@@ -2,40 +2,41 @@ package DIedrAl_Project.recursos;
 
 import java.math.BigInteger;
 
+public class Banco {
+	private ArrayActividades arrayActividades;
 
-public static class Banco {
-	private static ArrayActividades arrayActividades;
+	private ArraySesiones arraySesiones;
 
-	private static ArraySesiones arraySesiones;
+	private ArrayRecursos arrayRecursos;
 
-	private static ArrayRecursos arrayRecursos;
+	private long idSiguiente;
 
-	private static  BigInteger idSiguiente;
+	private static Banco instacia = null;
 
-	public static void addRecurso(Recurso rec) {
+	public void addRecurso(Recurso rec) {
 
 	}
 
-	public static void removeRecurso(Recurso rec) {
+	public void removeRecurso(Recurso rec) {
 	}
 
-	public static void addSesion(Sesion ses) {
+	public void addSesion(Sesion ses) {
 	}
 
-	public static void removeSesion(Sesion ses) {
+	public void removeSesion(Sesion ses) {
 	}
 
-	public static void addActividad(Actividad act) {
+	public void addActividad(Actividad act) {
 	}
 
-	public static void removeActividad(Actividad act) {
+	public void removeActividad(Actividad act) {
 	}
 
-	public static ArrayRecursos getArrayRecursos() {
+	public ArrayRecursos getArrayRecursos() {
 		return arrayRecursos;
 	}
 
-	public static void setArrayRecursos(ArrayRecursos value) {
+	public void setArrayRecursos(ArrayRecursos value) {
 		arrayRecursos = value;
 	}
 
