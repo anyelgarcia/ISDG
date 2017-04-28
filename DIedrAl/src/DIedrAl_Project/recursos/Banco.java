@@ -13,6 +13,18 @@ public class Banco {
 
 	private static Banco instacia = null;
 
+	public static Banco getInstancia() {
+
+		if (this.instancia == null)
+			this.instancia = new Banco();
+		else
+			return this.instancia;
+	}
+	
+	private Banco(){
+		
+	}
+
 	public void addRecurso(Recurso rec) {
 
 	}
