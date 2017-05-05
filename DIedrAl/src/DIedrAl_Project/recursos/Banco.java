@@ -11,18 +11,18 @@ public class Banco {
 
 	private long idSiguiente;
 
-	private static Banco instacia = null;
+	private static Banco instancia = null;
 
 	public static Banco getInstancia() {
 
-		if (this.instancia == null)
-			this.instancia = new Banco();
-		else
-			return this.instancia;
-	}
-	
-	private Banco(){
+		if (instancia == null)
+			instancia = new Banco();
 		
+		return instancia;
+	}
+
+	private Banco() {
+
 	}
 
 	public void addRecurso(Recurso rec) {
