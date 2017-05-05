@@ -8,11 +8,11 @@ public abstract class Etiquetable {
 	/**
 	 * Etiquetas asociadas al objeto
 	 */
-    private Set<String> arrayEtiquetas;
+    protected Set<String> arrayEtiquetas;
 
-    private String nombre;
+    protected String nombre;
 
-    private Integer id;
+    protected Integer id;
 
     /**
      * @param etiqueta etiqueta a comprobar
@@ -22,27 +22,27 @@ public abstract class Etiquetable {
     	return arrayEtiquetas.contains(etiqueta);
     }
 
-    Set<String> getEtiquetas() {
+    public Set<String> getEtiquetas() {
         return this.arrayEtiquetas;
     }
 
-    String getNombre() {
+    public String getNombre() {
         return this.nombre;
     }
 
-    void setNombre(String value) {
+    public void setNombre(String value) {
         this.nombre = value;
     }
 
-    int getId() {
+    public int getId() {
         return this.id;
     }
 
-    void setId(int value) {
+    public void setId(int value) {
         this.id = value;
     }
     
-    void insertarEtiqueta(String etiqueta){
+    public void insertarEtiqueta(String etiqueta){
     	this.arrayEtiquetas.add(etiqueta);
     }
 
