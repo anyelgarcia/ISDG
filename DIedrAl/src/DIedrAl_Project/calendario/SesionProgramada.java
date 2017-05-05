@@ -19,10 +19,15 @@ public class SesionProgramada {
 
     private Fecha fecha;
 
-    public void modificarFecha(Fecha fecha) {
+    public void clonFecha(Fecha fecha) {
+    	this.fecha.setAnyo(fecha.getAnyo());
+    	this.fecha.setMes(fecha.getAnyo());
+    	this.fecha.setDia(fecha.getAnyo());
+    	this.fecha.setHora(fecha.getHora());
     }
 
-    public void addNota(String nota) {
+    public void addNota(Nota nota) {
+    	this.nota.add(nota);
     }
 
     public void editarNota(Nota nota) {
