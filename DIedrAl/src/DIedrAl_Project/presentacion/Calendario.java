@@ -7,7 +7,6 @@ import java.awt.Insets;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -26,33 +25,12 @@ public class Calendario extends ImagePanel{
 		add(title, c);
 		
 		
-		
-		JButton modificar = new JButton("Modificar");
-		modificar.addActionListener((ae) -> {
-			JFrame panel = new JFrame();
-			
-			panel.setSize(300, 400);
-			panel.setVisible(true);
-			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			
-		});
 		c.gridx = 0;
 		c.gridy = 1;
-		add(modificar, c);
+		add(new JButton("Modificar"), c);
 		
-		
-		
-		JButton consultar = new JButton("Consultar");
-		consultar.addActionListener((ae) -> {
-			JFrame panel = new JFrame();
-			
-			panel.setSize(300, 400);
-			panel.setVisible(true);
-			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			
-		});
 		c.gridx = 2;
 		c.gridy = 1;
-		add(consultar, c);
+		add(new JButton("Consultar"), c);
 	}
 }
