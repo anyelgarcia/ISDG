@@ -1,27 +1,28 @@
 package DIedrAl_Project.presentacion;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-public class Usuarios extends ImagePanel{
+public class Usuarios extends ColorPanel{
 	
-	public Usuarios(String img){
-		super(img);
-		setBorder(BorderFactory.createLineBorder(Color.black));
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5881613145077329549L;
+
+	public Usuarios(int r, int g, int b){
+		super(r, g, b);
 		GridBagConstraints c = new GridBagConstraints();
 		
 		c.gridx = 1;
 		c.gridy = 0;
 		JLabel title = new JLabel("Usuarios");
-		title.setFont(new Font("Helvetica", Font.BOLD, 20));
-		title.setForeground(Color.BLACK);
+		title.setFont(font);
+		title.setForeground(Color.WHITE);
 		add(title, c);
 		
 		JButton nuevo = new JButton("Añadir");

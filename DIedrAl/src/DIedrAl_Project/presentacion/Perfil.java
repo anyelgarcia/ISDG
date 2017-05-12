@@ -1,27 +1,28 @@
 package DIedrAl_Project.presentacion;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-public class Perfil extends ImagePanel{
+public class Perfil extends ColorPanel{
 	
-	public Perfil(String img){
-		super(img);
-		setBorder(BorderFactory.createLineBorder(Color.black));
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1443115839427152482L;
+
+	public Perfil(int r, int g, int b){
+		super(r, g, b);
 		GridBagConstraints c = new GridBagConstraints();
 		
 		c.gridx = 1;
 		c.gridy = 0;
 		JLabel title = new JLabel("Mi Perfil");
-		title.setFont(new Font("Helvetica", Font.BOLD, 20));
-		title.setForeground(Color.WHITE);
+		title.setFont(font);
+		title.setForeground(Color.BLACK);
 		add(title, c);
 		
 		JButton perfil = new JButton("Ver Perfil");

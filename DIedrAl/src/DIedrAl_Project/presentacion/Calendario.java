@@ -3,19 +3,20 @@ package DIedrAl_Project.presentacion;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
-import java.awt.Insets;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-public class Calendario extends ImagePanel{
+public class Calendario extends ColorPanel{
 	
-	public Calendario(String img){
-		super(img);
-		setBorder(BorderFactory.createLineBorder(Color.black));
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 197254297067260869L;
+
+	public Calendario(int r, int g, int b){
+		super(r, g, b);
 		GridBagConstraints c = new GridBagConstraints();
 		
 		c.gridx = 1;
