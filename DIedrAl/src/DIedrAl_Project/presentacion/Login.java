@@ -5,7 +5,9 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.WindowEvent;
 import java.util.concurrent.TimeUnit;
+
 
 
 
@@ -16,8 +18,8 @@ import javax.swing.*;
 public class Login extends JPanel{
 	
 	
-	public static void entrar(JFrame pantalla){
-		Main.run(pantalla);
+	public static void entrar(){
+		Main.run();
 	}
 	
 	public static void main(String ... args) throws InterruptedException{
@@ -63,10 +65,11 @@ public class Login extends JPanel{
 		
 		pantalla.setVisible(true);
 		pantalla.setSize(1000, 760);
-		pantalla.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		pantalla.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		TimeUnit.SECONDS.sleep(5);
-		entrar(pantalla);
+		pantalla.dispatchEvent(new WindowEvent(pantalla, WindowEvent.WINDOW_CLOSING));
+		entrar();
 	}
 	
 }
