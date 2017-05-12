@@ -7,6 +7,7 @@ import java.awt.Insets;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -25,18 +26,51 @@ public class Recursos extends ImagePanel{
 		title.setForeground(Color.BLACK);
 		add(title, c);
 		
+		
+		
+		JButton nuevo = new JButton("Crear Nuevo");
+		nuevo.addActionListener((ae) -> {
+			JFrame panel = new JFrame();
+			
+			panel.setSize(300, 400);
+			panel.setVisible(true);
+			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			
+		});
 		c.gridx = 0;
 		c.gridy = 1;
 		c.insets = new Insets(0, 0, 0, 0);
-		add(new JButton("Crear Nuevo"), c);
+		add(nuevo, c);
+		
+		
+		
+		JButton buscar = new JButton("Buscar");
+		buscar.addActionListener((ae) -> {
+			JFrame panel = new JFrame();
+			
+			panel.setSize(300, 400);
+			panel.setVisible(true);
+			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			
+		});
 		
 		c.gridx = 1;
 		c.gridy = 1;
-		add(new JButton("Buscar"), c);
+		add(buscar , c);
 		
+		
+		JButton eliminar = new JButton("Eliminar");
+		eliminar.addActionListener((ae) -> {
+			JFrame panel = new JFrame();
+			
+			panel.setSize(300, 400);
+			panel.setVisible(true);
+			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			
+		});
 		c.gridx = 2;
 		c.gridy = 1;
-		add(new JButton("Eliminar"), c);
+		add(eliminar, c);
 		setVisible(true);
 	}
 
