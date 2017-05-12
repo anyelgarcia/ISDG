@@ -1,29 +1,30 @@
 package DIedrAl_Project.presentacion;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-public class Sesiones extends ImagePanel{
+public class Sesiones extends ColorPanel{
 
-		public Sesiones(String img){
-			super(img);
-			setBorder(BorderFactory.createLineBorder(Color.black));
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7805554218246174830L;
+
+		public Sesiones(int r, int g, int b){
+			super(r, g, b);
 			GridBagConstraints c = new GridBagConstraints();
 			
 			c.gridx = 1;
 			c.gridy = 0;
 			c.insets = new Insets(0, 0, 0, 20);
 			JLabel title = new JLabel("Sesiones");
-			title.setFont(new Font("Helvetica", Font.BOLD, 20));
-			title.setForeground(Color.BLACK);
+			title.setFont(font);
+			title.setForeground(Color.WHITE);
 			add(title, c);
 			
 			

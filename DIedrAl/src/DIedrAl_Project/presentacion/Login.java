@@ -3,7 +3,6 @@ package DIedrAl_Project.presentacion;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.WindowEvent;
 import java.util.concurrent.TimeUnit;
@@ -18,6 +17,11 @@ import javax.swing.*;
 public class Login extends JPanel{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6242725919201324689L;
+
 	public static void entrar(){
 		Main.run();
 	}
