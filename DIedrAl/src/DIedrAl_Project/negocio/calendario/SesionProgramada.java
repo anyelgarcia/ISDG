@@ -1,66 +1,91 @@
 package DIedrAl_Project.negocio.calendario;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.GregorianCalendar;
+import java.util.Set;
+import java.util.TreeSet;
 
-import DIedrAl_Project.negocio.administracion.Terapeuta;
-import DIedrAl_Project.negocio.pacientes.Nota;
-import DIedrAl_Project.negocio.pacientes.Paciente;
-import DIedrAl_Project.negocio.recursos.Sesion;
+import DIedrAl_Project.negocio.administracion.*;
+import DIedrAl_Project.negocio.pacientes.*;
+import DIedrAl_Project.negocio.recursos.*;
 
-//ACTUALIZARMODELIO
-public class SesionProgramada extends Sesion{
-    private List<Nota> nota = new ArrayList<Nota> ();
+public class SesionProgramada {
 
-    private List<Paciente> pacientes = new ArrayList<Paciente> ();
+	private Set<Nota> notas;
 
-    private List<Terapeuta> terapeutas = new ArrayList<Terapeuta> ();
+	private Set<Paciente> pacientes;
 
-    private Sesion sesion;
+	private Set<Terapeuta> terapeutas;
 
-    private Fecha fecha;
+	private Sesion modeloSesion;
 
-    public void clonFecha(Fecha fecha) {
-    	this.fecha.setAnyo(fecha.getAnyo());
-    	this.fecha.setMes(fecha.getAnyo());
-    	this.fecha.setDia(fecha.getAnyo());
-    	this.fecha.setHora(fecha.getHora());
-    }
+	private GregorianCalendar fecha;
 
-    public void addNota(Nota nota) {
-    	this.nota.add(nota);
-    }
 
-    public void editarNota(Nota nota) {
-    }
+	public SesionProgramada(GregorianCalendar fecha) {
+		this.fecha = fecha;
+		terapeutas = new TreeSet<Terapeuta>();
+		pacientes = new TreeSet<Paciente>();
+		notas = new TreeSet<Nota>();
+	}
 
-    public void eliminarNota(Nota nota) {
-    }
+	public void addNota(Nota nota) {
+		this.notas.add(nota);
+	}
 
-    public void editarTerapeuta(Terapeuta terapeuta) {
-    }
+	public void eliminarNota(Nota nota) {
+		this.notas.remove(nota);
+	}
 
-    public void editarPacientes(List<Paciente> pacientes) {
-    }
-    
-    public List<Terapeuta> getTerapeuta(){
-    	return terapeutas;
-    }
-    
-    public List<Paciente> getPaciente(){
-    	return pacientes;
-    }
-    
-    public int getMes(){
-    	return fecha.getMes();
-    }
-    
-    public int getAnyo(){
-    	return fecha.getAnyo();
-    }
-    
-    public Sesion getSesion(){
-    	return sesion;
-    }
+	public void addTerapeuta(Terapeuta terapeuta) {
+		this.terapeutas.add(terapeuta);
+	}
+
+	public void removeTerapeuta(Terapeuta terapeuta) {
+		this.terapeutas.remove(terapeuta);
+	}
+	public void addPaciente(Paciente paciente) {
+		this.pacientes.add(paciente);
+	}
+
+	public void removePaciente(Paciente paciente) {
+		this.pacientes.remove(paciente);
+	}
+
+	public Set<Terapeuta> getTerapeutas() {
+		return terapeutas;
+	}
+
+	public Set<Paciente> getPacientes() {
+		return pacientes;
+	}
+
+	// USO DEL PATRÓN FACHADA
+	public int getDay(){
+		return fecha.get(GregorianCalendar.DATE);
+	}
+	
+	public int getMonth() {
+		return fecha.get(GregorianCalendar.MONTH);
+	}
+
+	public int getYear() {
+		return fecha.get(GregorianCalendar.YEAR);
+	}
+
+	public Sesion getModeloSesion() {
+		return modeloSesion;
+	}
+	
+	public void setModeloSesion(Sesion modeloSesion) {
+		this.modeloSesion = modeloSesion;
+	}
+	
+	public GregorianCalendar getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(GregorianCalendar fecha) {
+		this.fecha = fecha;
+	}
 
 }

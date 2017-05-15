@@ -1,5 +1,6 @@
 package DIedrAl_Project.negocio.recursos;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -8,23 +9,25 @@ public abstract class Etiquetable {
 	/**
 	 * Etiquetas asociadas al objeto
 	 */
-    protected Set<String> arrayEtiquetas;
+    protected Set<String> etiquetas;
 
     protected String nombre;
 
     protected Integer id;
 
-    /**
+    public Etiquetable(String name) {
+		nombre=name;
+	}
+
+	/**
      * @param etiqueta etiqueta a comprobar
      * @return true si el objeto tiene asociada la etiqueta
      */
     public boolean ContieneEtiqueta(String etiqueta) {
-    	return arrayEtiquetas.contains(etiqueta);
+    	return this.getEtiquetas().contains(etiqueta);
     }
 
-    public Set<String> getEtiquetas() {
-        return this.arrayEtiquetas;
-    }
+    public abstract Set<String> getEtiquetas();
 
     public String getNombre() {
         return this.nombre;
@@ -43,7 +46,7 @@ public abstract class Etiquetable {
     }
     
     public void insertarEtiqueta(String etiqueta){
-    	this.arrayEtiquetas.add(etiqueta);
+    	this.etiquetas.add(etiqueta);
     }
 
 }

@@ -4,7 +4,11 @@ import java.util.*;
 
 public abstract class ArrayEtiquetables<T extends Etiquetable> {
 
-	protected HashSet<T> etiquetables;
+	protected Set<T> etiquetables;
+	
+	public ArrayEtiquetables(){
+		etiquetables = new HashSet<T>(); 
+	}
 
 	public HashSet<T> filtrarEtiqueta(Set<String> filtros) {
 

@@ -7,18 +7,6 @@ import java.util.Set;
  */
 public class ArrayActividades extends ArrayEtiquetables<Actividad> {
 
-	public ArrayActividades filtrarRango(Integer min, Integer max) {
-		return filtrarDur(min, max);
-	}
-
-	public ArrayActividades filtrarDesde(Integer dur) {
-		return filtrarDur(dur, Integer.MAX_VALUE);
-
-	}
-
-	public ArrayActividades filtrarHasta(Integer dur) {
-		return filtrarDur(Integer.MIN_VALUE, dur);
-	}
 
 	public ArrayActividades filtrarRango(Dificultad min, Dificultad max) {
 		return filtrarDif(min, max);
@@ -32,39 +20,7 @@ public class ArrayActividades extends ArrayEtiquetables<Actividad> {
 	public ArrayActividades filtrarHasta(Dificultad dif) {
 		return filtrarDif(Dificultad.MUY_FACIL, dif);
 	}
-	/*
-	public ArrayActividades filtrarEtiquetas(Set<String> eti) {
-		ArrayActividades aux = new ArrayActividades();
-		for (Actividad x : this.etiquetables) {
-			if (x.g) {
-				aux.etiquetables.add(x);
-			}
-		}
-		return aux;
-	}*/
-
-	public ArrayActividades filtrarDestinatarios(Set<String> dest) {
-		ArrayActividades aux = new ArrayActividades();
-		for (Actividad x : this.etiquetables) {
-			if (x.getDestinatarios().containsAll(dest)) {
-				aux.etiquetables.add(x);
-			}
-		}
-		return aux;
-	}
-
-	private ArrayActividades filtrarDur(Integer min, Integer max) {
-
-		ArrayActividades aux = new ArrayActividades();
-
-		for (Actividad x : this.etiquetables) {
-			if (x.getDuracion() >= min && x.getDuracion() <= max) {
-				aux.etiquetables.add(x);
-			}
-		}
-		return aux;
-	}
-
+	
 	private ArrayActividades filtrarDif(Dificultad min, Dificultad max) {
 
 		ArrayActividades aux = new ArrayActividades();

@@ -1,21 +1,23 @@
 package DIedrAl_Project.presentacion;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import javax.swing.*;
 
 public class Main {
 	
-	public static void run(JFrame pantalla){
-		pantalla = new JFrame();
-		pantalla.setLayout(new GridLayout(3, 3, 1, 1));
-		pantalla.add(new Calendario("images/diedral00.png"));
-		pantalla.add(new Pacientes());
-		pantalla.add(new Perfil());
-		pantalla.add(new Recursos("images/diedral01.png"));
-		pantalla.add(new Sesiones());
-		pantalla.add(new Usuarios());
-		pantalla.add(new Actividades("images/diedral22.png"));
+	public static void run(){
+		JFrame pantalla = new JFrame();
+		pantalla.setLayout(new GridLayout(4, 4, 1, 1));
+		pantalla.add(new Calendario(150, 206, 180));
+		pantalla.add(new Pacientes(255, 111, 105));
+		pantalla.add(new Perfil(255, 238, 173));
+		pantalla.add(new Recursos(255, 204, 92));
+		pantalla.add(new Sesiones(150, 206, 180));
+		pantalla.add(new Usuarios(255, 111, 105));
+		pantalla.add(new Actividades(255, 238, 173));
 		
 		pantalla.setSize(1200, 800);
 		pantalla.setVisible(true);
@@ -24,14 +26,61 @@ public class Main {
 	
 	public static void main(String ... args){
 		JFrame pantalla = new JFrame();
-		pantalla.setLayout(new GridLayout(3, 3, 1, 1));
-		pantalla.add(new Calendario("images/diedral00.png"));
-		pantalla.add(new Pacientes());
-		pantalla.add(new Perfil());
-		pantalla.add(new Recursos("images/diedral01.png"));
-		pantalla.add(new Sesiones());
-		pantalla.add(new Usuarios());
-		pantalla.add(new Actividades("images/diedral22.png"));
+		pantalla.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		
+		c.fill=GridBagConstraints.BOTH;
+		c.weightx=1000;
+		c.weighty=1000;
+		
+		c.gridx=0;
+		c.gridy=0;
+		
+		pantalla.add(new Calendario(150, 206, 180),c);
+		
+		c.gridx=1;
+		c.gridy=0;
+		
+		pantalla.add(new Pacientes(255, 111, 105),c);
+		
+		c.gridx=2;
+		c.gridy=0;
+		
+		
+		pantalla.add(new Recursos(255, 204, 92),c);
+		
+		c.gridx=0;
+		c.gridy=1;
+		
+		pantalla.add(new ColorPanel(255, 204, 92) ,c);
+		
+		c.gridx=1;
+		c.gridy=1;
+		
+		pantalla.add(new Perfil(255, 238, 173),c);
+		
+		c.gridx=2;
+		c.gridy=1;
+		
+		pantalla.add(new ColorPanel(150, 206, 180),c);
+		
+		c.gridx=0;
+		c.gridy=2;
+		
+		pantalla.add(new Sesiones(255, 111, 105),c);
+		
+		c.gridx=1;
+		c.gridy=2;
+		
+		pantalla.add(new Usuarios(150, 206, 180),c);
+		
+		c.gridx=2;
+		c.gridy=2;
+		
+		
+		pantalla.add(new Actividades(255, 238, 173),c);
+		
+		
 		pantalla.setSize(1200, 800);
 		pantalla.setVisible(true);
 		pantalla.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
