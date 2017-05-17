@@ -13,8 +13,8 @@ public class Recursos extends ColorPanel{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1366867660661296990L;
-
+	private static final long serialVersionUID = 1366867660661296990L;   
+	
 	public Recursos(int r, int g, int b){
 		super(r, g, b);
 		GridBagConstraints c = new GridBagConstraints();
@@ -32,11 +32,8 @@ public class Recursos extends ColorPanel{
 		JButton nuevo = new JButton("Crear Nuevo");
 		componentes.add(nuevo);
 		nuevo.addActionListener((ae) -> {
-			JFrame panel = new JFrame();
-			
-			panel.setSize(300, 400);
-			panel.setVisible(true);
-			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			JFrame pantalla = new PantallaAdd();
+			pantalla.setVisible(true);
 			
 		});
 		c.gridx = 0;
@@ -54,7 +51,6 @@ public class Recursos extends ColorPanel{
 			panel.setSize(300, 400);
 			panel.setVisible(true);
 			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			
 		});
 		
 		c.gridx = 1;
@@ -93,5 +89,147 @@ public class Recursos extends ColorPanel{
 		add(editar, c);
 		setVisible(true);
 	}
+        
+	
+	private class PantallaAdd extends JFrame{
+		
+		 /**
+		 * 
+		 */
+		private static final long serialVersionUID = 8065001825557862697L;
+		
+		// Variables declaration - do not modify                     
+	    private javax.swing.JButton jButton1;
+	    private javax.swing.JButton jButton2;
+	    private javax.swing.JLabel jLabel1;
+	    private javax.swing.JLabel jLabel2;
+	    private javax.swing.JLabel jLabel3;
+	    private javax.swing.JLabel jLabel4;
+	    private javax.swing.JScrollPane jScrollPane2;
+	    private javax.swing.JScrollPane jScrollPane3;
+	    private javax.swing.JTextArea jTextArea2;
+	    private javax.swing.JTextArea jTextArea3;
+	    private javax.swing.JTextField jTextField1;
+	    private javax.swing.JTextField jTextField2;
+	    // End of variables declaration    
+	    
+		public PantallaAdd(){
+			initGUI();
+		}
+		private void initGUI(){
+			jLabel1 = new javax.swing.JLabel();
+		    jLabel2 = new javax.swing.JLabel();
+		    jLabel3 = new javax.swing.JLabel();
+		    jLabel4 = new javax.swing.JLabel();
+		    jButton1 = new javax.swing.JButton();
+		    jButton2 = new javax.swing.JButton();
+		    jTextField1 = new javax.swing.JTextField();
+		    jTextField2 = new javax.swing.JTextField();
+		    jScrollPane2 = new javax.swing.JScrollPane();
+		    jTextArea2 = new javax.swing.JTextArea();
+		    jScrollPane3 = new javax.swing.JScrollPane();
+		    jTextArea3 = new javax.swing.JTextArea();
 
+		    setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+		    setTitle("Crear Recurso");
+
+		        jLabel1.setText("Nombre del recurso:");
+
+		        jLabel2.setText("Archivo: ");
+
+		        jLabel3.setText("Descripción: ");
+
+		        jLabel4.setText("Etiquetas: ");
+
+		        jButton1.setText("Guardar");
+		        jButton1.addActionListener(new java.awt.event.ActionListener() {
+		            public void actionPerformed(java.awt.event.ActionEvent evt) {
+		                jButton1ActionPerformed(evt);
+		            }
+		        });
+
+		        jButton2.setText("Salir");
+		        jButton2.addActionListener(new java.awt.event.ActionListener() {
+		            public void actionPerformed(java.awt.event.ActionEvent evt) {
+		                jButton2ActionPerformed(evt);
+		            }
+		        });
+
+		        jTextField2.setText("Ruta al archivo");
+
+		        jTextArea2.setColumns(20);
+		        jTextArea2.setRows(5);
+		        jScrollPane2.setViewportView(jTextArea2);
+
+		        jTextArea3.setColumns(20);
+		        jTextArea3.setRows(5);
+		        jScrollPane3.setViewportView(jTextArea3);
+
+		        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		        getContentPane().setLayout(layout);
+		        layout.setHorizontalGroup(
+		            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		            .addGroup(layout.createSequentialGroup()
+		                .addContainerGap()
+		                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		                    .addComponent(jScrollPane3)
+		                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+		                    .addGroup(layout.createSequentialGroup()
+		                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		                            .addComponent(jLabel4)
+		                            .addGroup(layout.createSequentialGroup()
+		                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		                                    .addComponent(jLabel1)
+		                                    .addComponent(jLabel2)
+		                                    .addComponent(jLabel3))
+		                                .addGap(18, 18, 18)
+		                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+		                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+		                                    .addComponent(jTextField1))))
+		                        .addGap(0, 0, Short.MAX_VALUE)))
+		                .addContainerGap())
+		            .addGroup(layout.createSequentialGroup()
+		                .addGap(85, 85, 85)
+		                .addComponent(jButton1)
+		                .addGap(60, 60, 60)
+		                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+		                .addContainerGap(88, Short.MAX_VALUE))
+		        );
+		        layout.setVerticalGroup(
+		            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		            .addGroup(layout.createSequentialGroup()
+		                .addContainerGap()
+		                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+		                    .addComponent(jLabel1)
+		                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+		                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+		                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+		                    .addComponent(jLabel2)
+		                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+		                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+		                .addComponent(jLabel3)
+		                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+		                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+		                .addGap(18, 18, 18)
+		                .addComponent(jLabel4)
+		                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+		                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+		                .addGap(29, 29, 29)
+		                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+		                    .addComponent(jButton1)
+		                    .addComponent(jButton2))
+		                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		        );
+
+		        pack();
+		}
+
+		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+		        // TODO add your handling code here:
+		}                                        
+
+		private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+		        // TODO add your handling code here:
+		}  
+	}
 }
