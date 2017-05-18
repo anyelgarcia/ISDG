@@ -17,11 +17,13 @@ public class Recursos extends ColorPanel{
 	
 	public Recursos(int r, int g, int b){
 		super(r, g, b);
-		GridBagConstraints c = new GridBagConstraints();
 		
-		c.gridx = 1;
+		GridBagConstraints c = new GridBagConstraints();
+		c.gridx = 0;
 		c.gridy = 0;
-		c.insets = new Insets(0, 0, 0, 20);
+		c.gridwidth = 3;
+		c.ipady= 20;
+		c.insets = new Insets(0,15,0,0);
 		JLabel title = new JLabel("Recursos");
 		title.setFont(this.font);
 		title.setForeground(Color.GRAY);
@@ -29,7 +31,7 @@ public class Recursos extends ColorPanel{
 		
 		
 		
-		JButton nuevo = new JButton("Crear Nuevo");
+		JButton nuevo = new JButton("Crear ");
 		componentes.add(nuevo);
 		nuevo.addActionListener((ae) -> {
 			JFrame pantalla = new PantallaAdd();
@@ -38,12 +40,14 @@ public class Recursos extends ColorPanel{
 		});
 		c.gridx = 0;
 		c.gridy = 1;
-		c.insets = new Insets(0, 0, 0, 0);
+		c.gridwidth = 1;
+		c.insets = new Insets(25,15,0,0);
+		c.ipady = 0;
 		add(nuevo, c);
 		
 		
 		
-		JButton buscar = new JButton("Buscar");
+		JButton buscar = new JButton(" Buscar  ");
 		componentes.add(buscar);
 		buscar.addActionListener((ae) -> {
 			JFrame panel = new JFrame();
@@ -68,15 +72,15 @@ public class Recursos extends ColorPanel{
 			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			
 		});
-		c.gridx = 2;
-		c.gridy = 1;
+		c.gridx = 1;
+		c.gridy = 2;
 		add(eliminar, c);
 		
 		
 		
 		JButton editar = new JButton("Editar");
 		componentes.add(editar);
-		eliminar.addActionListener((ae) -> {
+		editar.addActionListener((ae) -> {
 			JFrame panel = new JFrame();
 			
 			panel.setSize(300, 400);
@@ -84,8 +88,8 @@ public class Recursos extends ColorPanel{
 			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			
 		});
-		c.gridx = 3;
-		c.gridy = 1;
+		c.gridx = 0;
+		c.gridy = 2;
 		add(editar, c);
 		setVisible(true);
 	}
@@ -137,7 +141,7 @@ public class Recursos extends ColorPanel{
 
 		        jLabel2.setText("Archivo: ");
 
-		        jLabel3.setText("Descripción: ");
+		        jLabel3.setText("Descripciï¿½n: ");
 
 		        jLabel4.setText("Etiquetas: ");
 

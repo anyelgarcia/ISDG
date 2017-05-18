@@ -22,11 +22,8 @@ public class Login extends JPanel{
 	 */
 	private static final long serialVersionUID = 6242725919201324689L;
 
-	public static void entrar(){
-		Main.run();
-	}
 	
-	public static void main(String ... args) throws InterruptedException{
+	public static void main(String[] args) throws InterruptedException{
 		
 		
 		JFrame pantalla = new JFrame();
@@ -74,6 +71,11 @@ public class Login extends JPanel{
 		TimeUnit.SECONDS.sleep(5);
 		pantalla.dispatchEvent(new WindowEvent(pantalla, WindowEvent.WINDOW_CLOSING));
 		entrar();
+	}
+	
+
+	public static void entrar(){
+		Main.run();
 	}
 	
 }

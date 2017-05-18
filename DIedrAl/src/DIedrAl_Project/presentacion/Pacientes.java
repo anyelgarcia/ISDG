@@ -23,8 +23,11 @@ public class Pacientes extends ColorPanel{
 		super(r,g,b);
 		
 		GridBagConstraints c = new GridBagConstraints();
-		c.gridx = 4;
-		c.gridy = 2;
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridwidth = 3;
+		c.ipady= 20;
+		c.insets = new Insets(0,15,0,0);
 		JLabel title = new JLabel("Pacientes");
 		title.setFont(font);
 		title.setForeground(Color.WHITE);
@@ -41,8 +44,11 @@ public class Pacientes extends ColorPanel{
 			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			
 		});
-		c.gridx = 3;
-		c.gridy = 0;
+		c.gridx = 0;
+		c.gridy = 1;
+		c.gridwidth = 1;
+		c.insets = new Insets(25,15,0,0);
+		c.ipady = 0;
 		add(buscar, c);
 		
 		
@@ -56,24 +62,24 @@ public class Pacientes extends ColorPanel{
 			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			
 		});
-		c.gridx = 5;
-		c.gridy = 0;
+		c.gridx = 1;
+		c.gridy = 1;
 		add(eliminar, c);
 
 
 		
-		JButton anadir = new JButton("Añadir");
+		JButton anadir = new JButton("AÃ±adir");
 		componentes.add(anadir);
 		anadir.addActionListener((ae) -> {
 			JFrame pantalla = new PantallaAdd();
 			pantalla.setVisible(true);
 		});
-		c.gridx = 3;
-		c.gridy = 4;
+		c.gridx = 0;
+		c.gridy = 2;
 		add(anadir, c);
 		
 		
-		JButton editar = new JButton("Editar");
+		JButton editar = new JButton("  Editar  ");
 		componentes.add(editar);
 		editar.addActionListener((ae) -> {
 			JFrame panel = new JFrame();
@@ -83,9 +89,8 @@ public class Pacientes extends ColorPanel{
 			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			
 		});
-		c.gridx = 5;
-		c.gridy = 4;
-		c.insets = new Insets(0,5,0,0);
+		c.gridx = 1;
+		c.gridy = 2;
 		add(editar, c);
 		
 	}
@@ -182,9 +187,9 @@ public class Pacientes extends ColorPanel{
 			
 			jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Casado", "Soltero", "Divorciado", "Viudo" }));
 			
-			jLabel7.setText("Lesión: ");
+			jLabel7.setText("LesiÃ³n: ");
 			
-			jLabel8.setText("Fecha de Lesión:");
+			jLabel8.setText("Fecha de LesiÃ³n:");
 			
 			jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 			
@@ -197,7 +202,7 @@ public class Pacientes extends ColorPanel{
 			jTextArea1.setColumns(20);
 			jTextArea1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 			jTextArea1.setRows(5);
-			jTextArea1.setText("Insertar aquí una descripción del paciente");
+			jTextArea1.setText("Insertar aquÃ­ una descripciÃ³n del paciente");
 			jScrollPane1.setViewportView(jTextArea1);
 			
 			jLabel10.setText("Aficiones: ");

@@ -18,11 +18,13 @@ public class Sesiones extends ColorPanel{
 	
 	public Sesiones(int r, int g, int b){
 			super(r, g, b);
-			GridBagConstraints c = new GridBagConstraints();
 			
-			c.gridx = 1;
+			GridBagConstraints c = new GridBagConstraints();
+			c.gridx = 0;
 			c.gridy = 0;
-			c.insets = new Insets(0, 0, 0, 20);
+			c.gridwidth = 3;
+			c.ipady= 20;
+			c.insets = new Insets(0,15,0,0);
 			JLabel title = new JLabel("Sesiones");
 			title.setFont(font);
 			title.setForeground(Color.WHITE);
@@ -30,19 +32,21 @@ public class Sesiones extends ColorPanel{
 			
 			
 			
-			JButton nuevo = new JButton("Crear Nuevo");
+			JButton nuevo = new JButton("  Crear  ");
 			nuevo.addActionListener((ae) -> {
 				JFrame pantalla = new PantallaAdd();
 				pantalla.setVisible(true);
 			});
-			c.gridx = 0;
+			c.gridx = 1;
 			c.gridy = 1;
-			c.insets = new Insets(0, 0, 0, 0);
+			c.gridwidth = 1;
+			c.insets = new Insets(25,45,0,0);
+			c.ipady = 0;
 			add(nuevo, c);
 			
 			
 			
-			JButton buscar = new JButton("Buscar");
+			JButton buscar = new JButton(" Buscar  ");
 			buscar.addActionListener((ae) -> {
 				JFrame panel = new JFrame();
 				
@@ -52,7 +56,7 @@ public class Sesiones extends ColorPanel{
 				
 			});
 			c.gridx = 1;
-			c.gridy = 1;
+			c.gridy = 2;
 			add(buscar, c);
 			
 			
@@ -66,8 +70,8 @@ public class Sesiones extends ColorPanel{
 				panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				
 			});
-			c.gridx = 2;
-			c.gridy = 1;
+			c.gridx = 1;
+			c.gridy = 3;
 			add(eliminar, c);
 			setVisible(true);
 		}
@@ -130,12 +134,12 @@ public class Sesiones extends ColorPanel{
 		        jLabel9 = new javax.swing.JLabel();
 
 		        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		        setTitle("Crear Sesión");
+		        setTitle("Crear Sesiï¿½n");
 		        setName("Crear Actividad"); // NOI18N
 
 		        jLabel1.setText("Nombre: ");
 
-		        jLabel3.setText("Duración:");
+		        jLabel3.setText("Duraciï¿½n:");
 
 		        jButton1.setText("Guardar");
 		        jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -146,13 +150,13 @@ public class Sesiones extends ColorPanel{
 
 		        jLabel4.setText("min");
 
-		        jLabel5.setText("Descripción: ");
+		        jLabel5.setText("Descripciï¿½n: ");
 
 		        jTextArea1.setColumns(20);
 		        jTextArea1.setRows(5);
 		        jScrollPane1.setViewportView(jTextArea1);
 
-		        jLabel6.setText("Desarrollo de la Sesión");
+		        jLabel6.setText("Desarrollo de la Sesiï¿½n");
 
 		        jLabel7.setText("Posibles Variaciones");
 

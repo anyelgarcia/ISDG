@@ -19,7 +19,7 @@ class ImagePanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 5874533583261306673L;
 	private Image img;
-    protected Font font = new Font("Rockwell", Font.BOLD, 20);
+    protected Font font = new Font("Rockwell", Font.BOLD, 40);
     protected ArrayList<Component> componentes;
 
     public ImagePanel(String img) {

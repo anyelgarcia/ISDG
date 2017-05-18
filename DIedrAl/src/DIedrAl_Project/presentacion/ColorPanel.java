@@ -21,7 +21,7 @@ class ColorPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 690793639249179522L;
 	private Color color;
-    protected Font font = new Font("Rockwell", Font.BOLD, 20);
+    protected Font font = new Font("Rockwell", Font.BOLD, 30);
     protected ArrayList<Component> componentes;
 
     public ColorPanel(int r, int g, int b) {

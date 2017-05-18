@@ -10,22 +10,6 @@ public class Main {
 	
 	public static void run(){
 		JFrame pantalla = new JFrame();
-		pantalla.setLayout(new GridLayout(4, 4, 1, 1));
-		pantalla.add(new Calendario(150, 206, 180));
-		pantalla.add(new Pacientes(255, 111, 105));
-		pantalla.add(new Perfil(255, 238, 173));
-		pantalla.add(new Recursos(255, 204, 92));
-		pantalla.add(new Sesiones(150, 206, 180));
-		pantalla.add(new Usuarios(255, 111, 105));
-		pantalla.add(new Actividades(255, 238, 173));
-		
-		pantalla.setSize(1200, 800);
-		pantalla.setVisible(true);
-		pantalla.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-	
-	public static void main(String ... args){
-		JFrame pantalla = new JFrame();
 		pantalla.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
@@ -36,16 +20,16 @@ public class Main {
 		c.gridx=0;
 		c.gridy=0;
 		
-		pantalla.add(new Calendario(150, 206, 180),c);
+		
+		pantalla.add(new Pacientes(150, 206, 180),c);
 		
 		c.gridx=1;
 		c.gridy=0;
 		
-		pantalla.add(new Pacientes(255, 111, 105),c);
+		pantalla.add(new Calendario(255, 111, 105),c);
 		
 		c.gridx=2;
 		c.gridy=0;
-		
 		
 		pantalla.add(new Recursos(255, 204, 92),c);
 		
@@ -84,6 +68,9 @@ public class Main {
 		pantalla.setSize(1200, 800);
 		pantalla.setVisible(true);
 		pantalla.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+	}
+	
+	public static void main(String[] args) {
+		run();
 	}
 }

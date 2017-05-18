@@ -2,6 +2,7 @@ package DIedrAl_Project.presentacion;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,10 +17,13 @@ public class Perfil extends ColorPanel{
 	
 	public Perfil(int r, int g, int b){
 		super(r, g, b);
+
 		GridBagConstraints c = new GridBagConstraints();
-		
-		c.gridx = 1;
+		c.gridx = 0;
 		c.gridy = 0;
+		c.gridwidth = 3;
+		c.ipady= 20;
+		c.insets = new Insets(0,15,0,0);
 		JLabel title = new JLabel("Mi Perfil");
 		title.setFont(font);
 		title.setForeground(Color.BLACK);
@@ -32,15 +36,18 @@ public class Perfil extends ColorPanel{
 		});
 		c.gridx = 0;
 		c.gridy = 1;
+		c.gridwidth = 1;
+		c.insets = new Insets(25,15,0,0);
+		c.ipady = 0;
 		add(perfil, c);
 		
 		
-		JButton editar = new JButton("Editar");
+		JButton editar = new JButton(" Editar  ");
 		editar.addActionListener((ae) -> {
 			JFrame pantalla = new PantallaEditar();
 			pantalla.setVisible(true);
 		});
-		c.gridx = 2;
+		c.gridx = 1;
 		c.gridy = 1;
 		add(editar, c);
 	}
@@ -119,7 +126,7 @@ public class Perfil extends ColorPanel{
 	        jTextArea2.setRows(5);
 	        jScrollPane3.setViewportView(jTextArea2);
 
-	        jLabel1.setText("Despacho, horarios y otra información: ");
+	        jLabel1.setText("Despacho, horarios y otra informaciï¿½n: ");
 
 	        jLabel2.setText("Pacientes Asociados: ");
 
@@ -129,7 +136,7 @@ public class Perfil extends ColorPanel{
 
 	        jLabel5.setText("Email: ");
 
-	        jLabel6.setText("Teléfono: ");
+	        jLabel6.setText("Telï¿½fono: ");
 
 	        jTextField1.setEditable(false);
 
@@ -288,7 +295,7 @@ public class Perfil extends ColorPanel{
 		        jTextArea2.setRows(5);
 		        jScrollPane3.setViewportView(jTextArea2);
 
-		        jLabel1.setText("Despacho, horarios y otra información: ");
+		        jLabel1.setText("Despacho, horarios y otra informaciï¿½n: ");
 
 		        jLabel2.setText("Pacientes Asociados: ");
 
@@ -298,7 +305,7 @@ public class Perfil extends ColorPanel{
 
 		        jLabel5.setText("Email: ");
 
-		        jLabel6.setText("Teléfono: ");
+		        jLabel6.setText("Telï¿½fono: ");
 
 		        jButton1.setText("Guardar");
 		        jButton1.addActionListener(new java.awt.event.ActionListener() {
