@@ -1,15 +1,12 @@
 package DIedrAl_Project.presentacion;
 
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import DIedrAl_Project.negocio.calendario.Fecha;
 
 
 public class Pacientes extends ColorPanel{
@@ -18,6 +15,7 @@ public class Pacientes extends ColorPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = -6246895766907491090L;      
+    
     
 	public Pacientes(int r, int g, int b){
 		super(r,g,b);
@@ -34,7 +32,7 @@ public class Pacientes extends ColorPanel{
 		add(title, c);
 		
 		
-		JButton buscar = new JButton("Buscar");
+		ImageButton buscar = new ImageButton("Buscar", "images/bluebutton.png", "images/bluebutton2.png", this);
 		componentes.add(buscar);
 		buscar.addActionListener((ae) -> {
 			JFrame panel = new JFrame();
@@ -52,7 +50,7 @@ public class Pacientes extends ColorPanel{
 		add(buscar, c);
 		
 		
-		JButton eliminar = new JButton("Eliminar");
+		ImageButton eliminar = new ImageButton("Eliminar", "images/greenbutton.png", "images/greenbutton2.png", this);
 		componentes.add(eliminar);
 		eliminar.addActionListener((ae) -> {
 			JFrame panel = new JFrame();
@@ -68,7 +66,7 @@ public class Pacientes extends ColorPanel{
 
 
 		
-		JButton anadir = new JButton("Añadir");
+		ImageButton anadir = new ImageButton("Añadir", "images/tanbutton.png", "images/tanbutton2.png", this);
 		componentes.add(anadir);
 		anadir.addActionListener((ae) -> {
 			JFrame pantalla = new PantallaAdd();
@@ -79,7 +77,7 @@ public class Pacientes extends ColorPanel{
 		add(anadir, c);
 		
 		
-		JButton editar = new JButton("  Editar  ");
+		ImageButton editar = new ImageButton("  Editar  ", "images/redbutton.png", "images/redbutton2.png", this);
 		componentes.add(editar);
 		editar.addActionListener((ae) -> {
 			JFrame panel = new JFrame();

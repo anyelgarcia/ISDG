@@ -1,16 +1,13 @@
 package DIedrAl_Project.presentacion;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.Toolkit;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
 
 public class Calendario extends ColorPanel{
 	
@@ -18,6 +15,7 @@ public class Calendario extends ColorPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 197254297067260869L;
+
 
 	public Calendario(int r, int g, int b){
 		super(r, g, b);
@@ -52,7 +50,7 @@ public class Calendario extends ColorPanel{
 		
 		
 		
-		JButton consultar = new JButton("Consultar");
+		ImageButton consultar = new ImageButton("Consultar", "images/greenbutton.png", "images/greenbutton2.png", this);
 		consultar.addActionListener((ae) -> {
 			JFrame panel = new JFrame();
 			

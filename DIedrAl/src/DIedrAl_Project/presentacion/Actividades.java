@@ -16,6 +16,7 @@ public class Actividades extends ColorPanel{
 	 */
 	private static final long serialVersionUID = 6517855682994096031L;
 	
+	
 	public Actividades(int r, int g, int b){
 		super(r,g,b);
 
@@ -32,7 +33,7 @@ public class Actividades extends ColorPanel{
 		
 		
 		
-		JButton nuevo = new JButton("  Crear  ");
+		ImageButton nuevo = new ImageButton("  Crear  ", "images/bluebutton.png", "images/bluebutton2.png", this);
 		componentes.add(nuevo);
 		nuevo.addActionListener((ae) -> {
 			JFrame pantalla = new PantallaAdd();
@@ -45,7 +46,7 @@ public class Actividades extends ColorPanel{
 		c.ipady = 0;
 		add(nuevo, c);
 		
-		JButton buscar = new JButton("  Buscar ");
+		ImageButton buscar = new ImageButton("  Buscar ", "images/greenbutton.png", "images/greenbutton2.png", this);
 		componentes.add(buscar);
 		buscar.addActionListener((ae) -> {
 			JFrame panel = new JFrame();
@@ -59,7 +60,7 @@ public class Actividades extends ColorPanel{
 		c.gridy = 2;
 		add(buscar, c);
 		
-		JButton eliminar = new JButton("Eliminar");
+		ImageButton eliminar = new ImageButton("Eliminar", "images/redbutton.png", "images/redbutton2.png", this);
 		componentes.add(eliminar);
 		eliminar.addActionListener((ae) -> {
 			JFrame panel = new JFrame();

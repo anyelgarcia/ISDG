@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+
 public class Sesiones extends ColorPanel{
 
 	/**
@@ -32,7 +33,7 @@ public class Sesiones extends ColorPanel{
 			
 			
 			
-			JButton nuevo = new JButton("  Crear  ");
+			ImageButton nuevo = new ImageButton("  Crear  ", "images/bluebutton.png", "images/bluebutton2.png", this);
 			nuevo.addActionListener((ae) -> {
 				JFrame pantalla = new PantallaAdd();
 				pantalla.setVisible(true);
@@ -46,7 +47,7 @@ public class Sesiones extends ColorPanel{
 			
 			
 			
-			JButton buscar = new JButton(" Buscar  ");
+			ImageButton buscar = new ImageButton(" Buscar  ", "images/greenbutton.png", "images/greenbutton2.png", this);
 			buscar.addActionListener((ae) -> {
 				JFrame panel = new JFrame();
 				
@@ -61,7 +62,7 @@ public class Sesiones extends ColorPanel{
 			
 			
 			
-			JButton eliminar = new JButton("Eliminar");
+			ImageButton eliminar = new ImageButton("Eliminar", "images/tanbutton.png", "images/tanbutton2.png", this);
 			eliminar.addActionListener((ae) -> {
 				JFrame panel = new JFrame();
 				
