@@ -2,6 +2,7 @@ package DIedrAl_Project.integracion;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import DIedrAl_Project.integracion.BasicClasses.DAObasico;
 import DIedrAl_Project.negocio.administracion.Terapeuta;
@@ -41,8 +42,8 @@ public class DAORecursoImp implements DAORecurso{
 	}
 
 	@Override
-	public ArrayList<Recurso> listarRecursos() throws IOException, ClassNotFoundException {
-		return op.obtenerDatos(file);
+	public HashSet<Recurso> listarRecursos() throws IOException, ClassNotFoundException {
+		return op.obtenerDatosSet(file);
 	}
 
 	@Override
