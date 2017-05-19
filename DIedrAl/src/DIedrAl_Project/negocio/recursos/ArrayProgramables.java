@@ -16,7 +16,7 @@ public abstract class ArrayProgramables<T extends Programable> extends
 		return filtrarDur(dur, Integer.MAX_VALUE);
 
 	}
-
+	
 	public ArrayProgramables<T> filtrarHasta(Integer dur) {
 		return filtrarDur(Integer.MIN_VALUE, dur);
 	}

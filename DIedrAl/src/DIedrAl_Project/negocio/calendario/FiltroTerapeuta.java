@@ -3,19 +3,20 @@ package DIedrAl_Project.negocio.calendario;
 import java.util.List;
 import java.util.function.Predicate;
 
-import DIedrAl_Project.negocio.administracion.Terapeuta;
+import DIedrAl_Project.negocio.administracion.Usuario;
+
 
 class FiltroTerapeuta<T> implements Predicate<T>{
 
-    private List<Terapeuta> terapeutas;
+    private List<Usuario> terapeutas;
 	
-	public FiltroTerapeuta(List<Terapeuta> terapeutas){
-		for(Terapeuta t : terapeutas){
+	public FiltroTerapeuta(List<Usuario> terapeutas){
+		for(Usuario t : terapeutas){
 			this.terapeutas.add(t);
 		}
 	}
 	
-	public FiltroTerapeuta(Terapeuta terapeuta){
+	public FiltroTerapeuta(Usuario terapeuta){
 		terapeutas.add(terapeuta);
 	}
 

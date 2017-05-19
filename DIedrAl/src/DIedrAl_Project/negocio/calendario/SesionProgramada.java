@@ -14,7 +14,7 @@ public class SesionProgramada {
 
 	private Set<Paciente> pacientes;
 
-	private Set<Terapeuta> terapeutas;
+	private Set<Usuario> terapeutas;
 
 	private Sesion modeloSesion;
 
@@ -23,7 +23,7 @@ public class SesionProgramada {
 
 	public SesionProgramada(GregorianCalendar fecha) {
 		this.fecha = fecha;
-		terapeutas = new TreeSet<Terapeuta>();
+		terapeutas = new TreeSet<Usuario>();
 		pacientes = new TreeSet<Paciente>();
 		notas = new TreeSet<Nota>();
 	}
@@ -36,11 +36,11 @@ public class SesionProgramada {
 		this.notas.remove(nota);
 	}
 
-	public void addTerapeuta(Terapeuta terapeuta) {
+	public void addTerapeuta(Usuario terapeuta) {
 		this.terapeutas.add(terapeuta);
 	}
 
-	public void removeTerapeuta(Terapeuta terapeuta) {
+	public void removeTerapeuta(Usuario terapeuta) {
 		this.terapeutas.remove(terapeuta);
 	}
 	public void addPaciente(Paciente paciente) {
@@ -51,7 +51,7 @@ public class SesionProgramada {
 		this.pacientes.remove(paciente);
 	}
 
-	public Set<Terapeuta> getTerapeutas() {
+	public Set<Usuario> getTerapeutas() {
 		return terapeutas;
 	}
 

@@ -1,6 +1,6 @@
 package DIedrAl_Project.negocio.pacientes;
 
-import DIedrAl_Project.negocio.administracion.Terapeuta;
+import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.negocio.calendario.SesionProgramada;
 
 public class Informe {
@@ -11,9 +11,9 @@ public class Informe {
 	 */
 	private final SesionProgramada sesion;
 	// TODO Pueden ser más?
-	private Terapeuta autor;
+	private Usuario autor;
 
-	public Informe(SesionProgramada ses, Terapeuta autor) {
+	public Informe(SesionProgramada ses, Usuario autor) {
 		sesion = ses;
 		this.autor = autor;
 		texto = "";
@@ -27,11 +27,11 @@ public class Informe {
 		this.texto = texto;
 	}
 	
-	public Terapeuta getAutor() {
+	public Usuario getAutor() {
 		return this.autor;
 	}
 
-	public void setAutor(Terapeuta value) {
+	public void setAutor(Usuario value) {
 		this.autor = value;
 	}
 

@@ -1,21 +1,43 @@
 package DIedrAl_Project.negocio.administracion;
 
-import DIedrAl_Project.negocio.pacientes.Direccion;
+import java.util.Set;
 
+import DIedrAl_Project.negocio.pacientes.Paciente;
 
-public class Usuario {
-    private String id;
+public class Usuario extends Persona {
 
-    private int tlf;
+	protected String rol;
 
-    private String email;
+	protected String infor;
 
-    private Direccion direccion;
+	protected Set<Paciente> asociados;
 
-    public void mostrar() {
-    }
+	public Usuario(String nombre, String apellido1, String apellido2) {
+		super(nombre, apellido1, apellido2);
+	}
 
-    public void modificar(Direccion dir, String id, int tlf, String email) {
-    }
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+
+	public String getInfor() {
+		return infor;
+	}
+
+	public void setInfor(String infor) {
+		this.infor = infor;
+	}
+
+	public Set<Paciente> getAsociados() {
+		return asociados;
+	}
+
+	public void setAsociados(Set<Paciente> asociados) {
+		this.asociados = asociados;
+	}
 
 }

@@ -5,12 +5,13 @@ import java.util.ArrayList;
 
 import DIedrAl_Project.integracion.BasicClasses.DAObasico;
 import DIedrAl_Project.negocio.administracion.Terapeuta;
+import DIedrAl_Project.negocio.administracion.Usuario;
 
 public class DAOTerapeutaImp implements DAOTerapeuta {
 	
 	private static DAOTerapeutaImp instancia = null;
 	
-	private DAObasico<Terapeuta> op;
+	private DAObasico<Usuario> op;
 	private String file = "terapeutas.txt";
 	
 	public static DAOTerapeutaImp getInstance(){
@@ -24,7 +25,7 @@ public class DAOTerapeutaImp implements DAOTerapeuta {
 	}
 	
 	@Override
-	public void crearTerapeuta(Terapeuta t) throws IOException {
+	public void crearTerapeuta(Usuario t) throws IOException {
 		op.guardar(t, file);
 	}
 
@@ -34,12 +35,12 @@ public class DAOTerapeutaImp implements DAOTerapeuta {
 	}
 
 	@Override
-	public void modificarTerapeuta(Terapeuta t) throws IOException, ClassNotFoundException {
+	public void modificarTerapeuta(Usuario t) throws IOException, ClassNotFoundException {
 		op.modificar(t, file);
 	}
 
 	@Override
-	public ArrayList<Terapeuta> listarTerapeutas()  throws IOException, ClassNotFoundException {
+	public ArrayList<Usuario> listarTerapeutas()  throws IOException, ClassNotFoundException {
 		return op.obtenerDatos(file);
 	}
 
