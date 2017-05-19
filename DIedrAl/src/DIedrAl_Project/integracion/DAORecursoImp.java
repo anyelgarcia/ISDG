@@ -15,8 +15,10 @@ public class DAORecursoImp implements DAORecurso{
 	private String file = "recursos.txt";
 	
 	public static DAORecursoImp getInstance(){
-		if(instancia == null) return new DAORecursoImp();
-		else return instancia;
+		if(instancia == null){
+			instancia = new DAORecursoImp();
+		}
+		return instancia;
 	}
 
 	
