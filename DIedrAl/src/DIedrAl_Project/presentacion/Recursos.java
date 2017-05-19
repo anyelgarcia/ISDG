@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -106,7 +105,6 @@ public class Recursos extends ColorPanel{
 		
 		// Variables declaration - do not modify                     
 	    private javax.swing.JButton jButton1;
-	    private javax.swing.JButton jButton2;
 	    private javax.swing.JLabel jLabel1;
 	    private javax.swing.JLabel jLabel2;
 	    private javax.swing.JLabel jLabel3;
