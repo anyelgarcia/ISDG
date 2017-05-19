@@ -145,7 +145,7 @@ public class Actividades extends ColorPanel{
 
 	        jLabel2.setText("Dificultad:");
 
-	        jLabel3.setText("Duraciï¿½n:");
+	        jLabel3.setText("Duración:");
 
 	        jButton1.setText("Guardar");
 	        jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -158,7 +158,7 @@ public class Actividades extends ColorPanel{
 
 	        jLabel4.setText("min");
 
-	        jLabel5.setText("Descripciï¿½n: ");
+	        jLabel5.setText("Descripción: ");
 
 	        jTextArea1.setColumns(20);
 	        jTextArea1.setRows(5);
@@ -304,12 +304,38 @@ public class Actividades extends ColorPanel{
 
 	        pack();
 		}
-		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-		      //ActionInfo info = new ActionInfo(jTextField1.getText(), jComboBox1.getSelectedItem(),  jTextField)
+		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { 
+			
+			
+			ActividadTransfer info = new ActividadTransfer(String.valueOf(jTextField1.getText()), String.valueOf(jComboBox1.getSelectedItem()), String.valueOf(jTextField3.getText()),
+					Integer.parseInt(String.valueOf(jTextField2.getText())), String.valueOf(jTextArea1.getText()), String.valueOf(jTextArea4.getText()), String.valueOf(jTextArea3.getText()));
+			
+			Controlador.addActividad(info);
 		} 
 	}
 	
-	public class ActionInfo{
+	
+	public class ActividadTransfer{
+		
+		private String nombre;
+		private String dificultad;
+		private String pacienteTipo;
+		private int duracion;
+		private String descripcion;
+		private String desarrollo;
+		private String variaciones;
+		
+		public ActividadTransfer(String nombre, String dificultad, String pacienteTipo, int duracion,
+				String descripcion, String desarrollo, String variaciones){
+			this.nombre = nombre;
+			this.dificultad = dificultad;
+			this.pacienteTipo = pacienteTipo;
+			this.duracion = duracion;
+			this.descripcion = descripcion;
+			this.desarrollo = desarrollo;
+			this.variaciones = variaciones;
+		}
+		
 		public String getNombre() {
 			return nombre;
 		}
@@ -325,7 +351,6 @@ public class Actividades extends ColorPanel{
 		public int getDuracion() {
 			return duracion;
 		}
-
 
 		public String getDescripcion() {
 			return descripcion;
@@ -349,45 +374,6 @@ public class Actividades extends ColorPanel{
 
 		public void setVariaciones(String variaciones) {
 			this.variaciones = variaciones;
-		}
-
-		public String[] getRecursos() {
-			return recursos;
-		}
-
-		public void setRecursos(String[] recursos) {
-			this.recursos = recursos;
-		}
-
-		public String[] getActividades() {
-			return actividades;
-		}
-
-		public void setActividades(String[] actividades) {
-			this.actividades = actividades;
-		}
-
-		private String nombre;
-		private String dificultad;
-		private String pacienteTipo;
-		private int duracion;
-		private String descripcion;
-		private String desarrollo;
-		private String variaciones;
-		private String[] recursos;
-		private String[] actividades;
-		
-		public ActionInfo(String nombre, String dificultad, String pacienteTipo, int duracion,
-				String descripcion, String desarrollo, String variaciones, String[] recursos, String[] actividades){
-			this.nombre = nombre;
-			this.dificultad = dificultad;
-			this.pacienteTipo = pacienteTipo;
-			this.duracion = duracion;
-			this.descripcion = descripcion;
-			this.desarrollo = desarrollo;
-			this.variaciones = variaciones;
-			this.actividades = actividades;
-			this.recursos = recursos;
 		}
 	}
 

@@ -3,11 +3,15 @@ package DIedrAl_Project.negocio.recursos;
 import java.util.*;
 
 public abstract class Programable extends Etiquetable {
-	private int duracion;
+	protected int duracion;
 
-	private Set<String> destinatarios;
+	protected Set<String> destinatarios;
 
 	protected Set<Etiquetable> asociados;
+	
+	protected String desarrollo;
+	
+	protected String variaciones;
 
 	public Programable(String name) {
 		super(name);
@@ -48,4 +52,27 @@ public abstract class Programable extends Etiquetable {
 	public void setDuracion(int duracion) {
 		this.duracion = duracion;
 	}
+	public void addDestinatario(String des){
+		destinatarios.add(des);
+	}
+	public void removeDestinatario(String des){
+		destinatarios.remove(des);
+	}
+
+	public String getDesarrollo() {
+		return desarrollo;
+	}
+
+	public void setDesarrollo(String desarrollo) {
+		this.desarrollo = desarrollo;
+	}
+
+	public String getVariaciones() {
+		return variaciones;
+	}
+
+	public void setVariaciones(String variaciones) {
+		this.variaciones = variaciones;
+	}
+	
 }

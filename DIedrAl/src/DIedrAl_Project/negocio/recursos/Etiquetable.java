@@ -1,6 +1,8 @@
 package DIedrAl_Project.negocio.recursos;
 
+import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 
 public abstract class Etiquetable {
@@ -11,11 +13,30 @@ public abstract class Etiquetable {
     protected Set<String> etiquetas;
 
     protected String nombre;
+    
+    protected String descripcion;
 
-    protected Integer id;
+
+	protected Integer id;
 
     public Etiquetable(String name) {
 		nombre=name;
+		this.etiquetas=new TreeSet<String>();
+	}
+    public Etiquetable(String name, String[] etiquetas) {
+		nombre=name;
+		this.etiquetas=new TreeSet<String>();
+		for(String s:etiquetas){
+			addEtiqueta(s);
+		}
+	}
+    public Etiquetable(String name, String[] etiquetas, String desc) {
+		nombre=name;
+		this.etiquetas=new TreeSet<String>();
+		for(String s:etiquetas){
+			addEtiqueta(s);
+		}
+		descripcion = desc;
 	}
 
 	/**
@@ -44,8 +65,15 @@ public abstract class Etiquetable {
         this.id = value;
     }
     
-    public void insertarEtiqueta(String etiqueta){
+    public void addEtiqueta(String etiqueta){
     	this.etiquetas.add(etiqueta);
     }
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
 
 }

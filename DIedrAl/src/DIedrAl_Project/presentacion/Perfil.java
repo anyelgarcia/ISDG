@@ -129,7 +129,7 @@ public class Perfil extends ColorPanel{
 	        jTextArea2.setRows(5);
 	        jScrollPane3.setViewportView(jTextArea2);
 
-	        jLabel1.setText("Despacho, horarios y otra información: ");
+	        jLabel1.setText("Despacho, horarios y otra informaciÃ³n: ");
 
 	        jLabel2.setText("Pacientes Asociados: ");
 
@@ -139,7 +139,7 @@ public class Perfil extends ColorPanel{
 
 	        jLabel5.setText("Email: ");
 
-	        jLabel6.setText("Teléfono: ");
+	        jLabel6.setText("TelÃ©fono: ");
 
 	        jTextField1.setEditable(false);
 
@@ -300,7 +300,7 @@ public class Perfil extends ColorPanel{
 		        jTextArea2.setRows(5);
 		        jScrollPane3.setViewportView(jTextArea2);
 
-		        jLabel1.setText("Despacho, horarios y otra información: ");
+		        jLabel1.setText("Despacho, horarios y otra informaciÃ³n: ");
 
 		        jLabel2.setText("Pacientes Asociados: ");
 
@@ -310,7 +310,7 @@ public class Perfil extends ColorPanel{
 
 		        jLabel5.setText("Email: ");
 
-		        jLabel6.setText("Teléfono: ");
+		        jLabel6.setText("TelÃ©fono: ");
 
 		        jButton1.setText("Guardar");
 		        jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -461,6 +461,5 @@ public class Perfil extends ColorPanel{
 		
 		
 	}
-	
 }
 
