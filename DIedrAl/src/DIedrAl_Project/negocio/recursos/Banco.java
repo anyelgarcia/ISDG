@@ -15,12 +15,30 @@ public class Banco {
 
 		if (instancia == null)
 			instancia = new Banco();
-		
+
 		return instancia;
 	}
 
 	private Banco() {
-		recursos=new ArrayRecursos();
+		recursos = new ArrayRecursos();
+		actividades = new ArrayActividades();
+		sesiones = new ArraySesiones();
+	}
+
+	public ArrayActividades getActividades() {
+		return actividades;
+	}
+
+	public void setActividades(ArrayActividades actividades) {
+		this.actividades = actividades;
+	}
+
+	public ArraySesiones getSesiones() {
+		return sesiones;
+	}
+
+	public void setSesiones(ArraySesiones sesiones) {
+		this.sesiones = sesiones;
 	}
 
 	public void addRecurso(Recurso rec) {
@@ -28,26 +46,31 @@ public class Banco {
 	}
 
 	public void removeRecurso(Recurso rec) {
+		recursos.erase(rec);
 	}
 
 	public void addSesion(Sesion ses) {
+		sesiones.add(ses);
 	}
 
 	public void removeSesion(Sesion ses) {
+		sesiones.erase(ses);
 	}
 
 	public void addActividad(Actividad act) {
+		actividades.add(act);
 	}
 
 	public void removeActividad(Actividad act) {
+		actividades.erase(act);
 	}
 
-	public ArrayRecursos getArrayRecursos() {
-		return arrayRecursos;
+	public ArrayRecursos getRecursos() {
+		return recursos;
 	}
 
-	public void setArrayRecursos(ArrayRecursos value) {
-		arrayRecursos = value;
+	public void setRecursos(ArrayRecursos value) {
+		recursos = value;
 	}
 
 }
