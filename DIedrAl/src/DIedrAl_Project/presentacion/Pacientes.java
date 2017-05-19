@@ -5,9 +5,10 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.util.GregorianCalendar;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import DIedrAl_Project.negocio.calendario.Fecha;
 
 
 public class Pacientes extends ColorPanel{
@@ -67,7 +68,7 @@ public class Pacientes extends ColorPanel{
 
 
 		
-		ImageButton anadir = new ImageButton("AÃ±adir", "images/tanbutton.png", "images/tanbutton2.png", this);
+		ImageButton anadir = new ImageButton("Añadir", "images/tanbutton.png", "images/tanbutton2.png", this);
 		componentes.add(anadir);
 		anadir.addActionListener((ae) -> {
 			JFrame pantalla = new PantallaAdd();
@@ -186,9 +187,9 @@ public class Pacientes extends ColorPanel{
 			
 			jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Casado", "Soltero", "Divorciado", "Viudo" }));
 			
-			jLabel7.setText("LesiÃ³n: ");
+			jLabel7.setText("Lesión: ");
 			
-			jLabel8.setText("Fecha de LesiÃ³n:");
+			jLabel8.setText("Fecha de Lesión:");
 			
 			jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 			
@@ -201,10 +202,10 @@ public class Pacientes extends ColorPanel{
 			jTextArea1.setColumns(20);
 			jTextArea1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 			jTextArea1.setRows(5);
-			jTextArea1.setText("Insertar aquÃ­ una descripciÃ³n del paciente");
+			jTextArea1.setText("Insertar aquí una descripción del paciente");
 			jScrollPane1.setViewportView(jTextArea1);
 			
-			jLabel10.setText("Aficiones: ");
+			jLabel10.setText("Aficiones: (separadas por comas)");
 			
 			jTextArea2.setColumns(20);
 			jTextArea2.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
@@ -343,45 +344,41 @@ public class Pacientes extends ColorPanel{
 		}
 		
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {   
-			String mes1 = ((String)jComboBox2.getSelectedItem());
-			int mes1int =0;
-			String mes2 = ((String)jComboBox6.getSelectedItem());
-			int mes2int =0;
-			for(int i = 0; i<12; i++){
-				if(Calendario.MESES[i].equals(mes1)) mes1int = i;
-				if(Calendario.MESES[i].equals(mes2)) mes2int = i;
-				
-			}
+			
 			String aficionestodo = jTextArea1.getText();
 			String aficiones[] = aficionestodo.split(",");
-			GregorianCalendar cale1 = new GregorianCalendar(Integer.parseInt((String)jComboBox3.getSelectedItem()), mes1int, Integer.parseInt((String)jComboBox1.getSelectedItem()), 0, 0, 0);
-			GregorianCalendar cale2 = new GregorianCalendar(Integer.parseInt((String)jComboBox7.getSelectedItem()), mes2int, Integer.parseInt((String)jComboBox5.getSelectedItem()), 0, 0, 0);
-			PacienteInfo info = new PacienteInfo(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), cale1, ((String)jComboBox5.getSelectedItem()), jTextField4.getText(), cale2, aficiones , jTextArea2.getText());
+			
+			PacienteTransfer info = new PacienteTransfer(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(),
+					Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem())), String.valueOf(jComboBox2.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox3.getSelectedItem())),
+					String.valueOf(jComboBox4.getSelectedItem()), jTextField4.getText(),
+					Integer.parseInt(String.valueOf(jComboBox5.getSelectedItem())), String.valueOf(jComboBox6.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox7.getSelectedItem())),
+					aficiones , jTextArea2.getText());
 			
 			Controlador.addPaciente(info);
 		} 
 	}
 	
 	
-	public class PacienteInfo{
+	public class PacienteTransfer{
+		
 		private String nombre;
 		private String apellido1;
 		private String apellido2;
-		private GregorianCalendar fechanacimiento;
+		private Fecha fechanacim;
 		private String estadocivil;
 		private String lesion;
-		private GregorianCalendar fechalesion;
+		private Fecha fechalesion;
 		private String [] aficiones;
 		private String descripcion;
 		
-		public PacienteInfo(String nombre, String apellido1, String apellido2, GregorianCalendar nacimiento, String estadocivil, String lesion, GregorianCalendar fechalesion, String [] aficiones, String descripcion){
+		public PacienteTransfer(String nombre, String apellido1, String apellido2, int dia1, String mes1, int año1, String estadocivil, String lesion, int dia2, String mes2, int año2, String [] aficiones, String descripcion){
 				this.nombre = nombre;
 				this.apellido1 = apellido1;
 				this.apellido2 = apellido2;
-				this.fechanacimiento = nacimiento;
+				this.fechanacim = new Fecha(dia1, mes1, año1, 0);
 				this.estadocivil = estadocivil;
 				this.lesion = lesion;
-				this.fechalesion = fechalesion;
+				this.fechalesion = new Fecha(dia2, mes2, año2, 0);
 				this.aficiones = aficiones;
 				this.descripcion = descripcion;
 		}
@@ -398,8 +395,8 @@ public class Pacientes extends ColorPanel{
 			return apellido2;
 		}
 
-		public GregorianCalendar getFechanacimiento() {
-			return fechanacimiento;
+		public Fecha getFechanacimiento() {
+			return fechanacim;
 		}
 
 		public String getEstadocivil() {
@@ -410,14 +407,13 @@ public class Pacientes extends ColorPanel{
 			return lesion;
 		}
 
-		public GregorianCalendar getFechalesion() {
+		public Fecha getFechalesion() {
 			return fechalesion;
 		}
 
 		public String[] getAficiones() {
 			return aficiones;
 		}
-
 
 		public String getDescripcion() {
 			return descripcion;
