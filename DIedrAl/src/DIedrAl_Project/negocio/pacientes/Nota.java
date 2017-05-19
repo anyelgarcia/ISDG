@@ -4,15 +4,16 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import DIedrAl_Project.negocio.administracion.Terapeuta;
+import DIedrAl_Project.negocio.administracion.Usuario;
 
 public class Nota {
 	private String texto;
 
-	public Terapeuta getAutor() {
+	public Usuario getAutor() {
 		return autor;
 	}
 
-	public void setAutor(Terapeuta autor) {
+	public void setAutor(Usuario autor) {
 		this.autor = autor;
 	}
 
@@ -24,20 +25,20 @@ public class Nota {
 		this.ultimaActualizacion = ultimaActualizacion;
 	}
 
-	private Terapeuta autor;
+	private Usuario autor;
 	private GregorianCalendar ultimaActualizacion;
 
-	public Nota(Terapeuta autor, String texto) {
+	public Nota(Usuario autor, String texto) {
 		this.autor = autor;
 		this.texto = texto;
 	}
 
-	public Nota(Terapeuta autor) {
+	public Nota(Usuario autor) {
 		this.autor = autor;
 		this.texto = "";
 	}
 
-	void set(Terapeuta value) {
+	void set(Usuario value) {
 		this.autor = value;
 	}
 
