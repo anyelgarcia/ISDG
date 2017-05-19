@@ -284,7 +284,7 @@ public class Sesiones extends ColorPanel{
 				String desarrollo[] = desarroll.split("\n");
 				String variacione = jTextArea4.getText();
 				String variaciones[] = variacione.split("\n");
-				Controlador.addSesion(new SesionTransfer(String.valueOf(jTextField1.getText()), Integer.parseInt(String.valueOf(jTextField2.getText())), String.valueOf(jTextArea1.getText()), desarrollo, variaciones));
+				Controlador.addSesion(new SesionTransfer(String.valueOf(jTextField1.getText()), Integer.parseInt(String.valueOf(jTextField2.getText())), String.valueOf(jTextArea1.getText()), String.valueOf(jTextArea3.getText()), String.valueOf(jTextArea4.getText())));
 			} 
 		}
 		
@@ -293,13 +293,13 @@ public class Sesiones extends ColorPanel{
 			private String nombre;
 			private int minutos;
 			private String descripcion;
-			private String [] desarrollo;
-			private String [] posiblesVariaciones;
+			private String desarrollo;
+			private String posiblesVariaciones;
 			
 
 			public SesionTransfer(String nombre, int minutos,
-					String descripcion, String [] desarrollo,
-					String [] posiblesVariaciones) {
+					String descripcion, String desarrollo,
+					String posiblesVariaciones) {
 				
 				this.nombre = nombre;
 				this.minutos = minutos;
@@ -321,11 +321,11 @@ public class Sesiones extends ColorPanel{
 				return descripcion;
 			}
 
-			public String[] getDesarrollo() {
+			public String getDesarrollo() {
 				return desarrollo;
 			}
 
-			public String[] getPosiblesVariaciones() {
+			public String getPosiblesVariaciones() {
 				return posiblesVariaciones;
 			}
 			
