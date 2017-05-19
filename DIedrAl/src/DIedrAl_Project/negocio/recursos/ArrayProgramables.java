@@ -23,7 +23,7 @@ public abstract class ArrayProgramables<T extends Programable> extends
 
 	
 	public ArrayProgramables<T> filtrarDestinatarios(Set<String> dest) {
-		ArrayProgramables<T> aux = new ArrayProgramables<T>();
+		ArrayProgramables<T> aux = createNew();
 		for (T x : this.etiquetables) {
 			if (x.getDestinatarios().containsAll(dest)) {
 				aux.etiquetables.add(x);
@@ -35,7 +35,7 @@ public abstract class ArrayProgramables<T extends Programable> extends
 
 	private ArrayProgramables<T> filtrarDur(Integer min, Integer max) {
 
-		ArrayProgramables<T> aux = new ArrayProgramables<T>();
+		ArrayProgramables<T> aux = createNew();
 
 		for (T x : this.etiquetables) {
 			if (x.getDuracion() >= min && x.getDuracion() <= max) {
@@ -44,5 +44,7 @@ public abstract class ArrayProgramables<T extends Programable> extends
 		}
 		return aux;
 	}
+	
+	protected abstract ArrayProgramables<T> createNew();
 
 }

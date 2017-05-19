@@ -9,7 +9,6 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import DIedrAl_Project.negocio.calendario.Fecha;
 
 
 public class Pacientes extends ColorPanel{
