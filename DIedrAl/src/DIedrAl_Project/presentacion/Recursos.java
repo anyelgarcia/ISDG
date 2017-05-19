@@ -33,7 +33,7 @@ public class Recursos extends ColorPanel{
 		
 		
 		
-		ImageButton nuevo = new ImageButton("Crear ", "images/redbutton.png", "images/redbutton2.png", this);
+		ImageButton nuevo = new ImageButton("Crear ", "images/orangebutton.png", "images/orangebutton2.png", this);
 		componentes.add(nuevo);
 		nuevo.addActionListener((ae) -> {
 			JFrame pantalla = new PantallaAdd();

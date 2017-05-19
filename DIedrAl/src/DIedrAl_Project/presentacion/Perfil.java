@@ -44,7 +44,7 @@ public class Perfil extends ColorPanel{
 		add(perfil, c);
 		
 		
-		ImageButton editar = new ImageButton(" Editar  ", "images/redbutton.png", "images/redbutton2.png", this);
+		ImageButton editar = new ImageButton(" Editar  ", "images/orangebutton.png", "images/orangebutton2.png", this);
 		editar.addActionListener((ae) -> {
 			JFrame pantalla = new PantallaEditar();
 			pantalla.setVisible(true);

@@ -50,7 +50,7 @@ public class Usuarios extends ColorPanel{
 		
 		
 		
-		ImageButton buscar = new ImageButton("Buscar", "images/redbutton.png", "images/redbutton2.png", this);
+		ImageButton buscar = new ImageButton("Buscar", "images/orangebutton.png", "images/orangebutton2.png", this);
 		buscar.addActionListener((ae) -> {
 			JFrame panel = new JFrame();
 			

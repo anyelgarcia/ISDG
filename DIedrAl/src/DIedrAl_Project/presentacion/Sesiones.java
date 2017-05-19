@@ -41,7 +41,7 @@ public class Sesiones extends ColorPanel{
 			c.gridx = 1;
 			c.gridy = 1;
 			c.gridwidth = 1;
-			c.insets = new Insets(25,45,0,0);
+			c.insets = new Insets(25,35,0,0);
 			c.ipady = 0;
 			add(nuevo, c);
 			
