@@ -41,7 +41,7 @@ public class Actividades extends ColorPanel{
 		c.gridx = 0;
 		c.gridy = 1;
 		c.gridwidth = 1;
-		c.insets = new Insets(25,45,0,0);
+		c.insets = new Insets(25,15,0,0);
 		c.ipady = 0;
 		add(nuevo, c);
 		
@@ -55,11 +55,11 @@ public class Actividades extends ColorPanel{
 			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			
 		});
-		c.gridx = 0;
-		c.gridy = 2;
+		c.gridx = 1;
+		c.gridy = 1;
 		add(buscar, c);
 		
-		ImageButton eliminar = new ImageButton("Eliminar", "images/redbutton.png", "images/redbutton2.png", this);
+		ImageButton eliminar = new ImageButton("Eliminar", "images/orangebutton.png", "images/orangebutton2.png", this);
 		componentes.add(eliminar);
 		eliminar.addActionListener((ae) -> {
 			JFrame panel = new JFrame();
@@ -69,8 +69,8 @@ public class Actividades extends ColorPanel{
 			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			
 		});
-		c.gridx = 0;
-		c.gridy = 3;
+		c.gridx = 1;
+		c.gridy = 2;
 		add(eliminar, c);
 		setVisible(true);
 	}
@@ -307,8 +307,7 @@ public class Actividades extends ColorPanel{
 	        pack();
 		}
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-		      ActionInfo info = new ActionInfo(jTextField1.getText(), jComboBox1.getSelectedItem(), 
-		    		  jTextField)
+		      //ActionInfo info = new ActionInfo(jTextField1.getText(), jComboBox1.getSelectedItem(),  jTextField)
 		} 
 	}
 	
@@ -317,33 +316,18 @@ public class Actividades extends ColorPanel{
 			return nombre;
 		}
 
-		public void setNombre(String nombre) {
-			this.nombre = nombre;
-		}
-
 		public String getDificultad() {
 			return dificultad;
-		}
-
-		public void setDificultad(String dificultad) {
-			this.dificultad = dificultad;
 		}
 
 		public String getPacienteTipo() {
 			return pacienteTipo;
 		}
 
-		public void setPacienteTipo(String pacienteTipo) {
-			this.pacienteTipo = pacienteTipo;
-		}
-
 		public int getDuracion() {
 			return duracion;
 		}
 
-		public void setDuracion(int duracion) {
-			this.duracion = duracion;
-		}
 
 		public String getDescripcion() {
 			return descripcion;

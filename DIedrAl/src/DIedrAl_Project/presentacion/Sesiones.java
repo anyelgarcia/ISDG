@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import DIedrAl_Project.presentacion.Recursos.RecursoTransfer;
+
 
 public class Sesiones extends ColorPanel{
 
@@ -38,10 +40,10 @@ public class Sesiones extends ColorPanel{
 				JFrame pantalla = new PantallaAdd();
 				pantalla.setVisible(true);
 			});
-			c.gridx = 1;
+			c.gridx = 0;
 			c.gridy = 1;
 			c.gridwidth = 1;
-			c.insets = new Insets(25,35,0,0);
+			c.insets = new Insets(25,15,0,0);
 			c.ipady = 0;
 			add(nuevo, c);
 			
@@ -57,7 +59,7 @@ public class Sesiones extends ColorPanel{
 				
 			});
 			c.gridx = 1;
-			c.gridy = 2;
+			c.gridy = 1;
 			add(buscar, c);
 			
 			
@@ -71,8 +73,8 @@ public class Sesiones extends ColorPanel{
 				panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				
 			});
-			c.gridx = 1;
-			c.gridy = 3;
+			c.gridx = 0;
+			c.gridy = 2;
 			add(eliminar, c);
 			setVisible(true);
 		}
@@ -135,12 +137,12 @@ public class Sesiones extends ColorPanel{
 		        jLabel9 = new javax.swing.JLabel();
 
 		        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		        setTitle("Crear Sesiï¿½n");
+		        setTitle("Crear Sesión");
 		        setName("Crear Actividad"); // NOI18N
 
 		        jLabel1.setText("Nombre: ");
 
-		        jLabel3.setText("Duraciï¿½n:");
+		        jLabel3.setText("Duración:");
 
 		        jButton1.setText("Guardar");
 		        jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -149,15 +151,15 @@ public class Sesiones extends ColorPanel{
 		            }
 		        });
 
-		        jLabel4.setText("min");
+		        jLabel4.setText("minutos");
 
-		        jLabel5.setText("Descripciï¿½n: ");
+		        jLabel5.setText("Descripción: ");
 
 		        jTextArea1.setColumns(20);
 		        jTextArea1.setRows(5);
 		        jScrollPane1.setViewportView(jTextArea1);
 
-		        jLabel6.setText("Desarrollo de la Sesiï¿½n");
+		        jLabel6.setText("Desarrollo de la Sesión");
 
 		        jLabel7.setText("Posibles Variaciones");
 
@@ -276,8 +278,56 @@ public class Sesiones extends ColorPanel{
 
 		        pack();
 			}
-			private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-		        // TODO add your handling code here:
-		    } 
+			private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { 
+				
+				String desarroll = jTextArea3.getText();
+				String desarrollo[] = desarroll.split("\n");
+				String variacione = jTextArea4.getText();
+				String variaciones[] = variacione.split("\n");
+				Controlador.addSesion(new SesionTransfer(String.valueOf(jTextField1.getText()), Integer.parseInt(String.valueOf(jTextField2.getText())), String.valueOf(jTextArea1.getText()), desarrollo, variaciones));
+			} 
+		}
+		
+		public class SesionTransfer{
+			
+			private String nombre;
+			private int minutos;
+			private String descripcion;
+			private String [] desarrollo;
+			private String [] posiblesVariaciones;
+			
+
+			public SesionTransfer(String nombre, int minutos,
+					String descripcion, String [] desarrollo,
+					String [] posiblesVariaciones) {
+				
+				this.nombre = nombre;
+				this.minutos = minutos;
+				this.descripcion = descripcion;
+				this.desarrollo = desarrollo;
+				this.posiblesVariaciones = posiblesVariaciones;
+			}
+			
+
+			public String getNombre() {
+				return nombre;
+			}
+
+			public int getMinutos() {
+				return minutos;
+			}
+
+			public String getDescripcion() {
+				return descripcion;
+			}
+
+			public String[] getDesarrollo() {
+				return desarrollo;
+			}
+
+			public String[] getPosiblesVariaciones() {
+				return posiblesVariaciones;
+			}
+			
 		}
 }

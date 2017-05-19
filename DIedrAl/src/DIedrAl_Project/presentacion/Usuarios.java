@@ -32,7 +32,7 @@ public class Usuarios extends ColorPanel{
 		add(title, c);
 		
 		
-		ImageButton nuevo = new ImageButton("AÃ±adir", "images/bluebutton.png", "images/bluebutton2.png", this);
+		ImageButton nuevo = new ImageButton("Añadir", "images/bluebutton.png", "images/bluebutton2.png", this);
 		nuevo.addActionListener((ae) -> {
 			JFrame panel = new JFrame();
 			

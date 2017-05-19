@@ -128,7 +128,6 @@ public class Recursos extends ColorPanel{
 		    jLabel3 = new javax.swing.JLabel();
 		    jLabel4 = new javax.swing.JLabel();
 		    jButton1 = new javax.swing.JButton();
-		    jButton2 = new javax.swing.JButton();
 		    jTextField1 = new javax.swing.JTextField();
 		    jTextField2 = new javax.swing.JTextField();
 		    jScrollPane2 = new javax.swing.JScrollPane();
@@ -143,9 +142,9 @@ public class Recursos extends ColorPanel{
 
 		        jLabel2.setText("Archivo: ");
 
-		        jLabel3.setText("Descripciï¿½n: ");
+		        jLabel3.setText("Descripción: ");
 
-		        jLabel4.setText("Etiquetas: ");
+		        jLabel4.setText("Etiquetas: (separadas por comas)");
 
 		        jButton1.setText("Guardar");
 		        jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -154,12 +153,6 @@ public class Recursos extends ColorPanel{
 		            }
 		        });
 
-		        jButton2.setText("Salir");
-		        jButton2.addActionListener(new java.awt.event.ActionListener() {
-		            public void actionPerformed(java.awt.event.ActionEvent evt) {
-		                jButton2ActionPerformed(evt);
-		            }
-		        });
 
 		        jTextField2.setText("Ruta al archivo");
 
@@ -195,11 +188,9 @@ public class Recursos extends ColorPanel{
 		                        .addGap(0, 0, Short.MAX_VALUE)))
 		                .addContainerGap())
 		            .addGroup(layout.createSequentialGroup()
-		                .addGap(85, 85, 85)
-		                .addComponent(jButton1)
-		                .addGap(60, 60, 60)
-		                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-		                .addContainerGap(88, Short.MAX_VALUE))
+		            		.addGap(126, 126, 126)
+			                .addComponent(jButton1)
+			                .addGap(0, 0, Short.MAX_VALUE))
 		        );
 		        layout.setVerticalGroup(
 		            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,20 +213,48 @@ public class Recursos extends ColorPanel{
 		                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
 		                .addGap(29, 29, 29)
 		                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-		                    .addComponent(jButton1)
-		                    .addComponent(jButton2))
+		                    .addComponent(jButton1))
 		                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		        );
 
 		        pack();
 		}
 
-		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-		        // TODO add your handling code here:
+		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {     
+			
+			String etiquetas = jTextArea2.getText();
+			String etiqs[] = etiquetas.split(",");
+			Controlador.addRecurso(new RecursoTransfer(String.valueOf(jTextField1.getText()), String.valueOf(jTextField2.getText()), String.valueOf(jTextArea3.getText()), etiqs));
 		}                                        
 
-		private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-		        // TODO add your handling code here:
-		}  
+	}
+	
+	public class RecursoTransfer{
+		private String nombre;
+		private String ruta;
+		private String descripcion;
+		private String[] etiquetas;
+		
+		public RecursoTransfer(String nombre, String ruta, String descripcion,
+				String[] etiquetas) {
+			this.nombre = nombre;
+			this.ruta = ruta;
+			this.descripcion = descripcion;
+			this.etiquetas = etiquetas;
+		}
+		public String getNombre() {
+			return nombre;
+		}
+		public String getRuta() {
+			return ruta;
+		}
+		public String getDescripcion() {
+			return descripcion;
+		}
+		public String[] getEtiquetas() {
+			return etiquetas;
+		}
+		
+		
 	}
 }
