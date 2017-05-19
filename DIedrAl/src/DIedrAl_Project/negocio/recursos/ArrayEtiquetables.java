@@ -36,5 +36,12 @@ public abstract class ArrayEtiquetables<T extends Etiquetable> {
 
 		return aux;
 	}
+	
+	public void add(T elem){
+		etiquetables.add(elem);
+	}
+	public void erase(T elem){
+		etiquetables.remove(elem);
+	}
 
 }

@@ -1,11 +1,11 @@
 package DIedrAl_Project.negocio.recursos;
 
 public class Banco {
-	private ArrayActividades arrayActividades;
+	private ArrayActividades actividades;
 
-	private ArraySesiones arraySesiones;
+	private ArraySesiones sesiones;
 
-	private ArrayRecursos arrayRecursos;
+	private ArrayRecursos recursos;
 
 	private long idSiguiente;
 
@@ -20,11 +20,11 @@ public class Banco {
 	}
 
 	private Banco() {
-
+		recursos=new ArrayRecursos();
 	}
 
 	public void addRecurso(Recurso rec) {
-
+		recursos.add(rec);
 	}
 
 	public void removeRecurso(Recurso rec) {
