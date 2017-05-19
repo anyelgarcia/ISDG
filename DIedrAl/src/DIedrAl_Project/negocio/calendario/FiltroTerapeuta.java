@@ -21,7 +21,7 @@ class FiltroTerapeuta<T> implements Predicate<T>{
 
 	public boolean test(T var){
 		if(var instanceof SesionProgramada)
-			if((((SesionProgramada) var).getTerapeuta()).containsAll(terapeutas))
+			//if((((SesionProgramada) var).getTerapeuta()).containsAll(terapeutas))
 						return true;
 		return false;
 	}

@@ -1,7 +1,5 @@
 package DIedrAl_Project.negocio.recursos;
 
-import java.math.BigInteger;
-
 public class Banco {
 	private ArrayActividades arrayActividades;
 
