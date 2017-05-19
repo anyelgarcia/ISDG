@@ -8,14 +8,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-
 public class Usuarios extends ColorPanel{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5881613145077329549L;
-
 
 	public Usuarios(int r, int g, int b){
 		super(r, g, b);
@@ -32,7 +30,7 @@ public class Usuarios extends ColorPanel{
 		add(title, c);
 		
 		
-		ImageButton nuevo = new ImageButton("Añadir", "images/bluebutton.png", "images/bluebutton2.png", this);
+		JButton nuevo = new JButton("Añadir");
 		nuevo.addActionListener((ae) -> {
 			JFrame panel = new JFrame();
 			
@@ -50,7 +48,7 @@ public class Usuarios extends ColorPanel{
 		
 		
 		
-		ImageButton buscar = new ImageButton("Buscar", "images/orangebutton.png", "images/orangebutton2.png", this);
+		JButton buscar = new JButton("Buscar");
 		buscar.addActionListener((ae) -> {
 			JFrame panel = new JFrame();
 			
