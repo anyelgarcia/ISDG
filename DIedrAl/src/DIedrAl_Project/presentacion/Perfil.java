@@ -3,6 +3,7 @@ package DIedrAl_Project.presentacion;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -128,7 +129,7 @@ public class Perfil extends ColorPanel{
 	        jTextArea2.setRows(5);
 	        jScrollPane3.setViewportView(jTextArea2);
 
-	        jLabel1.setText("Despacho, horarios y otra informaciï¿½n: ");
+	        jLabel1.setText("Despacho, horarios y otra información: ");
 
 	        jLabel2.setText("Pacientes Asociados: ");
 
@@ -138,7 +139,7 @@ public class Perfil extends ColorPanel{
 
 	        jLabel5.setText("Email: ");
 
-	        jLabel6.setText("Telï¿½fono: ");
+	        jLabel6.setText("Teléfono: ");
 
 	        jTextField1.setEditable(false);
 
@@ -266,6 +267,7 @@ public class Perfil extends ColorPanel{
 		        jLabel5 = new javax.swing.JLabel();
 		        jLabel6 = new javax.swing.JLabel();
 		        jTextField1 = new javax.swing.JTextField();
+		        jTextField1.setEditable(false);
 		        jTextField2 = new javax.swing.JTextField();
 		        jTextField3 = new javax.swing.JTextField();
 		        jTextField4 = new javax.swing.JTextField();
@@ -284,8 +286,9 @@ public class Perfil extends ColorPanel{
 		            public int getSize() { return strings.length; }
 		            public String getElementAt(int i) { return strings[i]; }
 		        });
-		        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+		        jList1.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		        jList1.setToolTipText("");
+		        
 		        jScrollPane1.setViewportView(jList1);
 
 		        jTextArea1.setColumns(20);
@@ -297,7 +300,7 @@ public class Perfil extends ColorPanel{
 		        jTextArea2.setRows(5);
 		        jScrollPane3.setViewportView(jTextArea2);
 
-		        jLabel1.setText("Despacho, horarios y otra informaciï¿½n: ");
+		        jLabel1.setText("Despacho, horarios y otra información: ");
 
 		        jLabel2.setText("Pacientes Asociados: ");
 
@@ -307,7 +310,7 @@ public class Perfil extends ColorPanel{
 
 		        jLabel5.setText("Email: ");
 
-		        jLabel6.setText("Telï¿½fono: ");
+		        jLabel6.setText("Teléfono: ");
 
 		        jButton1.setText("Guardar");
 		        jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -394,9 +397,69 @@ public class Perfil extends ColorPanel{
 
 		        pack();
 		}
-		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-	        // TODO add your handling code here:
+		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                        
+			PerfilTransfer transfer = new PerfilTransfer(jTextField2.getText(), jTextField3.getText(), 
+				jTextField4.getText(), jTextArea2.getText(), jList1.getSelectedValuesList(), jTextArea1.getText());
+			Controlador.changeProfile(transfer);
 	    }     
+	}
+	
+	public class PerfilTransfer{
+		
+		public PerfilTransfer(String rol, String email, String telefono,
+				String descripcion, List<String> pacientes, String info) {
+			this.rol = rol;
+			this.email = email;
+			this.telefono = telefono;
+			this.descripcion = descripcion;
+			this.pacientes = pacientes;
+			this.info = info;
+		}
+		
+		public String getRol() {
+			return rol;
+		}
+		public void setRol(String rol) {
+			this.rol = rol;
+		}
+		public String getEmail() {
+			return email;
+		}
+		public void setEmail(String email) {
+			this.email = email;
+		}
+		public String getTelefono() {
+			return telefono;
+		}
+		public void setTelefono(String telefono) {
+			this.telefono = telefono;
+		}
+		public String getDescripcion() {
+			return descripcion;
+		}
+		public void setDescripcion(String descripcion) {
+			this.descripcion = descripcion;
+		}
+		public List<String> getPacientes() {
+			return pacientes;
+		}
+		public void setPacientes(List<String> pacientes) {
+			this.pacientes = pacientes;
+		}
+		public String getInfo() {
+			return info;
+		}
+		public void setInfo(String info) {
+			this.info = info;
+		}
+		String rol;
+		String email;
+		String telefono;
+		String descripcion;
+		List<String> pacientes;
+		String info;
+		
+		
 	}
 }
 

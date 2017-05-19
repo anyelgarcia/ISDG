@@ -1,8 +1,10 @@
 package DIedrAl_Project.presentacion;
 
 import DIedrAl_Project.presentacion.Pacientes.PacienteTransfer;
+import DIedrAl_Project.presentacion.Perfil.PerfilTransfer;
 import DIedrAl_Project.presentacion.Recursos.RecursoTransfer;
 import DIedrAl_Project.presentacion.Sesiones.SesionTransfer;
+import DIedrAl_Project.presentacion.Usuarios.UsuarioTransfer;
 
 public class Controlador {
 	public static void addPaciente(PacienteTransfer p){
@@ -40,5 +42,24 @@ public class Controlador {
 		 }
 		 System.out.println( p.getDescripcion());
 		
+	}
+	
+	public static void changeProfile(PerfilTransfer p){
+		System.out.println(p.getRol());
+		System.out.println(p.getEmail());
+		System.out.println(p.getTelefono());
+		System.out.println(p.getDescripcion());
+		for(String s : p.getPacientes()) System.out.println(s);
+		System.out.println(p.getInfo());
+	}
+	
+	public static void addUsuario(UsuarioTransfer p){
+		System.out.println(p.getNombre());
+		System.out.println(p.getRol());
+		System.out.println(p.getEmail());
+		System.out.println(p.getTelefono());
+		System.out.println(p.getDescripcion());
+		for(String s : p.getPacientes()) System.out.println(s);
+		System.out.println(p.getInfo());
 	}
 }

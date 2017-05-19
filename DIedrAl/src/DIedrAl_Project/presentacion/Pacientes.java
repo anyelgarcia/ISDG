@@ -371,14 +371,14 @@ public class Pacientes extends ColorPanel{
 		private String [] aficiones;
 		private String descripcion;
 		
-		public PacienteTransfer(String nombre, String apellido1, String apellido2, int dia1, String mes1, int año1, String estadocivil, String lesion, int dia2, String mes2, int año2, String [] aficiones, String descripcion){
+		public PacienteTransfer(String nombre, String apellido1, String apellido2, int dia1, String mes1, int ano1, String estadocivil, String lesion, int dia2, String mes2, int ano2, String [] aficiones, String descripcion){
 				this.nombre = nombre;
 				this.apellido1 = apellido1;
 				this.apellido2 = apellido2;
-				this.fechanacim = new Fecha(dia1, mes1, año1, 0);
+				this.fechanacim = new Fecha(dia1, mes1, ano1, 0);
 				this.estadocivil = estadocivil;
 				this.lesion = lesion;
-				this.fechalesion = new Fecha(dia2, mes2, año2, 0);
+				this.fechalesion = new Fecha(dia2, mes2, ano2, 0);
 				this.aficiones = aficiones;
 				this.descripcion = descripcion;
 		}
