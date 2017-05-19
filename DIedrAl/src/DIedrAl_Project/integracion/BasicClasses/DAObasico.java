@@ -3,7 +3,7 @@ package DIedrAl_Project.integracion.BasicClasses;
 import java.io.*;
 import java.util.ArrayList;
 
-import DIedrAl_Project.integracion.ObjetoAlmacenable;
+import DIedrAl_Project.negocio.ObjetoAlmacenable;
 
 /**
  * Created by Alejandro on 13/05/2017.

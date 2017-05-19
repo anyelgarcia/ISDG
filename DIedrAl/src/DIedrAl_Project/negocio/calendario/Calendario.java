@@ -37,6 +37,7 @@ public class Calendario {
 	}
 
 	public void filtrarTerapeuta(Terapeuta t) {
+		Calendario = new Calendario(ses);
 		//sesiones.removeIf((new FiltroTerapeuta<SesionProgramada>(t)));
 	}
 

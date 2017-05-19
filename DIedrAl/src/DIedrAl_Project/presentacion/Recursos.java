@@ -8,14 +8,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-
 public class Recursos extends ColorPanel{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1366867660661296990L;   
-	
 	
 	public Recursos(int r, int g, int b){
 		super(r, g, b);
@@ -33,7 +31,7 @@ public class Recursos extends ColorPanel{
 		
 		
 		
-		ImageButton nuevo = new ImageButton("Crear ", "images/orangebutton.png", "images/orangebutton2.png", this);
+		JButton nuevo = new JButton("Crear ");
 		componentes.add(nuevo);
 		nuevo.addActionListener((ae) -> {
 			JFrame pantalla = new PantallaAdd();
@@ -49,7 +47,7 @@ public class Recursos extends ColorPanel{
 		
 		
 		
-		ImageButton buscar = new ImageButton(" Buscar  ", "images/greenbutton.png", "images/greenbutton2.png", this);
+		JButton buscar = new JButton(" Buscar  ");
 		componentes.add(buscar);
 		buscar.addActionListener((ae) -> {
 			JFrame panel = new JFrame();
@@ -64,7 +62,7 @@ public class Recursos extends ColorPanel{
 		add(buscar , c);
 		
 		
-		ImageButton eliminar = new ImageButton("Eliminar", "images/bluebutton.png", "images/bluebutton2.png", this);
+		JButton eliminar = new JButton("Eliminar");
 		componentes.add(eliminar);
 		eliminar.addActionListener((ae) -> {
 			JFrame panel = new JFrame();
@@ -80,7 +78,7 @@ public class Recursos extends ColorPanel{
 		
 		
 		
-		ImageButton editar = new ImageButton("Editar", "images/tanbutton.png", "images/tanbutton2.png", this);
+		JButton editar = new JButton("Editar");
 		componentes.add(editar);
 		editar.addActionListener((ae) -> {
 			JFrame panel = new JFrame();

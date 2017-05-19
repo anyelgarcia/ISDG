@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -14,7 +15,6 @@ public class Actividades extends ColorPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 6517855682994096031L;
-	
 	
 	public Actividades(int r, int g, int b){
 		super(r,g,b);
@@ -32,7 +32,7 @@ public class Actividades extends ColorPanel{
 		
 		
 		
-		ImageButton nuevo = new ImageButton("  Crear  ", "images/bluebutton.png", "images/bluebutton2.png", this);
+		JButton nuevo = new JButton("  Crear  ");
 		componentes.add(nuevo);
 		nuevo.addActionListener((ae) -> {
 			JFrame pantalla = new PantallaAdd();
@@ -45,7 +45,7 @@ public class Actividades extends ColorPanel{
 		c.ipady = 0;
 		add(nuevo, c);
 		
-		ImageButton buscar = new ImageButton("  Buscar ", "images/greenbutton.png", "images/greenbutton2.png", this);
+		JButton buscar = new JButton("  Buscar ");
 		componentes.add(buscar);
 		buscar.addActionListener((ae) -> {
 			JFrame panel = new JFrame();
@@ -59,7 +59,7 @@ public class Actividades extends ColorPanel{
 		c.gridy = 2;
 		add(buscar, c);
 		
-		ImageButton eliminar = new ImageButton("Eliminar", "images/redbutton.png", "images/redbutton2.png", this);
+		JButton eliminar = new JButton("Eliminar");
 		componentes.add(eliminar);
 		eliminar.addActionListener((ae) -> {
 			JFrame panel = new JFrame();
@@ -307,106 +307,8 @@ public class Actividades extends ColorPanel{
 	        pack();
 		}
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-		      ActionInfo info = new ActionInfo(jTextField1.getText(), jComboBox1.getSelectedItem(), 
-		    		  jTextField)
+		        // TODO add your handling code here:
 		} 
-	}
-	
-	public class ActionInfo{
-		public String getNombre() {
-			return nombre;
-		}
-
-		public void setNombre(String nombre) {
-			this.nombre = nombre;
-		}
-
-		public String getDificultad() {
-			return dificultad;
-		}
-
-		public void setDificultad(String dificultad) {
-			this.dificultad = dificultad;
-		}
-
-		public String getPacienteTipo() {
-			return pacienteTipo;
-		}
-
-		public void setPacienteTipo(String pacienteTipo) {
-			this.pacienteTipo = pacienteTipo;
-		}
-
-		public int getDuracion() {
-			return duracion;
-		}
-
-		public void setDuracion(int duracion) {
-			this.duracion = duracion;
-		}
-
-		public String getDescripcion() {
-			return descripcion;
-		}
-
-		public void setDescripcion(String descripcion) {
-			this.descripcion = descripcion;
-		}
-
-		public String getDesarrollo() {
-			return desarrollo;
-		}
-
-		public void setDesarrollo(String desarrollo) {
-			this.desarrollo = desarrollo;
-		}
-
-		public String getVariaciones() {
-			return variaciones;
-		}
-
-		public void setVariaciones(String variaciones) {
-			this.variaciones = variaciones;
-		}
-
-		public String[] getRecursos() {
-			return recursos;
-		}
-
-		public void setRecursos(String[] recursos) {
-			this.recursos = recursos;
-		}
-
-		public String[] getActividades() {
-			return actividades;
-		}
-
-		public void setActividades(String[] actividades) {
-			this.actividades = actividades;
-		}
-
-		private String nombre;
-		private String dificultad;
-		private String pacienteTipo;
-		private int duracion;
-		private String descripcion;
-		private String desarrollo;
-		private String variaciones;
-		private String[] recursos;
-		private String[] actividades;
-		
-		public ActionInfo(String nombre, String dificultad, String pacienteTipo, int duracion,
-				String descripcion, String desarrollo, String variaciones, String[] recursos, String[] actividades){
-			this.nombre = nombre;
-			this.dificultad = dificultad;
-			this.pacienteTipo = pacienteTipo;
-			this.duracion = duracion;
-			this.descripcion = descripcion;
-			this.desarrollo = desarrollo;
-			this.variaciones = variaciones;
-			this.actividades = actividades;
-			this.recursos = recursos;
-		}
 	}
 
 }
