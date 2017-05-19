@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -308,8 +307,106 @@ public class Actividades extends ColorPanel{
 	        pack();
 		}
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-		        // TODO add your handling code here:
+		      ActionInfo info = new ActionInfo(jTextField1.getText(), jComboBox1.getSelectedItem(), 
+		    		  jTextField)
 		} 
+	}
+	
+	public class ActionInfo{
+		public String getNombre() {
+			return nombre;
+		}
+
+		public void setNombre(String nombre) {
+			this.nombre = nombre;
+		}
+
+		public String getDificultad() {
+			return dificultad;
+		}
+
+		public void setDificultad(String dificultad) {
+			this.dificultad = dificultad;
+		}
+
+		public String getPacienteTipo() {
+			return pacienteTipo;
+		}
+
+		public void setPacienteTipo(String pacienteTipo) {
+			this.pacienteTipo = pacienteTipo;
+		}
+
+		public int getDuracion() {
+			return duracion;
+		}
+
+		public void setDuracion(int duracion) {
+			this.duracion = duracion;
+		}
+
+		public String getDescripcion() {
+			return descripcion;
+		}
+
+		public void setDescripcion(String descripcion) {
+			this.descripcion = descripcion;
+		}
+
+		public String getDesarrollo() {
+			return desarrollo;
+		}
+
+		public void setDesarrollo(String desarrollo) {
+			this.desarrollo = desarrollo;
+		}
+
+		public String getVariaciones() {
+			return variaciones;
+		}
+
+		public void setVariaciones(String variaciones) {
+			this.variaciones = variaciones;
+		}
+
+		public String[] getRecursos() {
+			return recursos;
+		}
+
+		public void setRecursos(String[] recursos) {
+			this.recursos = recursos;
+		}
+
+		public String[] getActividades() {
+			return actividades;
+		}
+
+		public void setActividades(String[] actividades) {
+			this.actividades = actividades;
+		}
+
+		private String nombre;
+		private String dificultad;
+		private String pacienteTipo;
+		private int duracion;
+		private String descripcion;
+		private String desarrollo;
+		private String variaciones;
+		private String[] recursos;
+		private String[] actividades;
+		
+		public ActionInfo(String nombre, String dificultad, String pacienteTipo, int duracion,
+				String descripcion, String desarrollo, String variaciones, String[] recursos, String[] actividades){
+			this.nombre = nombre;
+			this.dificultad = dificultad;
+			this.pacienteTipo = pacienteTipo;
+			this.duracion = duracion;
+			this.descripcion = descripcion;
+			this.desarrollo = desarrollo;
+			this.variaciones = variaciones;
+			this.actividades = actividades;
+			this.recursos = recursos;
+		}
 	}
 
 }
