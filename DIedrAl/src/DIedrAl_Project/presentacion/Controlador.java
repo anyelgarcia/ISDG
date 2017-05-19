@@ -20,14 +20,14 @@ public class Controlador {
 		 System.out.println(p.getNombre());
 		 System.out.println(p.getApellido1());
 		 System.out.println(p.getApellido2());
-		 System.out.println(p.getFechanacimiento().getAño() + " " + p.getFechanacimiento().getMes() + " " + p.getFechanacimiento().getDia());
+		 System.out.println(p.getFechanacimiento().getAÃ±o() + " " + p.getFechanacimiento().getMes() + " " + p.getFechanacimiento().getDia());
 		 for(String str : p.getAficiones()){
 			 System.out.println(str);
 		 }
 		 System.out.println( p.getDescripcion());
 		 System.out.println( p.getEstadocivil());
 		 System.out.println(p.getLesion());
-		 System.out.println(p.getFechalesion().getAño() + " " + p.getFechalesion().getMes() + " " + p.getFechalesion().getDia());*/
+		 System.out.println(p.getFechalesion().getAÃ±o() + " " + p.getFechalesion().getMes() + " " + p.getFechalesion().getDia());*/
 	}
 	
 	public static void addRecurso(RecursoTransfer p){
@@ -92,5 +92,21 @@ public class Controlador {
 		System.out.println(p.getDescripcion());
 		for(String s : p.getPacientes()) System.out.println(s);
 		System.out.println(p.getInfo());
+	}
+	
+	public static void deleteActividad(String s){
+		System.out.println(s);
+	}
+	
+	public static void deletePaciente(String s){
+		System.out.println(s);
+	}
+	
+	public static void deleteRecurso(String s){
+		System.out.println(s);
+	}
+	
+	public static void deleteSesion(String s){
+		System.out.println(s);
 	}
 }

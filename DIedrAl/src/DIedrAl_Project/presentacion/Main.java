@@ -3,6 +3,7 @@ package DIedrAl_Project.presentacion;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
