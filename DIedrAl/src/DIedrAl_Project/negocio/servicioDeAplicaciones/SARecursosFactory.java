@@ -1,5 +1,7 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
+import DIedrAl_Project.negocio.recursos.Banco;
+
 public abstract class SARecursosFactory {
 
 	static SARecursosFactory  instancia; 
@@ -9,5 +11,5 @@ public abstract class SARecursosFactory {
 			instancia =  new SARecursosFactoryImpl();
 		return instancia;
 	}
-	public abstract SARecursos newSARecursos();
+	public abstract SARecursos newSARecursos(Banco bank);
 }
