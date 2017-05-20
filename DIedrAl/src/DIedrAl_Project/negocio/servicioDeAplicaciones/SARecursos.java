@@ -4,9 +4,6 @@ import java.util.Set;
 
 import DIedrAl_Project.negocio.recursos.*;
 
-//TODO: HAY QUE HACER filtrarRango y sus amigos una para cada uno.
-
-//NO FUNCIONA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! (TODAVÍA)
 public interface SARecursos {
 	public void addRecurso(Recurso rec);
 
@@ -20,22 +17,38 @@ public interface SARecursos {
 
 	public void removeSesion(Sesion ses);
 
-	public Set<Etiquetable> filtrarNombre(String nombre, EnumEtiquetable op);
+	public Set<Recurso> filtrarRecursosPorNombre(String nombre);
 
-	public Set<Etiquetable> filtrarEtiqueta(Set<String> filtros, EnumEtiquetable op);
+	public Set<Actividad> filtrarActividadPorNombre(String nombre);
 
-	public ArrayProgramables<Programable> filtrarRango(Integer min, Integer max, EnumEtiquetable op);
+	public Set<Sesion> filtrarSesionPorNombre(String nombre);
 
-	public ArrayProgramables<Programable> filtrarDesde(Integer dur, EnumEtiquetable op);
+	public Set<Recurso> filtrarRecursoPorEtiqueta(Set<String> filtros);
 
-	public ArrayProgramables<Programable> filtrarHasta(Integer dur, EnumEtiquetable op);
+	public Set<Actividad> filtrarActividadPorEtiqueta(Set<String> filtros);
 
-	public ArrayProgramables<Programable> filtrarDestinatarios(Set<String> dest, EnumEtiquetable op);
+	public Set<Sesion> filtrarSesionPorEtiqueta(Set<String> filtros);
 
-	public ArrayActividades filtrarRango(Dificultad min, Dificultad max);
-	
-	public ArrayActividades filtrarDesde(Dificultad dif);
-	
-	public ArrayActividades filtrarHasta(Dificultad dif);
+	public ArrayActividades filtrarActividadesPorRango(Integer min, Integer max);
+
+	public ArrayActividades filtrarActividadesDesde(Integer dur);
+
+	public ArrayActividades filtrarActividadesHasta(Integer dur);
+
+	public ArrayActividades filtrarActividadesPorDestinatarios(Set<String> dest);
+
+	public ArraySesiones filtrarSesionesPorRango(Integer min, Integer max);
+
+	public ArraySesiones filtrarSesionesDesde(Integer dur);
+
+	public ArraySesiones filtrarSesionesHasta(Integer dur);
+
+	public ArraySesiones filtrarSesionesDestinatarios(Set<String> dest);
+
+	public ArrayActividades filtrarActividadesPorRango(Dificultad min, Dificultad max);
+
+	public ArrayActividades filtrarActividadesDesde(Dificultad dif);
+
+	public ArrayActividades filtrarActividadesHasta(Dificultad dif);
 
 }
