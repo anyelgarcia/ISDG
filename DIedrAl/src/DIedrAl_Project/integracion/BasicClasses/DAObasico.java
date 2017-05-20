@@ -2,6 +2,7 @@ package DIedrAl_Project.integracion.BasicClasses;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import DIedrAl_Project.negocio.ObjetoAlmacenable;
 
@@ -124,5 +125,24 @@ public class DAObasico<S extends ObjetoAlmacenable> {
 		if (ois != null)
 			ois.close();
 		return true;
+	}
+	
+	public HashSet<S> obtenerDatosSet(String file) throws IOException, ClassNotFoundException{
+		FileInputStream fis = new FileInputStream(file);
+		BufferedInputStream bis = new BufferedInputStream(fis);
+		AppendableObjectInputStream ois = new AppendableObjectInputStream(bis);
+		HashSet<S> r = new HashSet<>();
+		S p = null;
+		try {
+			while (true) {
+				p = (S) ois.readObject();
+				r.add(p);
+			}
+
+		} catch (EOFException eof) {
+			if (ois != null)
+				ois.close();
+			return r;
+		}
 	}
 }

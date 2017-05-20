@@ -2,6 +2,7 @@ package DIedrAl_Project.integracion;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import DIedrAl_Project.integracion.BasicClasses.DAObasico;
 import DIedrAl_Project.negocio.administracion.Terapeuta;
@@ -40,9 +41,9 @@ public class DAOTerapeutaImp implements DAOTerapeuta {
 	}
 
 	@Override
-	public ArrayList<Usuario> listarTerapeutas()  throws IOException, ClassNotFoundException {
-		return op.obtenerDatos(file);
-	}
+	public HashSet<Terapeuta> listarTerapeutas()  throws IOException, ClassNotFoundException {
+		return op.obtenerDatosSet(file);
+  }
 
 	public boolean existeTerapeuta(String id)  throws IOException, ClassNotFoundException{
 		return op.exists(id, id);

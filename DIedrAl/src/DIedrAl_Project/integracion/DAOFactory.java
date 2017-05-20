@@ -5,4 +5,11 @@ public interface DAOFactory {
 	
 	public DAORecurso getDAORecurso();
 	
+	public DAOActividad getDAOActividad();
+	
+	public DAOInforme getDAOInforme();
+	
+	public DAOPaciente getDAOPaciente();
+	
+	public DAOSesion getDAOSesion();
 }
