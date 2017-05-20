@@ -16,6 +16,10 @@ public abstract class Programable extends Etiquetable {
 	public Programable(String name) {
 		super(name);
 	}
+	
+	public Programable(String name, String ... etiquetas){
+		super(name,etiquetas);
+	}
 
 	public Set<String> getEtiquetas() {
 		Set<String> aux = new HashSet<String>();

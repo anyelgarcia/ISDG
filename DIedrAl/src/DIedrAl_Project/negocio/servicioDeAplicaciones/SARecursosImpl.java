@@ -1,6 +1,6 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
-import java.util.Set;
+import java.util.*;
 
 import DIedrAl_Project.negocio.recursos.*;
 
@@ -108,7 +108,7 @@ public class SARecursosImpl implements SARecursos{
 
 	@Override
 	public ArraySesiones filtrarSesionesHasta(Integer dur) {
-		return (ArraySesiones) bank.getSesiones().filtrarHasta(dur);
+		return (ArraySesiones) bank.getSesiones().filtrarHasta(dur); 
 	}
 
 	@Override

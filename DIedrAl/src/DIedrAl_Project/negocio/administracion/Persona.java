@@ -2,9 +2,10 @@ package DIedrAl_Project.negocio.administracion;
 
 import java.util.GregorianCalendar;
 
+import DIedrAl_Project.negocio.ObjetoAlmacenable;
 import DIedrAl_Project.negocio.pacientes.Direccion;
 
-public class Persona {
+public class Persona implements ObjetoAlmacenable{
 
 	protected String name;
 
@@ -21,6 +22,8 @@ public class Persona {
 	protected String email;
 	
 	protected Integer tfo;
+	
+	protected String id;
 
 	public Persona(String nombre, String apellido1, String apellido2) {
 		name = nombre;
@@ -90,6 +93,11 @@ public class Persona {
 
 	public void setTfo(Integer tfo) {
 		this.tfo = tfo;
+	}
+
+	@Override
+	public String getId() {
+		return id;
 	}
 	
 

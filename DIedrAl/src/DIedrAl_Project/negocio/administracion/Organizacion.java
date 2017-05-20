@@ -1,12 +1,9 @@
 package DIedrAl_Project.negocio.administracion;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import DIedrAl_Project.negocio.recursos.Banco;
-
 public class Organizacion {
-    private final Banco banco;
+    //private final Banco banco;
 
     private List<Centro> centros;
 
