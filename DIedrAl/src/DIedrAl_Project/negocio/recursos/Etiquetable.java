@@ -1,11 +1,12 @@
 package DIedrAl_Project.negocio.recursos;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
+import DIedrAl_Project.negocio.*;
 
-public abstract class Etiquetable {
+
+public abstract class Etiquetable implements ObjetoAlmacenable{
 	
 	/**
 	 * Etiquetas asociadas al objeto
@@ -15,19 +16,18 @@ public abstract class Etiquetable {
     protected String nombre;
     
     protected String descripcion;
+    
+    protected String id;
 
-
-	protected Integer id;
-
-    public Etiquetable(String name) {
+	public Etiquetable(String name) {
 		nombre=name;
 		this.etiquetas=new TreeSet<String>();
 	}
-    public Etiquetable(String name, String[] etiquetas) {
+    public Etiquetable(String name, String...etiquetas) {
 		nombre=name;
 		this.etiquetas=new TreeSet<String>();
 		for(String s:etiquetas){
-			addEtiqueta(s);
+			this.etiquetas.add(s);
 		}
 	}
     public Etiquetable(String name, String[] etiquetas, String desc) {
@@ -56,15 +56,6 @@ public abstract class Etiquetable {
     public void setNombre(String value) {
         this.nombre = value;
     }
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int value) {
-        this.id = value;
-    }
-    
     public void addEtiqueta(String etiqueta){
     	this.etiquetas.add(etiqueta);
     }
@@ -73,6 +64,11 @@ public abstract class Etiquetable {
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+    @Override
+	public String getId() {
+		return id;
 	}
 
 

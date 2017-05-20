@@ -1,9 +1,5 @@
 package DIedrAl_Project.negocio.pacientes;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import DIedrAl_Project.negocio.administracion.Centro;
 import DIedrAl_Project.negocio.administracion.Persona;
 
 public class Paciente extends Persona {
