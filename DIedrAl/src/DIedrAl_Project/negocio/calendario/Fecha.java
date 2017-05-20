@@ -8,14 +8,18 @@ public class Fecha {
 	public final static String[] ANOS = {"2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000"};
 	
 	private int dia;
-
-    private int mes;
-
+    private String mes;
     private int anyo;
-
     private int hora;
+    
+    public Fecha(int dia, String mes, int anyo, int hora) {
+		this.dia = dia;
+		this.mes = mes;
+		this.anyo = anyo;
+		this.hora = hora;
+	}
 
-    int getDia() {
+	public int getDia() {
         return this.dia;
     }
 
@@ -23,15 +27,15 @@ public class Fecha {
         this.dia = value;
     }
 
-    int getMes() {
+    public String getMes() {
         return this.mes;
     }
 
-    void setMes(int value) {
+    void setMes(String value) {
         this.mes = value;
     }
 
-    int getAnyo() {
+    public int getAnyo() {
         return this.anyo;
     }
 
@@ -39,7 +43,7 @@ public class Fecha {
         this.anyo = value;
     }
 
-    int getHora() {
+    public int getHora() {
         return this.hora;
     }
 

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import DIedrAl_Project.integracion.ObjetoAlmacenable;
+import DIedrAl_Project.negocio.ObjetoAlmacenable;
 
 /**
  * Created by Alejandro on 13/05/2017.

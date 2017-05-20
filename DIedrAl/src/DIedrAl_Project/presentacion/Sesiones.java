@@ -8,6 +8,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import DIedrAl_Project.presentacion.Confirm.confirmListener;
+import DIedrAl_Project.presentacion.Recursos.RecursoTransfer;
+
+
 public class Sesiones extends ColorPanel{
 
 	/**
@@ -32,21 +36,21 @@ public class Sesiones extends ColorPanel{
 			
 			
 			
-			JButton nuevo = new JButton("  Crear  ");
+			ImageButton nuevo = new ImageButton("  Crear  ", "images/bluebutton.png", "images/bluebutton2.png", this);
 			nuevo.addActionListener((ae) -> {
 				JFrame pantalla = new PantallaAdd();
 				pantalla.setVisible(true);
 			});
-			c.gridx = 1;
+			c.gridx = 0;
 			c.gridy = 1;
 			c.gridwidth = 1;
-			c.insets = new Insets(25,45,0,0);
+			c.insets = new Insets(25,15,0,0);
 			c.ipady = 0;
 			add(nuevo, c);
 			
 			
 			
-			JButton buscar = new JButton(" Buscar  ");
+			ImageButton buscar = new ImageButton(" Buscar  ", "images/greenbutton.png", "images/greenbutton2.png", this);
 			buscar.addActionListener((ae) -> {
 				JFrame panel = new JFrame();
 				
@@ -56,22 +60,18 @@ public class Sesiones extends ColorPanel{
 				
 			});
 			c.gridx = 1;
-			c.gridy = 2;
+			c.gridy = 1;
 			add(buscar, c);
 			
 			
 			
-			JButton eliminar = new JButton("Eliminar");
+			ImageButton eliminar = new ImageButton("Eliminar", "images/tanbutton.png", "images/tanbutton2.png", this);
 			eliminar.addActionListener((ae) -> {
-				JFrame panel = new JFrame();
-				
-				panel.setSize(300, 400);
+				JFrame panel = new PantallaEliminar();
 				panel.setVisible(true);
-				panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				
 			});
-			c.gridx = 1;
-			c.gridy = 3;
+			c.gridx = 0;
+			c.gridy = 2;
 			add(eliminar, c);
 			setVisible(true);
 		}
@@ -134,12 +134,12 @@ public class Sesiones extends ColorPanel{
 		        jLabel9 = new javax.swing.JLabel();
 
 		        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		        setTitle("Crear Sesiï¿½n");
+		        setTitle("Crear Sesión");
 		        setName("Crear Actividad"); // NOI18N
 
 		        jLabel1.setText("Nombre: ");
 
-		        jLabel3.setText("Duraciï¿½n:");
+		        jLabel3.setText("Duración:");
 
 		        jButton1.setText("Guardar");
 		        jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -148,15 +148,15 @@ public class Sesiones extends ColorPanel{
 		            }
 		        });
 
-		        jLabel4.setText("min");
+		        jLabel4.setText("minutos");
 
-		        jLabel5.setText("Descripciï¿½n: ");
+		        jLabel5.setText("Descripción: ");
 
 		        jTextArea1.setColumns(20);
 		        jTextArea1.setRows(5);
 		        jScrollPane1.setViewportView(jTextArea1);
 
-		        jLabel6.setText("Desarrollo de la Sesiï¿½n");
+		        jLabel6.setText("Desarrollo de la Sesión");
 
 		        jLabel7.setText("Posibles Variaciones");
 
@@ -275,8 +275,152 @@ public class Sesiones extends ColorPanel{
 
 		        pack();
 			}
-			private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-		        // TODO add your handling code here:
-		    } 
+			private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { 
+				
+				String desarroll = jTextArea3.getText();
+				String desarrollo[] = desarroll.split("\n");
+				String variacione = jTextArea4.getText();
+				String variaciones[] = variacione.split("\n");
+				Controlador.addSesion(new SesionTransfer(String.valueOf(jTextField1.getText()), Integer.parseInt(String.valueOf(jTextField2.getText())), String.valueOf(jTextArea1.getText()), String.valueOf(jTextArea3.getText()), String.valueOf(jTextArea4.getText())));
+			} 
+		}
+		
+		public class SesionTransfer{
+			
+			private String nombre;
+			private int minutos;
+			private String descripcion;
+			private String desarrollo;
+			private String posiblesVariaciones;
+			
+
+			public SesionTransfer(String nombre, int minutos,
+					String descripcion, String desarrollo,
+					String posiblesVariaciones) {
+				
+				this.nombre = nombre;
+				this.minutos = minutos;
+				this.descripcion = descripcion;
+				this.desarrollo = desarrollo;
+				this.posiblesVariaciones = posiblesVariaciones;
+			}
+			
+
+			public String getNombre() {
+				return nombre;
+			}
+
+			public int getMinutos() {
+				return minutos;
+			}
+
+			public String getDescripcion() {
+				return descripcion;
+			}
+
+			public String getDesarrollo() {
+				return desarrollo;
+			}
+
+			public String getPosiblesVariaciones() {
+				return posiblesVariaciones;
+			}
+			
+		}
+
+		private class PantallaEliminar extends JFrame implements confirmListener{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -6239847431534738736L;
+			// Variables declaration - do not modify                     
+		    private javax.swing.JButton jButton1;
+		    private javax.swing.JLabel jLabel1;
+		    private javax.swing.JLabel jLabel2;
+		    private javax.swing.JTextField jTextField1;
+		    // End of variables declaration     
+		    
+		    public PantallaEliminar() {
+		        initComponents();
+		    }
+		    /**
+		     * This method is called from within the constructor to initialize the form.
+		     * WARNING: Do NOT modify this code. The content of this method is always
+		     * regenerated by the Form Editor.
+		     */                        
+		    private void initComponents() {
+
+		        jLabel1 = new javax.swing.JLabel();
+		        jTextField1 = new javax.swing.JTextField();
+		        jButton1 = new javax.swing.JButton();
+		        jLabel2 = new javax.swing.JLabel();
+
+		        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+		        setTitle("Eliminar Sesión");
+
+		        jTextField1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+		        jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+		        jButton1.setText("Eliminar");
+		        jButton1.addActionListener(new java.awt.event.ActionListener() {
+		            public void actionPerformed(java.awt.event.ActionEvent evt) {
+		                jButton1ActionPerformed(evt);
+		            }
+		        });
+
+		        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+		        jLabel2.setText("Introduzca el nombre de la sesión");
+
+		        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		        getContentPane().setLayout(layout);
+		        layout.setHorizontalGroup(
+		            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		            .addGroup(layout.createSequentialGroup()
+		                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		                    .addGroup(layout.createSequentialGroup()
+		                        .addContainerGap()
+		                        .addComponent(jLabel1))
+		                    .addGroup(layout.createSequentialGroup()
+		                        .addGap(151, 151, 151)
+		                        .addComponent(jButton1)))
+		                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+		                .addGap(0, 60, Short.MAX_VALUE)
+		                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+		                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+		                        .addGap(57, 57, 57))
+		                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+		                        .addComponent(jLabel2)
+		                        .addGap(92, 92, 92))))
+		        );
+		        layout.setVerticalGroup(
+		            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		            .addGroup(layout.createSequentialGroup()
+		                .addContainerGap()
+		                .addComponent(jLabel1)
+		                .addGap(16, 16, 16)
+		                .addComponent(jLabel2)
+		                .addGap(18, 18, 18)
+		                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+		                .addGap(26, 26, 26)
+		                .addComponent(jButton1)
+		                .addContainerGap(31, Short.MAX_VALUE))
+		        );
+
+		        pack();
+		    }                      
+
+		    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+		    	Confirm c = new Confirm();
+		    	c.setVisible(true);
+		    	c.addListener(this);
+		    }  
+		    
+		    public void delete(){
+		    	Controlador.deleteSesion(jTextField1.getText());
+		    	this.dispose();
+		    }
+		    
 		}
 }

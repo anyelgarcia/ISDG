@@ -1,4 +1,0 @@
-Direccion.java: cambio de atributos en mayusculas -> piso y numero
-Usuario.java: se elimina modificar
-Organizacion.java: nuevoCentro a bool
-Terapeuta.java: add y remove de  cada array

@@ -8,7 +8,7 @@ import DIedrAl_Project.negocio.recursos.Banco;
 public class Organizacion {
     private final Banco banco;
 
-    private List<Centro> centros = new ArrayList<Centro> ();
+    private List<Centro> centros;
 
     public void nuevoCentro(Centro centro) {
     }

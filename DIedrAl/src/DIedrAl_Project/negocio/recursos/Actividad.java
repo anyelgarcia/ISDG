@@ -1,7 +1,5 @@
 package DIedrAl_Project.negocio.recursos;
 
-import java.util.Set;
-
 public class Actividad extends Programable {
 
     public Actividad(String name) {

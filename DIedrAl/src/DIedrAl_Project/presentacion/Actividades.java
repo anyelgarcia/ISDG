@@ -4,9 +4,10 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 
 public class Actividades extends ColorPanel{
@@ -15,6 +16,7 @@ public class Actividades extends ColorPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 6517855682994096031L;
+	
 	
 	public Actividades(int r, int g, int b){
 		super(r,g,b);
@@ -32,7 +34,7 @@ public class Actividades extends ColorPanel{
 		
 		
 		
-		JButton nuevo = new JButton("  Crear  ");
+		ImageButton nuevo = new ImageButton("  Crear  ", "images/bluebutton.png", "images/bluebutton2.png", this);
 		componentes.add(nuevo);
 		nuevo.addActionListener((ae) -> {
 			JFrame pantalla = new PantallaAdd();
@@ -41,11 +43,11 @@ public class Actividades extends ColorPanel{
 		c.gridx = 0;
 		c.gridy = 1;
 		c.gridwidth = 1;
-		c.insets = new Insets(25,45,0,0);
+		c.insets = new Insets(25,15,0,0);
 		c.ipady = 0;
 		add(nuevo, c);
 		
-		JButton buscar = new JButton("  Buscar ");
+		ImageButton buscar = new ImageButton("  Buscar ", "images/greenbutton.png", "images/greenbutton2.png", this);
 		componentes.add(buscar);
 		buscar.addActionListener((ae) -> {
 			JFrame panel = new JFrame();
@@ -55,22 +57,18 @@ public class Actividades extends ColorPanel{
 			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			
 		});
-		c.gridx = 0;
-		c.gridy = 2;
+		c.gridx = 1;
+		c.gridy = 1;
 		add(buscar, c);
 		
-		JButton eliminar = new JButton("Eliminar");
+		ImageButton eliminar = new ImageButton("Eliminar", "images/orangebutton.png", "images/orangebutton2.png", this);
 		componentes.add(eliminar);
 		eliminar.addActionListener((ae) -> {
-			JFrame panel = new JFrame();
-			
-			panel.setSize(300, 400);
+			JFrame panel = new PantallaEliminar();
 			panel.setVisible(true);
-			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			
 		});
-		c.gridx = 0;
-		c.gridy = 3;
+		c.gridx = 1;
+		c.gridy = 2;
 		add(eliminar, c);
 		setVisible(true);
 	}
@@ -147,7 +145,7 @@ public class Actividades extends ColorPanel{
 
 	        jLabel2.setText("Dificultad:");
 
-	        jLabel3.setText("Duraciï¿½n:");
+	        jLabel3.setText("Duración:");
 
 	        jButton1.setText("Guardar");
 	        jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -160,7 +158,7 @@ public class Actividades extends ColorPanel{
 
 	        jLabel4.setText("min");
 
-	        jLabel5.setText("Descripciï¿½n: ");
+	        jLabel5.setText("Descripción: ");
 
 	        jTextArea1.setColumns(20);
 	        jTextArea1.setRows(5);
@@ -306,9 +304,172 @@ public class Actividades extends ColorPanel{
 
 	        pack();
 		}
-		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-		        // TODO add your handling code here:
+		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { 
+			
+			
+			ActividadTransfer info = new ActividadTransfer(String.valueOf(jTextField1.getText()), String.valueOf(jComboBox1.getSelectedItem()), String.valueOf(jTextField3.getText()),
+					Integer.parseInt(String.valueOf(jTextField2.getText())), String.valueOf(jTextArea1.getText()), String.valueOf(jTextArea4.getText()), String.valueOf(jTextArea3.getText()));
+			
+			Controlador.addActividad(info);
 		} 
 	}
+	
+	
+	public class ActividadTransfer{
+		
+		private String nombre;
+		private String dificultad;
+		private String pacienteTipo;
+		private int duracion;
+		private String descripcion;
+		private String desarrollo;
+		private String variaciones;
+		
+		public ActividadTransfer(String nombre, String dificultad, String pacienteTipo, int duracion,
+				String descripcion, String desarrollo, String variaciones){
+			this.nombre = nombre;
+			this.dificultad = dificultad;
+			this.pacienteTipo = pacienteTipo;
+			this.duracion = duracion;
+			this.descripcion = descripcion;
+			this.desarrollo = desarrollo;
+			this.variaciones = variaciones;
+		}
+		
+		public String getNombre() {
+			return nombre;
+		}
 
+		public String getDificultad() {
+			return dificultad;
+		}
+
+		public String getPacienteTipo() {
+			return pacienteTipo;
+		}
+
+		public int getDuracion() {
+			return duracion;
+		}
+
+		public String getDescripcion() {
+			return descripcion;
+		}
+
+		public void setDescripcion(String descripcion) {
+			this.descripcion = descripcion;
+		}
+
+		public String getDesarrollo() {
+			return desarrollo;
+		}
+
+		public void setDesarrollo(String desarrollo) {
+			this.desarrollo = desarrollo;
+		}
+
+		public String getVariaciones() {
+			return variaciones;
+		}
+
+		public void setVariaciones(String variaciones) {
+			this.variaciones = variaciones;
+		}
+	}
+
+	private class PantallaEliminar extends JFrame implements confirmListener{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -6239847431534738736L;
+		// Variables declaration - do not modify                     
+	    private javax.swing.JButton jButton1;
+	    private javax.swing.JLabel jLabel1;
+	    private javax.swing.JLabel jLabel2;
+	    private javax.swing.JTextField jTextField1;
+	    // End of variables declaration     
+	    
+	    public PantallaEliminar() {
+	        initComponents();
+	    }
+	    /**
+	     * This method is called from within the constructor to initialize the form.
+	     * WARNING: Do NOT modify this code. The content of this method is always
+	     * regenerated by the Form Editor.
+	     */                        
+	    private void initComponents() {
+
+	        jLabel1 = new javax.swing.JLabel();
+	        jTextField1 = new javax.swing.JTextField();
+	        jButton1 = new javax.swing.JButton();
+	        jLabel2 = new javax.swing.JLabel();
+
+	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+	        setTitle("Eliminar Actividad");
+
+	        jTextField1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+	        jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+	        jButton1.setText("Eliminar");
+	        jButton1.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton1ActionPerformed(evt);
+	            }
+	        });
+
+	        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+	        jLabel2.setText("Introduzca el nombre de la actividad");
+
+	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+	        getContentPane().setLayout(layout);
+	        layout.setHorizontalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(layout.createSequentialGroup()
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addContainerGap()
+	                        .addComponent(jLabel1))
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addGap(151, 151, 151)
+	                        .addComponent(jButton1)))
+	                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                .addGap(0, 60, Short.MAX_VALUE)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addGap(57, 57, 57))
+	                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                        .addComponent(jLabel2)
+	                        .addGap(92, 92, 92))))
+	        );
+	        layout.setVerticalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(layout.createSequentialGroup()
+	                .addContainerGap()
+	                .addComponent(jLabel1)
+	                .addGap(16, 16, 16)
+	                .addComponent(jLabel2)
+	                .addGap(18, 18, 18)
+	                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addGap(26, 26, 26)
+	                .addComponent(jButton1)
+	                .addContainerGap(31, Short.MAX_VALUE))
+	        );
+
+	        pack();
+	    }                      
+
+	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	    	Confirm c = new Confirm();
+	    	c.setVisible(true);
+	    	c.addListener(this);
+	    }  
+	    
+	    public void delete(){
+	    	Controlador.deleteActividad(jTextField1.getText());
+	    	this.dispose();
+	    }
+	    
+	}
 }
