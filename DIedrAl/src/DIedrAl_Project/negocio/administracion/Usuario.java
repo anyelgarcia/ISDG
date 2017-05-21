@@ -1,21 +1,43 @@
 package DIedrAl_Project.negocio.administracion;
 
-import DIedrAl_Project.negocio.pacientes.Direccion;
+public class Usuario extends Persona {
 
+	protected String rol;
 
-public class Usuario {
-    private String id;
+	protected String infor;
+	
+	protected String password;
 
-    private int tlf;
+	public Usuario(String nombre, String apellido1, String apellido2, String id) {
+		super(nombre, apellido1, apellido2, id);
+	}
 
-    private String email;
+	public String getRol() {
+		return rol;
+	}
 
-    private Direccion direccion;
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
 
-    public void mostrar() {
-    }
+	public String getInfor() {
+		return infor;
+	}
 
-    public void modificar(Direccion dir, String id, int tlf, String email) {
-    }
-
+	public void setInfor(String infor) {
+		this.infor = infor;
+	}
+	
+	public void setPassword(String password){
+		this.password = password;
+	}
+	
+	/**
+	 * Comprueba si el string introducido coincide con la contraseña del ususuario.
+	 * @param pass contraseña a probar
+	 * @return true si coincide, false en caso contrario.
+	 */
+	public boolean inputPassword(String pass){
+		return pass.equals(password);
+	}
 }

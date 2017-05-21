@@ -1,44 +1,54 @@
 package DIedrAl_Project.negocio.pacientes;
 
-
-import java.util.ArrayList;
-import DIedrAl_Project.negocio.calendario.Fecha;
-import DIedrAl_Project.negocio.calendario.Fecha;
+import java.util.GregorianCalendar;
 
 
 public class DatosPaciente {
+    private String estadocivil;
+
+    private String datosfamiliares;
 
     private String lesion;
 
-    private Fecha fechalesion;
-    
-    private ArrayList<String> aficiones;
+    private GregorianCalendar fechalesion;
 
+    String getEstadocivil() {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        return this.estadocivil;
+    }
 
-    public DatosPaciente(String lesion, Fecha fechalesion,
-			String... aficiones) {
+    void setEstadocivil(String value) {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        this.estadocivil = value;
+    }
 
-		this.lesion = lesion;
-		this.fechalesion = fechalesion;
-		this.aficiones = new ArrayList<String>();
-		for(String str: aficiones) 
-			this.aficiones.add(str);
-	}
+    String getDatosfamiliares() {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        return this.datosfamiliares;
+    }
+
+    void setDatosfamiliares(String value) {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        this.datosfamiliares = value;
+    }
 
     String getLesion() {
+        // Automatically generated method. Please delete this comment before entering specific code.
         return this.lesion;
     }
 
     void setLesion(String value) {
+        // Automatically generated method. Please delete this comment before entering specific code.
         this.lesion = value;
     }
 
-	public Fecha getFechalesion() {
+	public GregorianCalendar getFechalesion() {
 		return fechalesion;
 	}
 
-	public void setFechalesion(Fecha fechalesion) {
+	public void setFechalesion(GregorianCalendar fechalesion) {
 		this.fechalesion = fechalesion;
 	}
 
+  
 }

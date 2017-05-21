@@ -10,7 +10,7 @@ public abstract class ArrayEtiquetables<T extends Etiquetable> {
 		etiquetables = new HashSet<T>(); 
 	}
 
-	public HashSet<T> filtrarEtiqueta(Set<String> filtros) {
+	public Set<T> filtrarEtiqueta(Set<String> filtros) {
 
 		HashSet<T> aux = new HashSet<T>();
 		for (T x : etiquetables) {
@@ -21,7 +21,7 @@ public abstract class ArrayEtiquetables<T extends Etiquetable> {
 		return aux;
 	}
 
-	public HashSet<T> filtrarNombre(String nombre) {
+	public Set<T> filtrarNombre(String nombre) {
 
 		HashSet<T> aux = new HashSet<T>();
 
@@ -35,6 +35,13 @@ public abstract class ArrayEtiquetables<T extends Etiquetable> {
 		}
 
 		return aux;
+	}
+	
+	public void add(T elem){
+		etiquetables.add(elem);
+	}
+	public void erase(T elem){
+		etiquetables.remove(elem);
 	}
 
 }

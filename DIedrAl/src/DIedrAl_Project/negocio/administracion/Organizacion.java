@@ -1,29 +1,35 @@
 package DIedrAl_Project.negocio.administracion;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import DIedrAl_Project.negocio.recursos.Banco;
 
 public class Organizacion {
-    private final Banco banco;
+    //private final Banco banco;
+	
+	private static Organizacion instancia = null;
+	
+	private Set<String> centros;
 
-    private List<Centro> centros = new ArrayList<Centro> ();
+	public static Organizacion getInstancia() {
 
-    public void nuevoCentro(Centro centro) {
-    }
+		if (instancia == null)
+			instancia = new Organizacion();
 
-    public void eliminarCentro(String nombre) {
-    }
+		return instancia;
+	}
+	protected Organizacion(){
+		centros = new HashSet<String>();
+	}
 
-    List<Centro> getCentros() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return this.centros;
-    }
+	public Set<String> getCentros() {
+		return centros;
+	}
+	public void setCentros(Set<String> centros) {
+		this.centros = centros;
+	}
 
-    void setCentros(List<Centro> value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        this.centros = value;
-    }
-
+    
 }

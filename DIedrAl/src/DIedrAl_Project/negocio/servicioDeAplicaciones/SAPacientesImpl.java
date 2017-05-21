@@ -4,6 +4,7 @@ import java.rmi.*;
 import java.util.Set;
 
 import DIedrAl_Project.negocio.administracion.*;
+import DIedrAl_Project.negocio.administracion.Centro.Hints;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 
 public class SAPacientesImpl implements SAPacientes {
@@ -49,5 +50,21 @@ public class SAPacientesImpl implements SAPacientes {
 	public Set<Paciente> getPacientesAsociados(Usuario usu) throws NotBoundException {
 		return centro.getPacientesAsociados(usu);
 	}
+
+	@Override
+	public Paciente pacienteConNIF(String nif) {
+		return centro.getPacienteConNIF(nif);
+	}
+
+	@Override
+	public Usuario usuarioConNIF(String nif) {
+		return centro.getTerapeutaConNIF(nif);
+	}
+
+	@Override
+	public Set<Persona> filtrarPersonas(Centro.Hints[] hints, String[] values) {
+		return centro.getPersonas(hints, values);
+	}
+	
 
 }
