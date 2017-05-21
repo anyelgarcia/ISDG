@@ -1,93 +1,52 @@
 package DIedrAl_Project.negocio.recursos;
 
-import java.rmi.AlreadyBoundException;
-import java.rmi.NotBoundException;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
-import DIedrAl_Project.negocio.*;
 
-public abstract class Etiquetable implements ObjetoAlmacenable {
-
+public abstract class Etiquetable {
+	
 	/**
 	 * Etiquetas asociadas al objeto
 	 */
-	protected Set<String> etiquetas;
+    protected Set<String> etiquetas;
 
-	protected String nombre;
+    protected String nombre;
 
-	protected String descripcion;
+    protected Integer id;
 
-	protected String id;
-
-	public Etiquetable(String name) {
-		nombre = name;
-		this.etiquetas = new TreeSet<String>();
-	}
-
-	public Etiquetable(String name, String... etiquetas) {
-		nombre = name;
-		this.etiquetas = new TreeSet<String>();
-		for (String s : etiquetas) {
-			this.etiquetas.add(s);
-		}
-	}
-
-	public Etiquetable(String name, String desc, String... etiquetas) {
-		nombre = name;
-		this.etiquetas = new TreeSet<String>();
-		for (String s : etiquetas) {
-			this.etiquetas.add(s);
-		}
-		descripcion = desc;
+    public Etiquetable(String name) {
+		nombre=name;
 	}
 
 	/**
-	 * @param etiqueta
-	 *            etiqueta a comprobar
-	 * @return true si el objeto tiene asociada la etiqueta
-	 */
-	public boolean ContieneEtiqueta(String etiqueta) {
-		return this.getEtiquetas().contains(etiqueta);
-	}
+     * @param etiqueta etiqueta a comprobar
+     * @return true si el objeto tiene asociada la etiqueta
+     */
+    public boolean ContieneEtiqueta(String etiqueta) {
+    	return this.getEtiquetas().contains(etiqueta);
+    }
 
-	public abstract Set<String> getEtiquetas();
+    public abstract Set<String> getEtiquetas();
 
-	public String getNombre() {
-		return this.nombre;
-	}
+    public String getNombre() {
+        return this.nombre;
+    }
 
-	public void setNombre(String value) {
-		this.nombre = value;
-	}
+    public void setNombre(String value) {
+        this.nombre = value;
+    }
 
-	public void addEtiqueta(String eti) throws AlreadyBoundException {
-		if (etiquetas.contains(eti)) {
-			throw new AlreadyBoundException("Etiqueta " + eti + " ya existente");
-		} else {
-			this.etiquetas.add(eti);
-		}
-	}
-	
-	public void removeEtiqueta(String eti) throws NotBoundException{
-		if (!etiquetas.contains(eti)) {
-			throw new NotBoundException("Etiqueta " + eti + " no existente");
-		} else {
-			this.etiquetas.remove(eti);
-		}
-	}
+    public int getId() {
+        return this.id;
+    }
 
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	@Override
-	public String getId() {
-		return id;
-	}
+    public void setId(int value) {
+        this.id = value;
+    }
+    
+    public void insertarEtiqueta(String etiqueta){
+    	this.etiquetas.add(etiqueta);
+    }
 
 }

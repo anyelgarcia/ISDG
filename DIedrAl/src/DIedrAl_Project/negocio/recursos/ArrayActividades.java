@@ -1,9 +1,11 @@
 package DIedrAl_Project.negocio.recursos;
 
+import java.util.Set;
+
 /*
  * TODO CAMBIAR EL TIPO DE ESTAS FUNCIONES EN PUTO MODELIO
  */
-public class ArrayActividades extends ArrayProgramables<Actividad> {
+public class ArrayActividades extends ArrayEtiquetables<Actividad> {
 
 
 	public ArrayActividades filtrarRango(Dificultad min, Dificultad max) {
@@ -30,10 +32,5 @@ public class ArrayActividades extends ArrayProgramables<Actividad> {
 			}
 		}
 		return aux;
-	}
-
-	@Override
-	protected ArrayActividades createNew() {
-		return new ArrayActividades();
 	}
 }
