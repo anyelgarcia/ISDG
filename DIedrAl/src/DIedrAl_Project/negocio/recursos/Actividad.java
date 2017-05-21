@@ -1,5 +1,7 @@
 package DIedrAl_Project.negocio.recursos;
 
+import java.util.Set;
+
 public class Actividad extends Programable {
 
 	private Dificultad dificultad;
@@ -18,12 +20,8 @@ public class Actividad extends Programable {
 		this.dificultad = Dificultad.valueOf(dificultad);
 	}
 
-	public Dificultad getDificultad() {
-		return this.dificultad;
-	}
-
-	public void setDificultad(Dificultad dificultad) {
-		this.dificultad = dificultad;
-	}
-
+    public Dificultad getDificultad(){
+    	return this.dificultad;
+    }
+    
 }

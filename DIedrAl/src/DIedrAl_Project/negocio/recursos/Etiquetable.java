@@ -4,6 +4,7 @@ import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.UUID;
 
 import DIedrAl_Project.negocio.*;
 
@@ -23,6 +24,7 @@ public abstract class Etiquetable implements ObjetoAlmacenable {
 	public Etiquetable(String name) {
 		nombre = name;
 		this.etiquetas = new TreeSet<String>();
+		this.id = UUID.randomUUID().toString();
 	}
 
 	public Etiquetable(String name, String... etiquetas) {
@@ -31,6 +33,7 @@ public abstract class Etiquetable implements ObjetoAlmacenable {
 		for (String s : etiquetas) {
 			this.etiquetas.add(s);
 		}
+		this.id = UUID.randomUUID().toString();
 	}
 
 	public Etiquetable(String name, String desc, String... etiquetas) {
@@ -40,6 +43,7 @@ public abstract class Etiquetable implements ObjetoAlmacenable {
 			this.etiquetas.add(s);
 		}
 		descripcion = desc;
+		this.id = UUID.randomUUID().toString();
 	}
 
 	/**
@@ -47,7 +51,7 @@ public abstract class Etiquetable implements ObjetoAlmacenable {
 	 *            etiqueta a comprobar
 	 * @return true si el objeto tiene asociada la etiqueta
 	 */
-	public boolean ContieneEtiqueta(String etiqueta) {
+	public boolean contieneEtiqueta(String etiqueta) {
 		return this.getEtiquetas().contains(etiqueta);
 	}
 
@@ -68,8 +72,8 @@ public abstract class Etiquetable implements ObjetoAlmacenable {
 			this.etiquetas.add(eti);
 		}
 	}
-	
-	public void removeEtiqueta(String eti) throws NotBoundException{
+
+	public void removeEtiqueta(String eti) throws NotBoundException {
 		if (!etiquetas.contains(eti)) {
 			throw new NotBoundException("Etiqueta " + eti + " no existente");
 		} else {

@@ -1,7 +1,8 @@
 package DIedrAl_Project.negocio.pacientes;
 
-import java.util.ArrayList;
 
+import java.util.ArrayList;
+import DIedrAl_Project.negocio.calendario.Fecha;
 import DIedrAl_Project.negocio.calendario.Fecha;
 
 
@@ -12,7 +13,7 @@ public class DatosPaciente {
     private Fecha fechalesion;
     
     private ArrayList<String> aficiones;
-    
+
 
     public DatosPaciente(String lesion, Fecha fechalesion,
 			String... aficiones) {
@@ -40,5 +41,4 @@ public class DatosPaciente {
 		this.fechalesion = fechalesion;
 	}
 
-  
 }

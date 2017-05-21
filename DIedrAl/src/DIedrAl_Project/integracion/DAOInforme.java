@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.util.HashSet;
 
 import DIedrAl_Project.negocio.pacientes.Informe;
-import DIedrAl_Project.negocio.recursos.Actividad;
 
+/**
+ * DAO que con los métodos CRUD necesarios para los objetos Informe
+ * @author Diedral_Group
+ */
 public interface DAOInforme {
 
 	public void crearInforme(Informe i)  throws IOException;

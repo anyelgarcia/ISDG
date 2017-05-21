@@ -1,13 +1,24 @@
 package DIedrAl_Project.integracion;
 
+/**
+ * Factoría de objetos DAO (utiliza el patrón 
+ * Singleton para tener una única instancia)
+ * @author Diedral_Group
+ */
 public class SimpleFileDAOFactory implements DAOFactory {
-
 	
-	@Override
-	public DAOTerapeuta getDAOTerapeuta() {
-		return DAOTerapeutaImp.getInstance();
+	private static SimpleFileDAOFactory instancia = null;
+	
+	
+	public static SimpleFileDAOFactory getInstance(){
+		if(instancia == null) return new SimpleFileDAOFactory();
+		else return instancia;
 	}
-
+	
+	private SimpleFileDAOFactory(){
+		
+	}
+	
 	@Override
 	public DAORecurso getDAORecurso() {
 		return DAORecursoImp.getInstance();
@@ -20,20 +31,27 @@ public class SimpleFileDAOFactory implements DAOFactory {
 
 	@Override
 	public DAOInforme getDAOInforme() {
-		// TODO Auto-generated method stub
-		return null;
+		return DAOInformeImp.getInstance();
 	}
 
 	@Override
 	public DAOPaciente getDAOPaciente() {
-		// TODO Auto-generated method stub
-		return null;
+		return DAOPacienteImp.getInstance();
 	}
 
 	@Override
 	public DAOSesion getDAOSesion() {
-		// TODO Auto-generated method stub
-		return null;
+		return DAOSesionImp.getInstance();
+	}
+
+	@Override
+	public DAOUsuario getDAOUsuario() {
+		return DAOUsuarioImp.getInstance();
+	}
+
+	@Override
+	public DAORelacionable getDAORelacion(String file) {
+		return new DAORelacionableImp(file);
 	}
 	
 	

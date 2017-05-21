@@ -1,19 +1,22 @@
 package DIedrAl_Project.integracion;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 
 import DIedrAl_Project.integracion.BasicClasses.DAObasico;
 import DIedrAl_Project.negocio.recursos.Actividad;
-import DIedrAl_Project.negocio.recursos.Recurso;
 
+/**
+ * Clase que implementa la interfaz DAOActividad. Obtiene los datos
+ * del fichero "actividad.txt". Solo se crea una instancia de este DAO (singleton)
+ * @author Diedral_Group
+ */
 public class DAOActividadImp implements DAOActividad {
 
-private static DAOActividadImp instancia = null;
+	private static DAOActividadImp instancia = null;
 	
 	private DAObasico<Actividad> op;
-	private String file = "actividad.txt";
+	private final String file = "actividad.txt";
 	
 	public static DAOActividadImp getInstance(){
 		if(instancia == null) return new DAOActividadImp();

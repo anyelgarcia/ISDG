@@ -19,14 +19,14 @@ public class Recurso extends Etiquetable {
 		int pos = fileName.lastIndexOf('.');
 		extension = fileName.substring(pos + 1, fileName.length() - 1);
 	}
+    
+    String getExtension() {
+        return this.extension;
+    }
 
-	String getExtension() {
-		return this.extension;
-	}
-
-	void setExtension(String value) {
-		this.extension = value;
-	}
+    void setExtension(String value) {
+        this.extension = value;
+    }
 
 	public String getFileName() {
 		return fileName;
@@ -35,9 +35,9 @@ public class Recurso extends Etiquetable {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-
-	public void open() {
-
+	
+	public void open(){
+		 
 	}
 
 	@Override

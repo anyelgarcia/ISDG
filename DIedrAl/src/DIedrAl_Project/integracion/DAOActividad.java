@@ -1,12 +1,14 @@
 package DIedrAl_Project.integracion;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 
 import DIedrAl_Project.negocio.recursos.Actividad;
-import DIedrAl_Project.negocio.recursos.Recurso;
 
+/**
+ * DAO que con los métodos CRUD necesarios para los objetos Actividad
+ * @author Diedral_Group
+ */
 public interface DAOActividad {
 	
 	public void crearActividad(Actividad a)  throws IOException;
