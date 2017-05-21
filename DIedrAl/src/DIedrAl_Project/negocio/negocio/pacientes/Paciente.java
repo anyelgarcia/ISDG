@@ -1,0 +1,41 @@
+package DIedrAl_Project.negocio.pacientes;
+
+import DIedrAl_Project.negocio.administracion.Persona;
+
+public class Paciente extends Persona {
+
+	public Paciente(String nombre, String apellido1, String apellido2, String id) {
+		super(nombre, apellido1, apellido2, id);
+		// TODO Auto-generated constructor stub
+	}
+
+	public void addInforme(Informe Informe) {
+	}
+
+	public void eliminarInforme(Informe Informe) {
+	}
+
+	public void modificarInforme(Informe informe) {
+	}
+
+	public void addNota(Nota nota) {
+	}
+
+	public void eliminarNota(Nota nota) {
+	}
+
+	public void modificarNota(Nota nota) {
+	}
+
+	public void editarPerfil() {
+	}
+
+	public void editarDatos() {
+	}
+
+	public String toString() {
+		return id + ":" + nombre + " " + apellido1 + " " + apellido2;
+	}
+
+
+}
