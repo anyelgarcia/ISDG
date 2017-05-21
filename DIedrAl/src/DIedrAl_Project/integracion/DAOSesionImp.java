@@ -6,6 +6,11 @@ import java.util.HashSet;
 import DIedrAl_Project.integracion.BasicClasses.DAObasico;
 import DIedrAl_Project.negocio.recursos.Sesion;
 
+/**
+ * Clase que implementa la interfaz DAOSesion. Obtiene los datos
+ * del fichero "sesiones.txt". Solo se crea una instancia de este DAO (singleton)
+ * @author Diedral_Group
+ */
 public class DAOSesionImp implements DAOSesion {
 
 	private static DAOSesionImp instancia = null;

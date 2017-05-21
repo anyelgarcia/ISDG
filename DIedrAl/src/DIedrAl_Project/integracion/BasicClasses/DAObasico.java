@@ -7,7 +7,10 @@ import java.util.HashSet;
 import DIedrAl_Project.negocio.ObjetoAlmacenable;
 
 /**
- * Created by Alejandro on 13/05/2017.
+ * Clase generica que implementa todos los metodos CRUD. Cualquier clase
+ * que implemente ObjetoAlmacenable puede utilizar un DAObasico para realizar
+ * estas operaciones
+ * @author Diedral_Group
  */
 public class DAObasico<S extends ObjetoAlmacenable> {
 

@@ -6,9 +6,14 @@ import java.util.HashSet;
 import DIedrAl_Project.integracion.BasicClasses.DAObasico;
 import DIedrAl_Project.negocio.administracion.Usuario;
 
+/**
+ * Clase que implementa la interfaz DAOUsuario. Obtiene los datos
+ * del fichero "usuarios.txt". Solo se crea una instancia de este DAO (singleton)
+ * @author Diedral_Group
+ */
 public class DAOUsuarioImp implements DAOUsuario {
 	
-	private static DAOUsuarioImp instancia;
+	private static DAOUsuarioImp instancia = null;
 	
 	private DAObasico<Usuario> op;
 	private final String file = "usuarios.txt";

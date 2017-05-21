@@ -1,5 +1,10 @@
 package DIedrAl_Project.integracion;
 
+/**
+ * Interfaz para crear una factoría con todos los métodos DAO necesarios
+ * en el programa (patrón AbstractFactoryMethod)
+ * @author Diedral_Group
+ */
 public interface DAOFactory {
 	
 	public DAOUsuario getDAOUsuario();
@@ -13,4 +18,6 @@ public interface DAOFactory {
 	public DAOPaciente getDAOPaciente();
 	
 	public DAOSesion getDAOSesion();
+	
+	public DAORelacionable getDAORelacion(String file);
 }

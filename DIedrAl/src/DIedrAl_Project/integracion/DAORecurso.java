@@ -5,6 +5,10 @@ import java.util.HashSet;
 
 import DIedrAl_Project.negocio.recursos.Recurso;
 
+/**
+ * DAO que con los métodos CRUD necesarios para los objetos Recurso
+ * @author Diedral_Group
+ */
 public interface DAORecurso {
 	
 	public void crearRecurso(Recurso r)  throws IOException;

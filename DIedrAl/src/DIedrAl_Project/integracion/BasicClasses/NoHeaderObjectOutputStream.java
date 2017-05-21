@@ -3,7 +3,9 @@ package DIedrAl_Project.integracion.BasicClasses;
 import java.io.*;
 
 /**
- * Created by Alejandro on 12/05/2017.
+ * Clase que extiende ObjectOuputStream que permite guardar objetos Serializables
+ * sin el centinela, con lo que podemos extraerlos con un bucle
+ * @author Diedral_Group
  */
 public class NoHeaderObjectOutputStream extends ObjectOutputStream {
     public NoHeaderObjectOutputStream(OutputStream os) throws IOException {
