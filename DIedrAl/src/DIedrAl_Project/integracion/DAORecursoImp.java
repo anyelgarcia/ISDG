@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import DIedrAl_Project.integracion.BasicClasses.DAObasico;
-import DIedrAl_Project.negocio.administracion.Terapeuta;
 import DIedrAl_Project.negocio.recursos.Recurso;
 
 public class DAORecursoImp implements DAORecurso{
