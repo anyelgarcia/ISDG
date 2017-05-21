@@ -1,28 +1,21 @@
 package DIedrAl_Project.negocio.administracion;
 
-public class Usuario extends Persona {
+import DIedrAl_Project.negocio.pacientes.Direccion;
 
-	protected String rol;
 
-	protected String infor;
+public class Usuario {
+    private String id;
 
-	public Usuario(String nombre, String apellido1, String apellido2) {
-		super(nombre, apellido1, apellido2);
-	}
+    private int tlf;
 
-	public String getRol() {
-		return rol;
-	}
+    private String email;
 
-	public void setRol(String rol) {
-		this.rol = rol;
-	}
+    private Direccion direccion;
 
-	public String getInfor() {
-		return infor;
-	}
+    public void mostrar() {
+    }
 
-	public void setInfor(String infor) {
-		this.infor = infor;
-	}
+    public void modificar(Direccion dir, String id, int tlf, String email) {
+    }
+
 }
