@@ -20,4 +20,10 @@ public interface SAPacientes {
 	public void desligarPaciente(Paciente pac, Usuario usu) throws NotBoundException, AlreadyBoundException;
 	
 	public Set<Paciente> getPacientesAsociados(Usuario usu) throws NotBoundException;
+	
+	public Paciente pacienteConNIF(String nif);
+	
+	public Usuario usuarioConNIF(String nif);
+	
+	public Set<Persona> filtrarPersonas(Centro.Hints[] hints, String[] values) throws IllegalArgumentException;
 }
