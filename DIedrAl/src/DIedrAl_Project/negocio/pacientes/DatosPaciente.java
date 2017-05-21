@@ -1,6 +1,6 @@
 package DIedrAl_Project.negocio.pacientes;
 
-import java.util.GregorianCalendar;
+import DIedrAl_Project.negocio.calendario.Fecha;
 
 
 public class DatosPaciente {
@@ -10,7 +10,7 @@ public class DatosPaciente {
 
     private String lesion;
 
-    private GregorianCalendar fechalesion;
+    private Fecha fechalesion;
 
     String getEstadocivil() {
         // Automatically generated method. Please delete this comment before entering specific code.
@@ -42,13 +42,9 @@ public class DatosPaciente {
         this.lesion = value;
     }
 
-	public GregorianCalendar getFechalesion() {
-		return fechalesion;
-	}
+    void setFechalesion(Fecha value) {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        this.fechalesion = value;
+    }
 
-	public void setFechalesion(GregorianCalendar fechalesion) {
-		this.fechalesion = fechalesion;
-	}
-
-  
 }

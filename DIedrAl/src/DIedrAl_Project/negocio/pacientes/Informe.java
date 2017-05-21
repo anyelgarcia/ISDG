@@ -1,42 +1,27 @@
 package DIedrAl_Project.negocio.pacientes;
 
-import DIedrAl_Project.negocio.administracion.Usuario;
-import DIedrAl_Project.negocio.calendario.SesionProgramada;
+import DIedrAl_Project.negocio.administracion.Terapeuta;
+import DIedrAl_Project.negocio.recursos.Sesion;
+
 
 public class Informe {
-	private String texto;
-	/*
-	 * TODO No tiene sentido cambiar la sesion de la que está hablando el
-	 * informe.
-	 */
-	private final SesionProgramada sesion;
-	// TODO Pueden ser más?
-	private Usuario autor;
+    private String texto;
 
-	public Informe(SesionProgramada ses, Usuario autor) {
-		sesion = ses;
-		this.autor = autor;
-		texto = "";
-	}
+    private Sesion sesion;
 
-	public String getTexto() {
-		return texto;
-	}
+    private Terapeuta autor;
 
-	public void setTexto(String texto) {
-		this.texto = texto;
-	}
-	
-	public Usuario getAutor() {
-		return this.autor;
-	}
+    public void modificar() {
+    }
 
-	public void setAutor(Usuario value) {
-		this.autor = value;
-	}
+    Terapeuta getAutor() {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        return this.autor;
+    }
 
-	public SesionProgramada getSesion() {
-		return sesion;
-	}
+    void setAutor(Terapeuta value) {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        this.autor = value;
+    }
 
 }

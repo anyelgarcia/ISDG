@@ -5,14 +5,13 @@ import java.util.HashSet;
 
 import DIedrAl_Project.integracion.BasicClasses.DAObasico;
 import DIedrAl_Project.negocio.pacientes.Informe;
-import DIedrAl_Project.negocio.recursos.Actividad;
 
 public class DAOInformeImp implements DAOInforme {
 
 	private static DAOInformeImp instancia;
 	
 	private DAObasico<Informe> op;
-	private String file = "informe.txt";
+	private final String file = "informe.txt";
 	
 	public static DAOInformeImp getInstance(){
 		if(instancia == null) return new DAOInformeImp();
