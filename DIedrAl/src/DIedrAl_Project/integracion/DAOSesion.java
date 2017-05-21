@@ -2,8 +2,6 @@ package DIedrAl_Project.integracion;
 
 import java.io.IOException;
 import java.util.HashSet;
-
-import DIedrAl_Project.negocio.recursos.Actividad;
 import DIedrAl_Project.negocio.recursos.Sesion;
 
 public interface DAOSesion {

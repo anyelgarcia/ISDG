@@ -1,9 +1,10 @@
 package DIedrAl_Project.negocio.pacientes;
 
+import DIedrAl_Project.negocio.ObjetoAlmacenable;
 import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.negocio.calendario.SesionProgramada;
 
-public class Informe {
+public class Informe implements ObjetoAlmacenable{
 	private String texto;
 	/*
 	 * TODO No tiene sentido cambiar la sesion de la que está hablando el
@@ -12,6 +13,8 @@ public class Informe {
 	private final SesionProgramada sesion;
 	// TODO Pueden ser más?
 	private Usuario autor;
+	
+	private String id;
 
 	public Informe(SesionProgramada ses, Usuario autor) {
 		sesion = ses;
@@ -37,6 +40,11 @@ public class Informe {
 
 	public SesionProgramada getSesion() {
 		return sesion;
+	}
+
+	@Override
+	public String getId() {
+		return this.id;
 	}
 
 }

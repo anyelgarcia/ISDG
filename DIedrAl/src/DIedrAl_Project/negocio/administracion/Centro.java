@@ -6,7 +6,7 @@ import java.util.*;
 import DIedrAl_Project.negocio.calendario.Calendario;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 
-//Ejemplo del patrón mediator
+//Ejemplo del patrÃ³n mediator
 public class Centro {
 	private String nombre;
 	// TODO: implementarlo primero
@@ -122,3 +122,4 @@ public class Centro {
 	}
 
 }
+
