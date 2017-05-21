@@ -6,6 +6,11 @@ import java.util.HashSet;
 import DIedrAl_Project.integracion.BasicClasses.DAObasico;
 import DIedrAl_Project.negocio.recursos.Recurso;
 
+/**
+ * Clase que implementa la interfaz DAORecurso. Obtiene los datos
+ * del fichero "recursos.txt". Solo se crea una instancia de este DAO (singleton)
+ * @author Diedral_Group
+ */
 public class DAORecursoImp implements DAORecurso{
 	
 	private static DAORecursoImp instancia = null;

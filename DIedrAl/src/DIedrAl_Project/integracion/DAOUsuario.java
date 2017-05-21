@@ -5,6 +5,10 @@ import java.util.HashSet;
 
 import DIedrAl_Project.negocio.administracion.Usuario;
 
+/**
+ * DAO que con los métodos CRUD necesarios para los objetos Usuario
+ * @author Diedral_Group
+ */
 public interface DAOUsuario {
 	
 	public void crearUsuario(Usuario u)  throws IOException;

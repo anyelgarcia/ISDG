@@ -3,6 +3,13 @@ package DIedrAl_Project.negocio;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Objeto transfer que almacena la relacion entre un tipo de Objeto con una lista
+ * de otros, dado el identificador de esos objetos. Se puede utilizar para guardar
+ * las vinculaciones de un terapeuta con sus pacientes y viceversa.
+ * @author Diedral_Group
+ *
+ */
 public class Relacion implements Serializable, ObjetoAlmacenable {
 	
 	private final String id;

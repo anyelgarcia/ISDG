@@ -6,9 +6,14 @@ import java.util.HashSet;
 import DIedrAl_Project.integracion.BasicClasses.DAObasico;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 
+/**
+ * Clase que implementa la interfaz DAOPaciente. Obtiene los datos
+ * del fichero "actividad.txt". Solo se crea una instancia de este DAO (singleton)
+ * @author Diedral_Group
+ */
 public class DAOPacienteImp implements DAOPaciente {
 
-	private static DAOPacienteImp instancia;
+	private static DAOPacienteImp instancia = null;
 	
 	private DAObasico<Paciente> op;
 	private final String file = "pacientes.txt";

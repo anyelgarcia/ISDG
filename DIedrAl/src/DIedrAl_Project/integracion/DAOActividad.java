@@ -5,6 +5,10 @@ import java.util.HashSet;
 
 import DIedrAl_Project.negocio.recursos.Actividad;
 
+/**
+ * DAO que con los métodos CRUD necesarios para los objetos Actividad
+ * @author Diedral_Group
+ */
 public interface DAOActividad {
 	
 	public void crearActividad(Actividad a)  throws IOException;

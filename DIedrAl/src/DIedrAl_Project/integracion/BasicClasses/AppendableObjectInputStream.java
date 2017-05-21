@@ -3,7 +3,9 @@ package DIedrAl_Project.integracion.BasicClasses;
 import java.io.*;
 
 /**
- * Created by Alejandro on 12/05/2017.
+ * Clase que extiende de ObjectInputStream y permite sacar objetos Serializables
+ * con bucles sin que se corrompan los datos a la hora de sacarlos del archivo
+ * @author Diedral_Group
  */
 public class AppendableObjectInputStream extends ObjectInputStream{
 
