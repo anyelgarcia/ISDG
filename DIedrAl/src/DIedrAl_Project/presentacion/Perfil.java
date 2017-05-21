@@ -129,7 +129,7 @@ public class Perfil extends ColorPanel{
 	        jTextArea2.setRows(5);
 	        jScrollPane3.setViewportView(jTextArea2);
 
-	        jLabel1.setText("Despacho, horarios y otra informaciÃ³n: ");
+	        jLabel1.setText("Despacho, horarios y otra información: ");
 
 	        jLabel2.setText("Pacientes Asociados: ");
 
@@ -139,7 +139,7 @@ public class Perfil extends ColorPanel{
 
 	        jLabel5.setText("Email: ");
 
-	        jLabel6.setText("TelÃ©fono: ");
+	        jLabel6.setText("Teléfono: ");
 
 	        jTextField1.setEditable(false);
 

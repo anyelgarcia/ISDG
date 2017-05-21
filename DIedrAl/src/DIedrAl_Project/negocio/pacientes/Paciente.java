@@ -9,7 +9,7 @@ import DIedrAl_Project.negocio.administracion.Persona;
 import DIedrAl_Project.negocio.calendario.Fecha;
 
 	
-
+public class Paciente extends Persona{
 
     private List<Nota> nota = new ArrayList<Nota> ();
 
@@ -30,7 +30,7 @@ import DIedrAl_Project.negocio.calendario.Fecha;
     
     public Paciente(String nombre, String apellido1, String apellido2, String lesion, Fecha fechaLesion, String ... aficiones) {
 		  super(nombre, apellido1, apellido2);
-		  datos = new DatosPaciente(lesion, fechaLesion, aficiones);
+		  datosPaciente = new DatosPaciente(lesion, fechaLesion, aficiones);
 	  }
 
     public void addInforme(Informe Informe) {

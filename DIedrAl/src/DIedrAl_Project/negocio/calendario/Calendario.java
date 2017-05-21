@@ -1,7 +1,6 @@
 package DIedrAl_Project.negocio.calendario;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -10,7 +9,7 @@ import DIedrAl_Project.negocio.administracion.Terapeuta;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 
 public class Calendario {
-	private Map<GregorianCalendar, Set<SesionProgramada>> sesiones;
+	private Map<Fecha, Set<SesionProgramada>> sesiones;
 
 	public void addSesion(SesionProgramada sesion) {
 		sesiones.add(sesion);

@@ -1,5 +1,6 @@
 package DIedrAl_Project.presentacion;
 
+import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.negocio.recursos.Actividad;
 import DIedrAl_Project.negocio.recursos.Banco;
@@ -16,6 +17,17 @@ import DIedrAl_Project.presentacion.Usuarios.UsuarioTransfer;
  *
  */
 public class Controlador {
+	
+	private Usuario usuario;
+	
+	
+	protected void setUsuario(Usuario usuario){
+		this.usuario = usuario;
+	}
+	
+	protected Usuario getUsuario(){
+		return usuario;
+	}
 	
 	public static void addPaciente(Paciente p){
 		

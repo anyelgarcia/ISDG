@@ -6,7 +6,6 @@ import java.util.List;
 import DIedrAl_Project.negocio.recursos.Banco;
 
 public class Organizacion {
-    private final Banco banco;
 
     private List<Centro> centros = new ArrayList<Centro> ();
 

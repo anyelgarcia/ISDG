@@ -1,5 +1,6 @@
 package DIedrAl_Project.presentacion;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -13,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 
 import javax.swing.*;
+
 
 public class Login extends JPanel{
 	
@@ -62,6 +64,25 @@ public class Login extends JPanel{
 		JTextField passwordText = new JTextField();
 		passwordText.setPreferredSize(new Dimension (100, 20));
 		panel.add(passwordText,c);
+		
+		
+		c.gridx = 0;
+		c.gridy = 4;
+		c.insets = new Insets(30, 0, 0, 450);
+		ImageButton acceder = new ImageButton("Acceder", "images/whitebutton.png", "images/whitebutton2.png", panel);
+		acceder.setForeground(Color.GRAY);
+		panel.add(acceder,c);
+		acceder.addActionListener((ae) -> {
+			String nombreuser = usernameText.getText();
+			String contraseña = passwordText.getText();
+			
+			//consultar si la persona está en la base de datos y obtener el rol;
+			//SAUusarios sausuarios = ...
+			
+			//Controlador.setUsuario();...
+			
+			
+		});
 		
 		
 		pantalla.setVisible(true);

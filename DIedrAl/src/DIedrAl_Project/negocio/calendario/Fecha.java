@@ -9,11 +9,18 @@ public class Fecha {
 	
 	private int dia;
 
-    private int mes;
+    private String mes;
 
     private int anyo;
 
     private int hora;
+    
+    public Fecha (int dia, String mes, int anyo, int hora){
+    	this.dia = dia;
+    	this.mes = mes;
+    	this.anyo = anyo;
+    	this.hora = hora;
+    }
 
     int getDia() {
         return this.dia;
@@ -23,11 +30,11 @@ public class Fecha {
         this.dia = value;
     }
 
-    int getMes() {
+    String getMes() {
         return this.mes;
     }
 
-    void setMes(int value) {
+    void setMes(String value) {
         this.mes = value;
     }
 
