@@ -21,7 +21,7 @@ class FiltroPaciente<T> implements Predicate<T>{
 
 	public boolean test(T var){
 		if(var instanceof SesionProgramada)
-			//if((((SesionProgramada) var).getPaciente()).containsAll(pacientes))
+			if((((SesionProgramada) var).getPaciente()).containsAll(pacientes))
 						return true;
 		return false;
 	}
