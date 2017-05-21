@@ -1,11 +1,16 @@
 package DIedrAl_Project.presentacion;
 
+import java.util.Set;
+
+import DIedrAl_Project.negocio.administracion.Centro;
+import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.negocio.recursos.Actividad;
 import DIedrAl_Project.negocio.recursos.Banco;
 import DIedrAl_Project.negocio.recursos.Recurso;
 import DIedrAl_Project.negocio.recursos.Sesion;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
+import DIedrAl_Project.negocio.servicioDeAplicaciones.SAPacientes;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SARecursos;
 import DIedrAl_Project.presentacion.Perfil.PerfilTransfer;
 import DIedrAl_Project.presentacion.Usuarios.UsuarioTransfer;
@@ -17,10 +22,21 @@ import DIedrAl_Project.presentacion.Usuarios.UsuarioTransfer;
  */
 public class Controlador {
 	
+	private Usuario usuario;
+	
+	
+	protected void setUsuario(Usuario usuario){
+		this.usuario = usuario;
+	}
+	
+	protected Usuario getUsuario(){
+		return usuario;
+	}
+	
 	public static void addPaciente(Paciente p){
 		
-		//SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(Banco.getInstancia());
-		//saPacientes.addPaciente(p);
+		SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(Centro.getInstancia());
+		saPacientes.addPaciente(p);
 		
 		/* Prueba 1: Satisfactoria :D
 		 System.out.println(p.getNombre());
@@ -61,10 +77,10 @@ public class Controlador {
 	public static void addActividad(Actividad p){
 		
 		
-		//SAActividades saActividades = SAFactory.getInstancia().newSAActividades(banco.getInstancia());
-		//saActividades.addActividad(p);
+		SARecursos saActividades = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
+		saActividades.addActividad(p);
 		
-		System.out.println(p.getNombre());
+		/*System.out.println(p.getNombre());
 		System.out.println(p.getDificultad());
 		for(String str : p.getDestinatarios()){
 			 System.out.println(str);
@@ -75,23 +91,23 @@ public class Controlador {
 		 System.out.println(p.getDuracion());
 		 System.out.println( p.getDescripcion());
 		 System.out.println( p.getVariaciones());
-		 System.out.println( p.getDesarrollo());
+		 System.out.println( p.getDesarrollo());*/
 	}
 	
 	
 	public static void addSesion(Sesion p){
 		
-		//SASesiones saSesiones = SAFactory.getInstancia().newSASesiones(Banco.getInstancia());
-		//saSesiones.addSesion(p);
+		SARecursos saSesiones = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
+		saSesiones.addSesion(p);
 		
-		System.out.println(p.getNombre());
+		/*System.out.println(p.getNombre());
 		for(String str : p.getEtiquetas()){
 			 System.out.println(str);
 		 }
 		 System.out.println(p.getDuracion());
 		 System.out.println( p.getDescripcion());
 		 System.out.println( p.getVariaciones());
-		 System.out.println( p.getDesarrollo());
+		 System.out.println( p.getDesarrollo());*/
 		
 	}
 	
@@ -104,28 +120,32 @@ public class Controlador {
 		System.out.println(p.getInfo());
 	}
 	
-	public static void addUsuario(UsuarioTransfer p){
-		System.out.println(p.getNombre());
+	public static void addUsuario(Usuario p){
+		
+		SAPacientes saUsuarios = SAFactory.getInstancia().newSAPacientes(Centro.getInstancia());
+		saUsuarios.addUsuario(p);
+		
+		/*System.out.println(p.getNombre());
 		System.out.println(p.getRol());
 		System.out.println(p.getEmail());
 		System.out.println(p.getTelefono());
 		System.out.println(p.getDescripcion());
 		for(String s : p.getPacientes()) System.out.println(s);
-		System.out.println(p.getInfo());
+		System.out.println(p.getInfo());*/
 	}
 	
 	public static void deleteActividad(String s){
 		
-		//SAActividades saActividades = SAFactory.getInstancia().newSAActividades(Banco.getInstancia());
-		//saActividades.removeActividad(s);
+		SARecursos saActividades = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
+		Set<Actividad> actividades = saActividades.filtrarActividadPorNombre(s);
 				
 		//System.out.println(s);
 	}
 	
 	public static void deletePaciente(String s){
 		
-		//SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(Banco.getInstancia());
-		//saPacientes.removePaciente(s);
+		SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(Centro.getInstancia());
+		Set<Paciente> pacientes = saPacientes.filtrarPacientesPorNombre(s);
 		
 		//System.out.println(s);
 	}
@@ -133,15 +153,15 @@ public class Controlador {
 	public static void deleteRecurso(String s){
 		
 		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
-		//saRecursos.removeRecurso(s);
+		Set<Recurso> recursos = saRecursos.filtrarRecursosPorNombre(s);
 		
 		//System.out.println(s);
 	}
 	
 	public static void deleteSesion(String s){
 		
-		//SASesiones saSesiones = SAFactory.getInstancia().newSASesiones(Banco.getInstancia());
-		//saSesiones.removeSesione(s);
+		SARecursos saSesiones = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
+		Set<Sesion> sesiones = saSesiones.filtrarSesionPorNombre(s);
 		
 		//System.out.println(s);
 	}
