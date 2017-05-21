@@ -3,14 +3,23 @@ package DIedrAl_Project.presentacion;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import DIedrAl_Project.negocio.calendario.Fecha;
+import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
-
+/**
+ * Esta clase lleva la gestión de las vistas de los pacientes. En el constructor se dibuja la sección de Pacientes del Menú Principal y se pone a la espera para 
+ * añadir, eliminar, editar o buscar pacientes.
+ * 
+ * @author Diedral_Group
+ *
+ */
 public class Pacientes extends ColorPanel{
 
 	/**
@@ -91,7 +100,11 @@ public class Pacientes extends ColorPanel{
 		add(editar, c);
 		
 	}
-	                                        
+	/**
+	 * Clase que gestiona la ventana que aparece al darle al botón -Añadir- en la sección -Pacientes- del Ménú Principal
+	 * @author Diedral_Group
+	 * 
+	 */                    
 	private class PantallaAdd extends JFrame{
 		
 		 /**
@@ -340,21 +353,26 @@ public class Pacientes extends ColorPanel{
 							       pack();
 		}
 		
+		/**
+		 * Función que se ejecuta al darle a guardar en la ventana de añadir pacientes. Se rellena un objeto pacientey es pasado al controlador.
+		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {   
 			
 			String aficionestodo = jTextArea1.getText();
 			String aficiones[] = aficionestodo.split(",");
 			
-			PacienteTransfer info = new PacienteTransfer(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(),
-					Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem())), String.valueOf(jComboBox2.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox3.getSelectedItem())),
-					String.valueOf(jComboBox4.getSelectedItem()), jTextField4.getText(),
-					Integer.parseInt(String.valueOf(jComboBox5.getSelectedItem())), String.valueOf(jComboBox6.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox7.getSelectedItem())),
-					aficiones , jTextArea2.getText());
+			Fecha nacimiento = new Fecha(Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem())), String.valueOf(jComboBox2.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox3.getSelectedItem())), 0);
+			Fecha fechaLesion = new Fecha(Integer.parseInt(String.valueOf(jComboBox5.getSelectedItem())), String.valueOf(jComboBox6.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox7.getSelectedItem())), 0);
+
+			Paciente info = new Paciente(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), fechaLesion, aficiones);
+			info.setEstadoCivil(String.valueOf(jComboBox4.getSelectedItem()));
+			info.setBirthday(nacimiento);
+			info.setDescripcion(jTextArea2.getText());
 			
 			Controlador.addPaciente(info);
 		} 
 	}
-	
+	/*
 	public class PacienteTransfer{
 		
 		private String nombre;
@@ -418,8 +436,14 @@ public class Pacientes extends ColorPanel{
 		
 
 		
-	}
+	}*/
 
+	/**
+	 * 
+	 * Ventana que sale al pulsar el botón eliminar en la sección Pacientes en el menú principal.
+	 * @author Diedral_Group
+	 *
+	 */
 	private class PantallaEliminar extends JFrame implements confirmListener{
 		/**
 		 * 
@@ -503,12 +527,19 @@ public class Pacientes extends ColorPanel{
 	        pack();
 	    }                      
 
+	    /**
+	     * Se llama a esta función al introducir un nombre de paciente para eliminar en la ventana de eliminación de Pacientes. Pide confirmación.
+	     * @param evt
+	     */
 	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 	    	Confirm c = new Confirm();
 	    	c.setVisible(true);
 	    	c.addListener(this);
 	    }  
 	    
+	    /**
+	     * Se llama a esta función al pulsar el botón -Sí- en confirmar. Le dice al controlador que elimine al paciente.
+	     */
 	    public void delete(){
 	    	Controlador.deletePaciente(jTextField1.getText());
 	    	this.dispose();

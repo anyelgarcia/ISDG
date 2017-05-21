@@ -13,8 +13,8 @@ public class Recurso extends Etiquetable {
 		extension = fileName.substring(pos + 1, fileName.length() - 1);
 	}
 
-	public Recurso(String fileName, String name, String... etiquetas) {
-		super(name, etiquetas);
+	public Recurso(String fileName, String name, String descripcion, String... etiquetas) {
+		super(name, descripcion, etiquetas);
 		this.fileName = fileName;
 		int pos = fileName.lastIndexOf('.');
 		extension = fileName.substring(pos + 1, fileName.length() - 1);

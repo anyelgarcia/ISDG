@@ -4,14 +4,19 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import DIedrAl_Project.negocio.recursos.Sesion;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
-import DIedrAl_Project.presentacion.Recursos.RecursoTransfer;
 
 
+/**
+ * Esta clase lleva la gestión de las vistas de las sesiones. En el constructor se dibuja la sección de Sesiones del Menú Principal y se pone a la espera para 
+ * añadir, eliminar, editar o buscar sesiones.
+ * @author Diedral_Group
+ *
+ */
 public class Sesiones extends ColorPanel{
 
 	/**
@@ -77,6 +82,12 @@ public class Sesiones extends ColorPanel{
 		}
 		
 		
+	
+	/**
+	 * Clase que gestiona la ventana que aparece al darle al botón -Añadir- en la sección -Sesiones- del Ménú Principal
+	 * @author Diedral_Group
+	 * 
+	 */
 		private class PantallaAdd extends JFrame{
 			 /**
 			 * 
@@ -92,17 +103,20 @@ public class Sesiones extends ColorPanel{
 		    private javax.swing.JLabel jLabel6;
 		    private javax.swing.JLabel jLabel7;
 		    private javax.swing.JLabel jLabel8;
-		    private javax.swing.JLabel jLabel9;
+		    private javax.swing.JLabel jLabel9;		 
+		    private javax.swing.JLabel jLabel11;
 		    private javax.swing.JList<String> jList1;
 		    private javax.swing.JList<String> jList2;
 		    private javax.swing.JScrollPane jScrollPane1;
 		    private javax.swing.JScrollPane jScrollPane2;
 		    private javax.swing.JScrollPane jScrollPane3;
 		    private javax.swing.JScrollPane jScrollPane4;
-		    private javax.swing.JScrollPane jScrollPane5;
+		    private javax.swing.JScrollPane jScrollPane5; 
+		    private javax.swing.JScrollPane jScrollPane6;
 		    private javax.swing.JTextArea jTextArea1;
 		    private javax.swing.JTextArea jTextArea3;
 		    private javax.swing.JTextArea jTextArea4;
+		    private javax.swing.JTextArea jTextArea5;
 		    private javax.swing.JTextField jTextField1;
 		    private javax.swing.JTextField jTextField2;
 		    // End of variables declaration        
@@ -132,6 +146,9 @@ public class Sesiones extends ColorPanel{
 		        jList2 = new javax.swing.JList<>();
 		        jLabel8 = new javax.swing.JLabel();
 		        jLabel9 = new javax.swing.JLabel();
+		        jLabel11 = new javax.swing.JLabel();
+		        jScrollPane6 = new javax.swing.JScrollPane();
+		        jTextArea5 = new javax.swing.JTextArea();
 
 		        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		        setTitle("Crear Sesión");
@@ -181,6 +198,14 @@ public class Sesiones extends ColorPanel{
 		        jLabel8.setText("Recursos Empleados");
 
 		        jLabel9.setText("Actividades Empleadas");
+		        
+		        jLabel11.setText("Etiquetas: ");
+		        
+		        jTextArea5.setColumns(20);
+		        jTextArea5.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+		        jTextArea5.setRows(5);
+		        jTextArea5.setAutoscrolls(false);
+		        jScrollPane6.setViewportView(jTextArea5);
 
 		        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		        getContentPane().setLayout(layout);
@@ -195,7 +220,10 @@ public class Sesiones extends ColorPanel{
 		            .addGroup(layout.createSequentialGroup()
 		                .addContainerGap()
 		                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-		                    .addComponent(jScrollPane1)
+		                		.addGroup(layout.createSequentialGroup()
+		    	                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+		    	    	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+		    	    	                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
 		                    .addGroup(layout.createSequentialGroup()
 		                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
 		                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -222,7 +250,12 @@ public class Sesiones extends ColorPanel{
 		                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
 		                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 		                        .addComponent(jLabel4))
-		                    .addComponent(jLabel5))
+		                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+		        	                .addGap(32, 32, 32)
+		        	                .addComponent(jLabel5)
+		        	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+		        	                .addComponent(jLabel11)
+		        	                .addGap(45, 45, 45)))
 		                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		            .addGroup(layout.createSequentialGroup()
 		                .addGap(48, 48, 48)
@@ -248,12 +281,16 @@ public class Sesiones extends ColorPanel{
 		                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 		                    .addComponent(jLabel4))
 		                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-		                .addComponent(jLabel5)
+		                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+			                    .addComponent(jLabel5)
+			                    .addComponent(jLabel11))
 		                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 		                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
 		                    .addGroup(layout.createSequentialGroup()
-		                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-		                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+		                    		.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+		    		                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		    		                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+		    		                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
 		                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 		                            .addComponent(jLabel6)
 		                            .addComponent(jLabel7))
@@ -275,16 +312,24 @@ public class Sesiones extends ColorPanel{
 
 		        pack();
 			}
+			
+			/**
+			 * Función que se ejecuta al darle a guardar en la ventana de adición de sesiones. Se rellena un objeto sesión y es pasado al controlador.
+			 * */
 			private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { 
 				
-				String desarroll = jTextArea3.getText();
-				String desarrollo[] = desarroll.split("\n");
-				String variacione = jTextArea4.getText();
-				String variaciones[] = variacione.split("\n");
-				Controlador.addSesion(new SesionTransfer(String.valueOf(jTextField1.getText()), Integer.parseInt(String.valueOf(jTextField2.getText())), String.valueOf(jTextArea1.getText()), String.valueOf(jTextArea3.getText()), String.valueOf(jTextArea4.getText())));
+				String etiquetasSinFormato = jTextArea5.getText();
+				String etiquetas[] = etiquetasSinFormato.split(",");
+				Sesion info = new Sesion(String.valueOf(jTextField1.getText()), 
+						Integer.parseInt(String.valueOf(jTextField2.getText())),
+						String.valueOf(jTextArea1.getText()),
+						String.valueOf(jTextArea4.getText()),
+						String.valueOf(jTextArea3.getText()),
+						etiquetas);
+				Controlador.addSesion(info);
 			} 
 		}
-		
+		/*
 		public class SesionTransfer{
 			
 			private String nombre;
@@ -326,8 +371,14 @@ public class Sesiones extends ColorPanel{
 				return posiblesVariaciones;
 			}
 			
-		}
+		}*/
 
+		/**
+		 * 
+		 * Ventana que sale al pulsar el botón eliminar en la sección Sesiones en el menú principal.
+		 * @author Diedral_Group
+		 *
+		 */
 		private class PantallaEliminar extends JFrame implements confirmListener{
 			/**
 			 * 
@@ -411,12 +462,19 @@ public class Sesiones extends ColorPanel{
 		        pack();
 		    }                      
 
+		    /**
+		     * Se llama a esta función al introducir un nombre de sesión para eliminar en la ventana de eliminación de Sesiones. Pide confirmación.
+		     * @param evt
+		     */
 		    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 		    	Confirm c = new Confirm();
 		    	c.setVisible(true);
 		    	c.addListener(this);
 		    }  
 		    
+		    /**
+		     * Se llama a esta función al pulsar el botón -Sí- en confirmar. Le dice al controlador que elimine la sesión.
+		     */
 		    public void delete(){
 		    	Controlador.deleteSesion(jTextField1.getText());
 		    	this.dispose();

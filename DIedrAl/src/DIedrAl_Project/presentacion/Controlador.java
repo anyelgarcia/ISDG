@@ -1,20 +1,26 @@
 package DIedrAl_Project.presentacion;
 
+import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.negocio.recursos.Actividad;
 import DIedrAl_Project.negocio.recursos.Banco;
 import DIedrAl_Project.negocio.recursos.Recurso;
+import DIedrAl_Project.negocio.recursos.Sesion;
+import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SARecursos;
-import DIedrAl_Project.negocio.servicioDeAplicaciones.SARecursosFactory;
-import DIedrAl_Project.presentacion.Actividades.ActividadTransfer;
-import DIedrAl_Project.presentacion.Pacientes.PacienteTransfer;
 import DIedrAl_Project.presentacion.Perfil.PerfilTransfer;
-import DIedrAl_Project.presentacion.Recursos.RecursoTransfer;
-import DIedrAl_Project.presentacion.Sesiones.SesionTransfer;
 import DIedrAl_Project.presentacion.Usuarios.UsuarioTransfer;
 
+/**
+ * 
+ * @author Diedral_Group
+ *
+ */
 public class Controlador {
 	
-	public static void addPaciente(PacienteTransfer p){
+	public static void addPaciente(Paciente p){
+		
+		//SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(Banco.getInstancia());
+		//saPacientes.addPaciente(p);
 		
 		/* Prueba 1: Satisfactoria :D
 		 System.out.println(p.getNombre());
@@ -30,12 +36,17 @@ public class Controlador {
 		 System.out.println(p.getFechalesion().getAño() + " " + p.getFechalesion().getMes() + " " + p.getFechalesion().getDia());*/
 	}
 	
-	public static void addRecurso(RecursoTransfer p){
+	public static void addRecurso(Recurso p){
 		
-		Recurso cosa = new Recurso(p.getRuta(), p.getNombre(), p.getEtiquetas());
-		cosa.setDescripcion(p.getDescripcion());
-		SARecursos saRecursos = SARecursosFactory.getInstancia().newSARecursos(Banco.getInstancia());
-		saRecursos.addRecurso(cosa);
+		
+		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
+		saRecursos.addRecurso(p);
+		
+		/*Prueba 6 :D
+		for(Recurso rec : Banco.getInstancia().getRecursos().filtrarNombre(p.getNombre())){
+			 System.out.println("itworked!");
+		 }*/
+		
 		
 		/*Prueba 2 Satisfactoria :D
 		 * System.out.println(p.getNombre());
@@ -47,31 +58,40 @@ public class Controlador {
 	}
 	
 
-	public static void addActividad(ActividadTransfer p){
-		/*
-		 * Prueba 4 Satisfactoria :D
+	public static void addActividad(Actividad p){
+		
+		
+		//SAActividades saActividades = SAFactory.getInstancia().newSAActividades(banco.getInstancia());
+		//saActividades.addActividad(p);
+		
 		System.out.println(p.getNombre());
 		System.out.println(p.getDificultad());
-		System.out.println(p.getPacienteTipo());
+		for(String str : p.getDestinatarios()){
+			 System.out.println(str);
+		 }
+		for(String str : p.getEtiquetas()){
+			 System.out.println(str);
+		 }
 		 System.out.println(p.getDuracion());
 		 System.out.println( p.getDescripcion());
 		 System.out.println( p.getVariaciones());
-		 System.out.println( p.getDesarrollo());*/
+		 System.out.println( p.getDesarrollo());
 	}
 	
 	
-	public static void addSesion(SesionTransfer p){
+	public static void addSesion(Sesion p){
 		
-		 /* Prueba 3 Satisfactoria :D
-		  * System.out.println(p.getNombre());
-		 System.out.println(p.getMinutos());
-		 for(String str : p.getPosiblesVariaciones()){
+		//SASesiones saSesiones = SAFactory.getInstancia().newSASesiones(Banco.getInstancia());
+		//saSesiones.addSesion(p);
+		
+		System.out.println(p.getNombre());
+		for(String str : p.getEtiquetas()){
 			 System.out.println(str);
 		 }
-		 for(String str : p.getDesarrollo()){
-			 System.out.println(str);
-		 }
-		 System.out.println( p.getDescripcion());*/
+		 System.out.println(p.getDuracion());
+		 System.out.println( p.getDescripcion());
+		 System.out.println( p.getVariaciones());
+		 System.out.println( p.getDesarrollo());
 		
 	}
 	
@@ -95,18 +115,34 @@ public class Controlador {
 	}
 	
 	public static void deleteActividad(String s){
-		System.out.println(s);
+		
+		//SAActividades saActividades = SAFactory.getInstancia().newSAActividades(Banco.getInstancia());
+		//saActividades.removeActividad(s);
+				
+		//System.out.println(s);
 	}
 	
 	public static void deletePaciente(String s){
-		System.out.println(s);
+		
+		//SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(Banco.getInstancia());
+		//saPacientes.removePaciente(s);
+		
+		//System.out.println(s);
 	}
 	
 	public static void deleteRecurso(String s){
-		System.out.println(s);
+		
+		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
+		//saRecursos.removeRecurso(s);
+		
+		//System.out.println(s);
 	}
 	
 	public static void deleteSesion(String s){
-		System.out.println(s);
+		
+		//SASesiones saSesiones = SAFactory.getInstancia().newSASesiones(Banco.getInstancia());
+		//saSesiones.removeSesione(s);
+		
+		//System.out.println(s);
 	}
 }

@@ -1,8 +1,7 @@
 package DIedrAl_Project.negocio.administracion;
 
-import java.util.GregorianCalendar;
-
 import DIedrAl_Project.negocio.ObjetoAlmacenable;
+import DIedrAl_Project.negocio.calendario.Fecha;
 import DIedrAl_Project.negocio.pacientes.Direccion;
 
 public class Persona implements ObjetoAlmacenable{
@@ -13,7 +12,7 @@ public class Persona implements ObjetoAlmacenable{
 
 	protected String secondSurname;
 
-	protected GregorianCalendar birthday;
+	protected Fecha birthday;
 
 	protected String estadoCivil;
 
@@ -25,6 +24,8 @@ public class Persona implements ObjetoAlmacenable{
 	
 	protected String id;
 
+	protected String descripcion;
+	
 	public Persona(String nombre, String apellido1, String apellido2) {
 		name = nombre;
 		firstSurname = apellido1;
@@ -55,11 +56,11 @@ public class Persona implements ObjetoAlmacenable{
 		this.secondSurname = secondSurname;
 	}
 
-	public GregorianCalendar getBirthday() {
+	public Fecha getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(GregorianCalendar birthday) {
+	public void setBirthday(Fecha birthday) {
 		this.birthday = birthday;
 	}
 
@@ -93,6 +94,14 @@ public class Persona implements ObjetoAlmacenable{
 
 	public void setTfo(Integer tfo) {
 		this.tfo = tfo;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	@Override
