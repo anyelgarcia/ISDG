@@ -1,6 +1,7 @@
 package DIedrAl_Project.negocio.administracion;
 
 import java.util.GregorianCalendar;
+import java.util.UUID;
 
 import DIedrAl_Project.negocio.ObjetoAlmacenable;
 import DIedrAl_Project.negocio.pacientes.Direccion;
@@ -29,6 +30,7 @@ public class Persona implements ObjetoAlmacenable{
 		name = nombre;
 		firstSurname = apellido1;
 		secondSurname = apellido2;
+		this.id = UUID.randomUUID().toString();
 	}
 
 	public String getName() {
