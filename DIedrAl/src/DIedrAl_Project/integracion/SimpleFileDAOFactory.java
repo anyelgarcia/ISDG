@@ -2,11 +2,6 @@ package DIedrAl_Project.integracion;
 
 public class SimpleFileDAOFactory implements DAOFactory {
 
-	
-	@Override
-	public DAOTerapeuta getDAOTerapeuta() {
-		return DAOTerapeutaImp.getInstance();
-	}
 
 	@Override
 	public DAORecurso getDAORecurso() {
@@ -20,20 +15,22 @@ public class SimpleFileDAOFactory implements DAOFactory {
 
 	@Override
 	public DAOInforme getDAOInforme() {
-		// TODO Auto-generated method stub
-		return null;
+		return DAOInformeImp.getInstance();
 	}
 
 	@Override
 	public DAOPaciente getDAOPaciente() {
-		// TODO Auto-generated method stub
-		return null;
+		return DAOPacienteImp.getInstance();
 	}
 
 	@Override
 	public DAOSesion getDAOSesion() {
-		// TODO Auto-generated method stub
-		return null;
+		return DAOSesionImp.getInstance();
+	}
+
+	@Override
+	public DAOUsuario getDAOUsuario() {
+		return DAOUsuarioImp.getInstance();
 	}
 	
 	

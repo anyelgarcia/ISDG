@@ -1,7 +1,8 @@
 package DIedrAl_Project.integracion;
 
 public interface DAOFactory {
-	public DAOTerapeuta getDAOTerapeuta();
+	
+	public DAOUsuario getDAOUsuario();
 	
 	public DAORecurso getDAORecurso();
 	

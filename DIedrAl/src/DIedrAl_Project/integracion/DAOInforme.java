@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.HashSet;
 
 import DIedrAl_Project.negocio.pacientes.Informe;
-import DIedrAl_Project.negocio.recursos.Actividad;
 
 public interface DAOInforme {
 

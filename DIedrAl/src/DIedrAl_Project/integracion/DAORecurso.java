@@ -1,7 +1,6 @@
 package DIedrAl_Project.integracion;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 
 import DIedrAl_Project.negocio.recursos.Recurso;

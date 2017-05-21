@@ -17,11 +17,18 @@ public class Centro {
 	private Map<Usuario, Set<Paciente>> usuarios;
 	// TODO: implementarlo primero
 	private Organizacion organizacion;
-
+	
 	public Centro(String name) {
 		nombre = name;
 		pacientes = new HashMap<Paciente, Set<Usuario>>();
 		usuarios = new HashMap<Usuario, Set<Paciente>>();
+
+	}
+
+	public Centro(String name, Map<Paciente, Set<Usuario>> pacientes, Map<Usuario, Set<Paciente>> usuarios) {
+		nombre = name;
+		this.pacientes = pacientes;
+		this.usuarios = usuarios;
 
 	}
 
@@ -104,6 +111,14 @@ public class Centro {
 
 	public void setOrganizacion(Organizacion organizacion) {
 		this.organizacion = organizacion;
+	}
+
+	public Map<Paciente, Set<Usuario>> getPacientes() {
+		return pacientes;
+	}
+
+	public Map<Usuario, Set<Paciente>> getUsuarios() {
+		return usuarios;
 	}
 
 }
