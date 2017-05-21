@@ -7,11 +7,17 @@ import java.awt.Insets;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import DIedrAl_Project.negocio.recursos.Recurso;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 
+/**
+ * Esta clase lleva la gestión de las vistas de los recursos. En el constructor se dibuja la sección de Recursos del Menú Principal y se pone a la espera para 
+ * añadir, eliminar, editar o buscar recursos.
+ * @author Diedral_Group
+ *
+ */
 public class Recursos extends ColorPanel{
-	
 	/**
 	 * 
 	 */
@@ -94,6 +100,11 @@ public class Recursos extends ColorPanel{
 	}
         
 	
+	/**
+	 * Clase que gestiona la ventana que aparece al darle al botón -Añadir- en la sección -Recursos- del Ménú Principal
+	 * @author Diedral_Group
+	 *
+	 */
 	private class PantallaAdd extends JFrame{
 		
 		 /**
@@ -216,15 +227,20 @@ public class Recursos extends ColorPanel{
 		        pack();
 		}
 
+		
+		/**
+		 * Función que se ejecuta al darle a guardar en la ventana de adición de recursos. Se rellena un objeto recurso y es pasado al controlador.
+		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {     
 			
 			String etiquetas = jTextArea2.getText();
 			String etiqs[] = etiquetas.split(",");
-			Controlador.addRecurso(new RecursoTransfer(String.valueOf(jTextField1.getText()), String.valueOf(jTextField2.getText()), String.valueOf(jTextArea3.getText()), etiqs));
+			Controlador.addRecurso(new Recurso(String.valueOf(jTextField2.getText()), String.valueOf(jTextField1.getText()), String.valueOf(jTextArea3.getText()), etiqs));
 		}                                        
 
 	}
 	
+	/*
 	public class RecursoTransfer{
 		private String nombre;
 		private String ruta;
@@ -252,8 +268,14 @@ public class Recursos extends ColorPanel{
 		}
 		
 		
-	}
+	}*/
 
+	/**
+	 * 
+	 * Ventana que sale al pulsar el botón eliminar en la sección Recursos en el menú principal.
+	 * @author Diedral_Group
+	 *
+	 */
 	private class PantallaEliminar extends JFrame implements confirmListener{
 		/**
 		 * 
@@ -337,12 +359,19 @@ public class Recursos extends ColorPanel{
 	        pack();
 	    }                      
 
+	    /**
+	     * Se llama a esta función al introducir un nombre de recurso para eliminar en la ventana de eliminación de Recursos. Pide confirmación.
+	     * @param evt
+	     */
 	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 	    	Confirm c = new Confirm();
 	    	c.setVisible(true);
 	    	c.addListener(this);
 	    }  
 	    
+	    /**
+	     * Se llama a esta función al pulsar el botón -Sí- en confirmar. Le dice al controlador que elimine el recurso.
+	     */
 	    public void delete(){
 	    	Controlador.deleteRecurso(jTextField1.getText());
 	    	this.dispose();

@@ -2,13 +2,14 @@ package DIedrAl_Project.negocio.pacientes;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import DIedrAl_Project.negocio.administracion.Centro;
 import DIedrAl_Project.negocio.administracion.Terapeuta;
 import DIedrAl_Project.negocio.administracion.Usuario;
+import DIedrAl_Project.negocio.administracion.Persona;
+import DIedrAl_Project.negocio.calendario.Fecha;
 
-public class Paciente extends Usuario {
-    private String perfil;
+	
+
 
     private List<Nota> nota = new ArrayList<Nota> ();
 
@@ -18,7 +19,19 @@ public class Paciente extends Usuario {
 
     private Centro centro;
 
+    private String perfil;
+  
     private DatosPaciente datosPaciente;
+
+
+    public Paciente(String nombre, String apellido1, String apellido2) {
+		  super(nombre, apellido1, apellido2);
+	  }
+    
+    public Paciente(String nombre, String apellido1, String apellido2, String lesion, Fecha fechaLesion, String ... aficiones) {
+		  super(nombre, apellido1, apellido2);
+		  datos = new DatosPaciente(lesion, fechaLesion, aficiones);
+	  }
 
     public void addInforme(Informe Informe) {
     }
@@ -45,23 +58,18 @@ public class Paciente extends Usuario {
     }
 
     String getPerfil() {
-        // Automatically generated method. Please delete this comment before entering specific code.
         return this.perfil;
     }
 
     void setPerfil(String value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
         this.perfil = value;
     }
 
     Centro getCentro() {
-        // Automatically generated method. Please delete this comment before entering specific code.
         return this.centro;
     }
 
     void setCentro(Centro value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
         this.centro = value;
     }
-
 }

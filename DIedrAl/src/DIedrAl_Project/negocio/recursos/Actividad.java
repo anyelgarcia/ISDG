@@ -4,16 +4,24 @@ import java.util.Set;
 
 public class Actividad extends Programable {
 
-    public Actividad(String name) {
+	private Dificultad dificultad;
+
+	public Actividad(String name) {
 		super(name);
 	}
 
-	private Dificultad dificultad;
+	public Actividad(String name, String... etiquetas) {
+		super(name, etiquetas);
+	}
+	
+	public Actividad(String name, String dificultad, int duracion, String tipoPaciente, String descripcion, String desarrollo, String variaciones, String... etiquetas) {
+		super(name, duracion, descripcion, desarrollo, variaciones, etiquetas);
+		this.addDestinatario(tipoPaciente);
+		this.dificultad = Dificultad.valueOf(dificultad);
+	}
 
-    
     public Dificultad getDificultad(){
     	return this.dificultad;
     }
     
-
 }

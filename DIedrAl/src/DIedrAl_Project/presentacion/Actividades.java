@@ -7,16 +7,22 @@ import java.awt.Insets;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import DIedrAl_Project.negocio.recursos.Actividad;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
-
+/**
+ * Esta clase lleva la gestión de las vistas de las actividades. En el constructor se dibuja la sección de Actividades del Menú Principal y se pone a la espera para 
+ * añadir, eliminar, editar o buscar actividades.
+ * 
+ * @author Diedral_Group
+ *
+ */
 public class Actividades extends ColorPanel{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6517855682994096031L;
-	
 	
 	public Actividades(int r, int g, int b){
 		super(r,g,b);
@@ -73,6 +79,12 @@ public class Actividades extends ColorPanel{
 		setVisible(true);
 	}
 	 
+	
+	/**
+	 * Clase que gestiona la ventana que aparece al darle al botón -Añadir- en la sección -Actividades- del Ménú Principal
+	 * @author Diedral_Group
+	 * 
+	 */
 	private class PantallaAdd extends JFrame{
 		
 		/**
@@ -93,6 +105,7 @@ public class Actividades extends ColorPanel{
 	    private javax.swing.JLabel jLabel7;
 	    private javax.swing.JLabel jLabel8;
 	    private javax.swing.JLabel jLabel9;
+	    private javax.swing.JLabel jLabel11;
 	    private javax.swing.JList<String> jList1;
 	    private javax.swing.JList<String> jList2;
 	    private javax.swing.JScrollPane jScrollPane1;
@@ -100,9 +113,11 @@ public class Actividades extends ColorPanel{
 	    private javax.swing.JScrollPane jScrollPane3;
 	    private javax.swing.JScrollPane jScrollPane4;
 	    private javax.swing.JScrollPane jScrollPane5;
+	    private javax.swing.JScrollPane jScrollPane6;
 	    private javax.swing.JTextArea jTextArea1;
 	    private javax.swing.JTextArea jTextArea3;
 	    private javax.swing.JTextArea jTextArea4;
+	    private javax.swing.JTextArea jTextArea5;
 	    private javax.swing.JTextField jTextField1;
 	    private javax.swing.JTextField jTextField2;
 	    private javax.swing.JTextField jTextField3;
@@ -136,6 +151,10 @@ public class Actividades extends ColorPanel{
 	        jLabel9 = new javax.swing.JLabel();
 	        jLabel10 = new javax.swing.JLabel();
 	        jTextField3 = new javax.swing.JTextField();
+	        jLabel11 = new javax.swing.JLabel();
+	        jScrollPane6 = new javax.swing.JScrollPane();
+	        jTextArea5 = new javax.swing.JTextArea();
+	        
 
 	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 	        setTitle("Crear Actividad");
@@ -156,7 +175,7 @@ public class Actividades extends ColorPanel{
 
 	        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baja", "Media", "Alta" }));
 
-	        jLabel4.setText("min");
+	        jLabel4.setText("minutos");
 
 	        jLabel5.setText("Descripción: ");
 
@@ -193,6 +212,13 @@ public class Actividades extends ColorPanel{
 	        jLabel9.setText("Actividades Empleadas");
 
 	        jLabel10.setText("Paciente Tipo: ");
+	        jLabel11.setText("Etiquetas: ");
+	        
+	        jTextArea5.setColumns(20);
+	        jTextArea5.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+	        jTextArea5.setRows(5);
+	        jTextArea5.setAutoscrolls(false);
+	        jScrollPane6.setViewportView(jTextArea5);
 
 	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 	        getContentPane().setLayout(layout);
@@ -223,14 +249,20 @@ public class Actividades extends ColorPanel{
 	                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 	                                        .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))))
 	                            .addComponent(jTextField1)))
-	                    .addGroup(layout.createSequentialGroup()
-	                        .addGap(2, 2, 2)
-	                        .addComponent(jLabel5)))
+	                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	        	                .addGap(32, 32, 32)
+	        	                .addComponent(jLabel5)
+	        	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+	        	                .addComponent(jLabel11)
+	        	                .addGap(45, 45, 45)))
 	                .addGap(0, 0, Short.MAX_VALUE))
 	            .addGroup(layout.createSequentialGroup()
 	                .addContainerGap()
 	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                    .addComponent(jScrollPane1)
+	               		.addGroup(layout.createSequentialGroup()
+	                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+	    	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	    	                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
 	                    .addGroup(layout.createSequentialGroup()
 	                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
 	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -278,9 +310,13 @@ public class Actividades extends ColorPanel{
 	                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 	                    .addComponent(jLabel4))
 	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-	                .addComponent(jLabel5)
-	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-	                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+		                    .addComponent(jLabel5)
+		                    .addComponent(jLabel11))
+		                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+		                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+		                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
 	                .addGap(18, 18, 18)
 	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 	                    .addComponent(jLabel6)
@@ -304,17 +340,28 @@ public class Actividades extends ColorPanel{
 
 	        pack();
 		}
+		
+		/**
+		 * Función que se ejecuta al darle a guardar en la ventana de añadir actividades. Se rellena un objeto actividad y es pasado al controlador.
+		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { 
 			
-			
-			ActividadTransfer info = new ActividadTransfer(String.valueOf(jTextField1.getText()), String.valueOf(jComboBox1.getSelectedItem()), String.valueOf(jTextField3.getText()),
-					Integer.parseInt(String.valueOf(jTextField2.getText())), String.valueOf(jTextArea1.getText()), String.valueOf(jTextArea4.getText()), String.valueOf(jTextArea3.getText()));
+			String etiquetasSinFormato = jTextArea5.getText();
+			String etiquetas[] = etiquetasSinFormato.split(",");
+			Actividad info = new Actividad(String.valueOf(jTextField1.getText()), 
+					(String.valueOf(jComboBox1.getSelectedItem())).toUpperCase(),
+					Integer.parseInt(String.valueOf(jTextField2.getText())),
+					String.valueOf(jTextField3.getText()),
+					String.valueOf(jTextArea1.getText()),
+					String.valueOf(jTextArea4.getText()),
+					String.valueOf(jTextArea3.getText()),
+					etiquetas);
 			
 			Controlador.addActividad(info);
 		} 
 	}
 	
-	
+	/*
 	public class ActividadTransfer{
 		
 		private String nombre;
@@ -376,7 +423,15 @@ public class Actividades extends ColorPanel{
 			this.variaciones = variaciones;
 		}
 	}
-
+*/
+	
+	
+	/**
+	 * 
+	 * Ventana que sale al pulsar el botón eliminar en la sección Actividades en el menú principal.
+	 * @author Diedral_Group
+	 *
+	 */
 	private class PantallaEliminar extends JFrame implements confirmListener{
 		/**
 		 * 
@@ -460,12 +515,19 @@ public class Actividades extends ColorPanel{
 	        pack();
 	    }                      
 
-	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	    /**
+	     * Se llama a esta función al introducir un nombre de actividad para eliminar en la ventana de eliminación de Actividades. Pide confirmación.
+	     * @param evt
+	     */
+	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {   
 	    	Confirm c = new Confirm();
 	    	c.setVisible(true);
 	    	c.addListener(this);
 	    }  
 	    
+	    /**
+	     * Se llama a esta función al pulsar el botón -Sí- en confirmar. Le dice al controlador que elimine la actividad.
+	     */
 	    public void delete(){
 	    	Controlador.deleteActividad(jTextField1.getText());
 	    	this.dispose();
