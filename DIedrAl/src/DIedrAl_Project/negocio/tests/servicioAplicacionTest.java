@@ -1,6 +1,6 @@
 package DIedrAl_Project.negocio.tests;
 
-import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.*;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
@@ -9,10 +9,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import DIedrAl_Project.negocio.administracion.Centro;
-import DIedrAl_Project.negocio.administracion.Centro.Hints;
-import DIedrAl_Project.negocio.administracion.Persona;
-import DIedrAl_Project.negocio.administracion.Usuario;
+import DIedrAl_Project.negocio.administracion.*;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAPacientes;
