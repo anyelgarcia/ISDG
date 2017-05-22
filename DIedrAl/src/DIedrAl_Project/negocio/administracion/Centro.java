@@ -96,6 +96,7 @@ public class Centro {
 			throw new AlreadyBoundException("Paciente ya ligado");
 		} else {
 			usuarios.get(usu).add(pac);
+			pacientes.get(pac).add(usu);
 		}
 	}
 
@@ -109,6 +110,7 @@ public class Centro {
 			throw new AlreadyBoundException("Paciente no ligado");
 		} else {
 			usuarios.get(usu).remove(pac);
+			pacientes.get(pac).remove(usu);
 		}
 	}
 
