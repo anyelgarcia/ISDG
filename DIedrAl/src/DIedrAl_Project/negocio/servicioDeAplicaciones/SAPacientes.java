@@ -25,5 +25,5 @@ public interface SAPacientes {
 	
 	public Usuario usuarioConNIF(String nif);
 	
-	public Set<Persona> filtrarPersonas(Centro.Hints[] hints, String[] values) throws IllegalArgumentException;
+	public Set<Persona> filtrarPersonas(Hints[] hints, String[] values) throws IllegalArgumentException;
 }

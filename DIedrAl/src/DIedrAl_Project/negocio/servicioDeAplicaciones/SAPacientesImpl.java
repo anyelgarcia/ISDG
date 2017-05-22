@@ -4,8 +4,7 @@ import java.rmi.*;
 import java.util.Set;
 
 import DIedrAl_Project.negocio.administracion.*;
-import DIedrAl_Project.negocio.administracion.Centro.Hints;
-import DIedrAl_Project.negocio.pacientes.Paciente;
+import DIedrAl_Project.negocio.pacientes.*;
 
 public class SAPacientesImpl implements SAPacientes {
 
@@ -62,7 +61,7 @@ public class SAPacientesImpl implements SAPacientes {
 	}
 
 	@Override
-	public Set<Persona> filtrarPersonas(Centro.Hints[] hints, String[] values) {
+	public Set<Persona> filtrarPersonas(Hints[] hints, String[] values) {
 		return centro.getPersonas(hints, values);
 	}
 	

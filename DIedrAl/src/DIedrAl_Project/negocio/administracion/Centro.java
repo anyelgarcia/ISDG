@@ -11,10 +11,6 @@ import DIedrAl_Project.negocio.pacientes.Paciente;
 //Ejemplo del patrón mediator
 public class Centro {
 
-	public enum Hints {
-		NOMBRE, APELLIDO1, APELLIDO2, NIF
-	}
-
 	private String nombre;
 	// TODO: implementarlo primero
 	private Calendario calendario;
