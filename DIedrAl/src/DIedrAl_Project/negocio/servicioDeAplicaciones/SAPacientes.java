@@ -21,9 +21,9 @@ public interface SAPacientes {
 	
 	public Set<Paciente> getPacientesAsociados(Usuario usu) throws NotBoundException;
 	
-	public Paciente pacienteConNIF(String nif);
+	public Paciente pacienteConNIF(String nif) throws NotBoundException;
 	
-	public Usuario usuarioConNIF(String nif);
+	public Usuario usuarioConNIF(String nif) throws NotBoundException;
 	
 	public Set<Persona> filtrarPersonas(Hints[] hints, String[] values) throws IllegalArgumentException;
 }

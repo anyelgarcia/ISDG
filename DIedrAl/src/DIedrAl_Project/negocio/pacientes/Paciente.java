@@ -34,7 +34,7 @@ public class Paciente extends Persona {
 	}
 
 	public String toString() {
-		return id + ":" + nombre + " " + apellido1 + " " + apellido2;
+		return nif + ":" + nombre + " " + apellido1 + " " + apellido2;
 	}
 
 
