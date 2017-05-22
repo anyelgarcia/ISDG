@@ -197,7 +197,7 @@ public class Centro {
 	 * @throws IllegalArgumentException
 	 *             Si el número de filtros no coincide con el de valores.
 	 */
-	public Set<Persona> getPersonas(Hints[] hints, String[] values) throws IllegalArgumentException {
+	public Set<Persona> getPersonas(Hints[] hints, String... values) throws IllegalArgumentException {
 
 		if (hints.length != values.length)
 			throw new IllegalArgumentException("Número de campos debe coincidir con número de valores de búsqueda");
@@ -240,8 +240,20 @@ public class Centro {
 
 		return resultadoBusc;
 	}
+	
+	/**
+	 * Funcionará?
+	 * @param nif
+	 * @return
+	 */
+	public Persona getPersona(String nif){
+		Set<Persona> aux = getPersonas(new Hints[]{Hints.NIF},nif);
+		assert(aux.size()==1);
+		Persona[] a=null;
+		return aux.toArray(a)[0];
+	}
 
-	public void initCentro() {
+	private void initCentro() {
 		for (Persona key : pacientes.keySet()) {
 			personasCentro.put(key.getNif(), key);
 		}

@@ -51,12 +51,12 @@ public class SAPacientesImpl implements SAPacientes {
 	}
 
 	@Override
-	public Paciente pacienteConNIF(String nif) throws NotBoundException {
+	public Paciente getPacienteConNIF(String nif) throws NotBoundException {
 		return centro.getPacienteConNIF(nif);
 	}
 
 	@Override
-	public Usuario usuarioConNIF(String nif) throws NotBoundException {
+	public Usuario getUsuarioConNIF(String nif) throws NotBoundException {
 		return centro.getUsuarioConNIF(nif);
 	}
 
