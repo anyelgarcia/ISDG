@@ -8,12 +8,14 @@ import DIedrAl_Project.negocio.calendario.SesionProgramada;
 
 public class Informe implements ObjetoAlmacenable {
 	private String texto;
+
+	private String id;
 	/*
-	 * TODO No tiene sentido cambiar la sesion de la que est· hablando el
+	 * TODO No tiene sentido cambiar la sesion de la que est√° hablando el
 	 * informe.
 	 */
 	private final SesionProgramada sesion;
-	// TODO Pueden ser m·s?
+	// TODO Pueden ser m√°s?
 	private Usuario autor;
 
 	private String id;
