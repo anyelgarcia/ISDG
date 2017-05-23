@@ -11,7 +11,11 @@ import DIedrAl_Project.negocio.administracion.Persona;
 import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.negocio.recursos.Actividad;
+import DIedrAl_Project.negocio.recursos.ArrayActividades;
+import DIedrAl_Project.negocio.recursos.ArrayRecursos;
+import DIedrAl_Project.negocio.recursos.ArraySesiones;
 import DIedrAl_Project.negocio.recursos.Banco;
+import DIedrAl_Project.negocio.recursos.Dificultad;
 import DIedrAl_Project.negocio.recursos.Recurso;
 import DIedrAl_Project.negocio.recursos.Sesion;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
@@ -230,4 +234,37 @@ public class Controlador {
 		
 		return resultados;
 	}
+	
+	public static ArraySesiones filtrarSesiones(String nombre, Set<String> filtros, Integer min, Integer max, Set<String> destinatarios){
+		ArraySesiones salida = Banco.getInstancia().getSesiones();
+		if(nombre != null && nombre != "") salida.filtrarNombre(nombre);
+		if(filtros.size() > 0) salida.filtrarEtiqueta(filtros);
+		if(min != null) salida.filtrarDesde(min);
+		if(max != null) salida.filtrarHasta(max);
+		if(destinatarios.size() > 0) salida.filtrarDestinatarios(destinatarios);
+		
+		return salida;
+	}
+	
+	public static ArrayActividades filtrarActividades(String nombre, Set<String> filtros, Integer min, Integer max, Set<String> destinatarios, 
+			Dificultad minimo, Dificultad maximo){
+		ArrayActividades salida = Banco.getInstancia().getActividades();
+		if(nombre != null && nombre != "") salida.filtrarNombre(nombre);
+		if(filtros.size() > 0) salida.filtrarEtiqueta(filtros);
+		if(min != null) salida.filtrarDesde(min);
+		if(max != null) salida.filtrarHasta(max);
+		if(destinatarios.size() > 0) salida.filtrarDestinatarios(destinatarios);
+		if(minimo != null) salida.filtrarDesde(minimo);
+		if(maximo != null) salida.filtrarHasta(maximo);
+		
+		return salida;
+	}
+	
+	public static ArrayRecursos filtrarRecursos(String nombre, Set<String> filtros){
+		ArrayRecursos salida = Banco.getInstancia().getRecursos();
+		if(nombre != null && nombre != "") salida.filtrarNombre(nombre);
+		if(filtros.size() > 0) salida.filtrarEtiqueta(filtros);
+		return salida;
+	}
+
 }
