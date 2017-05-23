@@ -2,6 +2,8 @@ package DIedrAl_Project.negocio.pacientes;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
+
+import DIedrAl_Project.negocio.administracion.Terapeuta;
 import DIedrAl_Project.negocio.administracion.Usuario;
 
 public class Nota {

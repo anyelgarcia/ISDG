@@ -7,6 +7,8 @@ public class Banco {
 
 	private ArrayRecursos recursos;
 
+	private long idSiguiente;
+
 	private static Banco instancia = null;
 
 	public static Banco getInstancia() {

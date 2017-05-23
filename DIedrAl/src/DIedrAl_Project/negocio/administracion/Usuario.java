@@ -1,46 +1,43 @@
 package DIedrAl_Project.negocio.administracion;
 
+import java.util.Set;
+
+import DIedrAl_Project.negocio.pacientes.Paciente;
+
 public class Usuario extends Persona {
 
-	protected boolean admin;
+	protected String rol;
 
 	protected String infor;
 
-	protected String password;
+	protected Set<Paciente> asociados;
 
-	public Usuario(String nombre, String apellido1, String apellido2, String id) {
-		super(nombre, apellido1, apellido2, id);
+	public Usuario(String nombre, String apellido1, String apellido2) {
+		super(nombre, apellido1, apellido2);
 	}
 
-	public boolean isAdmin() {
-		return admin;
+	public String getRol() {
+		return rol;
 	}
 
-	public void setAdmin() {
-		admin = true;
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 
-	public void resetAdmin() {
-		admin = false;
+	public String getInfor() {
+		return infor;
 	}
 
 	public void setInfor(String infor) {
 		this.infor = infor;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public Set<Paciente> getAsociados() {
+		return asociados;
 	}
 
-	/**
-	 * Comprueba si el string introducido coincide con la contraseña del
-	 * ususuario.
-	 * 
-	 * @param pass
-	 *            contraseña a probar
-	 * @return true si coincide, false en caso contrario.
-	 */
-	public boolean inputPassword(String pass) {
-		return pass.equals(password);
+	public void setAsociados(Set<Paciente> asociados) {
+		this.asociados = asociados;
 	}
+
 }

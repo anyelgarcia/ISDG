@@ -3,24 +3,14 @@ package DIedrAl_Project.presentacion;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.rmi.AlreadyBoundException;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import DIedrAl_Project.negocio.calendario.Fecha;
-import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
-/**
- * Esta clase lleva la gestión de las vistas de los pacientes. En el constructor se dibuja la sección de Pacientes del Menú Principal y se pone a la espera para 
- * añadir, eliminar, editar o buscar pacientes.
- * 
- * @author Diedral_Group
- *
- */
+
 public class Pacientes extends ColorPanel{
 
 	/**
@@ -101,11 +91,7 @@ public class Pacientes extends ColorPanel{
 		add(editar, c);
 		
 	}
-	/**
-	 * Clase que gestiona la ventana que aparece al darle al botón -Añadir- en la sección -Pacientes- del Ménú Principal
-	 * @author Diedral_Group
-	 * 
-	 */                    
+	                                        
 	private class PantallaAdd extends JFrame{
 		
 		 /**
@@ -128,7 +114,6 @@ public class Pacientes extends ColorPanel{
 	    private javax.swing.JLabel jLabel3;
 	    private javax.swing.JLabel jLabel4;
 	    private javax.swing.JLabel jLabel5;
-	    private javax.swing.JLabel jLabel11;
 	    private javax.swing.JLabel jLabel6;
 	    private javax.swing.JLabel jLabel7;
 	    private javax.swing.JLabel jLabel8;
@@ -141,7 +126,6 @@ public class Pacientes extends ColorPanel{
 	    private javax.swing.JTextField jTextField2;
 	    private javax.swing.JTextField jTextField3;
 	    private javax.swing.JTextField jTextField4;
-	    private javax.swing.JTextField jTextField5;
 	    // End of variables declaration     
 	    
 		public PantallaAdd(){
@@ -174,8 +158,6 @@ public class Pacientes extends ColorPanel{
 			jScrollPane2 = new javax.swing.JScrollPane();
 			jTextArea2 = new javax.swing.JTextArea();
 			jButton1 = new javax.swing.JButton();
-			jLabel11 = new javax.swing.JLabel();
-			jTextField5 = new javax.swing.JTextField();
 			
 			setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 			setTitle("Crear Paciente");
@@ -189,7 +171,6 @@ public class Pacientes extends ColorPanel{
 			
 			jLabel4.setText("Segundo Apellido:");
 			
-			jLabel11.setText("DNI:");
 			
 			jLabel5.setText("Fecha de Nacimiento: ");
 			
@@ -265,8 +246,7 @@ public class Pacientes extends ColorPanel{
 							                                    .addComponent(jLabel2)
 							                                    .addComponent(jLabel1)
 							                                    .addComponent(jLabel3)
-							                                    .addComponent(jLabel4)
-							                                    .addComponent(jLabel11))
+							                                    .addComponent(jLabel4))
 							                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 							                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 							                                    .addGroup(layout.createSequentialGroup()
@@ -274,8 +254,7 @@ public class Pacientes extends ColorPanel{
 							                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
 							                                            .addComponent(jTextField1)
 							                                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)))
-							                                    .addComponent(jTextField3)
-							                                    .addComponent(jTextField5)))
+							                                    .addComponent(jTextField3)))
 							                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
 							                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 							                                    .addComponent(jLabel7)
@@ -327,10 +306,6 @@ public class Pacientes extends ColorPanel{
 							                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 							                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 							                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-							                    .addComponent(jLabel11)
-							                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-							                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-							                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 							                    .addComponent(jLabel5)
 							                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 							                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -365,36 +340,21 @@ public class Pacientes extends ColorPanel{
 							       pack();
 		}
 		
-		/**
-		 * Función que se ejecuta al darle a guardar en la ventana de añadir pacientes. Se rellena un objeto pacientey es pasado al controlador.
-		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {   
 			
-			String aficionestodo = jTextArea2.getText();
+			String aficionestodo = jTextArea1.getText();
 			String aficiones[] = aficionestodo.split(",");
 			
-			Fecha nacimiento = new Fecha(Integer.valueOf(String.valueOf(jComboBox1.getSelectedItem())), String.valueOf(jComboBox2.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox3.getSelectedItem())), 0);
-			Fecha fechaLesion = new Fecha(Integer.valueOf(String.valueOf(jComboBox5.getSelectedItem())), String.valueOf(jComboBox6.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox7.getSelectedItem())), 0);
-
-			Paciente info = new Paciente(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField5.getText());
+			PacienteTransfer info = new PacienteTransfer(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(),
+					Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem())), String.valueOf(jComboBox2.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox3.getSelectedItem())),
+					String.valueOf(jComboBox4.getSelectedItem()), jTextField4.getText(),
+					Integer.parseInt(String.valueOf(jComboBox5.getSelectedItem())), String.valueOf(jComboBox6.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox7.getSelectedItem())),
+					aficiones , jTextArea2.getText());
 			
-			info.setEstadoCivil(String.valueOf(jComboBox4.getSelectedItem()));
-			info.setBirthday(nacimiento);
-			info.setPerfil(jTextArea2.getText());
-			info.getDatos().setLesion(jTextField4.getText());
-			info.getDatos().setFechalesion(fechaLesion);
-			
-			for(String str: aficiones)
-				info.getDatos().addAficion(str);
-			
-			try {
-				Controlador.addPaciente(info);
-			} catch (AlreadyBoundException e) {
-				// Mostrar un mensaje de que el paciente ya existe
-			}
+			Controlador.addPaciente(info);
 		} 
 	}
-	/*
+	
 	public class PacienteTransfer{
 		
 		private String nombre;
@@ -458,14 +418,8 @@ public class Pacientes extends ColorPanel{
 		
 
 		
-	}*/
+	}
 
-	/**
-	 * 
-	 * Ventana que sale al pulsar el botón eliminar en la sección Pacientes en el menú principal.
-	 * @author Diedral_Group
-	 *
-	 */
 	private class PantallaEliminar extends JFrame implements confirmListener{
 		/**
 		 * 
@@ -549,19 +503,12 @@ public class Pacientes extends ColorPanel{
 	        pack();
 	    }                      
 
-	    /**
-	     * Se llama a esta función al introducir un nombre de paciente para eliminar en la ventana de eliminación de Pacientes. Pide confirmación.
-	     * @param evt
-	     */
 	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 	    	Confirm c = new Confirm();
 	    	c.setVisible(true);
 	    	c.addListener(this);
 	    }  
 	    
-	    /**
-	     * Se llama a esta función al pulsar el botón -Sí- en confirmar. Le dice al controlador que elimine al paciente.
-	     */
 	    public void delete(){
 	    	Controlador.deletePaciente(jTextField1.getText());
 	    	this.dispose();

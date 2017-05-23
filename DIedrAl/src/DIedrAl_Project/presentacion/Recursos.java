@@ -59,11 +59,8 @@ public class Recursos extends ColorPanel{
 		ImageButton buscar = new ImageButton(" Buscar  ", "images/greenbutton.png", "images/greenbutton2.png", this);
 		componentes.add(buscar);
 		buscar.addActionListener((ae) -> {
-			JFrame panel = new JFrame();
-			
-			panel.setSize(300, 400);
-			panel.setVisible(true);
-			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			JFrame pantalla = new PantallaBuscar();
+			pantalla.setVisible(true);
 		});
 		
 		c.gridx = 1;
@@ -278,6 +275,7 @@ public class Recursos extends ColorPanel{
 	 * @author Diedral_Group
 	 *
 	 */
+	
 	private class PantallaEliminar extends JFrame implements confirmListener{
 		/**
 		 * 
@@ -380,4 +378,144 @@ public class Recursos extends ColorPanel{
 	    }
 	    
 	}
+	
+	private class PantallaBuscar extends JFrame{
+		
+		 /**
+		 * 
+		 */
+		private static final long serialVersionUID = 5440327614929298767L;
+		
+		private javax.swing.JButton jButton1;
+		private javax.swing.JButton jButton2;
+		private javax.swing.JLabel jLabel1;
+		private javax.swing.JLabel jLabel2;
+		private javax.swing.JList<String> jList1;
+		private javax.swing.JScrollPane jScrollPane1;
+		private javax.swing.JScrollPane jScrollPane2;
+		private javax.swing.JSeparator jSeparator1;
+		private javax.swing.JTextArea jTextArea1;
+		private javax.swing.JTextField jTextField1;
+	    
+		public PantallaBuscar(){
+			initComponents();
+		}
+		
+	    private void initComponents() {
+
+	        jLabel1 = new javax.swing.JLabel();
+	        jTextField1 = new javax.swing.JTextField();
+	        jLabel2 = new javax.swing.JLabel();
+	        jScrollPane1 = new javax.swing.JScrollPane();
+	        jTextArea1 = new javax.swing.JTextArea();
+	        jSeparator1 = new javax.swing.JSeparator();
+	        jButton1 = new javax.swing.JButton();
+	        jScrollPane2 = new javax.swing.JScrollPane();
+	        jList1 = new javax.swing.JList<>();
+	        jButton2 = new javax.swing.JButton();
+
+	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+	        setTitle("Filtrar Recursos");
+
+	        jLabel1.setText("Nombre");
+
+	        jLabel2.setText("Etiquetas (separadas por comas)");
+
+	        jTextArea1.setColumns(20);
+	        jTextArea1.setRows(5);
+	        jScrollPane1.setViewportView(jTextArea1);
+
+	        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+	        jButton1.setText("Buscar");
+	        jButton1.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton1ActionPerformed(evt);
+	            }
+	        });
+
+	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+	            /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+				
+				String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+	            public int getSize() { return strings.length; }
+	            public String getElementAt(int i) { return strings[i]; }
+	        });
+	        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+	        jScrollPane2.setViewportView(jList1);
+
+	        jButton2.setText("Confirmar");
+	        jButton2.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton2ActionPerformed(evt);
+	            }
+	        });
+
+	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+	        getContentPane().setLayout(layout);
+	        layout.setHorizontalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(layout.createSequentialGroup()
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addContainerGap()
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                            .addComponent(jLabel2)
+	                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addGroup(layout.createSequentialGroup()
+	                                .addComponent(jLabel1)
+	                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addGap(63, 63, 63)
+	                        .addComponent(jButton1)))
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+	                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addGap(71, 71, 71)
+	                        .addComponent(jButton2)))
+	                .addContainerGap())
+	        );
+	        layout.setVerticalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addComponent(jSeparator1)
+	            .addGroup(layout.createSequentialGroup()
+	                .addContainerGap()
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                            .addComponent(jLabel1)
+	                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+	                        .addGap(18, 18, 18)
+	                        .addComponent(jLabel2)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addGap(18, 18, 18)
+	                        .addComponent(jButton1))
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addGap(18, 18, 18)
+	                        .addComponent(jButton2)))
+	                .addContainerGap(17, Short.MAX_VALUE))
+	        );
+
+	        pack();
+	    }// </editor-fold>                        
+
+	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	        // TODO add your handling code here:
+	    }                                        
+
+	    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	        // TODO add your handling code here:
+	    }  
+	}
+	
 }

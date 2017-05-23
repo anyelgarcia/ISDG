@@ -1,43 +1,20 @@
 package DIedrAl_Project.presentacion;
 
-import java.rmi.AlreadyBoundException;
-import java.util.Set;
-
-import DIedrAl_Project.negocio.administracion.Centro;
-import DIedrAl_Project.negocio.administracion.Hints;
-import DIedrAl_Project.negocio.administracion.Organizacion;
-import DIedrAl_Project.negocio.administracion.Usuario;
-import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.negocio.recursos.Actividad;
 import DIedrAl_Project.negocio.recursos.Banco;
 import DIedrAl_Project.negocio.recursos.Recurso;
-import DIedrAl_Project.negocio.recursos.Sesion;
-import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
-import DIedrAl_Project.negocio.servicioDeAplicaciones.SAPacientes;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SARecursos;
+import DIedrAl_Project.negocio.servicioDeAplicaciones.SARecursosFactory;
+import DIedrAl_Project.presentacion.Actividades.ActividadTransfer;
+import DIedrAl_Project.presentacion.Pacientes.PacienteTransfer;
 import DIedrAl_Project.presentacion.Perfil.PerfilTransfer;
+import DIedrAl_Project.presentacion.Recursos.RecursoTransfer;
+import DIedrAl_Project.presentacion.Sesiones.SesionTransfer;
+import DIedrAl_Project.presentacion.Usuarios.UsuarioTransfer;
 
-/**
- * 
- * @author Diedral_Group
- *
- */
 public class Controlador {
 	
-	private Usuario usuario;
-	
-	protected void setUsuario(Usuario usuario){
-		this.usuario = usuario;
-	}
-	
-	protected Usuario getUsuario(){
-		return usuario;
-	}
-	
-	public static void addPaciente(Paciente p) throws AlreadyBoundException{
-		
-		SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
-		saPacientes.addPaciente(p);
+	public static void addPaciente(PacienteTransfer p){
 		
 		/* Prueba 1: Satisfactoria :D
 		 System.out.println(p.getNombre());
@@ -53,17 +30,12 @@ public class Controlador {
 		 System.out.println(p.getFechalesion().getAño() + " " + p.getFechalesion().getMes() + " " + p.getFechalesion().getDia());*/
 	}
 	
-	public static void addRecurso(Recurso p){
+	public static void addRecurso(RecursoTransfer p){
 		
-		
-		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
-		saRecursos.addRecurso(p);
-		
-		/*Prueba 6 :D
-		for(Recurso rec : Banco.getInstancia().getRecursos().filtrarNombre(p.getNombre())){
-			 System.out.println("itworked!");
-		 }*/
-		
+		Recurso cosa = new Recurso(p.getRuta(), p.getNombre(), p.getEtiquetas());
+		cosa.setDescripcion(p.getDescripcion());
+		SARecursos saRecursos = SARecursosFactory.getInstancia().newSARecursos(Banco.getInstancia());
+		saRecursos.addRecurso(cosa);
 		
 		/*Prueba 2 Satisfactoria :D
 		 * System.out.println(p.getNombre());
@@ -75,20 +47,12 @@ public class Controlador {
 	}
 	
 
-	public static void addActividad(Actividad p){
-		
-		
-		SARecursos saActividades = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
-		saActividades.addActividad(p);
-		
-		/*System.out.println(p.getNombre());
+	public static void addActividad(ActividadTransfer p){
+		/*
+		 * Prueba 4 Satisfactoria :D
+		System.out.println(p.getNombre());
 		System.out.println(p.getDificultad());
-		for(String str : p.getDestinatarios()){
-			 System.out.println(str);
-		 }
-		for(String str : p.getEtiquetas()){
-			 System.out.println(str);
-		 }
+		System.out.println(p.getPacienteTipo());
 		 System.out.println(p.getDuracion());
 		 System.out.println( p.getDescripcion());
 		 System.out.println( p.getVariaciones());
@@ -96,19 +60,18 @@ public class Controlador {
 	}
 	
 	
-	public static void addSesion(Sesion p){
+	public static void addSesion(SesionTransfer p){
 		
-		SARecursos saSesiones = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
-		saSesiones.addSesion(p);
-		
-		/*System.out.println(p.getNombre());
-		for(String str : p.getEtiquetas()){
+		 /* Prueba 3 Satisfactoria :D
+		  * System.out.println(p.getNombre());
+		 System.out.println(p.getMinutos());
+		 for(String str : p.getPosiblesVariaciones()){
 			 System.out.println(str);
 		 }
-		 System.out.println(p.getDuracion());
-		 System.out.println( p.getDescripcion());
-		 System.out.println( p.getVariaciones());
-		 System.out.println( p.getDesarrollo());*/
+		 for(String str : p.getDesarrollo()){
+			 System.out.println(str);
+		 }
+		 System.out.println( p.getDescripcion());*/
 		
 	}
 	
@@ -121,49 +84,29 @@ public class Controlador {
 		System.out.println(p.getInfo());
 	}
 	
-	public static void addUsuario(Usuario p) throws AlreadyBoundException{
-		
-		SAPacientes saUsuarios = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
-		saUsuarios.addUsuario(p);
-		
-		/*System.out.println(p.getNombre());
+	public static void addUsuario(UsuarioTransfer p){
+		System.out.println(p.getNombre());
 		System.out.println(p.getRol());
 		System.out.println(p.getEmail());
 		System.out.println(p.getTelefono());
 		System.out.println(p.getDescripcion());
 		for(String s : p.getPacientes()) System.out.println(s);
-		System.out.println(p.getInfo());*/
+		System.out.println(p.getInfo());
 	}
 	
 	public static void deleteActividad(String s){
-		
-		SARecursos saActividades = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
-		Set<Actividad> actividades = saActividades.filtrarActividadPorNombre(s);
-				
-		//System.out.println(s);
+		System.out.println(s);
 	}
 	
 	public static void deletePaciente(String s){
-		
-		SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
-		//Set<Paciente> pacientes = saPacientes.filtrarPersonas(Hints.NOMBRE, s);
-		
-		//System.out.println(s);
+		System.out.println(s);
 	}
 	
 	public static void deleteRecurso(String s){
-		
-		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
-		Set<Recurso> recursos = saRecursos.filtrarRecursosPorNombre(s);
-		
-		//System.out.println(s);
+		System.out.println(s);
 	}
 	
 	public static void deleteSesion(String s){
-		
-		SARecursos saSesiones = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
-		Set<Sesion> sesiones = saSesiones.filtrarSesionPorNombre(s);
-		
-		//System.out.println(s);
+		System.out.println(s);
 	}
 }
