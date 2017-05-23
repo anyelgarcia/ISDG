@@ -320,12 +320,18 @@ public class Sesiones extends ColorPanel{
 				
 				String etiquetasSinFormato = jTextArea5.getText();
 				String etiquetas[] = etiquetasSinFormato.split(",");
-				Sesion info = new Sesion(String.valueOf(jTextField1.getText()), 
-						Integer.parseInt(String.valueOf(jTextField2.getText())),
-						String.valueOf(jTextArea1.getText()),
-						String.valueOf(jTextArea4.getText()),
-						String.valueOf(jTextArea3.getText()),
-						etiquetas);
+				Sesion info = new Sesion(String.valueOf(jTextField1.getText()), etiquetas);
+				
+				String duracion = String.valueOf(jTextField2.getText());
+
+				//Esta excepción hay que capturarla
+				if(duracion.length()>0 ){
+					info.setDuracion(Integer.valueOf(duracion));
+				}
+				
+				info.setDescripcion(String.valueOf(jTextArea1.getText()));
+				info.setDesarrollo(String.valueOf(jTextArea4.getText()));
+				info.setVariaciones(String.valueOf(jTextArea3.getText()));
 				Controlador.addSesion(info);
 			} 
 		}

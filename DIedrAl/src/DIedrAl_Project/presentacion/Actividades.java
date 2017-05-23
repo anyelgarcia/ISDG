@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import DIedrAl_Project.negocio.recursos.Actividad;
+import DIedrAl_Project.negocio.recursos.Dificultad;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 /**
@@ -173,7 +174,7 @@ public class Actividades extends ColorPanel{
 	            }
 	        });
 
-	        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baja", "Media", "Alta" }));
+	        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MUY_FACIL", "FACIL",  "MEDIO", "DIFICIL", "MUY_DIFICIL" }));
 
 	        jLabel4.setText("minutos");
 
@@ -348,14 +349,20 @@ public class Actividades extends ColorPanel{
 			
 			String etiquetasSinFormato = jTextArea5.getText();
 			String etiquetas[] = etiquetasSinFormato.split(",");
-			Actividad info = new Actividad(String.valueOf(jTextField1.getText()), 
-					(String.valueOf(jComboBox1.getSelectedItem())).toUpperCase(),
-					Integer.parseInt(String.valueOf(jTextField2.getText())),
-					String.valueOf(jTextField3.getText()),
-					String.valueOf(jTextArea1.getText()),
-					String.valueOf(jTextArea4.getText()),
-					String.valueOf(jTextArea3.getText()),
-					etiquetas);
+			Actividad info = new Actividad(String.valueOf(jTextField1.getText()), etiquetas);
+			
+			String duracion = String.valueOf(jTextField2.getText());
+
+			//Esta excepción hay que capturarla
+			if(duracion.length()>0 ){
+				info.setDuracion(Integer.valueOf(duracion));
+			}
+			
+			info.setDificultad(Dificultad.valueOf(String.valueOf(jComboBox1.getSelectedItem())));
+			info.setDescripcion(String.valueOf(jTextArea1.getText()));
+			info.addDestinatario(String.valueOf(jTextField3.getText()));
+			info.setVariaciones(String.valueOf(jTextArea3.getText()));
+			info.setDesarrollo(String.valueOf(jTextArea4.getText()));
 			
 			Controlador.addActividad(info);
 		} 

@@ -235,7 +235,9 @@ public class Recursos extends ColorPanel{
 			
 			String etiquetas = jTextArea2.getText();
 			String etiqs[] = etiquetas.split(",");
-			Controlador.addRecurso(new Recurso(String.valueOf(jTextField2.getText()), String.valueOf(jTextField1.getText()), String.valueOf(jTextArea3.getText()), etiqs));
+			
+			Recurso info = new Recurso(String.valueOf(jTextField2.getText()), String.valueOf(jTextField1.getText()), etiqs);
+			info.setDescripcion(String.valueOf(jTextArea3.getText()));
 		}                                        
 
 	}
