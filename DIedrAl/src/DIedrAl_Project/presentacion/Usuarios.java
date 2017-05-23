@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.negocio.calendario.Fecha;
 import DIedrAl_Project.presentacion.Perfil.PerfilTransfer;
 
@@ -79,6 +80,9 @@ public class Usuarios extends ColorPanel{
 	    private javax.swing.JLabel jLabel4;
 	    private javax.swing.JLabel jLabel5;
 	    private javax.swing.JLabel jLabel6;
+	    private javax.swing.JLabel jLabel7;
+	    private javax.swing.JLabel jLabel8;
+	    private javax.swing.JLabel jLabel9;
 	    private javax.swing.JList<String> jList1;
 	    private javax.swing.JScrollPane jScrollPane1;
 	    private javax.swing.JScrollPane jScrollPane2;
@@ -89,6 +93,9 @@ public class Usuarios extends ColorPanel{
 	    private javax.swing.JTextField jTextField2;
 	    private javax.swing.JTextField jTextField3;
 	    private javax.swing.JTextField jTextField4;
+	    private javax.swing.JTextField jTextField7;
+	    private javax.swing.JTextField jTextField8;
+	    private javax.swing.JTextField jTextField9;
 	    // End of variables declaration     
 		public PantallaAdd(){
 			initGUI();
@@ -111,6 +118,12 @@ public class Usuarios extends ColorPanel{
 		        jTextField3 = new javax.swing.JTextField();
 		        jTextField4 = new javax.swing.JTextField();
 		        jButton1 = new javax.swing.JButton();
+		        jLabel7 = new javax.swing.JLabel();
+		        jLabel8 = new javax.swing.JLabel();
+		        jLabel9 = new javax.swing.JLabel();
+		        jTextField7 = new javax.swing.JTextField();
+		        jTextField8 = new javax.swing.JTextField();
+		        jTextField9 = new javax.swing.JTextField();
 
 		        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		        setTitle("Añadir Usuario");
@@ -143,7 +156,13 @@ public class Usuarios extends ColorPanel{
 
 		        jLabel2.setText("Pacientes Asociados: ");
 
-		        jLabel3.setText("Nombre y Apellidos: ");
+		        jLabel3.setText("Nombre: ");
+		        
+		        jLabel7.setText("Primer Apellido: ");
+		        
+		        jLabel8.setText("Segundo Apellido: ");
+		        
+		        jLabel9.setText("DNI: ");
 
 		        jLabel4.setText("Rol: ");
 
@@ -185,6 +204,9 @@ public class Usuarios extends ColorPanel{
 		                            .addGroup(layout.createSequentialGroup()
 		                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 		                                    .addComponent(jLabel3)
+		                                    .addComponent(jLabel7)
+		                                    .addComponent(jLabel8)
+		                                    .addComponent(jLabel9)
 		                                    .addComponent(jLabel4)
 		                                    .addComponent(jLabel5)
 		                                    .addComponent(jLabel6))
@@ -192,6 +214,9 @@ public class Usuarios extends ColorPanel{
 		                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
 		                                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
 		                                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+		                                    .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+		                                    .addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+		                                    .addComponent(jTextField9, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
 		                                    .addComponent(jTextField2)
 		                                    .addComponent(jTextField1))))))
 		                .addContainerGap())
@@ -207,6 +232,18 @@ public class Usuarios extends ColorPanel{
 		                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 		                    .addComponent(jLabel3)
 		                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+		                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+		                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+		                    .addComponent(jLabel7)
+		                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+		                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+		                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+		                    .addComponent(jLabel8)
+		                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+		                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+		                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+		                    .addComponent(jLabel9)
+		                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 		                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 		                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 		                    .addComponent(jLabel4)
@@ -236,13 +273,26 @@ public class Usuarios extends ColorPanel{
 
 		        pack();
 		}
-		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-			UsuarioTransfer transfer = new UsuarioTransfer(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), 
-					jTextField4.getText(), jTextArea2.getText(), jList1.getSelectedValuesList(), jTextArea1.getText());
-			Controlador.addUsuario(transfer);
-	    }     
+		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {   
+			
+			//qué hacemos con esto jList1.getSelectedValuesList()
+			Usuario usuario = new Usuario(jTextField1.getText(), jTextField7.getText(), jTextField8.getText(), jTextField9.getText());
+			
+			usuario.setEmail(jTextField3.getText());
+			usuario.setPerfil(jTextArea2.getText());
+			usuario.setInfor(jTextArea1.getText());
+			
+			String tfo = jTextField4.getText();
+			if(tfo.length()>0){
+				usuario.setTfo(Integer.parseInt(tfo));
+			}
+			
+			String rol = jTextField2.getText();
+			if(rol.equals("admin") || rol.equals("Admin") || rol.equals("administrador") || rol.equals("Administrador") || rol.equals("ADMIN") || rol.equals("ADMINISTRADOR"))
+				usuario.setAdmin();
+		}     
 	}
-	
+/*
 	public class UsuarioTransfer{
 		
 		public UsuarioTransfer(String nombre, String rol, String email, String telefono,
@@ -309,5 +359,5 @@ public class Usuarios extends ColorPanel{
 		String info;
 		
 		
-	}
+	}*/
 }

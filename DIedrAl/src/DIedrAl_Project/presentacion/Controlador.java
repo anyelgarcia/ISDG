@@ -1,8 +1,11 @@
 package DIedrAl_Project.presentacion;
 
+import java.rmi.AlreadyBoundException;
 import java.util.Set;
 
 import DIedrAl_Project.negocio.administracion.Centro;
+import DIedrAl_Project.negocio.administracion.Hints;
+import DIedrAl_Project.negocio.administracion.Organizacion;
 import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.negocio.recursos.Actividad;
@@ -13,7 +16,6 @@ import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAPacientes;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SARecursos;
 import DIedrAl_Project.presentacion.Perfil.PerfilTransfer;
-import DIedrAl_Project.presentacion.Usuarios.UsuarioTransfer;
 
 /**
  * 
@@ -24,7 +26,6 @@ public class Controlador {
 	
 	private Usuario usuario;
 	
-	
 	protected void setUsuario(Usuario usuario){
 		this.usuario = usuario;
 	}
@@ -33,9 +34,9 @@ public class Controlador {
 		return usuario;
 	}
 	
-	public static void addPaciente(Paciente p){
+	public static void addPaciente(Paciente p) throws AlreadyBoundException{
 		
-		SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(Centro.getInstancia());
+		SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
 		saPacientes.addPaciente(p);
 		
 		/* Prueba 1: Satisfactoria :D
@@ -120,9 +121,9 @@ public class Controlador {
 		System.out.println(p.getInfo());
 	}
 	
-	public static void addUsuario(Usuario p){
+	public static void addUsuario(Usuario p) throws AlreadyBoundException{
 		
-		SAPacientes saUsuarios = SAFactory.getInstancia().newSAPacientes(Centro.getInstancia());
+		SAPacientes saUsuarios = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
 		saUsuarios.addUsuario(p);
 		
 		/*System.out.println(p.getNombre());
@@ -144,8 +145,8 @@ public class Controlador {
 	
 	public static void deletePaciente(String s){
 		
-		SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(Centro.getInstancia());
-		Set<Paciente> pacientes = saPacientes.filtrarPacientesPorNombre(s);
+		SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
+		//Set<Paciente> pacientes = saPacientes.filtrarPersonas(Hints.NOMBRE, s);
 		
 		//System.out.println(s);
 	}

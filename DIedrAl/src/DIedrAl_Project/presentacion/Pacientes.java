@@ -3,6 +3,7 @@ package DIedrAl_Project.presentacion;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.rmi.AlreadyBoundException;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -127,6 +128,7 @@ public class Pacientes extends ColorPanel{
 	    private javax.swing.JLabel jLabel3;
 	    private javax.swing.JLabel jLabel4;
 	    private javax.swing.JLabel jLabel5;
+	    private javax.swing.JLabel jLabel11;
 	    private javax.swing.JLabel jLabel6;
 	    private javax.swing.JLabel jLabel7;
 	    private javax.swing.JLabel jLabel8;
@@ -139,6 +141,7 @@ public class Pacientes extends ColorPanel{
 	    private javax.swing.JTextField jTextField2;
 	    private javax.swing.JTextField jTextField3;
 	    private javax.swing.JTextField jTextField4;
+	    private javax.swing.JTextField jTextField5;
 	    // End of variables declaration     
 	    
 		public PantallaAdd(){
@@ -171,6 +174,8 @@ public class Pacientes extends ColorPanel{
 			jScrollPane2 = new javax.swing.JScrollPane();
 			jTextArea2 = new javax.swing.JTextArea();
 			jButton1 = new javax.swing.JButton();
+			jLabel11 = new javax.swing.JLabel();
+			jTextField5 = new javax.swing.JTextField();
 			
 			setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 			setTitle("Crear Paciente");
@@ -184,6 +189,7 @@ public class Pacientes extends ColorPanel{
 			
 			jLabel4.setText("Segundo Apellido:");
 			
+			jLabel11.setText("DNI:");
 			
 			jLabel5.setText("Fecha de Nacimiento: ");
 			
@@ -259,7 +265,8 @@ public class Pacientes extends ColorPanel{
 							                                    .addComponent(jLabel2)
 							                                    .addComponent(jLabel1)
 							                                    .addComponent(jLabel3)
-							                                    .addComponent(jLabel4))
+							                                    .addComponent(jLabel4)
+							                                    .addComponent(jLabel11))
 							                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 							                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 							                                    .addGroup(layout.createSequentialGroup()
@@ -267,7 +274,8 @@ public class Pacientes extends ColorPanel{
 							                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
 							                                            .addComponent(jTextField1)
 							                                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)))
-							                                    .addComponent(jTextField3)))
+							                                    .addComponent(jTextField3)
+							                                    .addComponent(jTextField5)))
 							                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
 							                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 							                                    .addComponent(jLabel7)
@@ -319,6 +327,10 @@ public class Pacientes extends ColorPanel{
 							                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 							                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 							                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+							                    .addComponent(jLabel11)
+							                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+							                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+							                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 							                    .addComponent(jLabel5)
 							                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 							                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -358,18 +370,28 @@ public class Pacientes extends ColorPanel{
 		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {   
 			
-			String aficionestodo = jTextArea1.getText();
+			String aficionestodo = jTextArea2.getText();
 			String aficiones[] = aficionestodo.split(",");
 			
-			Fecha nacimiento = new Fecha(Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem())), String.valueOf(jComboBox2.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox3.getSelectedItem())), 0);
-			Fecha fechaLesion = new Fecha(Integer.parseInt(String.valueOf(jComboBox5.getSelectedItem())), String.valueOf(jComboBox6.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox7.getSelectedItem())), 0);
+			Fecha nacimiento = new Fecha(Integer.valueOf(String.valueOf(jComboBox1.getSelectedItem())), String.valueOf(jComboBox2.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox3.getSelectedItem())), 0);
+			Fecha fechaLesion = new Fecha(Integer.valueOf(String.valueOf(jComboBox5.getSelectedItem())), String.valueOf(jComboBox6.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox7.getSelectedItem())), 0);
 
-			Paciente info = new Paciente(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), fechaLesion, aficiones);
+			Paciente info = new Paciente(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField5.getText());
+			
 			info.setEstadoCivil(String.valueOf(jComboBox4.getSelectedItem()));
 			info.setBirthday(nacimiento);
-			info.setDescripcion(jTextArea2.getText());
+			info.setPerfil(jTextArea2.getText());
+			info.getDatos().setLesion(jTextField4.getText());
+			info.getDatos().setFechalesion(fechaLesion);
 			
-			Controlador.addPaciente(info);
+			for(String str: aficiones)
+				info.getDatos().addAficion(str);
+			
+			try {
+				Controlador.addPaciente(info);
+			} catch (AlreadyBoundException e) {
+				// Mostrar un mensaje de que el paciente ya existe
+			}
 		} 
 	}
 	/*
