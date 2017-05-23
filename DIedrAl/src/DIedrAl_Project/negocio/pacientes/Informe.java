@@ -1,10 +1,15 @@
 package DIedrAl_Project.negocio.pacientes;
 
+import java.util.UUID;
+
+import DIedrAl_Project.negocio.ObjetoAlmacenable;
 import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.negocio.calendario.SesionProgramada;
 
-public class Informe {
+public class Informe implements ObjetoAlmacenable {
 	private String texto;
+
+	private String id;
 	/*
 	 * TODO No tiene sentido cambiar la sesion de la que está hablando el
 	 * informe.
@@ -17,6 +22,7 @@ public class Informe {
 		sesion = ses;
 		this.autor = autor;
 		texto = "";
+		id = UUID.randomUUID().toString();
 	}
 
 	public String getTexto() {
@@ -26,7 +32,7 @@ public class Informe {
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
-	
+
 	public Usuario getAutor() {
 		return this.autor;
 	}
@@ -37,6 +43,12 @@ public class Informe {
 
 	public SesionProgramada getSesion() {
 		return sesion;
+	}
+
+	@Override
+	public String getId() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
