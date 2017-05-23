@@ -5,6 +5,15 @@ import java.util.Set;
 
 
 public class ArrayRecursos extends ArrayEtiquetables<Recurso> {
+	
+	public ArrayRecursos(){
+		super();
+	}
+	
+	public ArrayRecursos(Set<Recurso> rec) {
+		super(rec);
+	}
+	
     public Set<Recurso> filtrarExtension(String ext) {
     	Set<Recurso> aux = new HashSet<Recurso>();
     	for(Recurso rec : this.etiquetables){
