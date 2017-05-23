@@ -8,6 +8,10 @@ public abstract class ArrayProgramables<T extends Programable> extends
 	public ArrayProgramables(){
 		super();
 	}
+	
+	public ArrayProgramables(Set<T> progra) {
+		super(progra);
+	}
 	public ArrayProgramables<T> filtrarRango(Integer min, Integer max) {
 		return filtrarDur(min, max);
 	}

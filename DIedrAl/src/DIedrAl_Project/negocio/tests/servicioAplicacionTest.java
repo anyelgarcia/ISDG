@@ -54,7 +54,7 @@ public class servicioAplicacionTest {
 
 		Usuario t=null;
 		try {
-			t = servicioApPac.usuarioConNIF("00000001A");
+			t = servicioApPac.getUsuarioConNIF("00000001A");
 			assertTrue("El terapeuta ha sido añadido al centro", t != null
 					&& t.getId().equals("00000001A"));
 		} catch (NotBoundException e1) {
