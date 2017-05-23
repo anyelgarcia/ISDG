@@ -12,8 +12,8 @@ import org.junit.Test;
 
 import DIedrAl_Project.negocio.administracion.*;
 import DIedrAl_Project.negocio.pacientes.Paciente;
-import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
-import DIedrAl_Project.negocio.servicioDeAplicaciones.SAPacientes;
+import DIedrAl_Project.negocio.recursos.*;
+import DIedrAl_Project.negocio.servicioDeAplicaciones.*;
 
 
 public class servicioAplicacionTest {
@@ -27,7 +27,17 @@ public class servicioAplicacionTest {
 		SAFactory factoriaSA = SAFactory.getInstancia();
 
 		SAPacientes servicioApPac = factoriaSA.newSAPacientes(centro);
-
+		SARecursos aux = factoriaSA.newSARecursos(Banco.getInstancia());
+		Sesion ses= new Sesion("");
+		ses.setDuracion(2);
+		aux.addSesion(ses);
+		ArraySesiones a=aux.filtrarSesionesPorRango(-1000,10000);
+		for(Sesion s: a){
+			System.out.println(s.getId());
+		}
+		if(true){
+			return;
+		}
 		String[] nombres = { "Angel", "Pablo", "Enrique", "Guillermo",
 				"Alejandro", "Pablo" };
 		String[] apellidos = { "Manzana", "Apio", "Naranja", "Limon",

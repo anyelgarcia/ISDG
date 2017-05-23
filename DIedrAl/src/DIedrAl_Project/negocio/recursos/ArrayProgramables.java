@@ -42,7 +42,7 @@ public abstract class ArrayProgramables<T extends Programable> extends
 		ArrayProgramables<T> aux = createNew();
 
 		for (T x : this.etiquetables) {
-			if (x.getDuracion() >= min && x.getDuracion() <= max) {
+			if (min <= x.getDuracion() && x.getDuracion() <= max) {
 				aux.etiquetables.add(x);
 			}
 		}

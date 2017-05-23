@@ -2,7 +2,7 @@ package DIedrAl_Project.negocio.recursos;
 
 import java.util.*;
 
-public abstract class ArrayEtiquetables<T extends Etiquetable> {
+public abstract class ArrayEtiquetables<T extends Etiquetable> implements Iterable<T> {
 
 	protected Set<T> etiquetables;
 
@@ -47,6 +47,32 @@ public abstract class ArrayEtiquetables<T extends Etiquetable> {
 
 	public void erase(T elem) {
 		etiquetables.remove(elem);
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		return new IteratorEtiquetable<T>();
+	}
+
+	protected class IteratorEtiquetable<S extends Etiquetable> 
+	extends ArrayEtiquetables<S> implements Iterator<S> {
+
+		protected Iterator<S> it;
+
+		public IteratorEtiquetable() {
+			it = etiquetables.iterator();
+		}
+
+		@Override
+		public boolean hasNext() {
+			return it.hasNext();
+		}
+
+		@Override
+		public S next() {
+			return it.next();
+		}
+
 	}
 
 }
