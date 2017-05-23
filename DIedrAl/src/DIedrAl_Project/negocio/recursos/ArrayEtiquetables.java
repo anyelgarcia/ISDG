@@ -1,6 +1,10 @@
 package DIedrAl_Project.negocio.recursos;
 
+import static org.junit.Assert.*;
+
 import java.util.*;
+
+import org.junit.Test;
 
 public abstract class ArrayEtiquetables<T extends Etiquetable> implements Iterable<T> {
 
@@ -12,6 +16,10 @@ public abstract class ArrayEtiquetables<T extends Etiquetable> implements Iterab
 
 	public ArrayEtiquetables(Set<T> etique) {
 		etiquetables = etique;
+	}
+	
+	public int size(){
+		return etiquetables.size();
 	}
 
 	public Set<T> filtrarEtiqueta(Set<String> filtros) {
@@ -55,12 +63,13 @@ public abstract class ArrayEtiquetables<T extends Etiquetable> implements Iterab
 	}
 
 	protected class IteratorEtiquetable<S extends Etiquetable> 
-	extends ArrayEtiquetables<S> implements Iterator<S> {
+	implements Iterator<S> {
 
 		protected Iterator<S> it;
 
 		public IteratorEtiquetable() {
-			it = etiquetables.iterator();
+			//TODO xq el cast? NPI
+			it = (Iterator<S>) etiquetables.iterator();
 		}
 
 		@Override

@@ -1,13 +1,18 @@
 package DIedrAl_Project.negocio.administracion;
 
+import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
-public class Organizacion {
+public final class Organizacion {
 	
 	private static Organizacion instancia = null;
 	
-	private Set<String> centros;
+	private final Map<String, Centro> centros;
+	
 
 	public static Organizacion getInstancia() {
 
@@ -18,20 +23,33 @@ public class Organizacion {
 	}
 	
 	protected Organizacion(){
-		centros = new HashSet<String>();
+		centros = new HashMap<String, Centro>();
+		
 	}
 
-	public Set<String> getCentros() {
-		return centros;
-	}
-	
 	//APAÑO PARA PODER TRABAJAR
-	public Centro getCentro(String nombreCentro) {
-		return new Centro(nombreCentro);
+	public Centro getCentro(String name) throws NotBoundException {
+		if(!centros.containsKey(name)){
+			throw new NotBoundException("Centro ya introducido");
+		}
+		else return centros.get(name);
+		
 	}
-	
-	public void setCentros(Set<String> centros) {
-		this.centros = centros;
+	public void addCentro(String name) throws AlreadyBoundException{
+		if(centros.containsKey(name)){
+			throw new AlreadyBoundException("Centro ya introducido");
+		}
+		else{
+			centros.put(name, new Centro(name));
+		}
+	}
+	public void removeCentro(String name) throws NotBoundException{
+		if(!centros.containsKey(name)){
+			throw new NotBoundException("Centro ya introducido");
+		}
+		else{
+			centros.remove(name);
+		}
 	}
 
     
