@@ -49,7 +49,7 @@ public class Pacientes extends ColorPanel{
 		ImageButton buscar = new ImageButton("Buscar", "images/bluebutton.png", "images/bluebutton2.png", this);
 		componentes.add(buscar);
 		buscar.addActionListener((ae) -> {
-			JFrame pantalla = new PantallaBuscar();
+			JFrame pantalla = new PantallaPolifacetica(Modo.BUSCAR);
 			pantalla.setVisible(true);
 		});
 		c.gridx = 0;
@@ -63,7 +63,7 @@ public class Pacientes extends ColorPanel{
 		ImageButton eliminar = new ImageButton("Eliminar", "images/greenbutton.png", "images/greenbutton2.png", this);
 		componentes.add(eliminar);
 		eliminar.addActionListener((ae) -> {
-			JFrame panel = new PantallaEliminar();
+			JFrame panel = new PantallaEliminar(Modo.ELIMINAR);
 			panel.setVisible(true);
 			
 		});
@@ -87,12 +87,8 @@ public class Pacientes extends ColorPanel{
 		ImageButton editar = new ImageButton("  Editar  ", "images/orangebutton.png", "images/orangebutton2.png", this);
 		componentes.add(editar);
 		editar.addActionListener((ae) -> {
-			JFrame panel = new JFrame();
-			
-			panel.setSize(300, 400);
-			panel.setVisible(true);
-			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			
+			JFrame pantalla = new PantallaPolifacetica(Modo.EDITAR);
+			pantalla.setVisible(true);
 		});
 		c.gridx = 1;
 		c.gridy = 2;
@@ -474,10 +470,12 @@ public class Pacientes extends ColorPanel{
 	    private javax.swing.JLabel jLabel1;
 	    private javax.swing.JLabel jLabel2;
 	    private javax.swing.JTextField jTextField1;
+	    private Modo modo;
 	    // End of variables declaration     
 	    
-	    public PantallaEliminar() {
+	    public PantallaEliminar(Modo modo) {
 	        initGUI();
+	        this.modo = modo;
 	    }
 	    /**
 	     * This method is called from within the constructor to initialize the form.
@@ -567,7 +565,7 @@ public class Pacientes extends ColorPanel{
 	    
 	}
 	
-	private class PantallaBuscar extends JFrame{
+	private class PantallaPolifacetica extends JFrame{
 		
 		/**
 		 * 
@@ -587,10 +585,12 @@ public class Pacientes extends ColorPanel{
 	    private javax.swing.JTextField jTextField3;
 	    private javax.swing.JTextField jTextField4;
 	    private javax.swing.JSeparator jSeparator2;
-	    // End of variables declaration   
+	    private Modo modo;
+	    // End of variables declaration     
 	    
-	    public PantallaBuscar(){
-	    	initGUI();
+	    public PantallaPolifacetica(Modo modo) {
+	        initGUI();
+	        this.modo = modo;
 	    }
 		
 		
@@ -760,11 +760,32 @@ public class Pacientes extends ColorPanel{
 	            public int getSize() { return strings.length; }
 	            public String getElementAt(int i) { return strings[i]; }
 			});
-		}                                        
+		}
+	    
+	    
 
 		private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-			// TODO add your handling code here:
+			switch(modo){
+				case ELIMINAR:
+					Confirm c = new Confirm();
+			    	c.setVisible(true);
+			    	c.addListener(this);
+			    	break;
+				case EDITAR:
+					break;
+				case BUSCAR:
+					break;
+				}
+			
 		}  
+		
+		/**
+	     * Se llama a esta función al pulsar el botón -Sí- en confirmar. Le dice al controlador que elimine al paciente.
+	     */
+	    public void delete(){
+	    	Controlador.deletePaciente(jTextField1.getText());
+	    	this.dispose();
+	    }
 	}
 }
 	
