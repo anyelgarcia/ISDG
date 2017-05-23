@@ -310,7 +310,7 @@ public class Perfil extends ColorPanel{
 
 		        jLabel5.setText("Email: ");
 
-		        jLabel6.setText("TelÃ©fono: ");
+		        jLabel6.setText("Teléfono: ");
 
 		        jButton1.setText("Guardar");
 		        jButton1.addActionListener(new java.awt.event.ActionListener() {

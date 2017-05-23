@@ -1,8 +1,13 @@
 package DIedrAl_Project.presentacion;
 
+import java.rmi.AlreadyBoundException;
+import java.util.ArrayList;
 import java.util.Set;
 
 import DIedrAl_Project.negocio.administracion.Centro;
+import DIedrAl_Project.negocio.administracion.Hints;
+import DIedrAl_Project.negocio.administracion.Organizacion;
+import DIedrAl_Project.negocio.administracion.Persona;
 import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.negocio.recursos.Actividad;
@@ -13,7 +18,6 @@ import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAPacientes;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SARecursos;
 import DIedrAl_Project.presentacion.Perfil.PerfilTransfer;
-import DIedrAl_Project.presentacion.Usuarios.UsuarioTransfer;
 
 /**
  * 
@@ -22,20 +26,19 @@ import DIedrAl_Project.presentacion.Usuarios.UsuarioTransfer;
  */
 public class Controlador {
 	
-	private Usuario usuario;
+	private static Usuario usuario;
 	
-	
-	protected void setUsuario(Usuario usuario){
-		this.usuario = usuario;
+	protected static void setUsuario(Usuario user){
+		usuario = user;
 	}
 	
-	protected Usuario getUsuario(){
+	protected static Usuario getUsuario(){
 		return usuario;
 	}
 	
-	public static void addPaciente(Paciente p){
+	public static void addPaciente(Paciente p) throws AlreadyBoundException{
 		
-		SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(Centro.getInstancia());
+		SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
 		saPacientes.addPaciente(p);
 		
 		/* Prueba 1: Satisfactoria :D
@@ -120,9 +123,9 @@ public class Controlador {
 		System.out.println(p.getInfo());
 	}
 	
-	public static void addUsuario(Usuario p){
+	public static void addUsuario(Usuario p) throws AlreadyBoundException{
 		
-		SAPacientes saUsuarios = SAFactory.getInstancia().newSAPacientes(Centro.getInstancia());
+		SAPacientes saUsuarios = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
 		saUsuarios.addUsuario(p);
 		
 		/*System.out.println(p.getNombre());
@@ -144,8 +147,8 @@ public class Controlador {
 	
 	public static void deletePaciente(String s){
 		
-		SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(Centro.getInstancia());
-		Set<Paciente> pacientes = saPacientes.filtrarPacientesPorNombre(s);
+		SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
+		//Set<Paciente> pacientes = saPacientes.filtrarPersonas(Hints.NOMBRE, s);
 		
 		//System.out.println(s);
 	}
@@ -164,5 +167,67 @@ public class Controlador {
 		Set<Sesion> sesiones = saSesiones.filtrarSesionPorNombre(s);
 		
 		//System.out.println(s);
+	}
+	
+	public static String[] buscarPaciente(ArrayList<Hints> hints, ArrayList<String> values){
+		
+		SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
+		
+		int i = 0;
+		
+		Hints [] claves = new Hints[hints.size()];
+		for(Hints hint: hints){
+			claves[i] = hint;
+			i++;
+		}
+		
+		i=0;
+		String [] valores = new String[hints.size()];
+		for(String str: values){
+			valores[i] = str;
+			i++;
+		}
+		Set<Persona> pacientes = saPacientes.filtrarPersonas(claves, valores);
+		
+		int length = pacientes.size();
+		i=0;
+		String resultados[] = new String[length];
+		for(Persona persona: pacientes){
+			resultados[i] = persona.toString();
+			i++;
+		}
+		
+		return resultados;
+	}
+	
+	public static String [] buscarUsuarios(ArrayList<Hints> hints, ArrayList<String> values){
+		
+		SAPacientes saUsuarios = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
+		
+		int i=0;
+		Hints [] claves = new Hints[hints.size()];
+		for(Hints hint: hints){
+			claves[i] = hint;
+			i++;
+		}
+		
+		i=0;
+		String [] valores = new String[hints.size()];
+		for(String str: values){
+			valores[i] = str;
+			i++;
+		}
+		
+		Set<Persona> usuarios = saUsuarios.filtrarPersonas(claves, valores);
+		
+		int length = usuarios.size();
+		i=0;
+		String resultados[] = new String[length];
+		for(Persona persona: usuarios){
+			resultados[i] = persona.toString();
+			i++;
+		}
+		
+		return resultados;
 	}
 }

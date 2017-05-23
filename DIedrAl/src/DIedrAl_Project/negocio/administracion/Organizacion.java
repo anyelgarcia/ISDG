@@ -1,13 +1,9 @@
 package DIedrAl_Project.negocio.administracion;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import DIedrAl_Project.negocio.recursos.Banco;
-
 public class Organizacion {
-    //private final Banco banco;
 	
 	private static Organizacion instancia = null;
 	
@@ -20,6 +16,7 @@ public class Organizacion {
 
 		return instancia;
 	}
+	
 	protected Organizacion(){
 		centros = new HashSet<String>();
 	}
@@ -27,6 +24,12 @@ public class Organizacion {
 	public Set<String> getCentros() {
 		return centros;
 	}
+	
+	//APAÑO PARA PODER TRABAJAR
+	public Centro getCentro(String nombreCentro) {
+		return new Centro(nombreCentro);
+	}
+	
 	public void setCentros(Set<String> centros) {
 		this.centros = centros;
 	}
