@@ -1,5 +1,7 @@
 package DIedrAl_Project.negocio.recursos;
 
+import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
 import java.util.*;
 
 public abstract class Programable extends Etiquetable {
@@ -8,13 +10,21 @@ public abstract class Programable extends Etiquetable {
 	protected Set<String> destinatarios;
 
 	protected Set<Etiquetable> asociados;
-	
+
 	protected String desarrollo;
-	
+
 	protected String variaciones;
 
 	public Programable(String name) {
 		super(name);
+		destinatarios = new HashSet<String>();
+		asociados = new HashSet<Etiquetable>();
+	}
+
+	public Programable(String name, String... etiquetas) {
+		super(name, etiquetas);
+		destinatarios = new HashSet<String>();
+		asociados = new HashSet<Etiquetable>();
 	}
 
 	public Set<String> getEtiquetas() {
@@ -26,20 +36,40 @@ public abstract class Programable extends Etiquetable {
 		return aux;
 	}
 
-	public void addRecurso(Recurso rec) {
-		asociados.add(rec);
+	public void addRecurso(Recurso rec) throws AlreadyBoundException {
+		if (asociados.contains(rec)) {
+			throw new AlreadyBoundException("Recurso " + rec + " ya existente");
+		} else {
+			asociados.add(rec);
+		}
+
 	}
 
-	public void removeRecurso(Recurso rec) {
-		asociados.remove(rec);
+	public void removeRecurso(Recurso rec) throws NotBoundException {
+		if (!asociados.contains(rec)) {
+			throw new NotBoundException("Recurso " + rec + " no existente");
+		} else {
+			asociados.remove(rec);
+		}
 	}
-	public void removeActividad(Actividad act) {
-    	asociados.remove(act);
-    }
 
-    public void addActividad(Actividad act) {
-    	asociados.add(act);
-    }
+	public void removeActividad(Actividad act) throws NotBoundException {
+		if (!asociados.contains(act)) {
+			throw new NotBoundException("Actividad " + act + " no existente");
+		} else {
+			asociados.remove(act);
+		}
+
+	}
+
+	public void addActividad(Actividad act) throws AlreadyBoundException {
+		if(asociados.contains(act)){
+			throw new AlreadyBoundException("Actividad "+ act+" ya existente");
+		}
+		else{
+			asociados.add(act);
+		}
+	}
 
 	public Set<String> getDestinatarios() {
 		return this.destinatarios;
@@ -52,10 +82,12 @@ public abstract class Programable extends Etiquetable {
 	public void setDuracion(int duracion) {
 		this.duracion = duracion;
 	}
-	public void addDestinatario(String des){
+
+	public void addDestinatario(String des) {
 		destinatarios.add(des);
 	}
-	public void removeDestinatario(String des){
+
+	public void removeDestinatario(String des) {
 		destinatarios.remove(des);
 	}
 
@@ -74,5 +106,5 @@ public abstract class Programable extends Etiquetable {
 	public void setVariaciones(String variaciones) {
 		this.variaciones = variaciones;
 	}
-	
+
 }

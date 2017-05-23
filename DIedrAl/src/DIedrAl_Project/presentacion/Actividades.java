@@ -59,7 +59,6 @@ public class Actividades extends ColorPanel{
 		buscar.addActionListener((ae) -> {
 			JFrame pantalla = new PantallaBuscar();
 			pantalla.setVisible(true);
-			
 		});
 		c.gridx = 1;
 		c.gridy = 1;
@@ -539,6 +538,7 @@ public class Actividades extends ColorPanel{
 	    
 	}
 	
+
 	private class PantallaBuscar extends JFrame{
 		
 		/**
@@ -601,6 +601,7 @@ public class Actividades extends ColorPanel{
 	        jButton2 = new javax.swing.JButton();
 
 	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+	        setTitle("Buscar Actividad");
 
 	        jLabel1.setText("Nombre");
 
@@ -647,7 +648,7 @@ public class Actividades extends ColorPanel{
 				 */
 				private static final long serialVersionUID = 1L;
 				
-				String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+				String[] strings = {  };
 	            public int getSize() { return strings.length; }
 	            public String getElementAt(int i) { return strings[i]; }
 	        });

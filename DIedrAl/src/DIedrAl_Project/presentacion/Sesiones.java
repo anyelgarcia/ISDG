@@ -59,7 +59,6 @@ public class Sesiones extends ColorPanel{
 			buscar.addActionListener((ae) -> {
 				JFrame pantalla = new PantallaBuscar();
 				pantalla.setVisible(true);
-				
 			});
 			c.gridx = 1;
 			c.gridy = 1;
@@ -484,6 +483,7 @@ public class Sesiones extends ColorPanel{
 		    }
 		    
 		}
+		
 
 		private class PantallaBuscar extends JFrame{
 			/**
@@ -534,6 +534,7 @@ public class Sesiones extends ColorPanel{
 		        jButton2 = new javax.swing.JButton();
 
 		        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+		        setTitle("Buscar Sesiones");
 
 		        jLabel1.setText("Nombre");
 
@@ -568,7 +569,7 @@ public class Sesiones extends ColorPanel{
 		            
 					private static final long serialVersionUID = 1L;
 					
-					String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+					String[] strings = { };
 		            public int getSize() { return strings.length; }
 		            public String getElementAt(int i) { return strings[i]; }
 		        });
@@ -668,5 +669,4 @@ public class Sesiones extends ColorPanel{
 			        // TODO add your handling code here:
 			}
 		}
-
 }

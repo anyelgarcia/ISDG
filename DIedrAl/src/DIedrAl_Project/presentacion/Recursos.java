@@ -275,7 +275,6 @@ public class Recursos extends ColorPanel{
 	 * @author Diedral_Group
 	 *
 	 */
-	
 	private class PantallaEliminar extends JFrame implements confirmListener{
 		/**
 		 * 
@@ -379,6 +378,7 @@ public class Recursos extends ColorPanel{
 	    
 	}
 	
+
 	private class PantallaBuscar extends JFrame{
 		
 		 /**
@@ -415,7 +415,7 @@ public class Recursos extends ColorPanel{
 	        jButton2 = new javax.swing.JButton();
 
 	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-	        setTitle("Filtrar Recursos");
+	        setTitle("Buscar Recursos");
 
 	        jLabel1.setText("Nombre");
 
@@ -440,7 +440,7 @@ public class Recursos extends ColorPanel{
 				 */
 				private static final long serialVersionUID = 1L;
 				
-				String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+				String[] strings = {  };
 	            public int getSize() { return strings.length; }
 	            public String getElementAt(int i) { return strings[i]; }
 	        });
@@ -517,5 +517,4 @@ public class Recursos extends ColorPanel{
 	        // TODO add your handling code here:
 	    }  
 	}
-	
 }

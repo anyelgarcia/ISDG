@@ -1,6 +1,8 @@
 package DIedrAl_Project.negocio.pacientes;
 
-import java.util.GregorianCalendar;
+import java.util.ArrayList;
+
+import DIedrAl_Project.negocio.calendario.Fecha;
 
 
 public class DatosPaciente {
@@ -10,43 +12,47 @@ public class DatosPaciente {
 
     private String lesion;
 
-    private GregorianCalendar fechalesion;
+    private Fecha fechalesion;
+    
+    private ArrayList<String> aficiones;
+    
+    public DatosPaciente(){
+    	aficiones = new ArrayList<String>();
+    }
 
-    String getEstadocivil() {
-        // Automatically generated method. Please delete this comment before entering specific code.
+    public String getEstadocivil() {
         return this.estadocivil;
     }
 
-    void setEstadocivil(String value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
+    public void setEstadocivil(String value) {
         this.estadocivil = value;
     }
 
-    String getDatosfamiliares() {
-        // Automatically generated method. Please delete this comment before entering specific code.
+    public String getDatosfamiliares() {
         return this.datosfamiliares;
     }
 
-    void setDatosfamiliares(String value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
+    public void setDatosfamiliares(String value) {
         this.datosfamiliares = value;
     }
 
-    String getLesion() {
-        // Automatically generated method. Please delete this comment before entering specific code.
+    public String getLesion() {
         return this.lesion;
     }
 
-    void setLesion(String value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
+    public void setLesion(String value) {
         this.lesion = value;
     }
+    
+    public void addAficion(String aficion){
+    	aficiones.add(aficion);
+    }
 
-	public GregorianCalendar getFechalesion() {
+	public Fecha getFechalesion() {
 		return fechalesion;
 	}
 
-	public void setFechalesion(GregorianCalendar fechalesion) {
+	public void setFechalesion(Fecha fechalesion) {
 		this.fechalesion = fechalesion;
 	}
 
