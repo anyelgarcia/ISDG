@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -29,11 +30,16 @@ public class servicioAplicacionTest {
 		SAPacientes servicioApPac = factoriaSA.newSAPacientes(centro);
 		SARecursos aux = factoriaSA.newSARecursos(Banco.getInstancia());
 		Sesion ses= new Sesion("");
+		Sesion ses2= new Sesion("");
 		ses.setDuracion(2);
+		ses2.setDuracion(3);
 		aux.addSesion(ses);
+		aux.addSesion(ses2);
 		ArraySesiones a=aux.filtrarSesionesPorRango(-1000,10000);
-		for(Sesion s: a){
-			System.out.println(s.getId());
+		assertTrue(a.size()==2);
+		Iterator<Sesion> it = a.iterator();
+		for(Sesion k:a){
+			System.out.println(k.getDuracion());
 		}
 		if(true){
 			return;
