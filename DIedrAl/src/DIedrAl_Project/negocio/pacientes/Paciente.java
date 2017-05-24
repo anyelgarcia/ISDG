@@ -6,8 +6,8 @@ public class Paciente extends Persona {
 	
 	DatosPaciente datos;
 
-	public Paciente(String nombre, String apellido1, String apellido2, String id) {
-		super(nombre, apellido1, apellido2, id);
+	public Paciente(String nombre, String apellido1, String apellido2, String nif) {
+		super(nombre, apellido1, apellido2, nif);
 		datos = new DatosPaciente();
 	}
 

@@ -1,5 +1,4 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
-
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 
@@ -29,6 +28,4 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 	public void eraseCentro(String name) throws NotBoundException {
 		org.removeCentro(name);
 	}
-	
-	
 }
