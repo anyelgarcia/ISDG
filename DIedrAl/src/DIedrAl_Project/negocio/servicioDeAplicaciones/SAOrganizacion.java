@@ -1,6 +1,5 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
-public class SAOrganizacion {
 import java.rmi.*;
 
 import DIedrAl_Project.negocio.administracion.Centro;
