@@ -8,7 +8,6 @@ import java.util.stream.IntStream;
 import DIedrAl_Project.negocio.calendario.Calendario;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 
-//Ejemplo del patrón mediator
 public class Centro {
 
 	private String nombre;
@@ -17,7 +16,7 @@ public class Centro {
 
 	/**
 	 * Diccionario que permite el acceso a un terapeuta o paciente del centro a
-	 * través de su dni.
+	 * travÃ©s de su dni.
 	 */
 	private Map<String, Persona> personasCentro;
 
@@ -33,22 +32,29 @@ public class Centro {
 
 	// TODO: implementarlo primero
 	private Organizacion organizacion;
+	
+	private String id;
 
-	public Centro(String name) {
+	protected Centro(String name) {
 		nombre = name;
 		pacientes = new HashMap<Paciente, Set<Usuario>>();
 		usuarios = new HashMap<Usuario, Set<Paciente>>();
 		personasCentro = new HashMap<String, Persona>();
-	}
-
-	public Centro(String name, Map<Paciente, Set<Usuario>> pacientes,
-			Map<Usuario, Set<Paciente>> usuarios) {
+		id = UUID.randomUUID().toString();
+	
+  }
+	protected Centro(String name, Map<Paciente, Set<Usuario>> pacientes, Map<Usuario, Set<Paciente>> usuarios) {
 		nombre = name;
 		this.pacientes = pacientes;
 		this.usuarios = usuarios;
 		this.personasCentro = new HashMap<String, Persona>();
+		id = UUID.randomUUID().toString();
 		initCentro();
 
+	}
+	
+	public String getId(){
+		return id;
 	}
 
 	public void addUsuario(Usuario usu) throws AlreadyBoundException {
@@ -163,7 +169,7 @@ public class Centro {
 	 * 
 	 * @param NIF
 	 *            NIF buscado
-	 * @return Paciente con dicho NIF; null si no se encuentra ningún paciente.
+	 * @return Paciente con dicho NIF; null si no se encuentra ningÃºn paciente.
 	 * @throws NotBoundException
 	 */
 	public Paciente getPacienteConNIF(String NIF) throws NotBoundException {
@@ -200,26 +206,26 @@ public class Centro {
 	 * con los filtros proporcionados
 	 * 
 	 * @param hints
-	 *            Enumerados de filtro (véase Centro.Hints)
+	 *            Enumerados de filtro (vÃ©ase Centro.Hints)
 	 * @param values
 	 *            Valores para cada filtro ({Hints.NOMBRE, Hints.APELLIDO1},
 	 *            {"A", "B"} toma como filtros Nombre -> A, Apellido1 -> B)
 	 * @return Conjunto con coincidencias
 	 * @throws IllegalArgumentException
-	 *             Si el número de filtros no coincide con el de valores.
+	 *             Si el nÃºmero de filtros no coincide con el de valores.
 	 */
 	public Set<Persona> getPersonas(Hints[] hints, String[] values,
 			Hints[] tiposPers) throws IllegalArgumentException {
 
 		if (hints.length != values.length)
 			throw new IllegalArgumentException(
-					"Número de campos debe coincidir con número de valores de búsqueda");
+					"NÃºmero de campos debe coincidir con nÃºmero de valores de bÃºsqueda");
 
 		Set<Persona> resultadoBusc = new HashSet<>();
 
 		Collection<Persona> personas = personasCentro.values();
 
-		// Mapa de filtros a emplear en la búsqueda.
+		// Mapa de filtros a emplear en la bÃºsqueda.
 		Map<Hints, String> filtros = IntStream.range(0, hints.length).boxed()
 				.collect(Collectors.toMap(i -> hints[i], i -> values[i]));
 
@@ -258,7 +264,7 @@ public class Centro {
 	}
 
 	/**
-	 * Funcionará?
+	 * FuncionarÃ¡?
 	 * 
 	 * @param nif
 	 * @return
