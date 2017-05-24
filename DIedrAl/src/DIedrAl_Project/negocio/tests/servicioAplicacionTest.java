@@ -70,8 +70,9 @@ public class servicioAplicacionTest {
 		// Crear un nuevo centro de prueba donde añadir pacientes y terapeutas.
 		Centro centro = null;
 		try {
+			Organizacion.getInstancia().addCentro("Centro de Prueba");
 			centro = Organizacion.getInstancia().getCentro("Centro de Prueba");
-		} catch (NotBoundException e2) {
+		} catch (NotBoundException | AlreadyBoundException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
