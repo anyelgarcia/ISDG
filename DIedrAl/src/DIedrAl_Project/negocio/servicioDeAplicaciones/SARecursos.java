@@ -51,4 +51,10 @@ public interface SARecursos {
 
 	public ArrayActividades filtrarActividadesHasta(Dificultad dif);
 
+	public ArraySesiones getSesiones();
+
+	public ArrayActividades getActividades();
+
+	public ArrayRecursos getRecursos();
+
 }
