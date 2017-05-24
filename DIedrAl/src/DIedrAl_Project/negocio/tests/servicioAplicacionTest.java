@@ -24,7 +24,13 @@ public class servicioAplicacionTest {
 	@Test
 	public void testSAPacientes() {
 
-		Centro centro = new Centro("Centro de Prueba");
+		Centro centro=null;
+		try {
+			centro = Organizacion.getInstancia().getCentro("Centro de Prueba");
+		} catch (NotBoundException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		SAFactory factoriaSA = SAFactory.getInstancia();
 
 		SAPacientes servicioApPac = factoriaSA.newSAPacientes(centro);

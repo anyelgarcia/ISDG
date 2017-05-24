@@ -8,7 +8,6 @@ import java.util.stream.IntStream;
 import DIedrAl_Project.negocio.calendario.Calendario;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 
-//Ejemplo del patrón mediator
 public class Centro {
 
 	private String nombre;
@@ -33,21 +32,30 @@ public class Centro {
 
 	// TODO: implementarlo primero
 	private Organizacion organizacion;
+	
+	private String id;
 
-	public Centro(String name) {
+	protected Centro(String name) {
 		nombre = name;
 		pacientes = new HashMap<Paciente, Set<Usuario>>();
 		usuarios = new HashMap<Usuario, Set<Paciente>>();
 		personasCentro = new HashMap<String, Persona>();
+		id = UUID.randomUUID().toString();
+		
 	}
 
-	public Centro(String name, Map<Paciente, Set<Usuario>> pacientes, Map<Usuario, Set<Paciente>> usuarios) {
+	protected Centro(String name, Map<Paciente, Set<Usuario>> pacientes, Map<Usuario, Set<Paciente>> usuarios) {
 		nombre = name;
 		this.pacientes = pacientes;
 		this.usuarios = usuarios;
 		this.personasCentro = new HashMap<String, Persona>();
+		id = UUID.randomUUID().toString();
 		initCentro();
 
+	}
+	
+	public String getId(){
+		return id;
 	}
 
 	public void addUsuario(Usuario usu) throws AlreadyBoundException {
