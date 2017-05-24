@@ -42,7 +42,7 @@ public class Centro {
 		nombre = name;
 		pacientes = new HashMap<Paciente, Set<Usuario>>();
 		usuarios = new HashMap<Usuario, Set<Paciente>>();
-
+		personasCentro = new HashMap<String, Persona>();
 	}
 
 	public Centro(String name, Map<Paciente, Set<Usuario>> pacientes,
@@ -50,12 +50,13 @@ public class Centro {
 		nombre = name;
 		this.pacientes = pacientes;
 		this.usuarios = usuarios;
-
+		personasCentro = new HashMap<String, Persona>();
 	}
 
 	public void addUsuario(Usuario usu) throws AlreadyBoundException {
 		if (!usuarios.containsKey(usu)) {
 			usuarios.put(usu, new HashSet<Paciente>());
+			personasCentro.put(usu.getId(), usu);
 		} else {
 			throw new AlreadyBoundException(usu + " ya registrado");
 		}
@@ -172,7 +173,9 @@ public class Centro {
 	 */
 	public Usuario getTerapeutaConNIF(String NIF) {
 
-		if (personasCentro.get(NIF) instanceof Paciente)
+		Persona p = personasCentro.get(NIF);
+		
+		if (p instanceof Usuario)
 			return (Usuario) personasCentro.get(NIF);
 		else
 			return null;

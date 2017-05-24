@@ -21,14 +21,15 @@ import com.sun.istack.internal.logging.Logger;
 
 public class servicioAplicacionTest {
 
-	private static final Logger log = Logger.getLogger(
-			servicioAplicacionTest.class.getName(), null);
+	private static final Logger log = Logger.getLogger(servicioAplicacionTest.class);
 
 	@Test
 	public void testSAPacientes() {
 
 		Centro centro = new Centro("Centro de Prueba");
 		SAFactory factoriaSA = SAFactory.getInstancia();
+		assertTrue("Centro y SAFactory no han sido inicializados correctamente",
+				centro != null && factoriaSA != null);
 
 		SAPacientes servicioApPac = factoriaSA.newSAPacientes(centro);
 
@@ -58,16 +59,16 @@ public class servicioAplicacionTest {
 
 		Usuario t = servicioApPac.usuarioConNIF("00000001A");
 
-		assertTrue("El terapeuta ha sido añadido al centro", t != null
+		assertTrue("El terapeuta no ha sido añadido al centro; terapeuta: " + t, t != null
 				&& t.getId().equals("00000001A"));
 
 		Hints[] campos = new Hints[] { Hints.NOMBRE };
 		String[] valores = new String[] { "Pablo" };
 		Set<Persona> personas = servicioApPac.filtrarPersonas(campos, valores);
 
-		Persona[] coincidentes = (Persona[]) personas.toArray();
+		Persona[] coincidentes = personas.toArray(new Persona[personas.size()]);
 		assertTrue(
-				"Se han encontrado dos pacientes con este nombre",
+				"No se han encontrado dos pacientes con este nombre",
 				coincidentes.length == 2
 						&& coincidentes[0].getName().equals(
 								coincidentes[1].getName())
@@ -93,11 +94,7 @@ public class servicioAplicacionTest {
 		}
 
 		assertTrue(
-				"Intento de ligar el mismo paciente con el mismo terapeuta por segunda vez",
+				"Fallido intento de ligar el mismo paciente con el mismo terapeuta por segunda vez",
 				errorDetectado);
-	}
-
-	public static void main(String... args) {
-
 	}
 }
