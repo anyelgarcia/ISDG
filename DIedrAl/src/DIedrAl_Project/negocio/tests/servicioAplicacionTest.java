@@ -1,27 +1,25 @@
 package DIedrAl_Project.negocio.tests;
 
-import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.*;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import org.junit.Test;
 
-import DIedrAl_Project.negocio.administracion.Centro;
-import DIedrAl_Project.negocio.administracion.Centro.Hints;
-import DIedrAl_Project.negocio.administracion.Persona;
-import DIedrAl_Project.negocio.administracion.Usuario;
+import DIedrAl_Project.negocio.administracion.*;
 import DIedrAl_Project.negocio.pacientes.Paciente;
-import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
-import DIedrAl_Project.negocio.servicioDeAplicaciones.SAPacientes;
+import DIedrAl_Project.negocio.recursos.*;
+import DIedrAl_Project.negocio.servicioDeAplicaciones.*;
 
-import com.sun.istack.internal.logging.Logger;
 
 public class servicioAplicacionTest {
 
-	private static final Logger log = Logger.getLogger(servicioAplicacionTest.class);
+  private static final Logger log = Logger.getLogger(servicioAplicacionTest.class.getName());
 
 	@Test
 	public void testSAPacientes() {
@@ -32,14 +30,29 @@ public class servicioAplicacionTest {
 				centro != null && factoriaSA != null);
 
 		SAPacientes servicioApPac = factoriaSA.newSAPacientes(centro);
-
+		SARecursos aux = factoriaSA.newSARecursos(Banco.getInstancia());
+		Sesion ses= new Sesion("");
+		Sesion ses2= new Sesion("");
+		ses.setDuracion(2);
+		ses2.setDuracion(3);
+		aux.addSesion(ses);
+		aux.addSesion(ses2);
+		ArraySesiones a=aux.filtrarSesionesPorRango(-1000,10000);
+		assertTrue(a.size()==2);
+		Iterator<Sesion> it = a.iterator();
+		for(Sesion k:a){
+			System.out.println(k.getDuracion());
+		}
+		if(true){
+			return;
+		}
 		String[] nombres = { "Angel", "Pablo", "Enrique", "Guillermo",
 				"Alejandro", "Pablo" };
 		String[] apellidos = { "Manzana", "Apio", "Naranja", "Limon",
 				"Aceituna", "Ajo" };
 		Random rand = new Random();
 
-		// Añadir pacientes al centro por medio del SA Pacientes.
+		// AÃ±adir pacientes al centro por medio del SA Pacientes.
 		for (int i = 0; i < nombres.length; ++i) {
 			try {
 				servicioApPac.addPaciente(new Paciente(nombres[i],
@@ -57,9 +70,15 @@ public class servicioAplicacionTest {
 			log.info(e.getMessage());
 		}
 
-		Usuario t = servicioApPac.usuarioConNIF("00000001A");
-
-		assertTrue("El terapeuta no ha sido añadido al centro; terapeuta: " + t, t != null
+		Usuario t=null;
+		try {
+			t = servicioApPac.getUsuarioConNIF("00000001A");
+			assertTrue("El terapeuta ha sido aÃ±adido al centro", t != null
+					&& t.getId().equals("00000001A"));
+		} catch (NotBoundException e1) {
+			
+		}
+		assertTrue("El terapeuta no ha sido aÃ±adido al centro; terapeuta: " + t, t != null
 				&& t.getId().equals("00000001A"));
 
 		Hints[] campos = new Hints[] { Hints.NOMBRE };

@@ -1,6 +1,7 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
 import DIedrAl_Project.negocio.administracion.Centro;
+import DIedrAl_Project.negocio.administracion.Organizacion;
 import DIedrAl_Project.negocio.recursos.Banco;
 
 public abstract class SAFactory {
@@ -16,4 +17,6 @@ public abstract class SAFactory {
 	public abstract SARecursos newSARecursos(Banco bank);
 	
 	public abstract SAPacientes newSAPacientes(Centro centro);
+	
+	public abstract SAOrganizacion newSAOrganizacion(Organizacion org);
 }

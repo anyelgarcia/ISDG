@@ -1,12 +1,14 @@
 package DIedrAl_Project.negocio.administracion;
 
-import java.util.GregorianCalendar;
+
+import java.util.UUID;
 
 import DIedrAl_Project.negocio.ObjetoAlmacenable;
+import DIedrAl_Project.negocio.calendario.Fecha;
 import DIedrAl_Project.negocio.pacientes.Direccion;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 
-public class Persona implements ObjetoAlmacenable{
+public class Persona implements ObjetoAlmacenable {
 
 	protected String nombre;
 
@@ -14,22 +16,37 @@ public class Persona implements ObjetoAlmacenable{
 
 	protected String apellido2;
 
-	protected GregorianCalendar fechaNacimiento;
+	protected Fecha fechaNacimiento;
 
 	protected String estadoCivil;
 
 	protected Direccion direccion;
-	
+
 	protected String email;
-	
+
 	protected Integer tfo;
 	
-	protected String id;
+	protected String perfil;
+	
+	/**
+	 * El NIF es su dni, el id es el campo que le permite al objeto ser guardado.
+	 */
+	protected String nif;
 
-	public Persona(String nombre, String apellido1, String apellido2, String id) {
+	private String id;
+
+	public Persona(String nombre, String apellido1, String apellido2, String nif) {
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
 		this.apellido2 = apellido2;
+		this.nif = nif;
+		this.id = UUID.randomUUID().toString();
+	}
+	public Persona(String nombre, String apellido1, String apellido2, String nif, String id) {
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.nif = nif;
 		this.id = id;
 	}
 
@@ -57,11 +74,19 @@ public class Persona implements ObjetoAlmacenable{
 		this.apellido2 = secondSurname;
 	}
 
-	public GregorianCalendar getBirthday() {
+	public String getPerfil() {
+		return perfil;
+	}
+	
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
+	}
+	
+	public Fecha getBirthday() {
 		return fechaNacimiento;
 	}
 
-	public void setBirthday(GregorianCalendar birthday) {
+	public void setBirthday(Fecha birthday) {
 		fechaNacimiento = birthday;
 	}
 
@@ -101,40 +126,48 @@ public class Persona implements ObjetoAlmacenable{
 	public String getId() {
 		return id;
 	}
+	
+
+	public String getNif() {
+		return nif;
+	}
+
+	public void setNif(String nif) {
+		this.nif = nif;
+	}
 
 	public int compararAlfab(Persona otra) {
-		if(apellido1.compareTo(otra.apellido1) == -1){
+		if (apellido1.compareTo(otra.apellido1) == -1) {
 			return -1;
-		}
-		else if(apellido1.compareTo(otra.apellido1) == 1){
+		} else if (apellido1.compareTo(otra.apellido1) == 1) {
 			return 1;
-		}
-		else{
-			if(apellido2.compareTo(otra.apellido2) == -1){
+		} else {
+			if (apellido2.compareTo(otra.apellido2) == -1) {
 				return -1;
-			}
-			else if(apellido2.compareTo(otra.apellido2) == 1){
+			} else if (apellido2.compareTo(otra.apellido2) == 1) {
 				return 1;
-			}
-			else{
-				if(nombre.compareTo(otra.nombre) == -1){
+			} else {
+				if (nombre.compareTo(otra.nombre) == -1) {
 					return -1;
-				}
-				else if(nombre.compareTo(otra.nombre) == 1){
+				} else if (nombre.compareTo(otra.nombre) == 1) {
 					return 1;
-				}
-				else return 0;
+				} else
+					return 0;
 			}
 		}
 	}
-	
+
 	/**
 	 * Comprueba si la persona comparte id con la dada
-	 * @return 0 si id es el mismo que el de otra, -1/1 si menor/mayor, respectivamente.
+	 * 
+	 * @return 0 si id es el mismo que el de otra, -1/1 si menor/mayor,
+	 *         respectivamente.
 	 */
-	public int compararID(Persona otra){
-		return id.compareTo(otra.id);
+	public int compararID(Persona otra) {
+		return nif.compareTo(otra.nif);
 	}
 	
-
+	public String toString() {
+		return nif + ": " + nombre + " " + apellido1 + " " + apellido2;
+	}
 }

@@ -3,12 +3,15 @@ package DIedrAl_Project.presentacion;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.rmi.AlreadyBoundException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import DIedrAl_Project.negocio.administracion.Hints;
 import DIedrAl_Project.negocio.calendario.Fecha;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
@@ -46,12 +49,8 @@ public class Pacientes extends ColorPanel{
 		ImageButton buscar = new ImageButton("Buscar", "images/bluebutton.png", "images/bluebutton2.png", this);
 		componentes.add(buscar);
 		buscar.addActionListener((ae) -> {
-			JFrame panel = new JFrame();
-			
-			panel.setSize(300, 400);
-			panel.setVisible(true);
-			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			
+			JFrame pantalla = new PantallaPolifacetica(Modo.BUSCAR);
+			pantalla.setVisible(true);
 		});
 		c.gridx = 0;
 		c.gridy = 1;
@@ -64,7 +63,7 @@ public class Pacientes extends ColorPanel{
 		ImageButton eliminar = new ImageButton("Eliminar", "images/greenbutton.png", "images/greenbutton2.png", this);
 		componentes.add(eliminar);
 		eliminar.addActionListener((ae) -> {
-			JFrame panel = new PantallaEliminar();
+			JFrame panel = new PantallaEliminar(Modo.ELIMINAR);
 			panel.setVisible(true);
 			
 		});
@@ -88,12 +87,8 @@ public class Pacientes extends ColorPanel{
 		ImageButton editar = new ImageButton("  Editar  ", "images/orangebutton.png", "images/orangebutton2.png", this);
 		componentes.add(editar);
 		editar.addActionListener((ae) -> {
-			JFrame panel = new JFrame();
-			
-			panel.setSize(300, 400);
-			panel.setVisible(true);
-			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			
+			JFrame pantalla = new PantallaPolifacetica(Modo.EDITAR);
+			pantalla.setVisible(true);
 		});
 		c.gridx = 1;
 		c.gridy = 2;
@@ -127,6 +122,7 @@ public class Pacientes extends ColorPanel{
 	    private javax.swing.JLabel jLabel3;
 	    private javax.swing.JLabel jLabel4;
 	    private javax.swing.JLabel jLabel5;
+	    private javax.swing.JLabel jLabel11;
 	    private javax.swing.JLabel jLabel6;
 	    private javax.swing.JLabel jLabel7;
 	    private javax.swing.JLabel jLabel8;
@@ -139,6 +135,7 @@ public class Pacientes extends ColorPanel{
 	    private javax.swing.JTextField jTextField2;
 	    private javax.swing.JTextField jTextField3;
 	    private javax.swing.JTextField jTextField4;
+	    private javax.swing.JTextField jTextField5;
 	    // End of variables declaration     
 	    
 		public PantallaAdd(){
@@ -171,6 +168,8 @@ public class Pacientes extends ColorPanel{
 			jScrollPane2 = new javax.swing.JScrollPane();
 			jTextArea2 = new javax.swing.JTextArea();
 			jButton1 = new javax.swing.JButton();
+			jLabel11 = new javax.swing.JLabel();
+			jTextField5 = new javax.swing.JTextField();
 			
 			setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 			setTitle("Crear Paciente");
@@ -184,6 +183,7 @@ public class Pacientes extends ColorPanel{
 			
 			jLabel4.setText("Segundo Apellido:");
 			
+			jLabel11.setText("DNI:");
 			
 			jLabel5.setText("Fecha de Nacimiento: ");
 			
@@ -259,7 +259,8 @@ public class Pacientes extends ColorPanel{
 							                                    .addComponent(jLabel2)
 							                                    .addComponent(jLabel1)
 							                                    .addComponent(jLabel3)
-							                                    .addComponent(jLabel4))
+							                                    .addComponent(jLabel4)
+							                                    .addComponent(jLabel11))
 							                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 							                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 							                                    .addGroup(layout.createSequentialGroup()
@@ -267,7 +268,8 @@ public class Pacientes extends ColorPanel{
 							                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
 							                                            .addComponent(jTextField1)
 							                                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)))
-							                                    .addComponent(jTextField3)))
+							                                    .addComponent(jTextField3)
+							                                    .addComponent(jTextField5)))
 							                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
 							                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 							                                    .addComponent(jLabel7)
@@ -319,6 +321,10 @@ public class Pacientes extends ColorPanel{
 							                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 							                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 							                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+							                    .addComponent(jLabel11)
+							                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+							                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+							                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 							                    .addComponent(jLabel5)
 							                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 							                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -358,18 +364,28 @@ public class Pacientes extends ColorPanel{
 		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {   
 			
-			String aficionestodo = jTextArea1.getText();
+			String aficionestodo = jTextArea2.getText();
 			String aficiones[] = aficionestodo.split(",");
 			
-			Fecha nacimiento = new Fecha(Integer.parseInt(String.valueOf(jComboBox1.getSelectedItem())), String.valueOf(jComboBox2.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox3.getSelectedItem())), 0);
-			Fecha fechaLesion = new Fecha(Integer.parseInt(String.valueOf(jComboBox5.getSelectedItem())), String.valueOf(jComboBox6.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox7.getSelectedItem())), 0);
+			Fecha nacimiento = new Fecha(Integer.valueOf(String.valueOf(jComboBox1.getSelectedItem())), String.valueOf(jComboBox2.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox3.getSelectedItem())), 0);
+			Fecha fechaLesion = new Fecha(Integer.valueOf(String.valueOf(jComboBox5.getSelectedItem())), String.valueOf(jComboBox6.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox7.getSelectedItem())), 0);
 
-			Paciente info = new Paciente(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), fechaLesion, aficiones);
+			Paciente info = new Paciente(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField5.getText());
+			
 			info.setEstadoCivil(String.valueOf(jComboBox4.getSelectedItem()));
 			info.setBirthday(nacimiento);
-			info.setDescripcion(jTextArea2.getText());
+			info.setPerfil(jTextArea2.getText());
+			info.getDatos().setLesion(jTextField4.getText());
+			info.getDatos().setFechalesion(fechaLesion);
 			
-			Controlador.addPaciente(info);
+			for(String str: aficiones)
+				info.getDatos().addAficion(str);
+			
+			try {
+				Controlador.addPaciente(info);
+			} catch (AlreadyBoundException e) {
+				// Mostrar un mensaje de que el paciente ya existe
+			}
 		} 
 	}
 	/*
@@ -454,17 +470,19 @@ public class Pacientes extends ColorPanel{
 	    private javax.swing.JLabel jLabel1;
 	    private javax.swing.JLabel jLabel2;
 	    private javax.swing.JTextField jTextField1;
+	    private Modo modo;
 	    // End of variables declaration     
 	    
-	    public PantallaEliminar() {
-	        initComponents();
+	    public PantallaEliminar(Modo modo) {
+	        initGUI();
+	        this.modo = modo;
 	    }
 	    /**
 	     * This method is called from within the constructor to initialize the form.
 	     * WARNING: Do NOT modify this code. The content of this method is always
 	     * regenerated by the Form Editor.
 	     */                        
-	    private void initComponents() {
+	    private void initGUI() {
 
 	        jLabel1 = new javax.swing.JLabel();
 	        jTextField1 = new javax.swing.JTextField();
@@ -545,6 +563,229 @@ public class Pacientes extends ColorPanel{
 	    	this.dispose();
 	    }
 	    
+	}
+	
+	private class PantallaPolifacetica extends JFrame{
+		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -5453880899658964801L;
+		// Variables declaration - do not modify                     
+	    private javax.swing.JButton jButton1;
+	    private javax.swing.JButton jButton2;
+	    private javax.swing.JLabel jLabel1;
+	    private javax.swing.JLabel jLabel2;
+	    private javax.swing.JLabel jLabel3;
+	    private javax.swing.JLabel jLabel4;
+	    private javax.swing.JList<String> jList1;
+	    private javax.swing.JScrollPane jScrollPane1;
+	    private javax.swing.JTextField jTextField1;
+	    private javax.swing.JTextField jTextField2;
+	    private javax.swing.JTextField jTextField3;
+	    private javax.swing.JTextField jTextField4;
+	    private javax.swing.JSeparator jSeparator2;
+	    private Modo modo;
+	    // End of variables declaration     
+	    
+	    public PantallaPolifacetica(Modo modo) {
+	        initGUI();
+	        this.modo = modo;
+	    }
+		
+		
+	    private void initGUI() {
+
+	        jTextField1 = new javax.swing.JTextField();
+	        jTextField2 = new javax.swing.JTextField();
+	        jTextField3 = new javax.swing.JTextField();
+	        jTextField4 = new javax.swing.JTextField();
+	        jLabel1 = new javax.swing.JLabel();
+	        jLabel2 = new javax.swing.JLabel();
+	        jLabel3 = new javax.swing.JLabel();
+	        jLabel4 = new javax.swing.JLabel();
+	        jButton1 = new javax.swing.JButton();
+	        jScrollPane1 = new javax.swing.JScrollPane();
+	        jList1 = new javax.swing.JList<>();
+	        jButton2 = new javax.swing.JButton();
+	        jSeparator2 = new javax.swing.JSeparator();
+
+
+	        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+	        setTitle("Buscar Paciente");
+
+	        jLabel1.setText("Nombre:");
+
+	        jLabel2.setText("Primer Apellido:");
+
+	        jLabel3.setText("Segundo Apellido:");
+
+	        jLabel4.setText("DNI:");
+
+	        jButton1.setText("Buscar");
+	        jButton1.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton1ActionPerformed(evt);
+	            }
+	        });
+
+	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+	            /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+				String[] strings = {  };
+	            public int getSize() { return strings.length; }
+	            public String getElementAt(int i) { return strings[i]; }
+	        });
+	        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+	        jScrollPane1.setViewportView(jList1);
+
+	        jButton2.setText("Confirmar");
+	        jButton2.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton2ActionPerformed(evt);
+	            }
+	        });
+
+	        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+	        getContentPane().setLayout(layout);
+	        layout.setHorizontalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(layout.createSequentialGroup()
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                            .addGroup(layout.createSequentialGroup()
+	                                .addGap(21, 21, 21)
+	                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+	                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+	                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+	                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
+	                                .addGap(30, 30, 30))
+	                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                                .addContainerGap()
+	                                .addComponent(jLabel3)
+	                                .addGap(18, 18, 18)))
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+	                    .addComponent(jButton1))
+	                .addGap(35, 35, 35)
+	                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addGap(16, 16, 16)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addComponent(jButton2))
+	                .addContainerGap(29, Short.MAX_VALUE))
+	        );
+	        layout.setVerticalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(layout.createSequentialGroup()
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addGap(26, 26, 26)
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jLabel1))
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jLabel2))
+	                        .addGap(11, 11, 11)
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jLabel3))
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jLabel4))
+	                        .addGap(0, 0, Short.MAX_VALUE))
+	                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                        .addContainerGap(16, Short.MAX_VALUE)
+	                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addGap(18, 18, 18)
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                            .addComponent(jButton2)
+	                            .addComponent(jButton1))))
+	                .addGap(23, 23, 23))
+	            .addComponent(jSeparator2)
+	        );
+
+	        pack();
+	    }
+		
+		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+
+			String nombre = jTextField1.getText();
+			String apellido1 = jTextField2.getText();
+			String apellido2 = jTextField3.getText();
+			String DNI = jTextField4.getText();
+			
+			ArrayList<String> campos = new ArrayList<String>();
+			ArrayList<Hints> hints = new ArrayList<Hints>();
+			
+			if(nombre!=null && nombre.length()>0){
+				campos.add(nombre);
+				hints.add(Hints.NOMBRE);
+			}
+			
+			if(apellido1!=null && apellido1.length()>0){
+				campos.add(apellido1);
+				hints.add(Hints.APELLIDO1);
+			}
+			
+			if(apellido2!=null && apellido2.length()>0){
+				campos.add(apellido2);
+				hints.add(Hints.APELLIDO2);
+			}
+			
+			if(DNI!=null && DNI.length()>0){
+				campos.add(DNI);
+				hints.add(Hints.NIF);
+			}
+			
+			campos.add(" ");
+			hints.add(Hints.PACIENTE);
+				
+			
+			String resultados[] = Controlador.buscarUsuarios(hints, campos);
+			jList1.setModel(new javax.swing.AbstractListModel<String>() {
+				private static final long serialVersionUID = 1L;
+				String[] strings = resultados;
+	            public int getSize() { return strings.length; }
+	            public String getElementAt(int i) { return strings[i]; }
+			});
+		}
+	    
+	    
+
+		private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+			switch(modo){
+				case ELIMINAR:
+					Confirm c = new Confirm();
+			    	c.setVisible(true);
+			    	c.addListener(this);
+			    	break;
+				case EDITAR:
+					break;
+				case BUSCAR:
+					break;
+				}
+			
+		}  
+		
+		/**
+	     * Se llama a esta función al pulsar el botón -Sí- en confirmar. Le dice al controlador que elimine al paciente.
+	     */
+	    public void delete(){
+	    	Controlador.deletePaciente(jTextField1.getText());
+	    	this.dispose();
+	    }
 	}
 }
 	

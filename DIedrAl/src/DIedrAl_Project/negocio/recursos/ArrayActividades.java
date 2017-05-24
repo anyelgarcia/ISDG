@@ -1,10 +1,21 @@
 package DIedrAl_Project.negocio.recursos;
 
+import java.util.Iterator;
+import java.util.Set;
+
 /*
  * TODO CAMBIAR EL TIPO DE ESTAS FUNCIONES EN PUTO MODELIO
  */
 public class ArrayActividades extends ArrayProgramables<Actividad> {
+	
 
+	public ArrayActividades(){
+		super();
+	}
+	
+	public ArrayActividades(Set<Actividad> act) {
+		super(act);
+	}
 
 	public ArrayActividades filtrarRango(Dificultad min, Dificultad max) {
 		return filtrarDif(min, max);
@@ -36,4 +47,5 @@ public class ArrayActividades extends ArrayProgramables<Actividad> {
 	protected ArrayActividades createNew() {
 		return new ArrayActividades();
 	}
+
 }
