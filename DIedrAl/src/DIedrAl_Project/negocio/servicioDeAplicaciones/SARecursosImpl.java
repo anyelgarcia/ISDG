@@ -131,5 +131,20 @@ public class SARecursosImpl implements SARecursos{
 		return bank.getActividades().filtrarHasta(dif);
 	}
 
+	@Override
+	public ArraySesiones getSesiones() {
+		return bank.getSesiones();
+	}
+
+	@Override
+	public ArrayActividades getActividades() {
+		return bank.getActividades();
+	}
+
+	@Override
+	public ArrayRecursos getRecursos() {
+		return bank.getRecursos();
+	}
+
 
 }
