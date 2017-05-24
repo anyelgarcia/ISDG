@@ -15,6 +15,8 @@ public class Informe implements ObjetoAlmacenable {
 	private final SesionProgramada sesion;
 	// TODO Pueden ser más?
 	private Usuario autor;
+	
+	private String id;
 
 	public Informe(SesionProgramada ses, Usuario autor) {
 		sesion = ses;

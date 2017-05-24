@@ -1,6 +1,7 @@
 package DIedrAl_Project.presentacion;
 
 import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -41,9 +42,15 @@ public class Controlador {
 	}
 	
 	public static void addPaciente(Paciente p) throws AlreadyBoundException{
+		SAPacientes saPacientes;
+		try {
+			saPacientes = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
+			saPacientes.addPaciente(p);
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
-		saPacientes.addPaciente(p);
 		
 		/* Prueba 1: Satisfactoria :D
 		 System.out.println(p.getNombre());
@@ -127,10 +134,17 @@ public class Controlador {
 		System.out.println(p.getInfo());
 	}
 	
-	public static void addUsuario(Usuario p) throws AlreadyBoundException{
+	public static void addUsuario(Usuario p){
 		
-		SAPacientes saUsuarios = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
-		saUsuarios.addUsuario(p);
+		SAPacientes saUsuarios;
+		try {
+			saUsuarios = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
+		}
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		/*System.out.println(p.getNombre());
 		System.out.println(p.getRol());
@@ -141,36 +155,24 @@ public class Controlador {
 		System.out.println(p.getInfo());*/
 	}
 	
-	public static void deleteActividad(String s){
-		
-		SARecursos saActividades = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
-		Set<Actividad> actividades = saActividades.filtrarActividadPorNombre(s);
-				
-		//System.out.println(s);
+	public static void deleteActividad(Actividad a){
+		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
+		saRecursos.removeActividad(a);
+	
 	}
 	
 	public static void deletePaciente(String s){
 		
-		SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
-		//Set<Paciente> pacientes = saPacientes.filtrarPersonas(Hints.NOMBRE, s);
-		
-		//System.out.println(s);
 	}
 	
-	public static void deleteRecurso(String s){
-		
+	public static void deleteRecurso(Recurso r){
 		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
-		Set<Recurso> recursos = saRecursos.filtrarRecursosPorNombre(s);
-		
-		//System.out.println(s);
+		saRecursos.removeRecurso(r);
 	}
 	
-	public static void deleteSesion(String s){
-		
-		SARecursos saSesiones = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
-		Set<Sesion> sesiones = saSesiones.filtrarSesionPorNombre(s);
-		
-		//System.out.println(s);
+	public static void deleteSesion(Sesion s){
+		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
+		saRecursos.removeSesion(s);
 	}
 	
 	public static String[] buscarPaciente(ArrayList<Hints> hints, ArrayList<String> values){

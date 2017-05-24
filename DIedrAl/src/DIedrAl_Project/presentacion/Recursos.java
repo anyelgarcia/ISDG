@@ -3,6 +3,7 @@ package DIedrAl_Project.presentacion;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -289,6 +290,7 @@ public class Recursos extends ColorPanel{
 		private javax.swing.JTextArea jTextArea1;
 		private javax.swing.JTextField jTextField1;
 		private Modo modo;
+		private ArrayRecursos filtrados;
 	    
 		public PantallaBuscar(Modo m){
 			modo = m;
@@ -417,14 +419,18 @@ public class Recursos extends ColorPanel{
 	    	String nombre = jTextField1.getText();
 			Set<String> setEtiquetas = new HashSet<String>(Arrays.asList(jTextArea1.getText().split(",")));
 		
-			ArrayRecursos salida = Controlador.filtrarRecursos(nombre, setEtiquetas);
+			filtrados = Controlador.filtrarRecursos(nombre, setEtiquetas);
 			
-			/*jList1.setModel(new javax.swing.AbstractListModel<String>() {
+			ArrayList<String> nombres = new ArrayList<>();
+			for(Recurso r : filtrados){
+				nombres.add(r.getNombre());
+			}
+			
+			jList1.setModel(new javax.swing.AbstractListModel<String>() {
 			private static final long serialVersionUID = 1L;
-			String[] strings = ;
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return salida.; }
-			});*/
+            public int getSize() { return nombres.size(); }
+            public String getElementAt(int i) { return nombres.get(i); }
+			});
 			
 	    }                                        
 
@@ -444,8 +450,15 @@ public class Recursos extends ColorPanel{
 
 		@Override
 		public void delete() {
-			Controlador.deleteRecurso();
-	    	this.dispose();
+			String name = jList1.getSelectedValue();
+			for(Recurso r : filtrados){
+				if(r.getNombre().equals(name)){
+					System.out.println(name);
+					Controlador.deleteRecurso(r);
+			    	this.dispose();
+				}
+			}
+			
 		}  
 	}
 }

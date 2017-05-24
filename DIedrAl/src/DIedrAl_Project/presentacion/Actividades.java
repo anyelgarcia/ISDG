@@ -14,6 +14,7 @@ import DIedrAl_Project.negocio.recursos.Actividad;
 import DIedrAl_Project.negocio.recursos.ArrayActividades;
 import DIedrAl_Project.negocio.recursos.ArraySesiones;
 import DIedrAl_Project.negocio.recursos.Dificultad;
+import DIedrAl_Project.negocio.recursos.Recurso;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 /**
@@ -472,6 +473,7 @@ public class Actividades extends ColorPanel{
 	    private javax.swing.JTextField jTextField2;
 	    private javax.swing.JTextField jTextField3;
 	    private Modo modo;
+	    private ArrayActividades filtrados;
 	    
 	    public PantallaBuscar(Modo m){
 	    	modo = m;
@@ -689,7 +691,7 @@ public class Actividades extends ColorPanel{
 				max = jComboBox2.getSelectedItem();
 			}*/
 		
-			ArrayActividades salida = Controlador.filtrarActividades(nombre, setEtiquetas, ini, end, setDestinatarios, min, max);
+			filtrados = Controlador.filtrarActividades(nombre, setEtiquetas, ini, end, setDestinatarios, min, max);
 			
 			/*jList1.setModel(new javax.swing.AbstractListModel<String>() {
 			private static final long serialVersionUID = 1L;
@@ -717,8 +719,14 @@ public class Actividades extends ColorPanel{
 
 		@Override
 		public void delete() {
-			Controlador.deleteActividad();
-	    	this.dispose();
+			String name = jList1.getSelectedValue();
+			for(Actividad a : filtrados){
+				if(a.getNombre().equals(name)){
+					System.out.println(name);
+					Controlador.deleteActividad(a);
+			    	this.dispose();
+				}
+			}
 		}                                        
 
 	}

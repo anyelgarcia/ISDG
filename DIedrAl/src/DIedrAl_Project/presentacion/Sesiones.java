@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import DIedrAl_Project.negocio.recursos.ArraySesiones;
+import DIedrAl_Project.negocio.recursos.Recurso;
 import DIedrAl_Project.negocio.recursos.Sesion;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
@@ -405,6 +406,7 @@ public class Sesiones extends ColorPanel{
 			private javax.swing.JTextField jTextField2;
 			private javax.swing.JTextField jTextField3;
 			private Modo modo;
+			private ArraySesiones filtrados;
 			
 			public PantallaBuscar(Modo m){
 				modo = m;
@@ -579,7 +581,7 @@ public class Sesiones extends ColorPanel{
 				if(!jTextField3.getText().equals("")) 
 					end = Integer.parseInt(jTextField3.getText());
 			
-				ArraySesiones salida = Controlador.filtrarSesiones(nombre, setEtiquetas, ini, end, setDestinatarios);
+				filtrados = Controlador.filtrarSesiones(nombre, setEtiquetas, ini, end, setDestinatarios);
 				
 				
 				
@@ -609,8 +611,14 @@ public class Sesiones extends ColorPanel{
 			}
 			@Override
 			public void delete() {
-				Controlador.deleteSesion();
-		    	this.dispose();
+				String name = jList1.getSelectedValue();
+				for(Sesion s : filtrados){
+					if(s.getNombre().equals(name)){
+						System.out.println(name);
+						Controlador.deleteSesion(s);
+				    	this.dispose();
+					}
+				}
 			}
 		}
 }
