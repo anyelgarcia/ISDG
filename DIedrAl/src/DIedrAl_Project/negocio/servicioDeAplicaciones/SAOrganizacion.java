@@ -4,6 +4,7 @@ import java.rmi.*;
 
 import DIedrAl_Project.negocio.administracion.Centro;
 
+
 public interface SAOrganizacion {
 	public Centro getCentro(String name) throws NotBoundException;
 	
