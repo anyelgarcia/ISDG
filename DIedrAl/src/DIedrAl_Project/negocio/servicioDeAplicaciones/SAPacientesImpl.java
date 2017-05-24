@@ -49,6 +49,11 @@ public class SAPacientesImpl implements SAPacientes {
 	public Set<Paciente> getPacientesAsociados(Usuario usu) throws NotBoundException {
 		return centro.getPacientesAsociados(usu);
 	}
+	
+	@Override
+	public Set<Usuario> getUsuariosAsociados(Paciente pac) throws NotBoundException {
+		return centro.getUsuariosAsociados(pac);
+	}
 
 	@Override
 	public Paciente getPacienteConNIF(String nif) throws NotBoundException {
@@ -61,8 +66,8 @@ public class SAPacientesImpl implements SAPacientes {
 	}
 
 	@Override
-	public Set<Persona> filtrarPersonas(Hints[] hints, String[] values) {
-		return centro.getPersonas(hints, values);
+	public Set<Persona> filtrarPersonas(Hints[] hints, String[] values, Hints[] tipos) {
+		return centro.getPersonas(hints, values, tipos);
 	}
 	
 

@@ -163,7 +163,7 @@ public class Persona implements ObjetoAlmacenable {
 	 * @return 0 si id es el mismo que el de otra, -1/1 si menor/mayor,
 	 *         respectivamente.
 	 */
-	public int compararID(Persona otra) {
+	public int compararNIF(Persona otra) {
 		return nif.compareTo(otra.nif);
 	}
 	
