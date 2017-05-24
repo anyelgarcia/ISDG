@@ -41,7 +41,8 @@ public class Centro {
 		personasCentro = new HashMap<String, Persona>();
 	}
 
-	public Centro(String name, Map<Paciente, Set<Usuario>> pacientes, Map<Usuario, Set<Paciente>> usuarios) {
+	public Centro(String name, Map<Paciente, Set<Usuario>> pacientes,
+			Map<Usuario, Set<Paciente>> usuarios) {
 		nombre = name;
 		this.pacientes = pacientes;
 		this.usuarios = usuarios;
@@ -53,7 +54,7 @@ public class Centro {
 	public void addUsuario(Usuario usu) throws AlreadyBoundException {
 		if (!usuarios.containsKey(usu)) {
 			usuarios.put(usu, new HashSet<Paciente>());
-			personasCentro.put(usu.getId(), usu);
+			personasCentro.put(usu.getNif(), usu);
 		} else {
 			throw new AlreadyBoundException(usu + " ya registrado");
 		}
@@ -62,7 +63,7 @@ public class Centro {
 	public void addPaciente(Paciente pac) throws AlreadyBoundException {
 		if (!pacientes.containsKey(pac)) {
 			pacientes.put(pac, new HashSet<Usuario>());
-			personasCentro.put(pac.getId(), pac);
+			personasCentro.put(pac.getNif(), pac);
 		} else {
 			throw new AlreadyBoundException(pac + " ya registrado");
 		}
@@ -73,27 +74,35 @@ public class Centro {
 		if (usuarios.containsKey(usu)) {
 			usuarios.remove(usu);
 			// Suponemos coherencia de datos.
-			personasCentro.remove(usu.getId());
+			personasCentro.remove(usu.getNif());
+			// Borrar el usuario de todos los pacientes que lo tuvieran
+			// asociado.
+			usuarios.forEach((pac, set) -> set.remove(usu));
 		} else {
 			throw new NotBoundException(usu + " no registrado");
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void erasePaciente(Paciente pac) throws NotBoundException {
 
 		if (pacientes.containsKey(pac)) {
 			pacientes.remove(pac);
 			// Suponemos coherencia de datos.
-			personasCentro.remove(pac.getId());
+			personasCentro.remove(pac.getNif());
+			// Borrar el paciente de todos los usuarios que lo tuvieran
+			// asociado.
+			usuarios.forEach((usu, set) -> set.remove(pac));
 		} else {
 			throw new NotBoundException("Paciente " + pac + " no encontrado");
 		}
 	}
 
-	public void ligarPaciente(Paciente pac, Usuario usu) throws NotBoundException, AlreadyBoundException {
-		if (!usuarios.containsKey(usu)) {
+	public void ligarPaciente(Paciente pac, Usuario usu)
+			throws NotBoundException, AlreadyBoundException {
+		if (!personasCentro.containsKey(usu.getNif())) {
 			throw new NotBoundException("Usuario " + usu + " no encontrado");
-		} else if (!pacientes.containsKey(pac)) {
+		} else if (!personasCentro.containsKey(pac.getNif())) {
 			throw new NotBoundException("Paciente " + pac + " no encontrado");
 		} else if (usuarios.get(usu).contains(pac)) {
 			throw new AlreadyBoundException("Paciente ya ligado");
@@ -103,7 +112,8 @@ public class Centro {
 		}
 	}
 
-	public void desligarPaciente(Paciente pac, Usuario usu) throws NotBoundException, AlreadyBoundException {
+	public void desligarPaciente(Paciente pac, Usuario usu)
+			throws NotBoundException, AlreadyBoundException {
 		if (!usuarios.containsKey(usu)) {
 			throw new NotBoundException("Usuario " + usu + " no encontrado");
 		} else if (!pacientes.containsKey(pac)) {
@@ -116,8 +126,9 @@ public class Centro {
 		}
 	}
 
-	public Set<Paciente> getPacientesAsociados(Usuario usu) throws NotBoundException {
-		if (!usuarios.containsKey(usu)) {
+	public Set<Paciente> getPacientesAsociados(Usuario usu)
+			throws NotBoundException {
+		if (!personasCentro.containsKey(usu.getNif())) {
 			throw new NotBoundException("Usuario " + usu + " no encontrado");
 		} else
 			return usuarios.get(usu);
@@ -197,10 +208,12 @@ public class Centro {
 	 * @throws IllegalArgumentException
 	 *             Si el número de filtros no coincide con el de valores.
 	 */
-	public Set<Persona> getPersonas(Hints[] hints, String... values) throws IllegalArgumentException {
+	public Set<Persona> getPersonas(Hints[] hints, String[] values,
+			Hints[] tiposPers) throws IllegalArgumentException {
 
 		if (hints.length != values.length)
-			throw new IllegalArgumentException("Número de campos debe coincidir con número de valores de búsqueda");
+			throw new IllegalArgumentException(
+					"Número de campos debe coincidir con número de valores de búsqueda");
 
 		Set<Persona> resultadoBusc = new HashSet<>();
 
@@ -210,47 +223,51 @@ public class Centro {
 		Map<Hints, String> filtros = IntStream.range(0, hints.length).boxed()
 				.collect(Collectors.toMap(i -> hints[i], i -> values[i]));
 
+		// Conjunto de tipos de persona a buscar.
+		Set<Hints> tipos = new HashSet<>(Arrays.asList(tiposPers));
+
 		for (Persona x : personas) {
 			boolean valida = true;
-			valida = filtros.containsKey(Hints.NIF) ? filtros.get(Hints.NIF).equals(x.getId()) : valida;
+
+			valida = (tipos.size() == 0)
+					|| (tipos.contains(Hints.PACIENTE) && x instanceof Paciente)
+					|| (tipos.contains(Hints.ADMINISTRADOR)
+							&& x instanceof Usuario && ((Usuario) x).isAdmin())
+					|| (tipos.contains(Hints.USUARIO) && x instanceof Usuario);
+
+			valida = filtros.containsKey(Hints.NIF) ? filtros.get(Hints.NIF)
+					.equals(x.getNif()) : valida;
 			if (valida) {
-				valida = filtros.containsKey(Hints.APELLIDO1) ? filtros.get(Hints.APELLIDO1).equals(x.getFirstSurname())
-						: valida;
+				valida = filtros.containsKey(Hints.APELLIDO1) ? filtros.get(
+						Hints.APELLIDO1).equals(x.getFirstSurname()) : valida;
 			}
 			if (valida) {
-				valida = filtros.containsKey(Hints.APELLIDO2)
-						? filtros.get(Hints.APELLIDO2).equals(x.getSecondSurname()) : valida;
+				valida = filtros.containsKey(Hints.APELLIDO2) ? filtros.get(
+						Hints.APELLIDO2).equals(x.getSecondSurname()) : valida;
 			}
 			if (valida) {
-				valida = filtros.containsKey(Hints.NOMBRE) ? filtros.get(Hints.NOMBRE).equals(x.getName()) : valida;
+				valida = filtros.containsKey(Hints.NOMBRE) ? filtros.get(
+						Hints.NOMBRE).equals(x.getName()) : valida;
 			}
-			if (valida) {
-				valida = filtros.containsKey(Hints.PACIENTE) ? x instanceof Paciente : valida;
-			}
-			if (valida) {
-				valida = filtros.containsKey(Hints.ADMINISTRADOR) ? x instanceof Usuario && ((Usuario) x).isAdmin()
-						: valida;
-			}
-			if (valida) {
-				valida = filtros.containsKey(Hints.USUARIO) ? x instanceof Usuario : valida;
-			}
+
 			if (valida)
 				resultadoBusc.add(x);
 		}
 
 		return resultadoBusc;
 	}
-	
+
 	/**
 	 * Funcionará?
+	 * 
 	 * @param nif
 	 * @return
 	 */
-	public Persona getPersona(String nif){
-		Set<Persona> aux = getPersonas(new Hints[]{Hints.NIF},nif);
-		assert(aux.size()==1);
-		Persona[] a=null;
-		return aux.toArray(a)[0];
+	public Persona getPersona(String nif) {
+		Set<Persona> aux = getPersonas(new Hints[] { Hints.NIF },
+				new String[] { nif }, null);
+		assert (aux.size() == 1);
+		return aux.toArray(new Persona[aux.size()])[0];
 	}
 
 	private void initCentro() {
@@ -261,4 +278,13 @@ public class Centro {
 			personasCentro.put(key.getNif(), key);
 		}
 	}
+
+	public Set<Usuario> getUsuariosAsociados(Paciente pac)
+			throws NotBoundException {
+		if (!personasCentro.containsKey(pac.getNif())) {
+			throw new NotBoundException("Usuario " + pac + " no encontrado");
+		} else
+			return pacientes.get(pac);
+	}
+
 }
