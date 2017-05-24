@@ -16,9 +16,9 @@ import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import org.jdatepicker.impl.JDatePanelImpl;
+/*import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
+import org.jdatepicker.impl.UtilDateModel;*/
 
 
 
@@ -113,8 +113,8 @@ public class Calendario extends ColorPanel{
 		    private javax.swing.JScrollPane jScrollPane1;
 		    private javax.swing.JSeparator jSeparator1;
 		    private javax.swing.JPanel jPanel1;
-		    private JDatePickerImpl datePicker; 
-		    private JDatePanelImpl jPanel2;
+		    /*private JDatePickerImpl datePicker; 
+		    private JDatePanelImpl jPanel2;*/
 	    
 	    public PantallaConsulta() {
 	        initGUI();
@@ -132,19 +132,19 @@ public class Calendario extends ColorPanel{
 	        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
 	        
-	        UtilDateModel model = new UtilDateModel();
+	       // UtilDateModel model = new UtilDateModel();
 		    GregorianCalendar fecha = new GregorianCalendar();
 	        
- 	        model.setDate(Integer.parseInt(new SimpleDateFormat("yyyy").format(fecha.getTime())), 
- 	        		Integer.parseInt(new SimpleDateFormat("MM").format(fecha.getTime())) - 1, 
- 	        		Integer.parseInt(new SimpleDateFormat("dd").format(fecha.getTime())));
+ 	       // model.setDate(Integer.parseInt(new SimpleDateFormat("yyyy").format(fecha.getTime())), 
+ 	        //		Integer.parseInt(new SimpleDateFormat("MM").format(fecha.getTime())) - 1, 
+ 	        //		Integer.parseInt(new SimpleDateFormat("dd").format(fecha.getTime())));
 
 	        Properties p = new Properties();
 	        p.put("text.today", "Today");
 	        p.put("text.month", "Month");
 	        p.put("text.year", "Year");
 	        
-	        jPanel2 = new JDatePanelImpl(model, p);
+	        /*jPanel2 = new JDatePanelImpl(model, p);
 	        datePicker = new JDatePickerImpl(jPanel2, new DateLabelFormatter());
 	        datePicker.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -213,12 +213,13 @@ public class Calendario extends ColorPanel{
 	        );
 
 	        pack();
+	        */
 	    }
 	    
 	    private void jDateActionPerformed(java.awt.event.ActionEvent evt) {                                         
-	    	Date selectedDate = (Date) datePicker.getModel().getValue();
+	    	//Date selectedDate = (Date) datePicker.getModel().getValue();
 	        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-	        System.out.println(df.format(selectedDate));
+	        //System.out.println(df.format(selectedDate));
 	    }  
 	    
 	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {    
