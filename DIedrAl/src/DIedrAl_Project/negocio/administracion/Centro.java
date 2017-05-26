@@ -32,21 +32,22 @@ public class Centro {
 
 	// TODO: implementarlo primero
 	private Organizacion organizacion;
-	
 
 	protected Centro(String name) {
 		nombre = name;
 		pacientes = new HashMap<Paciente, Set<Usuario>>();
 		usuarios = new HashMap<Usuario, Set<Paciente>>();
 		personasCentro = new HashMap<String, Persona>();
-	
-  }
-	protected Centro(String name, Map<Paciente, Set<Usuario>> pacientes, Map<Usuario, Set<Paciente>> usuarios) {
+
+	}
+
+	protected Centro(String name, Map<Paciente, Set<Usuario>> pacientes,
+			Map<Usuario, Set<Paciente>> usuarios) {
 		nombre = name;
 		this.pacientes = pacientes;
 		this.usuarios = usuarios;
 		this.personasCentro = new HashMap<String, Persona>();
-		
+
 		initCentro();
 
 	}
@@ -287,7 +288,7 @@ public class Centro {
 			return pacientes.get(pac);
 	}
 
-	public CentroAlmacenable comoAlmacenable(){
-		return 
+	public CentroAlmacenable comoAlmacenable() {
+		return new CentroAlmacenable(this.getNombre());
 	}
 }

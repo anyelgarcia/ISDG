@@ -1,18 +1,13 @@
 package DIedrAl_Project.negocio.administracion;
 
-import java.rmi.AlreadyBoundException;
-import java.rmi.NotBoundException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 public final class Organizacion {
-	
+
 	private static Organizacion instancia = null;
-	
-	private final Map<String, Centro> centros;
-	
+
+	private String password;
+
+	//private final Map<String, Centro> centros;
 
 	public static Organizacion getInstancia() {
 
@@ -21,37 +16,54 @@ public final class Organizacion {
 
 		return instancia;
 	}
-	
-	protected Organizacion(){
-		centros = new HashMap<String, Centro>();
-		
+
+	protected Organizacion() {
+	//	centros = new HashMap<String, Centro>();
+
 	}
 
-	//APAÑO PARA PODER TRABAJAR
+	/*// APAÑO PARA PODER TRABAJAR
 	public Centro getCentro(String name) throws NotBoundException {
-		if(!centros.containsKey(name)){
+		if (!centros.containsKey(name)) {
 			throw new NotBoundException("Centro ya introducido");
-		}
-		else return centros.get(name);
-		
+		} else
+			return centros.get(name);
+
 	}
-	public void addCentro(String name) throws AlreadyBoundException{
-		if(centros.containsKey(name)){
+
+	public void addCentro(String name) throws AlreadyBoundException {
+		if (centros.containsKey(name)) {
 			throw new AlreadyBoundException("Centro ya introducido");
-		}
-		else{
+		} else {
 			centros.put(name, new Centro(name));
 		}
 	}
-	
-	public void removeCentro(String name) throws NotBoundException{
-		if(!centros.containsKey(name)){
+
+	public void removeCentro(String name) throws NotBoundException {
+		if (!centros.containsKey(name)) {
 			throw new NotBoundException("Centro ya introducido");
-		}
-		else{
+		} else {
 			centros.remove(name);
 		}
+	}*/
+
+	/**
+	 * Dada una cadena de caracteres, comprueba si coincide con la contraseña de
+	 * la organización
+	 * 
+	 * @return true si la contraseña suministrada coincide con la de la
+	 *         organización
+	 */
+	public boolean inputPassword(String trial) {
+		return password.equals(trial);
 	}
 
-    
+	/**
+	 * Cambia la contraseña actual de la organización por la contraseña proporcionada
+	 * @param password nueva contraseña
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 }

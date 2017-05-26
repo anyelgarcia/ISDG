@@ -5,6 +5,8 @@ public class Usuario extends Persona {
 	protected boolean admin;
 
 	protected String infor;
+	
+	protected String centro;
 
 	protected String password;
 
@@ -14,6 +16,10 @@ public class Usuario extends Persona {
 
 	public boolean isAdmin() {
 		return admin;
+	}
+	
+	public void setCentro(Centro centro){
+		this.centro = centro.getNombre();
 	}
 
 	public void setAdmin() {
@@ -27,11 +33,7 @@ public class Usuario extends Persona {
 	public void setInfor(String infor) {
 		this.infor = infor;
 	}
-	
-	public String getInfor() {
-		return infor;
-	}
-	
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -46,4 +48,5 @@ public class Usuario extends Persona {
 	public boolean inputPassword(String pass) {
 		return pass.equals(password);
 	}
+	
 }
