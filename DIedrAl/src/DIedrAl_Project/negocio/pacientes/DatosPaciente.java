@@ -6,7 +6,7 @@ import DIedrAl_Project.negocio.calendario.Fecha;
 
 
 public class DatosPaciente {
-    private String estadocivil;
+	
 
     private String datosfamiliares;
 
@@ -18,14 +18,6 @@ public class DatosPaciente {
     
     public DatosPaciente(){
     	aficiones = new ArrayList<String>();
-    }
-
-    public String getEstadocivil() {
-        return this.estadocivil;
-    }
-
-    public void setEstadocivil(String value) {
-        this.estadocivil = value;
     }
 
     public String getDatosfamiliares() {
@@ -54,6 +46,14 @@ public class DatosPaciente {
 
 	public void setFechalesion(Fecha fechalesion) {
 		this.fechalesion = fechalesion;
+	}
+	
+	public String getAficiones(){
+		String out = "";
+		for(String str: aficiones){
+			out += ", " + str;
+		}
+		return out;
 	}
 
   

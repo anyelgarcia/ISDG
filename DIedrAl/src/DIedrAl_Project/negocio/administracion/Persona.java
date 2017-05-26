@@ -10,6 +10,8 @@ import DIedrAl_Project.negocio.pacientes.Paciente;
 
 public class Persona implements ObjetoAlmacenable {
 
+	private final String ESTADOSCIVILES[] = {"Casado", "Soltero", "Divorciado", "Viudo"};
+    
 	protected String nombre;
 
 	protected String apellido1;
@@ -135,6 +137,14 @@ public class Persona implements ObjetoAlmacenable {
 	public void setNif(String nif) {
 		this.nif = nif;
 	}
+	
+	public int getEstadocivilIndex() {
+    	for(int i=0; i<4; i++){
+    		if(ESTADOSCIVILES[i].equals(estadoCivil))
+    			return i;
+    	}
+        return -1;
+    }
 
 	public int compararAlfab(Persona otra) {
 		if (apellido1.compareTo(otra.apellido1) == -1) {
