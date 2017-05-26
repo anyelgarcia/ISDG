@@ -56,6 +56,12 @@ public abstract class Etiquetable implements ObjetoAlmacenable {
 	}
 
 	public abstract Set<String> getEtiquetas();
+	
+	public void igualarCampos(Etiquetable that){
+		this.etiquetas = that.etiquetas;
+		this.descripcion  = that.descripcion;
+		this.nombre = that.nombre;
+	}
 
 	public String getNombre() {
 		return this.nombre;
