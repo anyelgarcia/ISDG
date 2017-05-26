@@ -3,11 +3,17 @@ package DIedrAl_Project.presentacion;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.io.IOException;
 import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
 import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import DIedrAl_Project.negocio.administracion.EstadoCivil;
 import DIedrAl_Project.negocio.administracion.Hints;
+import DIedrAl_Project.negocio.administracion.Persona;
 import DIedrAl_Project.negocio.calendario.Fecha;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
@@ -44,7 +50,7 @@ public class Pacientes extends ColorPanel{
 		ImageButton buscar = new ImageButton("Buscar", "images/bluebutton.png", "images/bluebutton2.png", this);
 		componentes.add(buscar);
 		buscar.addActionListener((ae) -> {
-			JFrame pantalla = new PantallaPolifacetica(Modo.BUSCAR);
+			JFrame pantalla = new PantallaBuscar(Modo.BUSCAR);
 			pantalla.setVisible(true);
 		});
 		c.gridx = 0;
@@ -58,7 +64,7 @@ public class Pacientes extends ColorPanel{
 		ImageButton eliminar = new ImageButton("Eliminar", "images/greenbutton.png", "images/greenbutton2.png", this);
 		componentes.add(eliminar);
 		eliminar.addActionListener((ae) -> {
-			JFrame panel = new PantallaPolifacetica(Modo.ELIMINAR);
+			JFrame panel = new PantallaBuscar(Modo.ELIMINAR);
 			panel.setVisible(true);
 			
 		});
@@ -71,7 +77,7 @@ public class Pacientes extends ColorPanel{
 		ImageButton anadir = new ImageButton("Añadir", "images/tanbutton.png", "images/tanbutton2.png", this);
 		componentes.add(anadir);
 		anadir.addActionListener((ae) -> {
-			JFrame pantalla = new PantallaAdd(false, null);
+			JFrame pantalla = new PantallaPaciente(null, Modo.ADD);
 			pantalla.setVisible(true);
 		});
 		c.gridx = 0;
@@ -82,7 +88,7 @@ public class Pacientes extends ColorPanel{
 		ImageButton editar = new ImageButton("  Editar  ", "images/orangebutton.png", "images/orangebutton2.png", this);
 		componentes.add(editar);
 		editar.addActionListener((ae) -> {
-			JFrame pantalla = new PantallaPolifacetica(Modo.EDITAR);
+			JFrame pantalla = new PantallaBuscar(Modo.EDITAR);
 			pantalla.setVisible(true);
 		});
 		c.gridx = 1;
@@ -95,7 +101,7 @@ public class Pacientes extends ColorPanel{
 	 * @author Diedral_Group
 	 * 
 	 */                    
-	private class PantallaAdd extends JFrame{
+	private class PantallaPaciente extends JFrame{
 		
 		 /**
 		 * 
@@ -132,13 +138,19 @@ public class Pacientes extends ColorPanel{
 	    private javax.swing.JTextField jTextField4;
 	    private javax.swing.JTextField jTextField5;
 	    private boolean editable;
-	    // End of variables declaration     
+	    private Paciente pac;
+	    private Modo mode;    
 	    
-		public PantallaAdd(boolean b, Paciente p){
-			editable = b;
-			initGUI(p);
+		public PantallaPaciente(Paciente p, Modo m){
+			pac = p;
+			mode = m;
+			if(mode.equals(Modo.VISTA)) editable= false;
+			else editable = true;
+
+			initGUI();
 		}
-		private void initGUI(Paciente p){
+		
+		private void initGUI(){
 			jLabel1 = new javax.swing.JLabel();
 			jLabel2 = new javax.swing.JLabel();
 			jLabel3 = new javax.swing.JLabel();
@@ -169,8 +181,11 @@ public class Pacientes extends ColorPanel{
 			jTextField5 = new javax.swing.JTextField();
 			
 			setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-			setTitle("Crear Paciente");
-			setName("Crear Paciente"); // NOI18N
+			switch(mode){
+				case ADD: setTitle("Crear Paciente"); break;
+			    case VISTA: setTitle("Paciente"); break;
+			    case EDITAR: setTitle("Editar Paciente"); break;
+			}
 			
 			jLabel1.setText("Datos Personales: ");
 			
@@ -226,28 +241,32 @@ public class Pacientes extends ColorPanel{
 				}
 			});
 			
-			if(p!=null){
-				jTextField1.setText(p.getName());
-				jTextField2.setText(p.getFirstSurname());
-				jTextField3.setText(p.getSecondSurname());
-				jTextField4.setText(p.getDatos().getLesion());
-				jTextField5.setText(p.getNif());
-				jTextArea1.setText(p.getDatos().getAficiones());
-				Fecha birthday = p.getBirthday();
+			if(pac!=null){
+				jTextField1.setText(pac.getName());
+				jTextField2.setText(pac.getFirstSurname());
+				jTextField3.setText(pac.getSecondSurname());
+				jTextField4.setText(pac.getDatos().getLesion());
+				jTextField5.setText(pac.getNif());
+				jTextArea1.setText(pac.getDatos().getAficiones());
+				Fecha birthday = pac.getBirthday();
 				if(birthday!=null){
 					jComboBox1.setSelectedIndex(birthday.getDia()-1);
 					jComboBox2.setSelectedIndex(birthday.getMesIndex());
 					jComboBox3.setSelectedIndex(birthday.getAnyo()-1900);
 				}
-				Fecha lesionday = p.getDatos().getFechalesion();
+				Fecha lesionday = pac.getDatos().getFechalesion();
 				if(lesionday!=null){
 					jComboBox5.setSelectedIndex(lesionday.getDia()-1);
 					jComboBox6.setSelectedIndex(lesionday.getMesIndex());
 					jComboBox7.setSelectedIndex(lesionday.getAnyo()-1900);
 				}
-				if(p.getEstadoCivil()!=null)
-					jComboBox4.setSelectedIndex(p.getEstadocivilIndex());
-				jTextArea2.setText(p.getPerfil());
+				EstadoCivil estadoCivil = pac.getEstadoCivil();
+				if(estadoCivil!=null){
+					for(int i=0; i<4; i++){
+						if(EstadoCivil.values()[i].equals(estadoCivil))jComboBox4.setSelectedIndex(i);
+					}
+				}
+				jTextArea2.setText(pac.getPerfil());
 			}
 			
 			if(!editable){
@@ -257,8 +276,9 @@ public class Pacientes extends ColorPanel{
 				jTextField5.setEditable(false);
 				jComboBox1.setEnabled(false);
 				jComboBox2.setEnabled(false);
+				jButton1.setVisible(false);
+		        jButton1.setEnabled(false);
 				jComboBox3.setEnabled(false);
-				
 			}
 						
 			javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -413,11 +433,14 @@ public class Pacientes extends ColorPanel{
 			for(String str: aficiones)
 				info.getDatos().addAficion(str);
 			
-			try {
-				Controlador.addPaciente(info);
-			} catch (AlreadyBoundException e) {
-				// Mostrar un mensaje de que el paciente ya existe
-			}
+			if(mode.equals(Modo.ADD))
+				try {
+					Controlador.addPaciente(info);
+				} catch (AlreadyBoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			else if(mode.equals(Modo.VISTA)) Controlador.modificaPaciente(pac, info);
 		} 
 	}
 
@@ -429,13 +452,13 @@ public class Pacientes extends ColorPanel{
 	 *
 	 */
 	
-	private class PantallaPolifacetica extends JFrame implements confirmListener{
+	private class PantallaBuscar extends JFrame implements confirmListener{
 		
 		/**
 		 * 
 		 */
 		private static final long serialVersionUID = -5453880899658964801L;
-		// Variables declaration - do not modify                     
+		
 	    private javax.swing.JButton jButton1;
 	    private javax.swing.JButton jButton2;
 	    private javax.swing.JLabel jLabel1;
@@ -450,9 +473,9 @@ public class Pacientes extends ColorPanel{
 	    private javax.swing.JTextField jTextField4;
 	    private javax.swing.JSeparator jSeparator2;
 	    private Modo modo;
-	    // End of variables declaration     
+		private Paciente[] resultados;   
 	    
-	    public PantallaPolifacetica(Modo modo) {
+	    public PantallaBuscar(Modo modo) {
 	    	this.modo = modo;
 	        initGUI();
 	    }
@@ -473,7 +496,6 @@ public class Pacientes extends ColorPanel{
 	        jList1 = new javax.swing.JList<>();
 	        jButton2 = new javax.swing.JButton();
 	        jSeparator2 = new javax.swing.JSeparator();
-
 
 	        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	        
@@ -505,10 +527,6 @@ public class Pacientes extends ColorPanel{
 	        });
 
 	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-	            /**
-				 * 
-				 */
-				private static final long serialVersionUID = 1L;
 				String[] strings = {  };
 	            public int getSize() { return strings.length; }
 	            public String getElementAt(int i) { return strings[i]; }
@@ -641,10 +659,19 @@ public class Pacientes extends ColorPanel{
 			
 			Hints valUsuarios [] = {Hints.PACIENTE};
 			
-			String resultados[] = Controlador.buscarUsuarios(claves, valores, valUsuarios);
+			ArrayList<Persona> res = Controlador.buscarUsuarios(claves, valores, valUsuarios);
+			String[] cadenas = new String[res.size()];
+			resultados = new Paciente[res.size()];
+			i=0;
+			for(Persona p: res){
+				cadenas[i] = res.toString();
+				resultados[i] = (Paciente)p;
+				i++;
+			}
+			
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
 				private static final long serialVersionUID = 1L;
-				String[] strings = resultados;
+				String[] strings = cadenas;
 	            public int getSize() { return strings.length; }
 	            public String getElementAt(int i) { return strings[i]; }
 			});
@@ -652,16 +679,26 @@ public class Pacientes extends ColorPanel{
 	    
 	    
 
-		private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+		private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {        
+			int i; JFrame j; Paciente p = null;
 			switch(modo){
 				case ELIMINAR:
 					Confirm c = new Confirm();
+					c.setMensaje("El paciente se eliminará del sistema.");
 			    	c.setVisible(true);
 			    	c.addListener(this);
 			    	break;
 				case EDITAR:
+					i = jList1.getSelectedIndex();
+					p = resultados[i];
+					j = new PantallaPaciente(p, Modo.EDITAR);
+					j.setVisible(true);
 					break;
 				case BUSCAR:
+					i = jList1.getSelectedIndex();
+					p = resultados[i];
+					j = new PantallaPaciente(p, Modo.VISTA);
+					j.setVisible(true);
 					break;
 				}
 			
@@ -671,7 +708,13 @@ public class Pacientes extends ColorPanel{
 	     * Se llama a esta función al pulsar el botón -Sí- en confirmar. Le dice al controlador que elimine al paciente.
 	     */
 	    public void delete(){
-	    	Controlador.deletePaciente(jTextField1.getText());
+	    	int i = jList1.getSelectedIndex();
+	    	try {
+				Controlador.deletePaciente(resultados[i]);
+			} catch (ClassNotFoundException | NotBoundException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    	this.dispose();
 	    }
 	}

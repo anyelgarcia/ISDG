@@ -153,8 +153,9 @@ public class Controlador {
 		saRecursos.removeActividad(a);
 	}
 	
-	public static void deletePaciente(String s){
-		
+	public static void deletePaciente(Paciente resultado) throws ClassNotFoundException, NotBoundException, IOException{
+		SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(null);
+		saPacientes.erasePaciente(resultado);
 	}
 	
 	public static void deleteRecurso(Recurso r){
@@ -189,7 +190,7 @@ public class Controlador {
 		return resultados;
 	}
 	
-	public static String [] buscarUsuarios(Hints[]hints, String [] values, Hints[] valUsuarios){
+	public static ArrayList<Persona> buscarUsuarios(Hints[]hints, String [] values, Hints[] valUsuarios){
 		
 		SAPacientes saUsuarios = null;
 		try {
@@ -200,15 +201,12 @@ public class Controlador {
 		}
 		Set<Persona> usuarios = saUsuarios.filtrarPersonas(hints, values, valUsuarios);
 		
-		int length = usuarios.size();
-		int i=0;
-		String resultados[] = new String[length];
-		for(Persona persona: usuarios){
-			resultados[i] = persona.toString();
-			i++;
+		ArrayList<Persona> resultado = new ArrayList<Persona>();
+		for(Persona p: usuarios){
+			resultado.add(p);
 		}
 		
-		return resultados;
+		return resultado;
 	}
 	
 	public static ArraySesiones filtrarSesiones(String nombre, Set<String> filtros, Integer min, Integer max, Set<String> destinatarios){
@@ -299,6 +297,10 @@ public class Controlador {
 	}
   
 	public static void modificaEtiquetable(Etiquetable antiguo, Etiquetable nuevo){
+		antiguo.igualarCampos(nuevo);
+	}
+
+	public static void modificaPaciente(Paciente antiguo, Paciente nuevo) {
 		antiguo.igualarCampos(nuevo);
 	}
 
