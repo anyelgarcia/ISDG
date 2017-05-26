@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import DIedrAl_Project.negocio.recursos.Actividad;
 import DIedrAl_Project.negocio.recursos.ArrayRecursos;
 import DIedrAl_Project.negocio.recursos.Recurso;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
@@ -48,7 +49,7 @@ public class Recursos extends ColorPanel{
 		ImageButton nuevo = new ImageButton("Crear ", "images/orangebutton.png", "images/orangebutton2.png", this);
 		componentes.add(nuevo);
 		nuevo.addActionListener((ae) -> {
-			JFrame pantalla = new PantallaAdd();
+			JFrame pantalla = new PantallaRecurso(null, Modo.ADD);
 			pantalla.setVisible(true);
 			
 		});
@@ -104,7 +105,7 @@ public class Recursos extends ColorPanel{
 	 * @author Diedral_Group
 	 *
 	 */
-	private class PantallaAdd extends JFrame{
+	private class PantallaRecurso extends JFrame{
 		
 		 /**
 		 * 
@@ -123,17 +124,27 @@ public class Recursos extends ColorPanel{
 	    private javax.swing.JTextArea jTextArea3;
 	    private javax.swing.JTextField jTextField1;
 	    private javax.swing.JTextField jTextField2;
+	    private boolean editable;
+	    private Recurso recurso;
+	    private Modo mode;
 	    // End of variables declaration    
 	    
-		public PantallaAdd(){
+		public PantallaRecurso(Recurso r, Modo m){
+			mode = m;
+			if(mode.equals(Modo.VISTA)) editable= false;
+			else editable = true;
+			recurso = r;
 			initGUI();
 		}
+		
 		private void initGUI(){
 			jLabel1 = new javax.swing.JLabel();
 		    jLabel2 = new javax.swing.JLabel();
 		    jLabel3 = new javax.swing.JLabel();
 		    jLabel4 = new javax.swing.JLabel();
 		    jButton1 = new javax.swing.JButton();
+		    jButton1.setVisible(editable);
+	        jButton1.setEnabled(editable);
 		    jTextField1 = new javax.swing.JTextField();
 		    jTextField2 = new javax.swing.JTextField();
 		    jScrollPane2 = new javax.swing.JScrollPane();
@@ -142,7 +153,11 @@ public class Recursos extends ColorPanel{
 		    jTextArea3 = new javax.swing.JTextArea();
 
 		    setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		    setTitle("Crear Recurso");
+		    switch(mode){
+		    case ADD: setTitle("Crear Recurso"); break;
+		    case VISTA: setTitle("Recurso"); break;
+		    case EDITAR: setTitle("Editar Recurso"); break;
+		    }
 
 		        jLabel1.setText("Nombre del recurso:");
 
@@ -170,6 +185,14 @@ public class Recursos extends ColorPanel{
 		        jTextArea3.setRows(5);
 		        jScrollPane3.setViewportView(jTextArea3);
 
+		        
+		        if(recurso != null){
+		        	jTextField1.setText(recurso.getNombre());
+		        	jTextField2.setText(recurso.getFileName());
+		        	jTextArea2.setText(recurso.getDescripcion());
+		        	jTextArea3.setText(Controlador.getEtiquetas(recurso));
+		        }
+		        
 		        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		        getContentPane().setLayout(layout);
 		        layout.setHorizontalGroup(
@@ -238,6 +261,9 @@ public class Recursos extends ColorPanel{
 			
 			Recurso info = new Recurso(String.valueOf(jTextField2.getText()), String.valueOf(jTextField1.getText()), etiqs);
 			info.setDescripcion(String.valueOf(jTextArea3.getText()));
+			
+			if(mode.equals(Modo.ADD)) Controlador.addRecurso(info);
+			else if(mode.equals(Modo.EDITAR)) Controlador.modificaEtiquetable(recurso, info);
 		}                                        
 
 	}
@@ -405,6 +431,7 @@ public class Recursos extends ColorPanel{
 	    }                                        
 
 	    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	    	int i; Recurso r; JFrame p;
 	    	switch(modo){
 			case ELIMINAR:
 				Confirm c = new Confirm();
@@ -412,22 +439,37 @@ public class Recursos extends ColorPanel{
 		    	c.addListener(this);
 		    	break;
 			case EDITAR:
+				i = jList1.getSelectedIndex();
+				r = getSelectedRecurso(i, filtrados);
+				p = new PantallaRecurso(r, Modo.EDITAR);
+				p.setVisible(true);
 				break;
 			case BUSCAR:
+				i = jList1.getSelectedIndex();
+				r = getSelectedRecurso(i, filtrados);
+				p = new PantallaRecurso(r, Modo.VISTA);
+				p.setVisible(true);
 				break;
 			}
 	    }
 
 		@Override
 		public void delete() {
-			String name = jList1.getSelectedValue();
-			for(Recurso r : filtrados){
-				if(r.getNombre().equals(name)){
-					Controlador.deleteRecurso(r);
-			    	this.dispose();
-				}
-			}
-			
+			int i = jList1.getSelectedIndex();
+			Recurso r = getSelectedRecurso(i, filtrados);
+			Controlador.deleteRecurso(r);
+	    	this.dispose();
 		}  
+		
+		private Recurso getSelectedRecurso(int i, ArrayRecursos filtrados){
+			int j = 0;
+			for(Recurso r : filtrados){
+				if(i == j){
+					return r;
+				}
+				else ++j;
+			}
+			return null;
+		}
 	}
 }

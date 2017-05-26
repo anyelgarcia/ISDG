@@ -71,7 +71,7 @@ public class Pacientes extends ColorPanel{
 		ImageButton anadir = new ImageButton("Añadir", "images/tanbutton.png", "images/tanbutton2.png", this);
 		componentes.add(anadir);
 		anadir.addActionListener((ae) -> {
-			JFrame pantalla = new PantallaAdd();
+			JFrame pantalla = new PantallaAdd(false, null);
 			pantalla.setVisible(true);
 		});
 		c.gridx = 0;
@@ -131,12 +131,14 @@ public class Pacientes extends ColorPanel{
 	    private javax.swing.JTextField jTextField3;
 	    private javax.swing.JTextField jTextField4;
 	    private javax.swing.JTextField jTextField5;
+	    private boolean editable;
 	    // End of variables declaration     
 	    
-		public PantallaAdd(){
-			initGUI();
+		public PantallaAdd(boolean b, Paciente p){
+			editable = b;
+			initGUI(p);
 		}
-		private void initGUI(){
+		private void initGUI(Paciente p){
 			jLabel1 = new javax.swing.JLabel();
 			jLabel2 = new javax.swing.JLabel();
 			jLabel3 = new javax.swing.JLabel();
@@ -223,6 +225,41 @@ public class Pacientes extends ColorPanel{
 					jButton1ActionPerformed(evt);
 				}
 			});
+			
+			if(p!=null){
+				jTextField1.setText(p.getName());
+				jTextField2.setText(p.getFirstSurname());
+				jTextField3.setText(p.getSecondSurname());
+				jTextField4.setText(p.getDatos().getLesion());
+				jTextField5.setText(p.getNif());
+				jTextArea1.setText(p.getDatos().getAficiones());
+				Fecha birthday = p.getBirthday();
+				if(birthday!=null){
+					jComboBox1.setSelectedIndex(birthday.getDia()-1);
+					jComboBox2.setSelectedIndex(birthday.getMesIndex());
+					jComboBox3.setSelectedIndex(birthday.getAnyo()-1900);
+				}
+				Fecha lesionday = p.getDatos().getFechalesion();
+				if(lesionday!=null){
+					jComboBox5.setSelectedIndex(lesionday.getDia()-1);
+					jComboBox6.setSelectedIndex(lesionday.getMesIndex());
+					jComboBox7.setSelectedIndex(lesionday.getAnyo()-1900);
+				}
+				if(p.getEstadoCivil()!=null)
+					jComboBox4.setSelectedIndex(p.getEstadocivilIndex());
+				jTextArea2.setText(p.getPerfil());
+			}
+			
+			if(!editable){
+				jTextField1.setEditable(false);
+				jTextField2.setEditable(false);
+				jTextField3.setEditable(false);
+				jTextField5.setEditable(false);
+				jComboBox1.setEnabled(false);
+				jComboBox2.setEnabled(false);
+				jComboBox3.setEnabled(false);
+				
+			}
 						
 			javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 			getContentPane().setLayout(layout);
@@ -383,71 +420,7 @@ public class Pacientes extends ColorPanel{
 			}
 		} 
 	}
-	/*
-	public class PacienteTransfer{
-		
-		private String nombre;
-		private String apellido1;
-		private String apellido2;
-		private Fecha fechanacim;
-		private String estadocivil;
-		private String lesion;
-		private Fecha fechalesion;
-		private String [] aficiones;
-		private String descripcion;
-		
-		public PacienteTransfer(String nombre, String apellido1, String apellido2, int dia1, String mes1, int ano1, String estadocivil, String lesion, int dia2, String mes2, int ano2, String [] aficiones, String descripcion){
-				this.nombre = nombre;
-				this.apellido1 = apellido1;
-				this.apellido2 = apellido2;
-				this.fechanacim = new Fecha(dia1, mes1, ano1, 0);
-				this.estadocivil = estadocivil;
-				this.lesion = lesion;
-				this.fechalesion = new Fecha(dia2, mes2, ano2, 0);
-				this.aficiones = aficiones;
-				this.descripcion = descripcion;
-		}
 
-		public String getNombre() {
-			return nombre;
-		}
-
-		public String getApellido1() {
-			return apellido1;
-		}
-
-		public String getApellido2() {
-			return apellido2;
-		}
-
-		public Fecha getFechanacimiento() {
-			return fechanacim;
-		}
-
-		public String getEstadocivil() {
-			return estadocivil;
-		}
-
-		public String getLesion() {
-			return lesion;
-		}
-
-		public Fecha getFechalesion() {
-			return fechalesion;
-		}
-
-		public String[] getAficiones() {
-			return aficiones;
-		}
-
-		public String getDescripcion() {
-			return descripcion;
-		}
-
-		
-
-		
-	}*/
 
 	/**
 	 * 

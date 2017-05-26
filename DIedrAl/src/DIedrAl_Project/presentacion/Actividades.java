@@ -51,7 +51,7 @@ public class Actividades extends ColorPanel{
 		ImageButton nuevo = new ImageButton("  Crear  ", "images/bluebutton.png", "images/bluebutton2.png", this);
 		componentes.add(nuevo);
 		nuevo.addActionListener((ae) -> {
-			JFrame pantalla = new PantallaActividad();
+			JFrame pantalla = new PantallaActividad(null, Modo.ADD);
 			pantalla.setVisible(true);
 		});
 		c.gridx = 0;
@@ -138,8 +138,13 @@ public class Actividades extends ColorPanel{
 	    private javax.swing.JTextField jTextField3;
 	    private boolean editable;
 	    private Actividad act;
+	    private Modo mode;
 	    
-		public PantallaActividad(){
+		public PantallaActividad(Actividad a, Modo m){
+			act = a;
+			mode = m;
+			if(mode.equals(Modo.VISTA)) editable= false;
+			else editable = true;
 			initGUI();
 		}
 		private void initGUI(){
@@ -147,9 +152,14 @@ public class Actividades extends ColorPanel{
 	        jLabel2 = new javax.swing.JLabel();
 	        jLabel3 = new javax.swing.JLabel();
 	        jButton1 = new javax.swing.JButton();
+	        jButton1.setVisible(editable);
+	        jButton1.setEnabled(editable);
 	        jTextField1 = new javax.swing.JTextField();
+	        jTextField1.setEditable(editable);
 	        jComboBox1 = new javax.swing.JComboBox<>();
+	        jComboBox1.setEnabled(editable);
 	        jTextField2 = new javax.swing.JTextField();
+	        jTextField2.setEditable(editable);
 	        jLabel4 = new javax.swing.JLabel();
 	        jLabel5 = new javax.swing.JLabel();
 	        jScrollPane1 = new javax.swing.JScrollPane();
@@ -168,14 +178,18 @@ public class Actividades extends ColorPanel{
 	        jLabel9 = new javax.swing.JLabel();
 	        jLabel10 = new javax.swing.JLabel();
 	        jTextField3 = new javax.swing.JTextField();
+	        jTextField3.setEditable(editable);
 	        jLabel11 = new javax.swing.JLabel();
 	        jScrollPane6 = new javax.swing.JScrollPane();
 	        jTextArea5 = new javax.swing.JTextArea();
 
 
 	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-	        setTitle("Crear Actividad");
-	        setName("Crear Actividad"); // NOI18N
+	        switch(mode){
+		    case ADD: setTitle("Crear Actividad"); break;
+		    case VISTA: setTitle("Actividad"); break;
+		    case EDITAR: setTitle("Editar Actividad"); break;
+		    }
 
 	        jLabel1.setText("Nombre: ");
 
@@ -198,6 +212,7 @@ public class Actividades extends ColorPanel{
 
 	        jTextArea1.setColumns(20);
 	        jTextArea1.setRows(5);
+	        jTextArea1.setEditable(editable);
 	        jScrollPane1.setViewportView(jTextArea1);
 
 	        jLabel6.setText("Desarrollo de la Actividad");
@@ -205,18 +220,14 @@ public class Actividades extends ColorPanel{
 	        jLabel7.setText("Posibles Variaciones");
 
 	        jTextArea3.setColumns(20);
-	        jTextArea3.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 	        jTextArea3.setRows(5);
-	        jTextArea3.setAutoscrolls(false);
+	        jTextArea3.setEditable(editable);
 	        jScrollPane3.setViewportView(jTextArea3);
 
 	        jTextArea4.setColumns(20);
-	        jTextArea4.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 	        jTextArea4.setRows(5);
-	        jTextArea4.setAutoscrolls(false);
-	        jTextArea4.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+	        jTextArea4.setEditable(editable);
 	        jScrollPane4.setViewportView(jTextArea4);
-	        jTextArea4.getAccessibleContext().setAccessibleParent(jTextArea1);
 
 	        jScrollPane2.setViewportView(jList1);
 	        jList1.getAccessibleContext().setAccessibleParent(null);
@@ -232,43 +243,36 @@ public class Actividades extends ColorPanel{
 	        jLabel11.setText("Etiquetas: ");
 	        
 	        jTextArea5.setColumns(20);
-	        jTextArea5.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 	        jTextArea5.setRows(5);
-	        jTextArea5.setAutoscrolls(false);
+	        jTextArea5.setEditable(editable);
 	        jScrollPane6.setViewportView(jTextArea5);
 
 	        
 
 	        if(act != null){
 	        	jTextField1.setText(act.getNombre());
-	        	ArrayList<String> destinatarios = new ArrayList<>();
-	        	for(String s : act.getDestinatarios()){
-	        		destinatarios.add(s);
-	        	}
-	        	jTextField2.setText(destinatarios.get(0));
+	        	
+	        	String pacienteTipo = Controlador.getPacienteTipo(act);
+	        	jTextField2.setText(pacienteTipo);
+	        	
+	        	jTextField3.setText(String.valueOf(act.getDuracion()));
+	        	
 	        	jTextArea1.setText(act.getDescripcion());
-	        	StringBuilder etiquetas = new StringBuilder();
-	        	for(String e : act.getEtiquetas()){
-	        		etiquetas.append(e + " ");
-	        	}
-	        	jTextArea3.setText(etiquetas.toString());
+	        	
+	        	String etiquetas = Controlador.getEtiquetas(act);
+	        	jTextArea3.setText(etiquetas);
+	        	
 	        	jTextArea4.setText(act.getDesarrollo());
 	        	jTextArea5.setText(act.getVariaciones());
-	        	ArrayList<String> aux1 = new ArrayList<>();
-	        	ArrayList<String> aux2 = new ArrayList<>();
-	        	ArrayList<Etiquetable> total = act.getAsociados();
-	        	for(Etiquetable eti : total){
-	        		if(eti instanceof Actividad) aux1.add(eti.getNombre());
-	        		else if(eti instanceof Recurso) aux2.add(eti.getNombre());
-	        	}
+	      
 	        	jList1.setModel(new javax.swing.AbstractListModel<String>() {
 		        	
 					/**
 					 * 
 					 */
 					private static final long serialVersionUID = 1L;
-					
-					String[] strings = aux.toArray(new String[aux.size()]);
+					ArrayList<String> recursos = Controlador.getRecursosAsociados(act);
+					String[] strings = recursos.toArray(new String[recursos.size()]);
 		            public int getSize() { return strings.length; }
 		            public String getElementAt(int i) { return strings[i]; }
 		        });
@@ -278,8 +282,8 @@ public class Actividades extends ColorPanel{
 					 * 
 					 */
 					private static final long serialVersionUID = 1L;
-					ArrayList<String> aux = Controlador.getPacientesAsociados(user);
-					String[] strings = aux.toArray(new String[aux.size()]);
+					ArrayList<String> actividades = Controlador.getActividadesAsociadas(act);
+					String[] strings = actividades.toArray(new String[actividades.size()]);
 		            public int getSize() { return strings.length; }
 		            public String getElementAt(int i) { return strings[i]; }
 		        });
@@ -430,7 +434,8 @@ public class Actividades extends ColorPanel{
 			info.setVariaciones(String.valueOf(jTextArea3.getText()));
 			info.setDesarrollo(String.valueOf(jTextArea4.getText()));
 			
-			Controlador.addActividad(info);
+			if(mode.equals(Modo.ADD)) Controlador.addActividad(info);
+			else if(mode.equals(Modo.VISTA)) Controlador.modificaEtiquetable(act, info);
 		} 
 	}
 	
@@ -704,6 +709,7 @@ public class Actividades extends ColorPanel{
 	    }                                        
 
 	    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	    	int i; JFrame p; Actividad a = null;
 	    	switch(modo){
 			case ELIMINAR:
 				Confirm c = new Confirm();
@@ -711,22 +717,37 @@ public class Actividades extends ColorPanel{
 		    	c.addListener(this);
 		    	break;
 			case EDITAR:
+				i = jList1.getSelectedIndex();
+				a = getSelectedActividad(i, filtrados);
+				p = new PantallaActividad(a, Modo.EDITAR);
+				p.setVisible(true);
 				break;
 			case BUSCAR:
+				i = jList1.getSelectedIndex();
+				a = getSelectedActividad(i, filtrados);
+				p = new PantallaActividad(a, Modo.VISTA);
+				p.setVisible(true);
 				break;
 			}
 	    }
 
 		@Override
 		public void delete() {
-			String name = jList1.getSelectedValue();
-			for(Actividad a : filtrados){
-				if(a.getNombre().equals(name)){
-					Controlador.deleteActividad(a);
-			    	this.dispose();
-				}
-			}
+			int i = jList1.getSelectedIndex();
+			Actividad a = getSelectedActividad(i, filtrados);
+			Controlador.deleteActividad(a);
+			this.dispose();
 		}                                        
 
+		private Actividad getSelectedActividad(int i, ArrayActividades filtrados){
+			int j = 0;
+			for(Actividad a : filtrados){
+				if(i == j){
+					return a;
+				}
+				else ++j;
+			}
+			return null;
+		}
 	}
 }

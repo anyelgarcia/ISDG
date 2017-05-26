@@ -27,6 +27,10 @@ public abstract class Programable extends Etiquetable {
 		asociados = new HashSet<Etiquetable>();
 	}
 
+	public Set<Etiquetable> getAsociados(){
+		return asociados;
+	}
+	
 	public Set<String> getEtiquetas() {
 		Set<String> aux = new HashSet<String>();
 		aux.addAll(etiquetas);

@@ -1,27 +1,32 @@
 package DIedrAl_Project.negocio.administracion;
 
-import java.util.UUID;
-
 import DIedrAl_Project.negocio.ObjetoAlmacenable;
 
 public class CentroAlmacenable implements ObjetoAlmacenable {
-
-	
-	private String id;
 	
 	private String nombre;
 	
-	private final String file;
+	private final String filePacientes;
+	
+	private final String fileUsuarios;
 	
 	public CentroAlmacenable(String n){
 		nombre = n;
-		id = UUID.randomUUID().toString();
-		file = id + "_relaciones.txt";
+		filePacientes = nombre + "_pacientes.txt";
+		fileUsuarios = nombre + "_usuarios.txt";
 	}
 	
 	@Override
 	public String getId() {
-		return id;
+		return nombre;
+	}
+
+	public String getFilePacientes() {
+		return filePacientes;
+	}
+
+	public String getFileUsuarios() {
+		return fileUsuarios;
 	}
 
 }
