@@ -104,5 +104,10 @@ public class Confirm extends JFrame{
     private void deleteObservers(){
     	observers = null;
     }
+
+	public void setMensaje(String string) {
+		jLabel1.setText(string);
+		
+	}
     
 }
