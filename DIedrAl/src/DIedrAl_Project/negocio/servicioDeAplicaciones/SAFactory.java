@@ -14,7 +14,7 @@ public abstract class SAFactory {
 		return instancia;
 	}
 	
-	public abstract SARecursos newSARecursos();
+	public abstract SARecursos newSARecursos(Banco bank);
 	
 	public abstract SAPacientes newSAPacientes(Centro centro);
 	

@@ -1,7 +1,6 @@
 package DIedrAl_Project.negocio.administracion;
 
 
-import java.io.Serializable;
 import java.util.UUID;
 
 import DIedrAl_Project.negocio.ObjetoAlmacenable;
@@ -9,7 +8,7 @@ import DIedrAl_Project.negocio.calendario.Fecha;
 import DIedrAl_Project.negocio.pacientes.Direccion;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 
-public class Persona implements ObjetoAlmacenable, Serializable {
+public class Persona implements ObjetoAlmacenable {
 
 	protected String nombre;
 
@@ -25,7 +24,7 @@ public class Persona implements ObjetoAlmacenable, Serializable {
 
 	protected String email;
 
-	protected Integer tfo;
+	protected String tfo;
 	
 	protected String perfil;
 	
@@ -115,11 +114,11 @@ public class Persona implements ObjetoAlmacenable, Serializable {
 		this.email = email;
 	}
 
-	public Integer getTfo() {
+	public String getTfo() {
 		return tfo;
 	}
 
-	public void setTfo(Integer tfo) {
+	public void setTfo(String tfo) {
 		this.tfo = tfo;
 	}
 
