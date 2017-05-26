@@ -15,10 +15,10 @@ import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import org.jdatepicker.impl.JDatePanelImpl;
+/*import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
-
+*/
 
 
 public class Calendario extends ColorPanel{
@@ -108,8 +108,8 @@ public class Calendario extends ColorPanel{
 		private javax.swing.JList<String> jList2;
 		private javax.swing.JScrollPane jScrollPane2;
 		private javax.swing.JSeparator jSeparator2;
-		private JDatePickerImpl datePicker; 
-		private JDatePanelImpl jPanel2;
+		//private JDatePickerImpl datePicker; 
+		//private JDatePanelImpl jPanel2;
 
 
 		public PantallaConsulta() {
@@ -118,7 +118,7 @@ public class Calendario extends ColorPanel{
 	                            
 	    private void initGUI() {
 
-	        jScrollPane2 = new javax.swing.JScrollPane();
+	        /*jScrollPane2 = new javax.swing.JScrollPane();
 	        jList2 = new javax.swing.JList<>();
 	        jSeparator2 = new javax.swing.JSeparator();
 	        jLabel2 = new javax.swing.JLabel();
@@ -224,13 +224,13 @@ public class Calendario extends ColorPanel{
 	        );
 	        
 	        getContentPane().setBackground(getColor());
-	        pack();
+	        pack(); */
 	    }                       
 
 	    private void jDateActionPerformed(java.awt.event.ActionEvent evt) {                                         
-			Date selectedDate = (Date) datePicker.getModel().getValue();
+			//Date selectedDate = (Date) datePicker.getModel().getValue();
 			DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-			System.out.println(df.format(selectedDate));
+			//System.out.println(df.format(selectedDate));
 		}  
 	    
 	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -255,8 +255,8 @@ public class Calendario extends ColorPanel{
 		private javax.swing.JList<String> jList2;
 		private javax.swing.JScrollPane jScrollPane2;
 		private javax.swing.JSeparator jSeparator2;
-		private JDatePickerImpl datePicker; 
-		private JDatePanelImpl jPanel2;
+		//private JDatePickerImpl datePicker; 
+		//private JDatePanelImpl jPanel2;
 		
 		public PantallaModificar() {
 			initGUI();
@@ -264,7 +264,7 @@ public class Calendario extends ColorPanel{
 
 		                       
 		private void initGUI() {
-
+			/*
 			jScrollPane2 = new javax.swing.JScrollPane();
 			jList2 = new javax.swing.JList<>();
 			jSeparator2 = new javax.swing.JSeparator();
@@ -301,9 +301,7 @@ public class Calendario extends ColorPanel{
 			
 
 			jList2.setModel(new javax.swing.AbstractListModel<String>() {
-				/**
-				 * 
-				 */
+				
 				private static final long serialVersionUID = 1L;
 				String[] strings = { };
 				public int getSize() { return strings.length; }
@@ -416,14 +414,14 @@ public class Calendario extends ColorPanel{
 					);
 
 			getContentPane().setBackground(getColor());
-			pack();
+			pack(); */
 		}                    
 
 		
 		private void jDateActionPerformed(java.awt.event.ActionEvent evt) {                                         
-			Date selectedDate = (Date) datePicker.getModel().getValue();
+			//Date selectedDate = (Date) datePicker.getModel().getValue();
 			DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-			System.out.println(df.format(selectedDate));
+			//System.out.println(df.format(selectedDate));
 		}  
 		
 		private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {                                         

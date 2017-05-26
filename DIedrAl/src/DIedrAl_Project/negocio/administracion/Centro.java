@@ -33,12 +33,14 @@ public class Centro {
 	// TODO: implementarlo primero
 	private Organizacion organizacion;
 	
+	private String id;
 
 	protected Centro(String name) {
 		nombre = name;
 		pacientes = new HashMap<Paciente, Set<Usuario>>();
 		usuarios = new HashMap<Usuario, Set<Paciente>>();
 		personasCentro = new HashMap<String, Persona>();
+		id = UUID.randomUUID().toString();
 	
   }
 	protected Centro(String name, Map<Paciente, Set<Usuario>> pacientes, Map<Usuario, Set<Paciente>> usuarios) {
@@ -46,8 +48,13 @@ public class Centro {
 		this.pacientes = pacientes;
 		this.usuarios = usuarios;
 		this.personasCentro = new HashMap<String, Persona>();
+		id = UUID.randomUUID().toString();
 		initCentro();
 
+	}
+	
+	public String getId(){
+		return id;
 	}
 
 	public void addUsuario(Usuario usu) throws AlreadyBoundException {
@@ -286,7 +293,4 @@ public class Centro {
 			return pacientes.get(pac);
 	}
 
-	public CentroAlmacenable getCentroAlmacenable(){
-		return 
-	}
 }

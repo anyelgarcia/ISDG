@@ -3,6 +3,7 @@ package DIedrAl_Project.presentacion;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +14,8 @@ import javax.swing.JLabel;
 import DIedrAl_Project.negocio.recursos.Actividad;
 import DIedrAl_Project.negocio.recursos.ArrayActividades;
 import DIedrAl_Project.negocio.recursos.Dificultad;
+import DIedrAl_Project.negocio.recursos.Etiquetable;
+import DIedrAl_Project.negocio.recursos.Recurso;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 /**
@@ -48,7 +51,7 @@ public class Actividades extends ColorPanel{
 		ImageButton nuevo = new ImageButton("  Crear  ", "images/bluebutton.png", "images/bluebutton2.png", this);
 		componentes.add(nuevo);
 		nuevo.addActionListener((ae) -> {
-			JFrame pantalla = new PantallaAdd();
+			JFrame pantalla = new PantallaActividad();
 			pantalla.setVisible(true);
 		});
 		c.gridx = 0;
@@ -97,7 +100,7 @@ public class Actividades extends ColorPanel{
 	 * @author Diedral_Group
 	 * 
 	 */
-	private class PantallaAdd extends JFrame{
+	private class PantallaActividad extends JFrame{
 		
 		/**
 		 * 
@@ -133,8 +136,10 @@ public class Actividades extends ColorPanel{
 	    private javax.swing.JTextField jTextField1;
 	    private javax.swing.JTextField jTextField2;
 	    private javax.swing.JTextField jTextField3;
+	    private boolean editable;
+	    private Actividad act;
 	    
-		public PantallaAdd(){
+		public PantallaActividad(){
 			initGUI();
 		}
 		private void initGUI(){
@@ -166,7 +171,7 @@ public class Actividades extends ColorPanel{
 	        jLabel11 = new javax.swing.JLabel();
 	        jScrollPane6 = new javax.swing.JScrollPane();
 	        jTextArea5 = new javax.swing.JTextArea();
-	        
+
 
 	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 	        setTitle("Crear Actividad");
@@ -232,6 +237,55 @@ public class Actividades extends ColorPanel{
 	        jTextArea5.setAutoscrolls(false);
 	        jScrollPane6.setViewportView(jTextArea5);
 
+	        
+
+	        if(act != null){
+	        	jTextField1.setText(act.getNombre());
+	        	ArrayList<String> destinatarios = new ArrayList<>();
+	        	for(String s : act.getDestinatarios()){
+	        		destinatarios.add(s);
+	        	}
+	        	jTextField2.setText(destinatarios.get(0));
+	        	jTextArea1.setText(act.getDescripcion());
+	        	StringBuilder etiquetas = new StringBuilder();
+	        	for(String e : act.getEtiquetas()){
+	        		etiquetas.append(e + " ");
+	        	}
+	        	jTextArea3.setText(etiquetas.toString());
+	        	jTextArea4.setText(act.getDesarrollo());
+	        	jTextArea5.setText(act.getVariaciones());
+	        	ArrayList<String> aux1 = new ArrayList<>();
+	        	ArrayList<String> aux2 = new ArrayList<>();
+	        	ArrayList<Etiquetable> total = act.getAsociados();
+	        	for(Etiquetable eti : total){
+	        		if(eti instanceof Actividad) aux1.add(eti.getNombre());
+	        		else if(eti instanceof Recurso) aux2.add(eti.getNombre());
+	        	}
+	        	jList1.setModel(new javax.swing.AbstractListModel<String>() {
+		        	
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+					
+					String[] strings = aux.toArray(new String[aux.size()]);
+		            public int getSize() { return strings.length; }
+		            public String getElementAt(int i) { return strings[i]; }
+		        });
+	        	jList2.setModel(new javax.swing.AbstractListModel<String>() {
+		        	
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+					ArrayList<String> aux = Controlador.getPacientesAsociados(user);
+					String[] strings = aux.toArray(new String[aux.size()]);
+		            public int getSize() { return strings.length; }
+		            public String getElementAt(int i) { return strings[i]; }
+		        });
+	        	
+	        }
+	        
 	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 	        getContentPane().setLayout(layout);
 	        layout.setHorizontalGroup(
