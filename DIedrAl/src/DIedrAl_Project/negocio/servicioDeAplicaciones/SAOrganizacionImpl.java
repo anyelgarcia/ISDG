@@ -21,7 +21,6 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 	@Override
 	public void addCentro(String name) throws AlreadyBoundException {
 		org.addCentro(name);
-		
 	}
 
 	@Override

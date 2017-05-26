@@ -1,17 +1,16 @@
 package DIedrAl_Project.negocio.administracion;
 
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import DIedrAl_Project.negocio.ObjetoAlmacenable;
 import DIedrAl_Project.negocio.calendario.Fecha;
 import DIedrAl_Project.negocio.pacientes.Direccion;
-import DIedrAl_Project.negocio.pacientes.Paciente;
 
-public class Persona implements ObjetoAlmacenable {
+@SuppressWarnings("serial")
+public class Persona implements ObjetoAlmacenable, Serializable {
 
-	private final String ESTADOSCIVILES[] = {"Casado", "Soltero", "Divorciado", "Viudo"};
-    
 	protected String nombre;
 
 	protected String apellido1;
@@ -26,7 +25,7 @@ public class Persona implements ObjetoAlmacenable {
 
 	protected String email;
 
-	protected String tfo;
+	protected Integer tfo;
 	
 	protected String perfil;
 	
@@ -116,11 +115,11 @@ public class Persona implements ObjetoAlmacenable {
 		this.email = email;
 	}
 
-	public String getTfo() {
+	public Integer getTfo() {
 		return tfo;
 	}
 
-	public void setTfo(String tfo) {
+	public void setTfo(Integer tfo) {
 		this.tfo = tfo;
 	}
 
@@ -137,14 +136,6 @@ public class Persona implements ObjetoAlmacenable {
 	public void setNif(String nif) {
 		this.nif = nif;
 	}
-	
-	public int getEstadocivilIndex() {
-    	for(int i=0; i<4; i++){
-    		if(ESTADOSCIVILES[i].equals(estadoCivil))
-    			return i;
-    	}
-        return -1;
-    }
 
 	public int compararAlfab(Persona otra) {
 		if (apellido1.compareTo(otra.apellido1) == -1) {

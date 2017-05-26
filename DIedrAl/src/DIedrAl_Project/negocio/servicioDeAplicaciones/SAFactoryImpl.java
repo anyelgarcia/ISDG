@@ -7,8 +7,8 @@ import DIedrAl_Project.negocio.recursos.Banco;
 public class SAFactoryImpl extends SAFactory{
 
 	@Override
-	public SARecursos newSARecursos(Banco bank) {
-		return new SARecursosImpl(bank);
+	public SARecursos newSARecursos() {
+		return new SARecursosImpl();
 	}
 
 	@Override
