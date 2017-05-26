@@ -24,7 +24,7 @@ public class Persona implements ObjetoAlmacenable {
 
 	protected String email;
 
-	protected Integer tfo;
+	protected String tfo;
 	
 	protected String perfil;
 	
@@ -114,11 +114,11 @@ public class Persona implements ObjetoAlmacenable {
 		this.email = email;
 	}
 
-	public Integer getTfo() {
+	public String getTfo() {
 		return tfo;
 	}
 
-	public void setTfo(Integer tfo) {
+	public void setTfo(String tfo) {
 		this.tfo = tfo;
 	}
 

@@ -5,12 +5,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.rmi.AlreadyBoundException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
 import DIedrAl_Project.negocio.administracion.Hints;
 import DIedrAl_Project.negocio.calendario.Fecha;
 import DIedrAl_Project.negocio.pacientes.Paciente;
@@ -354,7 +350,7 @@ public class Pacientes extends ColorPanel{
 							                .addComponent(jButton1)
 							                .addGap(18, 18, 18))
 							        );
-					
+							       getContentPane().setBackground(getColor());
 							       pack();
 		}
 		

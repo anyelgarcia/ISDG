@@ -6,17 +6,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.WindowEvent;
-import java.util.concurrent.TimeUnit;
-
-
-
-
-
-
-
-
-
-
 import javax.swing.*;
 
 import DIedrAl_Project.negocio.administracion.Organizacion;
