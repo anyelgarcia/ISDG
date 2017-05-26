@@ -297,8 +297,9 @@ public class Controlador {
     	}
     	return salida;
 	}
-
+  
 	public static void modificaEtiquetable(Etiquetable antiguo, Etiquetable nuevo){
 		antiguo.igualarCampos(nuevo);
 	}
+
 }

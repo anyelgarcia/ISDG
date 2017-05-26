@@ -19,8 +19,8 @@ import DIedrAl_Project.negocio.recursos.Recurso;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 /**
- * Esta clase lleva la gestión de las vistas de las actividades. En el constructor se dibuja la sección de Actividades del Menú Principal y se pone a la espera para 
- * añadir, eliminar, editar o buscar actividades.
+ * Esta clase lleva la gestiÃ³n de las vistas de las actividades. En el constructor se dibuja la secciÃ³n de Actividades del MenÃº Principal y se pone a la espera para 
+ * aÃ±adir, eliminar, editar o buscar actividades.
  * 
  * @author Diedral_Group
  *
@@ -96,7 +96,7 @@ public class Actividades extends ColorPanel{
 	 
 	
 	/**
-	 * Clase que gestiona la ventana que aparece al darle al botón -Añadir- en la sección -Actividades- del Ménú Principal
+	 * Clase que gestiona la ventana que aparece al darle al botÃ³n -AÃ±adir- en la secciÃ³n -Actividades- del MÃ©nÃº Principal
 	 * @author Diedral_Group
 	 * 
 	 */
@@ -145,6 +145,7 @@ public class Actividades extends ColorPanel{
 			mode = m;
 			if(mode.equals(Modo.VISTA)) editable= false;
 			else editable = true;
+
 			initGUI();
 		}
 		private void initGUI(){
@@ -195,7 +196,7 @@ public class Actividades extends ColorPanel{
 
 	        jLabel2.setText("Dificultad:");
 
-	        jLabel3.setText("Duración:");
+	        jLabel3.setText("DuraciÃ³n:");
 
 	        jButton1.setText("Guardar");
 	        jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -208,7 +209,7 @@ public class Actividades extends ColorPanel{
 
 	        jLabel4.setText("minutos");
 
-	        jLabel5.setText("Descripción: ");
+	        jLabel5.setText("DescripciÃ³n: ");
 
 	        jTextArea1.setColumns(20);
 	        jTextArea1.setRows(5);
@@ -413,7 +414,7 @@ public class Actividades extends ColorPanel{
 		}
 		
 		/**
-		 * Función que se ejecuta al darle a guardar en la ventana de añadir actividades. Se rellena un objeto actividad y es pasado al controlador.
+		 * FunciÃ³n que se ejecuta al darle a guardar en la ventana de aÃ±adir actividades. Se rellena un objeto actividad y es pasado al controlador.
 		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { 
 			
@@ -423,7 +424,7 @@ public class Actividades extends ColorPanel{
 			
 			String duracion = String.valueOf(jTextField2.getText());
 
-			//Esta excepción hay que capturarla
+			//Esta excepciÃ³n hay que capturarla
 			if(duracion.length()>0 ){
 				info.setDuracion(Integer.valueOf(duracion));
 			}
@@ -442,7 +443,7 @@ public class Actividades extends ColorPanel{
 	
 	/**
 	 * 
-	 * Ventana que sale al pulsar el botón eliminar en la sección Actividades en el menú principal.
+	 * Ventana que sale al pulsar el botÃ³n eliminar en la secciÃ³n Actividades en el menÃº principal.
 	 * @author Diedral_Group
 	 *
 	 */
@@ -532,7 +533,7 @@ public class Actividades extends ColorPanel{
 	        jTextArea1.setRows(5);
 	        jScrollPane1.setViewportView(jTextArea1);
 
-	        jLabel3.setText("Duración:");
+	        jLabel3.setText("DuraciÃ³n:");
 
 	        jLabel6.setText("Desde");
 
