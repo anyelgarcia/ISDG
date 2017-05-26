@@ -1,5 +1,6 @@
 package DIedrAl_Project.presentacion;
 
+import java.io.IOException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ import DIedrAl_Project.negocio.recursos.ArrayRecursos;
 import DIedrAl_Project.negocio.recursos.ArraySesiones;
 import DIedrAl_Project.negocio.recursos.Banco;
 import DIedrAl_Project.negocio.recursos.Dificultad;
+import DIedrAl_Project.negocio.recursos.Etiquetable;
+import DIedrAl_Project.negocio.recursos.Programable;
 import DIedrAl_Project.negocio.recursos.Recurso;
 import DIedrAl_Project.negocio.recursos.Sesion;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
@@ -44,7 +47,7 @@ public class Controlador {
 		try {
 			saPacientes = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
 			saPacientes.addPaciente(p);
-		} catch (NotBoundException e) {
+		} catch (NotBoundException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -67,7 +70,7 @@ public class Controlador {
 	public static void addRecurso(Recurso p){
 		
 		
-		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
+		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos();
 		saRecursos.addRecurso(p);
 		
 		/*Prueba 6 :D
@@ -89,7 +92,7 @@ public class Controlador {
 	public static void addActividad(Actividad p){
 		
 		
-		SARecursos saActividades = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
+		SARecursos saActividades = SAFactory.getInstancia().newSARecursos();
 		saActividades.addActividad(p);
 		
 		/*System.out.println(p.getNombre());
@@ -109,7 +112,7 @@ public class Controlador {
 	
 	public static void addSesion(Sesion p){
 		
-		SARecursos saSesiones = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
+		SARecursos saSesiones = SAFactory.getInstancia().newSARecursos();
 		saSesiones.addSesion(p);
 		
 		/*System.out.println(p.getNombre());
@@ -148,7 +151,7 @@ public class Controlador {
 	}
 	
 	public static void deleteActividad(Actividad a){
-		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
+		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos();
 		saRecursos.removeActividad(a);
 	
 	}
@@ -158,12 +161,12 @@ public class Controlador {
 	}
 	
 	public static void deleteRecurso(Recurso r){
-		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
+		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos();
 		saRecursos.removeRecurso(r);
 	}
 	
 	public static void deleteSesion(Sesion s){
-		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos(Banco.getInstancia());
+		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos();
 		saRecursos.removeSesion(s);
 	}
 	
@@ -212,7 +215,7 @@ public class Controlador {
 	}
 	
 	public static ArraySesiones filtrarSesiones(String nombre, Set<String> filtros, Integer min, Integer max, Set<String> destinatarios){
-		ArraySesiones salida = Banco.getInstancia().getSesiones();
+		ArraySesiones salida = SAFactory.getInstancia().newSARecursos().getSesiones();
 		if(nombre != null && nombre != "") salida.filtrarNombre(nombre);
 		if(filtros.size() > 0) salida.filtrarEtiqueta(filtros);
 		if(min != null) salida.filtrarDesde(min);
@@ -224,7 +227,7 @@ public class Controlador {
 	
 	public static ArrayActividades filtrarActividades(String nombre, Set<String> filtros, Integer min, Integer max, Set<String> destinatarios, 
 			Dificultad minimo, Dificultad maximo){
-		ArrayActividades salida = Banco.getInstancia().getActividades();
+		ArrayActividades salida = SAFactory.getInstancia().newSARecursos().getActividades();
 		if(nombre != null && nombre != "") salida.filtrarNombre(nombre);
 		if(filtros.size() > 0) salida.filtrarEtiqueta(filtros);
 		if(min != null) salida.filtrarDesde(min);
@@ -237,7 +240,7 @@ public class Controlador {
 	}
 	
 	public static ArrayRecursos filtrarRecursos(String nombre, Set<String> filtros){
-		ArrayRecursos salida = Banco.getInstancia().getRecursos();
+		ArrayRecursos salida = SAFactory.getInstancia().newSARecursos().getRecursos();
 		if(nombre != null && nombre != "") salida.filtrarNombre(nombre);
 		if(filtros.size() > 0) salida.filtrarEtiqueta(filtros);
 		return salida;
@@ -254,5 +257,47 @@ public class Controlador {
 		} catch (NotBoundException e) {
 			return null;
 		}
+	}
+	
+	public static String getPacienteTipo(Actividad a){
+		ArrayList<String> destinatarios = new ArrayList<>();
+    	for(String s : a.getDestinatarios()){
+    		destinatarios.add(s);
+    	}
+    	return destinatarios.get(0);
+	}
+	
+	public static String getEtiquetas(Programable a){
+		StringBuilder etiquetas = new StringBuilder();
+    	for(String e : a.getEtiquetas()){
+    		etiquetas.append(e + " ");
+    	}
+    	return a.toString();
+	}
+	
+	public static String getEtiquetas(Recurso a){
+		StringBuilder etiquetas = new StringBuilder();
+    	for(String e : a.getEtiquetas()){
+    		etiquetas.append(e + " ");
+    	}
+    	return a.toString();
+	}
+	
+	public static ArrayList<String> getRecursosAsociados(Programable a){
+		ArrayList<String> salida = new ArrayList<>();
+		Set<Etiquetable> total = a.getAsociados();
+    	for(Etiquetable eti : total){
+    		if(eti instanceof Recurso) salida.add(eti.getNombre());
+    	}
+    	return salida;
+	}
+	
+	public static ArrayList<String> getActividadesAsociadas(Programable a){
+		ArrayList<String> salida = new ArrayList<>();
+		Set<Etiquetable> total = a.getAsociados();
+    	for(Etiquetable eti : total){
+    		if(eti instanceof Actividad) salida.add(eti.getNombre());
+    	}
+    	return salida;
 	}
 }

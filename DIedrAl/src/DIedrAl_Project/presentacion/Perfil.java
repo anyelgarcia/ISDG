@@ -161,7 +161,7 @@ public class Perfil extends ColorPanel{
 	        jTextField4.setText(user.getTfo());
 	        
 	        jTextArea1.setText(user.getPerfil());
-	        jTextArea2.setText(user.getInfor());
+	        jTextArea2.setText(user.get);
 
 	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 	       getContentPane().setLayout(layout);

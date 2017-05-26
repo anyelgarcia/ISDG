@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import DIedrAl_Project.negocio.recursos.Actividad;
 import DIedrAl_Project.negocio.recursos.ArrayRecursos;
 import DIedrAl_Project.negocio.recursos.Recurso;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
@@ -48,7 +49,7 @@ public class Recursos extends ColorPanel{
 		ImageButton nuevo = new ImageButton("Crear ", "images/orangebutton.png", "images/orangebutton2.png", this);
 		componentes.add(nuevo);
 		nuevo.addActionListener((ae) -> {
-			JFrame pantalla = new PantallaAdd();
+			JFrame pantalla = new PantallaRecurso(true, null);
 			pantalla.setVisible(true);
 			
 		});
@@ -104,7 +105,7 @@ public class Recursos extends ColorPanel{
 	 * @author Diedral_Group
 	 *
 	 */
-	private class PantallaAdd extends JFrame{
+	private class PantallaRecurso extends JFrame{
 		
 		 /**
 		 * 
@@ -123,9 +124,13 @@ public class Recursos extends ColorPanel{
 	    private javax.swing.JTextArea jTextArea3;
 	    private javax.swing.JTextField jTextField1;
 	    private javax.swing.JTextField jTextField2;
+	    private boolean editable;
+	    private Recurso recurso;
 	    // End of variables declaration    
 	    
-		public PantallaAdd(){
+		public PantallaRecurso(boolean b, Recurso r){
+			editable = b;
+			recurso = r;
 			initGUI();
 		}
 		private void initGUI(){
@@ -170,6 +175,14 @@ public class Recursos extends ColorPanel{
 		        jTextArea3.setRows(5);
 		        jScrollPane3.setViewportView(jTextArea3);
 
+		        
+		        if(recurso != null){
+		        	jTextField1.setText(recurso.getNombre());
+		        	jTextField2.setText(recurso.getFileName());
+		        	jTextArea2.setText(recurso.getDescripcion());
+		        	jTextArea3.setText(Controlador.getEtiquetas(recurso));
+		        }
+		        
 		        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		        getContentPane().setLayout(layout);
 		        layout.setHorizontalGroup(
@@ -420,14 +433,21 @@ public class Recursos extends ColorPanel{
 
 		@Override
 		public void delete() {
-			String name = jList1.getSelectedValue();
-			for(Recurso r : filtrados){
-				if(r.getNombre().equals(name)){
-					Controlador.deleteRecurso(r);
-			    	this.dispose();
-				}
-			}
-			
+			int i = jList1.getSelectedIndex();
+			Recurso r = getSelectedRecurso(i, filtrados);
+			Controlador.deleteRecurso(r);
+	    	this.dispose();
 		}  
+		
+		private Recurso getSelectedRecurso(int i, ArrayRecursos filtrados){
+			int j = 0;
+			for(Recurso r : filtrados){
+				if(i == j){
+					return r;
+				}
+				else ++j;
+			}
+			return null;
+		}
 	}
 }
