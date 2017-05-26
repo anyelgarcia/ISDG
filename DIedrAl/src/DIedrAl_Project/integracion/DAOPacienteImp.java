@@ -58,4 +58,10 @@ public class DAOPacienteImp implements DAOPaciente {
 		return op.exists(id, file);
 	}
 
+
+	@Override
+	public Paciente consultarPaciente(String id) throws ClassNotFoundException, IOException {
+		return op.consultar(id, file);
+	}
+
 }

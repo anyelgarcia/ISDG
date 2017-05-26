@@ -20,4 +20,6 @@ public interface DAOPaciente {
 	public HashSet<Paciente> listarPacientes()  throws IOException, ClassNotFoundException;
 	
 	public boolean existePaciente(String id)  throws IOException, ClassNotFoundException;
+	
+	public Paciente consultarPaciente(String id) throws ClassNotFoundException, IOException;
 }

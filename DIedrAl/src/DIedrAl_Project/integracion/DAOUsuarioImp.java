@@ -57,4 +57,11 @@ public class DAOUsuarioImp implements DAOUsuario {
 	public boolean existeUsuario(String id) throws IOException, ClassNotFoundException {
 		return op.exists(id, file);
 	}
+
+
+	@Override
+	public Usuario consultarUsuario(String id) throws ClassNotFoundException, IOException {
+		return op.consultar(id, file);
+	}
+
 }
