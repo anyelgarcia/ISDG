@@ -53,6 +53,11 @@ public class SimpleFileDAOFactory implements DAOFactory {
 	public DAORelacionable getDAORelacion(String file) {
 		return new DAORelacionableImp(file);
 	}
+
+	@Override
+	public DAOCentro getDAOCentro() {
+		return DAOCentroImp.getInstance();
+	}
 	
 	
 
