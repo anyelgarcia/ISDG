@@ -31,7 +31,7 @@ public class Usuarios extends ColorPanel{
 		c.insets = new Insets(0,15,0,0);
 		JLabel title = new JLabel("Usuarios");
 		title.setFont(font);
-		title.setForeground(Color.WHITE);
+		title.setForeground(Color.BLACK);
 		add(title, c);
 		
 		
@@ -146,23 +146,41 @@ public class Usuarios extends ColorPanel{
 		        jTextArea2.setText("Descripción");
 		        jScrollPane3.setViewportView(jTextArea2);
 
+		        jLabel1.setFont(new java.awt.Font("Arial", 0, 10));
 		        jLabel1.setText("Despacho, horarios y otra información: ");
-
+		        jLabel1.setForeground(Color.BLACK);
+		        
+		        jLabel2.setFont(new java.awt.Font("Arial", 0, 10));
 		        jLabel2.setText("Pacientes Asociados: ");
+		        jLabel2.setForeground(Color.BLACK);
 
+		        jLabel3.setFont(new java.awt.Font("Arial", 0, 10));
 		        jLabel3.setText("Nombre: ");
+		        jLabel3.setForeground(Color.BLACK);
 		        
+		        jLabel7.setFont(new java.awt.Font("Arial", 0, 10));
 		        jLabel7.setText("Primer Apellido: ");
+		        jLabel7.setForeground(Color.BLACK);
 		        
+		        jLabel8.setFont(new java.awt.Font("Arial", 0, 10));
 		        jLabel8.setText("Segundo Apellido: ");
+		        jLabel8.setForeground(Color.BLACK);
 		        
+		        jLabel9.setFont(new java.awt.Font("Arial", 0, 10));
 		        jLabel9.setText("DNI: ");
+		        jLabel9.setForeground(Color.BLACK);
 
+		        jLabel4.setFont(new java.awt.Font("Arial", 0, 10));
 		        jLabel4.setText("Rol: ");
+		        jLabel4.setForeground(Color.BLACK);
 
+		        jLabel5.setFont(new java.awt.Font("Arial", 0, 10));
 		        jLabel5.setText("Email: ");
+		        jLabel5.setForeground(Color.BLACK);
 
+		        jLabel6.setFont(new java.awt.Font("Arial", 0, 10));
 		        jLabel6.setText("Teléfono: ");
+		        jLabel6.setForeground(Color.BLACK);
 
 		        jButton1.setText("Guardar");
 		        jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -265,6 +283,7 @@ public class Usuarios extends ColorPanel{
 		                .addGap(7, 7, 7))
 		        );
 
+		        getContentPane().setBackground(getColor());
 		        pack();
 		}
 		
@@ -279,7 +298,7 @@ public class Usuarios extends ColorPanel{
 			
 			String tfo = jTextField4.getText();
 			if(tfo.length()>0){
-				usuario.setTfo(Integer.parseInt(tfo));
+				usuario.setTfo(tfo);
 			}
 			
 			String rol = jTextField2.getText();
@@ -340,15 +359,25 @@ public class Usuarios extends ColorPanel{
 	        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	        setTitle("Buscar Usuario");
 
+	        jLabel1.setFont(new java.awt.Font("Arial", 0, 10));
 	        jLabel1.setText("Nombre:");
+	        jLabel1.setForeground(Color.BLACK);
 
+	        jLabel2.setFont(new java.awt.Font("Arial", 0, 10));
 	        jLabel2.setText("Primer Apellido:");
+	        jLabel2.setForeground(Color.BLACK);
 
+	        jLabel3.setFont(new java.awt.Font("Arial", 0, 10));
 	        jLabel3.setText("Segundo Apellido:");
+	        jLabel3.setForeground(Color.BLACK);
 
+	        jLabel4.setFont(new java.awt.Font("Arial", 0, 10));
 	        jLabel4.setText("DNI:");
+	        jLabel4.setForeground(Color.BLACK);
 	        
+	        jLabel5.setFont(new java.awt.Font("Arial", 0, 10));
 	        jLabel5.setText("Solo Administradores (SI o NO):");
+	        jLabel5.setForeground(Color.BLACK);
 
 	        jButton1.setText("Buscar");
 	        jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -447,6 +476,7 @@ public class Usuarios extends ColorPanel{
 	            .addComponent(jSeparator2)
 	        );
 
+	        getContentPane().setBackground(getColor());
 	        pack();
 	    }
 		
@@ -460,6 +490,7 @@ public class Usuarios extends ColorPanel{
 			
 			ArrayList<String> campos = new ArrayList<String>();
 			ArrayList<Hints> hints = new ArrayList<Hints>();
+			Hints [] usuarios = null;
 			
 			if(nombre!=null && nombre.length()>0){
 				campos.add(nombre);
@@ -481,13 +512,26 @@ public class Usuarios extends ColorPanel{
 				hints.add(Hints.NIF);
 			}
 			
-			if(admin!=null && admin.length()>0 && admin.equals("Si")||  admin.equals("Sí") ||  admin.equals("SI") ||  admin.equals("SÍ")){
-				campos.add(admin);
-				hints.add(Hints.ADMINISTRADOR);
+			if(admin.equals("Si")||  admin.equals("Sí") ||  admin.equals("SI") ||  admin.equals("SÍ")){
+				usuarios = new Hints[1];
+				usuarios[0] = Hints.ADMINISTRADOR;
 			}
-				
 			
-			String resultados[] = Controlador.buscarUsuarios(hints, campos);
+			int i=0;
+			Hints [] claves = new Hints[hints.size()];
+			for(Hints hint: hints){
+				claves[i] = hint;
+				i++;
+			}
+			
+			i=0;
+			String [] valores = new String[hints.size()];
+			for(String str: campos){
+				valores[i] = str;
+				i++;
+			}
+			
+			String resultados[] = Controlador.buscarUsuarios(claves, valores, usuarios);
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
 	            /**
 				 * 
@@ -503,72 +547,4 @@ public class Usuarios extends ColorPanel{
 			// TODO add your handling code here:
 		}  
 	}
-/*
-	public class UsuarioTransfer{
-		
-		public UsuarioTransfer(String nombre, String rol, String email, String telefono,
-				String descripcion, List<String> pacientes, String info) {
-			this.nombre = nombre;
-			this.rol = rol;
-			this.email = email;
-			this.telefono = telefono;
-			this.descripcion = descripcion;
-			this.pacientes = pacientes;
-			this.info = info;
-		}
-		
-		public String getNombre() {
-			return nombre;
-		}
-
-		public void setNombre(String nombre) {
-			this.nombre = nombre;
-		}
-
-		public String getRol() {
-			return rol;
-		}
-		public void setRol(String rol) {
-			this.rol = rol;
-		}
-		public String getEmail() {
-			return email;
-		}
-		public void setEmail(String email) {
-			this.email = email;
-		}
-		public String getTelefono() {
-			return telefono;
-		}
-		public void setTelefono(String telefono) {
-			this.telefono = telefono;
-		}
-		public String getDescripcion() {
-			return descripcion;
-		}
-		public void setDescripcion(String descripcion) {
-			this.descripcion = descripcion;
-		}
-		public List<String> getPacientes() {
-			return pacientes;
-		}
-		public void setPacientes(List<String> pacientes) {
-			this.pacientes = pacientes;
-		}
-		public String getInfo() {
-			return info;
-		}
-		public void setInfo(String info) {
-			this.info = info;
-		}
-		String nombre;
-		String rol;
-		String email;
-		String telefono;
-		String descripcion;
-		List<String> pacientes;
-		String info;
-		
-		
-	}*/
 }

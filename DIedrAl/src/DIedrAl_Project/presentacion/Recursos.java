@@ -3,6 +3,7 @@ package DIedrAl_Project.presentacion;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,15 +11,15 @@ import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import DIedrAl_Project.negocio.recursos.Actividad;
 import DIedrAl_Project.negocio.recursos.ArrayRecursos;
-import DIedrAl_Project.negocio.recursos.ArraySesiones;
 import DIedrAl_Project.negocio.recursos.Recurso;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 
 /**
- * Esta clase lleva la gestión de las vistas de los recursos. En el constructor se dibuja la sección de Recursos del Menú Principal y se pone a la espera para 
- * añadir, eliminar, editar o buscar recursos.
+ * Esta clase lleva la gestiÃ³n de las vistas de los recursos. En el constructor se dibuja la secciÃ³n de Recursos del MenÃº Principal y se pone a la espera para 
+ * aÃ±adir, eliminar, editar o buscar recursos.
  * @author Diedral_Group
  *
  */
@@ -40,7 +41,7 @@ public class Recursos extends ColorPanel{
 		c.insets = new Insets(0,15,0,0);
 		JLabel title = new JLabel("Recursos");
 		title.setFont(this.font);
-		title.setForeground(Color.GRAY);
+		title.setForeground(Color.WHITE);
 		add(title, c);
 		
 		
@@ -48,7 +49,7 @@ public class Recursos extends ColorPanel{
 		ImageButton nuevo = new ImageButton("Crear ", "images/orangebutton.png", "images/orangebutton2.png", this);
 		componentes.add(nuevo);
 		nuevo.addActionListener((ae) -> {
-			JFrame pantalla = new PantallaAdd();
+			JFrame pantalla = new PantallaRecurso(null, Modo.ADD);
 			pantalla.setVisible(true);
 			
 		});
@@ -85,7 +86,7 @@ public class Recursos extends ColorPanel{
 		
 		
 		
-		ImageButton editar = new ImageButton("Editar", "images/tanbutton.png", "images/tanbutton2.png", this);
+		ImageButton editar = new ImageButton("Editar", "images/blackbutton.png", "images/blackbutton2.png", this);
 		componentes.add(editar);
 		editar.addActionListener((ae) -> {
 			JFrame panel = new PantallaBuscar(Modo.EDITAR);
@@ -100,11 +101,11 @@ public class Recursos extends ColorPanel{
         
 	
 	/**
-	 * Clase que gestiona la ventana que aparece al darle al botón -Añadir- en la sección -Recursos- del Ménú Principal
+	 * Clase que gestiona la ventana que aparece al darle al botÃ³n -AÃ±adir- en la secciÃ³n -Recursos- del MÃ©nÃº Principal
 	 * @author Diedral_Group
 	 *
 	 */
-	private class PantallaAdd extends JFrame{
+	private class PantallaRecurso extends JFrame{
 		
 		 /**
 		 * 
@@ -123,17 +124,28 @@ public class Recursos extends ColorPanel{
 	    private javax.swing.JTextArea jTextArea3;
 	    private javax.swing.JTextField jTextField1;
 	    private javax.swing.JTextField jTextField2;
+	    private boolean editable;
+	    private Recurso recurso;
+	    private Modo mode;
 	    // End of variables declaration    
 	    
-		public PantallaAdd(){
+		public PantallaRecurso(Recurso r, Modo m){
+			mode = m;
+			if(mode.equals(Modo.VISTA)) editable= false;
+			else editable = true;
+
+			recurso = r;
 			initGUI();
 		}
+		
 		private void initGUI(){
 			jLabel1 = new javax.swing.JLabel();
 		    jLabel2 = new javax.swing.JLabel();
 		    jLabel3 = new javax.swing.JLabel();
 		    jLabel4 = new javax.swing.JLabel();
 		    jButton1 = new javax.swing.JButton();
+		    jButton1.setVisible(editable);
+	        jButton1.setEnabled(editable);
 		    jTextField1 = new javax.swing.JTextField();
 		    jTextField2 = new javax.swing.JTextField();
 		    jScrollPane2 = new javax.swing.JScrollPane();
@@ -142,13 +154,17 @@ public class Recursos extends ColorPanel{
 		    jTextArea3 = new javax.swing.JTextArea();
 
 		    setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		    setTitle("Crear Recurso");
+		    switch(mode){
+		    case ADD: setTitle("Crear Recurso"); break;
+		    case VISTA: setTitle("Recurso"); break;
+		    case EDITAR: setTitle("Editar Recurso"); break;
+		    }
 
 		        jLabel1.setText("Nombre del recurso:");
 
 		        jLabel2.setText("Archivo: ");
 
-		        jLabel3.setText("Descripción: ");
+		        jLabel3.setText("DescripciÃ³n: ");
 
 		        jLabel4.setText("Etiquetas: (separadas por comas)");
 
@@ -170,6 +186,14 @@ public class Recursos extends ColorPanel{
 		        jTextArea3.setRows(5);
 		        jScrollPane3.setViewportView(jTextArea3);
 
+		        
+		        if(recurso != null){
+		        	jTextField1.setText(recurso.getNombre());
+		        	jTextField2.setText(recurso.getFileName());
+		        	jTextArea2.setText(recurso.getDescripcion());
+		        	jTextArea3.setText(Controlador.getEtiquetas(recurso));
+		        }
+		        
 		        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		        getContentPane().setLayout(layout);
 		        layout.setHorizontalGroup(
@@ -222,13 +246,14 @@ public class Recursos extends ColorPanel{
 		                    .addComponent(jButton1))
 		                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		        );
-
+		        
+		        getContentPane().setBackground(getColor());
 		        pack();
 		}
 
 		
 		/**
-		 * Función que se ejecuta al darle a guardar en la ventana de adición de recursos. Se rellena un objeto recurso y es pasado al controlador.
+		 * FunciÃ³n que se ejecuta al darle a guardar en la ventana de adiciÃ³n de recursos. Se rellena un objeto recurso y es pasado al controlador.
 		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {     
 			
@@ -237,39 +262,12 @@ public class Recursos extends ColorPanel{
 			
 			Recurso info = new Recurso(String.valueOf(jTextField2.getText()), String.valueOf(jTextField1.getText()), etiqs);
 			info.setDescripcion(String.valueOf(jTextArea3.getText()));
+			
+			if(mode.equals(Modo.ADD)) Controlador.addRecurso(info);
+			else if(mode.equals(Modo.EDITAR)) Controlador.modificaEtiquetable(recurso, info);
 		}                                        
 
 	}
-	
-	/*
-	public class RecursoTransfer{
-		private String nombre;
-		private String ruta;
-		private String descripcion;
-		private String[] etiquetas;
-		
-		public RecursoTransfer(String nombre, String ruta, String descripcion,
-				String[] etiquetas) {
-			this.nombre = nombre;
-			this.ruta = ruta;
-			this.descripcion = descripcion;
-			this.etiquetas = etiquetas;
-		}
-		public String getNombre() {
-			return nombre;
-		}
-		public String getRuta() {
-			return ruta;
-		}
-		public String getDescripcion() {
-			return descripcion;
-		}
-		public String[] getEtiquetas() {
-			return etiquetas;
-		}
-		
-		
-	}*/
 
 	private class PantallaBuscar extends JFrame implements confirmListener{
 		
@@ -289,6 +287,7 @@ public class Recursos extends ColorPanel{
 		private javax.swing.JTextArea jTextArea1;
 		private javax.swing.JTextField jTextField1;
 		private Modo modo;
+		private ArrayRecursos filtrados;
 	    
 		public PantallaBuscar(Modo m){
 			modo = m;
@@ -409,7 +408,7 @@ public class Recursos extends ColorPanel{
 	                        .addComponent(jButton2)))
 	                .addContainerGap(17, Short.MAX_VALUE))
 	        );
-
+	        getContentPane().setBackground(getColor());
 	        pack();
 	    }// </editor-fold>                        
 
@@ -417,18 +416,23 @@ public class Recursos extends ColorPanel{
 	    	String nombre = jTextField1.getText();
 			Set<String> setEtiquetas = new HashSet<String>(Arrays.asList(jTextArea1.getText().split(",")));
 		
-			ArrayRecursos salida = Controlador.filtrarRecursos(nombre, setEtiquetas);
+			filtrados = Controlador.filtrarRecursos(nombre, setEtiquetas);
 			
-			/*jList1.setModel(new javax.swing.AbstractListModel<String>() {
+			ArrayList<String> nombres = new ArrayList<>();
+			for(Recurso r : filtrados){
+				nombres.add(r.getNombre());
+			}
+			
+			jList1.setModel(new javax.swing.AbstractListModel<String>() {
 			private static final long serialVersionUID = 1L;
-			String[] strings = ;
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return salida.; }
-			});*/
+            public int getSize() { return nombres.size(); }
+            public String getElementAt(int i) { return nombres.get(i); }
+			});
 			
 	    }                                        
 
 	    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	    	int i; Recurso r; JFrame p;
 	    	switch(modo){
 			case ELIMINAR:
 				Confirm c = new Confirm();
@@ -436,16 +440,37 @@ public class Recursos extends ColorPanel{
 		    	c.addListener(this);
 		    	break;
 			case EDITAR:
+				i = jList1.getSelectedIndex();
+				r = getSelectedRecurso(i, filtrados);
+				p = new PantallaRecurso(r, Modo.EDITAR);
+				p.setVisible(true);
 				break;
 			case BUSCAR:
+				i = jList1.getSelectedIndex();
+				r = getSelectedRecurso(i, filtrados);
+				p = new PantallaRecurso(r, Modo.VISTA);
+				p.setVisible(true);
 				break;
 			}
 	    }
 
 		@Override
 		public void delete() {
-			Controlador.deleteRecurso();
+			int i = jList1.getSelectedIndex();
+			Recurso r = getSelectedRecurso(i, filtrados);
+			Controlador.deleteRecurso(r);
 	    	this.dispose();
 		}  
+		
+		private Recurso getSelectedRecurso(int i, ArrayRecursos filtrados){
+			int j = 0;
+			for(Recurso r : filtrados){
+				if(i == j){
+					return r;
+				}
+				else ++j;
+			}
+			return null;
+		}
 	}
 }

@@ -5,10 +5,9 @@ import java.util.*;
 import DIedrAl_Project.negocio.recursos.*;
 
 public class SARecursosImpl implements SARecursos{
-	private Banco bank;
+	private Banco bank = Banco.getInstancia();
 	
-	public SARecursosImpl(Banco b){
-		bank=b;
+	public SARecursosImpl(){
 	}
 
 	@Override
@@ -129,6 +128,21 @@ public class SARecursosImpl implements SARecursos{
 	@Override
 	public ArrayActividades filtrarActividadesHasta(Dificultad dif) {
 		return bank.getActividades().filtrarHasta(dif);
+	}
+
+	@Override
+	public ArraySesiones getSesiones() {
+		return bank.getSesiones();
+	}
+
+	@Override
+	public ArrayActividades getActividades() {
+		return bank.getActividades();
+	}
+
+	@Override
+	public ArrayRecursos getRecursos() {
+		return bank.getRecursos();
 	}
 
 

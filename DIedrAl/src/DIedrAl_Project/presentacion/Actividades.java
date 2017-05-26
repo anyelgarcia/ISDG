@@ -3,6 +3,7 @@ package DIedrAl_Project.presentacion;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,13 +13,14 @@ import javax.swing.JLabel;
 
 import DIedrAl_Project.negocio.recursos.Actividad;
 import DIedrAl_Project.negocio.recursos.ArrayActividades;
-import DIedrAl_Project.negocio.recursos.ArraySesiones;
 import DIedrAl_Project.negocio.recursos.Dificultad;
+import DIedrAl_Project.negocio.recursos.Etiquetable;
+import DIedrAl_Project.negocio.recursos.Recurso;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 /**
- * Esta clase lleva la gestión de las vistas de las actividades. En el constructor se dibuja la sección de Actividades del Menú Principal y se pone a la espera para 
- * añadir, eliminar, editar o buscar actividades.
+ * Esta clase lleva la gestiÃ³n de las vistas de las actividades. En el constructor se dibuja la secciÃ³n de Actividades del MenÃº Principal y se pone a la espera para 
+ * aÃ±adir, eliminar, editar o buscar actividades.
  * 
  * @author Diedral_Group
  *
@@ -49,7 +51,7 @@ public class Actividades extends ColorPanel{
 		ImageButton nuevo = new ImageButton("  Crear  ", "images/bluebutton.png", "images/bluebutton2.png", this);
 		componentes.add(nuevo);
 		nuevo.addActionListener((ae) -> {
-			JFrame pantalla = new PantallaAdd();
+			JFrame pantalla = new PantallaActividad(null, Modo.ADD);
 			pantalla.setVisible(true);
 		});
 		c.gridx = 0;
@@ -69,7 +71,18 @@ public class Actividades extends ColorPanel{
 		c.gridy = 1;
 		add(buscar, c);
 		
-		ImageButton eliminar = new ImageButton("Eliminar", "images/orangebutton.png", "images/orangebutton2.png", this);
+		ImageButton editar = new ImageButton("Editar", "images/orangebutton.png", "images/orangebutton2.png", this);
+		componentes.add(editar);
+		editar.addActionListener((ae) -> {
+			JFrame panel = new PantallaBuscar(Modo.EDITAR);
+			panel.setVisible(true);
+			
+		});
+		c.gridx = 0;
+		c.gridy = 2;
+		add(editar, c);
+		
+		ImageButton eliminar = new ImageButton("Eliminar", "images/tanbutton.png", "images/tanbutton2.png", this);
 		componentes.add(eliminar);
 		eliminar.addActionListener((ae) -> {
 			JFrame panel = new PantallaBuscar(Modo.ELIMINAR);
@@ -83,11 +96,11 @@ public class Actividades extends ColorPanel{
 	 
 	
 	/**
-	 * Clase que gestiona la ventana que aparece al darle al botón -Añadir- en la sección -Actividades- del Ménú Principal
+	 * Clase que gestiona la ventana que aparece al darle al botÃ³n -AÃ±adir- en la secciÃ³n -Actividades- del MÃ©nÃº Principal
 	 * @author Diedral_Group
 	 * 
 	 */
-	private class PantallaAdd extends JFrame{
+	private class PantallaActividad extends JFrame{
 		
 		/**
 		 * 
@@ -123,8 +136,16 @@ public class Actividades extends ColorPanel{
 	    private javax.swing.JTextField jTextField1;
 	    private javax.swing.JTextField jTextField2;
 	    private javax.swing.JTextField jTextField3;
-	    // End of variables declaration    
-		public PantallaAdd(){
+	    private boolean editable;
+	    private Actividad act;
+	    private Modo mode;
+	    
+		public PantallaActividad(Actividad a, Modo m){
+			act = a;
+			mode = m;
+			if(mode.equals(Modo.VISTA)) editable= false;
+			else editable = true;
+
 			initGUI();
 		}
 		private void initGUI(){
@@ -132,9 +153,14 @@ public class Actividades extends ColorPanel{
 	        jLabel2 = new javax.swing.JLabel();
 	        jLabel3 = new javax.swing.JLabel();
 	        jButton1 = new javax.swing.JButton();
+	        jButton1.setVisible(editable);
+	        jButton1.setEnabled(editable);
 	        jTextField1 = new javax.swing.JTextField();
+	        jTextField1.setEditable(editable);
 	        jComboBox1 = new javax.swing.JComboBox<>();
+	        jComboBox1.setEnabled(editable);
 	        jTextField2 = new javax.swing.JTextField();
+	        jTextField2.setEditable(editable);
 	        jLabel4 = new javax.swing.JLabel();
 	        jLabel5 = new javax.swing.JLabel();
 	        jScrollPane1 = new javax.swing.JScrollPane();
@@ -153,20 +179,24 @@ public class Actividades extends ColorPanel{
 	        jLabel9 = new javax.swing.JLabel();
 	        jLabel10 = new javax.swing.JLabel();
 	        jTextField3 = new javax.swing.JTextField();
+	        jTextField3.setEditable(editable);
 	        jLabel11 = new javax.swing.JLabel();
 	        jScrollPane6 = new javax.swing.JScrollPane();
 	        jTextArea5 = new javax.swing.JTextArea();
-	        
+
 
 	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-	        setTitle("Crear Actividad");
-	        setName("Crear Actividad"); // NOI18N
+	        switch(mode){
+		    case ADD: setTitle("Crear Actividad"); break;
+		    case VISTA: setTitle("Actividad"); break;
+		    case EDITAR: setTitle("Editar Actividad"); break;
+		    }
 
 	        jLabel1.setText("Nombre: ");
 
 	        jLabel2.setText("Dificultad:");
 
-	        jLabel3.setText("Duración:");
+	        jLabel3.setText("DuraciÃ³n:");
 
 	        jButton1.setText("Guardar");
 	        jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -179,10 +209,11 @@ public class Actividades extends ColorPanel{
 
 	        jLabel4.setText("minutos");
 
-	        jLabel5.setText("Descripción: ");
+	        jLabel5.setText("DescripciÃ³n: ");
 
 	        jTextArea1.setColumns(20);
 	        jTextArea1.setRows(5);
+	        jTextArea1.setEditable(editable);
 	        jScrollPane1.setViewportView(jTextArea1);
 
 	        jLabel6.setText("Desarrollo de la Actividad");
@@ -190,18 +221,14 @@ public class Actividades extends ColorPanel{
 	        jLabel7.setText("Posibles Variaciones");
 
 	        jTextArea3.setColumns(20);
-	        jTextArea3.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 	        jTextArea3.setRows(5);
-	        jTextArea3.setAutoscrolls(false);
+	        jTextArea3.setEditable(editable);
 	        jScrollPane3.setViewportView(jTextArea3);
 
 	        jTextArea4.setColumns(20);
-	        jTextArea4.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 	        jTextArea4.setRows(5);
-	        jTextArea4.setAutoscrolls(false);
-	        jTextArea4.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+	        jTextArea4.setEditable(editable);
 	        jScrollPane4.setViewportView(jTextArea4);
-	        jTextArea4.getAccessibleContext().setAccessibleParent(jTextArea1);
 
 	        jScrollPane2.setViewportView(jList1);
 	        jList1.getAccessibleContext().setAccessibleParent(null);
@@ -217,11 +244,53 @@ public class Actividades extends ColorPanel{
 	        jLabel11.setText("Etiquetas: ");
 	        
 	        jTextArea5.setColumns(20);
-	        jTextArea5.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 	        jTextArea5.setRows(5);
-	        jTextArea5.setAutoscrolls(false);
+	        jTextArea5.setEditable(editable);
 	        jScrollPane6.setViewportView(jTextArea5);
 
+	        
+
+	        if(act != null){
+	        	jTextField1.setText(act.getNombre());
+	        	
+	        	String pacienteTipo = Controlador.getPacienteTipo(act);
+	        	jTextField2.setText(pacienteTipo);
+	        	
+	        	jTextField3.setText(String.valueOf(act.getDuracion()));
+	        	
+	        	jTextArea1.setText(act.getDescripcion());
+	        	
+	        	String etiquetas = Controlador.getEtiquetas(act);
+	        	jTextArea3.setText(etiquetas);
+	        	
+	        	jTextArea4.setText(act.getDesarrollo());
+	        	jTextArea5.setText(act.getVariaciones());
+	      
+	        	jList1.setModel(new javax.swing.AbstractListModel<String>() {
+		        	
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+					ArrayList<String> recursos = Controlador.getRecursosAsociados(act);
+					String[] strings = recursos.toArray(new String[recursos.size()]);
+		            public int getSize() { return strings.length; }
+		            public String getElementAt(int i) { return strings[i]; }
+		        });
+	        	jList2.setModel(new javax.swing.AbstractListModel<String>() {
+		        	
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+					ArrayList<String> actividades = Controlador.getActividadesAsociadas(act);
+					String[] strings = actividades.toArray(new String[actividades.size()]);
+		            public int getSize() { return strings.length; }
+		            public String getElementAt(int i) { return strings[i]; }
+		        });
+	        	
+	        }
+	        
 	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 	        getContentPane().setLayout(layout);
 	        layout.setHorizontalGroup(
@@ -339,12 +408,13 @@ public class Actividades extends ColorPanel{
 	                .addComponent(jButton1)
 	                .addContainerGap())
 	        );
-
+	        
+	        getContentPane().setBackground(getColor());
 	        pack();
 		}
 		
 		/**
-		 * Función que se ejecuta al darle a guardar en la ventana de añadir actividades. Se rellena un objeto actividad y es pasado al controlador.
+		 * FunciÃ³n que se ejecuta al darle a guardar en la ventana de aÃ±adir actividades. Se rellena un objeto actividad y es pasado al controlador.
 		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { 
 			
@@ -354,7 +424,7 @@ public class Actividades extends ColorPanel{
 			
 			String duracion = String.valueOf(jTextField2.getText());
 
-			//Esta excepción hay que capturarla
+			//Esta excepciÃ³n hay que capturarla
 			if(duracion.length()>0 ){
 				info.setDuracion(Integer.valueOf(duracion));
 			}
@@ -365,78 +435,15 @@ public class Actividades extends ColorPanel{
 			info.setVariaciones(String.valueOf(jTextArea3.getText()));
 			info.setDesarrollo(String.valueOf(jTextArea4.getText()));
 			
-			Controlador.addActividad(info);
+			if(mode.equals(Modo.ADD)) Controlador.addActividad(info);
+			else if(mode.equals(Modo.VISTA)) Controlador.modificaEtiquetable(act, info);
 		} 
 	}
-	
-	/*
-	public class ActividadTransfer{
-		
-		private String nombre;
-		private String dificultad;
-		private String pacienteTipo;
-		private int duracion;
-		private String descripcion;
-		private String desarrollo;
-		private String variaciones;
-		
-		public ActividadTransfer(String nombre, String dificultad, String pacienteTipo, int duracion,
-				String descripcion, String desarrollo, String variaciones){
-			this.nombre = nombre;
-			this.dificultad = dificultad;
-			this.pacienteTipo = pacienteTipo;
-			this.duracion = duracion;
-			this.descripcion = descripcion;
-			this.desarrollo = desarrollo;
-			this.variaciones = variaciones;
-		}
-		
-		public String getNombre() {
-			return nombre;
-		}
-
-		public String getDificultad() {
-			return dificultad;
-		}
-
-		public String getPacienteTipo() {
-			return pacienteTipo;
-		}
-
-		public int getDuracion() {
-			return duracion;
-		}
-
-		public String getDescripcion() {
-			return descripcion;
-		}
-
-		public void setDescripcion(String descripcion) {
-			this.descripcion = descripcion;
-		}
-
-		public String getDesarrollo() {
-			return desarrollo;
-		}
-
-		public void setDesarrollo(String desarrollo) {
-			this.desarrollo = desarrollo;
-		}
-
-		public String getVariaciones() {
-			return variaciones;
-		}
-
-		public void setVariaciones(String variaciones) {
-			this.variaciones = variaciones;
-		}
-	}
-*/
 	
 	
 	/**
 	 * 
-	 * Ventana que sale al pulsar el botón eliminar en la sección Actividades en el menú principal.
+	 * Ventana que sale al pulsar el botÃ³n eliminar en la secciÃ³n Actividades en el menÃº principal.
 	 * @author Diedral_Group
 	 *
 	 */
@@ -472,6 +479,7 @@ public class Actividades extends ColorPanel{
 	    private javax.swing.JTextField jTextField2;
 	    private javax.swing.JTextField jTextField3;
 	    private Modo modo;
+	    private ArrayActividades filtrados;
 	    
 	    public PantallaBuscar(Modo m){
 	    	modo = m;
@@ -525,7 +533,7 @@ public class Actividades extends ColorPanel{
 	        jTextArea1.setRows(5);
 	        jScrollPane1.setViewportView(jTextArea1);
 
-	        jLabel3.setText("Duración:");
+	        jLabel3.setText("DuraciÃ³n:");
 
 	        jLabel6.setText("Desde");
 
@@ -668,7 +676,7 @@ public class Actividades extends ColorPanel{
 	                        .addComponent(jButton2)))
 	                .addContainerGap())
 	        );
-
+	        getContentPane().setBackground(getColor());
 	        pack();
 	    }// </editor-fold>                        
 
@@ -689,7 +697,7 @@ public class Actividades extends ColorPanel{
 				max = jComboBox2.getSelectedItem();
 			}*/
 		
-			ArrayActividades salida = Controlador.filtrarActividades(nombre, setEtiquetas, ini, end, setDestinatarios, min, max);
+			filtrados = Controlador.filtrarActividades(nombre, setEtiquetas, ini, end, setDestinatarios, min, max);
 			
 			/*jList1.setModel(new javax.swing.AbstractListModel<String>() {
 			private static final long serialVersionUID = 1L;
@@ -702,6 +710,7 @@ public class Actividades extends ColorPanel{
 	    }                                        
 
 	    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	    	int i; JFrame p; Actividad a = null;
 	    	switch(modo){
 			case ELIMINAR:
 				Confirm c = new Confirm();
@@ -709,17 +718,37 @@ public class Actividades extends ColorPanel{
 		    	c.addListener(this);
 		    	break;
 			case EDITAR:
+				i = jList1.getSelectedIndex();
+				a = getSelectedActividad(i, filtrados);
+				p = new PantallaActividad(a, Modo.EDITAR);
+				p.setVisible(true);
 				break;
 			case BUSCAR:
+				i = jList1.getSelectedIndex();
+				a = getSelectedActividad(i, filtrados);
+				p = new PantallaActividad(a, Modo.VISTA);
+				p.setVisible(true);
 				break;
 			}
 	    }
 
 		@Override
 		public void delete() {
-			Controlador.deleteActividad();
-	    	this.dispose();
+			int i = jList1.getSelectedIndex();
+			Actividad a = getSelectedActividad(i, filtrados);
+			Controlador.deleteActividad(a);
+			this.dispose();
 		}                                        
 
+		private Actividad getSelectedActividad(int i, ArrayActividades filtrados){
+			int j = 0;
+			for(Actividad a : filtrados){
+				if(i == j){
+					return a;
+				}
+				else ++j;
+			}
+			return null;
+		}
 	}
 }

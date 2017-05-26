@@ -3,6 +3,7 @@ package DIedrAl_Project.presentacion;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,14 +11,15 @@ import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import DIedrAl_Project.negocio.recursos.Actividad;
 import DIedrAl_Project.negocio.recursos.ArraySesiones;
 import DIedrAl_Project.negocio.recursos.Sesion;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 
 /**
- * Esta clase lleva la gestión de las vistas de las sesiones. En el constructor se dibuja la sección de Sesiones del Menú Principal y se pone a la espera para 
- * añadir, eliminar, editar o buscar sesiones.
+ * Esta clase lleva la gestiÃ³n de las vistas de las sesiones. En el constructor se dibuja la secciÃ³n de Sesiones del MenÃº Principal y se pone a la espera para 
+ * aÃ±adir, eliminar, editar o buscar sesiones.
  * @author Diedral_Group
  *
  */
@@ -45,9 +47,9 @@ public class Sesiones extends ColorPanel{
 			
 			
 			
-			ImageButton nuevo = new ImageButton("  Crear  ", "images/bluebutton.png", "images/bluebutton2.png", this);
+			ImageButton nuevo = new ImageButton("  Crear  ", "images/greenbutton.png", "images/greenbutton2.png", this);
 			nuevo.addActionListener((ae) -> {
-				JFrame pantalla = new PantallaAdd();
+				JFrame pantalla = new PantallaSesion(null, Modo.ADD);
 				pantalla.setVisible(true);
 			});
 			c.gridx = 0;
@@ -59,7 +61,7 @@ public class Sesiones extends ColorPanel{
 			
 			
 			
-			ImageButton buscar = new ImageButton(" Buscar  ", "images/greenbutton.png", "images/greenbutton2.png", this);
+			ImageButton buscar = new ImageButton(" Buscar  ", "images/bluebutton.png", "images/bluebutton2.png", this);
 			buscar.addActionListener((ae) -> {
 				JFrame pantalla = new PantallaBuscar(Modo.BUSCAR);
 				pantalla.setVisible(true);
@@ -70,25 +72,37 @@ public class Sesiones extends ColorPanel{
 			
 			
 			
-			ImageButton eliminar = new ImageButton("Eliminar", "images/tanbutton.png", "images/tanbutton2.png", this);
+			ImageButton eliminar = new ImageButton("Eliminar", "images/blackbutton.png", "images/blackbutton2.png", this);
 			eliminar.addActionListener((ae) -> {
 				JFrame pantalla = new PantallaBuscar(Modo.ELIMINAR);
 				pantalla.setVisible(true);
 			});
-			c.gridx = 0;
+			c.gridx = 1;
 			c.gridy = 2;
 			add(eliminar, c);
+			
+			ImageButton editar = new ImageButton("Editar", "images/tanbutton.png", "images/tanbutton2.png", this);
+			componentes.add(editar);
+			editar.addActionListener((ae) -> {
+				JFrame panel = new PantallaBuscar(Modo.EDITAR);
+				panel.setVisible(true);
+				
+			});
+			c.gridx = 0;
+			c.gridy = 2;
+			add(editar, c);
+			
 			setVisible(true);
 		}
 		
 		
 	
 	/**
-	 * Clase que gestiona la ventana que aparece al darle al botón -Añadir- en la sección -Sesiones- del Ménú Principal
+	 * Clase que gestiona la ventana que aparece al darle al botÃ³n -AÃ±adir- en la secciÃ³n -Sesiones- del MÃ©nÃº Principal
 	 * @author Diedral_Group
 	 * 
 	 */
-		private class PantallaAdd extends JFrame{
+		private class PantallaSesion extends JFrame{
 			 /**
 			 * 
 			 */
@@ -119,27 +133,41 @@ public class Sesiones extends ColorPanel{
 		    private javax.swing.JTextArea jTextArea5;
 		    private javax.swing.JTextField jTextField1;
 		    private javax.swing.JTextField jTextField2;
+		    private boolean editable;
+		    private Sesion sesion;
+		    private Modo mode;
 		    // End of variables declaration        
 		    
-			public PantallaAdd(){
+			public PantallaSesion(Sesion s, Modo m){
+				sesion = s;
+				mode = m;
+				if(mode.equals(Modo.VISTA)) editable= false;
+				else editable = true;
 				initGUI();
 			}
 			private void initGUI(){
 				jLabel1 = new javax.swing.JLabel();
 		        jLabel3 = new javax.swing.JLabel();
 		        jButton1 = new javax.swing.JButton();
+		        jButton1.setVisible(editable);
+		        jButton1.setEnabled(editable);
 		        jTextField1 = new javax.swing.JTextField();
+		        jTextField1.setEditable(editable);
 		        jTextField2 = new javax.swing.JTextField();
+		        jTextField2.setEditable(editable);
 		        jLabel4 = new javax.swing.JLabel();
 		        jLabel5 = new javax.swing.JLabel();
 		        jScrollPane1 = new javax.swing.JScrollPane();
 		        jTextArea1 = new javax.swing.JTextArea();
+		        jTextArea1.setEditable(editable);
 		        jLabel6 = new javax.swing.JLabel();
 		        jLabel7 = new javax.swing.JLabel();
 		        jScrollPane3 = new javax.swing.JScrollPane();
 		        jTextArea3 = new javax.swing.JTextArea();
+		        jTextArea3.setEditable(editable);
 		        jScrollPane4 = new javax.swing.JScrollPane();
 		        jTextArea4 = new javax.swing.JTextArea();
+		        jTextArea4.setEditable(editable);
 		        jScrollPane2 = new javax.swing.JScrollPane();
 		        jList1 = new javax.swing.JList<>();
 		        jScrollPane5 = new javax.swing.JScrollPane();
@@ -149,14 +177,19 @@ public class Sesiones extends ColorPanel{
 		        jLabel11 = new javax.swing.JLabel();
 		        jScrollPane6 = new javax.swing.JScrollPane();
 		        jTextArea5 = new javax.swing.JTextArea();
+		        jTextArea5.setEditable(editable);
 
 		        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		        setTitle("Crear Sesión");
-		        setName("Crear Actividad"); // NOI18N
+		        switch(mode){
+			    case ADD: setTitle("Crear Sesion"); break;
+			    case VISTA: setTitle("Sesion"); break;
+			    case EDITAR: setTitle("Editar Sesion"); break;
+			    }
+		        
 
 		        jLabel1.setText("Nombre: ");
 
-		        jLabel3.setText("Duración:");
+		        jLabel3.setText("DuraciÃ³n:");
 
 		        jButton1.setText("Guardar");
 		        jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -167,13 +200,13 @@ public class Sesiones extends ColorPanel{
 
 		        jLabel4.setText("minutos");
 
-		        jLabel5.setText("Descripción: ");
+		        jLabel5.setText("DescripciÃ³n: ");
 
 		        jTextArea1.setColumns(20);
 		        jTextArea1.setRows(5);
 		        jScrollPane1.setViewportView(jTextArea1);
 
-		        jLabel6.setText("Desarrollo de la Sesión");
+		        jLabel6.setText("Desarrollo de la SesiÃ³n");
 
 		        jLabel7.setText("Posibles Variaciones");
 
@@ -207,6 +240,43 @@ public class Sesiones extends ColorPanel{
 		        jTextArea5.setAutoscrolls(false);
 		        jScrollPane6.setViewportView(jTextArea5);
 
+		        if(sesion != null){
+		        	jTextField1.setText(sesion.getNombre());
+		        	
+		        	jTextField2.setText(String.valueOf(sesion.getDuracion()));
+		        	
+		        	jTextArea1.setText(sesion.getDescripcion());
+		        	
+		        	String etiquetas = Controlador.getEtiquetas(sesion);
+		        	jTextArea3.setText(etiquetas);
+		        	
+		        	jTextArea4.setText(sesion.getDesarrollo());
+		        	jTextArea5.setText(sesion.getVariaciones());
+		      
+		        	jList1.setModel(new javax.swing.AbstractListModel<String>() {
+			        	
+						/**
+						 * 
+						 */
+						private static final long serialVersionUID = 1L;
+						ArrayList<String> recursos = Controlador.getRecursosAsociados(sesion);
+						String[] strings = recursos.toArray(new String[recursos.size()]);
+			            public int getSize() { return strings.length; }
+			            public String getElementAt(int i) { return strings[i]; }
+			        });
+		        	jList2.setModel(new javax.swing.AbstractListModel<String>() {
+			        	
+						/**
+						 * 
+						 */
+						private static final long serialVersionUID = 1L;
+						ArrayList<String> actividades = Controlador.getActividadesAsociadas(sesion);
+						String[] strings = actividades.toArray(new String[actividades.size()]);
+			            public int getSize() { return strings.length; }
+			            public String getElementAt(int i) { return strings[i]; }
+			        });
+		        }
+		        
 		        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		        getContentPane().setLayout(layout);
 		        layout.setHorizontalGroup(
@@ -309,12 +379,12 @@ public class Sesiones extends ColorPanel{
 		                .addComponent(jButton1)
 		                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		        );
-
+		        getContentPane().setBackground(getColor());
 		        pack();
 			}
 			
 			/**
-			 * Función que se ejecuta al darle a guardar en la ventana de adición de sesiones. Se rellena un objeto sesión y es pasado al controlador.
+			 * FunciÃ³n que se ejecuta al darle a guardar en la ventana de adiciÃ³n de sesiones. Se rellena un objeto sesiÃ³n y es pasado al controlador.
 			 * */
 			private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { 
 				
@@ -324,7 +394,7 @@ public class Sesiones extends ColorPanel{
 				
 				String duracion = String.valueOf(jTextField2.getText());
 
-				//Esta excepción hay que capturarla
+				//Esta excepciÃ³n hay que capturarla
 				if(duracion.length()>0 ){
 					info.setDuracion(Integer.valueOf(duracion));
 				}
@@ -332,52 +402,10 @@ public class Sesiones extends ColorPanel{
 				info.setDescripcion(String.valueOf(jTextArea1.getText()));
 				info.setDesarrollo(String.valueOf(jTextArea4.getText()));
 				info.setVariaciones(String.valueOf(jTextArea3.getText()));
-				Controlador.addSesion(info);
+				if(mode.equals(Modo.ADD)) Controlador.addSesion(info);
+				else if(mode.equals(Modo.EDITAR)) Controlador.modificaEtiquetable(sesion, info);
 			} 
 		}
-		/*
-		public class SesionTransfer{
-			
-			private String nombre;
-			private int minutos;
-			private String descripcion;
-			private String desarrollo;
-			private String posiblesVariaciones;
-			
-
-			public SesionTransfer(String nombre, int minutos,
-					String descripcion, String desarrollo,
-					String posiblesVariaciones) {
-				
-				this.nombre = nombre;
-				this.minutos = minutos;
-				this.descripcion = descripcion;
-				this.desarrollo = desarrollo;
-				this.posiblesVariaciones = posiblesVariaciones;
-			}
-			
-
-			public String getNombre() {
-				return nombre;
-			}
-
-			public int getMinutos() {
-				return minutos;
-			}
-
-			public String getDescripcion() {
-				return descripcion;
-			}
-
-			public String getDesarrollo() {
-				return desarrollo;
-			}
-
-			public String getPosiblesVariaciones() {
-				return posiblesVariaciones;
-			}
-			
-		}*/
 
 
 		private class PantallaBuscar extends JFrame implements confirmListener{
@@ -405,6 +433,7 @@ public class Sesiones extends ColorPanel{
 			private javax.swing.JTextField jTextField2;
 			private javax.swing.JTextField jTextField3;
 			private Modo modo;
+			private ArraySesiones filtrados;
 			
 			public PantallaBuscar(Modo m){
 				modo = m;
@@ -452,7 +481,7 @@ public class Sesiones extends ColorPanel{
 		        jTextArea1.setRows(5);
 		        jScrollPane1.setViewportView(jTextArea1);
 
-		        jLabel3.setText("Duración:");
+		        jLabel3.setText("DuraciÃ³n:");
 
 		        jLabel6.setText("Desde");
 
@@ -566,7 +595,8 @@ public class Sesiones extends ColorPanel{
 		                        .addComponent(jButton2)))
 		                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		        );
-
+		        
+		        getContentPane().setBackground(getColor());
 		        pack();
 		    }
 			private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -579,7 +609,7 @@ public class Sesiones extends ColorPanel{
 				if(!jTextField3.getText().equals("")) 
 					end = Integer.parseInt(jTextField3.getText());
 			
-				ArraySesiones salida = Controlador.filtrarSesiones(nombre, setEtiquetas, ini, end, setDestinatarios);
+				filtrados = Controlador.filtrarSesiones(nombre, setEtiquetas, ini, end, setDestinatarios);
 				
 				
 				
@@ -595,6 +625,7 @@ public class Sesiones extends ColorPanel{
 			}                                        
 
 			private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+				int i; Sesion s; JFrame p;
 				switch(modo){
 				case ELIMINAR:
 					Confirm c = new Confirm();
@@ -602,15 +633,36 @@ public class Sesiones extends ColorPanel{
 			    	c.addListener(this);
 			    	break;
 				case EDITAR:
+					i = jList1.getSelectedIndex();
+					s = getSelectedSesion(i, filtrados);
+					p = new PantallaSesion(s, Modo.EDITAR);
+					p.setVisible(true);
 					break;
 				case BUSCAR:
+					i = jList1.getSelectedIndex();
+					s = getSelectedSesion(i, filtrados);
+					p = new PantallaSesion(s, Modo.VISTA);
+					p.setVisible(true);
 					break;
 				}
 			}
 			@Override
 			public void delete() {
-				Controlador.deleteSesion();
-		    	this.dispose();
+				int i = jList1.getSelectedIndex();
+				Sesion s = getSelectedSesion(i, filtrados);
+				Controlador.deleteSesion(s);
+				dispose();
+			}
+			
+			private Sesion getSelectedSesion(int i, ArraySesiones filtrados){
+				int j = 0;
+				for(Sesion s : filtrados){
+					if(i == j){
+						return s;
+					}
+					else ++j;
+				}
+				return null;
 			}
 		}
 }

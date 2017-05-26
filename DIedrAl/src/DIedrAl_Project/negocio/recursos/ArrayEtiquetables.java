@@ -1,10 +1,7 @@
 package DIedrAl_Project.negocio.recursos;
 
-import static org.junit.Assert.*;
-
 import java.util.*;
 
-import org.junit.Test;
 
 public abstract class ArrayEtiquetables<T extends Etiquetable> implements Iterable<T> {
 

@@ -26,11 +26,11 @@ public class SAPacientesImpl implements SAPacientes {
 	}
 
 	/**
-	 * A馻de el paciente especificado al centro y actualiza la base de datos
-	 * para incluir la nueva informaci髇
+	 * A帽ade el paciente especificado al centro y actualiza la base de datos
+	 * para incluir la nueva informaci贸n
 	 * 
 	 * @param pac
-	 *            paciente a a馻dir al centro
+	 *            paciente a a帽adir al centro
 	 * @throws AlreadyBoundException
 	 *             , si el paciente ya estaba en el centro
 	 */
@@ -43,7 +43,7 @@ public class SAPacientesImpl implements SAPacientes {
 		String fichPac = centro.comoAlmacenable().getFilePacientes();
 		DAORelacionable daorel = factoria.getDAORelacion(fichPac);
 		daorel.crearRelacion(new Relacion(pac.getId()));
-
+        
 		DAOPaciente daopac = factoria.getDAOPaciente();
 		daopac.crearPaciente(pac);
 
@@ -61,7 +61,7 @@ public class SAPacientesImpl implements SAPacientes {
 	@Override
 	public void erasePaciente(Paciente pac) throws NotBoundException,
 			ClassNotFoundException, IOException {
-
+        
 		// Borrar el paciente del centro con todas sus relaciones a terapueutas
 		// y usuarios
 		centro.erasePaciente(pac);
@@ -70,7 +70,7 @@ public class SAPacientesImpl implements SAPacientes {
 		// los pacientes del centro con sus usuarios asociados
 		String fichPac = centro.comoAlmacenable().getFilePacientes();
 
-		// Obtener el dao de relaci髇 para modificar las relaciones en archivo
+		// Obtener el dao de relaci贸n para modificar las relaciones en archivo
 		DAORelacionable daorel = factoria.getDAORelacion(fichPac);
 
 		// eliminar todas las relaciones del paciente en el archivo anterior
@@ -91,7 +91,7 @@ public class SAPacientesImpl implements SAPacientes {
 				return aux.equals(pac.getId());
 			});
 
-			// Modifica la relaci髇 en archivo
+			// Modifica la relaci贸n en archivo
 				try {
 					daorel2.modificarRelacion(relacion);
 				} catch (Exception e) {
@@ -99,6 +99,8 @@ public class SAPacientesImpl implements SAPacientes {
 				}
 			});
 
+		centro.erasePaciente(pac);
+        
 		DAOPaciente daopac = factoria.getDAOPaciente();
 		if (daopac.existePaciente(pac.getId())) {
 			daopac.eliminarPaciente(pac.getId());
@@ -108,11 +110,11 @@ public class SAPacientesImpl implements SAPacientes {
 	}
 
 	/**
-	 * A馻de el usuario especificado al centro y actualiza la base de datos para
-	 * incluir la nueva informaci髇
+	 * A帽ade el usuario especificado al centro y actualiza la base de datos para
+	 * incluir la nueva informaci贸n
 	 * 
 	 * @param usu
-	 *            usuario a a馻dir al centro
+	 *            usuario a a帽adir al centro
 	 * @throws AlreadyBoundException
 	 *             , si el usuario ya estaba en el centro
 	 */
@@ -125,7 +127,7 @@ public class SAPacientesImpl implements SAPacientes {
 		String fichUsu = centro.comoAlmacenable().getFileUsuarios();
 		DAORelacionable daorel = factoria.getDAORelacion(fichUsu);
 		daorel.crearRelacion(new Relacion(usu.getId()));
-
+        
 		DAOUsuario daousu = factoria.getDAOUsuario();
 		daousu.crearUsuario(usu);
 	}
@@ -150,7 +152,7 @@ public class SAPacientesImpl implements SAPacientes {
 		// los usuarios del centro con sus pacientes asociados
 		String fichUsu = centro.comoAlmacenable().getFileUsuarios();
 
-		// Obtener el dao de relaci髇 para modificar las relaciones en archivo
+		// Obtener el dao de relaci贸n para modificar las relaciones en archivo
 		DAORelacionable daorel = factoria.getDAORelacion(fichUsu);
 
 		// eliminar todas las relaciones del usuario en el archivo anterior
@@ -171,14 +173,16 @@ public class SAPacientesImpl implements SAPacientes {
 				return aux.equals(usu.getId());
 			});
 
-			// Modifica la relaci髇 en archivo
+			// Modifica la relaci贸n en archivo
 				try {
 					daorel2.modificarRelacion(relacion);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			});
-
+        
+		centro.eraseUsuario(usu);
+        
 		DAOUsuario daousu = factoria.getDAOUsuario();
 		if (daousu.existeUsuario(usu.getId())) {
 			daousu.eliminarUsuario(usu.getId());
@@ -189,8 +193,11 @@ public class SAPacientesImpl implements SAPacientes {
 
 	@Override
 	public void ligarPaciente(Paciente pac, Usuario usu)
+    
 			throws NotBoundException, AlreadyBoundException, IOException,
 			ClassNotFoundException {
+			throws NotBoundException, AlreadyBoundException {
+        
 		centro.ligarPaciente(pac, usu);
 
 		DAORelacionable daorel = factoria.getDAORelacion(centro
@@ -214,6 +221,7 @@ public class SAPacientesImpl implements SAPacientes {
 	public void desligarPaciente(Paciente pac, Usuario usu)
 			throws NotBoundException, AlreadyBoundException,
 			ClassNotFoundException, IOException {
+        
 		centro.desligarPaciente(pac, usu);
 
 		DAORelacionable daorel = factoria.getDAORelacion(centro
@@ -225,7 +233,7 @@ public class SAPacientesImpl implements SAPacientes {
 		// Obtener conjunto de relaciones de pacientes con usuarios
 		HashSet<Relacion> PacUsu = daorel.listarRelaciones();
 
-		// Recorrer el conjunto buscando la relaci髇 que parte de pac y contiene a usu
+		// Recorrer el conjunto buscando la relaci贸n que parte de pac y contiene a usu
 		Iterator<Relacion> it = PacUsu.iterator();
 		boolean found = false;
 		Relacion buscada = null;
@@ -244,7 +252,7 @@ public class SAPacientesImpl implements SAPacientes {
 		// Obtener conjunto de relaciones de usuarios con pacientes
 		HashSet<Relacion> UsuPac = daorel2.listarRelaciones();
 
-		// Recorrer el conjunto buscando la relaci髇 que parte de usu y contiene a pac
+		// Recorrer el conjunto buscando la relaci贸n que parte de usu y contiene a pac
 		Iterator<Relacion> it2 = UsuPac.iterator();
 		boolean found2 = false;
 		Relacion buscada2 = null;

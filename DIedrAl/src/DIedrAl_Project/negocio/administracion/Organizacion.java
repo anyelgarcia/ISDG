@@ -43,6 +43,7 @@ public final class Organizacion {
 			centros.put(name, new Centro(name));
 		}
 	}
+	
 	public void removeCentro(String name) throws NotBoundException{
 		if(!centros.containsKey(name)){
 			throw new NotBoundException("Centro ya introducido");
