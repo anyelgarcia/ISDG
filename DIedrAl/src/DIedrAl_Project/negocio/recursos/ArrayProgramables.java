@@ -8,6 +8,10 @@ public abstract class ArrayProgramables<T extends Programable> extends
 	public ArrayProgramables(){
 		super();
 	}
+	
+	public ArrayProgramables(Set<T> progra) {
+		super(progra);
+	}
 	public ArrayProgramables<T> filtrarRango(Integer min, Integer max) {
 		return filtrarDur(min, max);
 	}
@@ -38,7 +42,7 @@ public abstract class ArrayProgramables<T extends Programable> extends
 		ArrayProgramables<T> aux = createNew();
 
 		for (T x : this.etiquetables) {
-			if (x.getDuracion() >= min && x.getDuracion() <= max) {
+			if (min <= x.getDuracion() && x.getDuracion() <= max) {
 				aux.etiquetables.add(x);
 			}
 		}

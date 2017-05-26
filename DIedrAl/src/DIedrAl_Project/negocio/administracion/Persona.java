@@ -1,14 +1,14 @@
 package DIedrAl_Project.negocio.administracion;
 
-
+import java.io.Serializable;
 import java.util.UUID;
 
 import DIedrAl_Project.negocio.ObjetoAlmacenable;
 import DIedrAl_Project.negocio.calendario.Fecha;
 import DIedrAl_Project.negocio.pacientes.Direccion;
-import DIedrAl_Project.negocio.pacientes.Paciente;
 
-public class Persona implements ObjetoAlmacenable {
+@SuppressWarnings("serial")
+public class Persona implements ObjetoAlmacenable, Serializable {
 
 	protected String nombre;
 
@@ -24,30 +24,21 @@ public class Persona implements ObjetoAlmacenable {
 
 	protected String email;
 
-	protected Integer tfo;
-	
+	protected String tfo;
+
 	protected String perfil;
-	
+
 	/**
-	 * El NIF es su dni, el id es el campo que le permite al objeto ser guardado.
+	 * El NIF es su dni, el id es el campo que le permite al objeto ser
+	 * guardado.
 	 */
 	protected String nif;
-
-	private String id;
 
 	public Persona(String nombre, String apellido1, String apellido2, String nif) {
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
 		this.apellido2 = apellido2;
 		this.nif = nif;
-		this.id = UUID.randomUUID().toString();
-	}
-	public Persona(String nombre, String apellido1, String apellido2, String nif, String id) {
-		this.nombre = nombre;
-		this.apellido1 = apellido1;
-		this.apellido2 = apellido2;
-		this.nif = nif;
-		this.id = id;
 	}
 
 	public String getName() {
@@ -77,11 +68,11 @@ public class Persona implements ObjetoAlmacenable {
 	public String getPerfil() {
 		return perfil;
 	}
-	
+
 	public void setPerfil(String perfil) {
 		this.perfil = perfil;
 	}
-	
+
 	public Fecha getBirthday() {
 		return fechaNacimiento;
 	}
@@ -114,7 +105,7 @@ public class Persona implements ObjetoAlmacenable {
 		this.email = email;
 	}
 
-	public Integer getTfo() {
+	public String getTfo() {
 		return tfo;
 	}
 
@@ -124,9 +115,8 @@ public class Persona implements ObjetoAlmacenable {
 
 	@Override
 	public String getId() {
-		return id;
+		return nif;
 	}
-	
 
 	public String getNif() {
 		return nif;
@@ -163,8 +153,33 @@ public class Persona implements ObjetoAlmacenable {
 	 * @return 0 si id es el mismo que el de otra, -1/1 si menor/mayor,
 	 *         respectivamente.
 	 */
-	public int compararID(Persona otra) {
+	public int compararNIF(Persona otra) {
 		return nif.compareTo(otra.nif);
 	}
 
+	public String toString() {
+		return nif + ": " + nombre + " " + apellido1 + " " + apellido2;
+	}
+
+	/**
+	 * Dada una persona, iguala los campos de la persona actual para que
+	 * coincidan con los de la proporcionada
+	 * 
+	 * @param otra
+	 *            persona cuyos campos se desean copiar
+	 */
+	public void igualarCampos(Persona otra) {
+
+		if (otra != null) {
+			this.nombre = otra.nombre;
+			this.apellido1 = otra.apellido1;
+			this.apellido2 = otra.apellido2;
+			this.fechaNacimiento = otra.fechaNacimiento;
+			this.estadoCivil = otra.estadoCivil;
+			this.direccion = otra.direccion;
+			this.email = otra.email;
+			this.tfo = otra.tfo;
+			this.perfil = otra.perfil;
+		}
+	}
 }

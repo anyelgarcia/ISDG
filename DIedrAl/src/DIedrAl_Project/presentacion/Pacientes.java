@@ -4,12 +4,10 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.rmi.AlreadyBoundException;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
+import DIedrAl_Project.negocio.administracion.Hints;
 import DIedrAl_Project.negocio.calendario.Fecha;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
@@ -28,9 +26,8 @@ public class Pacientes extends ColorPanel{
 	 */
 	private static final long serialVersionUID = -6246895766907491090L;      
     
-    
 	public Pacientes(int r, int g, int b){
-		super(r,g,b);
+		super(r, g, b);
 		
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
@@ -40,19 +37,15 @@ public class Pacientes extends ColorPanel{
 		c.insets = new Insets(0,15,0,0);
 		JLabel title = new JLabel("Pacientes");
 		title.setFont(font);
-		title.setForeground(Color.WHITE);
+		title.setForeground(Color.BLACK);
 		add(title, c);
 		
 		
 		ImageButton buscar = new ImageButton("Buscar", "images/bluebutton.png", "images/bluebutton2.png", this);
 		componentes.add(buscar);
 		buscar.addActionListener((ae) -> {
-			JFrame panel = new JFrame();
-			
-			panel.setSize(300, 400);
-			panel.setVisible(true);
-			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			
+			JFrame pantalla = new PantallaPolifacetica(Modo.BUSCAR);
+			pantalla.setVisible(true);
 		});
 		c.gridx = 0;
 		c.gridy = 1;
@@ -65,7 +58,7 @@ public class Pacientes extends ColorPanel{
 		ImageButton eliminar = new ImageButton("Eliminar", "images/greenbutton.png", "images/greenbutton2.png", this);
 		componentes.add(eliminar);
 		eliminar.addActionListener((ae) -> {
-			JFrame panel = new PantallaEliminar();
+			JFrame panel = new PantallaPolifacetica(Modo.ELIMINAR);
 			panel.setVisible(true);
 			
 		});
@@ -78,7 +71,7 @@ public class Pacientes extends ColorPanel{
 		ImageButton anadir = new ImageButton("Añadir", "images/tanbutton.png", "images/tanbutton2.png", this);
 		componentes.add(anadir);
 		anadir.addActionListener((ae) -> {
-			JFrame pantalla = new PantallaAdd();
+			JFrame pantalla = new PantallaAdd(false, null);
 			pantalla.setVisible(true);
 		});
 		c.gridx = 0;
@@ -89,12 +82,8 @@ public class Pacientes extends ColorPanel{
 		ImageButton editar = new ImageButton("  Editar  ", "images/orangebutton.png", "images/orangebutton2.png", this);
 		componentes.add(editar);
 		editar.addActionListener((ae) -> {
-			JFrame panel = new JFrame();
-			
-			panel.setSize(300, 400);
-			panel.setVisible(true);
-			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			
+			JFrame pantalla = new PantallaPolifacetica(Modo.EDITAR);
+			pantalla.setVisible(true);
 		});
 		c.gridx = 1;
 		c.gridy = 2;
@@ -142,12 +131,14 @@ public class Pacientes extends ColorPanel{
 	    private javax.swing.JTextField jTextField3;
 	    private javax.swing.JTextField jTextField4;
 	    private javax.swing.JTextField jTextField5;
+	    private boolean editable;
 	    // End of variables declaration     
 	    
-		public PantallaAdd(){
-			initGUI();
+		public PantallaAdd(boolean b, Paciente p){
+			editable = b;
+			initGUI(p);
 		}
-		private void initGUI(){
+		private void initGUI(Paciente p){
 			jLabel1 = new javax.swing.JLabel();
 			jLabel2 = new javax.swing.JLabel();
 			jLabel3 = new javax.swing.JLabel();
@@ -234,6 +225,41 @@ public class Pacientes extends ColorPanel{
 					jButton1ActionPerformed(evt);
 				}
 			});
+			
+			if(p!=null){
+				jTextField1.setText(p.getName());
+				jTextField2.setText(p.getFirstSurname());
+				jTextField3.setText(p.getSecondSurname());
+				jTextField4.setText(p.getDatos().getLesion());
+				jTextField5.setText(p.getNif());
+				jTextArea1.setText(p.getDatos().getAficiones());
+				Fecha birthday = p.getBirthday();
+				if(birthday!=null){
+					jComboBox1.setSelectedIndex(birthday.getDia()-1);
+					jComboBox2.setSelectedIndex(birthday.getMesIndex());
+					jComboBox3.setSelectedIndex(birthday.getAnyo()-1900);
+				}
+				Fecha lesionday = p.getDatos().getFechalesion();
+				if(lesionday!=null){
+					jComboBox5.setSelectedIndex(lesionday.getDia()-1);
+					jComboBox6.setSelectedIndex(lesionday.getMesIndex());
+					jComboBox7.setSelectedIndex(lesionday.getAnyo()-1900);
+				}
+				if(p.getEstadoCivil()!=null)
+					jComboBox4.setSelectedIndex(p.getEstadocivilIndex());
+				jTextArea2.setText(p.getPerfil());
+			}
+			
+			if(!editable){
+				jTextField1.setEditable(false);
+				jTextField2.setEditable(false);
+				jTextField3.setEditable(false);
+				jTextField5.setEditable(false);
+				jComboBox1.setEnabled(false);
+				jComboBox2.setEnabled(false);
+				jComboBox3.setEnabled(false);
+				
+			}
 						
 			javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 			getContentPane().setLayout(layout);
@@ -361,7 +387,7 @@ public class Pacientes extends ColorPanel{
 							                .addComponent(jButton1)
 							                .addGap(18, 18, 18))
 							        );
-					
+							       getContentPane().setBackground(getColor());
 							       pack();
 		}
 		
@@ -394,71 +420,7 @@ public class Pacientes extends ColorPanel{
 			}
 		} 
 	}
-	/*
-	public class PacienteTransfer{
-		
-		private String nombre;
-		private String apellido1;
-		private String apellido2;
-		private Fecha fechanacim;
-		private String estadocivil;
-		private String lesion;
-		private Fecha fechalesion;
-		private String [] aficiones;
-		private String descripcion;
-		
-		public PacienteTransfer(String nombre, String apellido1, String apellido2, int dia1, String mes1, int ano1, String estadocivil, String lesion, int dia2, String mes2, int ano2, String [] aficiones, String descripcion){
-				this.nombre = nombre;
-				this.apellido1 = apellido1;
-				this.apellido2 = apellido2;
-				this.fechanacim = new Fecha(dia1, mes1, ano1, 0);
-				this.estadocivil = estadocivil;
-				this.lesion = lesion;
-				this.fechalesion = new Fecha(dia2, mes2, ano2, 0);
-				this.aficiones = aficiones;
-				this.descripcion = descripcion;
-		}
 
-		public String getNombre() {
-			return nombre;
-		}
-
-		public String getApellido1() {
-			return apellido1;
-		}
-
-		public String getApellido2() {
-			return apellido2;
-		}
-
-		public Fecha getFechanacimiento() {
-			return fechanacim;
-		}
-
-		public String getEstadocivil() {
-			return estadocivil;
-		}
-
-		public String getLesion() {
-			return lesion;
-		}
-
-		public Fecha getFechalesion() {
-			return fechalesion;
-		}
-
-		public String[] getAficiones() {
-			return aficiones;
-		}
-
-		public String getDescripcion() {
-			return descripcion;
-		}
-
-		
-
-		
-	}*/
 
 	/**
 	 * 
@@ -466,107 +428,254 @@ public class Pacientes extends ColorPanel{
 	 * @author Diedral_Group
 	 *
 	 */
-	private class PantallaEliminar extends JFrame implements confirmListener{
+	
+	private class PantallaPolifacetica extends JFrame implements confirmListener{
+		
 		/**
 		 * 
 		 */
-		private static final long serialVersionUID = -6239847431534738736L;
+		private static final long serialVersionUID = -5453880899658964801L;
 		// Variables declaration - do not modify                     
 	    private javax.swing.JButton jButton1;
+	    private javax.swing.JButton jButton2;
 	    private javax.swing.JLabel jLabel1;
 	    private javax.swing.JLabel jLabel2;
+	    private javax.swing.JLabel jLabel3;
+	    private javax.swing.JLabel jLabel4;
+	    private javax.swing.JList<String> jList1;
+	    private javax.swing.JScrollPane jScrollPane1;
 	    private javax.swing.JTextField jTextField1;
+	    private javax.swing.JTextField jTextField2;
+	    private javax.swing.JTextField jTextField3;
+	    private javax.swing.JTextField jTextField4;
+	    private javax.swing.JSeparator jSeparator2;
+	    private Modo modo;
 	    // End of variables declaration     
 	    
-	    public PantallaEliminar() {
-	        initComponents();
+	    public PantallaPolifacetica(Modo modo) {
+	    	this.modo = modo;
+	        initGUI();
 	    }
-	    /**
-	     * This method is called from within the constructor to initialize the form.
-	     * WARNING: Do NOT modify this code. The content of this method is always
-	     * regenerated by the Form Editor.
-	     */                        
-	    private void initComponents() {
+		
+		
+	    private void initGUI() {
 
-	        jLabel1 = new javax.swing.JLabel();
 	        jTextField1 = new javax.swing.JTextField();
-	        jButton1 = new javax.swing.JButton();
+	        jTextField2 = new javax.swing.JTextField();
+	        jTextField3 = new javax.swing.JTextField();
+	        jTextField4 = new javax.swing.JTextField();
+	        jLabel1 = new javax.swing.JLabel();
 	        jLabel2 = new javax.swing.JLabel();
+	        jLabel3 = new javax.swing.JLabel();
+	        jLabel4 = new javax.swing.JLabel();
+	        jButton1 = new javax.swing.JButton();
+	        jScrollPane1 = new javax.swing.JScrollPane();
+	        jList1 = new javax.swing.JList<>();
+	        jButton2 = new javax.swing.JButton();
+	        jSeparator2 = new javax.swing.JSeparator();
 
-	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-	        setTitle("Eliminar Paciente");
 
-	        jTextField1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+	        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+	        
+	        switch(modo){
+			case ELIMINAR:
+				setTitle("Eliminar Paciente");
+		    	break;
+			case EDITAR:
+				setTitle("Editar Paciente");
+				break;
+			case BUSCAR:
+				setTitle("Buscar Paciente");
+				break;
+			}
 
-	        jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-	        jButton1.setText("Eliminar");
+	        jLabel1.setText("Nombre:");
+
+	        jLabel2.setText("Primer Apellido:");
+
+	        jLabel3.setText("Segundo Apellido:");
+
+	        jLabel4.setText("DNI:");
+
+	        jButton1.setText("Buscar");
 	        jButton1.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
 	                jButton1ActionPerformed(evt);
 	            }
 	        });
 
-	        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-	        jLabel2.setText("Introduzca el nombre del paciente");
+	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+	            /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+				String[] strings = {  };
+	            public int getSize() { return strings.length; }
+	            public String getElementAt(int i) { return strings[i]; }
+	        });
+	        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+	        jScrollPane1.setViewportView(jList1);
+
+	        jButton2.setText("Confirmar");
+	        jButton2.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton2ActionPerformed(evt);
+	            }
+	        });
+
+	        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
 	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 	        getContentPane().setLayout(layout);
 	        layout.setHorizontalGroup(
 	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	            .addGroup(layout.createSequentialGroup()
-	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
 	                    .addGroup(layout.createSequentialGroup()
-	                        .addContainerGap()
-	                        .addComponent(jLabel1))
-	                    .addGroup(layout.createSequentialGroup()
-	                        .addGap(151, 151, 151)
-	                        .addComponent(jButton1)))
-	                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-	                .addGap(0, 60, Short.MAX_VALUE)
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                            .addGroup(layout.createSequentialGroup()
+	                                .addGap(21, 21, 21)
+	                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+	                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+	                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+	                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
+	                                .addGap(30, 30, 30))
+	                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                                .addContainerGap()
+	                                .addComponent(jLabel3)
+	                                .addGap(18, 18, 18)))
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+	                    .addComponent(jButton1))
+	                .addGap(35, 35, 35)
+	                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addGap(16, 16, 16)
 	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-	                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                        .addGap(57, 57, 57))
-	                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-	                        .addComponent(jLabel2)
-	                        .addGap(92, 92, 92))))
+	                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addComponent(jButton2))
+	                .addContainerGap(29, Short.MAX_VALUE))
 	        );
 	        layout.setVerticalGroup(
 	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	            .addGroup(layout.createSequentialGroup()
-	                .addContainerGap()
-	                .addComponent(jLabel1)
-	                .addGap(16, 16, 16)
-	                .addComponent(jLabel2)
-	                .addGap(18, 18, 18)
-	                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                .addGap(26, 26, 26)
-	                .addComponent(jButton1)
-	                .addContainerGap(31, Short.MAX_VALUE))
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addGap(26, 26, 26)
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jLabel1))
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jLabel2))
+	                        .addGap(11, 11, 11)
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jLabel3))
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jLabel4))
+	                        .addGap(0, 0, Short.MAX_VALUE))
+	                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                        .addContainerGap(16, Short.MAX_VALUE)
+	                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addGap(18, 18, 18)
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                            .addComponent(jButton2)
+	                            .addComponent(jButton1))))
+	                .addGap(23, 23, 23))
+	            .addComponent(jSeparator2)
 	        );
-
+	        
+	        getContentPane().setBackground(getColor());
 	        pack();
-	    }                      
+	    }
+		
+		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 
-	    /**
-	     * Se llama a esta función al introducir un nombre de paciente para eliminar en la ventana de eliminación de Pacientes. Pide confirmación.
-	     * @param evt
-	     */
-	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-	    	Confirm c = new Confirm();
-	    	c.setVisible(true);
-	    	c.addListener(this);
-	    }  
+			String nombre = jTextField1.getText();
+			String apellido1 = jTextField2.getText();
+			String apellido2 = jTextField3.getText();
+			String DNI = jTextField4.getText();
+			
+			ArrayList<String> campos = new ArrayList<String>();
+			ArrayList<Hints> hints = new ArrayList<Hints>();
+			
+			if(nombre!=null && nombre.length()>0){
+				campos.add(nombre);
+				hints.add(Hints.NOMBRE);
+			}
+			
+			if(apellido1!=null && apellido1.length()>0){
+				campos.add(apellido1);
+				hints.add(Hints.APELLIDO1);
+			}
+			
+			if(apellido2!=null && apellido2.length()>0){
+				campos.add(apellido2);
+				hints.add(Hints.APELLIDO2);
+			}
+			
+			if(DNI!=null && DNI.length()>0){
+				campos.add(DNI);
+				hints.add(Hints.NIF);
+			}
+			
+			int i=0;
+			Hints [] claves = new Hints[hints.size()];
+			for(Hints hint: hints){
+				claves[i] = hint;
+				i++;
+			}
+			
+			i=0;
+			String [] valores = new String[hints.size()];
+			for(String str: campos){
+				valores[i] = str;
+				i++;
+			}
+			
+			Hints valUsuarios [] = {Hints.PACIENTE};
+			
+			String resultados[] = Controlador.buscarUsuarios(claves, valores, valUsuarios);
+			jList1.setModel(new javax.swing.AbstractListModel<String>() {
+				private static final long serialVersionUID = 1L;
+				String[] strings = resultados;
+	            public int getSize() { return strings.length; }
+	            public String getElementAt(int i) { return strings[i]; }
+			});
+		}
 	    
-	    /**
+	    
+
+		private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+			switch(modo){
+				case ELIMINAR:
+					Confirm c = new Confirm();
+			    	c.setVisible(true);
+			    	c.addListener(this);
+			    	break;
+				case EDITAR:
+					break;
+				case BUSCAR:
+					break;
+				}
+			
+		}  
+		
+		/**
 	     * Se llama a esta función al pulsar el botón -Sí- en confirmar. Le dice al controlador que elimine al paciente.
 	     */
 	    public void delete(){
 	    	Controlador.deletePaciente(jTextField1.getText());
 	    	this.dispose();
 	    }
-	    
 	}
+
+
 }
 	

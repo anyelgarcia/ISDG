@@ -3,15 +3,13 @@ package DIedrAl_Project.presentacion;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.util.List;
+import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import DIedrAl_Project.negocio.administracion.Hints;
 import DIedrAl_Project.negocio.administracion.Usuario;
-import DIedrAl_Project.negocio.calendario.Fecha;
-import DIedrAl_Project.presentacion.Perfil.PerfilTransfer;
 
 
 public class Usuarios extends ColorPanel{
@@ -33,7 +31,7 @@ public class Usuarios extends ColorPanel{
 		c.insets = new Insets(0,15,0,0);
 		JLabel title = new JLabel("Usuarios");
 		title.setFont(font);
-		title.setForeground(Color.WHITE);
+		title.setForeground(Color.BLACK);
 		add(title, c);
 		
 		
@@ -54,12 +52,8 @@ public class Usuarios extends ColorPanel{
 		
 		ImageButton buscar = new ImageButton("Buscar", "images/orangebutton.png", "images/orangebutton2.png", this);
 		buscar.addActionListener((ae) -> {
-			JFrame panel = new JFrame();
-			
-			panel.setSize(300, 400);
-			panel.setVisible(true);
-			panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			
+			JFrame pantalla = new PantallaBuscar();
+			pantalla.setVisible(true);
 		});
 		c.gridx = 1;
 		c.gridy = 1;
@@ -152,23 +146,41 @@ public class Usuarios extends ColorPanel{
 		        jTextArea2.setText("Descripción");
 		        jScrollPane3.setViewportView(jTextArea2);
 
+		        jLabel1.setFont(new java.awt.Font("Arial", 0, 10));
 		        jLabel1.setText("Despacho, horarios y otra información: ");
-
+		        jLabel1.setForeground(Color.BLACK);
+		        
+		        jLabel2.setFont(new java.awt.Font("Arial", 0, 10));
 		        jLabel2.setText("Pacientes Asociados: ");
+		        jLabel2.setForeground(Color.BLACK);
 
+		        jLabel3.setFont(new java.awt.Font("Arial", 0, 10));
 		        jLabel3.setText("Nombre: ");
+		        jLabel3.setForeground(Color.BLACK);
 		        
+		        jLabel7.setFont(new java.awt.Font("Arial", 0, 10));
 		        jLabel7.setText("Primer Apellido: ");
+		        jLabel7.setForeground(Color.BLACK);
 		        
+		        jLabel8.setFont(new java.awt.Font("Arial", 0, 10));
 		        jLabel8.setText("Segundo Apellido: ");
+		        jLabel8.setForeground(Color.BLACK);
 		        
+		        jLabel9.setFont(new java.awt.Font("Arial", 0, 10));
 		        jLabel9.setText("DNI: ");
+		        jLabel9.setForeground(Color.BLACK);
 
+		        jLabel4.setFont(new java.awt.Font("Arial", 0, 10));
 		        jLabel4.setText("Rol: ");
+		        jLabel4.setForeground(Color.BLACK);
 
+		        jLabel5.setFont(new java.awt.Font("Arial", 0, 10));
 		        jLabel5.setText("Email: ");
+		        jLabel5.setForeground(Color.BLACK);
 
+		        jLabel6.setFont(new java.awt.Font("Arial", 0, 10));
 		        jLabel6.setText("Teléfono: ");
+		        jLabel6.setForeground(Color.BLACK);
 
 		        jButton1.setText("Guardar");
 		        jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -271,8 +283,10 @@ public class Usuarios extends ColorPanel{
 		                .addGap(7, 7, 7))
 		        );
 
+		        getContentPane().setBackground(getColor());
 		        pack();
 		}
+		
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {   
 			
 			//qué hacemos con esto jList1.getSelectedValuesList()
@@ -284,7 +298,7 @@ public class Usuarios extends ColorPanel{
 			
 			String tfo = jTextField4.getText();
 			if(tfo.length()>0){
-				usuario.setTfo(Integer.parseInt(tfo));
+				usuario.setTfo(tfo);
 			}
 			
 			String rol = jTextField2.getText();
@@ -292,72 +306,245 @@ public class Usuarios extends ColorPanel{
 				usuario.setAdmin();
 		}     
 	}
-/*
-	public class UsuarioTransfer{
+	
+	
+	private class PantallaBuscar extends JFrame{
 		
-		public UsuarioTransfer(String nombre, String rol, String email, String telefono,
-				String descripcion, List<String> pacientes, String info) {
-			this.nombre = nombre;
-			this.rol = rol;
-			this.email = email;
-			this.telefono = telefono;
-			this.descripcion = descripcion;
-			this.pacientes = pacientes;
-			this.info = info;
-		}
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		// Variables declaration - do not modify                     
+	    private javax.swing.JButton jButton1;
+	    private javax.swing.JButton jButton2;
+	    private javax.swing.JLabel jLabel1;
+	    private javax.swing.JLabel jLabel2;
+	    private javax.swing.JLabel jLabel3;
+	    private javax.swing.JLabel jLabel4;
+	    private javax.swing.JLabel jLabel5;
+	    private javax.swing.JList<String> jList1;
+	    private javax.swing.JScrollPane jScrollPane1;
+	    private javax.swing.JTextField jTextField1;
+	    private javax.swing.JTextField jTextField2;
+	    private javax.swing.JTextField jTextField3;
+	    private javax.swing.JTextField jTextField4;
+	    private javax.swing.JTextField jTextField5;
+	    private javax.swing.JSeparator jSeparator2;
+	    // End of variables declaration   
+	    
+	    public PantallaBuscar(){
+	    	initGUI();
+	    }
 		
-		public String getNombre() {
-			return nombre;
-		}
+		
+	    private void initGUI() {
 
-		public void setNombre(String nombre) {
-			this.nombre = nombre;
-		}
+	        jTextField1 = new javax.swing.JTextField();
+	        jTextField2 = new javax.swing.JTextField();
+	        jTextField3 = new javax.swing.JTextField();
+	        jTextField4 = new javax.swing.JTextField();
+	        jTextField5 = new javax.swing.JTextField();
+	        jLabel1 = new javax.swing.JLabel();
+	        jLabel2 = new javax.swing.JLabel();
+	        jLabel3 = new javax.swing.JLabel();
+	        jLabel4 = new javax.swing.JLabel();
+	        jLabel5 = new javax.swing.JLabel();
+	        jButton1 = new javax.swing.JButton();
+	        jScrollPane1 = new javax.swing.JScrollPane();
+	        jList1 = new javax.swing.JList<>();
+	        jButton2 = new javax.swing.JButton();
+	        jSeparator2 = new javax.swing.JSeparator();
 
-		public String getRol() {
-			return rol;
-		}
-		public void setRol(String rol) {
-			this.rol = rol;
-		}
-		public String getEmail() {
-			return email;
-		}
-		public void setEmail(String email) {
-			this.email = email;
-		}
-		public String getTelefono() {
-			return telefono;
-		}
-		public void setTelefono(String telefono) {
-			this.telefono = telefono;
-		}
-		public String getDescripcion() {
-			return descripcion;
-		}
-		public void setDescripcion(String descripcion) {
-			this.descripcion = descripcion;
-		}
-		public List<String> getPacientes() {
-			return pacientes;
-		}
-		public void setPacientes(List<String> pacientes) {
-			this.pacientes = pacientes;
-		}
-		public String getInfo() {
-			return info;
-		}
-		public void setInfo(String info) {
-			this.info = info;
-		}
-		String nombre;
-		String rol;
-		String email;
-		String telefono;
-		String descripcion;
-		List<String> pacientes;
-		String info;
+
+	        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+	        setTitle("Buscar Usuario");
+
+	        jLabel1.setFont(new java.awt.Font("Arial", 0, 10));
+	        jLabel1.setText("Nombre:");
+	        jLabel1.setForeground(Color.BLACK);
+
+	        jLabel2.setFont(new java.awt.Font("Arial", 0, 10));
+	        jLabel2.setText("Primer Apellido:");
+	        jLabel2.setForeground(Color.BLACK);
+
+	        jLabel3.setFont(new java.awt.Font("Arial", 0, 10));
+	        jLabel3.setText("Segundo Apellido:");
+	        jLabel3.setForeground(Color.BLACK);
+
+	        jLabel4.setFont(new java.awt.Font("Arial", 0, 10));
+	        jLabel4.setText("DNI:");
+	        jLabel4.setForeground(Color.BLACK);
+	        
+	        jLabel5.setFont(new java.awt.Font("Arial", 0, 10));
+	        jLabel5.setText("Solo Administradores (SI o NO):");
+	        jLabel5.setForeground(Color.BLACK);
+
+	        jButton1.setText("Buscar");
+	        jButton1.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton1ActionPerformed(evt);
+	            }
+	        });
+
+	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+	            /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+				String[] strings = {  };
+	            public int getSize() { return strings.length; }
+	            public String getElementAt(int i) { return strings[i]; }
+	        });
+	        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+	        jScrollPane1.setViewportView(jList1);
+
+	        jButton2.setText("Confirmar");
+	        jButton2.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton2ActionPerformed(evt);
+	            }
+	        });
+
+	        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+	        getContentPane().setLayout(layout);
+	        layout.setHorizontalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(layout.createSequentialGroup()
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                            .addGroup(layout.createSequentialGroup()
+	                                .addGap(21, 21, 21)
+	                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+	                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+	                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+	                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+	                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+	                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
+	                                .addGap(30, 30, 30)))
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)	                            
+	                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+	                    .addComponent(jButton1))
+	                .addGap(35, 35, 35)
+	                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addGap(16, 16, 16)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addComponent(jButton2))
+	                .addContainerGap(29, Short.MAX_VALUE))
+	        );
+	        layout.setVerticalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(layout.createSequentialGroup()
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addGap(10, 10, 10)
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jLabel1))
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jLabel2))
+	                        .addGap(11, 11, 11)
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jLabel3))
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jLabel4))
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(jLabel5))
+	                        .addGap(0, 0, Short.MAX_VALUE))
+	                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                        .addContainerGap(16, Short.MAX_VALUE)
+	                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addGap(18, 18, 18)
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                            .addComponent(jButton2)
+	                            .addComponent(jButton1))))
+	                .addGap(10, 10, 10))
+	            .addComponent(jSeparator2)
+	        );
+
+	        getContentPane().setBackground(getColor());
+	        pack();
+	    }
 		
-		
-	}*/
+		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+
+			String nombre = jTextField1.getText();
+			String apellido1 = jTextField2.getText();
+			String apellido2 = jTextField3.getText();
+			String DNI = jTextField4.getText();
+			String admin = jTextField5.getText();
+			
+			ArrayList<String> campos = new ArrayList<String>();
+			ArrayList<Hints> hints = new ArrayList<Hints>();
+			Hints [] usuarios = null;
+			
+			if(nombre!=null && nombre.length()>0){
+				campos.add(nombre);
+				hints.add(Hints.NOMBRE);
+			}
+			
+			if(apellido1!=null && apellido1.length()>0){
+				campos.add(apellido1);
+				hints.add(Hints.APELLIDO1);
+			}
+			
+			if(apellido2!=null && apellido2.length()>0){
+				campos.add(apellido2);
+				hints.add(Hints.APELLIDO2);
+			}
+			
+			if(DNI!=null && DNI.length()>0){
+				campos.add(DNI);
+				hints.add(Hints.NIF);
+			}
+			
+			if(admin.equals("Si")||  admin.equals("Sí") ||  admin.equals("SI") ||  admin.equals("SÍ")){
+				usuarios = new Hints[1];
+				usuarios[0] = Hints.ADMINISTRADOR;
+			}
+			
+			int i=0;
+			Hints [] claves = new Hints[hints.size()];
+			for(Hints hint: hints){
+				claves[i] = hint;
+				i++;
+			}
+			
+			i=0;
+			String [] valores = new String[hints.size()];
+			for(String str: campos){
+				valores[i] = str;
+				i++;
+			}
+			
+			String resultados[] = Controlador.buscarUsuarios(claves, valores, usuarios);
+			jList1.setModel(new javax.swing.AbstractListModel<String>() {
+	            /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+				String[] strings = resultados;
+	            public int getSize() { return strings.length; }
+	            public String getElementAt(int i) { return strings[i]; }
+			});
+		}                                        
+
+		private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+			// TODO add your handling code here:
+		}  
+	}
 }
