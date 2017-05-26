@@ -88,7 +88,6 @@ public class Controlador {
 		 System.out.println( p.getDescripcion());*/
 	}
 	
-
 	public static void addActividad(Actividad p){
 		
 		
@@ -108,7 +107,6 @@ public class Controlador {
 		 System.out.println( p.getVariaciones());
 		 System.out.println( p.getDesarrollo());*/
 	}
-	
 	
 	public static void addSesion(Sesion p){
 		
@@ -153,7 +151,6 @@ public class Controlador {
 	public static void deleteActividad(Actividad a){
 		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos();
 		saRecursos.removeActividad(a);
-	
 	}
 	
 	public static void deletePaciente(String s){
@@ -300,4 +297,9 @@ public class Controlador {
     	}
     	return salida;
 	}
+  
+	public static void modificaEtiquetable(Etiquetable antiguo, Etiquetable nuevo){
+		antiguo.igualarCampos(nuevo);
+	}
+
 }

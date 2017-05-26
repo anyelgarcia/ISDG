@@ -18,8 +18,8 @@ import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 
 /**
- * Esta clase lleva la gestión de las vistas de los recursos. En el constructor se dibuja la sección de Recursos del Menú Principal y se pone a la espera para 
- * añadir, eliminar, editar o buscar recursos.
+ * Esta clase lleva la gestiÃ³n de las vistas de los recursos. En el constructor se dibuja la secciÃ³n de Recursos del MenÃº Principal y se pone a la espera para 
+ * aÃ±adir, eliminar, editar o buscar recursos.
  * @author Diedral_Group
  *
  */
@@ -49,7 +49,7 @@ public class Recursos extends ColorPanel{
 		ImageButton nuevo = new ImageButton("Crear ", "images/orangebutton.png", "images/orangebutton2.png", this);
 		componentes.add(nuevo);
 		nuevo.addActionListener((ae) -> {
-			JFrame pantalla = new PantallaRecurso(true, null);
+			JFrame pantalla = new PantallaRecurso(null, Modo.ADD);
 			pantalla.setVisible(true);
 			
 		});
@@ -101,7 +101,7 @@ public class Recursos extends ColorPanel{
         
 	
 	/**
-	 * Clase que gestiona la ventana que aparece al darle al botón -Añadir- en la sección -Recursos- del Ménú Principal
+	 * Clase que gestiona la ventana que aparece al darle al botÃ³n -AÃ±adir- en la secciÃ³n -Recursos- del MÃ©nÃº Principal
 	 * @author Diedral_Group
 	 *
 	 */
@@ -126,19 +126,26 @@ public class Recursos extends ColorPanel{
 	    private javax.swing.JTextField jTextField2;
 	    private boolean editable;
 	    private Recurso recurso;
+	    private Modo mode;
 	    // End of variables declaration    
 	    
-		public PantallaRecurso(boolean b, Recurso r){
-			editable = b;
+		public PantallaRecurso(Recurso r, Modo m){
+			mode = m;
+			if(mode.equals(Modo.VISTA)) editable= false;
+			else editable = true;
+
 			recurso = r;
 			initGUI();
 		}
+		
 		private void initGUI(){
 			jLabel1 = new javax.swing.JLabel();
 		    jLabel2 = new javax.swing.JLabel();
 		    jLabel3 = new javax.swing.JLabel();
 		    jLabel4 = new javax.swing.JLabel();
 		    jButton1 = new javax.swing.JButton();
+		    jButton1.setVisible(editable);
+	        jButton1.setEnabled(editable);
 		    jTextField1 = new javax.swing.JTextField();
 		    jTextField2 = new javax.swing.JTextField();
 		    jScrollPane2 = new javax.swing.JScrollPane();
@@ -147,13 +154,17 @@ public class Recursos extends ColorPanel{
 		    jTextArea3 = new javax.swing.JTextArea();
 
 		    setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		    setTitle("Crear Recurso");
+		    switch(mode){
+		    case ADD: setTitle("Crear Recurso"); break;
+		    case VISTA: setTitle("Recurso"); break;
+		    case EDITAR: setTitle("Editar Recurso"); break;
+		    }
 
 		        jLabel1.setText("Nombre del recurso:");
 
 		        jLabel2.setText("Archivo: ");
 
-		        jLabel3.setText("Descripción: ");
+		        jLabel3.setText("DescripciÃ³n: ");
 
 		        jLabel4.setText("Etiquetas: (separadas por comas)");
 
@@ -242,7 +253,7 @@ public class Recursos extends ColorPanel{
 
 		
 		/**
-		 * Función que se ejecuta al darle a guardar en la ventana de adición de recursos. Se rellena un objeto recurso y es pasado al controlador.
+		 * FunciÃ³n que se ejecuta al darle a guardar en la ventana de adiciÃ³n de recursos. Se rellena un objeto recurso y es pasado al controlador.
 		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {     
 			
@@ -251,6 +262,9 @@ public class Recursos extends ColorPanel{
 			
 			Recurso info = new Recurso(String.valueOf(jTextField2.getText()), String.valueOf(jTextField1.getText()), etiqs);
 			info.setDescripcion(String.valueOf(jTextArea3.getText()));
+			
+			if(mode.equals(Modo.ADD)) Controlador.addRecurso(info);
+			else if(mode.equals(Modo.EDITAR)) Controlador.modificaEtiquetable(recurso, info);
 		}                                        
 
 	}
@@ -418,6 +432,7 @@ public class Recursos extends ColorPanel{
 	    }                                        
 
 	    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	    	int i; Recurso r; JFrame p;
 	    	switch(modo){
 			case ELIMINAR:
 				Confirm c = new Confirm();
@@ -425,8 +440,16 @@ public class Recursos extends ColorPanel{
 		    	c.addListener(this);
 		    	break;
 			case EDITAR:
+				i = jList1.getSelectedIndex();
+				r = getSelectedRecurso(i, filtrados);
+				p = new PantallaRecurso(r, Modo.EDITAR);
+				p.setVisible(true);
 				break;
 			case BUSCAR:
+				i = jList1.getSelectedIndex();
+				r = getSelectedRecurso(i, filtrados);
+				p = new PantallaRecurso(r, Modo.VISTA);
+				p.setVisible(true);
 				break;
 			}
 	    }

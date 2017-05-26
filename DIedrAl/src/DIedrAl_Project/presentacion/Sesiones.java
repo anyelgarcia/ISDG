@@ -18,8 +18,8 @@ import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 
 /**
- * Esta clase lleva la gestión de las vistas de las sesiones. En el constructor se dibuja la sección de Sesiones del Menú Principal y se pone a la espera para 
- * añadir, eliminar, editar o buscar sesiones.
+ * Esta clase lleva la gestiÃ³n de las vistas de las sesiones. En el constructor se dibuja la secciÃ³n de Sesiones del MenÃº Principal y se pone a la espera para 
+ * aÃ±adir, eliminar, editar o buscar sesiones.
  * @author Diedral_Group
  *
  */
@@ -49,7 +49,7 @@ public class Sesiones extends ColorPanel{
 			
 			ImageButton nuevo = new ImageButton("  Crear  ", "images/greenbutton.png", "images/greenbutton2.png", this);
 			nuevo.addActionListener((ae) -> {
-				JFrame pantalla = new PantallaSesion(true, null);
+				JFrame pantalla = new PantallaSesion(null, Modo.ADD);
 				pantalla.setVisible(true);
 			});
 			c.gridx = 0;
@@ -98,7 +98,7 @@ public class Sesiones extends ColorPanel{
 		
 	
 	/**
-	 * Clase que gestiona la ventana que aparece al darle al botón -Añadir- en la sección -Sesiones- del Ménú Principal
+	 * Clase que gestiona la ventana que aparece al darle al botÃ³n -AÃ±adir- en la secciÃ³n -Sesiones- del MÃ©nÃº Principal
 	 * @author Diedral_Group
 	 * 
 	 */
@@ -135,17 +135,22 @@ public class Sesiones extends ColorPanel{
 		    private javax.swing.JTextField jTextField2;
 		    private boolean editable;
 		    private Sesion sesion;
+		    private Modo mode;
 		    // End of variables declaration        
 		    
-			public PantallaSesion(boolean b, Sesion s){
-				editable = b;
+			public PantallaSesion(Sesion s, Modo m){
 				sesion = s;
+				mode = m;
+				if(mode.equals(Modo.VISTA)) editable= false;
+				else editable = true;
 				initGUI();
 			}
 			private void initGUI(){
 				jLabel1 = new javax.swing.JLabel();
 		        jLabel3 = new javax.swing.JLabel();
 		        jButton1 = new javax.swing.JButton();
+		        jButton1.setVisible(editable);
+		        jButton1.setEnabled(editable);
 		        jTextField1 = new javax.swing.JTextField();
 		        jTextField1.setEditable(editable);
 		        jTextField2 = new javax.swing.JTextField();
@@ -175,12 +180,16 @@ public class Sesiones extends ColorPanel{
 		        jTextArea5.setEditable(editable);
 
 		        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		        setTitle("Crear Sesión");
-		        setName("Crear Actividad"); // NOI18N
+		        switch(mode){
+			    case ADD: setTitle("Crear Sesion"); break;
+			    case VISTA: setTitle("Sesion"); break;
+			    case EDITAR: setTitle("Editar Sesion"); break;
+			    }
+		        
 
 		        jLabel1.setText("Nombre: ");
 
-		        jLabel3.setText("Duración:");
+		        jLabel3.setText("DuraciÃ³n:");
 
 		        jButton1.setText("Guardar");
 		        jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -191,13 +200,13 @@ public class Sesiones extends ColorPanel{
 
 		        jLabel4.setText("minutos");
 
-		        jLabel5.setText("Descripción: ");
+		        jLabel5.setText("DescripciÃ³n: ");
 
 		        jTextArea1.setColumns(20);
 		        jTextArea1.setRows(5);
 		        jScrollPane1.setViewportView(jTextArea1);
 
-		        jLabel6.setText("Desarrollo de la Sesión");
+		        jLabel6.setText("Desarrollo de la SesiÃ³n");
 
 		        jLabel7.setText("Posibles Variaciones");
 
@@ -375,7 +384,7 @@ public class Sesiones extends ColorPanel{
 			}
 			
 			/**
-			 * Función que se ejecuta al darle a guardar en la ventana de adición de sesiones. Se rellena un objeto sesión y es pasado al controlador.
+			 * FunciÃ³n que se ejecuta al darle a guardar en la ventana de adiciÃ³n de sesiones. Se rellena un objeto sesiÃ³n y es pasado al controlador.
 			 * */
 			private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { 
 				
@@ -385,7 +394,7 @@ public class Sesiones extends ColorPanel{
 				
 				String duracion = String.valueOf(jTextField2.getText());
 
-				//Esta excepción hay que capturarla
+				//Esta excepciÃ³n hay que capturarla
 				if(duracion.length()>0 ){
 					info.setDuracion(Integer.valueOf(duracion));
 				}
@@ -393,7 +402,8 @@ public class Sesiones extends ColorPanel{
 				info.setDescripcion(String.valueOf(jTextArea1.getText()));
 				info.setDesarrollo(String.valueOf(jTextArea4.getText()));
 				info.setVariaciones(String.valueOf(jTextArea3.getText()));
-				Controlador.addSesion(info);
+				if(mode.equals(Modo.ADD)) Controlador.addSesion(info);
+				else if(mode.equals(Modo.EDITAR)) Controlador.modificaEtiquetable(sesion, info);
 			} 
 		}
 
@@ -471,7 +481,7 @@ public class Sesiones extends ColorPanel{
 		        jTextArea1.setRows(5);
 		        jScrollPane1.setViewportView(jTextArea1);
 
-		        jLabel3.setText("Duración:");
+		        jLabel3.setText("DuraciÃ³n:");
 
 		        jLabel6.setText("Desde");
 
@@ -625,13 +635,13 @@ public class Sesiones extends ColorPanel{
 				case EDITAR:
 					i = jList1.getSelectedIndex();
 					s = getSelectedSesion(i, filtrados);
-					p = new PantallaSesion(true, s);
+					p = new PantallaSesion(s, Modo.EDITAR);
 					p.setVisible(true);
 					break;
 				case BUSCAR:
 					i = jList1.getSelectedIndex();
 					s = getSelectedSesion(i, filtrados);
-					p = new PantallaSesion(false, s);
+					p = new PantallaSesion(s, Modo.VISTA);
 					p.setVisible(true);
 					break;
 				}

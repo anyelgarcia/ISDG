@@ -136,7 +136,7 @@ public class Perfil extends ColorPanel{
 	        jTextArea2.setRows(5);
 	        jScrollPane3.setViewportView(jTextArea2);
 
-	        jLabel1.setText("Despacho, horarios y otra información: ");
+	        jLabel1.setText("Despacho, horarios y otra informaciÃ³n: ");
 
 	        jLabel2.setText("Pacientes Asociados: ");
 
@@ -146,7 +146,7 @@ public class Perfil extends ColorPanel{
 
 	        jLabel5.setText("Email: ");
 
-	        jLabel6.setText("Teléfono: ");
+	        jLabel6.setText("TelÃ©fono: ");
 
 	        jTextField1.setEditable(false);
 	        jTextField1.setText(user.getName() +" " + user.getFirstSurname() + " " + user.getSecondSurname());
@@ -161,7 +161,12 @@ public class Perfil extends ColorPanel{
 	        jTextField4.setText(user.getTfo());
 	        
 	        jTextArea1.setText(user.getPerfil());
-	        jTextArea2.setText(user.get);
+      
+	        jTextArea1.setEditable(editable);
+	        
+	        jTextArea2.setText(user.getInfor());
+	        jTextArea2.setEditable(editable);
+	  
 
 	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 	       getContentPane().setLayout(layout);

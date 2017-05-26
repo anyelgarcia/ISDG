@@ -109,7 +109,7 @@ public class Persona implements ObjetoAlmacenable, Serializable {
 		return tfo;
 	}
 
-	public void setTfo(String tfo) {
+	public void setTfo(Integer tfo) {
 		this.tfo = tfo;
 	}
 
