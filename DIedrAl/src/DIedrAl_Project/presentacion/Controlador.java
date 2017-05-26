@@ -5,7 +5,6 @@ import java.rmi.NotBoundException;
 import java.util.ArrayList;
 import java.util.Set;
 
-import DIedrAl_Project.negocio.administracion.Centro;
 import DIedrAl_Project.negocio.administracion.Hints;
 import DIedrAl_Project.negocio.administracion.Organizacion;
 import DIedrAl_Project.negocio.administracion.Persona;
@@ -22,7 +21,6 @@ import DIedrAl_Project.negocio.recursos.Sesion;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAPacientes;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SARecursos;
-import DIedrAl_Project.presentacion.Perfil.PerfilTransfer;
 
 /**
  * 
@@ -125,13 +123,8 @@ public class Controlador {
 		
 	}
 	
-	public static void changeProfile(PerfilTransfer p){
-		System.out.println(p.getRol());
-		System.out.println(p.getEmail());
-		System.out.println(p.getTelefono());
-		System.out.println(p.getDescripcion());
-		for(String s : p.getPacientes()) System.out.println(s);
-		System.out.println(p.getInfo());
+	public static void changeProfile(Usuario p){
+		
 	}
 	
 	public static void addUsuario(Usuario p){
@@ -250,4 +243,16 @@ public class Controlador {
 		return salida;
 	}
 
+	public static ArrayList<String> getPacientesAsociados(Usuario u){
+		try {
+			ArrayList<String> salida = new ArrayList<String>();
+			Set<Paciente> pacientes = Organizacion.getInstancia().getCentro("Nombre del centro").getPacientesAsociados(u);
+			for(Paciente p : pacientes){
+				salida.add(p.toString());
+			}
+			return salida;
+		} catch (NotBoundException e) {
+			return null;
+		}
+	}
 }

@@ -298,7 +298,7 @@ public class Usuarios extends ColorPanel{
 			
 			String tfo = jTextField4.getText();
 			if(tfo.length()>0){
-				usuario.setTfo(Integer.parseInt(tfo));
+				usuario.setTfo(tfo);
 			}
 			
 			String rol = jTextField2.getText();

@@ -668,7 +668,6 @@ public class Actividades extends ColorPanel{
 			String name = jList1.getSelectedValue();
 			for(Actividad a : filtrados){
 				if(a.getNombre().equals(name)){
-					System.out.println(name);
 					Controlador.deleteActividad(a);
 			    	this.dispose();
 				}

@@ -11,7 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import DIedrAl_Project.negocio.recursos.ArraySesiones;
-import DIedrAl_Project.negocio.recursos.Recurso;
 import DIedrAl_Project.negocio.recursos.Sesion;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
@@ -584,7 +583,6 @@ public class Sesiones extends ColorPanel{
 				String name = jList1.getSelectedValue();
 				for(Sesion s : filtrados){
 					if(s.getNombre().equals(name)){
-						System.out.println(name);
 						Controlador.deleteSesion(s);
 				    	this.dispose();
 					}
