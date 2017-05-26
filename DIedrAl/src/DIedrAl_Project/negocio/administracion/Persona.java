@@ -18,7 +18,7 @@ public class Persona implements ObjetoAlmacenable, Serializable {
 
 	protected Fecha fechaNacimiento;
 
-	protected String estadoCivil;
+	protected EstadoCivil estadoCivil;
 
 	protected Direccion direccion;
 
@@ -81,12 +81,12 @@ public class Persona implements ObjetoAlmacenable, Serializable {
 		fechaNacimiento = birthday;
 	}
 
-	public String getEstadoCivil() {
+	public EstadoCivil getEstadoCivil() {
 		return estadoCivil;
 	}
 
 	public void setEstadoCivil(String estadoCivil) {
-		this.estadoCivil = estadoCivil;
+		this.estadoCivil = EstadoCivil.valueOf(estadoCivil);
 	}
 
 	public Direccion getAddress() {
