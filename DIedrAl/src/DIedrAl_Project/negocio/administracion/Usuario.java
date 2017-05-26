@@ -23,6 +23,10 @@ public class Usuario extends Persona {
 	public void resetAdmin() {
 		admin = false;
 	}
+	
+	public String getInfor() {
+		return this.infor;
+	}
 
 	public void setInfor(String infor) {
 		this.infor = infor;

@@ -5,9 +5,10 @@ import java.util.*;
 import DIedrAl_Project.negocio.recursos.*;
 
 public class SARecursosImpl implements SARecursos{
-	private Banco bank = Banco.getInstancia();
+	private Banco bank;
 	
-	public SARecursosImpl(){
+	public SARecursosImpl(Banco b){
+		bank=b;
 	}
 
 	@Override
