@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 
 
+
 import javax.swing.*;
 
 import DIedrAl_Project.negocio.administracion.Organizacion;
@@ -84,7 +85,13 @@ public class Login extends JPanel{
 			String nombreuser = usernameText.getText();
 			String clave = String.copyValueOf(passwordText.getPassword());
 			
-			SAPacientes saUsuarios = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
+			SAPacientes saUsuarios = null;
+			try {
+				saUsuarios = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			Usuario intento;
 			try {
 				intento = saUsuarios.getUsuarioConNIF(nombreuser);

@@ -139,7 +139,6 @@ public class Controlador {
 		SAPacientes saUsuarios;
 		try {
 			saUsuarios = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
-		}
 		} catch (NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -175,28 +174,19 @@ public class Controlador {
 		saRecursos.removeSesion(s);
 	}
 	
-	public static String[] buscarPaciente(ArrayList<Hints> hints, ArrayList<String> values){
+	public static String[] buscarPaciente(Hints[]hints, String [] values, Hints[] valUsuarios){
 		
-		SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
-		
-		int i = 0;
-		
-		Hints [] claves = new Hints[hints.size()];
-		for(Hints hint: hints){
-			claves[i] = hint;
-			i++;
+		SAPacientes saPacientes = null;
+		try {
+			saPacientes = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-		i=0;
-		String [] valores = new String[hints.size()];
-		for(String str: values){
-			valores[i] = str;
-			i++;
-		}
-		Set<Persona> pacientes = saPacientes.filtrarPersonas(claves, valores);
+		Set<Persona> pacientes = saPacientes.filtrarPersonas(hints, values, valUsuarios);
 		
 		int length = pacientes.size();
-		i=0;
+		int i=0;
 		String resultados[] = new String[length];
 		for(Persona persona: pacientes){
 			resultados[i] = persona.toString();
@@ -206,28 +196,19 @@ public class Controlador {
 		return resultados;
 	}
 	
-	public static String [] buscarUsuarios(ArrayList<Hints> hints, ArrayList<String> values){
+	public static String [] buscarUsuarios(Hints[]hints, String [] values, Hints[] valUsuarios){
 		
-		SAPacientes saUsuarios = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
-		
-		int i=0;
-		Hints [] claves = new Hints[hints.size()];
-		for(Hints hint: hints){
-			claves[i] = hint;
-			i++;
+		SAPacientes saUsuarios = null;
+		try {
+			saUsuarios = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-		i=0;
-		String [] valores = new String[hints.size()];
-		for(String str: values){
-			valores[i] = str;
-			i++;
-		}
-		
-		Set<Persona> usuarios = saUsuarios.filtrarPersonas(claves, valores);
+		Set<Persona> usuarios = saUsuarios.filtrarPersonas(hints, values, valUsuarios);
 		
 		int length = usuarios.size();
-		i=0;
+		int i=0;
 		String resultados[] = new String[length];
 		for(Persona persona: usuarios){
 			resultados[i] = persona.toString();

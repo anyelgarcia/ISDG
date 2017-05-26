@@ -32,7 +32,7 @@ public class Perfil extends ColorPanel{
 		title.setForeground(Color.BLACK);
 		add(title, c);
 		
-		ImageButton perfil = new ImageButton("Ver Perfil", "images/greenbutton.png", "images/greenbutton2.png", this);
+		ImageButton perfil = new ImageButton("Ver Perfil", "images/blackbutton.png", "images/blackbutton2.png", this);
 		perfil.addActionListener((ae) -> {
 			JFrame pantalla = new PantallaPerfil();
 			pantalla.setVisible(true);
@@ -219,7 +219,8 @@ public class Perfil extends ColorPanel{
 	                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
 	                .addGap(21, 21, 21))
 	        );
-
+	        
+	        getContentPane().setBackground(getColor());
 	        pack();
 	        setVisible(true);
 		}
@@ -395,6 +396,7 @@ public class Perfil extends ColorPanel{
 		                .addGap(7, 7, 7))
 		        );
 
+		        getContentPane().setBackground(getColor());
 		        pack();
 		}
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                        
@@ -405,9 +407,9 @@ public class Perfil extends ColorPanel{
 	}
 	
 	public class PerfilTransfer{
-		
-		public PerfilTransfer(String rol, String email, String telefono,
+				public PerfilTransfer(String rol, String email, String telefono,
 				String descripcion, List<String> pacientes, String info) {
+
 			this.rol = rol;
 			this.email = email;
 			this.telefono = telefono;

@@ -41,7 +41,7 @@ public class Recursos extends ColorPanel{
 		c.insets = new Insets(0,15,0,0);
 		JLabel title = new JLabel("Recursos");
 		title.setFont(this.font);
-		title.setForeground(Color.GRAY);
+		title.setForeground(Color.WHITE);
 		add(title, c);
 		
 		
@@ -86,7 +86,7 @@ public class Recursos extends ColorPanel{
 		
 		
 		
-		ImageButton editar = new ImageButton("Editar", "images/tanbutton.png", "images/tanbutton2.png", this);
+		ImageButton editar = new ImageButton("Editar", "images/blackbutton.png", "images/blackbutton2.png", this);
 		componentes.add(editar);
 		editar.addActionListener((ae) -> {
 			JFrame panel = new PantallaBuscar(Modo.EDITAR);
@@ -223,7 +223,8 @@ public class Recursos extends ColorPanel{
 		                    .addComponent(jButton1))
 		                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		        );
-
+		        
+		        getContentPane().setBackground(getColor());
 		        pack();
 		}
 
@@ -241,36 +242,6 @@ public class Recursos extends ColorPanel{
 		}                                        
 
 	}
-	
-	/*
-	public class RecursoTransfer{
-		private String nombre;
-		private String ruta;
-		private String descripcion;
-		private String[] etiquetas;
-		
-		public RecursoTransfer(String nombre, String ruta, String descripcion,
-				String[] etiquetas) {
-			this.nombre = nombre;
-			this.ruta = ruta;
-			this.descripcion = descripcion;
-			this.etiquetas = etiquetas;
-		}
-		public String getNombre() {
-			return nombre;
-		}
-		public String getRuta() {
-			return ruta;
-		}
-		public String getDescripcion() {
-			return descripcion;
-		}
-		public String[] getEtiquetas() {
-			return etiquetas;
-		}
-		
-		
-	}*/
 
 	private class PantallaBuscar extends JFrame implements confirmListener{
 		
@@ -411,7 +382,7 @@ public class Recursos extends ColorPanel{
 	                        .addComponent(jButton2)))
 	                .addContainerGap(17, Short.MAX_VALUE))
 	        );
-
+	        getContentPane().setBackground(getColor());
 	        pack();
 	    }// </editor-fold>                        
 

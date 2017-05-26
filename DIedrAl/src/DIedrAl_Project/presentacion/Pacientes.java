@@ -30,9 +30,8 @@ public class Pacientes extends ColorPanel{
 	 */
 	private static final long serialVersionUID = -6246895766907491090L;      
     
-    
 	public Pacientes(int r, int g, int b){
-		super(r,g,b);
+		super(r, g, b);
 		
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
@@ -42,7 +41,7 @@ public class Pacientes extends ColorPanel{
 		c.insets = new Insets(0,15,0,0);
 		JLabel title = new JLabel("Pacientes");
 		title.setFont(font);
-		title.setForeground(Color.WHITE);
+		title.setForeground(Color.BLACK);
 		add(title, c);
 		
 		
@@ -622,7 +621,8 @@ public class Pacientes extends ColorPanel{
 	                .addGap(23, 23, 23))
 	            .addComponent(jSeparator2)
 	        );
-
+	        
+	        getContentPane().setBackground(getColor());
 	        pack();
 	    }
 		
@@ -656,11 +656,23 @@ public class Pacientes extends ColorPanel{
 				hints.add(Hints.NIF);
 			}
 			
-			campos.add(" ");
-			hints.add(Hints.PACIENTE);
-				
+			int i=0;
+			Hints [] claves = new Hints[hints.size()];
+			for(Hints hint: hints){
+				claves[i] = hint;
+				i++;
+			}
 			
-			String resultados[] = Controlador.buscarUsuarios(hints, campos);
+			i=0;
+			String [] valores = new String[hints.size()];
+			for(String str: campos){
+				valores[i] = str;
+				i++;
+			}
+			
+			Hints valUsuarios [] = {Hints.PACIENTE};
+			
+			String resultados[] = Controlador.buscarUsuarios(claves, valores, valUsuarios);
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
 				private static final long serialVersionUID = 1L;
 				String[] strings = resultados;

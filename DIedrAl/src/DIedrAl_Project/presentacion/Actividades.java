@@ -12,9 +12,7 @@ import javax.swing.JLabel;
 
 import DIedrAl_Project.negocio.recursos.Actividad;
 import DIedrAl_Project.negocio.recursos.ArrayActividades;
-import DIedrAl_Project.negocio.recursos.ArraySesiones;
 import DIedrAl_Project.negocio.recursos.Dificultad;
-import DIedrAl_Project.negocio.recursos.Recurso;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 /**
@@ -70,7 +68,18 @@ public class Actividades extends ColorPanel{
 		c.gridy = 1;
 		add(buscar, c);
 		
-		ImageButton eliminar = new ImageButton("Eliminar", "images/orangebutton.png", "images/orangebutton2.png", this);
+		ImageButton editar = new ImageButton("Editar", "images/orangebutton.png", "images/orangebutton2.png", this);
+		componentes.add(editar);
+		editar.addActionListener((ae) -> {
+			JFrame panel = new PantallaBuscar(Modo.EDITAR);
+			panel.setVisible(true);
+			
+		});
+		c.gridx = 0;
+		c.gridy = 2;
+		add(editar, c);
+		
+		ImageButton eliminar = new ImageButton("Eliminar", "images/tanbutton.png", "images/tanbutton2.png", this);
 		componentes.add(eliminar);
 		eliminar.addActionListener((ae) -> {
 			JFrame panel = new PantallaBuscar(Modo.ELIMINAR);
@@ -124,7 +133,7 @@ public class Actividades extends ColorPanel{
 	    private javax.swing.JTextField jTextField1;
 	    private javax.swing.JTextField jTextField2;
 	    private javax.swing.JTextField jTextField3;
-	    // End of variables declaration    
+	    
 		public PantallaAdd(){
 			initGUI();
 		}
@@ -340,7 +349,8 @@ public class Actividades extends ColorPanel{
 	                .addComponent(jButton1)
 	                .addContainerGap())
 	        );
-
+	        
+	        getContentPane().setBackground(getColor());
 	        pack();
 		}
 		
@@ -369,70 +379,6 @@ public class Actividades extends ColorPanel{
 			Controlador.addActividad(info);
 		} 
 	}
-	
-	/*
-	public class ActividadTransfer{
-		
-		private String nombre;
-		private String dificultad;
-		private String pacienteTipo;
-		private int duracion;
-		private String descripcion;
-		private String desarrollo;
-		private String variaciones;
-		
-		public ActividadTransfer(String nombre, String dificultad, String pacienteTipo, int duracion,
-				String descripcion, String desarrollo, String variaciones){
-			this.nombre = nombre;
-			this.dificultad = dificultad;
-			this.pacienteTipo = pacienteTipo;
-			this.duracion = duracion;
-			this.descripcion = descripcion;
-			this.desarrollo = desarrollo;
-			this.variaciones = variaciones;
-		}
-		
-		public String getNombre() {
-			return nombre;
-		}
-
-		public String getDificultad() {
-			return dificultad;
-		}
-
-		public String getPacienteTipo() {
-			return pacienteTipo;
-		}
-
-		public int getDuracion() {
-			return duracion;
-		}
-
-		public String getDescripcion() {
-			return descripcion;
-		}
-
-		public void setDescripcion(String descripcion) {
-			this.descripcion = descripcion;
-		}
-
-		public String getDesarrollo() {
-			return desarrollo;
-		}
-
-		public void setDesarrollo(String desarrollo) {
-			this.desarrollo = desarrollo;
-		}
-
-		public String getVariaciones() {
-			return variaciones;
-		}
-
-		public void setVariaciones(String variaciones) {
-			this.variaciones = variaciones;
-		}
-	}
-*/
 	
 	
 	/**
@@ -670,7 +616,7 @@ public class Actividades extends ColorPanel{
 	                        .addComponent(jButton2)))
 	                .addContainerGap())
 	        );
-
+	        getContentPane().setBackground(getColor());
 	        pack();
 	    }// </editor-fold>                        
 

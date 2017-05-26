@@ -46,7 +46,7 @@ public class Sesiones extends ColorPanel{
 			
 			
 			
-			ImageButton nuevo = new ImageButton("  Crear  ", "images/bluebutton.png", "images/bluebutton2.png", this);
+			ImageButton nuevo = new ImageButton("  Crear  ", "images/greenbutton.png", "images/greenbutton2.png", this);
 			nuevo.addActionListener((ae) -> {
 				JFrame pantalla = new PantallaAdd();
 				pantalla.setVisible(true);
@@ -60,7 +60,7 @@ public class Sesiones extends ColorPanel{
 			
 			
 			
-			ImageButton buscar = new ImageButton(" Buscar  ", "images/greenbutton.png", "images/greenbutton2.png", this);
+			ImageButton buscar = new ImageButton(" Buscar  ", "images/bluebutton.png", "images/bluebutton2.png", this);
 			buscar.addActionListener((ae) -> {
 				JFrame pantalla = new PantallaBuscar(Modo.BUSCAR);
 				pantalla.setVisible(true);
@@ -71,14 +71,26 @@ public class Sesiones extends ColorPanel{
 			
 			
 			
-			ImageButton eliminar = new ImageButton("Eliminar", "images/tanbutton.png", "images/tanbutton2.png", this);
+			ImageButton eliminar = new ImageButton("Eliminar", "images/blackbutton.png", "images/blackbutton2.png", this);
 			eliminar.addActionListener((ae) -> {
 				JFrame pantalla = new PantallaBuscar(Modo.ELIMINAR);
 				pantalla.setVisible(true);
 			});
-			c.gridx = 0;
+			c.gridx = 1;
 			c.gridy = 2;
 			add(eliminar, c);
+			
+			ImageButton editar = new ImageButton("Editar", "images/tanbutton.png", "images/tanbutton2.png", this);
+			componentes.add(editar);
+			editar.addActionListener((ae) -> {
+				JFrame panel = new PantallaBuscar(Modo.EDITAR);
+				panel.setVisible(true);
+				
+			});
+			c.gridx = 0;
+			c.gridy = 2;
+			add(editar, c);
+			
 			setVisible(true);
 		}
 		
@@ -310,7 +322,7 @@ public class Sesiones extends ColorPanel{
 		                .addComponent(jButton1)
 		                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		        );
-
+		        getContentPane().setBackground(getColor());
 		        pack();
 			}
 			
@@ -336,49 +348,6 @@ public class Sesiones extends ColorPanel{
 				Controlador.addSesion(info);
 			} 
 		}
-		/*
-		public class SesionTransfer{
-			
-			private String nombre;
-			private int minutos;
-			private String descripcion;
-			private String desarrollo;
-			private String posiblesVariaciones;
-			
-
-			public SesionTransfer(String nombre, int minutos,
-					String descripcion, String desarrollo,
-					String posiblesVariaciones) {
-				
-				this.nombre = nombre;
-				this.minutos = minutos;
-				this.descripcion = descripcion;
-				this.desarrollo = desarrollo;
-				this.posiblesVariaciones = posiblesVariaciones;
-			}
-			
-
-			public String getNombre() {
-				return nombre;
-			}
-
-			public int getMinutos() {
-				return minutos;
-			}
-
-			public String getDescripcion() {
-				return descripcion;
-			}
-
-			public String getDesarrollo() {
-				return desarrollo;
-			}
-
-			public String getPosiblesVariaciones() {
-				return posiblesVariaciones;
-			}
-			
-		}*/
 
 
 		private class PantallaBuscar extends JFrame implements confirmListener{
@@ -568,7 +537,8 @@ public class Sesiones extends ColorPanel{
 		                        .addComponent(jButton2)))
 		                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		        );
-
+		        
+		        getContentPane().setBackground(getColor());
 		        pack();
 		    }
 			private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         

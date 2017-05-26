@@ -22,6 +22,7 @@ class ColorPanel extends JPanel {
 	private static final long serialVersionUID = 690793639249179522L;
 	private Color color;
     protected Font font = new Font("Rockwell", Font.BOLD, 30);
+    protected Font minifont = new Font("Rockwell", 1, 18);
     protected ArrayList<Component> componentes;
 
     public ColorPanel(int r, int g, int b) {
@@ -49,5 +50,9 @@ class ColorPanel extends JPanel {
     public static void addComboBox(JFrame pantalla, GridBagConstraints c,  String nombre, String ... valores){
     	pantalla.add(new JLabel(nombre), c);
     	pantalla.add(new JComboBox<String>(valores), c);
+    }
+    
+    public Color getColor(){
+    	return this.color;
     }
 }
