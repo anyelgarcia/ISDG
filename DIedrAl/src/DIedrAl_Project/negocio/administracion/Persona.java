@@ -1,6 +1,5 @@
 package DIedrAl_Project.negocio.administracion;
 
-
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -25,30 +24,21 @@ public class Persona implements ObjetoAlmacenable, Serializable {
 
 	protected String email;
 
-	protected Integer tfo;
-	
+	protected String tfo;
+
 	protected String perfil;
-	
+
 	/**
-	 * El NIF es su dni, el id es el campo que le permite al objeto ser guardado.
+	 * El NIF es su dni, el id es el campo que le permite al objeto ser
+	 * guardado.
 	 */
 	protected String nif;
-
-	private String id;
 
 	public Persona(String nombre, String apellido1, String apellido2, String nif) {
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
 		this.apellido2 = apellido2;
 		this.nif = nif;
-		this.id = UUID.randomUUID().toString();
-	}
-	public Persona(String nombre, String apellido1, String apellido2, String nif, String id) {
-		this.nombre = nombre;
-		this.apellido1 = apellido1;
-		this.apellido2 = apellido2;
-		this.nif = nif;
-		this.id = id;
 	}
 
 	public String getName() {
@@ -78,11 +68,11 @@ public class Persona implements ObjetoAlmacenable, Serializable {
 	public String getPerfil() {
 		return perfil;
 	}
-	
+
 	public void setPerfil(String perfil) {
 		this.perfil = perfil;
 	}
-	
+
 	public Fecha getBirthday() {
 		return fechaNacimiento;
 	}
@@ -115,19 +105,18 @@ public class Persona implements ObjetoAlmacenable, Serializable {
 		this.email = email;
 	}
 
-	public Integer getTfo() {
+	public String getTfo() {
 		return tfo;
 	}
 
-	public void setTfo(Integer tfo) {
+	public void setTfo(String tfo) {
 		this.tfo = tfo;
 	}
 
 	@Override
 	public String getId() {
-		return id;
+		return nif;
 	}
-	
 
 	public String getNif() {
 		return nif;
@@ -167,8 +156,30 @@ public class Persona implements ObjetoAlmacenable, Serializable {
 	public int compararNIF(Persona otra) {
 		return nif.compareTo(otra.nif);
 	}
-	
+
 	public String toString() {
 		return nif + ": " + nombre + " " + apellido1 + " " + apellido2;
+	}
+
+	/**
+	 * Dada una persona, iguala los campos de la persona actual para que
+	 * coincidan con los de la proporcionada
+	 * 
+	 * @param otra
+	 *            persona cuyos campos se desean copiar
+	 */
+	public void igualarCampos(Persona otra) {
+
+		if (otra != null) {
+			this.nombre = otra.nombre;
+			this.apellido1 = otra.apellido1;
+			this.apellido2 = otra.apellido2;
+			this.fechaNacimiento = otra.fechaNacimiento;
+			this.estadoCivil = otra.estadoCivil;
+			this.direccion = otra.direccion;
+			this.email = otra.email;
+			this.tfo = otra.tfo;
+			this.perfil = otra.perfil;
+		}
 	}
 }
