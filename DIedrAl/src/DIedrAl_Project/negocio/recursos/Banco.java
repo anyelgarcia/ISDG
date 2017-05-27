@@ -43,8 +43,26 @@ public class Banco {
 		recursos.add(rec);
 	}
 
+	/**
+	 * elimina el recurso dado de la lista de recursos del banco, así como de
+	 * los conjuntos de asociados de las listas de sesiones y de actividades del
+	 * banco
+	 * @param rec
+	 */
 	public void removeRecurso(Recurso rec) {
 		recursos.erase(rec);
+
+		this.actividades.forEach((actividad) -> {
+			if (actividad.getAsociados().contains(rec)) {
+				actividad.asociados.remove(rec);
+			}
+		});
+		
+		this.sesiones.forEach((sesion) -> {
+			if (sesion.getAsociados().contains(rec)) {
+				sesion.asociados.remove(rec);
+			}
+		});
 	}
 
 	public void addSesion(Sesion ses) {
@@ -53,6 +71,18 @@ public class Banco {
 
 	public void removeSesion(Sesion ses) {
 		sesiones.erase(ses);
+		
+		this.actividades.forEach((actividad) -> {
+			if (actividad.getAsociados().contains(ses)) {
+				actividad.asociados.remove(ses);
+			}
+		});
+		
+		this.sesiones.forEach((sesion) -> {
+			if (sesion.getAsociados().contains(ses)) {
+				sesion.asociados.remove(ses);
+			}
+		});
 	}
 
 	public void addActividad(Actividad act) {
@@ -60,7 +90,20 @@ public class Banco {
 	}
 
 	public void removeActividad(Actividad act) {
+		
 		actividades.erase(act);
+		
+		this.actividades.forEach((actividad) -> {
+			if (actividad.getAsociados().contains(act)) {
+				actividad.asociados.remove(act);
+			}
+		});
+		
+		this.sesiones.forEach((sesion) -> {
+			if (sesion.getAsociados().contains(act)) {
+				sesion.asociados.remove(act);
+			}
+		});
 	}
 
 	public ArrayRecursos getRecursos() {

@@ -13,7 +13,6 @@ import DIedrAl_Project.integracion.DAOPaciente;
 import DIedrAl_Project.integracion.DAORelacionable;
 import DIedrAl_Project.integracion.DAOUsuario;
 import DIedrAl_Project.integracion.SimpleFileDAOFactory;
-import DIedrAl_Project.integracion.tRelacion;
 import DIedrAl_Project.negocio.Relacion;
 import DIedrAl_Project.negocio.administracion.*;
 import DIedrAl_Project.negocio.pacientes.*;
@@ -27,9 +26,9 @@ public class SAPacientesImpl implements SAPacientes {
 		factoria = SimpleFileDAOFactory.getInstance();
 		DAOCentro daocen = factoria.getDAOCentro();
 		
-		EstadoCentro centroTrans = daocen.consultarCentro(nombreCentro);
-		CentroMaps mapeador = new CentroMaps();
-		centro = mapeador.generarCentro(centroTrans);
+		CentroAlmacenable centroTrans = daocen.consultarCentro(nombreCentro);
+		CentroMaps mapeador = new CentroMaps(centroTrans);
+		centro = mapeador.generarCentro();
 	}
 
 	/**
@@ -47,7 +46,8 @@ public class SAPacientesImpl implements SAPacientes {
 
 		centro.addPaciente(pac);
 
-		DAORelacionable daorel = factoria.getDAORelacion(tRelacion.paciente);
+		String fichPac = centro.comoAlmacenable().getFilePacientes();
+		DAORelacionable daorel = factoria.getDAORelacion(fichPac);
 		daorel.crearRelacion(new Relacion(pac.getId()));
 
 		DAOPaciente daopac = factoria.getDAOPaciente();
@@ -74,21 +74,23 @@ public class SAPacientesImpl implements SAPacientes {
 
 		// Obtener el nombre del fichero en el que se guardan las relaciones de
 		// los pacientes del centro con sus usuarios asociados
+		String fichPac = centro.comoAlmacenable().getFilePacientes();
 
 		// Obtener el dao de relación para modificar las relaciones en archivo
-		DAORelacionable daorel = factoria.getDAORelacion(tRelacion.paciente);
+		DAORelacionable daorel = factoria.getDAORelacion(fichPac);
 
 		// eliminar todas las relaciones del paciente en el archivo anterior
 		daorel.eliminarRelacion(pac.getId());
 
 		// Obtener el nombre del fichero en el que se guardan las relaciones de
 		// los usuarios del centro con sus pacientes asociados
+		String fichUsu = centro.comoAlmacenable().getFileUsuarios();
 
-		DAORelacionable daorel2 = factoria.getDAORelacion(tRelacion.usuario);
+		DAORelacionable daorel2 = factoria.getDAORelacion(fichUsu);
 
 		// recorrer los usuarios asociados al paciente eliminando en archivo las
 		// relaciones con dichgo paciente
-		HashSet<Relacion> listadoRelaciones = daorel2.listarRelaciones(centro.getNombre());
+		HashSet<Relacion> listadoRelaciones = daorel2.listarRelaciones();
 		listadoRelaciones.forEach((relacion) -> {
 			ArrayList<String> relacionados = relacion.getRelacionados();
 			relacionados.removeIf((aux) -> {
@@ -126,7 +128,8 @@ public class SAPacientesImpl implements SAPacientes {
 
 		centro.addUsuario(usu);
 
-		DAORelacionable daorel = factoria.getDAORelacion(tRelacion.usuario);
+		String fichUsu = centro.comoAlmacenable().getFileUsuarios();
+		DAORelacionable daorel = factoria.getDAORelacion(fichUsu);
 		daorel.crearRelacion(new Relacion(usu.getId()));
 
 		DAOUsuario daousu = factoria.getDAOUsuario();
@@ -149,21 +152,25 @@ public class SAPacientesImpl implements SAPacientes {
 		// Borrar el usuario del centro con todas sus relaciones a pacientes
 		centro.eraseUsuario(usu);
 
+		// Obtener el nombre del fichero en el que se guardan las relaciones de
+		// los usuarios del centro con sus pacientes asociados
+		String fichUsu = centro.comoAlmacenable().getFileUsuarios();
 
 		// Obtener el dao de relación para modificar las relaciones en archivo
-		DAORelacionable daorel = factoria.getDAORelacion(tRelacion.usuario);
+		DAORelacionable daorel = factoria.getDAORelacion(fichUsu);
 
 		// eliminar todas las relaciones del usuario en el archivo anterior
 		daorel.eliminarRelacion(usu.getId());
 
 		// Obtener el nombre del fichero en el que se guardan las relaciones de
 		// los pacientes del centro con sus pacientes asociados
+		String fichPac = centro.comoAlmacenable().getFilePacientes();
 
-		DAORelacionable daorel2 = factoria.getDAORelacion(tRelacion.paciente);
+		DAORelacionable daorel2 = factoria.getDAORelacion(fichUsu);
 
 		// recorrer los pacientes asociados al usuario eliminando en archivo las
 		// relaciones con dicho usuario
-		HashSet<Relacion> listadoRelaciones = daorel2.listarRelaciones(centro.getNombre());
+		HashSet<Relacion> listadoRelaciones = daorel2.listarRelaciones();
 		listadoRelaciones.forEach((relacion) -> {
 			ArrayList<String> relacionados = relacion.getRelacionados();
 			relacionados.removeIf((aux) -> {
@@ -192,9 +199,11 @@ public class SAPacientesImpl implements SAPacientes {
 			ClassNotFoundException {
 		centro.ligarPaciente(pac, usu);
 
-		DAORelacionable daorel = factoria.getDAORelacion(tRelacion.usuario);
+		DAORelacionable daorel = factoria.getDAORelacion(centro
+				.comoAlmacenable().getFilePacientes());
 
-		DAORelacionable daorel2 = factoria.getDAORelacion(tRelacion.paciente);
+		DAORelacionable daorel2 = factoria.getDAORelacion(centro
+				.comoAlmacenable().getFileUsuarios());
 
 		// Relacionar en archivo paciente con usuario
 		Relacion relPacUsu = new Relacion(pac.getId());
@@ -213,12 +222,14 @@ public class SAPacientesImpl implements SAPacientes {
 			ClassNotFoundException, IOException {
 		centro.desligarPaciente(pac, usu);
 
-		DAORelacionable daorel = factoria.getDAORelacion(tRelacion.paciente);
+		DAORelacionable daorel = factoria.getDAORelacion(centro
+				.comoAlmacenable().getFilePacientes());
 
-		DAORelacionable daorel2 = factoria.getDAORelacion(tRelacion.usuario);
+		DAORelacionable daorel2 = factoria.getDAORelacion(centro
+				.comoAlmacenable().getFileUsuarios());
 
 		// Obtener conjunto de relaciones de pacientes con usuarios
-		HashSet<Relacion> PacUsu = daorel.listarRelaciones(centro.getNombre());
+		HashSet<Relacion> PacUsu = daorel.listarRelaciones();
 
 		// Recorrer el conjunto buscando la relación que parte de pac y contiene a usu
 		Iterator<Relacion> it = PacUsu.iterator();
@@ -237,7 +248,7 @@ public class SAPacientesImpl implements SAPacientes {
 		}
 		
 		// Obtener conjunto de relaciones de usuarios con pacientes
-		HashSet<Relacion> UsuPac = daorel2.listarRelaciones(centro.getNombre());
+		HashSet<Relacion> UsuPac = daorel2.listarRelaciones();
 
 		// Recorrer el conjunto buscando la relación que parte de usu y contiene a pac
 		Iterator<Relacion> it2 = UsuPac.iterator();
