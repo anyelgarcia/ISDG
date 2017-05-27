@@ -28,11 +28,20 @@ public class Persona implements ObjetoAlmacenable, Serializable {
 
 	protected String perfil;
 
+	protected String centro;
 	/**
 	 * El NIF es su dni, el id es el campo que le permite al objeto ser
 	 * guardado.
 	 */
 	protected String nif;
+
+	public String getCentro() {
+		return centro;
+	}
+
+	public void setCentro(String nuevo) {
+		centro = nuevo;
+	};
 
 	public Persona(String nombre, String apellido1, String apellido2, String nif) {
 		this.nombre = nombre;

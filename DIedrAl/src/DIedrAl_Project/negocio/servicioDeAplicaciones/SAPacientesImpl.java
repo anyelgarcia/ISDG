@@ -5,8 +5,10 @@ import java.rmi.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
+import DIedrAl_Project.integracion.DAOCentro;
 import DIedrAl_Project.integracion.DAOPaciente;
 import DIedrAl_Project.integracion.DAORelacionable;
 import DIedrAl_Project.integracion.DAOUsuario;
@@ -20,9 +22,13 @@ public class SAPacientesImpl implements SAPacientes {
 	private Centro centro;
 	private SimpleFileDAOFactory factoria;
 
-	public SAPacientesImpl(Centro centro) {
-		this.centro = centro;
+	public SAPacientesImpl(String nombreCentro) {
 		factoria = SimpleFileDAOFactory.getInstance();
+		DAOCentro daocen = factoria.getDAOCentro();
+		
+		CentroAlmacenable centroTrans = daocen.consultarCentro(nombreCentro);
+		CentroMaps mapeador = new CentroMaps(centroTrans);
+		centro = mapeador.generarCentro();
 	}
 
 	/**
