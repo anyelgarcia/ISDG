@@ -5,21 +5,16 @@ public class Usuario extends Persona {
 	protected boolean admin;
 
 	protected String infor;
-	
-	protected String centro;
 
 	protected String password;
 
 	public Usuario(String nombre, String apellido1, String apellido2, String id) {
 		super(nombre, apellido1, apellido2, id);
+		password = id;
 	}
 
 	public boolean isAdmin() {
 		return admin;
-	}
-	
-	public void setCentro(Centro centro){
-		this.centro = centro.getNombre();
 	}
 
 	public void setAdmin() {

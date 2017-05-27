@@ -33,22 +33,22 @@ public class Centro {
 	// TODO: implementarlo primero
 	private Organizacion organizacion;
 
-	protected Centro(String name) {
+	/*protected Centro(String name) {
 		nombre = name;
 		pacientes = new HashMap<Paciente, Set<Usuario>>();
 		usuarios = new HashMap<Usuario, Set<Paciente>>();
 		personasCentro = new HashMap<String, Persona>();
 
-	}
+	}*/
 
 	protected Centro(String name, Map<Paciente, Set<Usuario>> pacientes,
-			Map<Usuario, Set<Paciente>> usuarios) {
-		nombre = name;
+			Map<Usuario, Set<Paciente>> usuarios, Map<String, Persona> personas) {
+		this.nombre = name;
 		this.pacientes = pacientes;
 		this.usuarios = usuarios;
-		this.personasCentro = new HashMap<String, Persona>();
+		this.personasCentro = personas;
 
-		initCentro();
+		//initCentro();
 
 	}
 
@@ -271,14 +271,14 @@ public class Centro {
 		return aux.toArray(new Persona[aux.size()])[0];
 	}
 
-	private void initCentro() {
+	/*private void initCentro() {
 		for (Persona key : pacientes.keySet()) {
 			personasCentro.put(key.getNif(), key);
 		}
 		for (Persona key : usuarios.keySet()) {
 			personasCentro.put(key.getNif(), key);
 		}
-	}
+	}*/
 
 	public Set<Usuario> getUsuariosAsociados(Paciente pac)
 			throws NotBoundException {
