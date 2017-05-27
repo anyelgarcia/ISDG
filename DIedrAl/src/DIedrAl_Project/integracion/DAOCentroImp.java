@@ -4,18 +4,18 @@ import java.io.IOException;
 import java.util.HashSet;
 
 import DIedrAl_Project.integracion.BasicClasses.DAObasico;
-import DIedrAl_Project.negocio.administracion.CentroAlmacenable;
+import DIedrAl_Project.negocio.administracion.EstadoCentro;
 
 public class DAOCentroImp implements DAOCentro{
 	
 private static DAOCentroImp instancia = null;
 	
-	private DAObasico<CentroAlmacenable> op;
+	private DAObasico<EstadoCentro> op;
 	private final String file = "organizacion.txt";
 	
 	public static DAOCentroImp getInstance(){
-		if(instancia == null) return new DAOCentroImp();
-		else return instancia;
+		if(instancia == null) instancia = new DAOCentroImp();
+		return instancia;
 	}
 
 	
@@ -24,7 +24,7 @@ private static DAOCentroImp instancia = null;
 	}
 	
 	@Override
-	public void guardarCentro(CentroAlmacenable c) throws IOException {
+	public void guardarCentro(EstadoCentro c) throws IOException {
 		op.guardar(c, file);
 	}
 
@@ -35,13 +35,13 @@ private static DAOCentroImp instancia = null;
 	}
 
 	@Override
-	public void modificarCentro(CentroAlmacenable c) throws IOException,
+	public void modificarCentro(EstadoCentro c) throws IOException,
 			ClassNotFoundException {
 		op.modificar(c, file);
 	}
 
 	@Override
-	public HashSet<CentroAlmacenable> listarCentros() throws IOException,
+	public HashSet<EstadoCentro> listarCentros() throws IOException,
 			ClassNotFoundException {
 		return op.obtenerDatosSet(file);
 	}
@@ -54,7 +54,7 @@ private static DAOCentroImp instancia = null;
 
 
 	@Override
-	public CentroAlmacenable consultarCentro(String id) throws ClassNotFoundException, IOException {
+	public EstadoCentro consultarCentro(String id) throws ClassNotFoundException, IOException {
 		return op.consultar(id, file);
 	}
 

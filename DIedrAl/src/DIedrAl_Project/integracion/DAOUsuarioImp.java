@@ -19,8 +19,8 @@ public class DAOUsuarioImp implements DAOUsuario {
 	private final String file = "usuarios.txt";
 	
 	public static DAOUsuarioImp getInstance(){
-		if(instancia == null) return new DAOUsuarioImp();
-		else return instancia;
+		if(instancia == null) instancia = new DAOUsuarioImp();
+		return instancia;
 	}
 
 	

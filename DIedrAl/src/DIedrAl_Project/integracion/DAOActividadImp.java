@@ -19,8 +19,8 @@ public class DAOActividadImp implements DAOActividad {
 	private final String file = "actividad.txt";
 	
 	public static DAOActividadImp getInstance(){
-		if(instancia == null) return new DAOActividadImp();
-		else return instancia;
+		if(instancia == null) instancia = new DAOActividadImp();
+		return instancia;
 	}
 
 	

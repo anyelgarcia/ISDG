@@ -50,8 +50,8 @@ public class SimpleFileDAOFactory implements DAOFactory {
 	}
 
 	@Override
-	public DAORelacionable getDAORelacion(String file) {
-		return new DAORelacionableImp(file);
+	public DAORelacionable getDAORelacion(tRelacion rel) {
+		return DAORelacionableImp.getInstance(rel);
 	}
 
 	@Override
