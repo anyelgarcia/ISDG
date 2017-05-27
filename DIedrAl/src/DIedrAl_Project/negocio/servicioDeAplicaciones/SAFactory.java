@@ -21,4 +21,6 @@ public abstract class SAFactory {
 	public abstract SAPacientes newSAPacientes(String centro) throws ClassNotFoundException, IOException;
 	
 	public abstract SAOrganizacion newSAOrganizacion(Organizacion org);
+	
+	public abstract SACalendario newSACalendario();
 }

@@ -1,5 +1,6 @@
 package DIedrAl_Project.negocio.calendario;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -10,7 +11,7 @@ import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 
 public class Calendario {
-	private Map<GregorianCalendar, Set<SesionProgramada>> sesiones;
+	private Map<LocalTime, Set<SesionProgramada>> sesiones;
 
 	public void addSesion(SesionProgramada sesion) {
 		sesiones.get(sesion.getFecha()).add(sesion);
@@ -35,21 +36,6 @@ public class Calendario {
 		}
 	}
 
-	public void filtrarTerapeuta(Usuario t) {
-		// Calendario = new Calendario(ses);
-		// sesiones.removeIf((new FiltroTerapeuta<SesionProgramada>(t)));
-	}
-
-	public void filtrarTerapeuta(ArrayList<Usuario> t) {
-		// sesiones.removeIf((new FiltroTerapeuta<SesionProgramada>(t)));
-	}
-
-	public void filtrarPaciente(Paciente p) {
-		// sesiones.removeIf((new FiltroPaciente<SesionProgramada>(p)));
-	}
-
-	public void filtrarPaciente(ArrayList<Paciente> p) {
-		// sesiones.removeIf((new FiltroPaciente<SesionProgramada>(p)));
-	}
+	
 
 }
