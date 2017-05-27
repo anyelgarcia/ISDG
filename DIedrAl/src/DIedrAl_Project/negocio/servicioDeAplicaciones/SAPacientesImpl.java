@@ -22,7 +22,7 @@ public class SAPacientesImpl implements SAPacientes {
 	private Centro centro;
 	private SimpleFileDAOFactory factoria;
 
-	public SAPacientesImpl(String nombreCentro) {
+	public SAPacientesImpl(String nombreCentro) throws ClassNotFoundException, IOException {
 		factoria = SimpleFileDAOFactory.getInstance();
 		DAOCentro daocen = factoria.getDAOCentro();
 		
