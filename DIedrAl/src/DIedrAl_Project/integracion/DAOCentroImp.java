@@ -52,4 +52,10 @@ private static DAOCentroImp instancia = null;
 		return op.exists(id, file);
 	}
 
+
+	@Override
+	public CentroAlmacenable consultarCentro(String id) throws ClassNotFoundException, IOException {
+		return op.consultar(id, file);
+	}
+
 }
