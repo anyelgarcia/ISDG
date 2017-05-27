@@ -22,11 +22,6 @@ public class SAFactoryImpl extends SAFactory{
 	public SAOrganizacion newSAOrganizacion(Organizacion org) {
 		return new SAOrganizacionImpl(org);
 	}
-
-	@Override
-	public SACalendario newSACalendario() {
-		return new SACalendarioImpl();
-	}
 	
 
 

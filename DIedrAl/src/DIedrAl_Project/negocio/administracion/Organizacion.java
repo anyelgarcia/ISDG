@@ -5,7 +5,7 @@ public final class Organizacion {
 
 	private static Organizacion instancia = null;
 
-	private String password;
+	private final String password = "12345678";
 
 	//private final Map<String, Centro> centros;
 
@@ -62,8 +62,9 @@ public final class Organizacion {
 	 * Cambia la contraseña actual de la organización por la contraseña proporcionada
 	 * @param password nueva contraseña
 	 */
-	public void setPassword(String password) {
+/*	public void setPassword(String password) {
 		this.password = password;
 	}
+	*/
 
 }
