@@ -19,8 +19,8 @@ public class DAOPacienteImp implements DAOPaciente {
 	private final String file = "pacientes.txt";
 	
 	public static DAOPacienteImp getInstance(){
-		if(instancia == null) return new DAOPacienteImp();
-		else return instancia;
+		if(instancia == null) instancia = new DAOPacienteImp();
+		return instancia;
 	}
 
 	

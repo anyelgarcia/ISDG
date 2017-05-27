@@ -16,6 +16,8 @@ public class Relacion implements Serializable, ObjetoAlmacenable {
 	
 	private ArrayList<String>  relacionados;
 	
+	private String centro;
+	
 	public Relacion(String id){
 		this.id = id;
 		this.relacionados = new ArrayList<>();
@@ -32,6 +34,14 @@ public class Relacion implements Serializable, ObjetoAlmacenable {
 	
 	public void setRelacionados(ArrayList<String> list){
 		this.relacionados = list;
+	}
+
+	public String getCentro() {
+		return centro;
+	}
+
+	public void setCentro(String centro) {
+		this.centro = centro;
 	}
 	
 }

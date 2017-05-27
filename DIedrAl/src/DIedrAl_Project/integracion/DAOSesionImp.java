@@ -19,8 +19,8 @@ public class DAOSesionImp implements DAOSesion {
 	private String file = "sesiones.txt";
 	
 	public static DAOSesionImp getInstance(){
-		if(instancia == null) return new DAOSesionImp();
-		else return instancia;
+		if(instancia == null) instancia = new DAOSesionImp();
+		return instancia;
 	}
 
 	

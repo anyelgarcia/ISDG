@@ -12,8 +12,9 @@ import DIedrAl_Project.integracion.DAOPaciente;
 import DIedrAl_Project.integracion.DAORelacionable;
 import DIedrAl_Project.integracion.DAOUsuario;
 import DIedrAl_Project.integracion.SimpleFileDAOFactory;
+import DIedrAl_Project.integracion.tRelacion;
 import DIedrAl_Project.negocio.administracion.Centro;
-import DIedrAl_Project.negocio.administracion.CentroAlmacenable;
+import DIedrAl_Project.negocio.administracion.EstadoCentro;
 import DIedrAl_Project.negocio.administracion.Organizacion;
 import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.negocio.pacientes.Paciente;
@@ -31,7 +32,7 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 	@Override
 	public ArrayList<String> getCentros() throws ClassNotFoundException, IOException {
 		DAOCentro daocen = factoria.getDAOCentro();
-		HashSet<CentroAlmacenable> centros = daocen.listarCentros();
+		HashSet<EstadoCentro> centros = daocen.listarCentros();
 
 		ArrayList<String> centrosStrings = new ArrayList<String>();
 		centros.forEach((centroTransfer) -> {
@@ -48,7 +49,7 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 		if (daocen.existeCentro(name))
 			throw new AlreadyBoundException("El centro solicitado ya se encuentra registrado en el sistema");
 
-		daocen.guardarCentro(new CentroAlmacenable(name));
+		daocen.guardarCentro(new EstadoCentro(name));
 
 		DAOUsuario daousu = factoria.getDAOUsuario();
 		daousu.crearUsuario(new Usuario(name + "_ADMIN", "", "", name + "_ADMIN"));
@@ -84,17 +85,14 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 					e.printStackTrace();
 				}
 		});
-
-		// Eliminar del sistema los ficheros de relaciones del centro borrado
+		
+		DAORelacionable daoter = factoria.getDAORelacion(tRelacion.usuario);
+		daoter.eliminarRelacionesCentro(name);
+		
+		DAORelacionable daopc = factoria.getDAORelacion(tRelacion.paciente);
+		daopc.eliminarRelacionesCentro(name);
+		
 		DAOCentro daocen = factoria.getDAOCentro();
-		CentroAlmacenable centro = daocen.consultarCentro(name);
-		
-		File fichRelPac = new File(centro.getFilePacientes());
-		File fichRelUsu = new File(centro.getFileUsuarios());
-		
-		fichRelPac.delete();
-		fichRelUsu.delete();
-		
 
 		// Borrar el centro del sistema
 		if (!daocen.existeCentro(name))
