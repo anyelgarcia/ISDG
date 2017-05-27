@@ -20,4 +20,6 @@ public interface DAOFactory {
 	public DAOSesion getDAOSesion();
 	
 	public DAORelacionable getDAORelacion(String file);
+	
+	public DAOCentro getDAOCentro();
 }

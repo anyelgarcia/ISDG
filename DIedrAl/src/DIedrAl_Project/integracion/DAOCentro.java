@@ -16,4 +16,6 @@ public interface DAOCentro {
 	public HashSet<CentroAlmacenable> listarCentros()  throws IOException, ClassNotFoundException;
 	
 	public boolean existeCentro(String id)  throws IOException, ClassNotFoundException;
+	
+	public CentroAlmacenable consultarCentro(String id) throws ClassNotFoundException, IOException;
 }
