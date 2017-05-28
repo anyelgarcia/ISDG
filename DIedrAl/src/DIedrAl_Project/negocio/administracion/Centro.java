@@ -10,7 +10,7 @@ import DIedrAl_Project.negocio.pacientes.Paciente;
 
 public class Centro {
 
-	private String nombre;
+	private EstadoCentro estado;
 	// TODO: implementarlo primero
 	private Calendario calendario;
 
@@ -41,9 +41,9 @@ public class Centro {
 
 	}*/
 
-	protected Centro(String name, Map<Paciente, Set<Usuario>> pacientes,
+	protected Centro(EstadoCentro c, Map<Paciente, Set<Usuario>> pacientes,
 			Map<Usuario, Set<Paciente>> usuarios, Map<String, Persona> personas) {
-		this.nombre = name;
+		this.estado = c;
 		this.pacientes = pacientes;
 		this.usuarios = usuarios;
 		this.personasCentro = personas;
@@ -136,11 +136,7 @@ public class Centro {
 	}
 
 	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		return estado.getId();
 	}
 
 	public Organizacion getOrganizacion() {
@@ -288,7 +284,7 @@ public class Centro {
 			return pacientes.get(pac);
 	}
 
-	public CentroAlmacenable comoAlmacenable() {
-		return new CentroAlmacenable(this.getNombre());
+	public EstadoCentro comoAlmacenable() {
+		return new EstadoCentro(this.getNombre());
 	}
 }
