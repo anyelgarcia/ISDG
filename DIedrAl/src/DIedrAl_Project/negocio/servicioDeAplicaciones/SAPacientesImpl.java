@@ -38,7 +38,7 @@ public class SAPacientesImpl implements SAPacientes {
 		centro.addPaciente(pac);
 
 		DAORelacionable daorel = factoria.getDAORelacion(tRelacion.paciente);
-		daorel.crearRelacion(new Relacion(pac.getId()));
+		daorel.crearRelacion(new Relacion(pac.getId(), centro.getNombre()));
 
 		DAOPaciente daopac = factoria.getDAOPaciente();
 		daopac.crearPaciente(pac);

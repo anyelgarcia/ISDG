@@ -78,7 +78,7 @@ public class DAORelacionableImp implements DAORelacionable{
 		try {
 			while (true) {
 				rel = (Relacion) ois.readObject();
-				if(rel.getCentro().equals(id)) r.add(rel);
+				if(rel.getNombreCentro().equals(id)) r.add(rel);
 			}
 
 		} catch (EOFException eof) {
@@ -103,7 +103,7 @@ public class DAORelacionableImp implements DAORelacionable{
 		try {
 			while (true) {
 				rel = (Relacion) ois.readObject();
-				if(!rel.getCentro().equals(id)) r.add(rel);
+				if(!rel.getNombreCentro().equals(id)) r.add(rel);
 			}
 
 		} catch (EOFException eof) {

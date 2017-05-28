@@ -25,6 +25,10 @@ public interface DAORelacionable {
 	
 	public boolean existeRelacion(String id)  throws IOException, ClassNotFoundException;
 	
+	/**
+	 * Dado el id del centro, elimino todas las Relaciones de un centro dado
+	 * @param id del centro a borrar
+	 */
 	public void eliminarRelacionesCentro(String id) throws IOException, ClassNotFoundException;
 	
 }
