@@ -1,8 +1,9 @@
 package DIedrAl_Project.integracion;
 
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Statement;
 import java.sql.Connection;
 
 
@@ -19,16 +20,21 @@ public class SQLDAOFactory implements DAOFactory {
 	private static Connection conexion = null;
 	
 	
-	public static SQLDAOFactory getInstance(){
+	public static SQLDAOFactory getInstance() throws AccessException{
 		if(instancia == null)
 			instancia = new SQLDAOFactory();
 		return instancia;
 	}
 	
-	private SQLDAOFactory() throws ClassNotFoundException, SQLException{
-		Class.forName("com.mysql.jdbc.Driver");
-		conexion = DriverManager.getConnection("jdbc:mysql://92.222.93.238/centromedico",
-				"centro_admin", "Supercentromedico1*");
+	private SQLDAOFactory() throws AccessException {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conexion = DriverManager.getConnection("jdbc:mysql://92.222.93.238/centromedico", "centro_admin",
+					"Supercentromedico1*");
+		} catch (SQLException | ClassNotFoundException e) {
+			throw new AccessException();
+		}
+	
 	}
 	
 	@Override
@@ -62,8 +68,8 @@ public class SQLDAOFactory implements DAOFactory {
 	}
 
 	@Override
-	public DAORelacionable getDAORelacion(String file) {
-		return new DAORelacionableImpSQL(file);
+	public DAORelacionable getDAORelacion(tRelacion rel) {
+		return new DAORelacionableImpSQL(rel);
 	}
 
 	@Override

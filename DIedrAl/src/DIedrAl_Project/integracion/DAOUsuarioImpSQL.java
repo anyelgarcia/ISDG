@@ -48,10 +48,14 @@ public class DAOUsuarioImpSQL implements DAOUsuario{
 	}
 
 	@Override
-	public void modificarUsuario(Usuario u) throws IOException, ClassNotFoundException, SQLException {
-		Statement s = conexion.createStatement();
-		s.executeQuery ("UPDATE FROM ");
-		
+	public void modificarUsuario(Usuario u) throws AccessException{
+		try {
+			Statement s = conexion.createStatement();
+			s.executeQuery("UPDATE FROM ");
+		} catch (SQLException e) {
+			throw new AccessException();
+		}
+
 	}
 
 	@Override
@@ -60,15 +64,27 @@ public class DAOUsuarioImpSQL implements DAOUsuario{
 	}
 
 	@Override
-	public boolean existeUsuario(String id) {
-		Statement s = conexion.createStatement();
-		ResultSet rs = s.executeQuery ("SELECT * ");
+	public boolean existeUsuario(String id) throws AccessException {
+		ResultSet rs;
+		try {
+			Statement s = conexion.createStatement();
+			rs = s.executeQuery("SELECT * ");
+		} catch (SQLException e) {
+			throw new AccessException();
+		}
 		return (rs == null);
 	}
 
 	@Override
-	public Usuario consultarUsuario(String id) throws ClassNotFoundException, IOException {
-		return null;
+	public Usuario consultarUsuario(String id) {
+		ResultSet rs;
+		try {
+			Statement s = conexion.createStatement();
+			rs = s.executeQuery("SELECT * ");
+		} catch (SQLException e) {
+			throw new AccessException();
+		}
+		return rs ;
 	}
 
 

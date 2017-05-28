@@ -65,7 +65,7 @@ public class DAOSesionImpSQL implements DAOSesion{
 	}
 
 	@Override
-	public boolean existeSesion(String id) {
+	public boolean existeSesion(String id) throws AccessException {
 		ResultSet rs;
 		try {
 			Statement s = conexion.createStatement();
