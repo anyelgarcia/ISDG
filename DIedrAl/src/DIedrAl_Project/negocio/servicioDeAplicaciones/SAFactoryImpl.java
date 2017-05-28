@@ -2,15 +2,11 @@ package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
 import java.io.IOException;
 
-import DIedrAl_Project.negocio.administracion.Centro;
-import DIedrAl_Project.negocio.administracion.Organizacion;
-import DIedrAl_Project.negocio.recursos.Banco;
-
 public class SAFactoryImpl extends SAFactory{
 
 	@Override
 	public SARecursos newSARecursos() {
-		return new SARecursosImpl();
+		return SARecursosImpl.getInstancia();
 	}
 
 	@Override
@@ -19,8 +15,8 @@ public class SAFactoryImpl extends SAFactory{
 	}
 
 	@Override
-	public SAOrganizacion newSAOrganizacion(Organizacion org) {
-		return new SAOrganizacionImpl(org);
+	public SAOrganizacion newSAOrganizacion() {
+		return SAOrganizacionImpl.getInstancia();
 	}
 	
 

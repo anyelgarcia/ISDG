@@ -2,10 +2,6 @@ package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
 import java.io.IOException;
 
-import DIedrAl_Project.negocio.administracion.Centro;
-import DIedrAl_Project.negocio.administracion.Organizacion;
-import DIedrAl_Project.negocio.recursos.Banco;
-
 public abstract class SAFactory {
 
 	private static SAFactory  instancia; 
@@ -20,5 +16,6 @@ public abstract class SAFactory {
 	
 	public abstract SAPacientes newSAPacientes(String centro) throws ClassNotFoundException, IOException;
 	
-	public abstract SAOrganizacion newSAOrganizacion(Organizacion org);
+	public abstract SAOrganizacion newSAOrganizacion();
+
 }
