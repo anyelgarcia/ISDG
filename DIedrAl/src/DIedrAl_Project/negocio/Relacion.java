@@ -22,12 +22,12 @@ public class Relacion implements Serializable, ObjetoAlmacenable {
 
 	private String nombreCentro;
 
-	private String nombreAgente;
+	private String idAgente;
 
-	public Relacion(String pac, String cen) {
+	public Relacion(String agente, String cen) {
 		relacionados = new ArrayList<String>();
 		id = UUID.randomUUID().toString();
-		nombreAgente = pac;
+		idAgente = agente;
 		nombreCentro = cen;
 	}
 
@@ -52,13 +52,15 @@ public class Relacion implements Serializable, ObjetoAlmacenable {
 		this.nombreCentro = nombreCentro;
 	}
 
-	public String getNombreAgente() {
-		return nombreAgente;
+	public String getIdAgente() {
+		return idAgente;
 	}
 
-	public void setNombreAgente(String nombreAgente) {
-		this.nombreAgente = nombreAgente;
+	public void setIdAgente(String idAgente) {
+		this.idAgente = idAgente;
 	}
+
+	
 
 	
 }

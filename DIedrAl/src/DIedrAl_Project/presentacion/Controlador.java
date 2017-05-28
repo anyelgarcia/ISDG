@@ -300,8 +300,8 @@ public class Controlador {
 		antiguo.igualarCampos(nuevo);
 	}
 
-	public static void modificaPaciente(Paciente antiguo, Paciente nuevo) {
-		antiguo.igualarCampos(nuevo);
+	public static void modificaPaciente(Paciente antiguo, Paciente nuevo) throws CloneNotSupportedException {
+		antiguo = (Paciente) nuevo.clone();
 	}
 
 }

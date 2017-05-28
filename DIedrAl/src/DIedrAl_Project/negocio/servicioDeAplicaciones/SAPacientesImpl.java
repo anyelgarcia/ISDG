@@ -12,11 +12,19 @@ import DIedrAl_Project.negocio.pacientes.*;
 public class SAPacientesImpl implements SAPacientes {
 
 	private Centro centro;
-	private SimpleFileDAOFactory factoria;
+	private DAOPaciente daopac;
+	private DAOUsuario daousu;
+	private DAOCentro daocen;
+	private DAORelacionable daorelPac;
+	private DAORelacionable daorelUsu;
 
 	public SAPacientesImpl(String nombreCentro) throws ClassNotFoundException, IOException {
-		factoria = SimpleFileDAOFactory.getInstance();
-		DAOCentro daocen = factoria.getDAOCentro();
+		DAOFactory factoria = SimpleFileDAOFactory.getInstance();
+		daocen = factoria.getDAOCentro();
+		daopac = factoria.getDAOPaciente();
+		daousu = factoria.getDAOUsuario();
+		daorelPac = factoria.getDAORelacion(tRelacion.paciente);
+		daorelUsu = factoria.getDAORelacion(tRelacion.usuario);
 
 		EstadoCentro centrotrans = daocen.consultarCentro(nombreCentro);
 		CentroMaps mapeador = new CentroMaps();
@@ -34,15 +42,15 @@ public class SAPacientesImpl implements SAPacientes {
 	 */
 	@Override
 	public void addPaciente(Paciente pac) throws AlreadyBoundException, IOException {
-
+		
+		/*
+		 * Se intenta añadir el paciente. Si se puede, se crea una relacion con agente
+		 * el nuevo paciente y con centro asociado el centro actual.
+		 * Ademas, se guarda en la base de datos.
+		 */
 		centro.addPaciente(pac);
-
-		DAORelacionable daorel = factoria.getDAORelacion(tRelacion.paciente);
-		daorel.crearRelacion(new Relacion(pac.getId()));
-
-		DAOPaciente daopac = factoria.getDAOPaciente();
+		daorelPac.crearRelacion(new Relacion(pac.getId(), centro.getNombre()));
 		daopac.crearPaciente(pac);
-
 	}
 
 	/**
@@ -51,51 +59,52 @@ public class SAPacientesImpl implements SAPacientes {
 	 * 
 	 * @param pac
 	 *            paciente a eliminar del centro
-	 * @throws NotBoundException
-	 *             , si el paciente no se encuentra en el centro
+	 * @throws NotBoundException,
+	 *             si el paciente no se encuentra en el centro
 	 */
 	@Override
 	public void erasePaciente(Paciente pac) throws NotBoundException, ClassNotFoundException, IOException {
 
-		// Borrar el paciente del centro con todas sus relaciones a terapueutas
-		// y usuarios
+		//Se intenta borrar el paciente del centro.
 		centro.erasePaciente(pac);
-
-		// Obtener el nombre del fichero en el que se guardan las relaciones de
-		// los pacientes del centro con sus usuarios asociados
-
-		// Obtener el dao de relación para modificar las relaciones en archivo
-		DAORelacionable daorel = factoria.getDAORelacion(tRelacion.paciente);
-
-		// eliminar todas las relaciones del paciente en el archivo anterior
-		daorel.eliminarRelacion(pac.getId());
-
-		// Obtener el nombre del fichero en el que se guardan las relaciones de
-		// los usuarios del centro con sus pacientes asociados
-
-		DAORelacionable daorel2 = factoria.getDAORelacion(tRelacion.usuario);
-
-		// recorrer los usuarios asociados al paciente eliminando en archivo las
-		// relaciones con dichgo paciente
-		HashSet<Relacion> listadoRelaciones = daorel2.listarRelaciones(centro.getNombre());
-		listadoRelaciones.forEach((relacion) -> {
-			ArrayList<String> relacionados = relacion.getRelacionados();
-			relacionados.removeIf((aux) -> {
-				return aux.equals(pac.getId());
-			});
-
-			// Modifica la relación en archivo
-			try {
-				daorel2.modificarRelacion(relacion);
-			} catch (Exception e) {
-				e.printStackTrace();
+		//Si se ha conseguido, cargamos las relaciones asociadas a pacientes del centro
+		//cuestion.
+		Set<Relacion> setrel = daorelPac.listarRelaciones(centro.getNombre());
+		Relacion aEliminar = null;
+		for (Relacion r : setrel) {
+			//Si el paciente es el agente de la relacion, la marcamos para eliminarla luego
+			if (r.getIdAgente() == pac.getId()) {
+				aEliminar = r;
+			} 
+			// Si el paciente esta en alguna relacion con otro paciente, lo eliminamos del los
+			// relacionados.
+			
+			//NOTA: ESTO NO DEBERIA ACTIVARSE NUNCA
+			else if (r.getRelacionados().contains(pac.getId())) {
+				r.getRelacionados().remove(pac.getId());
+				daorelPac.modificarRelacion(r);
 			}
-		});
-
-		DAOPaciente daopac = factoria.getDAOPaciente();
+		}
+		//Si se ha conseguido, cargamos las relaciones asociadas a usuarios del centro
+		//cuestion.
+		setrel = daorelUsu.listarRelaciones(centro.getNombre());
+		for (Relacion r : setrel) {
+			// Si el paciente esta en alguna relacion con un usuario, lo eliminamos del los
+			// relacionados.
+			if (r.getRelacionados().contains(pac.getId())) {
+				r.getRelacionados().remove(pac.getId());
+				daorelUsu.modificarRelacion(r);
+			}
+		}
+		//Luego, la relacion a eliminar, en la que es agente, la eliminamos.
+		if (aEliminar != null) {
+			daorelPac.eliminarRelacion(aEliminar.getId());
+		}
+		//Y eliminamos el paciente
 		if (daopac.existePaciente(pac.getId())) {
 			daopac.eliminarPaciente(pac.getId());
 		} else
+			//No debería entrar por aquí en estos momentos de la película.
 			throw new NotBoundException(pac + "no se encuentra registrado en la base de datos");
 	}
 
@@ -110,13 +119,13 @@ public class SAPacientesImpl implements SAPacientes {
 	 */
 	@Override
 	public void addUsuario(Usuario usu) throws AlreadyBoundException, ClassNotFoundException, IOException {
-
+		/*
+		 * Se intenta añadir el usuario. Si se puede, se crea una relacion con agente
+		 * el nuevo usuario y con centro asociado el centro actual.
+		 * Ademas, se guarda en la base de datos.
+		 */
 		centro.addUsuario(usu);
-
-		DAORelacionable daorel = factoria.getDAORelacion(tRelacion.usuario);
-		daorel.crearRelacion(new Relacion(usu.getId()));
-
-		DAOUsuario daousu = factoria.getDAOUsuario();
+		daorelUsu.crearRelacion(new Relacion(usu.getId(), centro.getNombre()));
 		daousu.crearUsuario(usu);
 	}
 
@@ -132,68 +141,89 @@ public class SAPacientesImpl implements SAPacientes {
 	@Override
 	public void eraseUsuario(Usuario usu) throws NotBoundException, ClassNotFoundException, IOException {
 
-		// Borrar el usuario del centro con todas sus relaciones a pacientes
+		//Se intenta borrar el usuario del centro.
 		centro.eraseUsuario(usu);
-
-		// Obtener el dao de relación para modificar las relaciones en archivo
-		DAORelacionable daorel = factoria.getDAORelacion(tRelacion.usuario);
-
-		// eliminar todas las relaciones del usuario en el archivo anterior
-		daorel.eliminarRelacion(usu.getId());
-
-		// Obtener el nombre del fichero en el que se guardan las relaciones de
-		// los pacientes del centro con sus pacientes asociados
-
-		DAORelacionable daorel2 = factoria.getDAORelacion(tRelacion.paciente);
-
-		// recorrer los pacientes asociados al usuario eliminando en archivo las
-		// relaciones con dicho usuario
-		HashSet<Relacion> listadoRelaciones = daorel2.listarRelaciones(centro.getNombre());
-		listadoRelaciones.forEach((relacion) -> {
-			ArrayList<String> relacionados = relacion.getRelacionados();
-			relacionados.removeIf((aux) -> {
-				return aux.equals(usu.getId());
-			});
-
-			// Modifica la relación en archivo
-			try {
-				daorel2.modificarRelacion(relacion);
-			} catch (Exception e) {
-				e.printStackTrace();
+		//Si se ha conseguido, cargamos las relaciones asociadas a pacientes del centro
+		//cuestion.
+		Set<Relacion> setrel = daorelPac.listarRelaciones(centro.getNombre());
+		Relacion aEliminar = null;
+		for (Relacion r : setrel) {
+			// Si el paciente esta en alguna relacion con un usuario, lo eliminamos del los
+			// relacionados.
+			if (r.getRelacionados().contains(usu.getId())) {
+				r.getRelacionados().remove(usu.getId());
+				daorelPac.modificarRelacion(r);
 			}
-		});
-
-		DAOUsuario daousu = factoria.getDAOUsuario();
+		}
+		
+		//Si se ha conseguido, cargamos las relaciones asociadas a usuarios del centro
+		//cuestion.
+		setrel = daorelUsu.listarRelaciones(centro.getNombre());
+		for (Relacion r : setrel) {
+			//Si el usuario es el agente de la relacion, la marcamos para eliminarla luego
+			if (r.getIdAgente() == usu.getId()) {
+				aEliminar = r;
+			} 
+			// Si el usuario esta en alguna relacion con otro usuario, lo eliminamos del los
+			// relacionados.
+			
+			//NOTA: ESTO NO DEBERÍA ACTIVARSE NUNCA
+			else if (r.getRelacionados().contains(usu.getId())) {
+				r.getRelacionados().remove(usu.getId());
+				daorelUsu.modificarRelacion(r);
+			}
+		}
+		//Luego, la relacion a eliminar, en la que es agente, la eliminamos.
+		if (aEliminar != null) {
+			daorelUsu.eliminarRelacion(aEliminar.getId());
+		}
+		//Y eliminamos el usuario
 		if (daousu.existeUsuario(usu.getId())) {
 			daousu.eliminarUsuario(usu.getId());
 		} else
+			//No debería entrar por aquí en estos momentos de la película.
 			throw new NotBoundException(usu + "no se encuentra registrado en la base de datos");
 	}
 
 	@Override
 	public void ligarPaciente(Paciente pac, Usuario usu)
 			throws NotBoundException, AlreadyBoundException, IOException, ClassNotFoundException {
+		//Ligamos en el centro el paciente y el usuario.
 		centro.ligarPaciente(pac, usu);
-
-		DAORelacionable daorel = factoria.getDAORelacion(tRelacion.usuario);
-
-		DAORelacionable daorel2 = factoria.getDAORelacion(tRelacion.paciente);
-		
-		HashSet<Relacion> setrel = daorel.listarRelaciones(centro.getNombre());
-		
-		for(Relacion r: setrel){
-			if(r.)
+		//Cargamos la lista de relaciones de usuarios del centro
+		Set<Relacion> setrel = daorelUsu.listarRelaciones(centro.getNombre());
+		Relacion usuToPac = null;
+		for (Relacion r : setrel) {
+			//Si hay una relacion en la que el usuario sea el agente, la guardamos
+			if (r.getIdAgente() == usu.getId()) {
+				usuToPac = r;
+				break;
+			}
 		}
-		
-		// Relacionar en archivo paciente con usuario
-		Relacion relPacUsu = new Relacion(pac.getId());
-		relPacUsu.getRelacionados().add(usu.getId());
-		daorel.modificarRelacion(relPacUsu);
+		//Si no hay relacion en la que el usuario sea el agente, la creamos.
+		if (usuToPac == null) {
+			usuToPac = new Relacion(usu.getId(), centro.getNombre());
+			daorelUsu.crearRelacion(usuToPac);
+		}
+		//Añadimos el nuevo relacionado.
+		usuToPac.getRelacionados().add(pac.getId());
+		daorelUsu.modificarRelacion(usuToPac);
+		//Hacemos lo mismo con el otro sentido de la relacion.
+		setrel = daorelPac.listarRelaciones(centro.getNombre());
+		Relacion pacToUsu = null;
+		for (Relacion r : setrel) {
+			if (r.getIdAgente() == pac.getId()) {
+				pacToUsu = r;
+				break;
+			}
+		}
+		if (pacToUsu == null) {
+			pacToUsu = new Relacion(pac.getId(), centro.getNombre());
+			daorelPac.crearRelacion(pacToUsu);
+		}
+		pacToUsu.getRelacionados().add(usu.getId());
+		daorelPac.modificarRelacion(pacToUsu);
 
-		// Relacionar en archivo usuario con paciente
-		Relacion relUsuPac = new Relacion(usu.getId());
-		relUsuPac.getRelacionados().add(pac.getId());
-		daorel.modificarRelacion(relUsuPac);
 	}
 
 	@Override
@@ -201,48 +231,26 @@ public class SAPacientesImpl implements SAPacientes {
 			throws NotBoundException, AlreadyBoundException, ClassNotFoundException, IOException {
 		centro.desligarPaciente(pac, usu);
 
-		DAORelacionable daorel = factoria.getDAORelacion(tRelacion.paciente);
+		//Cargamos el conjunto de relaciones de pacientes del centro
+		Set<Relacion> setrel = daorelPac.listarRelaciones(centro.getNombre());
 
-		DAORelacionable daorel2 = factoria.getDAORelacion(tRelacion.usuario);
-
-		// Obtener conjunto de relaciones de pacientes con usuarios
-		HashSet<Relacion> PacUsu = daorel.listarRelaciones(centro.getNombre());
-
-		// Recorrer el conjunto buscando la relación que parte de pac y contiene
-		// a usu
-		Iterator<Relacion> it = PacUsu.iterator();
-		boolean found = false;
-		Relacion buscada = null;
-
-		while (!found && it.hasNext()) {
-			buscada = it.next();
-			found = buscada.getId().equals(pac.getId());
+		for (Relacion r : setrel) {
+			//Si en alguno es el agente de la relación, eliminamos de relacionado el
+			//usuario
+			if (r.getIdAgente().equals(pac.getId())) {
+				r.getRelacionados().remove(usu.getId());
+				daorelPac.modificarRelacion(r);
+				break;
+			}
 		}
-
-		// al encontrarla, borra al usuario de los asociados al paciente
-		if (found) {
-			buscada.getRelacionados().remove(usu);
-			daorel.modificarRelacion(buscada);
-		}
-
-		// Obtener conjunto de relaciones de usuarios con pacientes
-		HashSet<Relacion> UsuPac = daorel2.listarRelaciones(centro.getNombre());
-
-		// Recorrer el conjunto buscando la relación que parte de usu y contiene
-		// a pac
-		Iterator<Relacion> it2 = UsuPac.iterator();
-		boolean found2 = false;
-		Relacion buscada2 = null;
-
-		while (!found2 && it2.hasNext()) {
-			buscada2 = it2.next();
-			found2 = buscada2.getId().equals(usu.getId());
-		}
-
-		// al encontrarla, borra al paciente de los asociados al usuario
-		if (found2) {
-			buscada2.getRelacionados().remove(pac);
-			daorel2.modificarRelacion(buscada2);
+		//Hacemos lo mismo pero con usuarios.
+		setrel = daorelUsu.listarRelaciones(centro.getNombre());
+		for (Relacion r : setrel) {
+			if (r.getIdAgente().equals(usu.getId())) {
+				r.getRelacionados().remove(pac.getId());
+				daorelUsu.modificarRelacion(r);
+				break;
+			}
 		}
 	}
 

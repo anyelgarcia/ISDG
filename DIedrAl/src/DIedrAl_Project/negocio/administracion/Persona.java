@@ -8,7 +8,7 @@ import DIedrAl_Project.negocio.calendario.Fecha;
 import DIedrAl_Project.negocio.pacientes.Direccion;
 
 @SuppressWarnings("serial")
-public abstract class Persona implements ObjetoAlmacenable, Serializable {
+public abstract class Persona implements ObjetoAlmacenable, Serializable, Cloneable {
 
 	protected String nombre;
 
@@ -35,6 +35,8 @@ public abstract class Persona implements ObjetoAlmacenable, Serializable {
 	 */
 	protected String nif;
 
+	protected String id;
+
 	public String getCentro() {
 		return centro;
 	}
@@ -48,6 +50,7 @@ public abstract class Persona implements ObjetoAlmacenable, Serializable {
 		this.apellido1 = apellido1;
 		this.apellido2 = apellido2;
 		this.nif = nif;
+		id = UUID.randomUUID().toString();
 	}
 
 	public String getName() {
@@ -133,6 +136,7 @@ public abstract class Persona implements ObjetoAlmacenable, Serializable {
 
 	public void setNif(String nif) {
 		this.nif = nif;
+		this.id = nif;
 	}
 
 	public int compararAlfab(Persona otra) {
@@ -177,18 +181,22 @@ public abstract class Persona implements ObjetoAlmacenable, Serializable {
 	 * @param otra
 	 *            persona cuyos campos se desean copiar
 	 */
-	public void igualarCampos(Persona otra) {
 
-		if (otra != null) {
-			this.nombre = otra.nombre;
-			this.apellido1 = otra.apellido1;
-			this.apellido2 = otra.apellido2;
-			this.fechaNacimiento = otra.fechaNacimiento;
-			this.estadoCivil = otra.estadoCivil;
-			this.direccion = otra.direccion;
-			this.email = otra.email;
-			this.tfo = otra.tfo;
-			this.perfil = otra.perfil;
-		}
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		Persona copia = (Persona) super.clone();
+		copia.nombre = this.nombre;
+		copia.apellido1 = this.apellido1;
+		copia.apellido2 = this.apellido2;
+		copia.fechaNacimiento = this.fechaNacimiento;
+		copia.estadoCivil = this.estadoCivil;
+		copia.direccion = this.direccion;
+		copia.email = this.email;
+		copia.tfo = this.tfo;
+		copia.perfil = this.perfil;
+		copia.nif = this.nif;
+		copia.centro = this.centro;
+		return copia;
 	}
+
 }

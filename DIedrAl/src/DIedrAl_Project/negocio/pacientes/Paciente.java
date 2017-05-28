@@ -8,9 +8,9 @@ import DIedrAl_Project.negocio.administracion.Persona;
 public class Paciente extends Persona {
 
 	private static final long serialVersionUID = -5410072833506454068L;
-	
+
 	private DatosPaciente datos;
-	
+
 	private Set<Nota> notas;
 
 	public Paciente(String nombre, String apellido1, String apellido2, String nif) {
@@ -35,6 +35,14 @@ public class Paciente extends Persona {
 
 	public DatosPaciente getDatos() {
 		return datos;
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		Paciente p = (Paciente) super.clone();
+		p.datos = this.datos;
+		p.notas = this.notas;
+		return p;
 	}
 
 }
