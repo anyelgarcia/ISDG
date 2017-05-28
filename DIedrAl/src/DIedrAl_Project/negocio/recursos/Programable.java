@@ -27,12 +27,12 @@ public abstract class Programable extends Etiquetable {
 		asociados = new HashSet<Etiquetable>();
 	}
 
-	public Set<Etiquetable> getAsociados() {
+	public HashSet<Etiquetable> getAsociados() {
 		return asociados;
 	}
 
-	public Set<String> getEtiquetas() {
-		Set<String> aux = new HashSet<String>();
+	public TreeSet<String> getEtiquetas() {
+		TreeSet<String> aux = new TreeSet<String>();
 		aux.addAll(etiquetas);
 		for (Etiquetable e : asociados) {
 			aux.addAll(e.getEtiquetas());
@@ -78,7 +78,7 @@ public abstract class Programable extends Etiquetable {
 		}
 	}
 
-	public Set<String> getDestinatarios() {
+	public HashSet<String> getDestinatarios() {
 		return this.destinatarios;
 	}
 

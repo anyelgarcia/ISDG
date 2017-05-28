@@ -3,6 +3,7 @@ package DIedrAl_Project.negocio.recursos;
 import java.io.Serializable;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.UUID;
@@ -58,7 +59,7 @@ public abstract class Etiquetable implements ObjetoAlmacenable, Serializable {
 		return this.getEtiquetas().contains(etiqueta);
 	}
 
-	public abstract Set<String> getEtiquetas();
+	public abstract TreeSet<String> getEtiquetas();
 	
 	public void igualarCampos(Etiquetable that){
 		this.etiquetas = that.etiquetas;

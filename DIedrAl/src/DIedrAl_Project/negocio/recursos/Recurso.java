@@ -70,7 +70,7 @@ public class Recurso extends Etiquetable {
 	}
 
 	@Override
-	public Set<String> getEtiquetas() {
+	public TreeSet<String> getEtiquetas() {
 		return this.etiquetas;
 	}
 

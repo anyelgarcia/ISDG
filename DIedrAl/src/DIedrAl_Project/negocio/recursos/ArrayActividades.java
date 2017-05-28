@@ -1,6 +1,6 @@
 package DIedrAl_Project.negocio.recursos;
 
-import java.util.Set;
+import java.util.*;
 
 /*
  * TODO CAMBIAR EL TIPO DE ESTAS FUNCIONES EN PUTO MODELIO
@@ -12,7 +12,7 @@ public class ArrayActividades extends ArrayProgramables<Actividad> {
 		super();
 	}
 	
-	public ArrayActividades(Set<Actividad> act) {
+	public ArrayActividades(HashSet<Actividad> act) {
 		super(act);
 	}
 
