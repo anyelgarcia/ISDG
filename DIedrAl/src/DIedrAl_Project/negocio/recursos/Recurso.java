@@ -1,23 +1,15 @@
 package DIedrAl_Project.negocio.recursos;
 
-import java.awt.Desktop;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-import java.util.Set;
+import java.awt.*;
+import java.io.*;
+import java.net.*;
+import java.nio.file.*;
+import java.util.*;
 
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 
 public class Recurso extends Etiquetable {
 
+	private static final long serialVersionUID = 695552343831162918L;
 	private File fichero;
 	private URI direccion;
 

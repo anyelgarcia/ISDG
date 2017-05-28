@@ -1,6 +1,8 @@
 package DIedrAl_Project.negocio.recursos;
 
 public class Actividad extends Programable {
+	private static final long serialVersionUID = 8515286333067141189L;
+	private Dificultad dificultad;
 
 	public Actividad(String name) {
 		super(name);
@@ -10,7 +12,6 @@ public class Actividad extends Programable {
 		super(name, etiquetas);
 	}
 
-	private Dificultad dificultad;
 
 	public Dificultad getDificultad() {
 		return this.dificultad;

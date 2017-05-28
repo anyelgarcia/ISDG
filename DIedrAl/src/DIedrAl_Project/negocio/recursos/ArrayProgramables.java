@@ -47,7 +47,11 @@ public abstract class ArrayProgramables<T extends Programable> extends
 			}
 		}
 		return aux;
+		
 	}
+	
+	
+	
 	
 	protected abstract ArrayProgramables<T> createNew();
 

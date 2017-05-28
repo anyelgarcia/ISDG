@@ -2,12 +2,23 @@ package DIedrAl_Project.negocio.calendario;
 
 import java.time.*;
 import java.util.*;
-public class Calendario {
+
+import DIedrAl_Project.negocio.ObjetoAlmacenable;
+
+public class Calendario implements ObjetoAlmacenable {
+
+	private String id;
 	private Map<LocalDate, Set<SesionProgramada>> sesiones;
+
+	public Calendario() {
+		id = UUID.randomUUID().toString();
+		sesiones = new TreeMap<LocalDate, Set<SesionProgramada>>();
+	}
 
 	public void addSesion(SesionProgramada sesion) {
 		sesiones.get(sesion.getFecha()).add(sesion);
 	}
+
 	public void eliminarSesion(SesionProgramada sesion) {
 		if (!sesiones.get(sesion.getFecha()).contains(sesion)) {
 			throw new IllegalArgumentException();
@@ -16,6 +27,9 @@ public class Calendario {
 		}
 	}
 
-	
+	@Override
+	public String getId() {
+		return id;
+	}
 
 }

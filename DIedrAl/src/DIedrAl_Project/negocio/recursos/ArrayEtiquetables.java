@@ -18,6 +18,10 @@ public abstract class ArrayEtiquetables<T extends Etiquetable> implements Iterab
 	public int size(){
 		return etiquetables.size();
 	}
+	
+	public boolean empty(){
+		return etiquetables.isEmpty();
+	}
 
 	public Set<T> filtrarEtiqueta(Set<String> filtros) {
 
@@ -58,7 +62,14 @@ public abstract class ArrayEtiquetables<T extends Etiquetable> implements Iterab
 	public Iterator<T> iterator() {
 		return new IteratorEtiquetable<T>();
 	}
-
+	@Override
+	public String toString() {
+		StringBuilder sb= new StringBuilder();
+		for(T t: etiquetables){
+			sb.append(t.toString()+"\n---\n");
+		}
+		return sb.toString();
+	}
 	protected class IteratorEtiquetable<S extends Etiquetable> 
 	implements Iterator<S> {
 
@@ -80,5 +91,5 @@ public abstract class ArrayEtiquetables<T extends Etiquetable> implements Iterab
 		}
 
 	}
-
+	
 }

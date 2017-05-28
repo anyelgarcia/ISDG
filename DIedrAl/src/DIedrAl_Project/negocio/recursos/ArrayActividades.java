@@ -47,4 +47,9 @@ public class ArrayActividades extends ArrayProgramables<Actividad> {
 		return new ArrayActividades();
 	}
 
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+	
 }
