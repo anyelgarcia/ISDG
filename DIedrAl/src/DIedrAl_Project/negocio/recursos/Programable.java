@@ -7,9 +7,9 @@ import java.util.*;
 public abstract class Programable extends Etiquetable {
 	protected int duracion;
 
-	protected Set<String> destinatarios;
+	protected HashSet<String> destinatarios;
 
-	protected Set<Etiquetable> asociados;
+	protected HashSet<Etiquetable> asociados;
 
 	protected String desarrollo;
 
@@ -27,10 +27,10 @@ public abstract class Programable extends Etiquetable {
 		asociados = new HashSet<Etiquetable>();
 	}
 
-	public Set<Etiquetable> getAsociados(){
+	public Set<Etiquetable> getAsociados() {
 		return asociados;
 	}
-	
+
 	public Set<String> getEtiquetas() {
 		Set<String> aux = new HashSet<String>();
 		aux.addAll(etiquetas);
@@ -67,10 +67,13 @@ public abstract class Programable extends Etiquetable {
 	}
 
 	public void addActividad(Actividad act) throws AlreadyBoundException {
-		if(asociados.contains(act)){
-			throw new AlreadyBoundException("Actividad "+ act+" ya existente");
+		if (act == this) {
+			throw new AlreadyBoundException("No se puede añadir una actividad a sí misma");
+		} else if (asociados.contains(act)) {
+			throw new AlreadyBoundException("Actividad " + act + " ya existente");
 		}
-		else{
+
+		else {
 			asociados.add(act);
 		}
 	}
@@ -109,6 +112,12 @@ public abstract class Programable extends Etiquetable {
 
 	public void setVariaciones(String variaciones) {
 		this.variaciones = variaciones;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString() + "Programable [duracion=" + duracion + ", destinatarios=" + destinatarios
+				+ ", asociados=" + asociados + ", desarrollo=" + desarrollo + ", variaciones=" + variaciones + "]";
 	}
 
 }

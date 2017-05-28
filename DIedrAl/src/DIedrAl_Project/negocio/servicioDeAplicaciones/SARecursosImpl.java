@@ -90,7 +90,11 @@ public class SARecursosImpl implements SARecursos {
 		// Primera capa de borrado: se elimina el recurso de la lista de
 		// recursos del banco
 		bank.removeActividad(act);
+		if(daoact.existeActividad(act.getId())){
+			
+		}
 		daoact.eliminarActividad(act.getId());
+		
 
 		// Segunda capa de borrado: se elimina de todas los programables que la
 		// tuvieran como asociado

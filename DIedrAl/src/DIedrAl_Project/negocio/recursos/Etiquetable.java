@@ -11,10 +11,12 @@ import DIedrAl_Project.negocio.*;
 
 public abstract class Etiquetable implements ObjetoAlmacenable, Serializable {
 
+	private static final long serialVersionUID = 4574224692338847257L;
+
 	/**
 	 * Etiquetas asociadas al objeto
 	 */
-	protected Set<String> etiquetas;
+	protected TreeSet<String> etiquetas;
 
 	protected String nombre;
 
@@ -52,7 +54,7 @@ public abstract class Etiquetable implements ObjetoAlmacenable, Serializable {
 	 *            etiqueta a comprobar
 	 * @return true si el objeto tiene asociada la etiqueta
 	 */
-	public boolean ContieneEtiqueta(String etiqueta) {
+	public boolean contains(String etiqueta) {
 		return this.getEtiquetas().contains(etiqueta);
 	}
 
@@ -101,4 +103,16 @@ public abstract class Etiquetable implements ObjetoAlmacenable, Serializable {
 		return id;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.nombre+"\n");
+		sb.append(this.descripcion+"\n");
+		sb.append("Lista de etiquetas:\n");
+		for(String e:etiquetas){
+			sb.append(e+" ");
+		}
+		return sb.toString();
+	}
+	
 }
