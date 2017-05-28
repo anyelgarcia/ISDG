@@ -8,12 +8,27 @@ import DIedrAl_Project.integracion.*;
 import DIedrAl_Project.negocio.recursos.*;
 
 public class SARecursosImpl implements SARecursos {
+
 	private Banco bank;
+
 	private DAORecurso daorec;
+
 	private DAOActividad daoact;
+
 	private DAOSesion daoses;
 
-	public SARecursosImpl(){
+	private static SARecursosImpl instancia = null;
+
+	public static SARecursosImpl getInstancia() {
+
+		if (instancia == null) {
+			instancia = new SARecursosImpl();
+		}
+
+		return instancia;
+	}
+
+	private SARecursosImpl() {
 		SimpleFileDAOFactory factoria = SimpleFileDAOFactory.getInstance();
 		daorec = factoria.getDAORecurso();
 		daoact = factoria.getDAOActividad();
@@ -211,14 +226,14 @@ public class SARecursosImpl implements SARecursos {
 		return bank.getRecursos();
 	}
 
-	private void cargarBanco(){
+	private void cargarBanco() {
 		try {
 			HashSet<Actividad> set = daoact.listarActividades();
 			for (Actividad a : set) {
 				bank.addActividad(a);
 			}
 		} catch (ClassNotFoundException | IOException e) {
-			//e.printStackTrace();
+			// e.printStackTrace();
 		}
 		try {
 			HashSet<Sesion> ses = daoses.listarSesiones();
@@ -226,17 +241,16 @@ public class SARecursosImpl implements SARecursos {
 				bank.addSesion(s);
 			}
 		} catch (ClassNotFoundException | IOException e) {
-			//e.printStackTrace();
+			// e.printStackTrace();
 		}
-		
-		
+
 		try {
 			HashSet<Recurso> rec = daorec.listarRecursos();
 			for (Recurso r : rec) {
 				bank.addRecurso(r);
 			}
 		} catch (ClassNotFoundException | IOException e) {
-			//e.printStackTrace();
+			// e.printStackTrace();
 		}
 	}
 

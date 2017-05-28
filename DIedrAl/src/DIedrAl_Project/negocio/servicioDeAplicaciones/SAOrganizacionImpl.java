@@ -1,31 +1,34 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import DIedrAl_Project.integracion.DAOCentro;
-import DIedrAl_Project.integracion.DAOPaciente;
-import DIedrAl_Project.integracion.DAORelacionable;
-import DIedrAl_Project.integracion.DAOUsuario;
-import DIedrAl_Project.integracion.SimpleFileDAOFactory;
-import DIedrAl_Project.integracion.tRelacion;
-import DIedrAl_Project.negocio.administracion.Centro;
-import DIedrAl_Project.negocio.administracion.EstadoCentro;
-import DIedrAl_Project.negocio.administracion.Organizacion;
-import DIedrAl_Project.negocio.administracion.Usuario;
+import DIedrAl_Project.integracion.*;
+import DIedrAl_Project.negocio.administracion.*;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 
 public class SAOrganizacionImpl implements SAOrganizacion {
 
 	private Organizacion organizacion;
+
 	private SimpleFileDAOFactory factoria;
 
-	public SAOrganizacionImpl(Organizacion org) {
-		this.organizacion = org;
+	private static SAOrganizacionImpl instancia = null;
+
+	public static SAOrganizacionImpl getInstancia() {
+
+		if (instancia == null) {
+			instancia = new SAOrganizacionImpl();
+		}
+
+		return instancia;
+	}
+
+	private SAOrganizacionImpl() {
+		this.organizacion = Organizacion.getInstancia();
 		factoria = SimpleFileDAOFactory.getInstance();
 	}
 
@@ -85,13 +88,13 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 					e.printStackTrace();
 				}
 		});
-		
+
 		DAORelacionable daoter = factoria.getDAORelacion(tRelacion.usuario);
 		daoter.eliminarRelacionesCentro(name);
-		
+
 		DAORelacionable daopaci = factoria.getDAORelacion(tRelacion.paciente);
 		daopaci.eliminarRelacionesCentro(name);
-		
+
 		DAOCentro daocen = factoria.getDAOCentro();
 
 		// Borrar el centro del sistema

@@ -2,46 +2,63 @@ package DIedrAl_Project.negocio;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
- * Objeto transfer que almacena la relacion entre un tipo de Objeto con una lista
- * de otros, dado el identificador de esos objetos. Se puede utilizar para guardar
- * las vinculaciones de un terapeuta con sus pacientes y viceversa.
+ * Objeto transfer que almacena la relacion entre un tipo de Objeto con una
+ * lista de otros, dado el identificador de esos objetos. Se puede utilizar para
+ * guardar las vinculaciones de un terapeuta con sus pacientes y viceversa.
+ * 
  * @author Diedral_Group
  *
  */
 public class Relacion implements Serializable, ObjetoAlmacenable {
-	
+
+	private static final long serialVersionUID = -1761048758403070404L;
+
 	private final String id;
-	
-	private ArrayList<String>  relacionados;
-	
-	private String centro;
-	
-	public Relacion(String id){
-		this.id = id;
-		this.relacionados = new ArrayList<>();
+
+	private ArrayList<String> relacionados;
+
+	private String nombreCentro;
+
+	private String nombreAgente;
+
+	public Relacion(String pac, String cen) {
+		relacionados = new ArrayList<String>();
+		id = UUID.randomUUID().toString();
+		nombreAgente = pac;
+		nombreCentro = cen;
 	}
 
 	@Override
 	public String getId() {
 		return this.id;
 	}
-	
-	public ArrayList<String> getRelacionados(){
+
+	public ArrayList<String> getRelacionados() {
 		return this.relacionados;
 	}
-	
-	public void setRelacionados(ArrayList<String> list){
+
+	public void setRelacionados(ArrayList<String> list) {
 		this.relacionados = list;
 	}
 
-	public String getCentro() {
-		return centro;
+	public String getNombreCentro() {
+		return nombreCentro;
 	}
 
-	public void setCentro(String centro) {
-		this.centro = centro;
+	public void setNombreCentro(String nombreCentro) {
+		this.nombreCentro = nombreCentro;
 	}
+
+	public String getNombreAgente() {
+		return nombreAgente;
+	}
+
+	public void setNombreAgente(String nombreAgente) {
+		this.nombreAgente = nombreAgente;
+	}
+
 	
 }
