@@ -11,15 +11,15 @@ import DIedrAl_Project.negocio.pacientes.Paciente;
  */
 public interface DAOPaciente {
 	
-	public void crearPaciente(Paciente p)  throws IOException;
+	public void crearPaciente(Paciente p)  throws AccessException;
 	
-	public void eliminarPaciente(String id)  throws IOException, ClassNotFoundException;
+	public void eliminarPaciente(String id)  throws AccessException;
 	
-	public void modificarPaciente(Paciente p)  throws IOException, ClassNotFoundException;
+	public void modificarPaciente(Paciente p)  throws AccessException;
 	
-	public HashSet<Paciente> listarPacientes()  throws IOException, ClassNotFoundException;
+	public HashSet<Paciente> listarPacientes()  throws AccessException;
 	
-	public boolean existePaciente(String id)  throws IOException, ClassNotFoundException;
+	public boolean existePaciente(String id)  throws AccessException;
 	
-	public Paciente consultarPaciente(String id) throws ClassNotFoundException, IOException;
+	public Paciente consultarPaciente(String id) throws AccessException;
 }

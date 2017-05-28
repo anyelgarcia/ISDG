@@ -11,15 +11,15 @@ import DIedrAl_Project.negocio.administracion.Usuario;
  */
 public interface DAOUsuario {
 	
-	public void crearUsuario(Usuario u)  throws IOException;
+	public void crearUsuario(Usuario u)  throws AccessException;
 	
-	public void eliminarUsuario(String id)  throws IOException, ClassNotFoundException;
+	public void eliminarUsuario(String id)  throws AccessException;
 	
-	public void modificarUsuario(Usuario u)  throws IOException, ClassNotFoundException;
+	public void modificarUsuario(Usuario u)  throws AccessException;
 	
-	public HashSet<Usuario> listarUsuarios()  throws IOException, ClassNotFoundException;
+	public HashSet<Usuario> listarUsuarios()  throws AccessException;
 	
-	public boolean existeUsuario(String id)  throws IOException, ClassNotFoundException;
+	public boolean existeUsuario(String id)  throws AccessException;
 	
-	public Usuario consultarUsuario(String id) throws ClassNotFoundException, IOException;
+	public Usuario consultarUsuario(String id) throws AccessException;
 }

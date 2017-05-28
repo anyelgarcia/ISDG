@@ -54,25 +54,43 @@ public class DAORelacionableImp implements DAORelacionable{
 	}
 	
 	@Override
-	public void crearRelacion(Relacion r) throws IOException {
-		op.guardar(r, file);
+	public void crearRelacion(Relacion r) throws AccessException {
+		try {
+			op.guardar(r, file);
+		} catch (IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public void eliminarRelacion(String id) throws IOException, ClassNotFoundException {
-		op.borrar(id, file);
+	public void eliminarRelacion(String id) throws AccessException {
+		try {
+			op.borrar(id, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public void modificarRelacion(Relacion r) throws IOException, ClassNotFoundException {
-		op.modificar(r, file);
+	public void modificarRelacion(Relacion r) throws AccessException {
+		try {
+			op.modificar(r, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public HashSet<Relacion> listarRelaciones(String id) throws IOException, ClassNotFoundException {
-		FileInputStream fis = new FileInputStream(file);
-		BufferedInputStream bis = new BufferedInputStream(fis);
-		AppendableObjectInputStream ois = new AppendableObjectInputStream(bis);
+	public HashSet<Relacion> listarRelaciones(String id) throws AccessException  {
+		FileInputStream fis;
+		AppendableObjectInputStream ois = null;
+		try {
+			fis = new FileInputStream(file);
+			BufferedInputStream bis = new BufferedInputStream(fis);
+			ois = new AppendableObjectInputStream(bis);
+		} catch (IOException e) {
+			throw new AccessException();
+		}
 		HashSet<Relacion> r = new HashSet<>();
 		Relacion rel = null;
 		try {
@@ -81,23 +99,37 @@ public class DAORelacionableImp implements DAORelacionable{
 				if(rel.getNombreCentro().equals(id)) r.add(rel);
 			}
 
-		} catch (EOFException eof) {
+		} catch (ClassNotFoundException | IOException eof) {
 			if (ois != null)
-				ois.close();
+				try {
+					ois.close();
+				} catch (IOException e) {
+					throw new AccessException();
+				}
 			return r;
 		}
 	}
 
 	@Override
-	public boolean existeRelacion(String id) throws IOException, ClassNotFoundException {
-		return op.exists(id, file);
+	public boolean existeRelacion(String id) throws AccessException {
+		try {
+			return op.exists(id, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public void eliminarRelacionesCentro(String id) throws IOException, ClassNotFoundException {
-		FileInputStream fis = new FileInputStream(file);
-		BufferedInputStream bis = new BufferedInputStream(fis);
-		AppendableObjectInputStream ois = new AppendableObjectInputStream(bis);
+	public void eliminarRelacionesCentro(String id) throws AccessException  {
+		BufferedInputStream bis;
+		AppendableObjectInputStream ois = null; 
+		try{
+			FileInputStream fis = new FileInputStream(file);
+			bis = new BufferedInputStream(fis);
+			ois = new AppendableObjectInputStream(bis);
+		} catch(IOException e){
+			throw new AccessException();
+		}
 		ArrayList<Relacion> r = new ArrayList<>();
 		Relacion rel = null;
 		try {
@@ -106,15 +138,21 @@ public class DAORelacionableImp implements DAORelacionable{
 				if(!rel.getNombreCentro().equals(id)) r.add(rel);
 			}
 
-		} catch (EOFException eof) {
-			FileOutputStream arch = new FileOutputStream(file);
-			BufferedOutputStream bf = new BufferedOutputStream(arch);
-			ObjectOutputStream obj = new NoHeaderObjectOutputStream(bf);
-			for (int i = 0; i < r.size(); ++i) {
-				obj.writeObject(r.get(i));
+		} catch (ClassNotFoundException | IOException eof) {
+			FileOutputStream arch;
+			try {
+				arch = new FileOutputStream(file);
+				BufferedOutputStream bf = new BufferedOutputStream(arch);
+				ObjectOutputStream obj = new NoHeaderObjectOutputStream(bf);
+				for (int i = 0; i < r.size(); ++i) {
+					obj.writeObject(r.get(i));
+				}
+				obj.close();
+				if (ois != null) ois.close();
+			} catch (IOException e) {
+				throw new AccessException();
 			}
-			obj.close();
-			if (ois != null) ois.close();
+			
 		}
 	}
 

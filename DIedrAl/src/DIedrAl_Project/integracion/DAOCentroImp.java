@@ -24,38 +24,58 @@ private static DAOCentroImp instancia = null;
 	}
 	
 	@Override
-	public void guardarCentro(EstadoCentro c) throws IOException {
-		op.guardar(c, file);
+	public void guardarCentro(EstadoCentro c) throws AccessException{
+		try {
+			op.guardar(c, file);
+		} catch (IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public void eliminarCentro(String id) throws IOException,
-			ClassNotFoundException {
-		op.borrar(id, file);
+	public void eliminarCentro(String id) throws AccessException{
+		try {
+			op.borrar(id, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public void modificarCentro(EstadoCentro c) throws IOException,
-			ClassNotFoundException {
-		op.modificar(c, file);
+	public void modificarCentro(EstadoCentro c) throws AccessException {
+		try {
+			op.modificar(c, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public HashSet<EstadoCentro> listarCentros() throws IOException,
-			ClassNotFoundException {
-		return op.obtenerDatosSet(file);
+	public HashSet<EstadoCentro> listarCentros() throws AccessException {
+		try {
+			return op.obtenerDatosSet(file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public boolean existeCentro(String id) throws IOException,
-			ClassNotFoundException {
-		return op.exists(id, file);
+	public boolean existeCentro(String id) throws AccessException {
+		try {
+			return op.exists(id, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 
 	@Override
-	public EstadoCentro consultarCentro(String id) throws ClassNotFoundException, IOException {
-		return op.consultar(id, file);
+	public EstadoCentro consultarCentro(String id) throws AccessException {
+		try {
+			return op.consultar(id, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 }

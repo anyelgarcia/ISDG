@@ -29,34 +29,48 @@ public class DAOSesionImp implements DAOSesion {
 	}
 	
 	@Override
-	public void crearSesion(Sesion a) throws IOException {
-		op.guardar(a, file);
+	public void crearSesion(Sesion a) throws AccessException {
+		try {
+			op.guardar(a, file);
+		} catch (IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public void eliminarSesion(String id) throws IOException,
-			ClassNotFoundException {
-		op.borrar(id, file);
+	public void eliminarSesion(String id) throws AccessException {
+		try {
+			op.borrar(id, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public void modificarSesion(Sesion r) throws IOException,
-			ClassNotFoundException {
-		op.modificar(r, file);
+	public void modificarSesion(Sesion r) throws AccessException  {
+		try {
+			op.modificar(r, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public HashSet<Sesion> listarSesiones() throws IOException,
-			ClassNotFoundException {
-		// TODO Auto-generated method stub
-		return op.obtenerDatosSet(file);
+	public HashSet<Sesion> listarSesiones() throws AccessException  {
+		try {
+			return op.obtenerDatosSet(file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public boolean existeSesion(String id) throws IOException,
-			ClassNotFoundException {
-		// TODO Auto-generated method stub
-		return op.exists(id, file);
+	public boolean existeSesion(String id) throws AccessException {
+		try {
+			return op.exists(id, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 }

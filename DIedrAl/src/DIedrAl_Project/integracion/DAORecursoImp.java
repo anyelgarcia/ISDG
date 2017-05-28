@@ -32,28 +32,48 @@ public class DAORecursoImp implements DAORecurso{
 	
 
 	@Override
-	public void crearRecurso(Recurso r) throws IOException {
-		op.guardar(r, file);
+	public void crearRecurso(Recurso r) throws AccessException {
+		try {
+			op.guardar(r, file);
+		} catch (IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public void eliminarRecurso(String id) throws IOException, ClassNotFoundException {
-		op.borrar(id, file);
+	public void eliminarRecurso(String id) throws AccessException  {
+		try {
+			op.borrar(id, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public void modificarRecurso(Recurso r) throws IOException, ClassNotFoundException {
-		op.modificar(r, file);
+	public void modificarRecurso(Recurso r) throws AccessException {
+		try {
+			op.modificar(r, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public HashSet<Recurso> listarRecursos() throws IOException, ClassNotFoundException {
-		return op.obtenerDatosSet(file);
+	public HashSet<Recurso> listarRecursos() throws AccessException {
+		try {
+			return op.obtenerDatosSet(file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public boolean existeRecurso(String id) throws IOException, ClassNotFoundException {
-		return op.exists(id, file);
+	public boolean existeRecurso(String id) throws AccessException  {
+		try {
+			return op.exists(id, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 }
