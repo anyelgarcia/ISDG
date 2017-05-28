@@ -1,6 +1,6 @@
 package DIedrAl_Project.negocio.recursos;
 
-import java.util.Set;
+import java.util.*;
 
 public class ArraySesiones extends ArrayProgramables<Sesion> {
 	
@@ -8,7 +8,7 @@ public class ArraySesiones extends ArrayProgramables<Sesion> {
 		super();
 	}
 	
-	public ArraySesiones(Set<Sesion> ses) {
+	public ArraySesiones(HashSet<Sesion> ses) {
 		super(ses);
 	}
 	@Override

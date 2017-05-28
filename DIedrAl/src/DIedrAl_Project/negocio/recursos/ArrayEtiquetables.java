@@ -5,13 +5,13 @@ import java.util.*;
 
 public abstract class ArrayEtiquetables<T extends Etiquetable> implements Iterable<T> {
 
-	protected Set<T> etiquetables;
+	protected HashSet<T> etiquetables;
 
 	public ArrayEtiquetables() {
 		etiquetables = new HashSet<T>();
 	}
 
-	public ArrayEtiquetables(Set<T> etique) {
+	public ArrayEtiquetables(HashSet<T> etique) {
 		etiquetables = etique;
 	}
 	

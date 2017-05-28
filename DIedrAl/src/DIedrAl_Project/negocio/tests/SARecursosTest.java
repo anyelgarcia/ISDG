@@ -31,6 +31,7 @@ public class SARecursosTest {
 		for (int i = 0; i < 10; i++) {
 			Sesion sesionAux = new Sesion("Sesion " + (i + 1));
 			sesionAux.setDuracion(i + 1);
+			//sesionAux.addDestinatario("Maria");
 			try {
 				sarec.addSesion(sesionAux);
 			} catch (IOException e) {
@@ -78,6 +79,7 @@ public class SARecursosTest {
 		for (int i = 0; i < 10; i++) {
 			Actividad a = new Actividad("Actividad nº " + (i + 1));
 			try {
+				
 				try {
 					a.addEtiqueta("Sukerorku es el rey nº " + (i + 1));
 				} catch (AlreadyBoundException e) {
@@ -88,11 +90,6 @@ public class SARecursosTest {
 				a.addDestinatario("Pablo Gutiérrez no va a leer esto");
 				a.setVariaciones("Psycho pass " + (Math.abs(new Random().nextInt()) % 2 +1) + " tambien está bien");
 				a.setDesarrollo("Estoy viendo el capitulo " + (Math.abs(new Random().nextInt())) % 25);
-				try {
-					a.addActividad(null);
-				} catch (AlreadyBoundException e) {
-					log.severe(e.getMessage());
-				}
 				if ((i % 3) == 2) {
 					a.setDificultad(Dificultad.DIFICIL);
 				} else {
@@ -103,8 +100,7 @@ public class SARecursosTest {
 				e.printStackTrace();
 			}
 		}
-		testFiltrarActs();
-
+		log.info("Las actividades del banco son:\n"+sarec.getActividades().toString());
 	}
 
 	public void testFiltrarActs() {
@@ -136,6 +132,7 @@ public class SARecursosTest {
 	
 	@Test
 	public void clearBanco(){
+		/*
 		ArrayActividades a=sarec.getActividades();
 		for(Actividad act:a){
 			try {
@@ -143,7 +140,7 @@ public class SARecursosTest {
 			} catch (ClassNotFoundException | IOException e) {
 				e.printStackTrace();
 			}
-		}
+		}*/
 		ArrayRecursos r=sarec.getRecursos();
 		for(Recurso rec:r){
 			try {

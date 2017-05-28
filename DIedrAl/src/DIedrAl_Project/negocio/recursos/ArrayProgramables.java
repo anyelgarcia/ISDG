@@ -1,6 +1,6 @@
 package DIedrAl_Project.negocio.recursos;
 
-import java.util.Set;
+import java.util.*;
 
 public abstract class ArrayProgramables<T extends Programable> extends
 		ArrayEtiquetables<T>{
@@ -9,7 +9,7 @@ public abstract class ArrayProgramables<T extends Programable> extends
 		super();
 	}
 	
-	public ArrayProgramables(Set<T> progra) {
+	public ArrayProgramables(HashSet<T> progra) {
 		super(progra);
 	}
 	public ArrayProgramables<T> filtrarRango(Integer min, Integer max) {

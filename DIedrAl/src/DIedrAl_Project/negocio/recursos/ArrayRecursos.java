@@ -10,12 +10,12 @@ public class ArrayRecursos extends ArrayEtiquetables<Recurso> {
 		super();
 	}
 	
-	public ArrayRecursos(Set<Recurso> rec) {
+	public ArrayRecursos(HashSet<Recurso> rec) {
 		super(rec);
 	}
 	
-    public Set<Recurso> filtrarExtension(String ext) {
-    	Set<Recurso> aux = new HashSet<Recurso>();
+    public HashSet<Recurso> filtrarExtension(String ext) {
+    	HashSet<Recurso> aux = new HashSet<Recurso>();
     	for(Recurso rec : this.etiquetables){
     		if(rec.getExtension().equals(ext)){
     			aux.add(rec);
