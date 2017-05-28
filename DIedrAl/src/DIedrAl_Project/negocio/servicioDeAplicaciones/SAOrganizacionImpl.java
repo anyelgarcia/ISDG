@@ -89,8 +89,8 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 		DAORelacionable daoter = factoria.getDAORelacion(tRelacion.usuario);
 		daoter.eliminarRelacionesCentro(name);
 		
-		DAORelacionable daopc = factoria.getDAORelacion(tRelacion.paciente);
-		daopc.eliminarRelacionesCentro(name);
+		DAORelacionable daopaci = factoria.getDAORelacion(tRelacion.paciente);
+		daopaci.eliminarRelacionesCentro(name);
 		
 		DAOCentro daocen = factoria.getDAOCentro();
 

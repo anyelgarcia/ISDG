@@ -20,7 +20,7 @@ public class CentroMaps {
 
 	private HashMap<String, Usuario> users;
 	
-	private String name;
+	private String nomb;
 
 	public CentroMaps() {
 		factory = SimpleFileDAOFactory.getInstance();
@@ -30,7 +30,7 @@ public class CentroMaps {
 		DAOUsuario daous = factory.getDAOUsuario();
 		DAORelacionable daoter = factory.getDAORelacion(tRelacion.usuario);
 		users = new HashMap<>();
-		HashSet<Relacion> relaciones_u = daoter.listarRelaciones(name);
+		HashSet<Relacion> relaciones_u = daoter.listarRelaciones(nomb);
 		relaciones_u.forEach((relacion) -> {
 			try {
 				users.put(relacion.getId(), daous.consultarUsuario(relacion.getId()));
@@ -42,7 +42,7 @@ public class CentroMaps {
 		DAOPaciente daopac = factory.getDAOPaciente();
 		DAORelacionable daore = factory.getDAORelacion(tRelacion.paciente);
 		this.pacients = new HashMap<>();
-		HashSet<Relacion> relaciones_p = daore.listarRelaciones(name);
+		HashSet<Relacion> relaciones_p = daore.listarRelaciones(nomb);
 		relaciones_p.forEach((relacion) -> {
 			try {
 				pacients.put(relacion.getId(), daopac.consultarPaciente(relacion.getId()));
@@ -56,7 +56,7 @@ public class CentroMaps {
 			Map<Usuario, Set<Paciente>> usuarios) throws ClassNotFoundException, IOException {
 		
 		DAORelacionable daore = factory.getDAORelacion(tRelacion.paciente);
-		HashSet<Relacion> relaciones_p = daore.listarRelaciones(name);
+		HashSet<Relacion> relaciones_p = daore.listarRelaciones(nomb);
 		HashSet<Usuario> user = new HashSet<>();
 
 		relaciones_p.forEach((rel)->{
@@ -69,7 +69,7 @@ public class CentroMaps {
 		});
 		
 		DAORelacionable daorel = factory.getDAORelacion(tRelacion.usuario);
-		HashSet<Relacion> relaciones_t = daorel.listarRelaciones(name);
+		HashSet<Relacion> relaciones_t = daorel.listarRelaciones(nomb);
 		HashSet<Paciente> pacs = new HashSet<>();
 		
 		relaciones_t.forEach((rel)->{
@@ -97,7 +97,7 @@ public class CentroMaps {
 	 */
 	public Centro generarCentro(EstadoCentro c) throws ClassNotFoundException, IOException{
 		// Mapas donde mapear la información del centro.
-		name = c.getId();
+		nomb = c.getId();
 		Map<String, Persona> personas = new HashMap<String, Persona>();
 		Map<Paciente, Set<Usuario>> pacientes = new HashMap<Paciente, Set<Usuario>>();
 		Map<Usuario, Set<Paciente>> usuarios = new HashMap<Usuario, Set<Paciente>>();

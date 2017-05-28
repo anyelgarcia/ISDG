@@ -27,9 +27,9 @@ public class SAPacientesImpl implements SAPacientes {
 		factoria = SimpleFileDAOFactory.getInstance();
 		DAOCentro daocen = factoria.getDAOCentro();
 		
-		EstadoCentro centroTrans = daocen.consultarCentro(nombreCentro);
+		EstadoCentro centrotrans = daocen.consultarCentro(nombreCentro);
 		CentroMaps mapeador = new CentroMaps();
-		centro = mapeador.generarCentro(centroTrans);
+		centro = mapeador.generarCentro(centrotrans);
 	}
 
 	/**
