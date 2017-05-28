@@ -25,27 +25,27 @@ private static DAOCalendarioImp instancia = null;
 	}
 
 	@Override
-	public void crearCalendario(Calendario c) throws IOException {
+	public void crearCalendario(Calendario c) {
 		op.guardar(c, file);
 	}
 
 	@Override
-	public void eliminarCalendario(String id) throws IOException, ClassNotFoundException {
+	public void eliminarCalendario(String id) {
 		op.borrar(id, file);
 	}
 
 	@Override
-	public void modificarActividad(Calendario r) throws IOException, ClassNotFoundException {
+	public void modificarActividad(Calendario r) {
 		op.modificar(r, file);
 	}
 
 	@Override
-	public HashSet<Calendario> listarCalendario() throws IOException, ClassNotFoundException {
+	public HashSet<Calendario> listarCalendario() {
 		return op.obtenerDatosSet(file);
 	}
 
 	@Override
-	public boolean existeCalendario(String id) throws IOException, ClassNotFoundException {
+	public boolean existeCalendario(String id) {
 		return op.exists(id, file);
 	}
 

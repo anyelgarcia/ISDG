@@ -30,38 +30,62 @@ public class DAOUsuarioImp implements DAOUsuario {
 
 
 	@Override
-	public void crearUsuario(Usuario u) throws IOException {
-		op.guardar(u, file);
+	public void crearUsuario(Usuario u) throws AccessException  {
+		try {
+			op.guardar(u, file);
+		} catch (IOException e) {
+			throw new AccessException();
+		}
 	}
 
 
 	@Override
-	public void eliminarUsuario(String id) throws IOException, ClassNotFoundException {
-		op.borrar(id, file);
+	public void eliminarUsuario(String id) throws AccessException  {
+		try {
+			op.borrar(id, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 
 	@Override
-	public void modificarUsuario(Usuario u) throws IOException, ClassNotFoundException {
-		op.modificar(u, file);
+	public void modificarUsuario(Usuario u) throws AccessException {
+		try {
+			op.modificar(u, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 
 	@Override
-	public HashSet<Usuario> listarUsuarios() throws IOException, ClassNotFoundException {
-		return op.obtenerDatosSet(file);
+	public HashSet<Usuario> listarUsuarios() throws AccessException {
+		try {
+			return op.obtenerDatosSet(file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 
 	@Override
-	public boolean existeUsuario(String id) throws IOException, ClassNotFoundException {
-		return op.exists(id, file);
+	public boolean existeUsuario(String id) throws AccessException {
+		try {
+			return op.exists(id, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 
 	@Override
-	public Usuario consultarUsuario(String id) throws ClassNotFoundException, IOException {
-		return op.consultar(id, file);
+	public Usuario consultarUsuario(String id) throws AccessException  {
+		try {
+			return op.consultar(id, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 }

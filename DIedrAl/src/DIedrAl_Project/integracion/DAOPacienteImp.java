@@ -30,38 +30,62 @@ public class DAOPacienteImp implements DAOPaciente {
 
 
 	@Override
-	public void crearPaciente(Paciente p) throws IOException {
-		op.guardar(p, file);
+	public void crearPaciente(Paciente p) throws AccessException {
+		try {
+			op.guardar(p, file);
+		} catch (IOException e) {
+			throw new AccessException();
+		}
 	}
 
 
 	@Override
-	public void eliminarPaciente(String id) throws IOException, ClassNotFoundException {
-		op.borrar(id, file);
+	public void eliminarPaciente(String id) throws AccessException {
+		try {
+			op.borrar(id, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 
 	@Override
-	public void modificarPaciente(Paciente p) throws IOException, ClassNotFoundException {
-		op.modificar(p, file);
+	public void modificarPaciente(Paciente p) throws AccessException {
+		try {
+			op.modificar(p, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 
 	@Override
-	public HashSet<Paciente> listarPacientes() throws IOException, ClassNotFoundException {
-		return op.obtenerDatosSet(file);
+	public HashSet<Paciente> listarPacientes() throws AccessException {
+		try {
+			return op.obtenerDatosSet(file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 
 	@Override
-	public boolean existePaciente(String id) throws IOException, ClassNotFoundException {
-		return op.exists(id, file);
+	public boolean existePaciente(String id) throws AccessException  {
+		try {
+			return op.exists(id, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 
 	@Override
-	public Paciente consultarPaciente(String id) throws ClassNotFoundException, IOException {
-		return op.consultar(id, file);
+	public Paciente consultarPaciente(String id) throws AccessException  {
+		try {
+			return op.consultar(id, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 }

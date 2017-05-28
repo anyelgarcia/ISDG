@@ -29,32 +29,48 @@ public class DAOInformeImp implements DAOInforme {
 	}
 	
 	@Override
-	public void crearInforme(Informe a) throws IOException {
-		op.guardar(a, file);
+	public void crearInforme(Informe a) throws AccessException  {
+		try {
+			op.guardar(a, file);
+		} catch (IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public void eliminarInforme(String id) throws IOException,
-			ClassNotFoundException {
-		op.borrar(id, file);
+	public void eliminarInforme(String id) throws AccessException  {
+		try {
+			op.borrar(id, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public void modificarInforme(Informe f) throws IOException,
-			ClassNotFoundException {
-		op.modificar(f, file);
+	public void modificarInforme(Informe f) throws AccessException {
+		try {
+			op.modificar(f, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public HashSet<Informe> listarInformes() throws IOException,
-			ClassNotFoundException {
-		return op.obtenerDatosSet(file);
+	public HashSet<Informe> listarInformes() throws AccessException  {
+		try {
+			return op.obtenerDatosSet(file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public boolean existeInformes(String id) throws IOException,
-			ClassNotFoundException {
-		return op.exists(id, file);
+	public boolean existeInformes(String id) throws AccessException{
+		try {
+			return op.exists(id, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 }

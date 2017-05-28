@@ -11,13 +11,13 @@ import DIedrAl_Project.negocio.recursos.Actividad;
  */
 public interface DAOActividad {
 	
-	public void crearActividad(Actividad a)  throws IOException;
+	public void crearActividad(Actividad a)  throws AccessException;
 	
-	public void eliminarActividad(String id)  throws IOException, ClassNotFoundException;
+	public void eliminarActividad(String id)  throws AccessException;
 	
-	public void modificarActividad(Actividad r)  throws IOException, ClassNotFoundException;
+	public void modificarActividad(Actividad r)  throws AccessException;
 	
-	public HashSet<Actividad> listarActividades()  throws IOException, ClassNotFoundException;
+	public HashSet<Actividad> listarActividades()  throws AccessException;
 	
-	public boolean existeActividad(String id)  throws IOException, ClassNotFoundException;
+	public boolean existeActividad(String id)  throws AccessException;
 }

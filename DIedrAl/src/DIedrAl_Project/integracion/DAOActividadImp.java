@@ -30,32 +30,48 @@ public class DAOActividadImp implements DAOActividad {
 	
 	
 	@Override
-	public void crearActividad(Actividad a) throws IOException {
-		op.guardar(a, file);
+	public void crearActividad(Actividad a) throws AccessException {
+		try {
+			op.guardar(a, file);
+		} catch (IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public void eliminarActividad(String id) throws IOException,
-			ClassNotFoundException {
-		op.borrar(id, file);
+	public void eliminarActividad(String id) throws AccessException  {
+		try {
+			op.borrar(id, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public void modificarActividad(Actividad r) throws IOException,
-			ClassNotFoundException {
-		op.modificar(r, file);
+	public void modificarActividad(Actividad r) throws AccessException  {
+		try {
+			op.modificar(r, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public HashSet<Actividad> listarActividades() throws IOException,
-			ClassNotFoundException {
-		return op.obtenerDatosSet(file);
+	public HashSet<Actividad> listarActividades() throws AccessException {
+		try {
+			return op.obtenerDatosSet(file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 	@Override
-	public boolean existeActividad(String id) throws IOException,
-			ClassNotFoundException {
-		return op.exists(id, file);
+	public boolean existeActividad(String id) throws AccessException {
+		try {
+			return op.exists(id, file);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new AccessException();
+		}
 	}
 
 }
