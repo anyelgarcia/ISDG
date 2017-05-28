@@ -32,16 +32,16 @@ public class Usuario extends Persona {
 	public String getInfor(){
 		return infor;
 	}
-
+  
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
 	/**
-	 * Comprueba si el string introducido coincide con la contraseña del
+	 * Comprueba si el string introducido coincide con la contraseÃ±a del
 	 * ususuario.
 	 * 
-	 * @param pass contraseña a probar
+	 * @param pass contraseÃ±a a probar
 	 * @return true si coincide, false en caso contrario.
 	 */
 	public boolean inputPassword(String pass) {
