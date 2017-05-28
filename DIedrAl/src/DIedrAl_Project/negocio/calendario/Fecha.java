@@ -38,6 +38,14 @@ public class Fecha {
     public int getAnyo() {
         return this.anyo;
     }
+    
+    public int getMesIndex(){
+    	for(int i=0; i<12; i++){
+    		if(MESES[i].equals(mes))
+    			return i;
+    	}
+    	return -1;
+    }
 
     void setAnyo(int value) {
         this.anyo = value;

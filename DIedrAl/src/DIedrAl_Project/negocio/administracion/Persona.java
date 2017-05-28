@@ -8,7 +8,7 @@ import DIedrAl_Project.negocio.calendario.Fecha;
 import DIedrAl_Project.negocio.pacientes.Direccion;
 
 @SuppressWarnings("serial")
-public class Persona implements ObjetoAlmacenable, Serializable {
+public abstract class Persona implements ObjetoAlmacenable, Serializable, Cloneable {
 
 	protected String nombre;
 
@@ -18,7 +18,7 @@ public class Persona implements ObjetoAlmacenable, Serializable {
 
 	protected Fecha fechaNacimiento;
 
-	protected String estadoCivil;
+	protected EstadoCivil estadoCivil;
 
 	protected Direccion direccion;
 
@@ -28,17 +28,29 @@ public class Persona implements ObjetoAlmacenable, Serializable {
 
 	protected String perfil;
 
+	protected String centro;
 	/**
 	 * El NIF es su dni, el id es el campo que le permite al objeto ser
 	 * guardado.
 	 */
 	protected String nif;
 
+	protected String id;
+
+	public String getCentro() {
+		return centro;
+	}
+
+	public void setCentro(String nuevo) {
+		centro = nuevo;
+	};
+
 	public Persona(String nombre, String apellido1, String apellido2, String nif) {
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
 		this.apellido2 = apellido2;
 		this.nif = nif;
+		id = UUID.randomUUID().toString();
 	}
 
 	public String getName() {
@@ -81,12 +93,12 @@ public class Persona implements ObjetoAlmacenable, Serializable {
 		fechaNacimiento = birthday;
 	}
 
-	public String getEstadoCivil() {
+	public EstadoCivil getEstadoCivil() {
 		return estadoCivil;
 	}
 
 	public void setEstadoCivil(String estadoCivil) {
-		this.estadoCivil = estadoCivil;
+		this.estadoCivil = EstadoCivil.valueOf(estadoCivil);
 	}
 
 	public Direccion getAddress() {
@@ -109,7 +121,7 @@ public class Persona implements ObjetoAlmacenable, Serializable {
 		return tfo;
 	}
 
-	public void setTfo(Integer tfo) {
+	public void setTfo(String tfo) {
 		this.tfo = tfo;
 	}
 
@@ -124,6 +136,7 @@ public class Persona implements ObjetoAlmacenable, Serializable {
 
 	public void setNif(String nif) {
 		this.nif = nif;
+		this.id = nif;
 	}
 
 	public int compararAlfab(Persona otra) {
@@ -168,18 +181,22 @@ public class Persona implements ObjetoAlmacenable, Serializable {
 	 * @param otra
 	 *            persona cuyos campos se desean copiar
 	 */
-	public void igualarCampos(Persona otra) {
 
-		if (otra != null) {
-			this.nombre = otra.nombre;
-			this.apellido1 = otra.apellido1;
-			this.apellido2 = otra.apellido2;
-			this.fechaNacimiento = otra.fechaNacimiento;
-			this.estadoCivil = otra.estadoCivil;
-			this.direccion = otra.direccion;
-			this.email = otra.email;
-			this.tfo = otra.tfo;
-			this.perfil = otra.perfil;
-		}
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		Persona copia = (Persona) super.clone();
+		copia.nombre = this.nombre;
+		copia.apellido1 = this.apellido1;
+		copia.apellido2 = this.apellido2;
+		copia.fechaNacimiento = this.fechaNacimiento;
+		copia.estadoCivil = this.estadoCivil;
+		copia.direccion = this.direccion;
+		copia.email = this.email;
+		copia.tfo = this.tfo;
+		copia.perfil = this.perfil;
+		copia.nif = this.nif;
+		copia.centro = this.centro;
+		return copia;
 	}
+
 }

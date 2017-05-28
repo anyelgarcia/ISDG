@@ -16,9 +16,9 @@ public interface SAPacientes {
 
 	public void eraseUsuario(Usuario usu) throws NotBoundException, ClassNotFoundException, IOException;
 
-	public void ligarPaciente(Paciente pac, Usuario usu) throws NotBoundException, AlreadyBoundException;
+	public void ligarPaciente(Paciente pac, Usuario usu) throws NotBoundException, AlreadyBoundException, IOException, ClassNotFoundException;
 
-	public void desligarPaciente(Paciente pac, Usuario usu) throws NotBoundException, AlreadyBoundException;
+	public void desligarPaciente(Paciente pac, Usuario usu) throws NotBoundException, AlreadyBoundException, ClassNotFoundException, IOException;
 	
 	public Set<Paciente> getPacientesAsociados(Usuario usu) throws NotBoundException;
 	

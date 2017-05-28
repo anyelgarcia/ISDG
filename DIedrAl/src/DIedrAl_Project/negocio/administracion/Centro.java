@@ -10,7 +10,7 @@ import DIedrAl_Project.negocio.pacientes.Paciente;
 
 public class Centro {
 
-	private String nombre;
+	private EstadoCentro estado;
 	// TODO: implementarlo primero
 	private Calendario calendario;
 
@@ -32,22 +32,23 @@ public class Centro {
 
 	// TODO: implementarlo primero
 	private Organizacion organizacion;
-	
 
-	protected Centro(String name) {
+	/*protected Centro(String name) {
 		nombre = name;
 		pacientes = new HashMap<Paciente, Set<Usuario>>();
 		usuarios = new HashMap<Usuario, Set<Paciente>>();
 		personasCentro = new HashMap<String, Persona>();
-	
-  }
-	protected Centro(String name, Map<Paciente, Set<Usuario>> pacientes, Map<Usuario, Set<Paciente>> usuarios) {
-		nombre = name;
+
+	}*/
+
+	protected Centro(EstadoCentro c, Map<Paciente, Set<Usuario>> pacientes,
+			Map<Usuario, Set<Paciente>> usuarios, Map<String, Persona> personas) {
+		this.estado = c;
 		this.pacientes = pacientes;
 		this.usuarios = usuarios;
-		this.personasCentro = new HashMap<String, Persona>();
-		
-		initCentro();
+		this.personasCentro = personas;
+
+		//initCentro();
 
 	}
 
@@ -135,11 +136,7 @@ public class Centro {
 	}
 
 	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		return estado.getId();
 	}
 
 	public Organizacion getOrganizacion() {
@@ -270,14 +267,14 @@ public class Centro {
 		return aux.toArray(new Persona[aux.size()])[0];
 	}
 
-	private void initCentro() {
+	/*private void initCentro() {
 		for (Persona key : pacientes.keySet()) {
 			personasCentro.put(key.getNif(), key);
 		}
 		for (Persona key : usuarios.keySet()) {
 			personasCentro.put(key.getNif(), key);
 		}
-	}
+	}*/
 
 	public Set<Usuario> getUsuariosAsociados(Paciente pac)
 			throws NotBoundException {
@@ -287,7 +284,7 @@ public class Centro {
 			return pacientes.get(pac);
 	}
 
-	public CentroAlmacenable comoAlmacenable(){
-		return 
+	public EstadoCentro comoAlmacenable() {
+		return new EstadoCentro(this.getNombre());
 	}
 }

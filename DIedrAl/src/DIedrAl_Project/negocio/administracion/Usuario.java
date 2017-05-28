@@ -10,6 +10,7 @@ public class Usuario extends Persona {
 
 	public Usuario(String nombre, String apellido1, String apellido2, String id) {
 		super(nombre, apellido1, apellido2, id);
+		password = id;
 	}
 
 	public boolean isAdmin() {
@@ -28,10 +29,10 @@ public class Usuario extends Persona {
 		this.infor = infor;
 	}
 	
-	public String getInfor() {
+	public String getInfor(){
 		return infor;
 	}
-	
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -46,4 +47,5 @@ public class Usuario extends Persona {
 	public boolean inputPassword(String pass) {
 		return pass.equals(password);
 	}
+	
 }

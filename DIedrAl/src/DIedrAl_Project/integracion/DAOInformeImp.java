@@ -19,8 +19,8 @@ public class DAOInformeImp implements DAOInforme {
 	private final String file = "informe.txt";
 	
 	public static DAOInformeImp getInstance(){
-		if(instancia == null) return new DAOInformeImp();
-		else return instancia;
+		if(instancia == null) instancia = new DAOInformeImp();
+		return instancia;
 	}
 
 	

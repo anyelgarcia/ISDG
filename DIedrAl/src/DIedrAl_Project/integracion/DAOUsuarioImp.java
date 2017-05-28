@@ -19,8 +19,8 @@ public class DAOUsuarioImp implements DAOUsuario {
 	private final String file = "usuarios.txt";
 	
 	public static DAOUsuarioImp getInstance(){
-		if(instancia == null) return new DAOUsuarioImp();
-		else return instancia;
+		if(instancia == null) instancia = new DAOUsuarioImp();
+		return instancia;
 	}
 
 	
@@ -57,4 +57,11 @@ public class DAOUsuarioImp implements DAOUsuario {
 	public boolean existeUsuario(String id) throws IOException, ClassNotFoundException {
 		return op.exists(id, file);
 	}
+
+
+	@Override
+	public Usuario consultarUsuario(String id) throws ClassNotFoundException, IOException {
+		return op.consultar(id, file);
+	}
+
 }

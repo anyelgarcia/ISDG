@@ -19,8 +19,8 @@ public class DAOPacienteImp implements DAOPaciente {
 	private final String file = "pacientes.txt";
 	
 	public static DAOPacienteImp getInstance(){
-		if(instancia == null) return new DAOPacienteImp();
-		else return instancia;
+		if(instancia == null) instancia = new DAOPacienteImp();
+		return instancia;
 	}
 
 	
@@ -56,6 +56,12 @@ public class DAOPacienteImp implements DAOPaciente {
 	@Override
 	public boolean existePaciente(String id) throws IOException, ClassNotFoundException {
 		return op.exists(id, file);
+	}
+
+
+	@Override
+	public Paciente consultarPaciente(String id) throws ClassNotFoundException, IOException {
+		return op.consultar(id, file);
 	}
 
 }

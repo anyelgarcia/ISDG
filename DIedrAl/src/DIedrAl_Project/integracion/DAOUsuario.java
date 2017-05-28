@@ -20,4 +20,6 @@ public interface DAOUsuario {
 	public HashSet<Usuario> listarUsuarios()  throws IOException, ClassNotFoundException;
 	
 	public boolean existeUsuario(String id)  throws IOException, ClassNotFoundException;
+	
+	public Usuario consultarUsuario(String id) throws ClassNotFoundException, IOException;
 }

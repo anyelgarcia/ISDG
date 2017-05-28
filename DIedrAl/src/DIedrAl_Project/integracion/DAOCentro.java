@@ -3,17 +3,19 @@ package DIedrAl_Project.integracion;
 import java.io.IOException;
 import java.util.HashSet;
 
-import DIedrAl_Project.negocio.administracion.Centro;
+import DIedrAl_Project.negocio.administracion.EstadoCentro;
 
-interface DAOCentro {
+public interface DAOCentro {
 	
-	public void crearCentro(Centro c)  throws IOException;
+	public void guardarCentro(EstadoCentro c)  throws IOException;
 	
 	public void eliminarCentro(String id)  throws IOException, ClassNotFoundException;
 	
-	public void modificarCentro(Centro c)  throws IOException, ClassNotFoundException;
+	public void modificarCentro(EstadoCentro c)  throws IOException, ClassNotFoundException;
 	
-	public HashSet<Centro> listarCentros()  throws IOException, ClassNotFoundException;
+	public HashSet<EstadoCentro> listarCentros()  throws IOException, ClassNotFoundException;
 	
 	public boolean existeCentro(String id)  throws IOException, ClassNotFoundException;
+	
+	public EstadoCentro consultarCentro(String id) throws ClassNotFoundException, IOException;
 }

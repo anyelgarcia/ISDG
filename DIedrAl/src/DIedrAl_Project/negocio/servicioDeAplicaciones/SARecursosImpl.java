@@ -1,48 +1,129 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
+import java.io.*;
+import java.nio.file.*;
 import java.util.*;
 
+import DIedrAl_Project.integracion.*;
 import DIedrAl_Project.negocio.recursos.*;
 
-public class SARecursosImpl implements SARecursos{
-	private Banco bank = Banco.getInstancia();
-	
-	public SARecursosImpl(){
+public class SARecursosImpl implements SARecursos {
+
+	private Banco bank;
+
+	private DAORecurso daorec;
+
+	private DAOActividad daoact;
+
+	private DAOSesion daoses;
+
+	private static SARecursosImpl instancia = null;
+
+	public static SARecursosImpl getInstancia() {
+
+		if (instancia == null) {
+			instancia = new SARecursosImpl();
+		}
+
+		return instancia;
+	}
+
+	private SARecursosImpl() {
+		SimpleFileDAOFactory factoria = SimpleFileDAOFactory.getInstance();
+		daorec = factoria.getDAORecurso();
+		daoact = factoria.getDAOActividad();
+		daoses = factoria.getDAOSesion();
+		bank = Banco.getInstancia();
+		cargarBanco();
 	}
 
 	@Override
-	public void addRecurso(Recurso rec) {
+	public void addRecurso(Recurso rec) throws IOException {
 		bank.addRecurso(rec);
+		daorec.crearRecurso(rec);
+
+		File resourcesDir = new File("src/recursos/" + rec.getFileName());
+		Files.copy(rec.getPath(), resourcesDir.toPath(), StandardCopyOption.REPLACE_EXISTING);
 	}
 
 	@Override
-	public void removeRecurso(Recurso rec) {
+	public void removeRecurso(Recurso rec) throws ClassNotFoundException, IOException {
+
+		// Primera capa de borrado: se elimina el recurso de la lista de
+		// recursos del banco
 		bank.removeRecurso(rec);
-		
+		daorec.eliminarRecurso(rec.getId());
+
+		// Segunda capa de borrado: se elimina de todas los programables que la
+		// tuvieran como asociado
+		HashSet<Programable> programables = new HashSet<Programable>();
+		programables.addAll(daoses.listarSesiones());
+		programables.addAll(daoact.listarActividades());
+		programables.forEach((p) -> {
+			if (p.getAsociados().contains(rec)) {
+				p.getAsociados().remove(rec);
+				try {
+					if (p instanceof Sesion) {
+						daoses.modificarSesion((Sesion) p);
+					} else {
+						daoact.modificarActividad((Actividad) p);
+					}
+				} catch (ClassNotFoundException | IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
+		rec.getFile().delete();
+
 	}
 
 	@Override
-	public void addActividad(Actividad act) {
+	public void addActividad(Actividad act) throws IOException {
 		bank.addActividad(act);
-		
+		daoact.crearActividad(act);
 	}
 
 	@Override
-	public void removeActividad(Actividad act) {
+	public void removeActividad(Actividad act) throws ClassNotFoundException, IOException {
+
+		// Primera capa de borrado: se elimina el recurso de la lista de
+		// recursos del banco
 		bank.removeActividad(act);
-		
+		daoact.eliminarActividad(act.getId());
+
+		// Segunda capa de borrado: se elimina de todas los programables que la
+		// tuvieran como asociado
+		HashSet<Programable> programables = new HashSet<Programable>();
+		programables.addAll(daoses.listarSesiones());
+		programables.addAll(daoact.listarActividades());
+		programables.forEach((p) -> {
+			if (p.getAsociados().contains(act)) {
+				p.getAsociados().remove(act);
+				try {
+					if (p instanceof Sesion) {
+						daoses.modificarSesion((Sesion) p);
+					} else {
+						daoact.modificarActividad((Actividad) p);
+					}
+				} catch (ClassNotFoundException | IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
 	}
 
 	@Override
-	public void addSesion(Sesion ses) {
+	public void addSesion(Sesion ses) throws IOException {
 		bank.addSesion(ses);
-		
+		daoses.crearSesion(ses);
 	}
 
 	@Override
-	public void removeSesion(Sesion ses) {
+	public void removeSesion(Sesion ses) throws ClassNotFoundException, IOException {
 		bank.removeSesion(ses);
-		
+		daoses.eliminarSesion(ses.getId());
 	}
 
 	@Override
@@ -107,7 +188,7 @@ public class SARecursosImpl implements SARecursos{
 
 	@Override
 	public ArraySesiones filtrarSesionesHasta(Integer dur) {
-		return (ArraySesiones) bank.getSesiones().filtrarHasta(dur); 
+		return (ArraySesiones) bank.getSesiones().filtrarHasta(dur);
 	}
 
 	@Override
@@ -145,5 +226,32 @@ public class SARecursosImpl implements SARecursos{
 		return bank.getRecursos();
 	}
 
+	private void cargarBanco() {
+		try {
+			HashSet<Actividad> set = daoact.listarActividades();
+			for (Actividad a : set) {
+				bank.addActividad(a);
+			}
+		} catch (ClassNotFoundException | IOException e) {
+			// e.printStackTrace();
+		}
+		try {
+			HashSet<Sesion> ses = daoses.listarSesiones();
+			for (Sesion s : ses) {
+				bank.addSesion(s);
+			}
+		} catch (ClassNotFoundException | IOException e) {
+			// e.printStackTrace();
+		}
+
+		try {
+			HashSet<Recurso> rec = daorec.listarRecursos();
+			for (Recurso r : rec) {
+				bank.addRecurso(r);
+			}
+		} catch (ClassNotFoundException | IOException e) {
+			// e.printStackTrace();
+		}
+	}
 
 }

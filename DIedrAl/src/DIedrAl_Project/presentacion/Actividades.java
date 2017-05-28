@@ -196,7 +196,7 @@ public class Actividades extends ColorPanel{
 
 	        jLabel2.setText("Dificultad:");
 
-	        jLabel3.setText("DuraciÃ³n:");
+	        jLabel3.setText("Duración:");
 
 	        jButton1.setText("Guardar");
 	        jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -209,7 +209,7 @@ public class Actividades extends ColorPanel{
 
 	        jLabel4.setText("minutos");
 
-	        jLabel5.setText("DescripciÃ³n: ");
+	        jLabel5.setText("Descripción: ");
 
 	        jTextArea1.setColumns(20);
 	        jTextArea1.setRows(5);
@@ -424,7 +424,7 @@ public class Actividades extends ColorPanel{
 			
 			String duracion = String.valueOf(jTextField2.getText());
 
-			//Esta excepciÃ³n hay que capturarla
+			//Esta excepción hay que capturarla
 			if(duracion.length()>0 ){
 				info.setDuracion(Integer.valueOf(duracion));
 			}
@@ -533,7 +533,7 @@ public class Actividades extends ColorPanel{
 	        jTextArea1.setRows(5);
 	        jScrollPane1.setViewportView(jTextArea1);
 
-	        jLabel3.setText("DuraciÃ³n:");
+	        jLabel3.setText("Duración:");
 
 	        jLabel6.setText("Desde");
 
@@ -565,11 +565,6 @@ public class Actividades extends ColorPanel{
 	        });
 
 	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-	            /**
-				 * 
-				 */
-				private static final long serialVersionUID = 1L;
-				
 				String[] strings = {  };
 	            public int getSize() { return strings.length; }
 	            public String getElementAt(int i) { return strings[i]; }
@@ -678,7 +673,7 @@ public class Actividades extends ColorPanel{
 	        );
 	        getContentPane().setBackground(getColor());
 	        pack();
-	    }// </editor-fold>                        
+	    }                     
 
 	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 	    	String nombre = jTextField1.getText();
@@ -714,6 +709,7 @@ public class Actividades extends ColorPanel{
 	    	switch(modo){
 			case ELIMINAR:
 				Confirm c = new Confirm();
+				c.setMensaje("La actividad se eliminará del sistema.");
 		    	c.setVisible(true);
 		    	c.addListener(this);
 		    	break;

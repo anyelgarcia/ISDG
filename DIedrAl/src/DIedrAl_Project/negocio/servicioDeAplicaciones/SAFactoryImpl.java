@@ -1,24 +1,22 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
-import DIedrAl_Project.negocio.administracion.Centro;
-import DIedrAl_Project.negocio.administracion.Organizacion;
-import DIedrAl_Project.negocio.recursos.Banco;
+import java.io.IOException;
 
 public class SAFactoryImpl extends SAFactory{
 
 	@Override
 	public SARecursos newSARecursos() {
-		return new SARecursosImpl();
+		return SARecursosImpl.getInstancia();
 	}
 
 	@Override
-	public SAPacientes newSAPacientes(Centro centro) {
+	public SAPacientes newSAPacientes(String centro) throws ClassNotFoundException, IOException {
 		return new SAPacientesImpl(centro);
 	}
 
 	@Override
-	public SAOrganizacion newSAOrganizacion(Organizacion org) {
-		return new SAOrganizacionImpl(org);
+	public SAOrganizacion newSAOrganizacion() {
+		return SAOrganizacionImpl.getInstancia();
 	}
 	
 

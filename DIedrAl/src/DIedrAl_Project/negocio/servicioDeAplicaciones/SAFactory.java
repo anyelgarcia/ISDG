@@ -1,8 +1,6 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
-import DIedrAl_Project.negocio.administracion.Centro;
-import DIedrAl_Project.negocio.administracion.Organizacion;
-import DIedrAl_Project.negocio.recursos.Banco;
+import java.io.IOException;
 
 public abstract class SAFactory {
 
@@ -16,7 +14,8 @@ public abstract class SAFactory {
 	
 	public abstract SARecursos newSARecursos();
 	
-	public abstract SAPacientes newSAPacientes(Centro centro);
+	public abstract SAPacientes newSAPacientes(String centro) throws ClassNotFoundException, IOException;
 	
-	public abstract SAOrganizacion newSAOrganizacion(Organizacion org);
+	public abstract SAOrganizacion newSAOrganizacion();
+
 }
