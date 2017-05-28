@@ -1,11 +1,31 @@
 package DIedrAl_Project.negocio.pacientes;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+import DIedrAl_Project.negocio.ObjetoAlmacenable;
 import DIedrAl_Project.negocio.administracion.Usuario;
 
-public class Nota {
+public class Nota implements ObjetoAlmacenable, Serializable {
+
+	private static final long serialVersionUID = 5858585383509332063L;
 	private String texto;
+	private Usuario autor;
+	private LocalDateTime ultimaActualizacion;
+	private String id;
+
+	public Nota(Usuario autor, String texto) {
+		this.autor = autor;
+		this.texto = texto;
+		id = UUID.randomUUID().toString();
+	}
+
+	public Nota(Usuario autor) {
+		this.autor = autor;
+		this.texto = "";
+		id = UUID.randomUUID().toString();
+	}
 
 	public Usuario getAutor() {
 		return autor;
@@ -15,25 +35,12 @@ public class Nota {
 		this.autor = autor;
 	}
 
-	public GregorianCalendar getUltimaActualizacion() {
+	public LocalDateTime getUltimaActualizacion() {
 		return ultimaActualizacion;
 	}
 
-	public void setUltimaActualizacion(GregorianCalendar ultimaActualizacion) {
+	public void setUltimaActualizacion(LocalDateTime ultimaActualizacion) {
 		this.ultimaActualizacion = ultimaActualizacion;
-	}
-
-	private Usuario autor;
-	private GregorianCalendar ultimaActualizacion;
-
-	public Nota(Usuario autor, String texto) {
-		this.autor = autor;
-		this.texto = texto;
-	}
-
-	public Nota(Usuario autor) {
-		this.autor = autor;
-		this.texto = "";
 	}
 
 	void set(Usuario value) {
@@ -46,7 +53,8 @@ public class Nota {
 
 	public void setTexto(String texto) {
 		this.texto = texto;
-		ultimaActualizacion.setTimeInMillis(new Date().getTime());
+		ultimaActualizacion = LocalDateTime.now();
+
 	}
 
 	public void append(String s) {
@@ -59,6 +67,11 @@ public class Nota {
 
 	public void append(String s, String separatorBefore, String separatorAfter) {
 		texto = texto + separatorBefore + s + separatorAfter;
+	}
+
+	@Override
+	public String getId() {
+		return id;
 	}
 
 }

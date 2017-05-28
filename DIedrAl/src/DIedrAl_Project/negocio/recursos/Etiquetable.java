@@ -1,5 +1,6 @@
 package DIedrAl_Project.negocio.recursos;
 
+import java.io.Serializable;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.util.Set;
@@ -8,7 +9,7 @@ import java.util.UUID;
 
 import DIedrAl_Project.negocio.*;
 
-public abstract class Etiquetable implements ObjetoAlmacenable {
+public abstract class Etiquetable implements ObjetoAlmacenable, Serializable {
 
 	/**
 	 * Etiquetas asociadas al objeto

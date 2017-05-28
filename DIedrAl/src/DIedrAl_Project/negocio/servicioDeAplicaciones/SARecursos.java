@@ -6,6 +6,8 @@ import java.util.Set;
 import DIedrAl_Project.negocio.recursos.*;
 
 public interface SARecursos {
+	
+	
 	public void addRecurso(Recurso rec) throws IOException;
 
 	public void removeRecurso(Recurso rec) throws ClassNotFoundException, IOException;

@@ -1,8 +1,7 @@
 package DIedrAl_Project.negocio.calendario;
 
-import java.util.GregorianCalendar;
-import java.util.Set;
-import java.util.TreeSet;
+import java.time.LocalDate;
+import java.util.*;
 
 import DIedrAl_Project.negocio.administracion.*;
 import DIedrAl_Project.negocio.pacientes.*;
@@ -18,14 +17,13 @@ public class SesionProgramada {
 
 	private Sesion modeloSesion;
 
-	private GregorianCalendar fecha;
+	private LocalDate fecha;
 
-
-	public SesionProgramada(GregorianCalendar fecha) {
+	public SesionProgramada(LocalDate fecha) {
 		this.fecha = fecha;
 		terapeutas = new TreeSet<Usuario>();
 		pacientes = new TreeSet<Paciente>();
-		notas = new TreeSet<Nota>();
+		notas = new HashSet<Nota>();
 	}
 
 	public void addNota(Nota nota) {
@@ -59,17 +57,16 @@ public class SesionProgramada {
 		return pacientes;
 	}
 
-	// USO DEL PATRÓN FACHADA
 	public int getDay(){
-		return fecha.get(GregorianCalendar.DATE);
+		return fecha.getDayOfMonth();
 	}
 	
 	public int getMonth() {
-		return fecha.get(GregorianCalendar.MONTH);
+		return fecha.getMonthValue();
 	}
 
 	public int getYear() {
-		return fecha.get(GregorianCalendar.YEAR);
+		return fecha.getYear();
 	}
 
 	public Sesion getModeloSesion() {
@@ -79,13 +76,20 @@ public class SesionProgramada {
 	public void setModeloSesion(Sesion modeloSesion) {
 		this.modeloSesion = modeloSesion;
 	}
-	
-	public GregorianCalendar getFecha() {
+
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(GregorianCalendar fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
+
+	public Set<Nota> getNotas() {
+		return notas;
+	}
+
+	
+	
 
 }
