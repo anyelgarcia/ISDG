@@ -1,18 +1,16 @@
 package DIedrAl_Project.negocio.calendario;
 
-import java.time.LocalTime;
-
 public class MesProxy implements MesCalendario {
 
 	private MesReal mes;
-	
+
 	private CalenCharger charger;
-	
+
 	private Calendario cal;
 
 	public MesProxy(Calendario calen, CalenCharger ch) {
 		charger = ch;
-		cal=calen;
+		cal = calen;
 		mes = null;
 	}
 

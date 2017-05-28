@@ -2,6 +2,7 @@ package DIedrAl_Project.negocio.tests;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.logging.Logger;
 
@@ -19,20 +20,23 @@ public class SARecursosTest {
 	private static final Logger log = Logger
 			.getLogger(SARecursosTest.class.getName());
 	
+	private SAFactory factoriaSA = SAFactory.getInstancia();
+	private SARecursos servicioAPRecursos = factoriaSA.newSARecursos();
+	
 	@Test
 	public void testSARecursosIterator() {
-
-		SAFactory factoriaSA = SAFactory.getInstancia();
-		SARecursos servicioAPRecursos = factoriaSA.newSARecursos(Banco
-				.getInstancia());
-
-		Sesion sesionAux;
+		
+		Banco.getInstancia().setSesiones(new ArraySesiones());
 
 		// Añadir al banco diez sesiones de prueba
 		for (int i = 0; i < 10; i++) {
-			sesionAux = new Sesion("Sesion " + (i + 1));
+			Sesion sesionAux = new Sesion("Sesion " + (i + 1));
 			sesionAux.setDuracion(i + 1);
-			servicioAPRecursos.addSesion(sesionAux);
+			try {
+				servicioAPRecursos.addSesion(sesionAux);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 		// Mover el filtro abarcando cada vez un minuto más.
@@ -42,10 +46,7 @@ public class SARecursosTest {
 					.filtrarSesionesPorRango(0, x);
 
 			// Comprobar que se han tomado las diez
-			assertTrue("Filtra número correcto", resultado.size() == x);
-
-			// Creación de un iterador para recorrer el resultado.
-			Iterator<Sesion> it = resultado.iterator();
+			assertTrue("Filtra número correcto", resultado.size() == x);	
 
 			// Texto del resultado
 			StringBuilder sb = new StringBuilder("");
@@ -56,7 +57,10 @@ public class SARecursosTest {
 			log.info(sb.toString());
 		}
 	}
-	
+	@Test
+	public void testSARecursosCarga(){
+		
+	}
 	/**
 	 * Pruebas para:
 	 * getActividades, recursos, etc,

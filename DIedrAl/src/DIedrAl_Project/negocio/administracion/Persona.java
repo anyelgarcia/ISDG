@@ -8,7 +8,7 @@ import DIedrAl_Project.negocio.calendario.Fecha;
 import DIedrAl_Project.negocio.pacientes.Direccion;
 
 @SuppressWarnings("serial")
-public class Persona implements ObjetoAlmacenable, Serializable {
+public abstract class Persona implements ObjetoAlmacenable, Serializable {
 
 	protected String nombre;
 

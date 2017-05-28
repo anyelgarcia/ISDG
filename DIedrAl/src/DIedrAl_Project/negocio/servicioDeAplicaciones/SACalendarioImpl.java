@@ -1,7 +1,6 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 import DIedrAl_Project.negocio.calendario.*;
 
@@ -11,7 +10,9 @@ public class SACalendarioImpl implements SACalendario {
 
 	@Override
 	public void swapMonth(LocalDate t) {
-		mes = new MesProxy(new Calendario() , (c)->{
+		
+		Calendario calen = null;
+		mes = new MesProxy(calen , (c)->{
 			/*
 			 * TODO Implementar la logica usando el DAO, que dado un mes
 			 * te devuelva las fechas necesarias.

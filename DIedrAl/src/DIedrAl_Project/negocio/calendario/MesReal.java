@@ -1,34 +1,23 @@
 package DIedrAl_Project.negocio.calendario;
 
-import java.time.LocalTime;
-
 public class MesReal implements MesCalendario {
 	
 	private Calendario calen;
-	
-	private CalenCharger charger;
 
-	public MesReal(Calendario c, CalenCharger calench) {
+	public MesReal(Calendario c, CalenCharger charger) {
 		calen = c;
-		charger = calench;
+		charger.charge(calen);
 	}
 	@Override
 	public void removeSesion(SesionProgramada sesion) {
-		charge();
 		calen.eliminarSesion(sesion);
 	}
 
 	@Override
 	public void addSesion(SesionProgramada sesion) {
-		charge();
 		calen.addSesion(sesion);
 
 	}
 	
-	private void charge(){
-		if(calen==null){
-			charger.charge(calen);
-		}
-	}
 
 }
