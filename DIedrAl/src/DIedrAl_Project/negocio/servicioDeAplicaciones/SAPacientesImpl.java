@@ -32,11 +32,11 @@ public class SAPacientesImpl implements SAPacientes {
 	}
 
 	/**
-	 * AÒade el paciente especificado al centro y actualiza la base de datos
-	 * para incluir la nueva informaciÛn
+	 * A√±ade el paciente especificado al centro y actualiza la base de datos
+	 * para incluir la nueva informaci√≥n
 	 * 
 	 * @param pac
-	 *            paciente a aÒadir al centro
+	 *            paciente a a√±adir al centro
 	 * @throws AlreadyBoundException
 	 *             , si el paciente ya estaba en el centro
 	 */
@@ -44,12 +44,12 @@ public class SAPacientesImpl implements SAPacientes {
 	public void addPaciente(Paciente pac) throws AlreadyBoundException, IOException {
 		
 		/*
-		 * Se intenta aÒadir el paciente. Si se puede, se crea una relacion con agente
+		 * Se intenta a√±adir el paciente. Si se puede, se crea una relacion con agente
 		 * el nuevo paciente y con centro asociado el centro actual.
 		 * Ademas, se guarda en la base de datos.
 		 */
 		centro.addPaciente(pac);
-		daorelPac.crearRelacion(new Relacion(pac.getId(), centro.getNombre()));
+    daorelPac.crearRelacion(new Relacion(pac.getId(), centro.getNombre()));
 		daopac.crearPaciente(pac);
 	}
 
@@ -104,23 +104,23 @@ public class SAPacientesImpl implements SAPacientes {
 		if (daopac.existePaciente(pac.getId())) {
 			daopac.eliminarPaciente(pac.getId());
 		} else
-			//No deberÌa entrar por aquÌ en estos momentos de la pelÌcula.
+			//No deber√≠a entrar por aqu√≠ en estos momentos de la pel√≠cula.
 			throw new NotBoundException(pac + "no se encuentra registrado en la base de datos");
 	}
 
 	/**
-	 * AÒade el usuario especificado al centro y actualiza la base de datos para
-	 * incluir la nueva informaciÛn
+	 * A√±ade el usuario especificado al centro y actualiza la base de datos para
+	 * incluir la nueva informaci√≥n
 	 * 
 	 * @param usu
-	 *            usuario a aÒadir al centro
+	 *            usuario a a√±adir al centro
 	 * @throws AlreadyBoundException
 	 *             , si el usuario ya estaba en el centro
 	 */
 	@Override
 	public void addUsuario(Usuario usu) throws AlreadyBoundException, ClassNotFoundException, IOException {
 		/*
-		 * Se intenta aÒadir el usuario. Si se puede, se crea una relacion con agente
+		 * Se intenta a√±adir el usuario. Si se puede, se crea una relacion con agente
 		 * el nuevo usuario y con centro asociado el centro actual.
 		 * Ademas, se guarda en la base de datos.
 		 */
@@ -167,7 +167,7 @@ public class SAPacientesImpl implements SAPacientes {
 			// Si el usuario esta en alguna relacion con otro usuario, lo eliminamos del los
 			// relacionados.
 			
-			//NOTA: ESTO NO DEBERÕA ACTIVARSE NUNCA
+			//NOTA: ESTO NO DEBER√çA ACTIVARSE NUNCA
 			else if (r.getRelacionados().contains(usu.getId())) {
 				r.getRelacionados().remove(usu.getId());
 				daorelUsu.modificarRelacion(r);
@@ -181,7 +181,7 @@ public class SAPacientesImpl implements SAPacientes {
 		if (daousu.existeUsuario(usu.getId())) {
 			daousu.eliminarUsuario(usu.getId());
 		} else
-			//No deberÌa entrar por aquÌ en estos momentos de la pelÌcula.
+			//No deber√≠a entrar por aqu√≠ en estos momentos de la pel√≠cula.
 			throw new NotBoundException(usu + "no se encuentra registrado en la base de datos");
 	}
 
@@ -205,7 +205,7 @@ public class SAPacientesImpl implements SAPacientes {
 			usuToPac = new Relacion(usu.getId(), centro.getNombre());
 			daorelUsu.crearRelacion(usuToPac);
 		}
-		//AÒadimos el nuevo relacionado.
+		//A√±adimos el nuevo relacionado.
 		usuToPac.getRelacionados().add(pac.getId());
 		daorelUsu.modificarRelacion(usuToPac);
 		//Hacemos lo mismo con el otro sentido de la relacion.
@@ -235,7 +235,7 @@ public class SAPacientesImpl implements SAPacientes {
 		Set<Relacion> setrel = daorelPac.listarRelaciones(centro.getNombre());
 
 		for (Relacion r : setrel) {
-			//Si en alguno es el agente de la relaciÛn, eliminamos de relacionado el
+			//Si en alguno es el agente de la relaci√≥n, eliminamos de relacionado el
 			//usuario
 			if (r.getIdAgente().equals(pac.getId())) {
 				r.getRelacionados().remove(usu.getId());
