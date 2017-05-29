@@ -164,7 +164,7 @@ public class Recursos extends ColorPanel{
 
 		        jLabel2.setText("Archivo: ");
 
-		        jLabel3.setText("DescripciÃ³n: ");
+		        jLabel3.setText("Descripción: ");
 
 		        jLabel4.setText("Etiquetas: (separadas por comas)");
 

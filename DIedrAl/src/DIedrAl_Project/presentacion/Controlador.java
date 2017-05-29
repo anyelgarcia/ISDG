@@ -22,7 +22,6 @@ import DIedrAl_Project.negocio.recursos.Programable;
 import DIedrAl_Project.negocio.recursos.Recurso;
 import DIedrAl_Project.negocio.recursos.Sesion;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
-import DIedrAl_Project.negocio.servicioDeAplicaciones.SAOrganizacion;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAPacientes;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SARecursos;
 
@@ -305,50 +304,4 @@ public class Controlador {
 		antiguo = (Paciente) nuevo.clone();
 	}
 
-	public static String[] getCentros(){
-		ArrayList<String> centros = new ArrayList<String>();
-    	try {
-			centros = SAFactory.getInstancia().newSAOrganizacion().getCentros();
-		} catch (ClassNotFoundException | IOException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema");
-			error.run();
-			return null;
-		}
-    	
-    	return centros.toArray(new String[centros.size()]);
-	}
-	
-	public static void deleteCentro(String name){
-		 SAOrganizacion saOrg = SAFactory.getInstancia().newSAOrganizacion();
-		 try {
-			saOrg.eliminarCentro(name);
-		} catch (ClassNotFoundException | NotBoundException | IOException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema");
-			error.run();
-		}
-	}
-	
-	public static boolean existeCentro(String name){
-		 SAOrganizacion saOrg = SAFactory.getInstancia().newSAOrganizacion();
-		 try {
-			if(!saOrg.existeCentro(name)){
-				return false; 
-			}
-		} catch (ClassNotFoundException | IOException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema");
-			error.run();
-		}
-		 return true;
-	}
-	
-	public static void createCentro(String nameCentro, String password){
-		SAOrganizacion saOrg = SAFactory.getInstancia().newSAOrganizacion();
-		 try {
-			saOrg.addCentro(nameCentro, password);
-		} catch (ClassNotFoundException | IOException | AlreadyBoundException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema");
-			error.run();
-		}
-		 
-	}
 }
