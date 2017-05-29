@@ -35,7 +35,7 @@ public class Perfil extends ColorPanel{
 		
 		ImageButton perfil = new ImageButton("Ver Perfil", "images/blackbutton.png", "images/blackbutton2.png", this);
 		perfil.addActionListener((ae) -> {
-			JFrame pantalla = new PantallaPerfil(false, Controlador.getUsuario());
+			JFrame pantalla = new PantallaPerfil(Modo.VISTA, Controlador.getUsuario());
 			pantalla.setVisible(true);
 		});
 		c.gridx = 0;
@@ -48,7 +48,7 @@ public class Perfil extends ColorPanel{
 		
 		ImageButton editar = new ImageButton(" Editar  ", "images/orangebutton.png", "images/orangebutton2.png", this);
 		editar.addActionListener((ae) -> {
-			JFrame pantalla = new PantallaPerfil(true, Controlador.getUsuario());
+			JFrame pantalla = new PantallaPerfil(Modo.EDITAR, Controlador.getUsuario());
 			pantalla.setVisible(true);
 		});
 		c.gridx = 1;
@@ -82,11 +82,14 @@ public class Perfil extends ColorPanel{
 	    private javax.swing.JTextField jTextField4;
 	    private boolean editable;
 	    private Usuario user;
+	    private Modo mode;
 	    // End of variables declaration  
 	    
-		public PantallaPerfil(boolean b, Usuario s){
-			editable = b;
+		public PantallaPerfil(Modo m, Usuario s){
+			if(m.equals(Modo.VISTA)) editable = false;
+			else if(m.equals(Modo.EDITAR)) editable = true;
 			user = s;
+			mode = m;
 			initGUI();
 		}
 		
@@ -109,6 +112,11 @@ public class Perfil extends ColorPanel{
 	        jTextField4 = new javax.swing.JTextField();
 
 	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+	        
+	        switch(mode){
+	        case VISTA: setTitle("Mi Perfil"); break;
+	        case EDITAR: setTitle("Editar Mi Perfil"); break;
+	        }
 
 	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
 	        	/**
