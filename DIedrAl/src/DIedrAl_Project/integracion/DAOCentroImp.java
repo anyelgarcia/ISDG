@@ -28,7 +28,7 @@ private static DAOCentroImp instancia = null;
 		try {
 			op.guardar(c, file);
 		} catch (IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo guardar el Centro");
 		}
 	}
 
@@ -37,7 +37,7 @@ private static DAOCentroImp instancia = null;
 		try {
 			op.borrar(id, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo eliminar el Centro");
 		}
 	}
 
@@ -46,7 +46,7 @@ private static DAOCentroImp instancia = null;
 		try {
 			op.modificar(c, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo modificar el Centro");
 		}
 	}
 
@@ -55,7 +55,7 @@ private static DAOCentroImp instancia = null;
 		try {
 			return op.obtenerDatosSet(file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo acceder a los centros");
 		}
 	}
 
@@ -64,7 +64,7 @@ private static DAOCentroImp instancia = null;
 		try {
 			return op.exists(id, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo buscar el Centro");
 		}
 	}
 
@@ -74,7 +74,7 @@ private static DAOCentroImp instancia = null;
 		try {
 			return op.consultar(id, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo acceder al Centro");
 		}
 	}
 

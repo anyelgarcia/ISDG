@@ -58,7 +58,7 @@ public class DAORelacionableImp implements DAORelacionable {
 		try {
 			op.guardar(r, file);
 		} catch (IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo guardar la relacion");
 		}
 	}
 
@@ -67,7 +67,7 @@ public class DAORelacionableImp implements DAORelacionable {
 		try {
 			op.borrar(id, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo eliminar la relacion");
 		}
 	}
 
@@ -76,7 +76,7 @@ public class DAORelacionableImp implements DAORelacionable {
 		try {
 			op.modificar(r, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo modificar la relacion");
 		}
 	}
 
@@ -107,7 +107,7 @@ public class DAORelacionableImp implements DAORelacionable {
 				return r;
 			}
 		} catch (IOException | ClassNotFoundException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo listar las relaciones");
 		}
 	}
 
@@ -116,7 +116,7 @@ public class DAORelacionableImp implements DAORelacionable {
 		try {
 			return op.exists(id, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo comprobar la existencia de la relacion");
 		}
 	}
 
@@ -150,7 +150,7 @@ public class DAORelacionableImp implements DAORelacionable {
 			}
 
 		} catch (IOException | ClassNotFoundException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo eliminar la relaciones del centro dado");
 		}
 	}
 

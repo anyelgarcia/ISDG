@@ -17,6 +17,10 @@ public class SARecursosTest {
 
 	private SAFactory factoriaSA = SAFactory.getInstancia();
 	private SARecursos sarec = factoriaSA.newSARecursos();
+	
+	public SARecursosTest(){
+		
+	}
 
 	@Test
 	public void testSARecursosSesionesIterator() {

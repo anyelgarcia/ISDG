@@ -34,7 +34,7 @@ public class DAOActividadImp implements DAOActividad {
 		try {
 			op.guardar(a, file);
 		} catch (IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo guardar la Actividad");
 		}
 	}
 
@@ -43,7 +43,7 @@ public class DAOActividadImp implements DAOActividad {
 		try {
 			op.borrar(id, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo eliminar la Actividad");
 		}
 	}
 
@@ -52,7 +52,7 @@ public class DAOActividadImp implements DAOActividad {
 		try {
 			op.modificar(r, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo modificar la Actividad");
 		}
 	}
 
@@ -61,7 +61,7 @@ public class DAOActividadImp implements DAOActividad {
 		try {
 			return op.obtenerDatosSet(file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo cargar las actividades");
 		}
 	}
 
@@ -70,7 +70,7 @@ public class DAOActividadImp implements DAOActividad {
 		try {
 			return op.exists(id, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo acceder a la Actividad");
 		}
 	}
 
