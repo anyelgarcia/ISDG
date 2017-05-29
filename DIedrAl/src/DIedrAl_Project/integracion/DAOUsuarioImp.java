@@ -34,7 +34,7 @@ public class DAOUsuarioImp implements DAOUsuario {
 		try {
 			op.guardar(u, file);
 		} catch (IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo guardar el usuario");
 		}
 	}
 
@@ -44,7 +44,7 @@ public class DAOUsuarioImp implements DAOUsuario {
 		try {
 			op.borrar(id, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo eliminar el usuario");
 		}
 	}
 
@@ -54,7 +54,7 @@ public class DAOUsuarioImp implements DAOUsuario {
 		try {
 			op.modificar(u, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo modificar el usuario");
 		}
 	}
 
@@ -64,7 +64,7 @@ public class DAOUsuarioImp implements DAOUsuario {
 		try {
 			return op.obtenerDatosSet(file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo listar los usuarios");
 		}
 	}
 
@@ -74,7 +74,7 @@ public class DAOUsuarioImp implements DAOUsuario {
 		try {
 			return op.exists(id, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo comprobar la existencia del usuario");
 		}
 	}
 
@@ -84,7 +84,7 @@ public class DAOUsuarioImp implements DAOUsuario {
 		try {
 			return op.consultar(id, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo consultar el usuario");
 		}
 	}
 

@@ -14,6 +14,7 @@ import DIedrAl_Project.negocio.administracion.Hints;
 import DIedrAl_Project.negocio.administracion.Persona;
 import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.negocio.pacientes.Paciente;
+import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 
 public class Usuarios extends ColorPanel{
@@ -39,9 +40,9 @@ public class Usuarios extends ColorPanel{
 		add(title, c);
 
 
-		ImageButton nuevo = new ImageButton("A�adir", "images/bluebutton.png", "images/bluebutton2.png", this);
+		ImageButton nuevo = new ImageButton("Añadir", "images/bluebutton.png", "images/bluebutton2.png", this);
 		nuevo.addActionListener((ae) -> {
-			JFrame panel = new PantallaUsuario(null);
+			JFrame panel = new PantallaUsuario(null, Modo.ADD);
 			panel.setVisible(true);
 
 		});
@@ -56,7 +57,7 @@ public class Usuarios extends ColorPanel{
 
 		ImageButton buscar = new ImageButton("Buscar", "images/orangebutton.png", "images/orangebutton2.png", this);
 		buscar.addActionListener((ae) -> {
-			JFrame pantalla = new PantallaBuscar();
+			JFrame pantalla = new PantallaBuscar(Modo.BUSCAR);
 			pantalla.setVisible(true);
 		});
 		c.gridx = 1;
@@ -64,6 +65,12 @@ public class Usuarios extends ColorPanel{
 		add(buscar, c);
 	}
 
+	/**
+	 * Clase que gestiona la ventana que muestra los campos de un usuario. Se utiliza esta ventana tanto para
+	 * añadir un usuario nuevo como para editar o consultar los datos de un usuario ya existente.
+	 * @author Diedral_Group
+	 * 
+	 */  
 	private class PantallaUsuario extends JFrame{
 		/**
 		 * 
@@ -75,7 +82,6 @@ public class Usuarios extends ColorPanel{
 		private javax.swing.JLabel jLabel1;
 		private javax.swing.JLabel jLabel2;
 		private javax.swing.JLabel jLabel3;
-		private javax.swing.JLabel jLabel4;
 		private javax.swing.JLabel jLabel5;
 		private javax.swing.JLabel jLabel6;
 		private javax.swing.JLabel jLabel7;
@@ -88,17 +94,21 @@ public class Usuarios extends ColorPanel{
 		private javax.swing.JTextArea jTextArea1;
 		private javax.swing.JTextArea jTextArea2;
 		private javax.swing.JTextField jTextField1;
-		private javax.swing.JTextField jTextField2;
 		private javax.swing.JTextField jTextField3;
 		private javax.swing.JTextField jTextField4;
 		private javax.swing.JTextField jTextField7;
 		private javax.swing.JTextField jTextField8;
 		private javax.swing.JTextField jTextField9;
+		private boolean editable;
 		private Usuario u;
+	    private Modo mode;    
 
-		// End of variables declaration     
-		public PantallaUsuario(Usuario u){
+		public PantallaUsuario(Usuario u, Modo m){
 			this.u = u;
+			mode = m;
+			if(mode.equals(Modo.VISTA)) editable= false;
+			else editable = true;
+
 			initGUI();
 		}
 		private void initGUI(){
@@ -111,13 +121,13 @@ public class Usuarios extends ColorPanel{
 			jLabel1 = new javax.swing.JLabel();
 			jLabel2 = new javax.swing.JLabel();
 			jLabel3 = new javax.swing.JLabel();
-			jLabel4 = new javax.swing.JLabel();
 			jLabel5 = new javax.swing.JLabel();
 			jLabel6 = new javax.swing.JLabel();
 			jTextField1 = new javax.swing.JTextField("");
 			jTextField2 = new javax.swing.JTextField("");
 			jTextField3 = new javax.swing.JTextField("");
 			jTextField4 = new javax.swing.JTextField("");
+
 			jButton1 = new javax.swing.JButton();
 			jLabel7 = new javax.swing.JLabel();
 			jLabel8 = new javax.swing.JLabel();
@@ -127,15 +137,16 @@ public class Usuarios extends ColorPanel{
 			jTextField9 = new javax.swing.JTextField("");
 
 			setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-			
-			if(u!=null) setTitle("Paciente"); 
-			else setTitle("Crear Paciente"); 
+			switch(mode){
+				case ADD: setTitle("Crear Usuario"); break;
+			    case VISTA: setTitle("Usuario"); break;
+			    case EDITAR: setTitle("Ligar/Desligar Pacientes"); break;
+			}
 
-			//COMPLETAR CONSIGUIENDO PACIENTES ASOCIADOS
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
 				private static final long serialVersionUID = 1L;
 
-				String[] strings = {  };
+				String[] strings = Controlador.getPacientesAsociados(u);
 				public int getSize() { return strings.length; }
 				public String getElementAt(int i) { return strings[i]; }
 			});
@@ -150,11 +161,11 @@ public class Usuarios extends ColorPanel{
 
 			jTextArea2.setColumns(20);
 			jTextArea2.setRows(5);
-			jTextArea2.setText("Descripci�n");
+			jTextArea2.setText("Descripción");
 			jScrollPane3.setViewportView(jTextArea2);
 
 			jLabel1.setFont(new java.awt.Font("Arial", 0, 10));
-			jLabel1.setText("Despacho, horarios y otra informaci�n: ");
+			jLabel1.setText("Despacho, horarios y otra información: ");
 			jLabel1.setForeground(Color.BLACK);
 
 			jLabel2.setFont(new java.awt.Font("Arial", 0, 10));
@@ -177,16 +188,12 @@ public class Usuarios extends ColorPanel{
 			jLabel9.setText("DNI: ");
 			jLabel9.setForeground(Color.BLACK);
 
-			jLabel4.setFont(new java.awt.Font("Arial", 0, 10));
-			jLabel4.setText("Rol: ");
-			jLabel4.setForeground(Color.BLACK);
-
 			jLabel5.setFont(new java.awt.Font("Arial", 0, 10));
 			jLabel5.setText("Email: ");
 			jLabel5.setForeground(Color.BLACK);
 
 			jLabel6.setFont(new java.awt.Font("Arial", 0, 10));
-			jLabel6.setText("Tel�fono: ");
+			jLabel6.setText("Teléfono: ");
 			jLabel6.setForeground(Color.BLACK);
 
 			jButton1.setText("Guardar");
@@ -198,7 +205,6 @@ public class Usuarios extends ColorPanel{
 			
 			if(u!=null){
 				jTextField1.setText(u.getName());
-				jTextField2.setText(u.isAdmin() ? "Administrador" : "Terapeuta");
 				jTextField3.setText(u.getEmail());
 				jTextField4.setText(u.getTfo());
 				jTextField7.setText(u.getFirstSurname());
@@ -207,7 +213,6 @@ public class Usuarios extends ColorPanel{
 				jTextArea2.setText(u.getInfor());
 				jTextArea1.setText(u.getPerfil());
 				jTextField1.setEditable(false);
-				jTextField2.setEditable(false);
 				jTextField7.setEditable(false);
 				jTextField8.setEditable(false);
 				jTextField9.setEditable(false);
@@ -245,7 +250,6 @@ public class Usuarios extends ColorPanel{
 																													.addComponent(jLabel7)
 																													.addComponent(jLabel8)
 																													.addComponent(jLabel9)
-																													.addComponent(jLabel4)
 																													.addComponent(jLabel5)
 																													.addComponent(jLabel6))
 																													.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -255,7 +259,6 @@ public class Usuarios extends ColorPanel{
 																															.addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
 																															.addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
 																															.addComponent(jTextField9, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
-																															.addComponent(jTextField2)
 																															.addComponent(jTextField1))))))
 																															.addContainerGap())
 																															.addGroup(layout.createSequentialGroup()
@@ -283,9 +286,6 @@ public class Usuarios extends ColorPanel{
 															.addComponent(jLabel9)
 															.addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 															.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-															.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-																	.addComponent(jLabel4)
-																	.addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 																	.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																	.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 																			.addComponent(jLabel5)
@@ -325,17 +325,13 @@ public class Usuarios extends ColorPanel{
 			if(tfo.length()>0){
 				usuario.setTfo(tfo);
 			}
-
-			String rol = jTextField2.getText();
-			if(rol.equals("admin") || rol.equals("Admin") || rol.equals("administrador") || rol.equals("Administrador") || rol.equals("ADMIN") || rol.equals("ADMINISTRADOR"))
-				usuario.setAdmin();
 			
 			Controlador.addUsuario(usuario);
 		}     
 	}
 
 
-	private class PantallaBuscar extends JFrame{
+	private class PantallaBuscar extends JFrame implements confirmListener{
 
 		/**
 		 * 
@@ -358,9 +354,11 @@ public class Usuarios extends ColorPanel{
 		private javax.swing.JTextField jTextField5;
 		private javax.swing.JSeparator jSeparator2;
 		private Usuario[] resultados;
+		private Modo modo;
 		// End of variables declaration   
 
-		public PantallaBuscar(){
+		public PantallaBuscar(Modo modo){
+			this.modo = modo;
 			initGUI();
 		}
 
@@ -508,6 +506,11 @@ public class Usuarios extends ColorPanel{
 			pack();
 		}
 
+		/**
+		 * Función que se ejecuta al darle al botón buscar. Rellena un Usuario con los datos introducidos y 
+		 * busca en el sistema a todos los que coincidan con él.
+		 * @param evt
+		 */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 
 			String nombre = jTextField1.getText();
@@ -540,7 +543,7 @@ public class Usuarios extends ColorPanel{
 				hints.add(Hints.NIF);
 			}
 
-			if(admin.equals("Si")||  admin.equals("S�") ||  admin.equals("SI") ||  admin.equals("S�")){
+			if(admin.equals("Si")||  admin.equals("Sí") ||  admin.equals("SI") ||  admin.equals("SÍ")){
 				usuarios = new Hints[1];
 				usuarios[0] = Hints.ADMINISTRADOR;
 			}else{
@@ -579,11 +582,41 @@ public class Usuarios extends ColorPanel{
 			});
 		}                                        
 
+		/**
+		 * Función que se ejecuta al seleccionar uno de los resultados de la búsqueda y pulsar el
+		 * botón de validar. Según el modo se hace una cosa u otra. 
+		 * Si el modo es eliminar, se muestra una pantalla de confirmación.
+		 * Si el modo es Editar o buscar, se crea una pantalla Usuario y se le pasa el control.
+		 * @param evt
+		 */
 		private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 			int i = jList1.getSelectedIndex();
 			Usuario u = resultados[i];
-			PantallaUsuario j = new PantallaUsuario(u);
-			j.setVisible(true);
+			PantallaUsuario j;
+			switch(modo){
+				case ELIMINAR:
+					Confirm c = new Confirm();
+					c.setMensaje("El paciente se eliminará del sistema.");
+			    	c.setVisible(true);
+			    	c.addListener(this);
+			    	break;
+				case EDITAR:
+					j = new PantallaUsuario(u, Modo.EDITAR);
+					j.setVisible(true);
+					break;
+				case BUSCAR:
+					j = new PantallaUsuario(u, Modo.VISTA);
+					j.setVisible(true);
+					break;
+				}
+		}
+
+
+		@Override
+		public void delete() {
+			int i = jList1.getSelectedIndex();
+	    	Controlador.deleteUsuario(resultados[i]);
+	    	this.dispose();
 		}  
 	}
 }

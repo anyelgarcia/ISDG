@@ -1,16 +1,13 @@
 package DIedrAl_Project.negocio.tests;
 
 import static org.junit.Assert.assertTrue;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 import java.rmi.AlreadyBoundException;
 import java.util.Random;
 import java.util.logging.Logger;
 
 import org.junit.Test;
 
+import DIedrAl_Project.integracion.AccessException;
 import DIedrAl_Project.negocio.recursos.*;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.*;
 
@@ -20,6 +17,10 @@ public class SARecursosTest {
 
 	private SAFactory factoriaSA = SAFactory.getInstancia();
 	private SARecursos sarec = factoriaSA.newSARecursos();
+	
+	public SARecursosTest(){
+		
+	}
 
 	@Test
 	public void testSARecursosSesionesIterator() {
@@ -31,12 +32,13 @@ public class SARecursosTest {
 		for (int i = 0; i < 10; i++) {
 			Sesion sesionAux = new Sesion("Sesion " + (i + 1));
 			sesionAux.setDuracion(i + 1);
-			//sesionAux.addDestinatario("Maria");
+			sesionAux.addDestinatario("Maria");
 			try {
 				sarec.addSesion(sesionAux);
-			} catch (IOException e) {
+			} catch (AccessException e) {
 				e.printStackTrace();
 			}
+			
 		}
 
 		// Mover el filtro abarcando cada vez un minuto más.
@@ -96,7 +98,7 @@ public class SARecursosTest {
 					a.setDificultad(Dificultad.MUY_FACIL);
 				}
 				sarec.addActividad(a);
-			} catch (IOException e) {
+			} catch (AccessException e) {
 				e.printStackTrace();
 			}
 		}
@@ -132,20 +134,19 @@ public class SARecursosTest {
 	
 	@Test
 	public void clearBanco(){
-		/*
 		ArrayActividades a=sarec.getActividades();
 		for(Actividad act:a){
 			try {
 				sarec.removeActividad(act);
-			} catch (ClassNotFoundException | IOException e) {
+			} catch (AccessException e) {
 				e.printStackTrace();
 			}
-		}*/
+		}
 		ArrayRecursos r=sarec.getRecursos();
 		for(Recurso rec:r){
 			try {
 				sarec.removeRecurso(rec);
-			} catch (ClassNotFoundException | IOException e) {
+			} catch (AccessException e) {
 				e.printStackTrace();
 			}
 		} 
@@ -153,7 +154,7 @@ public class SARecursosTest {
 		for(Sesion ses:s){
 			try {
 				sarec.removeSesion(ses);
-			} catch (ClassNotFoundException | IOException e) {
+			} catch (AccessException e) {
 				e.printStackTrace();
 			}
 		}

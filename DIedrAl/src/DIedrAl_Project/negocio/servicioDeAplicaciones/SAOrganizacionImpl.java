@@ -1,6 +1,5 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
-import java.io.*;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.util.ArrayList;
@@ -13,6 +12,8 @@ import DIedrAl_Project.negocio.pacientes.Paciente;
 public class SAOrganizacionImpl implements SAOrganizacion {
 
 	private Organizacion organizacion;
+	
+	private DAOUsuario daousu;
 
 	private SimpleFileDAOFactory factoria;
 
@@ -30,10 +31,11 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 	private SAOrganizacionImpl() {
 		this.organizacion = Organizacion.getInstancia();
 		factoria = SimpleFileDAOFactory.getInstance();
+		daousu=factoria.getDAOUsuario();
 	}
 
 	@Override
-	public ArrayList<String> getCentros() throws ClassNotFoundException, IOException {
+	public ArrayList<String> getCentros() throws AccessException {
 		DAOCentro daocen = factoria.getDAOCentro();
 		HashSet<EstadoCentro> centros = daocen.listarCentros();
 
@@ -47,47 +49,53 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 
 	@Override
 	public void addCentro(String name, String passAdmin)
-			throws AlreadyBoundException, IOException, ClassNotFoundException {
+			throws AlreadyBoundException, AccessException {
 		DAOCentro daocen = factoria.getDAOCentro();
 		if (daocen.existeCentro(name))
-			throw new AlreadyBoundException("El centro solicitado ya se encuentra registrado en el sistema");
+			throw new AlreadyBoundException(
+					"El centro solicitado ya se encuentra registrado en el sistema");
 
 		daocen.guardarCentro(new EstadoCentro(name));
 
 		DAOUsuario daousu = factoria.getDAOUsuario();
-		daousu.crearUsuario(new Usuario(name + "_ADMIN", "", "", name + "_ADMIN"));
+		daousu.crearUsuario(new Usuario(name + "_ADMIN", "", "", name
+				+ "_ADMIN"));
 
 	}
 
 	@Override
-	public void eliminarCentro(String name) throws NotBoundException, ClassNotFoundException, IOException {
+	public void eliminarCentro(String name) throws NotBoundException,
+			AccessException {
 
 		// Borrar del sistema todos aquellos usuarios cuyo centro sea el borrado
-		DAOUsuario daousu = factoria.getDAOUsuario();
 		HashSet<Usuario> usuarios = daousu.listarUsuarios();
-		usuarios.forEach((user) -> {
-			if (user.getCentro().equals(name))
+		for (Usuario user : usuarios) {
+			if (user.getCentro().equals(name)) {
 				try {
 					daousu.eliminarUsuario(user.getId());
-				} catch (ClassNotFoundException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				} catch (AccessException e) {
+					throw new AccessException(e.getMessage()
+							+ "\nProblema en el daoUsuario");
 				}
-		});
+
+			}
+		}
 
 		// Borrar del sistema todos aquellos pacientes cuyo centro sea el
 		// borrado
 		DAOPaciente daopac = factoria.getDAOPaciente();
 		HashSet<Paciente> pacientes = daopac.listarPacientes();
-		pacientes.forEach((paciente) -> {
-			if (paciente.getCentro().equals(name))
+		for (Paciente paciente : pacientes) {
+			if (paciente.getCentro().equals(name)) {
 				try {
 					daopac.eliminarPaciente(paciente.getId());
-				} catch (ClassNotFoundException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				} catch (AccessException e) {
+					throw new AccessException(e.getMessage()
+							+ "\nProblema en el daoPaciente");
 				}
-		});
+			}
+
+		}
 
 		DAORelacionable daoter = factoria.getDAORelacion(tRelacion.usuario);
 		daoter.eliminarRelacionesCentro(name);
@@ -99,14 +107,15 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 
 		// Borrar el centro del sistema
 		if (!daocen.existeCentro(name))
-			throw new NotBoundException("El centro solicitado no se encuentra registrado en el sistema");
+			throw new NotBoundException(
+					"El centro solicitado no se encuentra registrado en el sistema");
 
 		daocen.eliminarCentro(name);
 
 	}
 
 	@Override
-	public boolean existeCentro(String name) throws ClassNotFoundException, IOException {
+	public boolean existeCentro(String name) throws AccessException {
 		DAOCentro daocen = factoria.getDAOCentro();
 		return daocen.existeCentro(name);
 	}
@@ -117,9 +126,12 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 	}
 
 	@Override
-	public boolean existeUsuario(String nif) throws ClassNotFoundException, IOException {
-		DAOUsuario daousu = factoria.getDAOUsuario();
-		return daousu.existeUsuario(nif);
+	public Usuario getUsuario(String nif) throws AccessException, NotBoundException {
+		Usuario usu = daousu.consultarUsuario(nif);
+		if(usu==null){
+			throw new NotBoundException("Usuario no encontrado");
+		}
+		return usu;
 	}
 
 }

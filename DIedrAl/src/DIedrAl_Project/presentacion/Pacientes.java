@@ -97,7 +97,8 @@ public class Pacientes extends ColorPanel{
 		
 	}
 	/**
-	 * Clase que gestiona la ventana que aparece al darle al botón -Añadir- en la sección -Pacientes- del Ménú Principal
+	 * Clase que gestiona la ventana que muestra los campos de un paciente. Se utiliza esta ventana tanto para
+	 * añadir un paciente nuevo como para editar o consultar los datos de un paciente ya existente.
 	 * @author Diedral_Group
 	 * 
 	 */                    
@@ -247,7 +248,7 @@ public class Pacientes extends ColorPanel{
 				jTextField3.setText(pac.getSecondSurname());
 				jTextField4.setText(pac.getDatos().getLesion());
 				jTextField5.setText(pac.getNif());
-				jTextArea1.setText(pac.getDatos().getAficiones());
+				jTextArea1.setText(Controlador.tratarAficiones(pac.getDatos().getAficiones()));
 				Fecha birthday = pac.getBirthday();
 				if(birthday!=null){
 					jComboBox1.setSelectedIndex(birthday.getDia()-1);
@@ -412,7 +413,9 @@ public class Pacientes extends ColorPanel{
 		}
 		
 		/**
-		 * Función que se ejecuta al darle a guardar en la ventana de añadir pacientes. Se rellena un objeto pacientey es pasado al controlador.
+		 * Función que se ejecuta al darle a guardar en la ventana de Paciente. Se rellena un objeto paciente
+		 * y es pasado al controlador para que lo añada si estamos en modo añadir o para que sobreescriba
+		 * a un paciente antiguo si estamos en modo editar.
 		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {   
 			
@@ -433,25 +436,18 @@ public class Pacientes extends ColorPanel{
 			for(String str: aficiones)
 				info.getDatos().addAficion(str);
 			
-			if(mode.equals(Modo.ADD))
-				try {
-					Controlador.addPaciente(info);
-				} catch (AlreadyBoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			if(mode.equals(Modo.ADD)) Controlador.addPaciente(info);
 			else if(mode.equals(Modo.VISTA)) Controlador.modificaPaciente(pac, info);
 		} 
 	}
 
 
 	/**
-	 * 
-	 * Ventana que sale al pulsar el botón eliminar en la sección Pacientes en el menú principal.
+	 * Clase que gestiona la ventana que permite buscar un paciente. Esta ventana es la que 
+	 * aparece al seleccionar los botones -Buscar-, -Editar- y -Eliminar-.
 	 * @author Diedral_Group
-	 *
-	 */
-	
+	 * 
+	 */     
 	private class PantallaBuscar extends JFrame implements confirmListener{
 		
 		/**
@@ -612,7 +608,12 @@ public class Pacientes extends ColorPanel{
 	        getContentPane().setBackground(getColor());
 	        pack();
 	    }
-		
+	    
+		/**
+		 * Función que se ejecuta al darle al botón buscar. Rellena un Paciente con los datos introducidos y 
+		 * busca en el sistema a todos los que coincidan con él.
+		 * @param evt
+		 */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 
 			String nombre = jTextField1.getText();
@@ -660,6 +661,7 @@ public class Pacientes extends ColorPanel{
 			Hints valUsuarios [] = {Hints.PACIENTE};
 			
 			ArrayList<Persona> res = Controlador.buscarUsuarios(claves, valores, valUsuarios);
+			
 			String[] cadenas = new String[res.size()];
 			resultados = new Paciente[res.size()];
 			i=0;
@@ -678,7 +680,13 @@ public class Pacientes extends ColorPanel{
 		}
 	    
 	    
-
+		/**
+		 * Función que se ejecuta al seleccionar uno de los resultados de la búsqueda y pulsar el
+		 * botón de validar. Según el modo se hace una cosa u otra. 
+		 * Si el modo es eliminar, se muestra una pantalla de confirmación.
+		 * Si el modo es Editar o buscar, se crea una pantalla Paciente y se le pasa el control.
+		 * @param evt
+		 */
 		private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {        
 			int i; JFrame j; Paciente p = null;
 			switch(modo){
@@ -709,12 +717,7 @@ public class Pacientes extends ColorPanel{
 	     */
 	    public void delete(){
 	    	int i = jList1.getSelectedIndex();
-	    	try {
-				Controlador.deletePaciente(resultados[i]);
-			} catch (ClassNotFoundException | NotBoundException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	    	Controlador.deletePaciente(resultados[i]);
 	    	this.dispose();
 	    }
 	}

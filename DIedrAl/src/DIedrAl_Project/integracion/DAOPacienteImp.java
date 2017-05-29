@@ -34,7 +34,7 @@ public class DAOPacienteImp implements DAOPaciente {
 		try {
 			op.guardar(p, file);
 		} catch (IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo guardar el paciente");
 		}
 	}
 
@@ -44,7 +44,7 @@ public class DAOPacienteImp implements DAOPaciente {
 		try {
 			op.borrar(id, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo eliminar el paciente");
 		}
 	}
 
@@ -54,7 +54,7 @@ public class DAOPacienteImp implements DAOPaciente {
 		try {
 			op.modificar(p, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo modificar el paciente");
 		}
 	}
 
@@ -64,7 +64,7 @@ public class DAOPacienteImp implements DAOPaciente {
 		try {
 			return op.obtenerDatosSet(file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo acceder a los pacientes");
 		}
 	}
 
@@ -74,7 +74,7 @@ public class DAOPacienteImp implements DAOPaciente {
 		try {
 			return op.exists(id, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo acceder al paciente");
 		}
 	}
 
@@ -84,7 +84,7 @@ public class DAOPacienteImp implements DAOPaciente {
 		try {
 			return op.consultar(id, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo consultar el paciente");
 		}
 	}
 

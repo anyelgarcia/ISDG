@@ -33,7 +33,7 @@ public class DAOInformeImp implements DAOInforme {
 		try {
 			op.guardar(a, file);
 		} catch (IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo guardar el informe");
 		}
 	}
 
@@ -42,7 +42,7 @@ public class DAOInformeImp implements DAOInforme {
 		try {
 			op.borrar(id, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo eliminar el informe");
 		}
 	}
 
@@ -51,7 +51,7 @@ public class DAOInformeImp implements DAOInforme {
 		try {
 			op.modificar(f, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo modificar el informe");
 		}
 	}
 
@@ -60,7 +60,7 @@ public class DAOInformeImp implements DAOInforme {
 		try {
 			return op.obtenerDatosSet(file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo listar informes");
 		}
 	}
 
@@ -69,7 +69,7 @@ public class DAOInformeImp implements DAOInforme {
 		try {
 			return op.exists(id, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo existir informes");
 		}
 	}
 

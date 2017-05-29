@@ -6,6 +6,7 @@ import java.rmi.NotBoundException;
 import java.util.ArrayList;
 import java.util.Set;
 
+import DIedrAl_Project.integracion.AccessException;
 import DIedrAl_Project.negocio.administracion.Hints;
 import DIedrAl_Project.negocio.administracion.Organizacion;
 import DIedrAl_Project.negocio.administracion.Persona;
@@ -22,6 +23,7 @@ import DIedrAl_Project.negocio.recursos.Programable;
 import DIedrAl_Project.negocio.recursos.Recurso;
 import DIedrAl_Project.negocio.recursos.Sesion;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
+import DIedrAl_Project.negocio.servicioDeAplicaciones.SAOrganizacion;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAPacientes;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SARecursos;
 
@@ -42,14 +44,17 @@ public class Controlador {
 		return usuario;
 	}
 	
-	public static void addPaciente(Paciente p) throws AlreadyBoundException{
+	public static void addPaciente(Paciente p){
 		SAPacientes saPacientes;
 		try {
-			saPacientes = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
+			saPacientes = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 			saPacientes.addPaciente(p);
-		} catch (NotBoundException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (IOException | ClassNotFoundException e) {
+			Error error = new Error("Ha ocurrido un error en el sistema al añadir al paciente");
+			error.run();
+		} catch (AlreadyBoundException e){
+			Error error = new Error("El paciente ya está en el sistema");
+			error.run();
 		}
 		
 		
@@ -71,7 +76,12 @@ public class Controlador {
 		
 		
 		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos();
-		saRecursos.addRecurso(p);
+		try {
+			saRecursos.addRecurso(p);
+		} catch (IOException e) {
+			Error error = new Error("Ha ocurrido un error en el sistema al añadir el recurso");
+			error.run();
+		}
 		
 		/*Prueba 6 :D
 		for(Recurso rec : Banco.getInstancia().getRecursos().filtrarNombre(p.getNombre())){
@@ -92,7 +102,12 @@ public class Controlador {
 		
 		
 		SARecursos saActividades = SAFactory.getInstancia().newSARecursos();
-		saActividades.addActividad(p);
+		try {
+			saActividades.addActividad(p);
+		} catch (IOException e) {
+			Error error = new Error("Ha ocurrido un error en el sistema al añadir la actividad");
+			error.run();
+		}
 		
 		/*System.out.println(p.getNombre());
 		System.out.println(p.getDificultad());
@@ -111,7 +126,12 @@ public class Controlador {
 	public static void addSesion(Sesion p){
 		
 		SARecursos saSesiones = SAFactory.getInstancia().newSARecursos();
-		saSesiones.addSesion(p);
+		try {
+			saSesiones.addSesion(p);
+		} catch (IOException e) {
+			Error error = new Error("Ha ocurrido un error en el sistema al añadir la sesión");
+			error.run();
+		}
 		
 		/*System.out.println(p.getNombre());
 		for(String str : p.getEtiquetas()){
@@ -129,15 +149,22 @@ public class Controlador {
 	}
 	
 	public static void addUsuario(Usuario p){
-		
+
 		SAPacientes saUsuarios;
 		try {
-			saUsuarios = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
+			saUsuarios = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
+			saUsuarios.addUsuario(p);
+		} catch (AccessException e) {
+			Error error = new Error("Ha ocurrido un error en el sistema.");
+			error.run();
+		} catch (AlreadyBoundException e) {
+			Error error = new Error("El usuario ya está en el sistema");
+			error.run();
 		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Error error = new Error("Ha ocurrido un error en el sistema al añadir el usuario");
+			error.run();
 		}
-		
+
 		
 		/*System.out.println(p.getNombre());
 		System.out.println(p.getRol());
@@ -150,62 +177,91 @@ public class Controlador {
 	
 	public static void deleteActividad(Actividad a){
 		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos();
-		saRecursos.removeActividad(a);
+		try {
+			saRecursos.removeActividad(a);
+		} catch (AccessException e) {
+			Error error = new Error("Ha ocurrido un error en el sistema al eliminar el recurso.");
+			error.run();
+		}
 	}
 	
-	public static void deletePaciente(Paciente resultado) throws ClassNotFoundException, NotBoundException, IOException{
-		SAPacientes saPacientes = SAFactory.getInstancia().newSAPacientes(null);
-		saPacientes.erasePaciente(resultado);
+	public static void deletePaciente(Paciente resultado){
+		SAPacientes saPacientes;
+		try {
+			saPacientes = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
+			saPacientes.erasePaciente(resultado);
+		} catch (AccessException e) {
+			Error error = new Error("Ha ocurrido un error en el sistema");
+			error.run();
+		} catch(NotBoundException e){
+			Error error = new Error("Ha ocurrido un error en el sistema al eliminar al paciente");
+			error.run();
+		}
 	}
 	
+	public static void deleteUsuario(Usuario resultado) {
+		SAPacientes saUsuarios;
+		try {
+			saUsuarios = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
+			saUsuarios.eraseUsuario(resultado);
+		} catch (AccessException e) {
+			Error error = new Error("Ha ocurrido un error en el sistema");
+			error.run();
+		} catch(NotBoundException e){
+			Error error = new Error("Ha ocurrido un error en el sistema al eliminar al paciente");
+			error.run();
+		}
+		
+	}
 	public static void deleteRecurso(Recurso r){
 		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos();
-		saRecursos.removeRecurso(r);
+		try {
+			saRecursos.removeRecurso(r);
+		} catch (AccessException e) {
+			Error error = new Error("Ha ocurrido un error en el sistema al eliminar el recurso");
+			error.run();
+		}
 	}
 	
 	public static void deleteSesion(Sesion s){
 		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos();
-		saRecursos.removeSesion(s);
+		try {
+			saRecursos.removeSesion(s);
+		} catch (AccessException e) {
+			Error error = new Error("Ha ocurrido un error en el sistema al eliminar la sesión");
+			error.run();
+		}
 	}
 	
 	public static String[] buscarPaciente(Hints[]hints, String [] values, Hints[] valUsuarios){
 		
 		SAPacientes saPacientes = null;
+		
 		try {
-			saPacientes = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
-		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			saPacientes = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
+		} catch (AccessException e) {
+			Error error = new Error("Ha ocurrido un error en el sistema");
+			error.run();
 		}
+		
 		Set<Persona> pacientes = saPacientes.filtrarPersonas(hints, values, valUsuarios);
-		
-		int length = pacientes.size();
-		int i=0;
-		String resultados[] = new String[length];
-		for(Persona persona: pacientes){
-			resultados[i] = persona.toString();
-			i++;
-		}
-		
-		return resultados;
+		return pacientes.toArray(new String[pacientes.size()]);
 	}
 	
 	public static ArrayList<Persona> buscarUsuarios(Hints[]hints, String [] values, Hints[] valUsuarios){
 		
 		SAPacientes saUsuarios = null;
 		try {
-			saUsuarios = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
-		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			saUsuarios = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
+		} catch (AccessException e) {
+			Error error = new Error("Ha ocurrido un error en el sistema");
+			error.run();
 		}
+		
 		Set<Persona> usuarios = saUsuarios.filtrarPersonas(hints, values, valUsuarios);
 		
 		ArrayList<Persona> resultado = new ArrayList<Persona>();
-		for(Persona p: usuarios){
-			resultado.add(p);
-		}
-		
+		resultado.addAll(usuarios);
 		return resultado;
 	}
 	
@@ -241,17 +297,24 @@ public class Controlador {
 		return salida;
 	}
 
-	public static ArrayList<String> getPacientesAsociados(Usuario u){
+	public static String [] getPacientesAsociados(Usuario u){
+		ArrayList<String> salida = new ArrayList<String>();
+		Set<Paciente> pacientes = null;
 		try {
-			ArrayList<String> salida = new ArrayList<String>();
-			Set<Paciente> pacientes = Organizacion.getInstancia().getCentro("Nombre del centro").getPacientesAsociados(u);
-			for(Paciente p : pacientes){
-				salida.add(p.toString());
-			}
-			return salida;
-		} catch (NotBoundException e) {
+			pacientes = SAFactory.getInstancia().newSAPacientes(usuario.getCentro()).getPacientesAsociados(u);
+		} catch (AccessException e) {
+			Error error = new Error("Ha ocurrido un error en el sistema");
+			error.run();
+			return null;
+		} catch (NotBoundException e){
+			Error error = new Error("Ha ocurrido un error en el sistema al devolver los pacientes asociados");
+			error.run();
 			return null;
 		}
+		for(Paciente p : pacientes){
+			salida.add(p.toString());
+		}
+		return salida.toArray(new String[salida.size()]);
 	}
 	
 	public static String getPacienteTipo(Actividad a){
@@ -262,15 +325,7 @@ public class Controlador {
     	return destinatarios.get(0);
 	}
 	
-	public static String getEtiquetas(Programable a){
-		StringBuilder etiquetas = new StringBuilder();
-    	for(String e : a.getEtiquetas()){
-    		etiquetas.append(e + " ");
-    	}
-    	return a.toString();
-	}
-	
-	public static String getEtiquetas(Recurso a){
+	public static String getEtiquetas(Etiquetable a){
 		StringBuilder etiquetas = new StringBuilder();
     	for(String e : a.getEtiquetas()){
     		etiquetas.append(e + " ");
@@ -300,8 +355,76 @@ public class Controlador {
 		antiguo.igualarCampos(nuevo);
 	}
 
-	public static void modificaPaciente(Paciente antiguo, Paciente nuevo) throws CloneNotSupportedException {
-		antiguo = (Paciente) nuevo.clone();
+	public static void modificaPaciente(Paciente antiguo, Paciente nuevo) {
+		try {
+			antiguo = (Paciente) nuevo.clone();
+		} catch (CloneNotSupportedException e) {
+			Error error = new Error("Ha ocurrido un error al editar el paciente");
+			error.run();
+		}
 	}
 
+	public static String[] getCentros(){
+		ArrayList<String> centros = new ArrayList<String>();
+    	try {
+			centros = SAFactory.getInstancia().newSAOrganizacion().getCentros();
+		} catch (AccessException e) {
+			Error error = new Error("Ha ocurrido un error en el sistema");
+			error.run();
+			return null;
+		}
+    	
+    	return centros.toArray(new String[centros.size()]);
+	}
+	
+	public static void deleteCentro(String name){
+		 SAOrganizacion saOrg = SAFactory.getInstancia().newSAOrganizacion();
+		 try {
+			saOrg.eliminarCentro(name);
+		} catch (ClassNotFoundException | NotBoundException | IOException e) {
+			Error error = new Error("Ha ocurrido un error en el sistema");
+			error.run();
+		}
+	}
+	
+	public static boolean existeCentro(String name){
+		 SAOrganizacion saOrg = SAFactory.getInstancia().newSAOrganizacion();
+		 try {
+			if(!saOrg.existeCentro(name)){
+				return false; 
+			}
+		} catch (AccessException e) {
+			Error error = new Error("Ha ocurrido un error en el sistema");
+			error.run();
+		}
+		 return true;
+	}
+	
+	public static void createCentro(String nameCentro, String password){
+		SAOrganizacion saOrg = SAFactory.getInstancia().newSAOrganizacion();
+		 try {
+			saOrg.addCentro(nameCentro, password);
+		} catch (AccessException e) {
+			Error error = new Error("Ha ocurrido un error en el sistema");
+			error.run();
+		} catch(AlreadyBoundException e){
+			Error error = new Error("Ya existe un centro con ese nombre");
+			error.run();
+		}
+		 
+	}
+
+	public static String tratarAficiones(ArrayList<String> aficiones) {
+		if(aficiones.isEmpty()) return "";
+		
+		String str = aficiones.get(0);
+		aficiones.remove(0);
+		
+		for(String af: aficiones){
+			str += ", " + af;
+		}
+		return str;
+	}
+
+	
 }

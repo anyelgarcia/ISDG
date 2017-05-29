@@ -5,9 +5,7 @@ public final class Organizacion {
 
 	private static Organizacion instancia = null;
 
-	private final String password = "12345678";
-
-	//private final Map<String, Centro> centros;
+	private String password = "12345678";
 
 	public static Organizacion getInstancia() {
 
@@ -18,34 +16,9 @@ public final class Organizacion {
 	}
 
 	protected Organizacion() {
-	//	centros = new HashMap<String, Centro>();
-
+		
 	}
 
-	/*// APAÑO PARA PODER TRABAJAR
-	public Centro getCentro(String name) throws NotBoundException {
-		if (!centros.containsKey(name)) {
-			throw new NotBoundException("Centro ya introducido");
-		} else
-			return centros.get(name);
-
-	}
-
-	public void addCentro(String name) throws AlreadyBoundException {
-		if (centros.containsKey(name)) {
-			throw new AlreadyBoundException("Centro ya introducido");
-		} else {
-			centros.put(name, new Centro(name));
-		}
-	}
-
-	public void removeCentro(String name) throws NotBoundException {
-		if (!centros.containsKey(name)) {
-			throw new NotBoundException("Centro ya introducido");
-		} else {
-			centros.remove(name);
-		}
-	}*/
 
 	/**
 	 * Dada una cadena de caracteres, comprueba si coincide con la contraseña de
@@ -62,9 +35,6 @@ public final class Organizacion {
 	 * Cambia la contraseña actual de la organización por la contraseña proporcionada
 	 * @param password nueva contraseña
 	 */
-/*	public void setPassword(String password) {
-		this.password = password;
-	}
-	*/
+
 
 }

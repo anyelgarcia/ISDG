@@ -2,7 +2,15 @@ package DIedrAl_Project.presentacion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.swing.*;
+
+import DIedrAl_Project.integracion.AccessException;
+import DIedrAl_Project.negocio.administracion.Usuario;
+import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
+import DIedrAl_Project.negocio.servicioDeAplicaciones.SAOrganizacion;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 
@@ -104,43 +112,29 @@ public class Login extends JFrame{
     	
     	String nombreuser = jTextField1.getText();
 		String clave = String.copyValueOf(jPasswordField1.getPassword());
-		/*
-		 * Usuario user = existeUsuario(nombreuser);
-		SAPacientes saUsuarios = null;
-		try {
-			saUsuarios = SAFactory.getInstancia().newSAPacientes(Organizacion.getInstancia().getCentro("Nombre del centro"));
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		Usuario intento;
-		try {
-			intento = saUsuarios.getUsuarioConNIF(nombreuser);
-		} catch (Exception e) {
-			JFrame mensaje = new JFrame();
-			JLabel jlabel = new JLabel("Usuario no registrado");
-			mensaje.add(jlabel);
-			mensaje.setVisible(true);
-			mensaje.setSize(200, 100);
-			mensaje.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		SAOrganizacion saOrg = SAFactory.getInstancia().newSAOrganizacion();
+		Usuario intento = null;
+		try{
+			intento = saOrg.existeUsuario(nombreuser);
+		}catch(Exception e){
+		} 
+		
+		if(intento==null){
+			Error mensaje = new Error("No se ha encontrado al usuario en el sistema");
+			mensaje.run();
 			return;
 		}
 		
 		if(!intento.inputPassword(clave)){
-			//mensaje de contraseña equivocada
-			JFrame mensaje = new JFrame();
-			JLabel jlabel = new JLabel("Contraseña equivocada");
-			mensaje.add(jlabel);
-			mensaje.setVisible(true);
-			mensaje.setSize(200, 100);
-			mensaje.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			Error mensaje = new Error("Contraseña equivocada");
+			mensaje.run();
 			return;
 		}
 
-		Controlador.setUsuario(intento);*/
+		Controlador.setUsuario(intento);
 		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-		JFrame pantalla = new MainFrame();
-		pantalla.setVisible(true);
+		Main.run();
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) { 
@@ -215,10 +209,83 @@ public class Login extends JFrame{
 		private void jButton1ActionPerformed(ActionEvent evt) {
 			
 			String password = jPasswordField1.getPassword().toString();
-			// Comprobar que el password es correcto
-			JFrame minimenu = new CentroWindow();
+			/*SAOrganizacion saOrg = SAFactory.getInstancia().newSAOrganizacion();
+			if(!saOrg.inputPasswordGod(password)){
+				Error msg = new Error("Contraseña Equivocada");
+				msg.run();
+				return;
+			}*/
+			JFrame minimenu = new MenuCentroUsuarios();
 			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		}     
+	}
+	
+	private class MenuCentroUsuarios extends javax.swing.JFrame {
+		
+		private javax.swing.JButton jButton1;
+	    private javax.swing.JButton jButton2;
+		
+	    public MenuCentroUsuarios(){
+	    	initGUI();
+	    }
+
+	    private void initGUI() {
+
+	    	jButton1 = new javax.swing.JButton();
+	    	jButton2 = new javax.swing.JButton();
+
+	    	setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+	    	jButton1.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+	    	jButton1.setText("Menu Centros");
+	    	jButton1.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton1ActionPerformed(evt);
+	            }
+	        });
+	    	
+	    	jButton2.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+	        jButton2.setText("Menu Usuarios");
+	        jButton1.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton2ActionPerformed(evt);
+	            }
+	        });
+	
+	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+	        getContentPane().setLayout(layout);
+	        layout.setHorizontalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(layout.createSequentialGroup()
+	                .addGap(68, 68, 68)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+	                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))
+	                .addContainerGap(63, Short.MAX_VALUE))
+	        );
+	        layout.setVerticalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                .addGap(33, 33, 33)
+	                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addGap(37, 37, 37)
+	                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addContainerGap(27, Short.MAX_VALUE))
+	        );
+	
+	        pack();
+	    }
+	    
+	    private void jButton1ActionPerformed(ActionEvent evt) {
+			JFrame minimenu = new CentroWindow();
+			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+		}    
+	    
+	    private void jButton2ActionPerformed(ActionEvent evt) {
+			
+			JFrame minimenu = new UsuarioWindow();
+			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+		} 
 	}
 
 	
@@ -245,8 +312,8 @@ public class Login extends JFrame{
 	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
 	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-	        	//Lista de centros
-	            String[] strings = {  };
+	            //String[] strings = Controlador.getCentros();
+	            String[] strings = {" "};
 	            public int getSize() { return strings.length; }
 	            public String getElementAt(int i) { return strings[i]; }
 	        });
@@ -317,7 +384,7 @@ public class Login extends JFrame{
 		private void jButton2ActionPerformed(ActionEvent evt) {
 			if(jList1.getSelectedValue()!=null){
 				Confirm c = new Confirm();
-				c.setMensaje("El centro se eliminar� definitivamente.");
+				c.setMensaje("El centro se eliminará definitivamente.");
 		    	c.setVisible(true);
 		    	c.addListener(this);
 			}
@@ -325,7 +392,7 @@ public class Login extends JFrame{
 
 		@Override
 		public void delete() {
-			// Eliminar jList1.getSelectedValue();
+			Controlador.deleteCentro(jList1.getSelectedValue());
 		}        
 	}
 	
@@ -333,11 +400,9 @@ public class Login extends JFrame{
 
 		private javax.swing.JButton jButton1;
 		private javax.swing.JLabel jLabel1;
-		private javax.swing.JLabel jLabel2;
 		private javax.swing.JLabel jLabel3;
 		private javax.swing.JPasswordField jPasswordField1;
 		private javax.swing.JTextField jTextField1;
-		private javax.swing.JTextField jTextField2;
 		   
 	   public CentroAdd() {
 	       init();
@@ -346,25 +411,23 @@ public class Login extends JFrame{
 	   private void init() {
 
 	       jLabel1 = new javax.swing.JLabel();
-	       jLabel2 = new javax.swing.JLabel();
 	       jLabel3 = new javax.swing.JLabel();
+       
 	       jTextField1 = new javax.swing.JTextField("");
 	       jTextField2 = new javax.swing.JTextField("");
+
 	       jPasswordField1 = new javax.swing.JPasswordField();
 	       jButton1 = new javax.swing.JButton();
 
 	       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-	       jLabel1.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+	       jLabel1.setFont(new java.awt.Font("Rockwell", 1, 14)); 
 	       jLabel1.setText("Nombre Nuevo Centro:");
 
-	       jLabel2.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-	       jLabel2.setText("ID Administrador:");
-
-	       jLabel3.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+	       jLabel3.setFont(new java.awt.Font("Rockwell", 1, 14)); 
 	       jLabel3.setText("Password Administrador:");
 
-	       jButton1.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+	       jButton1.setFont(new java.awt.Font("Rockwell", 0, 14)); 
 	       jButton1.setText("Validar");
 	       jButton1.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -383,11 +446,9 @@ public class Login extends JFrame{
 	                   .addGroup(layout.createSequentialGroup()
 	                       .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	                           .addComponent(jLabel1)
-	                           .addComponent(jLabel2)
 	                           .addComponent(jLabel3))
 	                       .addGap(33, 33, 33)
 	                       .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-	                           .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
 	                           .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
 	                           .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
 	               .addContainerGap(32, Short.MAX_VALUE))
@@ -399,10 +460,6 @@ public class Login extends JFrame{
 	               .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 	                   .addComponent(jLabel1)
 	                   .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-	               .addGap(36, 36, 36)
-	               .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-	                   .addComponent(jLabel2)
-	                   .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 	               .addGap(36, 36, 36)
 	               .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 	                   .addComponent(jLabel3)
@@ -419,19 +476,21 @@ public class Login extends JFrame{
 	   private void jButton1ActionPerformed(ActionEvent evt) {
 		   
 		   String nameCenter = jTextField1.getText();
-		   String nifAdmin = jTextField2.getText();
 		   String password = jPasswordField1.getPassword().toString();
 		   
-		   if(nameCenter!=null && nifAdmin!=null && password!=null){
-			   
-			   //buscar centro con ese nombre
-			   
-			   //si hay uno igual, mostramos mensaje mierda por pantalla
-			   
-			   //si no, lo creamos y volvemos a la pantalla anterior
-			   
-			   Login minimenu = new Login();
-			   dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+		   if(nameCenter!=null && password!=null){
+			   if(!Controlador.existeCentro(nameCenter)){
+				   Controlador.createCentro(nameCenter, password);
+				   Error nombreadmin = new Error("El identificador del administrador del nuevo centro es: " + nameCenter + "_ADMIN");
+				   dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+				   new Login().init();
+			   }else{
+				   Error msg = new Error("Ya existe un centro con ese nombre");
+				   msg.run();
+			   }
+		   }else{
+			   Error msg = new Error("Han de rellenarse todos los campos");
+			   msg.run();
 		   }
 	   }
 	}
