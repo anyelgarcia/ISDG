@@ -13,6 +13,7 @@ public class Recurso extends Etiquetable {
 	private File fichero;
 	private URI direccion;
 
+	
 	public Recurso(String name, String dir, String... etiquetas) throws URISyntaxException {
 		super(name, etiquetas);
 		this.direccion = new URI(dir);
@@ -77,4 +78,5 @@ public class Recurso extends Etiquetable {
 	public File getFile() {
 		return this.fichero;
 	}
+	
 }

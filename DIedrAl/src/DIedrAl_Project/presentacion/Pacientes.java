@@ -155,9 +155,9 @@ public class Pacientes extends ColorPanel{
 			jLabel2 = new javax.swing.JLabel();
 			jLabel3 = new javax.swing.JLabel();
 			jLabel4 = new javax.swing.JLabel();
-			jTextField1 = new javax.swing.JTextField();
-			jTextField2 = new javax.swing.JTextField();
-			jTextField3 = new javax.swing.JTextField();
+			jTextField1 = new javax.swing.JTextField("");
+			jTextField2 = new javax.swing.JTextField("");
+			jTextField3 = new javax.swing.JTextField("");
 			jLabel5 = new javax.swing.JLabel();
 			jComboBox1 = new javax.swing.JComboBox<>();
 			jComboBox2 = new javax.swing.JComboBox<>();
@@ -165,20 +165,20 @@ public class Pacientes extends ColorPanel{
 			jLabel6 = new javax.swing.JLabel();
 			jComboBox4 = new javax.swing.JComboBox<>();
 			jLabel7 = new javax.swing.JLabel();
-			jTextField4 = new javax.swing.JTextField();
+			jTextField4 = new javax.swing.JTextField("");
 			jLabel8 = new javax.swing.JLabel();
 			jComboBox5 = new javax.swing.JComboBox<>();
 			jComboBox6 = new javax.swing.JComboBox<>();
 			jComboBox7 = new javax.swing.JComboBox<>();
 			jLabel9 = new javax.swing.JLabel();
 			jScrollPane1 = new javax.swing.JScrollPane();
-			jTextArea1 = new javax.swing.JTextArea();
+			jTextArea1 = new javax.swing.JTextArea("");
 			jLabel10 = new javax.swing.JLabel();
 			jScrollPane2 = new javax.swing.JScrollPane();
-			jTextArea2 = new javax.swing.JTextArea();
+			jTextArea2 = new javax.swing.JTextArea("");
 			jButton1 = new javax.swing.JButton();
 			jLabel11 = new javax.swing.JLabel();
-			jTextField5 = new javax.swing.JTextField();
+			jTextField5 = new javax.swing.JTextField("");
 			
 			setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 			switch(mode){
@@ -483,10 +483,10 @@ public class Pacientes extends ColorPanel{
 		
 	    private void initGUI() {
 
-	        jTextField1 = new javax.swing.JTextField();
-	        jTextField2 = new javax.swing.JTextField();
-	        jTextField3 = new javax.swing.JTextField();
-	        jTextField4 = new javax.swing.JTextField();
+	        jTextField1 = new javax.swing.JTextField("");
+	        jTextField2 = new javax.swing.JTextField("");
+	        jTextField3 = new javax.swing.JTextField("");
+	        jTextField4 = new javax.swing.JTextField("");
 	        jLabel1 = new javax.swing.JLabel();
 	        jLabel2 = new javax.swing.JLabel();
 	        jLabel3 = new javax.swing.JLabel();

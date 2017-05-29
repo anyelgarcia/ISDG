@@ -97,19 +97,19 @@ public class Perfil extends ColorPanel{
 			jScrollPane1 = new javax.swing.JScrollPane();
 	        jList1 = new javax.swing.JList<>();
 	        jScrollPane2 = new javax.swing.JScrollPane();
-	        jTextArea1 = new javax.swing.JTextArea();
+	        jTextArea1 = new javax.swing.JTextArea("");
 	        jScrollPane3 = new javax.swing.JScrollPane();
-	        jTextArea2 = new javax.swing.JTextArea();
+	        jTextArea2 = new javax.swing.JTextArea("");
 	        jLabel1 = new javax.swing.JLabel();
 	        jLabel2 = new javax.swing.JLabel();
 	        jLabel3 = new javax.swing.JLabel();
 	        jLabel4 = new javax.swing.JLabel();
 	        jLabel5 = new javax.swing.JLabel();
 	        jLabel6 = new javax.swing.JLabel();
-	        jTextField1 = new javax.swing.JTextField();
-	        jTextField2 = new javax.swing.JTextField();
-	        jTextField3 = new javax.swing.JTextField();
-	        jTextField4 = new javax.swing.JTextField();
+	        jTextField1 = new javax.swing.JTextField("");
+	        jTextField2 = new javax.swing.JTextField("");
+	        jTextField3 = new javax.swing.JTextField("");
+	        jTextField4 = new javax.swing.JTextField("");
 
 	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 	        
