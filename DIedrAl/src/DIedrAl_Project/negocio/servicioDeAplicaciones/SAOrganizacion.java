@@ -5,6 +5,8 @@ import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.util.ArrayList;
 
+import DIedrAl_Project.integracion.AccessException;
+
 public interface SAOrganizacion {
 	/**
 	 * Devuelve los nombres de los centros asociados a la organización
@@ -12,8 +14,9 @@ public interface SAOrganizacion {
 	 * @return arrayList que contiene los nombres solicitados
 	 * @throws IOException
 	 * @throws ClassNotFoundException
+	 * @throws AccessException 
 	 */
-	public ArrayList<String> getCentros() throws ClassNotFoundException, IOException;
+	public ArrayList<String> getCentros() throws AccessException;
 
 	/**
 	 * Añade a la organización un centro con el nombre name, y genera un usuario
@@ -30,7 +33,7 @@ public interface SAOrganizacion {
 	 * @throws ClassNotFoundException
 	 */
 	public void addCentro(String name, String passAdmin)
-			throws AlreadyBoundException, ClassNotFoundException, IOException;
+			throws AlreadyBoundException, AccessException;
 
 	/**
 	 * Dado un nombre de centro, lo borra del sistema
@@ -41,7 +44,7 @@ public interface SAOrganizacion {
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
 	 */
-	public void eliminarCentro(String name) throws NotBoundException, ClassNotFoundException, IOException;
+	public void eliminarCentro(String name) throws NotBoundException, AccessException;
 
 	/**
 	 * Comprueba si existe un centro con el nombre dado en el sistema
@@ -52,7 +55,7 @@ public interface SAOrganizacion {
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
 	 */
-	public boolean existeCentro(String name) throws ClassNotFoundException, IOException;
+	public boolean existeCentro(String name) throws AccessException;
 
 	/**
 	 * Comprueba si el string dado coincide con la contraseña de administrador
@@ -73,5 +76,5 @@ public interface SAOrganizacion {
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
 	 */
-	public boolean existeUsuario(String nif) throws ClassNotFoundException, IOException;
+	public boolean existeUsuario(String nif) throws AccessException;
 }

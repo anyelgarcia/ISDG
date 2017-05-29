@@ -3,6 +3,7 @@ package DIedrAl_Project.negocio.administracion;
 import java.io.IOException;
 import java.util.*;
 
+import DIedrAl_Project.integracion.AccessException;
 import DIedrAl_Project.integracion.DAOFactory;
 import DIedrAl_Project.integracion.DAOPaciente;
 import DIedrAl_Project.integracion.DAORelacionable;
@@ -26,34 +27,27 @@ public class CentroMaps {
 		factory = SimpleFileDAOFactory.getInstance();
 	}
 
-	private void cargarInfo() throws ClassNotFoundException, IOException {
+	private void cargarInfo() throws AccessException {
 		DAOUsuario daous = factory.getDAOUsuario();
 		DAORelacionable daoter = factory.getDAORelacion(tRelacion.usuario);
 		users = new HashMap<>();
 		HashSet<Relacion> relaciones_u = daoter.listarRelaciones(nomb);
-		relaciones_u.forEach((relacion) -> {
-			try {
-				users.put(relacion.getId(), daous.consultarUsuario(relacion.getId()));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
+		for(Relacion r: relaciones_u){
+			users.put(r.getId(), daous.consultarUsuario(r.getId()));
+		}
 
 		DAOPaciente daopac = factory.getDAOPaciente();
 		DAORelacionable daore = factory.getDAORelacion(tRelacion.paciente);
 		this.pacients = new HashMap<>();
 		HashSet<Relacion> relaciones_p = daore.listarRelaciones(nomb);
-		relaciones_p.forEach((relacion) -> {
-			try {
-				pacients.put(relacion.getId(), daopac.consultarPaciente(relacion.getId()));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
+		for(Relacion r: relaciones_p){
+			pacients.put(r.getId(), daopac.consultarPaciente(r.getId()));
+		}
+		
 	}
 
 	private void mapear(Map<String, Persona> personas, Map<Paciente, Set<Usuario>> pacientes,
-			Map<Usuario, Set<Paciente>> usuarios) throws ClassNotFoundException, IOException {
+			Map<Usuario, Set<Paciente>> usuarios) throws AccessException {
 		
 		DAORelacionable daore = factory.getDAORelacion(tRelacion.paciente);
 		HashSet<Relacion> relaciones_p = daore.listarRelaciones(nomb);
@@ -83,7 +77,7 @@ public class CentroMaps {
 	}
 	
 	private void cargarCentro(Map<String, Persona> personas, Map<Paciente, Set<Usuario>> pacientes,
-			Map<Usuario, Set<Paciente>> usuarios) throws ClassNotFoundException, IOException{
+			Map<Usuario, Set<Paciente>> usuarios) throws AccessException{
 		cargarInfo();
 		mapear(personas,pacientes, usuarios);
 	}
@@ -94,8 +88,9 @@ public class CentroMaps {
 	 * @return centro mapeado con la información de los ficheros usados en la construcción del mapeador
 	 * @throws ClassNotFoundException
 	 * @throws IOException
+	 * @throws AccessException 
 	 */
-	public Centro generarCentro(EstadoCentro c) throws ClassNotFoundException, IOException{
+	public Centro generarCentro(EstadoCentro c) throws AccessException{
 		// Mapas donde mapear la información del centro.
 		nomb = c.getId();
 		Map<String, Persona> personas = new HashMap<String, Persona>();

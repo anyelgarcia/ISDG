@@ -1,6 +1,6 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
-import java.io.IOException;
+import DIedrAl_Project.integracion.AccessException;
 
 public class SAFactoryImpl extends SAFactory{
 
@@ -10,7 +10,7 @@ public class SAFactoryImpl extends SAFactory{
 	}
 
 	@Override
-	public SAPacientes newSAPacientes(String centro) throws ClassNotFoundException, IOException {
+	public SAPacientes newSAPacientes(String centro) throws AccessException  {
 		return new SAPacientesImpl(centro);
 	}
 
