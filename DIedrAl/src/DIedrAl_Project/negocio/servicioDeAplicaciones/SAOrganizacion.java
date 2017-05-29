@@ -5,6 +5,8 @@ import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.util.ArrayList;
 
+import DIedrAl_Project.integracion.AccessException;
+
 public interface SAOrganizacion {
 	/**
 	 * Devuelve los nombres de los centros asociados a la organización
@@ -69,9 +71,10 @@ public interface SAOrganizacion {
 	 * 
 	 * @param nif
 	 *            nif a buscar
-	 * @return true si existe, false en caso contrario
+	 * @return nombre del centro del usuario, null en caso de que no exista
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
+	 * @throws AccessException 
 	 */
-	public boolean existeUsuario(String nif) throws ClassNotFoundException, IOException;
+	public String existeUsuario(String nif) throws ClassNotFoundException, IOException;
 }
