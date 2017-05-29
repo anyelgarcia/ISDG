@@ -1,10 +1,10 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
-import java.io.IOException;
 import java.rmi.*;
 import java.util.*;
 
 import DIedrAl_Project.integracion.*;
+import DIedrAl_Project.integracion.AccessException;
 import DIedrAl_Project.negocio.Relacion;
 import DIedrAl_Project.negocio.administracion.*;
 import DIedrAl_Project.negocio.pacientes.*;
@@ -18,7 +18,7 @@ public class SAPacientesImpl implements SAPacientes {
 	private DAORelacionable daorelPac;
 	private DAORelacionable daorelUsu;
 
-	public SAPacientesImpl(String nombreCentro) throws ClassNotFoundException, IOException {
+	public SAPacientesImpl(String nombreCentro) throws AccessException{
 		DAOFactory factoria = SimpleFileDAOFactory.getInstance();
 		daocen = factoria.getDAOCentro();
 		daopac = factoria.getDAOPaciente();
@@ -32,24 +32,24 @@ public class SAPacientesImpl implements SAPacientes {
 	}
 
 	/**
-	 * Añade el paciente especificado al centro y actualiza la base de datos
-	 * para incluir la nueva información
+	 * AÃ±ade el paciente especificado al centro y actualiza la base de datos
+	 * para incluir la nueva informaciÃ³n
 	 * 
 	 * @param pac
-	 *            paciente a añadir al centro
+	 *            paciente a aÃ±adir al centro
 	 * @throws AlreadyBoundException
 	 *             , si el paciente ya estaba en el centro
 	 */
 	@Override
-	public void addPaciente(Paciente pac) throws AlreadyBoundException, IOException {
+	public void addPaciente(Paciente pac) throws AlreadyBoundException, AccessException {
 		
 		/*
-		 * Se intenta añadir el paciente. Si se puede, se crea una relacion con agente
+		 * Se intenta aÃ±adir el paciente. Si se puede, se crea una relacion con agente
 		 * el nuevo paciente y con centro asociado el centro actual.
 		 * Ademas, se guarda en la base de datos.
 		 */
 		centro.addPaciente(pac);
-    daorelPac.crearRelacion(new Relacion(pac.getId(), centro.getNombre()));
+		daorelPac.crearRelacion(new Relacion(pac.getId(), centro.getNombre()));
 		daopac.crearPaciente(pac);
 	}
 
@@ -61,9 +61,10 @@ public class SAPacientesImpl implements SAPacientes {
 	 *            paciente a eliminar del centro
 	 * @throws NotBoundException,
 	 *             si el paciente no se encuentra en el centro
+	 * @throws AccessException 
 	 */
 	@Override
-	public void erasePaciente(Paciente pac) throws NotBoundException, ClassNotFoundException, IOException {
+	public void erasePaciente(Paciente pac) throws NotBoundException, AccessException {
 
 		//Se intenta borrar el paciente del centro.
 		centro.erasePaciente(pac);
@@ -104,23 +105,23 @@ public class SAPacientesImpl implements SAPacientes {
 		if (daopac.existePaciente(pac.getId())) {
 			daopac.eliminarPaciente(pac.getId());
 		} else
-			//No debería entrar por aquí en estos momentos de la película.
+			//No deberÃ­a entrar por aquÃ­ en estos momentos de la pelÃ­cula.
 			throw new NotBoundException(pac + "no se encuentra registrado en la base de datos");
 	}
 
 	/**
-	 * Añade el usuario especificado al centro y actualiza la base de datos para
-	 * incluir la nueva información
+	 * AÃ±ade el usuario especificado al centro y actualiza la base de datos para
+	 * incluir la nueva informaciÃ³n
 	 * 
 	 * @param usu
-	 *            usuario a añadir al centro
+	 *            usuario a aÃ±adir al centro
 	 * @throws AlreadyBoundException
 	 *             , si el usuario ya estaba en el centro
 	 */
 	@Override
-	public void addUsuario(Usuario usu) throws AlreadyBoundException, ClassNotFoundException, IOException {
+	public void addUsuario(Usuario usu) throws AlreadyBoundException, AccessException {
 		/*
-		 * Se intenta añadir el usuario. Si se puede, se crea una relacion con agente
+		 * Se intenta aÃ±adir el usuario. Si se puede, se crea una relacion con agente
 		 * el nuevo usuario y con centro asociado el centro actual.
 		 * Ademas, se guarda en la base de datos.
 		 */
@@ -139,7 +140,7 @@ public class SAPacientesImpl implements SAPacientes {
 	 *             , si el usuario no se encuentra en el centro
 	 */
 	@Override
-	public void eraseUsuario(Usuario usu) throws NotBoundException, ClassNotFoundException, IOException {
+	public void eraseUsuario(Usuario usu) throws NotBoundException, AccessException {
 
 		//Se intenta borrar el usuario del centro.
 		centro.eraseUsuario(usu);
@@ -167,7 +168,7 @@ public class SAPacientesImpl implements SAPacientes {
 			// Si el usuario esta en alguna relacion con otro usuario, lo eliminamos del los
 			// relacionados.
 			
-			//NOTA: ESTO NO DEBERÍA ACTIVARSE NUNCA
+			//NOTA: ESTO NO DEBERÃ�A ACTIVARSE NUNCA
 			else if (r.getRelacionados().contains(usu.getId())) {
 				r.getRelacionados().remove(usu.getId());
 				daorelUsu.modificarRelacion(r);
@@ -181,13 +182,13 @@ public class SAPacientesImpl implements SAPacientes {
 		if (daousu.existeUsuario(usu.getId())) {
 			daousu.eliminarUsuario(usu.getId());
 		} else
-			//No debería entrar por aquí en estos momentos de la película.
+			//No deberÃ­a entrar por aquÃ­ en estos momentos de la pelÃ­cula.
 			throw new NotBoundException(usu + "no se encuentra registrado en la base de datos");
 	}
 
 	@Override
 	public void ligarPaciente(Paciente pac, Usuario usu)
-			throws NotBoundException, AlreadyBoundException, IOException, ClassNotFoundException {
+			throws NotBoundException, AlreadyBoundException, AccessException {
 		//Ligamos en el centro el paciente y el usuario.
 		centro.ligarPaciente(pac, usu);
 		//Cargamos la lista de relaciones de usuarios del centro
@@ -205,7 +206,7 @@ public class SAPacientesImpl implements SAPacientes {
 			usuToPac = new Relacion(usu.getId(), centro.getNombre());
 			daorelUsu.crearRelacion(usuToPac);
 		}
-		//Añadimos el nuevo relacionado.
+		//AÃ±adimos el nuevo relacionado.
 		usuToPac.getRelacionados().add(pac.getId());
 		daorelUsu.modificarRelacion(usuToPac);
 		//Hacemos lo mismo con el otro sentido de la relacion.
@@ -228,14 +229,14 @@ public class SAPacientesImpl implements SAPacientes {
 
 	@Override
 	public void desligarPaciente(Paciente pac, Usuario usu)
-			throws NotBoundException, AlreadyBoundException, ClassNotFoundException, IOException {
+			throws NotBoundException, AlreadyBoundException, AccessException {
 		centro.desligarPaciente(pac, usu);
 
 		//Cargamos el conjunto de relaciones de pacientes del centro
 		Set<Relacion> setrel = daorelPac.listarRelaciones(centro.getNombre());
 
 		for (Relacion r : setrel) {
-			//Si en alguno es el agente de la relación, eliminamos de relacionado el
+			//Si en alguno es el agente de la relaciÃ³n, eliminamos de relacionado el
 			//usuario
 			if (r.getIdAgente().equals(pac.getId())) {
 				r.getRelacionados().remove(usu.getId());

@@ -1,24 +1,27 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
-import java.io.IOException;
-import java.rmi.*;
+import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
 import java.util.Set;
 
-import DIedrAl_Project.negocio.administracion.*;
-import DIedrAl_Project.negocio.pacientes.*;
+import DIedrAl_Project.integracion.AccessException;
+import DIedrAl_Project.negocio.administracion.Hints;
+import DIedrAl_Project.negocio.administracion.Persona;
+import DIedrAl_Project.negocio.administracion.Usuario;
+import DIedrAl_Project.negocio.pacientes.Paciente;
 
 public interface SAPacientes {
-	public void addPaciente(Paciente pac) throws AlreadyBoundException, IOException;
+	public void addPaciente(Paciente pac) throws AlreadyBoundException, AccessException;
 
-	public void erasePaciente(Paciente pac) throws NotBoundException, ClassNotFoundException, IOException;
+	public void erasePaciente(Paciente pac) throws NotBoundException,AccessException;
 
-	public void addUsuario(Usuario usu) throws AlreadyBoundException, ClassNotFoundException, IOException, NotBoundException;
+	public void addUsuario(Usuario usu) throws AlreadyBoundException, NotBoundException, AccessException;
 
-	public void eraseUsuario(Usuario usu) throws NotBoundException, ClassNotFoundException, IOException;
+	public void eraseUsuario(Usuario usu) throws NotBoundException, AccessException;
 
-	public void ligarPaciente(Paciente pac, Usuario usu) throws NotBoundException, AlreadyBoundException, IOException, ClassNotFoundException;
+	public void ligarPaciente(Paciente pac, Usuario usu) throws NotBoundException, AlreadyBoundException, AccessException;
 
-	public void desligarPaciente(Paciente pac, Usuario usu) throws NotBoundException, AlreadyBoundException, ClassNotFoundException, IOException;
+	public void desligarPaciente(Paciente pac, Usuario usu) throws NotBoundException, AlreadyBoundException, AccessException;
 	
 	public Set<Paciente> getPacientesAsociados(Usuario usu) throws NotBoundException;
 	

@@ -38,16 +38,17 @@ public class SARecursosImpl implements SARecursos {
 	}
 
 	@Override
-	public void addRecurso(Recurso rec) throws IOException {
+	public void addRecurso(Recurso rec) throws AccessException, IOException {
 		bank.addRecurso(rec);
 		daorec.crearRecurso(rec);
 
 		File resourcesDir = new File("src/recursos/" + rec.getFileName());
-		Files.copy(rec.getPath(), resourcesDir.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		Files.copy(rec.getPath(), resourcesDir.toPath(),
+				StandardCopyOption.REPLACE_EXISTING);
 	}
 
 	@Override
-	public void removeRecurso(Recurso rec) throws ClassNotFoundException, IOException {
+	public void removeRecurso(Recurso rec) throws AccessException {
 
 		// Primera capa de borrado: se elimina el recurso de la lista de
 		// recursos del banco
@@ -59,7 +60,7 @@ public class SARecursosImpl implements SARecursos {
 		HashSet<Programable> programables = new HashSet<Programable>();
 		programables.addAll(daoses.listarSesiones());
 		programables.addAll(daoact.listarActividades());
-		programables.forEach((p) -> {
+		for (Programable p : programables) {
 			if (p.getAsociados().contains(rec)) {
 				p.getAsociados().remove(rec);
 				try {
@@ -68,40 +69,40 @@ public class SARecursosImpl implements SARecursos {
 					} else {
 						daoact.modificarActividad((Actividad) p);
 					}
-				} catch (ClassNotFoundException | IOException e) {
-					e.printStackTrace();
+				} catch (AccessException e) {
+					throw new AccessException(e.getMessage()
+							+ "\nFallo al utilizar el DAO");
 				}
 			}
-		});
+		}
 
 		rec.getFile().delete();
 
 	}
 
 	@Override
-	public void addActividad(Actividad act) throws IOException {
+	public void addActividad(Actividad act) throws AccessException {
 		bank.addActividad(act);
 		daoact.crearActividad(act);
 	}
 
 	@Override
-	public void removeActividad(Actividad act) throws ClassNotFoundException, IOException {
+	public void removeActividad(Actividad act) throws AccessException {
 
 		// Primera capa de borrado: se elimina el recurso de la lista de
 		// recursos del banco
 		bank.removeActividad(act);
-		if(daoact.existeActividad(act.getId())){
-			
+		if (daoact.existeActividad(act.getId())) {
+
 		}
 		daoact.eliminarActividad(act.getId());
-		
 
 		// Segunda capa de borrado: se elimina de todas los programables que la
 		// tuvieran como asociado
 		HashSet<Programable> programables = new HashSet<Programable>();
 		programables.addAll(daoses.listarSesiones());
 		programables.addAll(daoact.listarActividades());
-		programables.forEach((p) -> {
+		for (Programable p : programables) {
 			if (p.getAsociados().contains(act)) {
 				p.getAsociados().remove(act);
 				try {
@@ -110,22 +111,23 @@ public class SARecursosImpl implements SARecursos {
 					} else {
 						daoact.modificarActividad((Actividad) p);
 					}
-				} catch (ClassNotFoundException | IOException e) {
-					e.printStackTrace();
+				} catch (AccessException e) {
+					throw new AccessException(e.getMessage()
+							+ "\nFallo al utilizar el DAO");
 				}
 			}
-		});
+		}
 
 	}
 
 	@Override
-	public void addSesion(Sesion ses) throws IOException {
+	public void addSesion(Sesion ses) throws AccessException {
 		bank.addSesion(ses);
 		daoses.crearSesion(ses);
 	}
 
 	@Override
-	public void removeSesion(Sesion ses) throws ClassNotFoundException, IOException {
+	public void removeSesion(Sesion ses) throws AccessException {
 		bank.removeSesion(ses);
 		daoses.eliminarSesion(ses.getId());
 	}
@@ -177,7 +179,8 @@ public class SARecursosImpl implements SARecursos {
 
 	@Override
 	public ArrayActividades filtrarActividadesPorDestinatarios(Set<String> dest) {
-		return (ArrayActividades) bank.getActividades().filtrarDestinatarios(dest);
+		return (ArrayActividades) bank.getActividades().filtrarDestinatarios(
+				dest);
 	}
 
 	@Override
@@ -201,7 +204,8 @@ public class SARecursosImpl implements SARecursos {
 	}
 
 	@Override
-	public ArrayActividades filtrarActividadesPorRango(Dificultad min, Dificultad max) {
+	public ArrayActividades filtrarActividadesPorRango(Dificultad min,
+			Dificultad max) {
 		return bank.getActividades().filtrarRango(min, max);
 	}
 
@@ -236,7 +240,7 @@ public class SARecursosImpl implements SARecursos {
 			for (Actividad a : set) {
 				bank.addActividad(a);
 			}
-		} catch (ClassNotFoundException | IOException e) {
+		} catch (AccessException e) {
 			// e.printStackTrace();
 		}
 		try {
@@ -244,7 +248,7 @@ public class SARecursosImpl implements SARecursos {
 			for (Sesion s : ses) {
 				bank.addSesion(s);
 			}
-		} catch (ClassNotFoundException | IOException e) {
+		} catch (AccessException e) {
 			// e.printStackTrace();
 		}
 
@@ -253,7 +257,7 @@ public class SARecursosImpl implements SARecursos {
 			for (Recurso r : rec) {
 				bank.addRecurso(r);
 			}
-		} catch (ClassNotFoundException | IOException e) {
+		} catch (AccessException e) {
 			// e.printStackTrace();
 		}
 	}

@@ -3,22 +3,23 @@ package DIedrAl_Project.negocio.servicioDeAplicaciones;
 import java.io.IOException;
 import java.util.Set;
 
+import DIedrAl_Project.integracion.AccessException;
 import DIedrAl_Project.negocio.recursos.*;
 
 public interface SARecursos {
 	
 	
-	public void addRecurso(Recurso rec) throws IOException;
+	public void addRecurso(Recurso rec) throws AccessException, IOException;
 
-	public void removeRecurso(Recurso rec) throws ClassNotFoundException, IOException;
+	public void removeRecurso(Recurso rec) throws AccessException;
 
-	public void addActividad(Actividad act) throws IOException;
+	public void addActividad(Actividad act) throws AccessException;
 
-	public void removeActividad(Actividad act) throws ClassNotFoundException, IOException;
+	public void removeActividad(Actividad act) throws AccessException;
 
-	public void addSesion(Sesion ses) throws IOException;
+	public void addSesion(Sesion ses) throws AccessException;
 
-	public void removeSesion(Sesion ses) throws ClassNotFoundException, IOException;
+	public void removeSesion(Sesion ses) throws AccessException;
 
 	public Set<Recurso> filtrarRecursosPorNombre(String nombre);
 

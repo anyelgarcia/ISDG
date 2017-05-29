@@ -1,6 +1,6 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
-import java.io.IOException;
+import DIedrAl_Project.integracion.AccessException;
 
 public abstract class SAFactory {
 
@@ -14,7 +14,7 @@ public abstract class SAFactory {
 	
 	public abstract SARecursos newSARecursos();
 	
-	public abstract SAPacientes newSAPacientes(String centro) throws ClassNotFoundException, IOException;
+	public abstract SAPacientes newSAPacientes(String centro) throws AccessException;
 	
 	public abstract SAOrganizacion newSAOrganizacion();
 
