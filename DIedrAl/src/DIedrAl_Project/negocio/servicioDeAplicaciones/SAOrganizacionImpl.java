@@ -117,9 +117,9 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 	}
 
 	@Override
-	public boolean existeUsuario(String nif) throws ClassNotFoundException, IOException {
+	public String existeUsuario(String nif) throws ClassNotFoundException, IOException {
 		DAOUsuario daousu = factoria.getDAOUsuario();
-		return daousu.existeUsuario(nif);
+		return daousu.consultarUsuario(nif).getCentro();
 	}
 
 }
