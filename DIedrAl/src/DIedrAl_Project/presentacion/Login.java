@@ -30,7 +30,7 @@ public class Login extends JFrame{
     	jPanel1 = new ImagePanel("images/bb.jpg");
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField("");
         jPasswordField1 = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -127,7 +127,7 @@ public class Login extends JFrame{
 		}
 		
 		if(!intento.inputPassword(clave)){
-			Error mensaje = new Error("ContraseÒa equivocada");
+			Error mensaje = new Error("Contrase√±a equivocada");
 			mensaje.run();
 			return;
 		}
@@ -211,7 +211,7 @@ public class Login extends JFrame{
 			String password = jPasswordField1.getPassword().toString();
 			/*SAOrganizacion saOrg = SAFactory.getInstancia().newSAOrganizacion();
 			if(!saOrg.inputPasswordGod(password)){
-				Error msg = new Error("ContraseÒa Equivocada");
+				Error msg = new Error("Contrase√±a Equivocada");
 				msg.run();
 				return;
 			}*/
@@ -384,7 +384,7 @@ public class Login extends JFrame{
 		private void jButton2ActionPerformed(ActionEvent evt) {
 			if(jList1.getSelectedValue()!=null){
 				Confirm c = new Confirm();
-				c.setMensaje("El centro se eliminar· definitivamente.");
+				c.setMensaje("El centro se eliminar√° definitivamente.");
 		    	c.setVisible(true);
 		    	c.addListener(this);
 			}
@@ -412,7 +412,10 @@ public class Login extends JFrame{
 
 	       jLabel1 = new javax.swing.JLabel();
 	       jLabel3 = new javax.swing.JLabel();
-	       jTextField1 = new javax.swing.JTextField();
+       
+	       jTextField1 = new javax.swing.JTextField("");
+	       jTextField2 = new javax.swing.JTextField("");
+
 	       jPasswordField1 = new javax.swing.JPasswordField();
 	       jButton1 = new javax.swing.JButton();
 

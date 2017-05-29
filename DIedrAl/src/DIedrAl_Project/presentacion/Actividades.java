@@ -155,22 +155,22 @@ public class Actividades extends ColorPanel{
 	        jButton1 = new javax.swing.JButton();
 	        jButton1.setVisible(editable);
 	        jButton1.setEnabled(editable);
-	        jTextField1 = new javax.swing.JTextField();
+	        jTextField1 = new javax.swing.JTextField("");
 	        jTextField1.setEditable(editable);
 	        jComboBox1 = new javax.swing.JComboBox<>();
 	        jComboBox1.setEnabled(editable);
-	        jTextField2 = new javax.swing.JTextField();
+	        jTextField2 = new javax.swing.JTextField("");
 	        jTextField2.setEditable(editable);
 	        jLabel4 = new javax.swing.JLabel();
 	        jLabel5 = new javax.swing.JLabel();
 	        jScrollPane1 = new javax.swing.JScrollPane();
-	        jTextArea1 = new javax.swing.JTextArea();
+	        jTextArea1 = new javax.swing.JTextArea("");
 	        jLabel6 = new javax.swing.JLabel();
 	        jLabel7 = new javax.swing.JLabel();
 	        jScrollPane3 = new javax.swing.JScrollPane();
-	        jTextArea3 = new javax.swing.JTextArea();
+	        jTextArea3 = new javax.swing.JTextArea("");
 	        jScrollPane4 = new javax.swing.JScrollPane();
-	        jTextArea4 = new javax.swing.JTextArea();
+	        jTextArea4 = new javax.swing.JTextArea("");
 	        jScrollPane2 = new javax.swing.JScrollPane();
 	        jList1 = new javax.swing.JList<>();
 	        jScrollPane5 = new javax.swing.JScrollPane();
@@ -178,11 +178,11 @@ public class Actividades extends ColorPanel{
 	        jLabel8 = new javax.swing.JLabel();
 	        jLabel9 = new javax.swing.JLabel();
 	        jLabel10 = new javax.swing.JLabel();
-	        jTextField3 = new javax.swing.JTextField();
+	        jTextField3 = new javax.swing.JTextField("");
 	        jTextField3.setEditable(editable);
 	        jLabel11 = new javax.swing.JLabel();
 	        jScrollPane6 = new javax.swing.JScrollPane();
-	        jTextArea5 = new javax.swing.JTextArea();
+	        jTextArea5 = new javax.swing.JTextArea("");
 
 
 	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -489,15 +489,15 @@ public class Actividades extends ColorPanel{
 		private void initComponents() {
 
 	        jLabel1 = new javax.swing.JLabel();
-	        jTextField1 = new javax.swing.JTextField();
+	        jTextField1 = new javax.swing.JTextField("");
 	        jLabel2 = new javax.swing.JLabel();
 	        jScrollPane1 = new javax.swing.JScrollPane();
-	        jTextArea1 = new javax.swing.JTextArea();
+	        jTextArea1 = new javax.swing.JTextArea("");
 	        jLabel3 = new javax.swing.JLabel();
 	        jLabel6 = new javax.swing.JLabel();
-	        jTextField2 = new javax.swing.JTextField();
+	        jTextField2 = new javax.swing.JTextField("");
 	        jLabel7 = new javax.swing.JLabel();
-	        jTextField3 = new javax.swing.JTextField();
+	        jTextField3 = new javax.swing.JTextField("");
 	        jLabel8 = new javax.swing.JLabel();
 	        jLabel9 = new javax.swing.JLabel();
 	        jComboBox1 = new javax.swing.JComboBox<>();
@@ -505,7 +505,7 @@ public class Actividades extends ColorPanel{
 	        jComboBox2 = new javax.swing.JComboBox<>();
 	        jLabel4 = new javax.swing.JLabel();
 	        jScrollPane2 = new javax.swing.JScrollPane();
-	        jTextArea2 = new javax.swing.JTextArea();
+	        jTextArea2 = new javax.swing.JTextArea("");
 	        jSeparator1 = new javax.swing.JSeparator();
 	        jButton1 = new javax.swing.JButton();
 	        jScrollPane3 = new javax.swing.JScrollPane();

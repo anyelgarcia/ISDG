@@ -40,7 +40,7 @@ public class Usuarios extends ColorPanel{
 		add(title, c);
 
 
-		ImageButton nuevo = new ImageButton("AÒadir", "images/bluebutton.png", "images/bluebutton2.png", this);
+		ImageButton nuevo = new ImageButton("A√±adir", "images/bluebutton.png", "images/bluebutton2.png", this);
 		nuevo.addActionListener((ae) -> {
 			JFrame panel = new PantallaUsuario(null, Modo.ADD);
 			panel.setVisible(true);
@@ -67,7 +67,7 @@ public class Usuarios extends ColorPanel{
 
 	/**
 	 * Clase que gestiona la ventana que muestra los campos de un usuario. Se utiliza esta ventana tanto para
-	 * aÒadir un usuario nuevo como para editar o consultar los datos de un usuario ya existente.
+	 * a√±adir un usuario nuevo como para editar o consultar los datos de un usuario ya existente.
 	 * @author Diedral_Group
 	 * 
 	 */  
@@ -115,24 +115,26 @@ public class Usuarios extends ColorPanel{
 			jScrollPane1 = new javax.swing.JScrollPane();
 			jList1 = new javax.swing.JList<>();
 			jScrollPane2 = new javax.swing.JScrollPane();
-			jTextArea1 = new javax.swing.JTextArea();
+			jTextArea1 = new javax.swing.JTextArea("");
 			jScrollPane3 = new javax.swing.JScrollPane();
-			jTextArea2 = new javax.swing.JTextArea();
+			jTextArea2 = new javax.swing.JTextArea("");
 			jLabel1 = new javax.swing.JLabel();
 			jLabel2 = new javax.swing.JLabel();
 			jLabel3 = new javax.swing.JLabel();
 			jLabel5 = new javax.swing.JLabel();
 			jLabel6 = new javax.swing.JLabel();
-			jTextField1 = new javax.swing.JTextField();
-			jTextField3 = new javax.swing.JTextField();
-			jTextField4 = new javax.swing.JTextField();
+			jTextField1 = new javax.swing.JTextField("");
+			jTextField2 = new javax.swing.JTextField("");
+			jTextField3 = new javax.swing.JTextField("");
+			jTextField4 = new javax.swing.JTextField("");
+
 			jButton1 = new javax.swing.JButton();
 			jLabel7 = new javax.swing.JLabel();
 			jLabel8 = new javax.swing.JLabel();
 			jLabel9 = new javax.swing.JLabel();
-			jTextField7 = new javax.swing.JTextField();
-			jTextField8 = new javax.swing.JTextField();
-			jTextField9 = new javax.swing.JTextField();
+			jTextField7 = new javax.swing.JTextField("");
+			jTextField8 = new javax.swing.JTextField("");
+			jTextField9 = new javax.swing.JTextField("");
 
 			setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 			switch(mode){
@@ -159,11 +161,11 @@ public class Usuarios extends ColorPanel{
 
 			jTextArea2.setColumns(20);
 			jTextArea2.setRows(5);
-			jTextArea2.setText("DescripciÛn");
+			jTextArea2.setText("Descripci√≥n");
 			jScrollPane3.setViewportView(jTextArea2);
 
 			jLabel1.setFont(new java.awt.Font("Arial", 0, 10));
-			jLabel1.setText("Despacho, horarios y otra informaciÛn: ");
+			jLabel1.setText("Despacho, horarios y otra informaci√≥n: ");
 			jLabel1.setForeground(Color.BLACK);
 
 			jLabel2.setFont(new java.awt.Font("Arial", 0, 10));
@@ -191,7 +193,7 @@ public class Usuarios extends ColorPanel{
 			jLabel5.setForeground(Color.BLACK);
 
 			jLabel6.setFont(new java.awt.Font("Arial", 0, 10));
-			jLabel6.setText("TelÈfono: ");
+			jLabel6.setText("Tel√©fono: ");
 			jLabel6.setForeground(Color.BLACK);
 
 			jButton1.setText("Guardar");
@@ -363,11 +365,11 @@ public class Usuarios extends ColorPanel{
 
 		private void initGUI() {
 
-			jTextField1 = new javax.swing.JTextField();
-			jTextField2 = new javax.swing.JTextField();
-			jTextField3 = new javax.swing.JTextField();
-			jTextField4 = new javax.swing.JTextField();
-			jTextField5 = new javax.swing.JTextField();
+			jTextField1 = new javax.swing.JTextField("");
+			jTextField2 = new javax.swing.JTextField("");
+			jTextField3 = new javax.swing.JTextField("");
+			jTextField4 = new javax.swing.JTextField("");
+			jTextField5 = new javax.swing.JTextField("");
 			jLabel1 = new javax.swing.JLabel();
 			jLabel2 = new javax.swing.JLabel();
 			jLabel3 = new javax.swing.JLabel();
@@ -505,8 +507,8 @@ public class Usuarios extends ColorPanel{
 		}
 
 		/**
-		 * FunciÛn que se ejecuta al darle al botÛn buscar. Rellena un Usuario con los datos introducidos y 
-		 * busca en el sistema a todos los que coincidan con Èl.
+		 * Funci√≥n que se ejecuta al darle al bot√≥n buscar. Rellena un Usuario con los datos introducidos y 
+		 * busca en el sistema a todos los que coincidan con √©l.
 		 * @param evt
 		 */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -541,7 +543,7 @@ public class Usuarios extends ColorPanel{
 				hints.add(Hints.NIF);
 			}
 
-			if(admin.equals("Si")||  admin.equals("SÌ") ||  admin.equals("SI") ||  admin.equals("SÕ")){
+			if(admin.equals("Si")||  admin.equals("S√≠") ||  admin.equals("SI") ||  admin.equals("S√ç")){
 				usuarios = new Hints[1];
 				usuarios[0] = Hints.ADMINISTRADOR;
 			}else{
@@ -581,9 +583,9 @@ public class Usuarios extends ColorPanel{
 		}                                        
 
 		/**
-		 * FunciÛn que se ejecuta al seleccionar uno de los resultados de la b˙squeda y pulsar el
-		 * botÛn de validar. Seg˙n el modo se hace una cosa u otra. 
-		 * Si el modo es eliminar, se muestra una pantalla de confirmaciÛn.
+		 * Funci√≥n que se ejecuta al seleccionar uno de los resultados de la b√∫squeda y pulsar el
+		 * bot√≥n de validar. Seg√∫n el modo se hace una cosa u otra. 
+		 * Si el modo es eliminar, se muestra una pantalla de confirmaci√≥n.
 		 * Si el modo es Editar o buscar, se crea una pantalla Usuario y se le pasa el control.
 		 * @param evt
 		 */
@@ -594,7 +596,7 @@ public class Usuarios extends ColorPanel{
 			switch(modo){
 				case ELIMINAR:
 					Confirm c = new Confirm();
-					c.setMensaje("El paciente se eliminar· del sistema.");
+					c.setMensaje("El paciente se eliminar√° del sistema.");
 			    	c.setVisible(true);
 			    	c.addListener(this);
 			    	break;
