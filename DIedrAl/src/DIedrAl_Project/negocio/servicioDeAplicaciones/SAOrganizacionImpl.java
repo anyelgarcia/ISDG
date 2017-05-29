@@ -12,6 +12,8 @@ import DIedrAl_Project.negocio.pacientes.Paciente;
 public class SAOrganizacionImpl implements SAOrganizacion {
 
 	private Organizacion organizacion;
+	
+	private DAOUsuario daousu;
 
 	private SimpleFileDAOFactory factoria;
 
@@ -29,6 +31,7 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 	private SAOrganizacionImpl() {
 		this.organizacion = Organizacion.getInstancia();
 		factoria = SimpleFileDAOFactory.getInstance();
+		daousu=factoria.getDAOUsuario();
 	}
 
 	@Override
@@ -65,7 +68,6 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 			AccessException {
 
 		// Borrar del sistema todos aquellos usuarios cuyo centro sea el borrado
-		DAOUsuario daousu = factoria.getDAOUsuario();
 		HashSet<Usuario> usuarios = daousu.listarUsuarios();
 		for (Usuario user : usuarios) {
 			if (user.getCentro().equals(name)) {
@@ -124,9 +126,12 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 	}
 
 	@Override
-	public boolean existeUsuario(String nif) throws AccessException {
-		DAOUsuario daousu = factoria.getDAOUsuario();
-		return daousu.existeUsuario(nif);
+	public Usuario getUsuario(String nif) throws AccessException, NotBoundException {
+		Usuario usu = daousu.consultarUsuario(nif);
+		if(usu==null){
+			throw new NotBoundException("Usuario no encontrado");
+		}
+		return usu;
 	}
 
 }

@@ -36,7 +36,7 @@ public class DAORecursoImp implements DAORecurso{
 		try {
 			op.guardar(r, file);
 		} catch (IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo guardar el recurso");
 		}
 	}
 
@@ -45,7 +45,7 @@ public class DAORecursoImp implements DAORecurso{
 		try {
 			op.borrar(id, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo eliminar el recurso");
 		}
 	}
 
@@ -54,7 +54,7 @@ public class DAORecursoImp implements DAORecurso{
 		try {
 			op.modificar(r, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo modificar el recurso");
 		}
 	}
 
@@ -63,7 +63,7 @@ public class DAORecursoImp implements DAORecurso{
 		try {
 			return op.obtenerDatosSet(file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException();
+			throw new AccessException("No se pudo listar los recursos");
 		}
 	}
 

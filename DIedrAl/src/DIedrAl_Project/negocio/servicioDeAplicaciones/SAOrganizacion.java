@@ -6,6 +6,7 @@ import java.rmi.NotBoundException;
 import java.util.ArrayList;
 
 import DIedrAl_Project.integracion.AccessException;
+import DIedrAl_Project.negocio.administracion.Usuario;
 
 public interface SAOrganizacion {
 	/**
@@ -68,13 +69,11 @@ public interface SAOrganizacion {
 	public boolean inputPasswordGod(String pass);
 
 	/**
-	 * Comprueba si existe un usuario con el nif dado en el sistema
+	 * Devuelve un usuario con el nif dado en el sistema
 	 * 
 	 * @param nif
 	 *            nif a buscar
-	 * @return true si existe, false en caso contrario
-	 * @throws IOException 
-	 * @throws ClassNotFoundException 
+	 * @return el usuario con el nif
 	 */
-	public boolean existeUsuario(String nif) throws AccessException;
+	public Usuario getUsuario(String nif) throws AccessException, NotBoundException;
 }

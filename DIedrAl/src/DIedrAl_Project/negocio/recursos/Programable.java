@@ -5,6 +5,9 @@ import java.rmi.NotBoundException;
 import java.util.*;
 
 public abstract class Programable extends Etiquetable {
+	
+	private static final long serialVersionUID = 7766081036213708004L;
+
 	protected int duracion;
 
 	protected HashSet<String> destinatarios;
