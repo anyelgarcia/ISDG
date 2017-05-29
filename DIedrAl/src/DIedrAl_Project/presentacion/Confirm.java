@@ -33,7 +33,7 @@ public class Confirm extends JFrame{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); 
         jLabel1.setText("El archivo se eliminará definitivamente");
 
         jButton1.setText("Aceptar");
