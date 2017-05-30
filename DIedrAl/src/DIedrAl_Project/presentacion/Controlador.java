@@ -410,6 +410,7 @@ public class Controlador {
 		
 		if(intento==null){
 			new Error("No se ha encontrado al usuario en el sistema");
+			return false;
 		}
 		
 		if(!intento.inputPassword(clave)){
