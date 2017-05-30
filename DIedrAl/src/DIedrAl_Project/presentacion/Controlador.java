@@ -5,6 +5,7 @@ import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import DIedrAl_Project.integracion.BasicClasses.AccessException;
 import DIedrAl_Project.negocio.administracion.Hints;
@@ -24,6 +25,7 @@ import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAOrganizacion;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAPacientes;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SARecursos;
+import DIedrAl_Project.negocio.tests.SARecursosTest;
 
 /**
  * 
@@ -31,6 +33,8 @@ import DIedrAl_Project.negocio.servicioDeAplicaciones.SARecursos;
  *
  */
 public class Controlador {
+	
+	private static final Logger log = Logger.getLogger(Controlador.class.getName());
 	
 	private static Usuario usuario;
 	
@@ -232,6 +236,7 @@ public class Controlador {
 		try {
 			saUsuarios = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 		} catch (AccessException e) {
+			log.severe(e.getMessage());
 			new Error(e.getMessage());
 		}
 		
@@ -336,6 +341,7 @@ public class Controlador {
     	try {
 			centros = SAFactory.getInstancia().newSAOrganizacion().getCentros();
 		} catch (AccessException e) {
+			log.severe(e.getMessage());
 			new Error(e.getMessage());
 			return null;
 		}
@@ -348,6 +354,7 @@ public class Controlador {
 		 try {
 			saOrg.eliminarCentro(name);
 		} catch (NotBoundException | AccessException e) {
+			log.severe(e.getMessage());
 			new Error(e.getMessage());
 			
 		}
@@ -360,6 +367,7 @@ public class Controlador {
 				return false; 
 			}
 		} catch (AccessException e) {
+			log.severe(e.getMessage());
 			new Error(e.getMessage());
 		}
 		 return true;
@@ -370,6 +378,7 @@ public class Controlador {
 		 try {
 			saOrg.addCentro(nameCentro, password);
 		} catch (AccessException | AlreadyBoundException e) {
+			log.severe(e.getMessage());
 			new Error(e.getMessage());
 		}
 		 
@@ -394,6 +403,7 @@ public class Controlador {
 		try {
 			intento = saOrg.getUsuario(nombreuser);
 		} catch (NotBoundException | AccessException e) {
+			log.severe(e.getMessage());
 			new Error(e.getMessage());
 			return false;
 		}
@@ -417,6 +427,7 @@ public class Controlador {
 			SAPacientes saUsu = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 			saUsu.ligarPaciente(pac, usr);
 		} catch (AccessException | NotBoundException | AlreadyBoundException e) {
+			log.severe(e.getMessage());
 			new Error(e.getMessage());
 		}
 	}
@@ -426,6 +437,7 @@ public class Controlador {
 			SAPacientes saUsu = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 			saUsu.desligarPaciente(pac, usr);
 		} catch (AccessException | NotBoundException | AlreadyBoundException e) {
+			log.severe(e.getMessage());
 			new Error(e.getMessage());
 		}
 	}

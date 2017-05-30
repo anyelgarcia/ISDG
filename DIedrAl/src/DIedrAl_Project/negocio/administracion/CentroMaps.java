@@ -43,8 +43,8 @@ public class CentroMaps {
 		
 	}
 
-	private void mapear(Map<String, Persona> personas, Map<Paciente, Set<Usuario>> pacientes,
-			Map<Usuario, Set<Paciente>> usuarios) throws AccessException {
+	private void mapear(HashMap<String, Persona> personas, HashMap<Paciente, HashSet<Usuario>> pacientes,
+			HashMap<Usuario, HashSet<Paciente>> usuarios) throws AccessException {
 		
 		DAORelacionable daore = factory.getDAORelacion(tRelacion.paciente);
 		HashSet<Relacion> relaciones_p = daore.listarRelaciones(nomb);
@@ -73,8 +73,8 @@ public class CentroMaps {
 		});
 	}
 	
-	private void cargarCentro(Map<String, Persona> personas, Map<Paciente, Set<Usuario>> pacientes,
-			Map<Usuario, Set<Paciente>> usuarios) throws AccessException{
+	private void cargarCentro(HashMap<String, Persona> personas, HashMap<Paciente, HashSet<Usuario>> pacientes,
+			HashMap<Usuario, HashSet<Paciente>> usuarios) throws AccessException{
 		cargarInfo();
 		mapear(personas,pacientes, usuarios);
 	}
@@ -90,9 +90,9 @@ public class CentroMaps {
 	public Centro generarCentro(EstadoCentro c) throws AccessException{
 		// Mapas donde mapear la información del centro.
 		nomb = c.getId();
-		Map<String, Persona> personas = new HashMap<String, Persona>();
-		Map<Paciente, Set<Usuario>> pacientes = new HashMap<Paciente, Set<Usuario>>();
-		Map<Usuario, Set<Paciente>> usuarios = new HashMap<Usuario, Set<Paciente>>();
+		HashMap<String, Persona> personas = new HashMap<String, Persona>();
+		HashMap<Paciente, HashSet<Usuario>> pacientes = new HashMap<Paciente, HashSet<Usuario>>();
+		HashMap<Usuario, HashSet<Paciente>> usuarios = new HashMap<Usuario, HashSet<Paciente>>();
 		cargarCentro(personas, pacientes, usuarios);
 		return new Centro(c, pacientes, usuarios, personas);
 	}
