@@ -23,10 +23,16 @@ import DIedrAl_Project.presentacion.Confirm.confirmListener;
  * @author Diedral_Group
  *
  */
-@SuppressWarnings("serial")
+
 public class Actividades extends ColorPanel{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6517855682994096031L;
+
+
 	public Actividades(int r, int g, int b){
 		super(r,g,b);
 
@@ -91,13 +97,17 @@ public class Actividades extends ColorPanel{
 	 
 	
 	/**
-	 * Clase que gestiona la ventana que aparece al darle al botón -AÃ±adir- en la sección -Actividades- del MÃ©nú Principal
+	 * Clase que gestiona la ventana que aparece al darle al botón -Añadir- en la sección -Actividades- del Menú Principal
 	 * @author Diedral_Group
 	 * 
 	 */
 	private class PantallaActividad extends JFrame{
 		                    
-	    private javax.swing.JButton jButton1;
+	    /**
+		 * 
+		 */
+		private static final long serialVersionUID = -5373151364761180723L;
+		private javax.swing.JButton jButton1;
 	    private javax.swing.JComboBox<String> jComboBox1;
 	    private javax.swing.JLabel jLabel1;
 	    private javax.swing.JLabel jLabel10;
@@ -257,12 +267,20 @@ public class Actividades extends ColorPanel{
 	        	jTextArea5.setText(act.getVariaciones());
 	      
 	        	jList1.setModel(new javax.swing.AbstractListModel<String>() {
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
 					ArrayList<String> recursos = Controlador.getRecursosAsociados(act);
 					String[] strings = recursos.toArray(new String[recursos.size()]);
 					public int getSize() { return strings!= null ? strings.length : 0; }
 		            public String getElementAt(int i) { return strings[i]; }
 		        });
 	        	jList2.setModel(new javax.swing.AbstractListModel<String>() {
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
 					ArrayList<String> actividades = Controlador.getActividadesAsociadas(act);
 					String[] strings = actividades.toArray(new String[actividades.size()]);
 					public int getSize() { return strings!= null ? strings.length : 0; }
@@ -394,7 +412,7 @@ public class Actividades extends ColorPanel{
 		}
 		
 		/**
-		 * Función que se ejecuta al darle a guardar en la ventana de aÃ±adir actividades. Se rellena un objeto actividad y es pasado al controlador.
+		 * Función que se ejecuta al darle a guardar en la ventana de añadir actividades. Se rellena un objeto actividad y es pasado al controlador.
 		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { 
 			
@@ -431,6 +449,10 @@ public class Actividades extends ColorPanel{
 	private class PantallaBuscar extends JFrame implements confirmListener{
 		
 		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -8004040768761577903L;
 		private javax.swing.JButton jButton1;
 	    private javax.swing.JButton jButton2;
 	    private javax.swing.JComboBox<String> jComboBox1;
@@ -543,6 +565,10 @@ public class Actividades extends ColorPanel{
 	        });
 
 	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
 				String[] strings = {  };
 				public int getSize() { return strings!= null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }
@@ -651,8 +677,12 @@ public class Actividades extends ColorPanel{
 	        );
 	        getContentPane().setBackground(getColor());
 	        pack();
-	    }                     
-
+	    }     
+		
+		/**
+		 * Funcion que se ejecuta cuando se pulsa al boton buscar en la pantalla actividad
+		 * @param evt
+		 */
 	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 	    	String nombre = jTextField1.getText();
 			Set<String> setEtiquetas = new HashSet<String>(Arrays.asList(jTextArea1.getText().split(",")));
@@ -681,7 +711,10 @@ public class Actividades extends ColorPanel{
 			
 			
 	    }                                        
-
+	    /**
+	     * Funcion que se ejecuta cuando seleccionan el boton seleccionar, tras haber buscado algo
+	     * @param evt
+	     */
 	    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 	    	int i; JFrame p; Actividad a = null;
 	    	switch(modo){

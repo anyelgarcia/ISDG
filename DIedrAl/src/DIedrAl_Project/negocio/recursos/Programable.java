@@ -5,7 +5,7 @@ import java.rmi.NotBoundException;
 import java.util.*;
 
 public abstract class Programable extends Etiquetable {
-	
+
 	private static final long serialVersionUID = 7766081036213708004L;
 
 	protected int duracion;
@@ -71,9 +71,11 @@ public abstract class Programable extends Etiquetable {
 
 	public void addActividad(Actividad act) throws AlreadyBoundException {
 		if (act == this) {
-			throw new AlreadyBoundException("No se puede añadir una actividad a sí misma");
+			throw new AlreadyBoundException(
+					"No se puede añadir una actividad a sí misma");
 		} else if (asociados.contains(act)) {
-			throw new AlreadyBoundException("Actividad " + act + " ya existente");
+			throw new AlreadyBoundException("Actividad " + act
+					+ " ya existente");
 		}
 
 		else {
@@ -119,8 +121,19 @@ public abstract class Programable extends Etiquetable {
 
 	@Override
 	public String toString() {
-		return super.toString() + "Programable [duracion=" + duracion + ", destinatarios=" + destinatarios
-				+ ", asociados=" + asociados + ", desarrollo=" + desarrollo + ", variaciones=" + variaciones + "]";
+		StringBuilder sb = new StringBuilder();
+		StringBuilder sbdes = new StringBuilder();
+		for(String s: destinatarios){
+			sbdes.append(s+" ");
+		}
+		sb.append(super.toString() + "\nDuracion: " + duracion
+				+ "\nDestinatarios: " + sbdes.toString() + "\nSu desarrollo es: "
+				+ desarrollo + "\nSus variaciones son: " + variaciones);
+		sb.append("\nContiene a:");
+		for (Etiquetable e : asociados) {
+			sb.append("\n" + e.toString());
+		}
+		return sb.toString();
 	}
 
 }

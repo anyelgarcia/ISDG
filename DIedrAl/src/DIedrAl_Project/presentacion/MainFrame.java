@@ -5,8 +5,17 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
 
-@SuppressWarnings("serial")
+/**
+ * Pantalla principal. Se abre cuando se inicia la aplicacion tras haberse iniciado
+ * sesión correctamente
+ *
+ */
 public class MainFrame extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6538639746657299835L;
+
 	public MainFrame(){
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -67,9 +76,4 @@ public class MainFrame extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-
-	public static void main(String ... args){
-		JFrame pantalla = new MainFrame();
-		pantalla.setVisible(true);
-	}
 }
