@@ -49,4 +49,13 @@ public class Usuario extends Persona {
 		return pass.equals(password);
 	}
 	
+	@Override
+	public void igualarCampos(Persona that){
+		super.igualarCampos(that);
+		
+		admin = that.admin;
+		infor = that.infor;
+		password = that.password;
+	}
+	
 }
