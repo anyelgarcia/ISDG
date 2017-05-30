@@ -67,6 +67,7 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 				+ "_ADMIN");
 		u.setCentro(name);
 		u.setPassword(passAdmin);
+		u.setAdmin();
 		daousu.crearUsuario(u);
 		
 	}

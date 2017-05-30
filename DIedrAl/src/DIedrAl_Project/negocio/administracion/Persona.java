@@ -50,7 +50,7 @@ public abstract class Persona implements ObjetoAlmacenable, Serializable, Clonea
 		this.apellido1 = apellido1;
 		this.apellido2 = apellido2;
 		this.nif = nif;
-		id = UUID.randomUUID().toString();
+		this.id=nif;
 	}
 
 	public String getName() {

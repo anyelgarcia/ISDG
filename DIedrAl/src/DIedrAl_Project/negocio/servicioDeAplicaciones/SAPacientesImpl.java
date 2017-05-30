@@ -124,6 +124,7 @@ public class SAPacientesImpl implements SAPacientes {
 	 */
 	@Override
 	public void addUsuario(Usuario usu) throws AlreadyBoundException, AccessException {
+		usu.setCentro(centro.getNombre());
 		/*
 		 * Se intenta añadir el usuario. Si se puede, se crea una relacion con agente
 		 * el nuevo usuario y con centro asociado el centro actual.
