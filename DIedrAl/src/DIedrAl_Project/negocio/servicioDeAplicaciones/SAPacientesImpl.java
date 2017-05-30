@@ -52,9 +52,12 @@ public class SAPacientesImpl implements SAPacientes {
 		 * el nuevo paciente y con centro asociado el centro actual.
 		 * Ademas, se guarda en la base de datos.
 		 */
-		centro.addPaciente(pac);
-		daorelPac.crearRelacion(new Relacion(pac.getId(), centro.getNombre()));
-		daopac.crearPaciente(pac);
+		if(!daopac.existePaciente(pac.getId())){
+			centro.addPaciente(pac);
+			daorelPac.crearRelacion(new Relacion(pac.getId(), centro.getNombre()));
+			daopac.crearPaciente(pac);
+		}
+		else throw new AlreadyBoundException("El paciente ya se encuentra registrado");
 	}
 
 	/**
@@ -130,9 +133,13 @@ public class SAPacientesImpl implements SAPacientes {
 		 * el nuevo usuario y con centro asociado el centro actual.
 		 * Ademas, se guarda en la base de datos.
 		 */
-		centro.addUsuario(usu);
-		daorelUsu.crearRelacion(new Relacion(usu.getId(), centro.getNombre()));
-		daousu.crearUsuario(usu);
+		if(!daousu.existeUsuario(usu.getId())){
+			centro.addUsuario(usu);
+			daorelUsu.crearRelacion(new Relacion(usu.getId(), centro.getNombre()));
+			daousu.crearUsuario(usu);
+		}
+		else throw new AlreadyBoundException("El usuario ya se encuentra registrado");
+
 	}
 
 	/**
