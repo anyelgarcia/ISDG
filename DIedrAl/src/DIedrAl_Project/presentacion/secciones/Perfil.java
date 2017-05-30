@@ -136,8 +136,8 @@ public class Perfil extends ColorPanel{
 				 */
 				private static final long serialVersionUID = 1L;
 				
-				String[] strings = /*Controlador.getPacientesAsociados(user)*/{""};
-	            public int getSize() { return strings.length; }
+				String[] strings = Controlador.getPacientesAsociados(user);
+	            public int getSize() { return strings!=null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }
 	        });
 	        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -164,23 +164,24 @@ public class Perfil extends ColorPanel{
 	        jLabel5.setText("Email: ");
 
 	        jLabel6.setText("Teléfono: ");
-
-	        /*jTextField1.setEditable(false);
-	        jTextField1.setText(user.getName() +" " + user.getFirstSurname() + " " + user.getSecondSurname());
 	        
-	        jTextField3.setEditable(editable);
-	        jTextField3.setText(user.getEmail());
-	        
-	        jTextField4.setEditable(editable);
-	        jTextField4.setText(user.getTfo());
-	        
-	        jTextArea1.setText(user.getPerfil());
-      
-	        jTextArea1.setEditable(editable);
-	        
-	        jTextArea2.setText(user.getInfor());
-	        jTextArea2.setEditable(editable);*/
-	  
+	        if(user != null){
+		        jTextField1.setEditable(false);
+		        jTextField1.setText(user.getName() +" " + user.getFirstSurname() + " " + user.getSecondSurname());
+		        
+		        jTextField3.setEditable(editable);
+		        jTextField3.setText(user.getEmail());
+		        
+		        jTextField4.setEditable(editable);
+		        jTextField4.setText(user.getTfo());
+		        
+		        jTextArea1.setText(user.getPerfil());
+	      
+		        jTextArea1.setEditable(editable);
+		        
+		        jTextArea2.setText(user.getInfor());
+		        jTextArea2.setEditable(editable);
+	        }
 
 	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 	       getContentPane().setLayout(layout);

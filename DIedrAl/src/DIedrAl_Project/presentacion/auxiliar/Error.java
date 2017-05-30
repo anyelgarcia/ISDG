@@ -1,7 +1,10 @@
 package DIedrAl_Project.presentacion.auxiliar;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.AffineTransform;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,7 +25,11 @@ public class Error extends JFrame{
 		jlabel.setFont(new java.awt.Font("SansSerif", 1, 13));
 		add(jlabel);
 		setVisible(true);
-		setSize(300, 100);
+		AffineTransform affinetransform = new AffineTransform();     
+		FontRenderContext frc = new FontRenderContext(affinetransform,true,true);     
+		Font font = new Font("Arial", Font.PLAIN, 12);
+		int textwidth = (int)(font.getStringBounds(mensaje, frc).getWidth());
+		setSize(textwidth + 200, 100);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
