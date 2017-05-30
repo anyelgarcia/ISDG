@@ -1,14 +1,13 @@
 package DIedrAl_Project.negocio.tests;
 
 import static org.junit.Assert.assertTrue;
-
 import java.rmi.AlreadyBoundException;
 import java.util.Random;
 import java.util.logging.Logger;
 
 import org.junit.Test;
 
-import DIedrAl_Project.integracion.BasicClasses.AccessException;
+import DIedrAl_Project.integracion.AccessException;
 import DIedrAl_Project.negocio.recursos.*;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.*;
 
@@ -28,6 +27,7 @@ public class SARecursosTest {
 
 		// Limpiamos el banco.
 		Banco.getInstancia().setSesiones(new ArraySesiones());
+
 		// Añadir al banco diez sesiones de prueba
 		for (int i = 0; i < 10; i++) {
 			Sesion sesionAux = new Sesion("Sesion " + (i + 1));
@@ -132,7 +132,7 @@ public class SARecursosTest {
 
 	}
 	
-	@Test
+	//@Test
 	public void clearBanco(){
 		ArrayActividades a=sarec.getActividades();
 		for(Actividad act:a){

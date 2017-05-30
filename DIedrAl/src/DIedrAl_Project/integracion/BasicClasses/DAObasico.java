@@ -7,10 +7,9 @@ import java.util.HashSet;
 import DIedrAl_Project.negocio.ObjetoAlmacenable;
 
 /**
- * Clase generica que implementa todos los metodos CRUD. Cualquier clase que
- * implemente ObjetoAlmacenable puede utilizar un DAObasico para realizar estas
- * operaciones
- * 
+ * Clase generica que implementa todos los metodos CRUD. Cualquier clase
+ * que implemente ObjetoAlmacenable puede utilizar un DAObasico para realizar
+ * estas operaciones
  * @author Diedral_Group
  */
 public class DAObasico<S extends ObjetoAlmacenable> {
@@ -24,38 +23,36 @@ public class DAObasico<S extends ObjetoAlmacenable> {
 		obj.close();
 	}
 
-	public S consultar(String id, String file) throws IOException,
-			ClassNotFoundException {
+	public S consultar(String id, String file) throws IOException, ClassNotFoundException {
 		FileInputStream fis = new FileInputStream(file);
 		BufferedInputStream bis = new BufferedInputStream(fis);
 		AppendableObjectInputStream ois = new AppendableObjectInputStream(bis);
-		S p = null;
-		try {
-			do {
+		S p = (S) ois.readObject();
+		while (!p.getId().equalsIgnoreCase(id)) {
+			try {
 				p = (S) ois.readObject();
-			} while (!p.getId().equalsIgnoreCase(id));
-		} catch (EOFException op) {
-			ois.close();
-			return null;
+			} catch (EOFException op) {
+				ois.close();
+				return null;
+			}
 		}
 		ois.close();
 		return p;
 	}
 
-	public void modificar(S nuevo, String file) throws IOException,
-			ClassNotFoundException {
+	public void modificar(S nuevo, String file) throws IOException, ClassNotFoundException {
 		FileInputStream fis = new FileInputStream(file);
 		BufferedInputStream bis = new BufferedInputStream(fis);
 		AppendableObjectInputStream ois = new AppendableObjectInputStream(bis);
-		S p;
+		S p = (S) ois.readObject();
 		ArrayList<S> sobreescribir = new ArrayList<>();
 		try {
 			while (true) {
-				p = (S) ois.readObject();
 				if (p.getId().equalsIgnoreCase(nuevo.getId()))
 					sobreescribir.add(nuevo);
 				else
 					sobreescribir.add(p);
+				p = (S) ois.readObject();
 			}
 		} catch (EOFException op) {
 			if (ois != null)
@@ -70,8 +67,7 @@ public class DAObasico<S extends ObjetoAlmacenable> {
 		}
 	}
 
-	public ArrayList<S> obtenerDatos(String file) throws IOException,
-			ClassNotFoundException {
+	public ArrayList<S> obtenerDatos(String file) throws IOException, ClassNotFoundException {
 		FileInputStream fis = new FileInputStream(file);
 		BufferedInputStream bis = new BufferedInputStream(fis);
 		AppendableObjectInputStream ois = new AppendableObjectInputStream(bis);
@@ -90,18 +86,17 @@ public class DAObasico<S extends ObjetoAlmacenable> {
 		}
 	}
 
-	public void borrar(String id, String file) throws IOException,
-			ClassNotFoundException {
+	public void borrar(String id, String file) throws IOException, ClassNotFoundException {
 		FileInputStream fis = new FileInputStream(file);
 		BufferedInputStream bis = new BufferedInputStream(fis);
 		AppendableObjectInputStream ois = new AppendableObjectInputStream(bis);
-		S p = null;
+		S p = (S) ois.readObject();
 		ArrayList<S> sobreescribir = new ArrayList<>();
 		try {
 			while (true) {
-				p = (S) ois.readObject();
 				if (!p.getId().equalsIgnoreCase(id))
 					sobreescribir.add(p);
+				p = (S) ois.readObject();
 			}
 		} catch (EOFException op) {
 			if (ois != null)
@@ -116,16 +111,15 @@ public class DAObasico<S extends ObjetoAlmacenable> {
 		}
 	}
 
-	public boolean exists(String id, String file)
-			throws ClassNotFoundException, IOException {
+	public boolean exists(String id, String file) throws ClassNotFoundException, IOException {
 		FileInputStream fis = new FileInputStream(file);
 		BufferedInputStream bis = new BufferedInputStream(fis);
 		AppendableObjectInputStream ois = new AppendableObjectInputStream(bis);
-		S p = null;
+		S p = (S) ois.readObject();
 		try {
-			do {
+			while (p.getId() != id) {
 				p = (S) ois.readObject();
-			} while (p.getId() != id);
+			}
 
 		} catch (EOFException eof) {
 			ois.close();
@@ -135,9 +129,8 @@ public class DAObasico<S extends ObjetoAlmacenable> {
 			ois.close();
 		return true;
 	}
-
-	public HashSet<S> obtenerDatosSet(String file) throws IOException,
-			ClassNotFoundException {
+	
+	public HashSet<S> obtenerDatosSet(String file) throws IOException, ClassNotFoundException{
 		FileInputStream fis = new FileInputStream(file);
 		BufferedInputStream bis = new BufferedInputStream(fis);
 		AppendableObjectInputStream ois = new AppendableObjectInputStream(bis);

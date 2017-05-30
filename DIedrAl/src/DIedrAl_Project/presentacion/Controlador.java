@@ -6,7 +6,7 @@ import java.rmi.NotBoundException;
 import java.util.ArrayList;
 import java.util.Set;
 
-import DIedrAl_Project.integracion.BasicClasses.AccessException;
+import DIedrAl_Project.integracion.AccessException;
 import DIedrAl_Project.negocio.administracion.Hints;
 import DIedrAl_Project.negocio.administracion.Persona;
 import DIedrAl_Project.negocio.administracion.Usuario;
@@ -24,6 +24,7 @@ import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAOrganizacion;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAPacientes;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SARecursos;
+import DIedrAl_Project.presentacion.auxiliar.Error;
 
 /**
  * 
@@ -34,11 +35,11 @@ public class Controlador {
 	
 	private static Usuario usuario;
 	
-	protected static void setUsuario(Usuario user){
+	public static void setUsuario(Usuario user){
 		usuario = user;
 	}
 	
-	protected static Usuario getUsuario(){
+	public static Usuario getUsuario(){
 		return usuario;
 	}
 	

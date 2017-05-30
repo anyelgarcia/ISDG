@@ -5,13 +5,17 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
 
+import DIedrAl_Project.presentacion.auxiliar.ColorPanel;
+import DIedrAl_Project.presentacion.secciones.Actividades;
+import DIedrAl_Project.presentacion.secciones.Calendario;
+import DIedrAl_Project.presentacion.secciones.Pacientes;
+import DIedrAl_Project.presentacion.secciones.Perfil;
+import DIedrAl_Project.presentacion.secciones.Recursos;
+import DIedrAl_Project.presentacion.secciones.Sesiones;
+import DIedrAl_Project.presentacion.secciones.Usuarios;
 
+@SuppressWarnings("serial")
 public class MainFrame extends JFrame{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6538639746657299835L;
-
 	public MainFrame(){
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -72,4 +76,9 @@ public class MainFrame extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+
+	public static void main(String ... args){
+		JFrame pantalla = new MainFrame();
+		pantalla.setVisible(true);
+	}
 }
