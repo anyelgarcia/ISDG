@@ -256,7 +256,7 @@ public class Controlador {
 	public static ArrayActividades filtrarActividades(String nombre, Set<String> filtros, Integer min, Integer max, Set<String> destinatarios, 
 			Dificultad minimo, Dificultad maximo){
 		ArrayActividades salida = SAFactory.getInstancia().newSARecursos().getActividades();
-		if(nombre != null && nombre != "") salida.filtrarNombre(nombre);
+		if(nombre != "") salida.filtrarNombre(nombre);
 		if(filtros.size() > 0) salida.filtrarEtiqueta(filtros);
 		if(min != null) salida.filtrarDesde(min);
 		if(max != null) salida.filtrarHasta(max);

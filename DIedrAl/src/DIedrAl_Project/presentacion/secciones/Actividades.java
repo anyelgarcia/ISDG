@@ -423,7 +423,10 @@ public class Actividades extends ColorPanel{
 			
 			String etiquetasSinFormato = jTextArea5.getText();
 			String etiquetas[] = etiquetasSinFormato.split(",");
-			Actividad info = new Actividad(String.valueOf(jTextField1.getText()), etiquetas);
+			String nombre = jTextField1.getText();
+			if(nombre.equals("")) new Error("Nombre vacio");
+			else{
+			Actividad info = new Actividad(nombre, etiquetas);
 			
 			String duracion = String.valueOf(jTextField2.getText());
 
@@ -440,6 +443,7 @@ public class Actividades extends ColorPanel{
 			
 			if(mode.equals(Modo.ADD)) Controlador.addActividad(info);
 			else if(mode.equals(Modo.VISTA)) Controlador.modificaEtiquetable(act, info);
+			}
 		} 
 	}
 	

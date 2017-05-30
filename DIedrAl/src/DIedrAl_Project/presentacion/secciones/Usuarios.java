@@ -313,19 +313,21 @@ public class Usuarios extends ColorPanel{
 		 * Funcion que se ejecuta cuando se selecciona el boton guardar en la pantalla de paciente
 		 */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {   
-
-			Usuario usuario = new Usuario(jTextField1.getText(), jTextField7.getText(), jTextField8.getText(), jTextField9.getText());
-
-			usuario.setEmail(jTextField3.getText());
-			usuario.setPerfil(jTextArea1.getText());
-			usuario.setInfor(jTextArea2.getText());
-
-			String tfo = jTextField4.getText();
-			if(tfo.length()>0){
-				usuario.setTfo(tfo);
+			String nombre = jTextField1.getText();
+			if(nombre.equals("")) new Error("Nombre vacio");
+			else{
+				Usuario usuario = new Usuario(nombre, jTextField7.getText(), jTextField8.getText(), jTextField9.getText());
+	
+				usuario.setEmail(jTextField3.getText());
+				usuario.setPerfil(jTextArea1.getText());
+				usuario.setInfor(jTextArea2.getText());
+	
+				String tfo = jTextField4.getText();
+				if(tfo.length()>0){
+					usuario.setTfo(tfo);
+				}
+				Controlador.addUsuario(usuario);
 			}
-			
-			Controlador.addUsuario(usuario);
 		}     
 	}
 	

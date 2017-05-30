@@ -394,20 +394,24 @@ public class Sesiones extends ColorPanel{
 				
 				String etiquetasSinFormato = jTextArea5.getText();
 				String etiquetas[] = etiquetasSinFormato.split(",");
-				Sesion info = new Sesion(String.valueOf(jTextField1.getText()), etiquetas);
-				
-				String duracion = String.valueOf(jTextField2.getText());
-
-				//Esta excepción hay que capturarla
-				if(duracion.length()>0 ){
-					info.setDuracion(Integer.valueOf(duracion));
+				String nombre = jTextField1.getText();
+				if(nombre.equals("")) new Error("Nombre vacio");
+				else{
+					Sesion info = new Sesion(String.valueOf(jTextField1.getText()), etiquetas);
+					
+					String duracion = String.valueOf(jTextField2.getText());
+	
+					//Esta excepción hay que capturarla
+					if(duracion.length()>0 ){
+						info.setDuracion(Integer.valueOf(duracion));
+					}
+					
+					info.setDescripcion(String.valueOf(jTextArea1.getText()));
+					info.setDesarrollo(String.valueOf(jTextArea4.getText()));
+					info.setVariaciones(String.valueOf(jTextArea3.getText()));
+					if(mode.equals(Modo.ADD)) Controlador.addSesion(info);
+					else if(mode.equals(Modo.EDITAR)) Controlador.modificaEtiquetable(sesion, info);
 				}
-				
-				info.setDescripcion(String.valueOf(jTextArea1.getText()));
-				info.setDesarrollo(String.valueOf(jTextArea4.getText()));
-				info.setVariaciones(String.valueOf(jTextArea3.getText()));
-				if(mode.equals(Modo.ADD)) Controlador.addSesion(info);
-				else if(mode.equals(Modo.EDITAR)) Controlador.modificaEtiquetable(sesion, info);
 			} 
 		}
 

@@ -429,20 +429,23 @@ public class Pacientes extends ColorPanel{
 			
 			Fecha nacimiento = new Fecha(Integer.valueOf(String.valueOf(jComboBox1.getSelectedItem())), String.valueOf(jComboBox2.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox3.getSelectedItem())), 0);
 			Fecha fechaLesion = new Fecha(Integer.valueOf(String.valueOf(jComboBox5.getSelectedItem())), String.valueOf(jComboBox6.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox7.getSelectedItem())), 0);
-
-			Paciente info = new Paciente(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField5.getText());
-			
-			info.setEstadoCivil(String.valueOf(jComboBox4.getSelectedItem()));
-			info.setBirthday(nacimiento);
-			info.setPerfil(jTextArea2.getText());
-			info.getDatos().setLesion(jTextField4.getText());
-			info.getDatos().setFechalesion(fechaLesion);
-			
-			for(String str: aficiones)
-				info.getDatos().addAficion(str);
-			
-			if(mode.equals(Modo.ADD)) Controlador.addPaciente(info);
-			else if(mode.equals(Modo.VISTA)) Controlador.modificaPaciente(pac, info);
+			String nombre = jTextField1.getText();
+			if(nombre.equals("")) new Error("Nombre vacio");
+			else{
+				Paciente info = new Paciente(nombre, jTextField2.getText(), jTextField3.getText(), jTextField5.getText());
+				
+				info.setEstadoCivil(String.valueOf(jComboBox4.getSelectedItem()));
+				info.setBirthday(nacimiento);
+				info.setPerfil(jTextArea2.getText());
+				info.getDatos().setLesion(jTextField4.getText());
+				info.getDatos().setFechalesion(fechaLesion);
+				
+				for(String str: aficiones)
+					info.getDatos().addAficion(str);
+				
+				if(mode.equals(Modo.ADD)) Controlador.addPaciente(info);
+				else if(mode.equals(Modo.VISTA)) Controlador.modificaPaciente(pac, info);
+			}
 		} 
 	}
 
