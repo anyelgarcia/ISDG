@@ -183,20 +183,18 @@ public abstract class Persona implements ObjetoAlmacenable, Serializable, Clonea
 	 */
 
 	@Override
-	public Object clone() throws CloneNotSupportedException {
-		Persona copia = (Persona) super.clone();
-		copia.nombre = this.nombre;
-		copia.apellido1 = this.apellido1;
-		copia.apellido2 = this.apellido2;
-		copia.fechaNacimiento = this.fechaNacimiento;
-		copia.estadoCivil = this.estadoCivil;
-		copia.direccion = this.direccion;
-		copia.email = this.email;
-		copia.tfo = this.tfo;
-		copia.perfil = this.perfil;
-		copia.nif = this.nif;
-		copia.centro = this.centro;
-		return copia;
+	public void igualarCampos(Persona that) throws CloneNotSupportedException {
+		nombre = that.nombre;
+		apellido1 = that.apellido1;
+		apellido2 = that.apellido2;
+		fechaNacimiento = that.fechaNacimiento;
+		estadoCivil = that.estadoCivil;
+		direccion = that.direccion;
+		email = that.email;
+		tfo = that.tfo;
+		perfil = that.perfil;
+		nif = that.nif;
+		centro = that.centro;
 	}
 
 }
