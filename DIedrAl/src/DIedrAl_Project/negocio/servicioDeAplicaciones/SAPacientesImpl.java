@@ -105,23 +105,23 @@ public class SAPacientesImpl implements SAPacientes {
 		if (daopac.existePaciente(pac.getId())) {
 			daopac.eliminarPaciente(pac.getId());
 		} else
-			//No deberÃ­a entrar por aquÃ­ en estos momentos de la pelÃ­cula.
+			//No deber�a entrar por aqu� en estos momentos de la pel�cula.
 			throw new NotBoundException(pac + "no se encuentra registrado en la base de datos");
 	}
 
 	/**
 	 * AÃ±ade el usuario especificado al centro y actualiza la base de datos para
-	 * incluir la nueva informaciÃ³n
+	 * incluir la nueva informaci�n
 	 * 
 	 * @param usu
-	 *            usuario a aÃ±adir al centro
+	 *            usuario a a�adir al centro
 	 * @throws AlreadyBoundException
 	 *             , si el usuario ya estaba en el centro
 	 */
 	@Override
 	public void addUsuario(Usuario usu) throws AlreadyBoundException, AccessException {
 		/*
-		 * Se intenta aÃ±adir el usuario. Si se puede, se crea una relacion con agente
+		 * Se intenta a�adir el usuario. Si se puede, se crea una relacion con agente
 		 * el nuevo usuario y con centro asociado el centro actual.
 		 * Ademas, se guarda en la base de datos.
 		 */
@@ -168,7 +168,7 @@ public class SAPacientesImpl implements SAPacientes {
 			// Si el usuario esta en alguna relacion con otro usuario, lo eliminamos del los
 			// relacionados.
 			
-			//NOTA: ESTO NO DEBERÃ�A ACTIVARSE NUNCA
+			//NOTA: ESTO NO DEBER�A ACTIVARSE NUNCA
 			else if (r.getRelacionados().contains(usu.getId())) {
 				r.getRelacionados().remove(usu.getId());
 				daorelUsu.modificarRelacion(r);
@@ -182,7 +182,7 @@ public class SAPacientesImpl implements SAPacientes {
 		if (daousu.existeUsuario(usu.getId())) {
 			daousu.eliminarUsuario(usu.getId());
 		} else
-			//No deberÃ­a entrar por aquÃ­ en estos momentos de la pelÃ­cula.
+			//No deber�a entrar por aqu� en estos momentos de la pel�cula.
 			throw new NotBoundException(usu + "no se encuentra registrado en la base de datos");
 	}
 
@@ -206,7 +206,7 @@ public class SAPacientesImpl implements SAPacientes {
 			usuToPac = new Relacion(usu.getId(), centro.getNombre());
 			daorelUsu.crearRelacion(usuToPac);
 		}
-		//AÃ±adimos el nuevo relacionado.
+		//A�adimos el nuevo relacionado.
 		usuToPac.getRelacionados().add(pac.getId());
 		daorelUsu.modificarRelacion(usuToPac);
 		//Hacemos lo mismo con el otro sentido de la relacion.
@@ -236,7 +236,7 @@ public class SAPacientesImpl implements SAPacientes {
 		Set<Relacion> setrel = daorelPac.listarRelaciones(centro.getNombre());
 
 		for (Relacion r : setrel) {
-			//Si en alguno es el agente de la relaciÃ³n, eliminamos de relacionado el
+			//Si en alguno es el agente de la relaci�n, eliminamos de relacionado el
 			//usuario
 			if (r.getIdAgente().equals(pac.getId())) {
 				r.getRelacionados().remove(usu.getId());

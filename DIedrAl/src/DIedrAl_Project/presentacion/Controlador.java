@@ -8,6 +8,7 @@ import java.util.Set;
 
 import DIedrAl_Project.integracion.AccessException;
 import DIedrAl_Project.negocio.administracion.Hints;
+import DIedrAl_Project.negocio.administracion.Organizacion;
 import DIedrAl_Project.negocio.administracion.Persona;
 import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.negocio.pacientes.Paciente;
@@ -15,6 +16,7 @@ import DIedrAl_Project.negocio.recursos.Actividad;
 import DIedrAl_Project.negocio.recursos.ArrayActividades;
 import DIedrAl_Project.negocio.recursos.ArrayRecursos;
 import DIedrAl_Project.negocio.recursos.ArraySesiones;
+import DIedrAl_Project.negocio.recursos.Banco;
 import DIedrAl_Project.negocio.recursos.Dificultad;
 import DIedrAl_Project.negocio.recursos.Etiquetable;
 import DIedrAl_Project.negocio.recursos.Programable;
@@ -30,8 +32,6 @@ import DIedrAl_Project.negocio.servicioDeAplicaciones.SARecursos;
  * @author Diedral_Group
  *
  */
-@SuppressWarnings("unused")
-
 public class Controlador {
 	
 	private static Usuario usuario;
@@ -49,8 +49,12 @@ public class Controlador {
 		try {
 			saPacientes = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 			saPacientes.addPaciente(p);
-		} catch (AlreadyBoundException | AccessException e){
+		} catch (AlreadyBoundException e){
 			Error error = new Error("El paciente ya está en el sistema");
+			error.run();
+		} catch (AccessException e) {
+			Error error = new Error(e.getMessage());
+			error.run();
 		}
 		
 		
@@ -74,12 +78,13 @@ public class Controlador {
 		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos();
 		try {
 			saRecursos.addRecurso(p);
-		} catch (IOException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema.");
 		} catch (AccessException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema.");
+			Error error = new Error(e.getMessage());
+			error.run();
+		} catch (IOException e) {
+			Error error = new Error("Ha ocurrido un error en el sistema al añadir el recurso");
+			error.run();
 		}
-		
 		
 		/*Prueba 6 :D
 		for(Recurso rec : Banco.getInstancia().getRecursos().filtrarNombre(p.getNombre())){
@@ -103,9 +108,9 @@ public class Controlador {
 		try {
 			saActividades.addActividad(p);
 		} catch (AccessException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema.");
+			Error error = new Error(e.getMessage());
+			error.run();
 		}
-		
 		
 		/*System.out.println(p.getNombre());
 		System.out.println(p.getDificultad());
@@ -127,9 +132,9 @@ public class Controlador {
 		try {
 			saSesiones.addSesion(p);
 		} catch (AccessException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema.");
+			Error error = new Error(e.getMessage());
+			error.run();
 		}
-		
 		
 		/*System.out.println(p.getNombre());
 		for(String str : p.getEtiquetas()){
@@ -152,12 +157,9 @@ public class Controlador {
 		try {
 			saUsuarios = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 			saUsuarios.addUsuario(p);
-		} catch (AccessException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema.");
-		} catch (AlreadyBoundException e) {
-			Error error = new Error("El usuario ya está en el sistema");
-		} catch (NotBoundException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema al añadir el usuario");
+		} catch (AccessException | NotBoundException | AlreadyBoundException e) {
+			Error error = new Error(e.getMessage());
+			error.run();
 		}
 
 		
@@ -175,7 +177,8 @@ public class Controlador {
 		try {
 			saRecursos.removeActividad(a);
 		} catch (AccessException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema al eliminar el recurso.");
+			Error error = new Error(e.getMessage());
+			error.run();
 		}
 	}
 	
@@ -184,10 +187,9 @@ public class Controlador {
 		try {
 			saPacientes = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 			saPacientes.erasePaciente(resultado);
-		} catch (AccessException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema");
-		} catch(NotBoundException e){
-			Error error = new Error("Ha ocurrido un error en el sistema al eliminar al paciente");
+		} catch (NotBoundException | AccessException e) {
+			Error error = new Error(e.getMessage());
+			error.run();
 		}
 	}
 	
@@ -196,10 +198,9 @@ public class Controlador {
 		try {
 			saUsuarios = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 			saUsuarios.eraseUsuario(resultado);
-		} catch (AccessException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema");
-		} catch(NotBoundException e){
-			Error error = new Error("Ha ocurrido un error en el sistema al eliminar al paciente");
+		} catch (NotBoundException | AccessException e) {
+			Error error = new Error(e.getMessage());
+			error.run();
 		}
 		
 	}
@@ -208,7 +209,8 @@ public class Controlador {
 		try {
 			saRecursos.removeRecurso(r);
 		} catch (AccessException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema al eliminar el recurso");
+			Error error = new Error(e.getMessage());
+			error.run();
 		}
 	}
 	
@@ -217,7 +219,8 @@ public class Controlador {
 		try {
 			saRecursos.removeSesion(s);
 		} catch (AccessException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema al eliminar la sesión");
+			Error error = new Error(e.getMessage());
+			error.run();
 		}
 	}
 	
@@ -228,7 +231,8 @@ public class Controlador {
 		try {
 			saPacientes = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 		} catch (AccessException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema");
+			Error error = new Error(e.getMessage());
+			error.run();
 		}
 		
 		Set<Persona> pacientes = saPacientes.filtrarPersonas(hints, values, valUsuarios);
@@ -241,7 +245,8 @@ public class Controlador {
 		try {
 			saUsuarios = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 		} catch (AccessException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema");
+			Error error = new Error(e.getMessage());
+			error.run();
 		}
 		
 		Set<Persona> usuarios = saUsuarios.filtrarPersonas(hints, values, valUsuarios);
@@ -288,11 +293,9 @@ public class Controlador {
 		Set<Paciente> pacientes = null;
 		try {
 			pacientes = SAFactory.getInstancia().newSAPacientes(usuario.getCentro()).getPacientesAsociados(u);
-		} catch (AccessException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema");
-			return null;
-		} catch (NotBoundException e){
-			Error error = new Error("Ha ocurrido un error en el sistema al devolver los pacientes asociados");
+		} catch (NotBoundException | AccessException e) {
+			Error error = new Error(e.getMessage());
+			error.run();
 			return null;
 		}
 		for(Paciente p : pacientes){
@@ -344,6 +347,7 @@ public class Controlador {
 			antiguo = (Paciente) nuevo.clone();
 		} catch (CloneNotSupportedException e) {
 			Error error = new Error("Ha ocurrido un error al editar el paciente");
+			error.run();
 		}
 	}
 
@@ -352,7 +356,8 @@ public class Controlador {
     	try {
 			centros = SAFactory.getInstancia().newSAOrganizacion().getCentros();
 		} catch (AccessException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema");
+			Error error = new Error(e.getMessage());
+			error.run();
 			return null;
 		}
     	
@@ -361,19 +366,12 @@ public class Controlador {
 	
 	public static void deleteCentro(String name){
 		 SAOrganizacion saOrg = SAFactory.getInstancia().newSAOrganizacion();
-		 
-			try {
-				saOrg.eliminarCentro(name);
-			} catch (NotBoundException e) {
-				Error error = new Error("Ha ocurrido un error en el sistema");
-				e.printStackTrace();
-			} catch (AccessException e) {
-				Error error = new Error("Ha ocurrido un error en el sistema");
-				e.printStackTrace();
-			}
-		
-		
-		
+		 try {
+			saOrg.eliminarCentro(name);
+		} catch (NotBoundException | AccessException e) {
+			Error error = new Error(e.getMessage());
+			error.run();
+		}
 	}
 	
 	public static boolean existeCentro(String name){
@@ -383,7 +381,8 @@ public class Controlador {
 				return false; 
 			}
 		} catch (AccessException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema");
+			Error error = new Error(e.getMessage());
+			error.run();
 		}
 		 return true;
 	}
@@ -392,10 +391,9 @@ public class Controlador {
 		SAOrganizacion saOrg = SAFactory.getInstancia().newSAOrganizacion();
 		 try {
 			saOrg.addCentro(nameCentro, password);
-		} catch (AccessException e) {
-			Error error = new Error("Ha ocurrido un error en el sistema");
-		} catch(AlreadyBoundException e){
-			Error error = new Error("Ya existe un centro con ese nombre");
+		} catch (AccessException | AlreadyBoundException e) {
+			Error error = new Error(e.getMessage());
+			error.run();
 		}
 		 
 	}
@@ -410,6 +408,35 @@ public class Controlador {
 			str += ", " + af;
 		}
 		return str;
+	}
+
+	public static boolean usuarioCorrecto(String nombreuser, String clave) {
+		SAOrganizacion saOrg = SAFactory.getInstancia().newSAOrganizacion();
+		Usuario intento = null;
+		
+		try {
+			intento = saOrg.getUsuario(nombreuser);
+		} catch (NotBoundException | AccessException e) {
+			Error error = new Error(e.getMessage());
+			error.run();
+			return false;
+		}
+		
+		if(intento==null){
+			Error mensaje = new Error("No se ha encontrado al usuario en el sistema");
+			mensaje.run();
+			return false;
+		}
+		
+		if(!intento.inputPassword(clave)){
+			Error mensaje = new Error("Contraseña equivocada");
+			mensaje.run();
+			return false;
+		}
+		
+		Controlador.setUsuario(intento);
+		
+		return true;
 	}
 
 	

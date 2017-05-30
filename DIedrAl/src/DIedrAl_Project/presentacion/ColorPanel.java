@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
-class ColorPanel extends JPanel {
+public class ColorPanel extends JPanel {
 
     /**
 	 * 
