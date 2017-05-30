@@ -14,8 +14,13 @@ import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 
-@SuppressWarnings("serial")
 public class Usuarios extends ColorPanel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5881613145077329549L;
+
 
 	public Usuarios(int r, int g, int b){
 		super(r, g, b);
@@ -56,6 +61,10 @@ public class Usuarios extends ColorPanel{
 	private class PantallaUsuario extends JFrame{
 		
   
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 2568326513524514651L;
 		private javax.swing.JButton jButton1;
 		private javax.swing.JLabel jLabel1;
 		private javax.swing.JLabel jLabel2;
@@ -122,6 +131,10 @@ public class Usuarios extends ColorPanel{
 			}
 
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
 				String[] strings = Controlador.getPacientesAsociados(u);
 				public int getSize() { return strings!= null ? strings.length : 0; }
 				public String getElementAt(int i) { return strings[i]; }
@@ -312,6 +325,10 @@ public class Usuarios extends ColorPanel{
 
 	public class PantallaBuscar extends JFrame implements confirmListener{
             
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -3035898821023713008L;
 		private javax.swing.JButton jButton1;
 		private javax.swing.JButton jButton2;
 		private javax.swing.JLabel jLabel1;
@@ -386,7 +403,11 @@ public class Usuarios extends ColorPanel{
 			});
 
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
-				 String[] strings = {  };
+				 /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+				String[] strings = {  };
 				 public int getSize() { return strings!= null ? strings.length : 0; }
 				 public String getElementAt(int i) { return strings[i]; }
 			});
@@ -544,6 +565,10 @@ public class Usuarios extends ColorPanel{
 			}
 			
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
 				String[] strings = cadenas;
 				public int getSize() { return strings!= null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }

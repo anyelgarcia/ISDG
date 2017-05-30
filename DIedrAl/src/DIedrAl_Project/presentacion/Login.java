@@ -16,10 +16,13 @@ import DIedrAl_Project.negocio.servicioDeAplicaciones.SAOrganizacion;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 
-@SuppressWarnings("serial")
 public class Login extends JFrame{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2735783534774038620L;
 	private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -111,8 +114,9 @@ public class Login extends JFrame{
         this.setVisible(true);
         pack();              
     }
-    
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {        
+ 
+    @SuppressWarnings("unused")
+	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {        
     	
     	String nombreuser = jTextField1.getText();
 		String clave = String.copyValueOf(jPasswordField1.getPassword());
@@ -122,8 +126,8 @@ public class Login extends JFrame{
 		}
 		*/
 		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-		JFrame mainPantalla = new MainFrame();
-		mainPantalla.setVisible(true);
+		JFrame pantalla = new MainFrame();
+		pantalla.setVisible(true);
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) { 
@@ -134,6 +138,10 @@ public class Login extends JFrame{
 
 	private class PasswordFrame extends javax.swing.JFrame {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 5678303925676196364L;
 		private javax.swing.JButton jButton1;
 	    private javax.swing.JLabel jLabel1;
 	    private javax.swing.JPasswordField jPasswordField1;
@@ -149,7 +157,7 @@ public class Login extends JFrame{
 	        jButton1 = new javax.swing.JButton();
 
 	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-	        setTitle("ContraseÃ±a Administrador");
+	        setTitle("Contraseña Administrador");
 
 	        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 20)); 
 	        jLabel1.setText("Introduzca el password de administrador");
@@ -203,7 +211,7 @@ public class Login extends JFrame{
 			String password = String.valueOf(jPasswordField1.getPassword());
 			SAOrganizacion saOrg = SAFactory.getInstancia().newSAOrganizacion();
 			if(!saOrg.inputPasswordGod(password)){
-				new Error("ContraseÃ±a Equivocada");
+				new Error("Contraseña Equivocada");
 				return;
 			}
 			new MenuCentroUsuarios();
@@ -213,6 +221,10 @@ public class Login extends JFrame{
 	
 	private class MenuCentroUsuarios extends javax.swing.JFrame {
 		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -3050119298158186149L;
 		private javax.swing.JButton jButton1;
 	    private javax.swing.JButton jButton2;
 		
@@ -226,7 +238,7 @@ public class Login extends JFrame{
 	    	jButton2 = new javax.swing.JButton();
 
 	    	setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-	    	setTitle("MenÃº Centros y Usuarios");
+	    	setTitle("Menú Centros y Usuarios");
 
 	    	jButton1.setFont(new java.awt.Font("SansSerif", 1, 20)); 
 	    	jButton1.setText("Menu Centros");
@@ -282,6 +294,10 @@ public class Login extends JFrame{
 	
 	private class CentroWindow extends javax.swing.JFrame implements confirmListener{
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 7646115040455065790L;
 		private javax.swing.JButton jButton1;
 	    private javax.swing.JButton jButton2;
 	    private javax.swing.JButton jButton3;
@@ -312,7 +328,11 @@ public class Login extends JFrame{
 	        }
 
 	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-	            String[] strings = Controlador.getCentros();
+	            /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+				String[] strings = Controlador.getCentros();
 	            public int getSize() { return strings!= null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }
 	        });
@@ -337,7 +357,7 @@ public class Login extends JFrame{
 	        });
 
 	        jButton3.setFont(new java.awt.Font("SansSerif", 1, 12)); 
-	        jButton3.setText("Validar SelecciÃ³n");
+	        jButton3.setText("Validar Selección");
 	        jButton3.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
 	                jButton3ActionPerformed(evt);
@@ -405,7 +425,7 @@ public class Login extends JFrame{
 		private void jButton2ActionPerformed(ActionEvent evt) {
 			if(jList1.getSelectedValue()!=null){
 				Confirm c = new Confirm();
-				c.setMensaje("El centro se eliminarÃ¡ definitivamente.");
+				c.setMensaje("El centro se eliminará definitivamente.");
 		    	c.setVisible(true);
 		    	c.addListener(this);
 			}
@@ -431,6 +451,10 @@ public class Login extends JFrame{
 	
 	private class CentroAdd extends javax.swing.JFrame {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 6096764679056232375L;
 		private javax.swing.JButton jButton1;
 		private javax.swing.JLabel jLabel1;
 		private javax.swing.JLabel jLabel3;
@@ -452,7 +476,7 @@ public class Login extends JFrame{
 	       jButton1 = new javax.swing.JButton();
 
 	       setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-	       setTitle("AÃ±adir Centro");
+	       setTitle("Añadir Centro");
 
 	       jLabel1.setFont(new java.awt.Font("Rockwell", 1, 14)); 
 	       jLabel1.setText("Nombre Nuevo Centro:");
@@ -526,6 +550,10 @@ public class Login extends JFrame{
 	
 	private class UsuarioWindow extends javax.swing.JFrame {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -5655036026374526476L;
 		private javax.swing.JButton jButton1;
 	    private javax.swing.JButton jButton2;
 	    private javax.swing.JButton jButton3;
@@ -543,7 +571,7 @@ public class Login extends JFrame{
 	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
 	        jButton1.setFont(new java.awt.Font("Rockwell", 1, 14)); 
-	        jButton1.setText("AÃ±adir Usuario");
+	        jButton1.setText("Añadir Usuario");
 	        jButton1.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
 	                jButton1ActionPerformed(evt);
@@ -616,6 +644,10 @@ public class Login extends JFrame{
 	
 	private class UsuarioLigarDesligar extends JFrame{
 		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -9131990638283874964L;
 		private javax.swing.JButton jButton1;
 	    private javax.swing.JButton jButton2;
 	    private javax.swing.JButton jButton3;
@@ -682,7 +714,11 @@ public class Login extends JFrame{
 	        setTitle("Ligar Pacientes y Terapeutas");
 
 	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-	        	Hints hints[] = {Hints.USUARIO};
+	        	/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+				Hints hints[] = {Hints.USUARIO};
 	            String[] strings = Controlador.buscarPaciente(new Hints[0], new String[0], hints);
 	            public int getSize() { return strings!= null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }
@@ -691,7 +727,11 @@ public class Login extends JFrame{
 	        jScrollPane1.setViewportView(jList1);
 
 	        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-	        	Hints hints[] = {Hints.PACIENTE};
+	        	/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+				Hints hints[] = {Hints.PACIENTE};
 	            String[] strings = Controlador.buscarPaciente(new Hints[0], new String[0], hints);
 	            public int getSize() { return strings!= null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }
@@ -954,6 +994,10 @@ public class Login extends JFrame{
 			}
 			
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
 				String[] strings = cadenas;
 				public int getSize() { return strings!= null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }
@@ -1018,6 +1062,10 @@ public class Login extends JFrame{
 			}
 			
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
 				String[] strings = cadenas;
 				public int getSize() { return strings!= null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }
@@ -1041,13 +1089,17 @@ public class Login extends JFrame{
 	
 	/**
 	 * Clase que gestiona la ventana que muestra los campos de un usuario. Se utiliza esta ventana tanto para
-	 * aÃ±adir un usuario nuevo como para editar o consultar los datos de un usuario ya existente.
+	 * añadir un usuario nuevo como para editar o consultar los datos de un usuario ya existente.
 	 * @author Diedral_Group
 	 * 
 	 */  
 	private class PantallaUsuario extends JFrame{
 		
   
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 7301856325840652829L;
 		private javax.swing.JButton jButton1;
 		private javax.swing.JLabel jLabel1;
 		private javax.swing.JLabel jLabel2;
@@ -1115,6 +1167,10 @@ public class Login extends JFrame{
 
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
 
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
 				String[] strings = Controlador.getPacientesAsociados(u);
 				public int getSize() { return strings!= null ? strings.length : 0; }
 				public String getElementAt(int i) { return strings[i]; }
@@ -1130,11 +1186,11 @@ public class Login extends JFrame{
 
 			jTextArea2.setColumns(20);
 			jTextArea2.setRows(5);
-			jTextArea2.setText("DescripciÃ³n");
+			jTextArea2.setText("Descripción");
 			jScrollPane3.setViewportView(jTextArea2);
 
 			jLabel1.setFont(new java.awt.Font("Arial", 0, 10));
-			jLabel1.setText("Despacho, horarios y otra informaciÃ³n: ");
+			jLabel1.setText("Despacho, horarios y otra información: ");
 			jLabel1.setForeground(Color.BLACK);
 
 			jLabel2.setFont(new java.awt.Font("Arial", 0, 10));
@@ -1162,7 +1218,7 @@ public class Login extends JFrame{
 			jLabel5.setForeground(Color.BLACK);
 
 			jLabel6.setFont(new java.awt.Font("Arial", 0, 10));
-			jLabel6.setText("TelÃ©fono: ");
+			jLabel6.setText("Teléfono: ");
 			jLabel6.setForeground(Color.BLACK);
 
 			jButton1.setText("Guardar");
@@ -1304,6 +1360,10 @@ public class Login extends JFrame{
 	
 	public class PantallaBuscar extends JFrame implements confirmListener{
         
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -3364837860148531878L;
 		private javax.swing.JButton jButton1;
 		private javax.swing.JButton jButton2;
 		private javax.swing.JLabel jLabel1;
@@ -1378,7 +1438,11 @@ public class Login extends JFrame{
 			});
 
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
-				 String[] strings = {  };
+				 /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+				String[] strings = {  };
 				 public int getSize() { return strings!= null ? strings.length : 0; }
 				 public String getElementAt(int i) { return strings[i]; }
 			});
@@ -1467,8 +1531,8 @@ public class Login extends JFrame{
 		}
 
 		/**
-		 * FunciÃ³n que se ejecuta al darle al botÃ³n buscar. Rellena un Usuario con los datos introducidos y 
-		 * busca en el sistema a todos los que coincidan con Ã©l.
+		 * Función que se ejecuta al darle al botón buscar. Rellena un Usuario con los datos introducidos y 
+		 * busca en el sistema a todos los que coincidan con él.
 		 * @param evt
 		 */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -1503,7 +1567,7 @@ public class Login extends JFrame{
 				hints.add(Hints.NIF);
 			}
 
-			if(admin.equals("Si")||  admin.equals("SÃ­") ||  admin.equals("SI") ||  admin.equals("SÃ­")){
+			if(admin.equals("Si")||  admin.equals("Sí") ||  admin.equals("SI") ||  admin.equals("Sí")){
 				usuarios = new Hints[1];
 				usuarios[0] = Hints.ADMINISTRADOR;
 			}else{
@@ -1537,6 +1601,10 @@ public class Login extends JFrame{
 			
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
 				
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
 				String[] strings = cadenas;
 				public int getSize() { return strings!= null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }
@@ -1544,9 +1612,9 @@ public class Login extends JFrame{
 		}                                        
 
 		/**
-		 * FunciÃ³n que se ejecuta al seleccionar uno de los resultados de la bÃºsqueda y pulsar el
-		 * botÃ³n de validar. SegÃºn el modo se hace una cosa u otra. 
-		 * Si el modo es eliminar, se muestra una pantalla de confirmaciÃ³n.
+		 * Función que se ejecuta al seleccionar uno de los resultados de la búsqueda y pulsar el
+		 * botón de validar. Según el modo se hace una cosa u otra. 
+		 * Si el modo es eliminar, se muestra una pantalla de confirmación.
 		 * Si el modo es Editar o buscar, se crea una pantalla Usuario y se le pasa el control.
 		 * @param evt
 		 */
@@ -1556,7 +1624,7 @@ public class Login extends JFrame{
 			switch(modo){
 				case ELIMINAR:
 					Confirm c = new Confirm();
-					c.setMensaje("El paciente se eliminarÃ¡ del sistema.");
+					c.setMensaje("El paciente se eliminará del sistema.");
 			    	c.setVisible(true);
 			    	c.addListener(this);
 			    	break;
@@ -1567,7 +1635,7 @@ public class Login extends JFrame{
 					new PantallaUsuario(u, Modo.VISTA);
 					break;
 				default:
-					new Error("Error raro en el modo en bÃºsqueda de usuarios");
+					new Error("Error raro en el modo en búsqueda de usuarios");
 					break;
 				}
 		}

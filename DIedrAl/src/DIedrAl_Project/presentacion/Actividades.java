@@ -23,10 +23,16 @@ import DIedrAl_Project.presentacion.Confirm.confirmListener;
  * @author Diedral_Group
  *
  */
-@SuppressWarnings("serial")
+
 public class Actividades extends ColorPanel{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6517855682994096031L;
+
+
 	public Actividades(int r, int g, int b){
 		super(r,g,b);
 
@@ -97,7 +103,11 @@ public class Actividades extends ColorPanel{
 	 */
 	private class PantallaActividad extends JFrame{
 		                    
-	    private javax.swing.JButton jButton1;
+	    /**
+		 * 
+		 */
+		private static final long serialVersionUID = -5373151364761180723L;
+		private javax.swing.JButton jButton1;
 	    private javax.swing.JComboBox<String> jComboBox1;
 	    private javax.swing.JLabel jLabel1;
 	    private javax.swing.JLabel jLabel10;
@@ -257,12 +267,20 @@ public class Actividades extends ColorPanel{
 	        	jTextArea5.setText(act.getVariaciones());
 	      
 	        	jList1.setModel(new javax.swing.AbstractListModel<String>() {
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
 					ArrayList<String> recursos = Controlador.getRecursosAsociados(act);
 					String[] strings = recursos.toArray(new String[recursos.size()]);
 					public int getSize() { return strings!= null ? strings.length : 0; }
 		            public String getElementAt(int i) { return strings[i]; }
 		        });
 	        	jList2.setModel(new javax.swing.AbstractListModel<String>() {
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
 					ArrayList<String> actividades = Controlador.getActividadesAsociadas(act);
 					String[] strings = actividades.toArray(new String[actividades.size()]);
 					public int getSize() { return strings!= null ? strings.length : 0; }
@@ -431,6 +449,10 @@ public class Actividades extends ColorPanel{
 	private class PantallaBuscar extends JFrame implements confirmListener{
 		
 		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -8004040768761577903L;
 		private javax.swing.JButton jButton1;
 	    private javax.swing.JButton jButton2;
 	    private javax.swing.JComboBox<String> jComboBox1;
@@ -543,6 +565,10 @@ public class Actividades extends ColorPanel{
 	        });
 
 	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
 				String[] strings = {  };
 				public int getSize() { return strings!= null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }

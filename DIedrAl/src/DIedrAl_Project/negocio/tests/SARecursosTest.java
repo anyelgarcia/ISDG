@@ -27,7 +27,6 @@ public class SARecursosTest {
 
 		// Limpiamos el banco.
 		Banco.getInstancia().setSesiones(new ArraySesiones());
-
 		// Añadir al banco diez sesiones de prueba
 		for (int i = 0; i < 10; i++) {
 			Sesion sesionAux = new Sesion("Sesion " + (i + 1));

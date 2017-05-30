@@ -22,9 +22,17 @@ import DIedrAl_Project.presentacion.Confirm.confirmListener;
  * @author Diedral_Group
  *
  */
-@SuppressWarnings("serial")
+
 public class Pacientes extends ColorPanel{   
     
+	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1316669015671287170L;
+
+
 	public Pacientes(int r, int g, int b){
 		super(r, g, b);
 		
@@ -97,7 +105,11 @@ public class Pacientes extends ColorPanel{
 	 */                    
 	private class PantallaPaciente extends JFrame{
                  
-	    private javax.swing.JButton jButton1;
+	    /**
+		 * 
+		 */
+		private static final long serialVersionUID = -6079618578451230833L;
+		private javax.swing.JButton jButton1;
 	    private javax.swing.JComboBox<String> jComboBox1;
 	    private javax.swing.JComboBox<String> jComboBox2;
 	    private javax.swing.JComboBox<String> jComboBox3;
@@ -514,6 +526,10 @@ public class Pacientes extends ColorPanel{
 	        });
 
 	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
 				String[] strings = {  };
 				public int getSize() { return strings!= null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }
@@ -663,6 +679,10 @@ public class Pacientes extends ColorPanel{
 			}
 			
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
 				String[] strings = cadenas;
 				public int getSize() { return strings!= null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }

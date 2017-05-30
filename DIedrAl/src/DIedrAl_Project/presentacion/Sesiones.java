@@ -22,10 +22,16 @@ import DIedrAl_Project.presentacion.Confirm.confirmListener;
  * @author Diedral_Group
  *
  */
-@SuppressWarnings("serial")
+
 public class Sesiones extends ColorPanel{
   
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7805554218246174830L;
+
+
 	public Sesiones(int r, int g, int b){
 			super(r, g, b);
 			
@@ -99,7 +105,11 @@ public class Sesiones extends ColorPanel{
 	 */
 		private class PantallaSesion extends JFrame{
 			                  
-		    private javax.swing.JButton jButton1;
+		    /**
+		 * 
+		 */
+		private static final long serialVersionUID = -1349374506624011557L;
+			private javax.swing.JButton jButton1;
 		    private javax.swing.JLabel jLabel1;
 		    private javax.swing.JLabel jLabel3;
 		    private javax.swing.JLabel jLabel4;
@@ -245,6 +255,10 @@ public class Sesiones extends ColorPanel{
 		      
 		        	jList1.setModel(new javax.swing.AbstractListModel<String>() {
 			        	
+						/**
+						 * 
+						 */
+						private static final long serialVersionUID = 1L;
 						ArrayList<String> recursos = Controlador.getRecursosAsociados(sesion);
 						String[] strings = recursos.toArray(new String[recursos.size()]);
 						public int getSize() { return strings!= null ? strings.length : 0; }
@@ -252,6 +266,10 @@ public class Sesiones extends ColorPanel{
 			        });
 		        	jList2.setModel(new javax.swing.AbstractListModel<String>() {
 			        	
+						/**
+						 * 
+						 */
+						private static final long serialVersionUID = 1L;
 						ArrayList<String> actividades = Controlador.getActividadesAsociadas(sesion);
 						String[] strings = actividades.toArray(new String[actividades.size()]);
 						public int getSize() { return strings!= null ? strings.length : 0; }
@@ -489,6 +507,10 @@ public class Sesiones extends ColorPanel{
 
 		        jList1.setModel(new javax.swing.AbstractListModel<String>() {
 					
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
 					String[] strings = { };
 					public int getSize() { return strings!= null ? strings.length : 0; }
 		            public String getElementAt(int i) { return strings[i]; }
