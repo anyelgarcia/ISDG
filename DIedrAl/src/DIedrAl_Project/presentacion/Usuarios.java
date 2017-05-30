@@ -8,12 +8,9 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import com.sun.scenario.effect.Blend.Mode;
-
 import DIedrAl_Project.negocio.administracion.Hints;
 import DIedrAl_Project.negocio.administracion.Persona;
 import DIedrAl_Project.negocio.administracion.Usuario;
-import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 
@@ -40,7 +37,7 @@ public class Usuarios extends ColorPanel{
 		add(title, c);
 
 
-		ImageButton nuevo = new ImageButton("AÃ±adir", "images/bluebutton.png", "images/bluebutton2.png", this);
+		ImageButton nuevo = new ImageButton("Añadir", "images/bluebutton.png", "images/bluebutton2.png", this);
 		nuevo.addActionListener((ae) -> {
 			JFrame panel = new PantallaUsuario(null, Modo.ADD);
 			panel.setVisible(true);
@@ -67,7 +64,7 @@ public class Usuarios extends ColorPanel{
 
 	/**
 	 * Clase que gestiona la ventana que muestra los campos de un usuario. Se utiliza esta ventana tanto para
-	 * aÃ±adir un usuario nuevo como para editar o consultar los datos de un usuario ya existente.
+	 * aá±adir un usuario nuevo como para editar o consultar los datos de un usuario ya existente.
 	 * @author Diedral_Group
 	 * 
 	 */  
@@ -140,6 +137,10 @@ public class Usuarios extends ColorPanel{
 				case ADD: setTitle("Crear Usuario"); break;
 			    case VISTA: setTitle("Usuario"); break;
 			    case EDITAR: setTitle("Ligar/Desligar Pacientes"); break;
+			    default:
+			    	Error raro = new Error("Error en el modo en pantalla Usuarios");
+			    	raro.run();
+			    	break;
 			}
 
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
@@ -160,11 +161,11 @@ public class Usuarios extends ColorPanel{
 
 			jTextArea2.setColumns(20);
 			jTextArea2.setRows(5);
-			jTextArea2.setText("DescripciÃ³n");
+			jTextArea2.setText("Descripción");
 			jScrollPane3.setViewportView(jTextArea2);
 
 			jLabel1.setFont(new java.awt.Font("Arial", 0, 10));
-			jLabel1.setText("Despacho, horarios y otra informaciÃ³n: ");
+			jLabel1.setText("Despacho, horarios y otra información: ");
 			jLabel1.setForeground(Color.BLACK);
 
 			jLabel2.setFont(new java.awt.Font("Arial", 0, 10));
@@ -192,7 +193,7 @@ public class Usuarios extends ColorPanel{
 			jLabel5.setForeground(Color.BLACK);
 
 			jLabel6.setFont(new java.awt.Font("Arial", 0, 10));
-			jLabel6.setText("TelÃ©fono: ");
+			jLabel6.setText("Teléfono: ");
 			jLabel6.setForeground(Color.BLACK);
 
 			jButton1.setText("Guardar");
@@ -211,6 +212,9 @@ public class Usuarios extends ColorPanel{
 				jTextField9.setText(u.getNif());
 				jTextArea2.setText(u.getInfor());
 				jTextArea1.setText(u.getPerfil());
+			}
+			
+			if(!editable){
 				jTextField1.setEditable(false);
 				jTextField7.setEditable(false);
 				jTextField8.setEditable(false);
@@ -330,13 +334,9 @@ public class Usuarios extends ColorPanel{
 	}
 
 
+	@SuppressWarnings("serial")
 	private class PantallaBuscar extends JFrame implements confirmListener{
-
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		// Variables declaration - do not modify                     
+            
 		private javax.swing.JButton jButton1;
 		private javax.swing.JButton jButton2;
 		private javax.swing.JLabel jLabel1;
@@ -353,8 +353,7 @@ public class Usuarios extends ColorPanel{
 		private javax.swing.JTextField jTextField5;
 		private javax.swing.JSeparator jSeparator2;
 		private Usuario[] resultados;
-		private Modo modo;
-		// End of variables declaration   
+		private Modo modo; 
 
 		public PantallaBuscar(Modo modo){
 			this.modo = modo;
@@ -412,10 +411,6 @@ public class Usuarios extends ColorPanel{
 			});
 
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
-				/**
-				 * 
-				 */
-				 private static final long serialVersionUID = 1L;
 				 String[] strings = {  };
 				 public int getSize() { return strings.length; }
 				 public String getElementAt(int i) { return strings[i]; }
@@ -506,8 +501,8 @@ public class Usuarios extends ColorPanel{
 		}
 
 		/**
-		 * FunciÃ³n que se ejecuta al darle al botÃ³n buscar. Rellena un Usuario con los datos introducidos y 
-		 * busca en el sistema a todos los que coincidan con Ã©l.
+		 * Función que se ejecuta al darle al botón buscar. Rellena un Usuario con los datos introducidos y 
+		 * busca en el sistema a todos los que coincidan con él.
 		 * @param evt
 		 */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -542,10 +537,11 @@ public class Usuarios extends ColorPanel{
 				hints.add(Hints.NIF);
 			}
 
-			if(admin.equals("Si")||  admin.equals("SÃ­") ||  admin.equals("SI") ||  admin.equals("SÃ�")){
+			if(admin.equals("Si")||  admin.equals("Sí") ||  admin.equals("SI") ||  admin.equals("SÍ")){
 				usuarios = new Hints[1];
 				usuarios[0] = Hints.ADMINISTRADOR;
 			}else{
+				usuarios = new Hints[1];
 				usuarios[0] = Hints.USUARIO;
 			}
 
@@ -582,9 +578,9 @@ public class Usuarios extends ColorPanel{
 		}                                        
 
 		/**
-		 * FunciÃ³n que se ejecuta al seleccionar uno de los resultados de la bÃºsqueda y pulsar el
-		 * botÃ³n de validar. SegÃºn el modo se hace una cosa u otra. 
-		 * Si el modo es eliminar, se muestra una pantalla de confirmaciÃ³n.
+		 * Función que se ejecuta al seleccionar uno de los resultados de la búsqueda y pulsar el
+		 * botón de validar. Según el modo se hace una cosa u otra. 
+		 * Si el modo es eliminar, se muestra una pantalla de confirmación.
 		 * Si el modo es Editar o buscar, se crea una pantalla Usuario y se le pasa el control.
 		 * @param evt
 		 */
@@ -595,7 +591,7 @@ public class Usuarios extends ColorPanel{
 			switch(modo){
 				case ELIMINAR:
 					Confirm c = new Confirm();
-					c.setMensaje("El paciente se eliminarÃ¡ del sistema.");
+					c.setMensaje("El paciente se eliminará¡ del sistema.");
 			    	c.setVisible(true);
 			    	c.addListener(this);
 			    	break;
@@ -606,6 +602,10 @@ public class Usuarios extends ColorPanel{
 				case BUSCAR:
 					j = new PantallaUsuario(u, Modo.VISTA);
 					j.setVisible(true);
+					break;
+				default:
+					Error error = new Error("Error raro en el modo");
+					error.run();
 					break;
 				}
 		}

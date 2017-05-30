@@ -16,7 +16,7 @@ public class Centro {
 
 	/**
 	 * Diccionario que permite el acceso a un terapeuta o paciente del centro a
-	 * travÃ©s de su dni.
+	 * través de su dni.
 	 */
 	private Map<String, Persona> personasCentro;
 

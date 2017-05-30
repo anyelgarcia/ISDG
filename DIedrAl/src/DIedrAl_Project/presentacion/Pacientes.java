@@ -3,9 +3,6 @@ package DIedrAl_Project.presentacion;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.io.IOException;
-import java.rmi.AlreadyBoundException;
-import java.rmi.NotBoundException;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -186,6 +183,10 @@ public class Pacientes extends ColorPanel{
 				case ADD: setTitle("Crear Paciente"); break;
 			    case VISTA: setTitle("Paciente"); break;
 			    case EDITAR: setTitle("Editar Paciente"); break;
+				default: 
+					Error raro = new Error("Problema en el modo en pantalla pacientes.");
+					raro.run();
+					break;
 			}
 			
 			jLabel1.setText("Datos Personales: ");
@@ -477,7 +478,8 @@ public class Pacientes extends ColorPanel{
 	    }
 		
 		
-	    private void initGUI() {
+	    @SuppressWarnings("serial")
+		private void initGUI() {
 
 	        jTextField1 = new javax.swing.JTextField("");
 	        jTextField2 = new javax.swing.JTextField("");
@@ -496,15 +498,19 @@ public class Pacientes extends ColorPanel{
 	        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	        
 	        switch(modo){
-			case ELIMINAR:
-				setTitle("Eliminar Paciente");
-		    	break;
-			case EDITAR:
-				setTitle("Editar Paciente");
-				break;
-			case BUSCAR:
-				setTitle("Buscar Paciente");
-				break;
+				case ELIMINAR:
+					setTitle("Eliminar Paciente");
+			    	break;
+				case EDITAR:
+					setTitle("Editar Paciente");
+					break;
+				case BUSCAR:
+					setTitle("Buscar Paciente");
+					break;
+				default:
+					Error raro = new Error("Error raro en pantalla de búsqueda de pacientes");
+					raro.run();
+					break;
 			}
 
 	        jLabel1.setText("Nombre:");
@@ -707,6 +713,10 @@ public class Pacientes extends ColorPanel{
 					p = resultados[i];
 					j = new PantallaPaciente(p, Modo.VISTA);
 					j.setVisible(true);
+					break;
+				default:
+					Error raro = new Error("Error interno en la pantalla buscar pacientes.");
+					raro.run();
 					break;
 				}
 			

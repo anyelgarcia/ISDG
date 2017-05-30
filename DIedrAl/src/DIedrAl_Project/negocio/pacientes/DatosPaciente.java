@@ -56,5 +56,9 @@ public class DatosPaciente {
 		this.fechalesion = fechalesion;
 	}
 
+	public ArrayList<String> getAficiones() {
+		return aficiones;
+	}
+
   
 }

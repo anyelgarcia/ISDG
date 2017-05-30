@@ -8,19 +8,18 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import DIedrAl_Project.integracion.AccessException;
+import DIedrAl_Project.negocio.administracion.Hints;
 import DIedrAl_Project.negocio.administracion.Usuario;
+import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAOrganizacion;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 
+@SuppressWarnings("serial")
 public class Login extends JFrame{
 	
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2735783534774038620L;
 	private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -117,31 +116,15 @@ public class Login extends JFrame{
     	String nombreuser = jTextField1.getText();
 		String clave = String.copyValueOf(jPasswordField1.getPassword());
 		
-		SAOrganizacion saOrg = SAFactory.getInstancia().newSAOrganizacion();
-		Usuario intento = null;
-		try{
-			intento = saOrg.existeUsuario(nombreuser);
-		}catch(Exception e){
-		} 
-		
-		if(intento==null){
-			Error mensaje = new Error("No se ha encontrado al usuario en el sistema");
+		if(!Controlador.usuarioCorrecto(nombreuser, clave)){
 			return;
 		}
-		
-		if(!intento.inputPassword(clave)){
-			Error mensaje = new Error("Contraseña equivocada");
-			return;
-		}
-
-		Controlador.setUsuario(intento);
 		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-		JFrame PantallaPrincipal = new MainFrame();
-		PantallaPrincipal.setVisible(true);
+		MainFrame.main();
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) { 
-    	JFrame minimenu = new PasswordFrame();
+    	new PasswordFrame();
 		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     } 
     
@@ -167,7 +150,7 @@ public class Login extends JFrame{
 	        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 20)); 
 	        jLabel1.setText("Introduzca el password de administrador");
 
-	        jPasswordField1.setText("jPasswordField1");
+	        jPasswordField1.setText("");
 
 	        jButton1.setFont(new java.awt.Font("SansSerif", 1, 10));  
 	        jButton1.setText("Aceptar");
@@ -211,14 +194,14 @@ public class Login extends JFrame{
 
 		private void jButton1ActionPerformed(ActionEvent evt) {
 			
-			String password = jPasswordField1.getPassword().toString();
-			/*SAOrganizacion saOrg = SAFactory.getInstancia().newSAOrganizacion();
+			String password = String.valueOf(jPasswordField1.getPassword());
+			SAOrganizacion saOrg = SAFactory.getInstancia().newSAOrganizacion();
 			if(!saOrg.inputPasswordGod(password)){
-				Error msg = new Error("ContraseÃ±a Equivocada");
+				Error msg = new Error("Contraseña Equivocada");
 				msg.run();
 				return;
-			}*/
-			JFrame minimenu = new MenuCentroUsuarios();
+			}
+			new MenuCentroUsuarios();
 			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		}     
 	}
@@ -237,9 +220,9 @@ public class Login extends JFrame{
 	    	jButton1 = new javax.swing.JButton();
 	    	jButton2 = new javax.swing.JButton();
 
-	    	setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+	    	setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-	    	jButton1.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+	    	jButton1.setFont(new java.awt.Font("SansSerif", 1, 20)); 
 	    	jButton1.setText("Menu Centros");
 	    	jButton1.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,9 +230,9 @@ public class Login extends JFrame{
 	            }
 	        });
 	    	
-	    	jButton2.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+	    	jButton2.setFont(new java.awt.Font("SansSerif", 1, 20)); 
 	        jButton2.setText("Menu Usuarios");
-	        jButton1.addActionListener(new java.awt.event.ActionListener() {
+	        jButton2.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
 	                jButton2ActionPerformed(evt);
 	            }
@@ -270,23 +253,22 @@ public class Login extends JFrame{
 	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
 	                .addGap(33, 33, 33)
-	                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
 	                .addGap(37, 37, 37)
-	                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
 	                .addContainerGap(27, Short.MAX_VALUE))
 	        );
-	
+	        setVisible(true);
 	        pack();
 	    }
 	    
 	    private void jButton1ActionPerformed(ActionEvent evt) {
-			JFrame minimenu = new CentroWindow();
+			new CentroWindow();
 			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		}    
 	    
 	    private void jButton2ActionPerformed(ActionEvent evt) {
-			
-			JFrame minimenu = new UsuarioWindow();
+			new UsuarioWindow();
 			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		} 
 	}
@@ -380,14 +362,14 @@ public class Login extends JFrame{
 	    }        
 	    
 		private void jButton1ActionPerformed(ActionEvent evt) {
-			JFrame minimenu = new CentroAdd();
+			new CentroAdd();
 			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		}
 
 		private void jButton2ActionPerformed(ActionEvent evt) {
 			if(jList1.getSelectedValue()!=null){
 				Confirm c = new Confirm();
-				c.setMensaje("El centro se eliminarÃ¡ definitivamente.");
+				c.setMensaje("El centro se eliminará definitivamente.");
 		    	c.setVisible(true);
 		    	c.addListener(this);
 			}
@@ -421,7 +403,7 @@ public class Login extends JFrame{
 	       jPasswordField1 = new javax.swing.JPasswordField();
 	       jButton1 = new javax.swing.JButton();
 
-	       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+	       setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
 	       jLabel1.setFont(new java.awt.Font("Rockwell", 1, 14)); 
 	       jLabel1.setText("Nombre Nuevo Centro:");
@@ -484,15 +466,373 @@ public class Login extends JFrame{
 			   if(!Controlador.existeCentro(nameCenter)){
 				   Controlador.createCentro(nameCenter, password);
 				   Error nombreadmin = new Error("El identificador del administrador del nuevo centro es: " + nameCenter + "_ADMIN");
+				   nombreadmin.run();
+				   new MenuCentroUsuarios();
 				   dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-				   new Login().init();
-			   }else{
-				   Error msg = new Error("Ya existe un centro con ese nombre");
 			   }
 		   }else{
 			   Error msg = new Error("Han de rellenarse todos los campos");
+			   msg.run();
 		   }
 	   }
+	}
+	
+	private class UsuarioWindow extends javax.swing.JFrame {
+
+		private javax.swing.JButton jButton1;
+	    private javax.swing.JButton jButton2;
+	    private javax.swing.JButton jButton3;
+	    
+	    public UsuarioWindow() {
+	        initGUI();
+	    }
+                      
+	    private void initGUI() {
+
+	        jButton1 = new javax.swing.JButton();
+	        jButton2 = new javax.swing.JButton();
+	        jButton3 = new javax.swing.JButton();
+
+	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+	        jButton1.setFont(new java.awt.Font("Rockwell", 1, 14)); 
+	        jButton1.setText("Añadir Usuario");
+	        jButton1.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton1ActionPerformed(evt);
+	            }
+	        });
+
+	        jButton2.setFont(new java.awt.Font("Rockwell", 1, 14)); 
+	        jButton2.setText("Eliminar Usuario");
+	        jButton2.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton2ActionPerformed(evt);
+	            }
+	        });
+
+	        jButton3.setFont(new java.awt.Font("Rockwell", 1, 14)); 
+	        jButton3.setText("Ligar Pacientes/Terapeutas");
+	        jButton3.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton3ActionPerformed(evt);
+	            }
+	        });
+
+	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+	        getContentPane().setLayout(layout);
+	        layout.setHorizontalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(layout.createSequentialGroup()
+	                .addGap(53, 53, 53)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+	                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addComponent(jButton1)
+	                        .addGap(53, 53, 53)
+	                        .addComponent(jButton2)))
+	                .addContainerGap(41, Short.MAX_VALUE))
+	        );
+	        layout.setVerticalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(layout.createSequentialGroup()
+	                .addGap(41, 41, 41)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                    .addComponent(jButton1)
+	                    .addComponent(jButton2))
+	                .addGap(28, 28, 28)
+	                .addComponent(jButton3)
+	                .addContainerGap(40, Short.MAX_VALUE))
+	        );
+
+	        setVisible(true);
+	        pack();
+	    }
+
+	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	    	//new UsuarioBusqueda(); añadir
+			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+	    }  
+	    
+	    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	    	//new UsuarioLigarDesligar(); eliminar
+			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+	    }  
+	    
+	    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	    	new UsuarioLigarDesligar();
+			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+	    }  
+                  
+	}
+	
+	
+	private class UsuarioLigarDesligar extends JFrame{
+		
+		private javax.swing.JButton jButton1;
+	    private javax.swing.JButton jButton2;
+	    private javax.swing.JButton jButton3;
+	    private javax.swing.JLabel jLabel1;
+	    private javax.swing.JLabel jLabel10;
+	    private javax.swing.JLabel jLabel2;
+	    private javax.swing.JLabel jLabel3;
+	    private javax.swing.JLabel jLabel4;
+	    private javax.swing.JLabel jLabel5;
+	    private javax.swing.JLabel jLabel6;
+	    private javax.swing.JLabel jLabel7;
+	    private javax.swing.JLabel jLabel8;
+	    private javax.swing.JLabel jLabel9;
+	    private javax.swing.JList<String> jList1;
+	    private javax.swing.JList<String> jList2;
+	    private javax.swing.JScrollPane jScrollPane1;
+	    private javax.swing.JScrollPane jScrollPane2;
+	    private javax.swing.JTextField jTextField1;
+	    private javax.swing.JTextField jTextField2;
+	    private javax.swing.JTextField jTextField3;
+	    private javax.swing.JTextField jTextField4;
+	    private javax.swing.JTextField jTextField5;
+	    private javax.swing.JTextField jTextField6;
+	    private javax.swing.JTextField jTextField7;
+	    private javax.swing.JTextField jTextField8;
+	    private Paciente pacientes[];
+	    private Usuario terapeutas[];
+	    
+	    public UsuarioLigarDesligar(){
+	    	initGUI();
+	    }
+	    
+	    private void initGUI() {
+
+	        jScrollPane1 = new javax.swing.JScrollPane();
+	        jList1 = new javax.swing.JList<>();
+	        jScrollPane2 = new javax.swing.JScrollPane();
+	        jList2 = new javax.swing.JList<>();
+	        jButton1 = new javax.swing.JButton();
+	        jLabel1 = new javax.swing.JLabel();
+	        jLabel2 = new javax.swing.JLabel();
+	        jLabel3 = new javax.swing.JLabel();
+	        jLabel4 = new javax.swing.JLabel();
+	        jLabel5 = new javax.swing.JLabel();
+	        jLabel6 = new javax.swing.JLabel();
+	        jTextField1 = new javax.swing.JTextField();
+	        jTextField2 = new javax.swing.JTextField();
+	        jTextField3 = new javax.swing.JTextField();
+	        jTextField4 = new javax.swing.JTextField();
+	        jLabel7 = new javax.swing.JLabel();
+	        jTextField5 = new javax.swing.JTextField();
+	        jTextField6 = new javax.swing.JTextField();
+	        jTextField7 = new javax.swing.JTextField();
+	        jTextField8 = new javax.swing.JTextField();
+	        jLabel8 = new javax.swing.JLabel();
+	        jLabel9 = new javax.swing.JLabel();
+	        jLabel10 = new javax.swing.JLabel();
+	        jButton2 = new javax.swing.JButton();
+	        jButton3 = new javax.swing.JButton();
+
+	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+	        	Hints hints[] = {Hints.USUARIO};
+	            String[] strings = Controlador.buscarPaciente(new Hints[0], new String[0], hints);
+	            public int getSize() { return strings.length; }
+	            public String getElementAt(int i) { return strings[i]; }
+	        });
+	        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+	        jScrollPane1.setViewportView(jList1);
+
+	        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+	        	Hints hints[] = {Hints.PACIENTE};
+	            String[] strings = Controlador.buscarPaciente(new Hints[0], new String[0], hints);
+	            public int getSize() { return strings.length; }
+	            public String getElementAt(int i) { return strings[i]; }
+	        });
+	        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+	        jScrollPane2.setViewportView(jList2);
+
+	        jButton1.setFont(new java.awt.Font("Rockwell", 1, 12)); 
+	        jButton1.setText("Validar");
+	        jButton1.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton1ActionPerformed(evt);
+	            }
+	        });
+
+	        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 12)); 
+	        jLabel1.setText("Nombre:");
+
+	        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 12)); 
+	        jLabel2.setText("Primer Apellido:");
+
+	        jLabel3.setFont(new java.awt.Font("SansSerif", 1, 12)); 
+	        jLabel3.setText("Segundo Apellido:");
+
+	        jLabel4.setFont(new java.awt.Font("SansSerif", 1, 12)); 
+	        jLabel4.setText("DNI:");
+
+	        jLabel5.setFont(new java.awt.Font("Rockwell", 1, 14)); 
+	        jLabel5.setText("TERAPEUTAS");
+
+	        jLabel6.setFont(new java.awt.Font("Rockwell", 1, 14)); 
+	        jLabel6.setText("PACIENTES");
+
+	        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 12)); 
+	        jLabel7.setText("DNI:");
+
+	        jLabel8.setFont(new java.awt.Font("SansSerif", 1, 12)); 
+	        jLabel8.setText("Nombre:");
+
+	        jLabel9.setFont(new java.awt.Font("SansSerif", 1, 12)); 
+	        jLabel9.setText("Primer Apellido:");
+
+	        jLabel10.setFont(new java.awt.Font("SansSerif", 1, 12)); 
+	        jLabel10.setText("Segundo Apellido:");
+
+	        jButton2.setFont(new java.awt.Font("SansSerif", 1, 12)); 
+	        jButton2.setText("Buscar");
+	        jButton2.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton2ActionPerformed(evt);
+	            }
+	        });
+
+	        jButton3.setFont(new java.awt.Font("SansSerif", 1, 12)); 
+	        jButton3.setText("Buscar");
+	        jButton3.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton3ActionPerformed(evt);
+	            }
+	        });
+
+	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+	        getContentPane().setLayout(layout);
+	        layout.setHorizontalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                .addContainerGap()
+	                .addComponent(jButton2)
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                .addComponent(jButton1)
+	                .addGap(260, 260, 260))
+	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addContainerGap()
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                            .addGroup(layout.createSequentialGroup()
+	                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+	                                .addGap(0, 0, Short.MAX_VALUE)))
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+	                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                        .addComponent(jLabel5)
+	                        .addGap(25, 25, 25)))
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addGap(58, 58, 58)
+	                        .addComponent(jLabel6)
+	                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+	                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+	                            .addGroup(layout.createSequentialGroup()
+	                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                                .addComponent(jButton3))
+	                            .addGroup(layout.createSequentialGroup()
+	                                .addGap(33, 33, 33)
+	                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
+	                        .addGap(15, 15, 15))))
+	        );
+	        layout.setVerticalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(layout.createSequentialGroup()
+	                .addGap(13, 13, 13)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                    .addComponent(jLabel5)
+	                    .addComponent(jLabel6))
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addGap(13, 13, 13)
+	                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addGap(5, 5, 5)
+	                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+	                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addGap(13, 13, 13)
+	                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addGap(5, 5, 5)
+	                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addGap(18, 18, 18)
+	                        .addComponent(jButton1))
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addGap(3, 3, 3)
+	                        .addComponent(jButton2))
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addGap(5, 5, 5)
+	                        .addComponent(jButton3)))
+	                .addContainerGap(28, Short.MAX_VALUE))
+	        );
+
+	        setVisible(true);
+	        pack();
+	    }
+
+	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { 
+	    	//Validar
+	    }  
+
+	    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	        // Buscar terap
+	    }                                        
+
+	    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	        // Buscar pac
+	    }                                        
+
+	       
 	}
 }
 
