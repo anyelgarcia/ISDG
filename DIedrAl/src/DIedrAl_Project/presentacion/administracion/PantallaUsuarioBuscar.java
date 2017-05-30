@@ -1,6 +1,7 @@
 package DIedrAl_Project.presentacion.administracion;
 
 import java.awt.Color;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -273,21 +274,24 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 	 */
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 		int i = jList1.getSelectedIndex();
-		Usuario u = resultados[i];
-		switch(modo){
-			case ELIMINAR:
-				Confirm c = new Confirm();
-				c.setMensaje("El paciente se eliminará del sistema.");
-		    	c.setVisible(true);
-		    	c.addListener(this);
-		    	break;
-			case BUSCAR:
-				new PantallaUsuario(u, Modo.VISTA);
-				break;
-			default:
-				new Error("Error raro en el modo en búsqueda de usuarios");
-				break;
-			}
+		if(i!=-1){
+			Usuario u = resultados[i];
+			switch(modo){
+				case ELIMINAR:
+					Confirm c = new Confirm();
+					c.setMensaje("El paciente se eliminará del sistema.");
+			    	c.setVisible(true);
+			    	c.addListener(this);
+			    	break;
+				case BUSCAR:
+					new PantallaUsuario(u, Modo.VISTA);
+					break;
+				default:
+					new Error("Error raro en el modo en búsqueda de usuarios");
+					break;
+				}
+		}
+		new Error("Has de seleccionar al menos un usuario.");
 	}
 
 
@@ -295,6 +299,8 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 	public void delete() {
 		int i = jList1.getSelectedIndex();
     	Controlador.deleteUsuario(resultados[i]);
-    	this.dispose();
+    	new Error("Usuario eliminado del sistema.");
+    	new MenuCentroUsuarios();
+    	dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}  
 }

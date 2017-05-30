@@ -30,7 +30,7 @@ public class CentroMaps {
 		users = new HashMap<>();
 		HashSet<Relacion> relaciones_u = daoter.listarRelaciones(nomb);
 		for(Relacion r: relaciones_u){
-			users.put(r.getId(), daous.consultarUsuario(r.getId()));
+			users.put(r.getIdAgente(), daous.consultarUsuario(r.getIdAgente()));
 		}
 
 		DAOPaciente daopac = factory.getDAOPaciente();
@@ -38,7 +38,7 @@ public class CentroMaps {
 		this.pacients = new HashMap<>();
 		HashSet<Relacion> relaciones_p = daore.listarRelaciones(nomb);
 		for(Relacion r: relaciones_p){
-			pacients.put(r.getId(), daopac.consultarPaciente(r.getId()));
+			pacients.put(r.getIdAgente(), daopac.consultarPaciente(r.getIdAgente()));
 		}
 		
 	}
@@ -51,11 +51,11 @@ public class CentroMaps {
 		HashSet<Usuario> user = new HashSet<>();
 
 		relaciones_p.forEach((rel)->{
-			personas.put(rel.getId(), pacients.get(rel.getId()));
+			personas.put(rel.getIdAgente(), pacients.get(rel.getIdAgente()));
 			for(String str: rel.getRelacionados()){
 				user.add(users.get(str));
 			}
-			pacientes.put(pacients.get(rel.getId()), user);
+			pacientes.put(pacients.get(rel.getIdAgente()), user);
 			user.clear();
 		});
 		
@@ -64,11 +64,11 @@ public class CentroMaps {
 		HashSet<Paciente> pacs = new HashSet<>();
 		
 		relaciones_t.forEach((rel)->{
-			personas.put(rel.getId(), users.get(rel.getId()));
+			personas.put(rel.getIdAgente(), users.get(rel.getIdAgente()));
 			for(String str: rel.getRelacionados()){
 				pacs.add(pacients.get(str));
 			}
-			usuarios.put(users.get(rel.getId()), pacs);
+			usuarios.put(users.get(rel.getIdAgente()), pacs);
 			pacs.clear();
 		});
 	}

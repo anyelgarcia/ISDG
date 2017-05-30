@@ -264,4 +264,19 @@ public class SARecursosImpl implements SARecursos {
 		}
 	}
 
+	@Override
+	public void updateSesion(Sesion ses) throws AccessException {
+		this.daoses.modificarSesion(ses);
+	}
+
+	@Override
+	public void updateActividad(Actividad act) throws AccessException {
+		this.daoact.modificarActividad(act);
+	}
+
+	@Override
+	public void updateRecurso(Recurso rec) throws AccessException {
+		this.daorec.modificarRecurso(rec);
+	}
+
 }
