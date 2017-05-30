@@ -6,9 +6,14 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-@SuppressWarnings("serial")
+
 public class Error extends JFrame{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2339935005104485121L;
+
 	public Error(String mensaje){
 		JLabel jlabel = new JLabel("  " + mensaje);
 		jlabel.setFont(new java.awt.Font("SansSerif", 1, 13));
