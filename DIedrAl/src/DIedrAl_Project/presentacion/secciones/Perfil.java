@@ -1,4 +1,4 @@
-package DIedrAl_Project.presentacion;
+package DIedrAl_Project.presentacion.secciones;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -8,6 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import DIedrAl_Project.negocio.administracion.Usuario;
+import DIedrAl_Project.presentacion.Controlador;
+import DIedrAl_Project.presentacion.auxiliar.ColorPanel;
+import DIedrAl_Project.presentacion.auxiliar.ImageButton;
+import DIedrAl_Project.presentacion.auxiliar.Modo;
 
 
 public class Perfil extends ColorPanel{
