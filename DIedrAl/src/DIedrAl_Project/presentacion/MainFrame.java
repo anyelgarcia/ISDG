@@ -5,6 +5,15 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
 
+import DIedrAl_Project.presentacion.auxiliar.ColorPanel;
+import DIedrAl_Project.presentacion.secciones.Actividades;
+import DIedrAl_Project.presentacion.secciones.Calendario;
+import DIedrAl_Project.presentacion.secciones.Pacientes;
+import DIedrAl_Project.presentacion.secciones.Perfil;
+import DIedrAl_Project.presentacion.secciones.Recursos;
+import DIedrAl_Project.presentacion.secciones.Sesiones;
+import DIedrAl_Project.presentacion.secciones.Usuarios;
+
 /**
  * Pantalla principal. Se abre cuando se inicia la aplicacion tras haberse iniciado
  * sesión correctamente

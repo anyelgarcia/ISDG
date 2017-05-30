@@ -6,7 +6,7 @@ import java.rmi.NotBoundException;
 import java.util.ArrayList;
 import java.util.Set;
 
-import DIedrAl_Project.integracion.AccessException;
+import DIedrAl_Project.integracion.BasicClasses.AccessException;
 import DIedrAl_Project.negocio.administracion.Hints;
 import DIedrAl_Project.negocio.administracion.Persona;
 import DIedrAl_Project.negocio.administracion.Usuario;

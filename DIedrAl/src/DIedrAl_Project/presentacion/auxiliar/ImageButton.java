@@ -1,4 +1,4 @@
-package DIedrAl_Project.presentacion;
+package DIedrAl_Project.presentacion.auxiliar;
 
 import java.awt.*;
 import java.awt.image.ImageObserver;
