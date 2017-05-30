@@ -4,7 +4,14 @@ import java.rmi.*;
 import java.util.*;
 
 import DIedrAl_Project.integracion.*;
-import DIedrAl_Project.integracion.AccessException;
+import DIedrAl_Project.integracion.BasicClasses.AccessException;
+import DIedrAl_Project.integracion.BasicClasses.tRelacion;
+import DIedrAl_Project.integracion.DAOinterfaces.DAOCentro;
+import DIedrAl_Project.integracion.DAOinterfaces.DAOFactory;
+import DIedrAl_Project.integracion.DAOinterfaces.DAOPaciente;
+import DIedrAl_Project.integracion.DAOinterfaces.DAORelacionable;
+import DIedrAl_Project.integracion.DAOinterfaces.DAOUsuario;
+import DIedrAl_Project.integracion.simplefileImp.SimpleFileDAOFactory;
 import DIedrAl_Project.negocio.Relacion;
 import DIedrAl_Project.negocio.administracion.*;
 import DIedrAl_Project.negocio.pacientes.*;

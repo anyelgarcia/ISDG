@@ -1,6 +1,6 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
-import DIedrAl_Project.integracion.AccessException;
+import DIedrAl_Project.integracion.BasicClasses.AccessException;
 
 public class SAFactoryImpl extends SAFactory{
 

@@ -3,13 +3,13 @@ package DIedrAl_Project.negocio.administracion;
 import java.io.IOException;
 import java.util.*;
 
-import DIedrAl_Project.integracion.AccessException;
-import DIedrAl_Project.integracion.DAOFactory;
-import DIedrAl_Project.integracion.DAOPaciente;
-import DIedrAl_Project.integracion.DAORelacionable;
-import DIedrAl_Project.integracion.DAOUsuario;
-import DIedrAl_Project.integracion.SimpleFileDAOFactory;
-import DIedrAl_Project.integracion.tRelacion;
+import DIedrAl_Project.integracion.BasicClasses.AccessException;
+import DIedrAl_Project.integracion.BasicClasses.tRelacion;
+import DIedrAl_Project.integracion.DAOinterfaces.DAOFactory;
+import DIedrAl_Project.integracion.DAOinterfaces.DAOPaciente;
+import DIedrAl_Project.integracion.DAOinterfaces.DAORelacionable;
+import DIedrAl_Project.integracion.DAOinterfaces.DAOUsuario;
+import DIedrAl_Project.integracion.simplefileImp.SimpleFileDAOFactory;
 import DIedrAl_Project.negocio.Relacion;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 
