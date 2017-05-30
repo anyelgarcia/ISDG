@@ -14,23 +14,18 @@ import javax.swing.JLabel;
 import DIedrAl_Project.negocio.recursos.Actividad;
 import DIedrAl_Project.negocio.recursos.ArrayActividades;
 import DIedrAl_Project.negocio.recursos.Dificultad;
-import DIedrAl_Project.negocio.recursos.Etiquetable;
-import DIedrAl_Project.negocio.recursos.Recurso;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 /**
- * Esta clase lleva la gestiÃ³n de las vistas de las actividades. En el constructor se dibuja la secciÃ³n de Actividades del MenÃº Principal y se pone a la espera para 
+ * Esta clase lleva la gestión de las vistas de las actividades. En el constructor se dibuja la sección de Actividades del Menú Principal y se pone a la espera para 
  * aÃ±adir, eliminar, editar o buscar actividades.
  * 
  * @author Diedral_Group
  *
  */
+@SuppressWarnings("serial")
 public class Actividades extends ColorPanel{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6517855682994096031L;
 	
 	public Actividades(int r, int g, int b){
 		super(r,g,b);
@@ -96,18 +91,12 @@ public class Actividades extends ColorPanel{
 	 
 	
 	/**
-	 * Clase que gestiona la ventana que aparece al darle al botÃ³n -AÃ±adir- en la secciÃ³n -Actividades- del MÃ©nÃº Principal
+	 * Clase que gestiona la ventana que aparece al darle al botón -AÃ±adir- en la sección -Actividades- del MÃ©nú Principal
 	 * @author Diedral_Group
 	 * 
 	 */
 	private class PantallaActividad extends JFrame{
-		
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 7199864481454444290L;
-		
-		// Variables declaration - do not modify                     
+		                    
 	    private javax.swing.JButton jButton1;
 	    private javax.swing.JComboBox<String> jComboBox1;
 	    private javax.swing.JLabel jLabel1;
@@ -187,9 +176,10 @@ public class Actividades extends ColorPanel{
 
 	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 	        switch(mode){
-		    case ADD: setTitle("Crear Actividad"); break;
-		    case VISTA: setTitle("Actividad"); break;
-		    case EDITAR: setTitle("Editar Actividad"); break;
+			    case ADD: setTitle("Crear Actividad"); break;
+			    case VISTA: setTitle("Actividad"); break;
+			    case EDITAR: setTitle("Editar Actividad"); break;
+			    default: new Error("Error modo pantalla actividades"); break;
 		    }
 
 	        jLabel1.setText("Nombre: ");
@@ -267,25 +257,15 @@ public class Actividades extends ColorPanel{
 	        	jTextArea5.setText(act.getVariaciones());
 	      
 	        	jList1.setModel(new javax.swing.AbstractListModel<String>() {
-		        	
-					/**
-					 * 
-					 */
-					private static final long serialVersionUID = 1L;
 					ArrayList<String> recursos = Controlador.getRecursosAsociados(act);
 					String[] strings = recursos.toArray(new String[recursos.size()]);
-		            public int getSize() { return strings.length; }
+					public int getSize() { return strings!= null ? strings.length : 0; }
 		            public String getElementAt(int i) { return strings[i]; }
 		        });
 	        	jList2.setModel(new javax.swing.AbstractListModel<String>() {
-		        	
-					/**
-					 * 
-					 */
-					private static final long serialVersionUID = 1L;
 					ArrayList<String> actividades = Controlador.getActividadesAsociadas(act);
 					String[] strings = actividades.toArray(new String[actividades.size()]);
-		            public int getSize() { return strings.length; }
+					public int getSize() { return strings!= null ? strings.length : 0; }
 		            public String getElementAt(int i) { return strings[i]; }
 		        });
 	        	
@@ -414,7 +394,7 @@ public class Actividades extends ColorPanel{
 		}
 		
 		/**
-		 * FunciÃ³n que se ejecuta al darle a guardar en la ventana de aÃ±adir actividades. Se rellena un objeto actividad y es pasado al controlador.
+		 * Función que se ejecuta al darle a guardar en la ventana de aÃ±adir actividades. Se rellena un objeto actividad y es pasado al controlador.
 		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { 
 			
@@ -443,17 +423,13 @@ public class Actividades extends ColorPanel{
 	
 	/**
 	 * 
-	 * Ventana que sale al pulsar el botÃ³n eliminar en la secciÃ³n Actividades en el menÃº principal.
+	 * Ventana que sale al pulsar el botón eliminar en la sección Actividades en el menú principal.
 	 * @author Diedral_Group
 	 *
 	 */
 
 	private class PantallaBuscar extends JFrame implements confirmListener{
 		
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = -5500263054256196980L;
 		
 		private javax.swing.JButton jButton1;
 	    private javax.swing.JButton jButton2;
@@ -512,17 +488,19 @@ public class Actividades extends ColorPanel{
 	        jList1 = new javax.swing.JList<>();
 	        jButton2 = new javax.swing.JButton();
 
-	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+	        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	        switch(modo){
-			case ELIMINAR:
-				setTitle("Eliminar Actividad");
-		    	break;
-			case EDITAR:
-				setTitle("Editar Actividad");
-				break;
-			case BUSCAR:
-				setTitle("Buscar Actividad");
-				break;
+				case ELIMINAR:
+					setTitle("Eliminar Actividad");
+			    	break;
+				case EDITAR:
+					setTitle("Editar Actividad");
+					break;
+				case BUSCAR:
+					setTitle("Buscar Actividad");
+					break;
+				default:
+					new Error("Error modo pantalla de búsqueda de actividad");
 			}
 
 	        jLabel1.setText("Nombre");
@@ -566,7 +544,7 @@ public class Actividades extends ColorPanel{
 
 	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
 				String[] strings = {  };
-	            public int getSize() { return strings.length; }
+				public int getSize() { return strings!= null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }
 	        });
 	        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -724,6 +702,9 @@ public class Actividades extends ColorPanel{
 				a = getSelectedActividad(i, filtrados);
 				p = new PantallaActividad(a, Modo.VISTA);
 				p.setVisible(true);
+				break;
+			default:
+				new Error("Error modo pantalla de búsqueda de actividades");
 				break;
 			}
 	    }

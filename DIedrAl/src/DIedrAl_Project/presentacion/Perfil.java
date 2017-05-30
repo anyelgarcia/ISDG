@@ -3,7 +3,6 @@ package DIedrAl_Project.presentacion;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -114,8 +113,9 @@ public class Perfil extends ColorPanel{
 	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 	        
 	        switch(mode){
-	        case VISTA: setTitle("Mi Perfil"); break;
-	        case EDITAR: setTitle("Editar Mi Perfil"); break;
+		        case VISTA: setTitle("Mi Perfil"); break;
+		        case EDITAR: setTitle("Editar Mi Perfil"); break;
+		        default: new Error("Error de modo en pantalla perfil"); break;
 	        }
 
 	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
@@ -124,8 +124,7 @@ public class Perfil extends ColorPanel{
 				 */
 				private static final long serialVersionUID = 1L;
 				
-				ArrayList<String> aux = Controlador.getPacientesAsociados(user);
-				String[] strings = aux.toArray(new String[aux.size()]);
+				String[] strings = Controlador.getPacientesAsociados(user);
 	            public int getSize() { return strings.length; }
 	            public String getElementAt(int i) { return strings[i]; }
 	        });

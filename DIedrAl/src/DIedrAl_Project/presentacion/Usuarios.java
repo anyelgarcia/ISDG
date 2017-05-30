@@ -14,13 +14,8 @@ import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 
+@SuppressWarnings("serial")
 public class Usuarios extends ColorPanel{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -5881613145077329549L;
-
 
 	public Usuarios(int r, int g, int b){
 		super(r, g, b);
@@ -37,44 +32,30 @@ public class Usuarios extends ColorPanel{
 		add(title, c);
 
 
-		ImageButton nuevo = new ImageButton("Añadir", "images/bluebutton.png", "images/bluebutton2.png", this);
-		nuevo.addActionListener((ae) -> {
-			JFrame panel = new PantallaUsuario(null, Modo.ADD);
-			panel.setVisible(true);
-
-		});
-		c.gridx = 0;
-		c.gridy = 1;
-		c.gridwidth = 1;
-		c.insets = new Insets(25,15,0,0);
-		c.ipady = 0;
-		add(nuevo, c);
-
-
-
-		ImageButton buscar = new ImageButton("Buscar", "images/orangebutton.png", "images/orangebutton2.png", this);
+		ImageButton buscar = new ImageButton("Consultar", "images/orangebutton.png", "images/orangebutton2.png", this);
 		buscar.addActionListener((ae) -> {
 			JFrame pantalla = new PantallaBuscar(Modo.BUSCAR);
 			pantalla.setVisible(true);
 		});
-		c.gridx = 1;
+		c.gridx = 0;
 		c.gridy = 1;
+		c.gridwidth = 2;
+		c.insets = new Insets(25,15,0,0);
+		c.ipadx = 5;
+		c.ipady = 0;
 		add(buscar, c);
 	}
+	
 
 	/**
 	 * Clase que gestiona la ventana que muestra los campos de un usuario. Se utiliza esta ventana tanto para
-	 * aá±adir un usuario nuevo como para editar o consultar los datos de un usuario ya existente.
+	 * añadir un usuario nuevo como para editar o consultar los datos de un usuario ya existente.
 	 * @author Diedral_Group
 	 * 
 	 */  
 	private class PantallaUsuario extends JFrame{
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = -945687595344304805L;
-
-		// Variables declaration - do not modify    
+		
+  
 		private javax.swing.JButton jButton1;
 		private javax.swing.JLabel jLabel1;
 		private javax.swing.JLabel jLabel2;
@@ -137,17 +118,12 @@ public class Usuarios extends ColorPanel{
 				case ADD: setTitle("Crear Usuario"); break;
 			    case VISTA: setTitle("Usuario"); break;
 			    case EDITAR: setTitle("Ligar/Desligar Pacientes"); break;
-			    default:
-			    	Error raro = new Error("Error en el modo en pantalla Usuarios");
-			    	raro.run();
-			    	break;
+			    default: new Error("Error en el modo en pantalla Usuarios"); break;
 			}
 
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
-				private static final long serialVersionUID = 1L;
-
 				String[] strings = Controlador.getPacientesAsociados(u);
-				public int getSize() { return strings.length; }
+				public int getSize() { return strings!= null ? strings.length : 0; }
 				public String getElementAt(int i) { return strings[i]; }
 			});
 			jList1.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -312,7 +288,7 @@ public class Usuarios extends ColorPanel{
 																									.addGap(7, 7, 7))
 					);
 
-			getContentPane().setBackground(getColor());
+			setVisible(true);
 			pack();
 		}
 
@@ -332,10 +308,9 @@ public class Usuarios extends ColorPanel{
 			Controlador.addUsuario(usuario);
 		}     
 	}
+	
 
-
-	@SuppressWarnings("serial")
-	private class PantallaBuscar extends JFrame implements confirmListener{
+	public class PantallaBuscar extends JFrame implements confirmListener{
             
 		private javax.swing.JButton jButton1;
 		private javax.swing.JButton jButton2;
@@ -412,7 +387,7 @@ public class Usuarios extends ColorPanel{
 
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
 				 String[] strings = {  };
-				 public int getSize() { return strings.length; }
+				 public int getSize() { return strings!= null ? strings.length : 0; }
 				 public String getElementAt(int i) { return strings[i]; }
 			});
 			jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -495,7 +470,6 @@ public class Usuarios extends ColorPanel{
 																									.addGap(10, 10, 10))
 																									.addComponent(jSeparator2)
 					);
-
 			getContentPane().setBackground(getColor());
 			pack();
 		}
@@ -537,7 +511,7 @@ public class Usuarios extends ColorPanel{
 				hints.add(Hints.NIF);
 			}
 
-			if(admin.equals("Si")||  admin.equals("Sí") ||  admin.equals("SI") ||  admin.equals("SÍ")){
+			if(admin.equals("Si")||  admin.equals("SÃ­") ||  admin.equals("SI") ||  admin.equals("SÃ�")){
 				usuarios = new Hints[1];
 				usuarios[0] = Hints.ADMINISTRADOR;
 			}else{
@@ -570,9 +544,8 @@ public class Usuarios extends ColorPanel{
 			}
 			
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
-				private static final long serialVersionUID = 1L;
 				String[] strings = cadenas;
-	            public int getSize() { return strings.length; }
+				public int getSize() { return strings!= null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }
 			});
 		}                                        
@@ -591,7 +564,7 @@ public class Usuarios extends ColorPanel{
 			switch(modo){
 				case ELIMINAR:
 					Confirm c = new Confirm();
-					c.setMensaje("El paciente se eliminará¡ del sistema.");
+					c.setMensaje("El paciente se eliminará del sistema.");
 			    	c.setVisible(true);
 			    	c.addListener(this);
 			    	break;
@@ -604,8 +577,7 @@ public class Usuarios extends ColorPanel{
 					j.setVisible(true);
 					break;
 				default:
-					Error error = new Error("Error raro en el modo");
-					error.run();
+					new Error("Error raro en el modo en búsqueda de usuarios");
 					break;
 				}
 		}

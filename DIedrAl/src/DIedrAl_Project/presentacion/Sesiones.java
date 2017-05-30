@@ -11,24 +11,19 @@ import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import DIedrAl_Project.negocio.recursos.Actividad;
 import DIedrAl_Project.negocio.recursos.ArraySesiones;
 import DIedrAl_Project.negocio.recursos.Sesion;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 
 /**
- * Esta clase lleva la gesti贸n de las vistas de las sesiones. En el constructor se dibuja la secci贸n de Sesiones del Men煤 Principal y se pone a la espera para 
+ * Esta clase lleva la gesti髇 de las vistas de las sesiones. En el constructor se dibuja la secci髇 de Sesiones del Men煤 Principal y se pone a la espera para 
  * a帽adir, eliminar, editar o buscar sesiones.
  * @author Diedral_Group
  *
  */
+@SuppressWarnings("serial")
 public class Sesiones extends ColorPanel{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 7805554218246174830L;
   
 	
 	public Sesiones(int r, int g, int b){
@@ -98,17 +93,12 @@ public class Sesiones extends ColorPanel{
 		
 	
 	/**
-	 * Clase que gestiona la ventana que aparece al darle al bot贸n -A帽adir- en la secci贸n -Sesiones- del M茅n煤 Principal
+	 * Clase que gestiona la ventana que aparece al darle al bot髇 -A帽adir- en la secci髇 -Sesiones- del M茅n煤 Principal
 	 * @author Diedral_Group
 	 * 
 	 */
 		private class PantallaSesion extends JFrame{
-			 /**
-			 * 
-			 */
-			private static final long serialVersionUID = -4494007563168661421L;
-			
-			// Variables declaration - do not modify                     
+			                  
 		    private javax.swing.JButton jButton1;
 		    private javax.swing.JLabel jLabel1;
 		    private javax.swing.JLabel jLabel3;
@@ -135,8 +125,7 @@ public class Sesiones extends ColorPanel{
 		    private javax.swing.JTextField jTextField2;
 		    private boolean editable;
 		    private Sesion sesion;
-		    private Modo mode;
-		    // End of variables declaration        
+		    private Modo mode;      
 		    
 			public PantallaSesion(Sesion s, Modo m){
 				sesion = s;
@@ -181,15 +170,16 @@ public class Sesiones extends ColorPanel{
 
 		        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		        switch(mode){
-			    case ADD: setTitle("Crear Sesion"); break;
-			    case VISTA: setTitle("Sesion"); break;
-			    case EDITAR: setTitle("Editar Sesion"); break;
+				    case ADD: setTitle("Crear Sesion"); break;
+				    case VISTA: setTitle("Sesion"); break;
+				    case EDITAR: setTitle("Editar Sesion"); break;
+				    default: new Error("Error en modo en pantalla sesiones"); break;
 			    }
 		        
 
 		        jLabel1.setText("Nombre: ");
 
-		        jLabel3.setText("Duraci贸n:");
+		        jLabel3.setText("Duraci髇:");
 
 		        jButton1.setText("Guardar");
 		        jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -200,13 +190,13 @@ public class Sesiones extends ColorPanel{
 
 		        jLabel4.setText("minutos");
 
-		        jLabel5.setText("Descripci贸n: ");
+		        jLabel5.setText("Descripci髇: ");
 
 		        jTextArea1.setColumns(20);
 		        jTextArea1.setRows(5);
 		        jScrollPane1.setViewportView(jTextArea1);
 
-		        jLabel6.setText("Desarrollo de la Sesi贸n");
+		        jLabel6.setText("Desarrollo de la Sesi髇");
 
 		        jLabel7.setText("Posibles Variaciones");
 
@@ -255,24 +245,16 @@ public class Sesiones extends ColorPanel{
 		      
 		        	jList1.setModel(new javax.swing.AbstractListModel<String>() {
 			        	
-						/**
-						 * 
-						 */
-						private static final long serialVersionUID = 1L;
 						ArrayList<String> recursos = Controlador.getRecursosAsociados(sesion);
 						String[] strings = recursos.toArray(new String[recursos.size()]);
-			            public int getSize() { return strings.length; }
+						public int getSize() { return strings!= null ? strings.length : 0; }
 			            public String getElementAt(int i) { return strings[i]; }
 			        });
 		        	jList2.setModel(new javax.swing.AbstractListModel<String>() {
 			        	
-						/**
-						 * 
-						 */
-						private static final long serialVersionUID = 1L;
 						ArrayList<String> actividades = Controlador.getActividadesAsociadas(sesion);
 						String[] strings = actividades.toArray(new String[actividades.size()]);
-			            public int getSize() { return strings.length; }
+						public int getSize() { return strings!= null ? strings.length : 0; }
 			            public String getElementAt(int i) { return strings[i]; }
 			        });
 		        }
@@ -379,12 +361,13 @@ public class Sesiones extends ColorPanel{
 		                .addComponent(jButton1)
 		                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		        );
+		       
 		        getContentPane().setBackground(getColor());
 		        pack();
 			}
 			
 			/**
-			 * Funci贸n que se ejecuta al darle a guardar en la ventana de adici贸n de sesiones. Se rellena un objeto sesi贸n y es pasado al controlador.
+			 * Funci髇 que se ejecuta al darle a guardar en la ventana de adici髇 de sesiones. Se rellena un objeto sesi髇 y es pasado al controlador.
 			 * */
 			private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { 
 				
@@ -394,7 +377,7 @@ public class Sesiones extends ColorPanel{
 				
 				String duracion = String.valueOf(jTextField2.getText());
 
-				//Esta excepci贸n hay que capturarla
+				//Esta excepci髇 hay que capturarla
 				if(duracion.length()>0 ){
 					info.setDuracion(Integer.valueOf(duracion));
 				}
@@ -462,15 +445,17 @@ public class Sesiones extends ColorPanel{
 
 		        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		        switch(modo){
-				case ELIMINAR:
-					setTitle("Eliminar Sesion");
-			    	break;
-				case EDITAR:
-					setTitle("Editar Sesion");
-					break;
-				case BUSCAR:
-					setTitle("Buscar Sesion");
-					break;
+					case ELIMINAR:
+						setTitle("Eliminar Sesion");
+				    	break;
+					case EDITAR:
+						setTitle("Editar Sesion");
+						break;
+					case BUSCAR:
+						setTitle("Buscar Sesion");
+						break;
+					default:
+						new Error("Error modo sesiones buscar");
 				}
 
 		        jLabel1.setText("Nombre");
@@ -481,7 +466,7 @@ public class Sesiones extends ColorPanel{
 		        jTextArea1.setRows(5);
 		        jScrollPane1.setViewportView(jTextArea1);
 
-		        jLabel3.setText("Duraci贸n:");
+		        jLabel3.setText("Duraci髇:");
 
 		        jLabel6.setText("Desde");
 
@@ -503,11 +488,9 @@ public class Sesiones extends ColorPanel{
 		        });
 
 		        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-		            
-					private static final long serialVersionUID = 1L;
 					
 					String[] strings = { };
-		            public int getSize() { return strings.length; }
+					public int getSize() { return strings!= null ? strings.length : 0; }
 		            public String getElementAt(int i) { return strings[i]; }
 		        });
 		        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -595,7 +578,8 @@ public class Sesiones extends ColorPanel{
 		                        .addComponent(jButton2)))
 		                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		        );
-		        
+		       
+
 		        getContentPane().setBackground(getColor());
 		        pack();
 		    }
@@ -643,6 +627,9 @@ public class Sesiones extends ColorPanel{
 					s = getSelectedSesion(i, filtrados);
 					p = new PantallaSesion(s, Modo.VISTA);
 					p.setVisible(true);
+					break;
+				default:
+					new Error("Error modo pantalla sesiones buscar");
 					break;
 				}
 			}

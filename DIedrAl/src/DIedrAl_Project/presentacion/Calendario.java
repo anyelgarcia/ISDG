@@ -76,6 +76,7 @@ public class Calendario extends ColorPanel{
 		add(consultar, c);
 	}
 
+	@SuppressWarnings("serial")
 	private class DateLabelFormatter extends AbstractFormatter {
 
 		private String datePattern = "dd-MM-yyyy";
@@ -99,6 +100,12 @@ public class Calendario extends ColorPanel{
 	}
 
 
+	/**
+	 * Clase que se utiliza para consultar los datos de las sesiones planificadas.
+	 * @author Diedral_Group
+	 *
+	 */
+	@SuppressWarnings("serial")
 	public class PantallaConsulta extends JFrame{
 
 		                  
@@ -151,7 +158,7 @@ public class Calendario extends ColorPanel{
 
 	        jList2.setModel(new javax.swing.AbstractListModel<String>() {
 	            String[] strings = { };
-	            public int getSize() { return strings.length; }
+	            public int getSize() { return strings!= null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }
 	        });
 	        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -242,7 +249,12 @@ public class Calendario extends ColorPanel{
 	    } 
 	}
 
-
+	/**
+	 * Pantala que se utiliza para añadir, eliminar y editar las sesiones del calendario.
+	 * @author Diedral_Group
+	 *
+	 */
+	@SuppressWarnings("serial")
 	public class PantallaModificar extends JFrame{
 
 		                    
@@ -304,7 +316,7 @@ public class Calendario extends ColorPanel{
 				
 				private static final long serialVersionUID = 1L;
 				String[] strings = { };
-				public int getSize() { return strings.length; }
+				public int getSize() { return strings!= null ? strings.length : 0; }
 				public String getElementAt(int i) { return strings[i]; }
 			});
 			jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
