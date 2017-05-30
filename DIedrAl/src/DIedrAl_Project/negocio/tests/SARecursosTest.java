@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import org.junit.Test;
 
-import DIedrAl_Project.integracion.AccessException;
+import DIedrAl_Project.integracion.BasicClasses.AccessException;
 import DIedrAl_Project.negocio.recursos.*;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.*;
 

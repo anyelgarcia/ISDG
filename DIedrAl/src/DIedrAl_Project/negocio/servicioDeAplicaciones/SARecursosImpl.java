@@ -4,7 +4,9 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 
-import DIedrAl_Project.integracion.*;
+import DIedrAl_Project.integracion.BasicClasses.*;
+import DIedrAl_Project.integracion.DAOinterfaces.*;
+import DIedrAl_Project.integracion.simplefileImp.*;
 import DIedrAl_Project.negocio.recursos.*;
 
 public class SARecursosImpl implements SARecursos {

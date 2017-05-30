@@ -5,7 +5,10 @@ import java.rmi.NotBoundException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import DIedrAl_Project.integracion.*;
+import DIedrAl_Project.integracion.BasicClasses.*;
+import DIedrAl_Project.integracion.DAOinterfaces.*;
+import DIedrAl_Project.integracion.simplefileImp.*;
+import DIedrAl_Project.integracion.BasicClasses.AccessException;
 import DIedrAl_Project.negocio.administracion.*;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 
