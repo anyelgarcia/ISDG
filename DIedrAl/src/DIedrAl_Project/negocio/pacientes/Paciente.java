@@ -38,11 +38,10 @@ public class Paciente extends Persona {
 	}
 
 	@Override
-	public Object clone() throws CloneNotSupportedException {
-		Paciente p = (Paciente) super.clone();
-		p.datos = this.datos;
-		p.notas = this.notas;
-		return p;
+	public void igualarCampos(Persona that){
+		super.igualarCampos(that);
+		datos = that.datos;
+		notas = that.notas;
 	}
 
 }
