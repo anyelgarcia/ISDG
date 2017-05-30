@@ -72,10 +72,17 @@ public class DAObasico<S extends ObjetoAlmacenable> {
 
 	public ArrayList<S> obtenerDatos(String file) throws IOException,
 			ClassNotFoundException {
-		FileInputStream fis = new FileInputStream(file);
+		ArrayList<S> r = new ArrayList<>();
+		FileInputStream fis = null;
+		try{
+			fis = new FileInputStream(file);
+		}
+		catch(FileNotFoundException e) {
+			return r;
+		}
 		BufferedInputStream bis = new BufferedInputStream(fis);
 		AppendableObjectInputStream ois = new AppendableObjectInputStream(bis);
-		ArrayList<S> r = new ArrayList<>();
+		
 		S p = null;
 		try {
 			while (true) {
@@ -118,7 +125,13 @@ public class DAObasico<S extends ObjetoAlmacenable> {
 
 	public boolean exists(String id, String file)
 			throws ClassNotFoundException, IOException {
-		FileInputStream fis = new FileInputStream(file);
+		FileInputStream fis;
+		try{
+			fis = new FileInputStream(file);
+		}
+		catch(FileNotFoundException e) {
+			return false;
+		}
 		BufferedInputStream bis = new BufferedInputStream(fis);
 		AppendableObjectInputStream ois = new AppendableObjectInputStream(bis);
 		S p = null;
@@ -138,10 +151,16 @@ public class DAObasico<S extends ObjetoAlmacenable> {
 
 	public HashSet<S> obtenerDatosSet(String file) throws IOException,
 			ClassNotFoundException {
-		FileInputStream fis = new FileInputStream(file);
+		HashSet<S> r = new HashSet<>();
+		FileInputStream fis = null;
+		try{
+			fis = new FileInputStream(file);
+		}
+		catch(FileNotFoundException e) {
+			return r;
+		}
 		BufferedInputStream bis = new BufferedInputStream(fis);
 		AppendableObjectInputStream ois = new AppendableObjectInputStream(bis);
-		HashSet<S> r = new HashSet<>();
 		S p = null;
 		try {
 			while (true) {

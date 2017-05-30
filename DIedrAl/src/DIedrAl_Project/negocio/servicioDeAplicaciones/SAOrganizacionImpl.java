@@ -65,9 +65,12 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 		daocen.guardarCentro(new EstadoCentro(name));
 
 		DAOUsuario daousu = factoria.getDAOUsuario();
-		daousu.crearUsuario(new Usuario(name + "_ADMIN", "", "", name
-				+ "_ADMIN"));
-
+		Usuario u = new Usuario(name + "_ADMIN", "", "", name
+				+ "_ADMIN");
+		u.setCentro(name);
+		u.setPassword(passAdmin);
+		daousu.crearUsuario(u);
+		
 	}
 
 	@Override
