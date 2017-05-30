@@ -1,6 +1,7 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
-import DIedrAl_Project.integracion.AccessException;
+import DIedrAl_Project.integracion.BasicClasses.AccessException;
+
 
 public abstract class SAFactory {
 

@@ -1,6 +1,6 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
-import DIedrAl_Project.integracion.AccessException;
+import DIedrAl_Project.integracion.BasicClasses.AccessException;
 
 public class SAFactoryImpl extends SAFactory{
 
@@ -10,7 +10,7 @@ public class SAFactoryImpl extends SAFactory{
 	}
 
 	@Override
-	public SAPacientes newSAPacientes(String centro) throws AccessException  {
+	public SAPacientes newSAPacientes(String centro) throws AccessException   {
 		return new SAPacientesImpl(centro);
 	}
 

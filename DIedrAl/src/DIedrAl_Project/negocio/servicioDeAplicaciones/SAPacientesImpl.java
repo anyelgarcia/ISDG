@@ -3,8 +3,11 @@ package DIedrAl_Project.negocio.servicioDeAplicaciones;
 import java.rmi.*;
 import java.util.*;
 
-import DIedrAl_Project.integracion.*;
-import DIedrAl_Project.integracion.AccessException;
+import DIedrAl_Project.integracion.BasicClasses.*;
+import DIedrAl_Project.integracion.BasicClasses.AccessException;
+import DIedrAl_Project.integracion.DAOinterfaces.*;
+import DIedrAl_Project.integracion.simplefileImp.*;
+import DIedrAl_Project.integracion.SQL.*;
 import DIedrAl_Project.negocio.Relacion;
 import DIedrAl_Project.negocio.administracion.*;
 import DIedrAl_Project.negocio.pacientes.*;
