@@ -258,18 +258,11 @@ public class Perfil extends ColorPanel{
 		}
 
 		protected void jButton1ActionPerformed(ActionEvent evt) {
-			Usuario info;
-			try {
-				info = (Usuario) user.clone();
-				info.setEmail(jTextField3.getText());
-				info.setTfo(jTextField4.getText());
-				info.setInfor(jTextArea2.getText());
-				info.setPerfil(jTextArea1.getText());
-				Controlador.modificaUsuario(info);
-			} catch (CloneNotSupportedException e) {
-				new Error("Ha habido un error");
-			}
-			
+			user.setEmail(jTextField3.getText());
+			user.setTfo(jTextField4.getText());
+			user.setInfor(jTextArea2.getText());
+			user.setPerfil(jTextArea1.getText());
+			Controlador.modificaUsuario(user);
 		}
 	}
 	

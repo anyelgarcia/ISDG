@@ -183,16 +183,12 @@ public abstract class Persona implements ObjetoAlmacenable, Serializable, Clonea
 	 */
 
 	public void igualarCampos(Persona that) {
-		nombre = that.nombre;
-		apellido1 = that.apellido1;
-		apellido2 = that.apellido2;
 		fechaNacimiento = that.fechaNacimiento;
 		estadoCivil = that.estadoCivil;
 		direccion = that.direccion;
 		email = that.email;
 		tfo = that.tfo;
 		perfil = that.perfil;
-		nif = that.nif;
 		centro = that.centro;
 	}
 

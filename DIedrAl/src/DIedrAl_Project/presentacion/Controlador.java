@@ -328,11 +328,7 @@ public class Controlador {
 	}
 
 	public static void modificaPaciente(Paciente antiguo, Paciente nuevo) {
-		try {
-			antiguo = (Paciente) nuevo.clone();
-		} catch (CloneNotSupportedException e) {
-			new Error("Ha ocurrido un error al editar el paciente");
-		}
+		antiguo.igualarCampos(nuevo);
 	}
 
 	public static String[] getCentros(){
@@ -435,8 +431,7 @@ public class Controlador {
 	}
 
 	public static void modificaUsuario(Usuario info) {
-	
-		
+		usuario.igualarCampos(info);
 	}
 
 }

@@ -52,10 +52,10 @@ public class Usuario extends Persona {
 	@Override
 	public void igualarCampos(Persona that){
 		super.igualarCampos(that);
-		
-		admin = that.admin;
-		infor = that.infor;
-		password = that.password;
+		Usuario aux = (Usuario) that;
+		admin = aux.admin;
+		infor = aux.infor;
+		password = aux.password;
 	}
 	
 }
