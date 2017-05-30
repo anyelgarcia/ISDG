@@ -67,11 +67,19 @@ public class DAObasico<S extends ObjetoAlmacenable> {
 		}
 	}
 
-	public ArrayList<S> obtenerDatos(String file) throws IOException, ClassNotFoundException {
-		FileInputStream fis = new FileInputStream(file);
+	public ArrayList<S> obtenerDatos(String file) throws IOException,
+			ClassNotFoundException {
+		ArrayList<S> r = new ArrayList<>();
+		FileInputStream fis = null;
+		try{
+			fis = new FileInputStream(file);
+		}
+		catch(FileNotFoundException e) {
+			return r;
+		}
 		BufferedInputStream bis = new BufferedInputStream(fis);
 		AppendableObjectInputStream ois = new AppendableObjectInputStream(bis);
-		ArrayList<S> r = new ArrayList<>();
+		
 		S p = null;
 		try {
 			while (true) {
@@ -111,8 +119,15 @@ public class DAObasico<S extends ObjetoAlmacenable> {
 		}
 	}
 
-	public boolean exists(String id, String file) throws ClassNotFoundException, IOException {
-		FileInputStream fis = new FileInputStream(file);
+	public boolean exists(String id, String file)
+			throws ClassNotFoundException, IOException {
+		FileInputStream fis;
+		try{
+			fis = new FileInputStream(file);
+		}
+		catch(FileNotFoundException e) {
+			return false;
+		}
 		BufferedInputStream bis = new BufferedInputStream(fis);
 		AppendableObjectInputStream ois = new AppendableObjectInputStream(bis);
 		S p = (S) ois.readObject();
@@ -129,12 +144,19 @@ public class DAObasico<S extends ObjetoAlmacenable> {
 			ois.close();
 		return true;
 	}
-	
-	public HashSet<S> obtenerDatosSet(String file) throws IOException, ClassNotFoundException{
-		FileInputStream fis = new FileInputStream(file);
+
+	public HashSet<S> obtenerDatosSet(String file) throws IOException,
+			ClassNotFoundException {
+		HashSet<S> r = new HashSet<>();
+		FileInputStream fis = null;
+		try{
+			fis = new FileInputStream(file);
+		}
+		catch(FileNotFoundException e) {
+			return r;
+		}
 		BufferedInputStream bis = new BufferedInputStream(fis);
 		AppendableObjectInputStream ois = new AppendableObjectInputStream(bis);
-		HashSet<S> r = new HashSet<>();
 		S p = null;
 		try {
 			while (true) {

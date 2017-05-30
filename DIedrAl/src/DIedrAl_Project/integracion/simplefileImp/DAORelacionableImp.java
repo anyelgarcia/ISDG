@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.EOFException;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -87,11 +88,16 @@ public class DAORelacionableImp implements DAORelacionable {
 	public HashSet<Relacion> listarRelaciones(String id) throws AccessException {
 		FileInputStream fis;
 		AppendableObjectInputStream ois = null;
+		HashSet<Relacion> r = new HashSet<>();
 		try {
-			fis = new FileInputStream(file);
+			try{
+				fis = new FileInputStream(file);
+			}
+			catch(FileNotFoundException e) {
+				return r;
+			}
 			BufferedInputStream bis = new BufferedInputStream(fis);
 			ois = new AppendableObjectInputStream(bis);
-			HashSet<Relacion> r = new HashSet<>();
 			Relacion rel = null;
 			try {
 				while (true) {
@@ -127,8 +133,14 @@ public class DAORelacionableImp implements DAORelacionable {
 	public void eliminarRelacionesCentro(String id) throws AccessException {
 		BufferedInputStream bis;
 		AppendableObjectInputStream ois = null;
+		FileInputStream fis = null;
 		try {
-			FileInputStream fis = new FileInputStream(file);
+			try{
+				fis = new FileInputStream(file);
+			}
+			catch(FileNotFoundException e){
+				return;
+			}
 			bis = new BufferedInputStream(fis);
 			ois = new AppendableObjectInputStream(bis);
 			ArrayList<Relacion> r = new ArrayList<>();
