@@ -17,6 +17,10 @@ import DIedrAl_Project.presentacion.Confirm.confirmListener;
 public class Login extends JFrame{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2735783534774038620L;
 	private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -122,19 +126,18 @@ public class Login extends JFrame{
 		
 		if(intento==null){
 			Error mensaje = new Error("No se ha encontrado al usuario en el sistema");
-			mensaje.run();
 			return;
 		}
 		
 		if(!intento.inputPassword(clave)){
-			Error mensaje = new Error("ContraseÃ±a equivocada");
-			mensaje.run();
+			Error mensaje = new Error("Contraseña equivocada");
 			return;
 		}
 
 		Controlador.setUsuario(intento);
 		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-		Main.run();
+		JFrame PantallaPrincipal = new MainFrame();
+		PantallaPrincipal.setVisible(true);
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) { 
@@ -414,7 +417,6 @@ public class Login extends JFrame{
 	       jLabel3 = new javax.swing.JLabel();
        
 	       jTextField1 = new javax.swing.JTextField("");
-	       jTextField2 = new javax.swing.JTextField("");
 
 	       jPasswordField1 = new javax.swing.JPasswordField();
 	       jButton1 = new javax.swing.JButton();
@@ -486,11 +488,9 @@ public class Login extends JFrame{
 				   new Login().init();
 			   }else{
 				   Error msg = new Error("Ya existe un centro con ese nombre");
-				   msg.run();
 			   }
 		   }else{
 			   Error msg = new Error("Han de rellenarse todos los campos");
-			   msg.run();
 		   }
 	   }
 	}
