@@ -9,9 +9,6 @@ public class Error extends JFrame{
 	
 	public Error(String mensaje){
 		this.mensaje = mensaje;
-	}
-	
-	public void run(){
 		JLabel jlabel = new JLabel("  " + mensaje);
 		add(jlabel);
 		setVisible(true);

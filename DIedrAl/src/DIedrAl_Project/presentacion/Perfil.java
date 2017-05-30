@@ -124,8 +124,7 @@ public class Perfil extends ColorPanel{
 				 */
 				private static final long serialVersionUID = 1L;
 				
-				ArrayList<String> aux = Controlador.getPacientesAsociados(user);
-				String[] strings = aux.toArray(new String[aux.size()]);
+				String[] strings = Controlador.getPacientesAsociados(user);
 	            public int getSize() { return strings.length; }
 	            public String getElementAt(int i) { return strings[i]; }
 	        });

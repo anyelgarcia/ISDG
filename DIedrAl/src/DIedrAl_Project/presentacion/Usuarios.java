@@ -40,7 +40,7 @@ public class Usuarios extends ColorPanel{
 		add(title, c);
 
 
-		ImageButton nuevo = new ImageButton("Añadir", "images/bluebutton.png", "images/bluebutton2.png", this);
+		ImageButton nuevo = new ImageButton("AÃ±adir", "images/bluebutton.png", "images/bluebutton2.png", this);
 		nuevo.addActionListener((ae) -> {
 			JFrame panel = new PantallaUsuario(null, Modo.ADD);
 			panel.setVisible(true);
@@ -67,7 +67,7 @@ public class Usuarios extends ColorPanel{
 
 	/**
 	 * Clase que gestiona la ventana que muestra los campos de un usuario. Se utiliza esta ventana tanto para
-	 * añadir un usuario nuevo como para editar o consultar los datos de un usuario ya existente.
+	 * aÃ±adir un usuario nuevo como para editar o consultar los datos de un usuario ya existente.
 	 * @author Diedral_Group
 	 * 
 	 */  
@@ -124,7 +124,6 @@ public class Usuarios extends ColorPanel{
 			jLabel5 = new javax.swing.JLabel();
 			jLabel6 = new javax.swing.JLabel();
 			jTextField1 = new javax.swing.JTextField("");
-			jTextField2 = new javax.swing.JTextField("");
 			jTextField3 = new javax.swing.JTextField("");
 			jTextField4 = new javax.swing.JTextField("");
 
@@ -161,11 +160,11 @@ public class Usuarios extends ColorPanel{
 
 			jTextArea2.setColumns(20);
 			jTextArea2.setRows(5);
-			jTextArea2.setText("Descripción");
+			jTextArea2.setText("DescripciÃ³n");
 			jScrollPane3.setViewportView(jTextArea2);
 
 			jLabel1.setFont(new java.awt.Font("Arial", 0, 10));
-			jLabel1.setText("Despacho, horarios y otra información: ");
+			jLabel1.setText("Despacho, horarios y otra informaciÃ³n: ");
 			jLabel1.setForeground(Color.BLACK);
 
 			jLabel2.setFont(new java.awt.Font("Arial", 0, 10));
@@ -193,7 +192,7 @@ public class Usuarios extends ColorPanel{
 			jLabel5.setForeground(Color.BLACK);
 
 			jLabel6.setFont(new java.awt.Font("Arial", 0, 10));
-			jLabel6.setText("Teléfono: ");
+			jLabel6.setText("TelÃ©fono: ");
 			jLabel6.setForeground(Color.BLACK);
 
 			jButton1.setText("Guardar");
@@ -507,8 +506,8 @@ public class Usuarios extends ColorPanel{
 		}
 
 		/**
-		 * Función que se ejecuta al darle al botón buscar. Rellena un Usuario con los datos introducidos y 
-		 * busca en el sistema a todos los que coincidan con él.
+		 * FunciÃ³n que se ejecuta al darle al botÃ³n buscar. Rellena un Usuario con los datos introducidos y 
+		 * busca en el sistema a todos los que coincidan con Ã©l.
 		 * @param evt
 		 */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -543,7 +542,7 @@ public class Usuarios extends ColorPanel{
 				hints.add(Hints.NIF);
 			}
 
-			if(admin.equals("Si")||  admin.equals("Sí") ||  admin.equals("SI") ||  admin.equals("SÍ")){
+			if(admin.equals("Si")||  admin.equals("SÃ­") ||  admin.equals("SI") ||  admin.equals("SÃ�")){
 				usuarios = new Hints[1];
 				usuarios[0] = Hints.ADMINISTRADOR;
 			}else{
@@ -583,9 +582,9 @@ public class Usuarios extends ColorPanel{
 		}                                        
 
 		/**
-		 * Función que se ejecuta al seleccionar uno de los resultados de la búsqueda y pulsar el
-		 * botón de validar. Según el modo se hace una cosa u otra. 
-		 * Si el modo es eliminar, se muestra una pantalla de confirmación.
+		 * FunciÃ³n que se ejecuta al seleccionar uno de los resultados de la bÃºsqueda y pulsar el
+		 * botÃ³n de validar. SegÃºn el modo se hace una cosa u otra. 
+		 * Si el modo es eliminar, se muestra una pantalla de confirmaciÃ³n.
 		 * Si el modo es Editar o buscar, se crea una pantalla Usuario y se le pasa el control.
 		 * @param evt
 		 */
@@ -596,7 +595,7 @@ public class Usuarios extends ColorPanel{
 			switch(modo){
 				case ELIMINAR:
 					Confirm c = new Confirm();
-					c.setMensaje("El paciente se eliminará del sistema.");
+					c.setMensaje("El paciente se eliminarÃ¡ del sistema.");
 			    	c.setVisible(true);
 			    	c.addListener(this);
 			    	break;
