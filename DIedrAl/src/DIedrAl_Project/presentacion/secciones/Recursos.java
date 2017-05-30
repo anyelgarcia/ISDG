@@ -267,9 +267,7 @@ public class Recursos extends ColorPanel{
 			String etiquetas = jTextArea2.getText();
 			String etiqs[] = etiquetas.split(",");
 			String nombre = jTextField1.getText();
-			if(nombre == null) {
-				new Error("Nombre vacio");
-			}
+			if(nombre == null) new Error("Nombre vacio");
 			else{
 				Recurso info = new Recurso(nombre, (File)null, etiqs);
 				info.setDescripcion(String.valueOf(jTextArea3.getText()));
@@ -662,9 +660,8 @@ public class Recursos extends ColorPanel{
 			 
 			 String direction = jTextField2.getText(); 
 		     String name = jTextField1.getText();
-		     if(name.equals("")){
-		    	 new Error("Nombre Vacio");
-		     }else{
+		     if(name.equals("")) new Error("Nombre Vacio");
+		     else{
 		    	 if(direction.equals("") && file != null){
 		    		 Recurso rec = new Recurso(name, file, jTextArea3.getText().split(","));
 		    		 rec.setDescripcion(jTextArea2.getText());
