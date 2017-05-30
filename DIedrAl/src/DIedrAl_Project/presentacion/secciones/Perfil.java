@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -136,8 +137,8 @@ public class Perfil extends ColorPanel{
 				 */
 				private static final long serialVersionUID = 1L;
 				
-				String[] strings = /*Controlador.getPacientesAsociados(user)*/{""};
-	            public int getSize() { return strings.length; }
+				String[] strings = Controlador.getPacientesAsociados(user);
+	            public int getSize() { return strings!=null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }
 	        });
 	        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -164,23 +165,24 @@ public class Perfil extends ColorPanel{
 	        jLabel5.setText("Email: ");
 
 	        jLabel6.setText("Teléfono: ");
-
-	        /*jTextField1.setEditable(false);
-	        jTextField1.setText(user.getName() +" " + user.getFirstSurname() + " " + user.getSecondSurname());
 	        
-	        jTextField3.setEditable(editable);
-	        jTextField3.setText(user.getEmail());
-	        
-	        jTextField4.setEditable(editable);
-	        jTextField4.setText(user.getTfo());
-	        
-	        jTextArea1.setText(user.getPerfil());
-      
-	        jTextArea1.setEditable(editable);
-	        
-	        jTextArea2.setText(user.getInfor());
-	        jTextArea2.setEditable(editable);*/
-	  
+	        if(user != null){
+		        jTextField1.setEditable(false);
+		        jTextField1.setText(user.getName() +" " + user.getFirstSurname() + " " + user.getSecondSurname());
+		        
+		        jTextField3.setEditable(editable);
+		        jTextField3.setText(user.getEmail());
+		        
+		        jTextField4.setEditable(editable);
+		        jTextField4.setText(user.getTfo());
+		        
+		        jTextArea1.setText(user.getPerfil());
+	      
+		        jTextArea1.setEditable(editable);
+		        
+		        jTextArea2.setText(user.getInfor());
+		        jTextArea2.setEditable(editable);
+	        }
 
 	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 	       getContentPane().setLayout(layout);
@@ -256,13 +258,16 @@ public class Perfil extends ColorPanel{
 	        pack();
 	        setVisible(true);
 		}
-
+		/**
+		 * Funcion que se ejecuta cuando nos piden guardar las modificaciones en el perfil
+		 */
 		protected void jButton1ActionPerformed(ActionEvent evt) {
 			user.setEmail(jTextField3.getText());
 			user.setTfo(jTextField4.getText());
 			user.setInfor(jTextArea2.getText());
 			user.setPerfil(jTextArea1.getText());
 			Controlador.modificaUsuario(user);
+			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		}
 	}
 	

@@ -3,10 +3,12 @@ package DIedrAl_Project.presentacion.administracion;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
+import java.rmi.NotBoundException;
 import java.util.ArrayList;
 
 import javax.swing.*;
 
+import DIedrAl_Project.integracion.BasicClasses.AccessException;
 import DIedrAl_Project.negocio.administracion.Hints;
 import DIedrAl_Project.negocio.administracion.Persona;
 import DIedrAl_Project.negocio.administracion.Usuario;
@@ -124,7 +126,7 @@ public class Login extends JFrame{
 		String clave = String.copyValueOf(jPasswordField1.getPassword());
 		
 		if(!Controlador.usuarioCorrecto(nombreuser, clave)){
-			return;
+			new Error("Usuario o contraseña incorrecta");
 		}
 		
 		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));

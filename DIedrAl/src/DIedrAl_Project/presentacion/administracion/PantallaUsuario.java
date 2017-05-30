@@ -13,7 +13,7 @@ import DIedrAl_Project.presentacion.auxiliar.Modo;
 
 /**
  * Clase que gestiona la ventana que muestra los campos de un usuario. Se utiliza esta ventana tanto para
- * a馻dir un usuario nuevo como para consultar los datos de un usuario ya existente.
+ * a帽adir un usuario nuevo como para consultar los datos de un usuario ya existente.
  * @author Diedral_Group
  * 
  */  
@@ -115,11 +115,11 @@ public class PantallaUsuario extends JFrame{
 
 		jTextArea2.setColumns(20);
 		jTextArea2.setRows(5);
-		jTextArea2.setText("Descripci髇");
+		jTextArea2.setText("Descripci贸n");
 		jScrollPane3.setViewportView(jTextArea2);
 
 		jLabel1.setFont(new java.awt.Font("Arial", 0, 10));
-		jLabel1.setText("Despacho, horarios y otra informaci髇: ");
+		jLabel1.setText("Despacho, horarios y otra informaci贸n: ");
 		jLabel1.setForeground(Color.BLACK);
 
 		jLabel2.setFont(new java.awt.Font("Arial", 0, 10));
@@ -147,11 +147,11 @@ public class PantallaUsuario extends JFrame{
 		jLabel5.setForeground(Color.BLACK);
 
 		jLabel6.setFont(new java.awt.Font("Arial", 0, 10));
-		jLabel6.setText("Tel閒ono: ");
+		jLabel6.setText("Tel茅fono: ");
 		jLabel6.setForeground(Color.BLACK);
 
 		jLabel10.setFont(new java.awt.Font("Arial", 0, 10));
-		jLabel10.setText("Contrase馻: ");
+		jLabel10.setText("Contrase帽a: ");
 		jLabel10.setForeground(Color.BLACK);
 		
 		jButton1.setText("Guardar");
@@ -281,7 +281,7 @@ public class PantallaUsuario extends JFrame{
 	}
 	
 	/**
-	 * Funci髇 que se lanza al pulsar el bot髇 de guardar. Se recoge el contenido de los
+	 * Funci贸n que se lanza al pulsar el bot贸n de guardar. Se recoge el contenido de los
 	 * campos de texto y se pasan al controlador para que cree el usuario.
 	 * @param evt
 	 */
@@ -295,18 +295,17 @@ public class PantallaUsuario extends JFrame{
 			usuario.setEmail(jTextField3.getText());
 			usuario.setPerfil(jTextArea1.getText());
 			usuario.setInfor(jTextArea2.getText());
-	
 			String tfo = jTextField4.getText();
 			if(tfo.length()>0){
 				usuario.setTfo(tfo);
-			}
-			
+			} else usuario.setTfo("");
+
 			Controlador.addUsuario(usuario);
 			new Error("El nuevo usuario ha sido creado");
 			new MenuCentroUsuarios();
 			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		}else{
-			new Error("Han de llenarse los campos de nombre, contrase馻 y DNI");
+			new Error("Han de llenarse los campos de nombre, contrase帽a y DNI");
 		}
 	} 
 	

@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -272,6 +273,7 @@ public class Recursos extends ColorPanel{
 				Recurso info = new Recurso(nombre, (File)null, etiqs);
 				info.setDescripcion(String.valueOf(jTextArea3.getText()));
 				Controlador.modificaEtiquetable(recurso, info);
+				dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 			}
 		}                                        
 
@@ -662,12 +664,13 @@ public class Recursos extends ColorPanel{
 		     String name = jTextField1.getText();
 		     if(name.equals("")) new Error("Nombre Vacio");
 		     else{
-		    	 if(direction.equals("") && file != null){
+		    	 if(direction.equals("") && file.canRead()){
 		    		 Recurso rec = new Recurso(name, file, jTextArea3.getText().split(","));
 		    		 rec.setDescripcion(jTextArea2.getText());
 		    		 Controlador.addRecurso(rec);
+		    		 dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		    	 }
-		    	 else if(!direction.equals("") && file == null){
+		    	 else if(!direction.equals("") && !file.canRead()){
 		    		 try {
 		    			 Recurso rec = new Recurso(name, direction, jTextArea3.getText().split(","));
 		    			 rec.setDescripcion(jTextArea2.getText());

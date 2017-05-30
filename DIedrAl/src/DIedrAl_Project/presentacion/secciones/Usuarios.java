@@ -3,6 +3,7 @@ package DIedrAl_Project.presentacion.secciones;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -327,6 +328,7 @@ public class Usuarios extends ColorPanel{
 					usuario.setTfo(tfo);
 				}
 				Controlador.addUsuario(usuario);
+				dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 			}
 		}     
 	}
