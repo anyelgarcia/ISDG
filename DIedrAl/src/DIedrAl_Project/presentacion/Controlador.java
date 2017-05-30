@@ -434,4 +434,9 @@ public class Controlador {
 		}
 	}
 
+	public static void modificaUsuario(Usuario info) {
+	
+		
+	}
+
 }

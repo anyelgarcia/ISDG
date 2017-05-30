@@ -3,6 +3,7 @@ package DIedrAl_Project.presentacion.secciones;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -70,9 +71,9 @@ public class Perfil extends ColorPanel{
 	    private javax.swing.JLabel jLabel1;
 	    private javax.swing.JLabel jLabel2;
 	    private javax.swing.JLabel jLabel3;
-	    private javax.swing.JLabel jLabel4;
 	    private javax.swing.JLabel jLabel5;
 	    private javax.swing.JLabel jLabel6;
+	    private javax.swing.JButton jButton1;
 	    private javax.swing.JList<String> jList1;
 	    private javax.swing.JScrollPane jScrollPane1;
 	    private javax.swing.JScrollPane jScrollPane2;
@@ -80,7 +81,6 @@ public class Perfil extends ColorPanel{
 	    private javax.swing.JTextArea jTextArea1;
 	    private javax.swing.JTextArea jTextArea2;
 	    private javax.swing.JTextField jTextField1;
-	    private javax.swing.JTextField jTextField2;
 	    private javax.swing.JTextField jTextField3;
 	    private javax.swing.JTextField jTextField4;
 	    private boolean editable;
@@ -106,13 +106,14 @@ public class Perfil extends ColorPanel{
 	        jLabel1 = new javax.swing.JLabel();
 	        jLabel2 = new javax.swing.JLabel();
 	        jLabel3 = new javax.swing.JLabel();
-	        jLabel4 = new javax.swing.JLabel();
 	        jLabel5 = new javax.swing.JLabel();
 	        jLabel6 = new javax.swing.JLabel();
 	        jTextField1 = new javax.swing.JTextField("");
-	        jTextField2 = new javax.swing.JTextField("");
 	        jTextField3 = new javax.swing.JTextField("");
 	        jTextField4 = new javax.swing.JTextField("");
+	        jButton1 = new javax.swing.JButton();
+	        jButton1.setEnabled(editable);
+	        jButton1.setVisible(editable);
 
 	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 	        
@@ -121,6 +122,13 @@ public class Perfil extends ColorPanel{
 		        case EDITAR: setTitle("Editar Mi Perfil"); break;
 		        default: new Error("Error de modo en pantalla perfil"); break;
 	        }
+	        
+	        jButton1.setText("Guardar");
+	        jButton1.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	            	jButton1ActionPerformed(evt);
+	            }
+	        });
 
 	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
 	        	/**
@@ -128,7 +136,7 @@ public class Perfil extends ColorPanel{
 				 */
 				private static final long serialVersionUID = 1L;
 				
-				String[] strings = Controlador.getPacientesAsociados(user);
+				String[] strings = /*Controlador.getPacientesAsociados(user)*/{""};
 	            public int getSize() { return strings.length; }
 	            public String getElementAt(int i) { return strings[i]; }
 	        });
@@ -153,17 +161,12 @@ public class Perfil extends ColorPanel{
 
 	        jLabel3.setText("Nombre y Apellidos: ");
 
-	        jLabel4.setText("Rol: ");
-
 	        jLabel5.setText("Email: ");
 
 	        jLabel6.setText("Teléfono: ");
 
-	        jTextField1.setEditable(false);
+	        /*jTextField1.setEditable(false);
 	        jTextField1.setText(user.getName() +" " + user.getFirstSurname() + " " + user.getSecondSurname());
-
-	        jTextField2.setEditable(editable);
-	        jTextField2.setText(user.isAdmin() ? "Administrador" : "Terapeuta");
 	        
 	        jTextField3.setEditable(editable);
 	        jTextField3.setText(user.getEmail());
@@ -176,7 +179,7 @@ public class Perfil extends ColorPanel{
 	        jTextArea1.setEditable(editable);
 	        
 	        jTextArea2.setText(user.getInfor());
-	        jTextArea2.setEditable(editable);
+	        jTextArea2.setEditable(editable);*/
 	  
 
 	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -198,7 +201,8 @@ public class Perfil extends ColorPanel{
 	                            .addGroup(layout.createSequentialGroup()
 	                                .addComponent(jLabel1)
 	                                .addGap(0, 116, Short.MAX_VALUE))
-	                            .addComponent(jScrollPane2)))
+	                            .addComponent(jScrollPane2))
+	                            .addComponent(jButton1))
 	                    .addGroup(layout.createSequentialGroup()
 	                        .addContainerGap()
 	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,7 +210,6 @@ public class Perfil extends ColorPanel{
 	                            .addGroup(layout.createSequentialGroup()
 	                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	                                    .addComponent(jLabel3)
-	                                    .addComponent(jLabel4)
 	                                    .addComponent(jLabel5)
 	                                    .addComponent(jLabel6))
 	                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -214,7 +217,6 @@ public class Perfil extends ColorPanel{
 	                                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
 	                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
 	                                        .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
-	                                        .addComponent(jTextField2)
 	                                        .addComponent(jTextField1)))))))
 	                .addContainerGap())
 	        );
@@ -226,9 +228,7 @@ public class Perfil extends ColorPanel{
 	                    .addComponent(jLabel3)
 	                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-	                    .addComponent(jLabel4)
-	                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE))
 	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 	                    .addComponent(jLabel5)
@@ -247,12 +247,29 @@ public class Perfil extends ColorPanel{
 	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
 	                    .addComponent(jScrollPane2)
 	                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
+	                .addGap(21, 21, 21)
+	                .addComponent(jButton1)
 	                .addGap(21, 21, 21))
 	        );
 	        
 	        getContentPane().setBackground(getColor());
 	        pack();
 	        setVisible(true);
+		}
+
+		protected void jButton1ActionPerformed(ActionEvent evt) {
+			Usuario info;
+			try {
+				info = (Usuario) user.clone();
+				info.setEmail(jTextField3.getText());
+				info.setTfo(jTextField4.getText());
+				info.setInfor(jTextArea2.getText());
+				info.setPerfil(jTextArea1.getText());
+				Controlador.modificaUsuario(info);
+			} catch (CloneNotSupportedException e) {
+				new Error("Ha habido un error");
+			}
+			
 		}
 	}
 	
