@@ -3,7 +3,7 @@ package DIedrAl_Project.negocio.servicioDeAplicaciones;
 import java.io.IOException;
 import java.util.Set;
 
-import DIedrAl_Project.integracion.AccessException;
+import DIedrAl_Project.integracion.BasicClasses.AccessException;
 import DIedrAl_Project.negocio.recursos.*;
 
 public interface SARecursos {

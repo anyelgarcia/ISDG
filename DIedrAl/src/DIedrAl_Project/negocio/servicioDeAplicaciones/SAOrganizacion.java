@@ -5,7 +5,7 @@ import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.util.ArrayList;
 
-import DIedrAl_Project.integracion.AccessException;
+import DIedrAl_Project.integracion.BasicClasses.AccessException;
 import DIedrAl_Project.negocio.administracion.Usuario;
 
 public interface SAOrganizacion {

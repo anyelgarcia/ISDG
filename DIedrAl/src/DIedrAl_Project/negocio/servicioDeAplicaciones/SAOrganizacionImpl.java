@@ -6,6 +6,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import DIedrAl_Project.integracion.*;
+import DIedrAl_Project.integracion.BasicClasses.AccessException;
+import DIedrAl_Project.integracion.BasicClasses.tRelacion;
+import DIedrAl_Project.integracion.DAOinterfaces.DAOCentro;
+import DIedrAl_Project.integracion.DAOinterfaces.DAOPaciente;
+import DIedrAl_Project.integracion.DAOinterfaces.DAORelacionable;
+import DIedrAl_Project.integracion.DAOinterfaces.DAOUsuario;
+import DIedrAl_Project.integracion.simplefileImp.SimpleFileDAOFactory;
 import DIedrAl_Project.negocio.administracion.*;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 
