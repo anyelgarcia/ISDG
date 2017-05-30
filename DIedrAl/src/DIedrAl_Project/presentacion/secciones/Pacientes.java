@@ -1,4 +1,4 @@
-package DIedrAl_Project.presentacion.secciones;
+package DIedrAl_Project.presentacion;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -13,13 +13,7 @@ import DIedrAl_Project.negocio.administracion.Hints;
 import DIedrAl_Project.negocio.administracion.Persona;
 import DIedrAl_Project.negocio.calendario.Fecha;
 import DIedrAl_Project.negocio.pacientes.Paciente;
-import DIedrAl_Project.presentacion.Controlador;
-import DIedrAl_Project.presentacion.auxiliar.ColorPanel;
-import DIedrAl_Project.presentacion.auxiliar.Confirm;
-import DIedrAl_Project.presentacion.auxiliar.Error;
-import DIedrAl_Project.presentacion.auxiliar.ImageButton;
-import DIedrAl_Project.presentacion.auxiliar.Modo;
-import DIedrAl_Project.presentacion.auxiliar.Confirm.confirmListener;
+import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 /**
  * Esta clase lleva la gestión de las vistas de los pacientes. En el constructor se dibuja la sección de Pacientes del Menú Principal y se pone a la espera para 
@@ -28,9 +22,17 @@ import DIedrAl_Project.presentacion.auxiliar.Confirm.confirmListener;
  * @author Diedral_Group
  *
  */
-@SuppressWarnings("serial")
+
 public class Pacientes extends ColorPanel{   
     
+	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1316669015671287170L;
+
+
 	public Pacientes(int r, int g, int b){
 		super(r, g, b);
 		
@@ -103,7 +105,11 @@ public class Pacientes extends ColorPanel{
 	 */                    
 	private class PantallaPaciente extends JFrame{
                  
-	    private javax.swing.JButton jButton1;
+	    /**
+		 * 
+		 */
+		private static final long serialVersionUID = -6079618578451230833L;
+		private javax.swing.JButton jButton1;
 	    private javax.swing.JComboBox<String> jComboBox1;
 	    private javax.swing.JComboBox<String> jComboBox2;
 	    private javax.swing.JComboBox<String> jComboBox3;
@@ -520,6 +526,10 @@ public class Pacientes extends ColorPanel{
 	        });
 
 	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
 				String[] strings = {  };
 				public int getSize() { return strings!= null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }
@@ -669,6 +679,10 @@ public class Pacientes extends ColorPanel{
 			}
 			
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
 				String[] strings = cadenas;
 				public int getSize() { return strings!= null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }

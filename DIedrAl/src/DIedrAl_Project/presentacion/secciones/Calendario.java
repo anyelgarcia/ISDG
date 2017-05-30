@@ -1,4 +1,4 @@
-package DIedrAl_Project.presentacion.secciones;
+package DIedrAl_Project.presentacion;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -18,9 +18,6 @@ import javax.swing.JLabel;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
-
-import DIedrAl_Project.presentacion.auxiliar.ColorPanel;
-import DIedrAl_Project.presentacion.auxiliar.ImageButton;
 
 
 
