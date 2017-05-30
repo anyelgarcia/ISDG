@@ -182,8 +182,7 @@ public abstract class Persona implements ObjetoAlmacenable, Serializable, Clonea
 	 *            persona cuyos campos se desean copiar
 	 */
 
-	@Override
-	public void igualarCampos(Persona that) throws CloneNotSupportedException {
+	public void igualarCampos(Persona that) {
 		nombre = that.nombre;
 		apellido1 = that.apellido1;
 		apellido2 = that.apellido2;
