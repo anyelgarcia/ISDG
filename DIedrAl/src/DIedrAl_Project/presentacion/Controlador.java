@@ -24,7 +24,6 @@ import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAOrganizacion;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAPacientes;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SARecursos;
-import DIedrAl_Project.presentacion.auxiliar.Error;
 
 /**
  * 
@@ -35,11 +34,11 @@ public class Controlador {
 	
 	private static Usuario usuario;
 	
-	public static void setUsuario(Usuario user){
+	protected static void setUsuario(Usuario user){
 		usuario = user;
 	}
 	
-	public static Usuario getUsuario(){
+	protected static Usuario getUsuario(){
 		return usuario;
 	}
 	
@@ -194,6 +193,7 @@ public class Controlador {
 		}
 		
 	}
+	
 	public static void deleteRecurso(Recurso r){
 		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos();
 		try {
@@ -434,7 +434,4 @@ public class Controlador {
 		}
 	}
 
-	
-	
-	
 }
