@@ -1,5 +1,6 @@
 package DIedrAl_Project.negocio.administracion;
 
+@SuppressWarnings("serial")
 public class Usuario extends Persona {
 
 	protected boolean admin;

@@ -14,7 +14,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import DIedrAl_Project.negocio.recursos.Actividad;
 import DIedrAl_Project.negocio.recursos.ArrayRecursos;
 import DIedrAl_Project.negocio.recursos.Recurso;
 import DIedrAl_Project.presentacion.Confirm.confirmListener;
@@ -108,14 +107,10 @@ public class Recursos extends ColorPanel{
 	 * @author Diedral_Group
 	 *
 	 */
+	@SuppressWarnings("serial")
 	private class PantallaRecurso extends JFrame{
 		
-		 /**
-		 * 
-		 */
-		private static final long serialVersionUID = 8065001825557862697L;
-		
-		// Variables declaration - do not modify                     
+		                   
 	    private javax.swing.JButton jButton1;
 	    private javax.swing.JLabel jLabel1;
 	    private javax.swing.JLabel jLabel2;
@@ -129,8 +124,7 @@ public class Recursos extends ColorPanel{
 	    private javax.swing.JTextField jTextField2;
 	    private boolean editable;
 	    private Recurso recurso;
-	    private Modo mode;
-	    // End of variables declaration    
+	    private Modo mode;   
 	    
 		public PantallaRecurso(Recurso r, Modo m){
 			mode = m;
@@ -158,8 +152,9 @@ public class Recursos extends ColorPanel{
 
 		    setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		    switch(mode){
-		    case VISTA: setTitle("Recurso"); break;
-		    case EDITAR: setTitle("Editar Recurso"); break;
+		    	case VISTA: setTitle("Recurso"); break;
+		    	case EDITAR: setTitle("Editar Recurso"); break;
+		    	default: new Error("Error en modo en pantalla recursos"); break;
 		    }
 
 		        jLabel1.setText("Nombre del recurso:");
@@ -263,7 +258,7 @@ public class Recursos extends ColorPanel{
 			String etiqs[] = etiquetas.split(",");
 			String nombre = jTextField1.getText();
 			if(nombre == null) {
-				JFrame err = new Error("Nombre vacio");
+				new Error("Nombre vacio");
 			}
 			else{
 				Recurso info = new Recurso(nombre, (File)null, etiqs);
@@ -274,12 +269,8 @@ public class Recursos extends ColorPanel{
 
 	}
 
+	@SuppressWarnings("serial")
 	private class PantallaBuscar extends JFrame implements confirmListener{
-		
-		 /**
-		 * 
-		 */
-		private static final long serialVersionUID = 5440327614929298767L;
 		
 		private javax.swing.JButton jButton1;
 		private javax.swing.JButton jButton2;
@@ -314,15 +305,17 @@ public class Recursos extends ColorPanel{
 
 	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 	        switch(modo){
-			case ELIMINAR:
-				setTitle("Eliminar Recurso");
-		    	break;
-			case EDITAR:
-				setTitle("Editar Recurso");
-				break;
-			case BUSCAR:
-				setTitle("Buscar Recurso");
-				break;
+				case ELIMINAR:
+					setTitle("Eliminar Recurso");
+			    	break;
+				case EDITAR:
+					setTitle("Editar Recurso");
+					break;
+				case BUSCAR:
+					setTitle("Buscar Recurso");
+					break;
+				default:
+					new Error("Error raro en modo de pantalla Recursos buscar");
 			}
 
 	        jLabel1.setText("Nombre");
@@ -349,7 +342,7 @@ public class Recursos extends ColorPanel{
 				private static final long serialVersionUID = 1L;
 				
 				String[] strings = {  };
-	            public int getSize() { return strings.length; }
+				public int getSize() { return strings!= null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }
 	        });
 	        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -415,7 +408,7 @@ public class Recursos extends ColorPanel{
 	        );
 	        getContentPane().setBackground(getColor());
 	        pack();
-	    }// </editor-fold>                        
+	    }                      
 
 	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 	    	String nombre = jTextField1.getText();
@@ -429,9 +422,9 @@ public class Recursos extends ColorPanel{
 			}
 			
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
-			private static final long serialVersionUID = 1L;
-            public int getSize() { return nombres.size(); }
-            public String getElementAt(int i) { return nombres.get(i); }
+				
+				public int getSize() { return nombres!= null ? nombres.size() : 0; }
+	            public String getElementAt(int i) { return nombres.get(i); }
 			});
 			
 	    }                                        
@@ -456,6 +449,9 @@ public class Recursos extends ColorPanel{
 				p = new PantallaRecurso(r, Modo.VISTA);
 				p.setVisible(true);
 				break;
+			default:
+				new Error("Error modo pantalla buscar recursos");
+				break;
 			}
 	    }
 
@@ -479,6 +475,7 @@ public class Recursos extends ColorPanel{
 		}
 	}
 
+	@SuppressWarnings("serial")
 	private class CrearRecurso extends JFrame{
 		
 		private javax.swing.JButton jButton1;
@@ -517,7 +514,7 @@ public class Recursos extends ColorPanel{
 	        jButton3 = new javax.swing.JButton();
 	        fc = new JFileChooser();
 
-	        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+	        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	        setTitle("Crear Recurso");
 
 	        jLabel1.setText("Nombre del recurso:");
@@ -614,16 +611,17 @@ public class Recursos extends ColorPanel{
 	                    .addComponent(jButton2))
 	                .addContainerGap(13, Short.MAX_VALUE))
 	        );
-
+	        
+	        getContentPane().setBackground(getColor());
 	        pack();
-	    }// </editor-fold>   
+	    } 
 		
 		 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-		     JFrame err;
+			 
 			 String direction = jTextField2.getText(); 
 		     String name = jTextField1.getText();
 		     if(name.equals("")){
-		    	 err = new Error("Nombre Vacio");
+		    	 new Error("Nombre Vacio");
 		     }else{
 		    	 if(direction.equals("") && file != null){
 		    		 Recurso rec = new Recurso(name, file, jTextArea3.getText().split(","));
@@ -636,10 +634,10 @@ public class Recursos extends ColorPanel{
 		    			 rec.setDescripcion(jTextArea2.getText());
 		    			 Controlador.addRecurso(rec);
 		    		 } catch (URISyntaxException e) {
-		    			 err = new Error("Direccion incorrecta");
+		    			 new Error("Direccion incorrecta");
 		    		 }
 		    	 }
-		    	 else err = new Error("Argumentos Incorrectos");   
+		    	 else new Error("Argumentos Incorrectos");   
 		     }
 		 }                                     
 

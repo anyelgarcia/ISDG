@@ -22,12 +22,8 @@ import DIedrAl_Project.presentacion.Confirm.confirmListener;
  * @author Diedral_Group
  *
  */
-public class Pacientes extends ColorPanel{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6246895766907491090L;      
+@SuppressWarnings("serial")
+public class Pacientes extends ColorPanel{   
     
 	public Pacientes(int r, int g, int b){
 		super(r, g, b);
@@ -100,13 +96,7 @@ public class Pacientes extends ColorPanel{
 	 * 
 	 */                    
 	private class PantallaPaciente extends JFrame{
-		
-		 /**
-		 * 
-		 */
-		private static final long serialVersionUID = -4023107552010703559L;
-		
-		// Variables declaration - do not modify                     
+                 
 	    private javax.swing.JButton jButton1;
 	    private javax.swing.JComboBox<String> jComboBox1;
 	    private javax.swing.JComboBox<String> jComboBox2;
@@ -183,10 +173,7 @@ public class Pacientes extends ColorPanel{
 				case ADD: setTitle("Crear Paciente"); break;
 			    case VISTA: setTitle("Paciente"); break;
 			    case EDITAR: setTitle("Editar Paciente"); break;
-				default: 
-					Error raro = new Error("Problema en el modo en pantalla pacientes.");
-					raro.run();
-					break;
+				default: new Error("Problema en el modo en pantalla pacientes."); break;
 			}
 			
 			jLabel1.setText("Datos Personales: ");
@@ -409,8 +396,8 @@ public class Pacientes extends ColorPanel{
 							                .addComponent(jButton1)
 							                .addGap(18, 18, 18))
 							        );
-							       getContentPane().setBackground(getColor());
-							       pack();
+			getContentPane().setBackground(getColor());
+			pack();
 		}
 		
 		/**
@@ -478,7 +465,6 @@ public class Pacientes extends ColorPanel{
 	    }
 		
 		
-	    @SuppressWarnings("serial")
 		private void initGUI() {
 
 	        jTextField1 = new javax.swing.JTextField("");
@@ -508,8 +494,7 @@ public class Pacientes extends ColorPanel{
 					setTitle("Buscar Paciente");
 					break;
 				default:
-					Error raro = new Error("Error raro en pantalla de búsqueda de pacientes");
-					raro.run();
+					new Error("Error raro en pantalla de búsqueda de pacientes");
 					break;
 			}
 
@@ -530,7 +515,7 @@ public class Pacientes extends ColorPanel{
 
 	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
 				String[] strings = {  };
-	            public int getSize() { return strings.length; }
+				public int getSize() { return strings!= null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }
 	        });
 	        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -678,9 +663,8 @@ public class Pacientes extends ColorPanel{
 			}
 			
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
-				private static final long serialVersionUID = 1L;
 				String[] strings = cadenas;
-	            public int getSize() { return strings.length; }
+				public int getSize() { return strings!= null ? strings.length : 0; }
 	            public String getElementAt(int i) { return strings[i]; }
 			});
 		}
@@ -715,8 +699,7 @@ public class Pacientes extends ColorPanel{
 					j.setVisible(true);
 					break;
 				default:
-					Error raro = new Error("Error interno en la pantalla buscar pacientes.");
-					raro.run();
+					new Error("Error interno en la pantalla buscar pacientes.");
 					break;
 				}
 			
