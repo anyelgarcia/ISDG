@@ -18,44 +18,43 @@ public class Centro {
 	 * Diccionario que permite el acceso a un terapeuta o paciente del centro a
 	 * través de su dni.
 	 */
-	private Map<String, Persona> personasCentro;
+	private HashMap<String, Persona> personasCentro;
 
 	/**
 	 * Pacientes del centro almacenados con un conjunto de usuarios asociados.
 	 */
-	private Map<Paciente, Set<Usuario>> pacientes;
+	private HashMap<Paciente, HashSet<Usuario>> pacientes;
 
 	/**
 	 * Terapeutas y usuarios del centro almacenados con sus pacientes asociados.
 	 */
-	private Map<Usuario, Set<Paciente>> usuarios;
+	private HashMap<Usuario, HashSet<Paciente>> usuarios;
 
 	// TODO: implementarlo primero
 	private Organizacion organizacion;
 
-	/*protected Centro(String name) {
-		nombre = name;
-		pacientes = new HashMap<Paciente, Set<Usuario>>();
-		usuarios = new HashMap<Usuario, Set<Paciente>>();
-		personasCentro = new HashMap<String, Persona>();
+	/*
+	 * protected Centro(String name) { nombre = name; pacientes = new
+	 * HashMap<Paciente, Set<Usuario>>(); usuarios = new HashMap<Usuario,
+	 * Set<Paciente>>(); personasCentro = new HashMap<String, Persona>();
+	 * 
+	 * }
+	 */
 
-	}*/
-
-	protected Centro(EstadoCentro c, Map<Paciente, Set<Usuario>> pacientes,
-			Map<Usuario, Set<Paciente>> usuarios, Map<String, Persona> personas) {
+	protected Centro(EstadoCentro c,
+			HashMap<Paciente, HashSet<Usuario>> pacientes,
+			HashMap<Usuario, HashSet<Paciente>> usuarios,
+			HashMap<String, Persona> personas) {
 		this.estado = c;
 		this.pacientes = pacientes;
 		this.usuarios = usuarios;
 		this.personasCentro = personas;
-
-		//initCentro();
-
 	}
 
 	public void addUsuario(Usuario usu) throws AlreadyBoundException {
 		if (!usuarios.containsKey(usu)) {
 			usuarios.put(usu, new HashSet<Paciente>());
-			personasCentro.put(usu.getNif(), usu);
+			personasCentro.put(usu.getId(), usu);
 		} else {
 			throw new AlreadyBoundException(usu + " ya registrado");
 		}
@@ -64,7 +63,7 @@ public class Centro {
 	public void addPaciente(Paciente pac) throws AlreadyBoundException {
 		if (!pacientes.containsKey(pac)) {
 			pacientes.put(pac, new HashSet<Usuario>());
-			personasCentro.put(pac.getNif(), pac);
+			personasCentro.put(pac.getId(), pac);
 		} else {
 			throw new AlreadyBoundException(pac + " ya registrado");
 		}
@@ -78,7 +77,9 @@ public class Centro {
 			personasCentro.remove(usu.getNif());
 			// Borrar el usuario de todos los pacientes que lo tuvieran
 			// asociado.
-			usuarios.forEach((pac, set) -> set.remove(usu));
+			pacientes.forEach((pac, set) -> {
+				set.remove(usu);
+			});
 		} else {
 			throw new NotBoundException(usu + " no registrado");
 		}
@@ -93,7 +94,10 @@ public class Centro {
 			personasCentro.remove(pac.getNif());
 			// Borrar el paciente de todos los usuarios que lo tuvieran
 			// asociado.
-			usuarios.forEach((usu, set) -> set.remove(pac));
+			usuarios.forEach((usu, set) -> {
+
+				set.remove(pac);
+			});
 		} else {
 			throw new NotBoundException("Paciente " + pac + " no encontrado");
 		}
@@ -147,11 +151,11 @@ public class Centro {
 		this.organizacion = organizacion;
 	}
 
-	public Map<Paciente, Set<Usuario>> getPacientes() {
+	public HashMap<Paciente, HashSet<Usuario>> getPacientes() {
 		return pacientes;
 	}
 
-	public Map<Usuario, Set<Paciente>> getUsuarios() {
+	public HashMap<Usuario, HashSet<Paciente>> getUsuarios() {
 		return usuarios;
 	}
 
@@ -267,14 +271,11 @@ public class Centro {
 		return aux.toArray(new Persona[aux.size()])[0];
 	}
 
-	/*private void initCentro() {
-		for (Persona key : pacientes.keySet()) {
-			personasCentro.put(key.getNif(), key);
-		}
-		for (Persona key : usuarios.keySet()) {
-			personasCentro.put(key.getNif(), key);
-		}
-	}*/
+	/*
+	 * private void initCentro() { for (Persona key : pacientes.keySet()) {
+	 * personasCentro.put(key.getNif(), key); } for (Persona key :
+	 * usuarios.keySet()) { personasCentro.put(key.getNif(), key); } }
+	 */
 
 	public Set<Usuario> getUsuariosAsociados(Paciente pac)
 			throws NotBoundException {
