@@ -125,7 +125,7 @@ public class Login extends JFrame{
     	String nombreuser = jTextField1.getText();
 		String clave = String.copyValueOf(jPasswordField1.getPassword());
 		
-		if(!Controlador.usuarioCorrecto(nombreuser, clave)){
+		if(!Controlador.usuarioExiste(nombreuser, clave)){
 			new Error("Usuario o contraseña incorrecta");
 		}
 		
