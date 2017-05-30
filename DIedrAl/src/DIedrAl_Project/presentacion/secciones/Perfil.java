@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -257,13 +258,16 @@ public class Perfil extends ColorPanel{
 	        pack();
 	        setVisible(true);
 		}
-
+		/**
+		 * Funcion que se ejecuta cuando nos piden guardar las modificaciones en el perfil
+		 */
 		protected void jButton1ActionPerformed(ActionEvent evt) {
 			user.setEmail(jTextField3.getText());
 			user.setTfo(jTextField4.getText());
 			user.setInfor(jTextArea2.getText());
 			user.setPerfil(jTextArea1.getText());
 			Controlador.modificaUsuario(user);
+			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		}
 	}
 	

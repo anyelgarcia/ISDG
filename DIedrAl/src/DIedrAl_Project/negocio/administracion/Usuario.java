@@ -5,9 +5,9 @@ public class Usuario extends Persona {
 
 	protected boolean admin;
 
-	protected String infor;
+	protected String infor = "";
 
-	protected String password;
+	protected String password = "";
 
 	public Usuario(String nombre, String apellido1, String apellido2, String nif) {
 		super(nombre, apellido1, apellido2, nif);

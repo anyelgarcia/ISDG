@@ -1,5 +1,6 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
