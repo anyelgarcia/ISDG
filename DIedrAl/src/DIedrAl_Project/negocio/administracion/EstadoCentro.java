@@ -16,4 +16,5 @@ public class EstadoCentro implements ObjetoAlmacenable, Serializable {
 	public String getId() {
 		return nombre;
 	}
+	
 }

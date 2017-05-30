@@ -154,11 +154,13 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 	 * @param evt
 	 */
 	private void jButton2ActionPerformed(ActionEvent evt) {
-		if(jList1.getSelectedValue()!=null){
+		
+		if(jList1.getSelectedIndex()!= -1){
 			Confirm c = new Confirm();
 			c.setMensaje("El centro se eliminará definitivamente.");
 	    	c.setVisible(true);
 	    	c.addListener(this);
+	    	
 		}
 	}
 	
@@ -185,6 +187,12 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 	@Override
 	public void delete() {
 		Controlador.deleteCentro(jList1.getSelectedValue());
+		jList1.setModel(new javax.swing.AbstractListModel<String>() {
+			private static final long serialVersionUID = 1L;
+			String[] strings = Controlador.getCentros();
+            public int getSize() { return strings!= null ? strings.length : 0; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
 	} 
 	
 	

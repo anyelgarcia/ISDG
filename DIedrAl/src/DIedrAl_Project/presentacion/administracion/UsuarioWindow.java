@@ -94,7 +94,7 @@ public class UsuarioWindow extends javax.swing.JFrame {
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-    	new PantallaUsuarioBuscar(Modo.ADD);
+    	new PantallaUsuario(null, Modo.ADD);
 		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }  
     
