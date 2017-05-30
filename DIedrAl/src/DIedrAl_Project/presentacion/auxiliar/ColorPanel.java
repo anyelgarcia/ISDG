@@ -1,4 +1,4 @@
-package DIedrAl_Project.presentacion.auxiliar;
+package DIedrAl_Project.presentacion;
 
 import java.awt.Color;
 import java.awt.Component;

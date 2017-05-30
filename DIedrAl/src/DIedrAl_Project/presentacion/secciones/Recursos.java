@@ -1,8 +1,10 @@
-package DIedrAl_Project.presentacion.secciones;
+package DIedrAl_Project.presentacion;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -16,13 +18,7 @@ import javax.swing.JLabel;
 
 import DIedrAl_Project.negocio.recursos.ArrayRecursos;
 import DIedrAl_Project.negocio.recursos.Recurso;
-import DIedrAl_Project.presentacion.Controlador;
-import DIedrAl_Project.presentacion.auxiliar.ColorPanel;
-import DIedrAl_Project.presentacion.auxiliar.Confirm;
-import DIedrAl_Project.presentacion.auxiliar.Error;
-import DIedrAl_Project.presentacion.auxiliar.ImageButton;
-import DIedrAl_Project.presentacion.auxiliar.Modo;
-import DIedrAl_Project.presentacion.auxiliar.Confirm.confirmListener;
+import DIedrAl_Project.presentacion.Confirm.confirmListener;
 
 
 /**
@@ -113,11 +109,14 @@ public class Recursos extends ColorPanel{
 	 * @author Diedral_Group
 	 *
 	 */
-	@SuppressWarnings("serial")
 	private class PantallaRecurso extends JFrame{
 		
 		                   
-	    private javax.swing.JButton jButton1;
+	    /**
+		 * 
+		 */
+		private static final long serialVersionUID = 4771327958790552537L;
+		private javax.swing.JButton jButton1;
 	    private javax.swing.JLabel jLabel1;
 	    private javax.swing.JLabel jLabel2;
 	    private javax.swing.JLabel jLabel3;
@@ -256,7 +255,7 @@ public class Recursos extends ColorPanel{
 
 		
 		/**
-		 * Función que se ejecuta al darle a guardar en la ventana de adiciÃ³n de recursos. Se rellena un objeto recurso y es pasado al controlador.
+		 * Función que se ejecuta al darle a guardar en la ventana de de recursos. Se rellena un objeto recurso y es pasado al controlador.
 		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {     
 			
@@ -274,10 +273,17 @@ public class Recursos extends ColorPanel{
 		}                                        
 
 	}
-
-	@SuppressWarnings("serial")
+	/**
+	 * Crea una pantalla que nos permite buscar un recurso, para posteriormente eliminarlo
+	 * editarlo, o consultarlo
+	 *
+	 */
 	private class PantallaBuscar extends JFrame implements confirmListener{
 		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -1959937229612958709L;
 		private javax.swing.JButton jButton1;
 		private javax.swing.JButton jButton2;
 		private javax.swing.JLabel jLabel1;
@@ -415,7 +421,10 @@ public class Recursos extends ColorPanel{
 	        getContentPane().setBackground(getColor());
 	        pack();
 	    }                      
-
+	    /**
+	     * Funcion que se ejecuta al pulsar el boton de "buscar", 
+	     * muestra las coincidencias en la lista
+	     */
 	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 	    	String nombre = jTextField1.getText();
 			Set<String> setEtiquetas = new HashSet<String>(Arrays.asList(jTextArea1.getText().split(",")));
@@ -429,12 +438,19 @@ public class Recursos extends ColorPanel{
 			
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
 				
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
 				public int getSize() { return nombres!= null ? nombres.size() : 0; }
 	            public String getElementAt(int i) { return nombres.get(i); }
 			});
 			
 	    }                                        
-
+	    /**
+	     * Funcion que se ejecuta cuando seleccionamos un archivo, y según se esté
+	     * editando/eliminando/consultando realiza una acción.
+	     */
 	    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 	    	int i; Recurso r; JFrame p;
 	    	switch(modo){
@@ -481,9 +497,15 @@ public class Recursos extends ColorPanel{
 		}
 	}
 
-	@SuppressWarnings("serial")
+	/**
+	 * Crea una pantalla que nos permite añadir un recurso al sistema
+	 */
 	private class CrearRecurso extends JFrame{
 		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 219891999838326102L;
 		private javax.swing.JButton jButton1;
 	    private javax.swing.JButton jButton2;
 	    private javax.swing.JButton jButton3;
@@ -537,11 +559,12 @@ public class Recursos extends ColorPanel{
 	                jButton1ActionPerformed(evt);
 	            }
 	        });
-
+	        JFrame aux = this;
 	        jButton2.setText("Salir");
-	        jButton2.addActionListener(new java.awt.event.ActionListener() {
-	            public void actionPerformed(java.awt.event.ActionEvent evt) {
-	                jButton2ActionPerformed(evt);
+	        jButton2.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e)
+	            {
+	               aux.dispose();
 	            }
 	        });
 
@@ -556,6 +579,11 @@ public class Recursos extends ColorPanel{
 	        jScrollPane3.setViewportView(jTextArea3);
 
 	        jButton3.setText("Seleccionar Archivo");
+	        jButton3.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton3ActionPerformed(evt);
+	            }
+	        });
 
 	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 	        getContentPane().setLayout(layout);
@@ -621,8 +649,11 @@ public class Recursos extends ColorPanel{
 	        getContentPane().setBackground(getColor());
 	        pack();
 	    } 
-		
-		 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+		/**
+		 * Funcion que se ejecuta cuando se pide guardar el recurso
+		 * @param evt
+		 */
+		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 			 
 			 String direction = jTextField2.getText(); 
 		     String name = jTextField1.getText();
@@ -646,8 +677,12 @@ public class Recursos extends ColorPanel{
 		    	 else new Error("Argumentos Incorrectos");   
 		     }
 		 }                                     
-
-		 private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+		 
+		 /**
+		  * Funcion que se ejecuta al pedir añadir un archivo manualmente
+		  * @param evt
+		  */
+		 private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) { 
 				int returnVal = fc.showOpenDialog(new JFrame("Prueba"));
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					file = fc.getSelectedFile();
@@ -655,4 +690,5 @@ public class Recursos extends ColorPanel{
 		 }
 
 	}
+
 }

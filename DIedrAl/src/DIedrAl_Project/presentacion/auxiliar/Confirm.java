@@ -1,9 +1,13 @@
-package DIedrAl_Project.presentacion.auxiliar;
+package DIedrAl_Project.presentacion;
 
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
-
+/**
+ * Crea una nueva pantalla que pide confirmacion a la hora de eliminar definitivamente un archivo
+ * @author usuario_local
+ *
+ */
 public class Confirm extends JFrame{
     
 	/**
@@ -85,13 +89,19 @@ public class Confirm extends JFrame{
     public void addListener(confirmListener e){
     	observers.add(e);
     }
-
+    /**
+     * Funcion que se ejecuta cuando se confirma el borrado de un elemento
+     * @param evt
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
     	notifyObservers();
     	deleteObservers();
     	this.dispose();
     }                                        
-
+    /**
+     * Funcion que se ejecuta cuando se selecciona "Cancelar"
+     * @param evt
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {    
     	deleteObservers();
     	this.dispose();
