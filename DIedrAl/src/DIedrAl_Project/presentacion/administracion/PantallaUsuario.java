@@ -295,11 +295,10 @@ public class PantallaUsuario extends JFrame{
 			usuario.setEmail(jTextField3.getText());
 			usuario.setPerfil(jTextArea1.getText());
 			usuario.setInfor(jTextArea2.getText());
-	
 			String tfo = jTextField4.getText();
 			if(tfo.length()>0){
 				usuario.setTfo(tfo);
-			}
+			} else usuario.setTfo("");
 			Controlador.addUsuario(usuario);
 			new Error("El nuevo usuario ha sido creado");
 			new MenuCentroUsuarios();

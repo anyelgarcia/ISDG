@@ -3,6 +3,7 @@ package DIedrAl_Project.presentacion.secciones;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -443,6 +444,8 @@ public class Actividades extends ColorPanel{
 			
 			if(mode.equals(Modo.ADD)) Controlador.addActividad(info);
 			else if(mode.equals(Modo.VISTA)) Controlador.modificaEtiquetable(act, info);
+			
+			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 			}
 		} 
 	}

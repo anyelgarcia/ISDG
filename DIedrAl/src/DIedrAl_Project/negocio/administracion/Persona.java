@@ -1,34 +1,36 @@
 package DIedrAl_Project.negocio.administracion;
 
 import java.io.Serializable;
-import java.util.UUID;
-
 import DIedrAl_Project.negocio.ObjetoAlmacenable;
 import DIedrAl_Project.negocio.calendario.Fecha;
 import DIedrAl_Project.negocio.pacientes.Direccion;
 
-@SuppressWarnings("serial")
 public abstract class Persona implements ObjetoAlmacenable, Serializable, Cloneable {
 
-	protected String nombre;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5272541968155649741L;
 
-	protected String apellido1;
+	protected String nombre = "";
 
-	protected String apellido2;
+	protected String apellido1 = "";
 
-	protected Fecha fechaNacimiento;
+	protected String apellido2 = "";
 
-	protected EstadoCivil estadoCivil;
+	protected Fecha fechaNacimiento = null;
 
-	protected Direccion direccion;
+	protected EstadoCivil estadoCivil = null;
 
-	protected String email;
+	protected Direccion direccion = null;
 
-	protected String tfo;
+	protected String email = "";
 
-	protected String perfil;
+	protected String tfo = "";
 
-	protected String centro;
+	protected String perfil = "";
+
+	protected String centro = "";
 	/**
 	 * El NIF es su dni, el id es el campo que le permite al objeto ser
 	 * guardado.
