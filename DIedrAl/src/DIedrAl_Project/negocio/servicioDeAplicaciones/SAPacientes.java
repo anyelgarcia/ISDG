@@ -32,4 +32,10 @@ public interface SAPacientes {
 	public Set<Persona> filtrarPersonas(Hints[] hints, String[] values, Hints[] tipos) throws IllegalArgumentException;
 
 	public Set<Usuario> getUsuariosAsociados(Paciente pac) throws NotBoundException;
+	
+	public void updateUsuario(Usuario usu) throws AccessException;
+	
+	public void updatePaciente(Paciente pac) throws AccessException;
+	
+	
 }

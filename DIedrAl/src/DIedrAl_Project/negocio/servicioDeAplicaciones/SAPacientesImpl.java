@@ -285,4 +285,15 @@ public class SAPacientesImpl implements SAPacientes {
 		return centro.getPersonas(hints, values, tipos);
 	}
 
+	@Override
+	public void updateUsuario(Usuario usu) throws AccessException {
+		this.daousu.modificarUsuario(usu);
+	}
+
+	@Override
+	public void updatePaciente(Paciente pac) throws AccessException {
+		this.daopac.modificarPaciente(pac);
+		
+	}
+
 }

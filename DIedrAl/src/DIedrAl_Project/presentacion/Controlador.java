@@ -396,7 +396,7 @@ public class Controlador {
 		return str;
 	}
 
-	public static boolean usuarioCorrecto(String nombreuser, String clave) {
+	public static boolean usuarioExiste(String nombreuser, String clave) {
 		SAOrganizacion saOrg = SAFactory.getInstancia().newSAOrganizacion();
 		Usuario intento = null;
 		

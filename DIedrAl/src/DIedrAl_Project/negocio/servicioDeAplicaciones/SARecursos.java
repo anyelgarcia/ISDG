@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Set;
 
 import DIedrAl_Project.integracion.BasicClasses.AccessException;
+import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.negocio.recursos.*;
 
 public interface SARecursos {
@@ -60,5 +61,11 @@ public interface SARecursos {
 	public ArrayActividades getActividades();
 
 	public ArrayRecursos getRecursos();
+	
+	public void updateSesion(Sesion ses) throws AccessException;
+	
+	public void updateActividad(Actividad act) throws AccessException;
+	
+	public void updateRecurso(Recurso rec) throws AccessException;
 
 }
