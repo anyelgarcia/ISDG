@@ -32,6 +32,7 @@ public class SAPacientesImpl implements SAPacientes {
 		EstadoCentro centrotrans = daocen.consultarCentro(nombreCentro);
 		CentroMaps mapeador = new CentroMaps();
 		centro = mapeador.generarCentro(centrotrans);
+		centro.setOrganizacion(Organizacion.getInstancia());
 	}
 
 	/**

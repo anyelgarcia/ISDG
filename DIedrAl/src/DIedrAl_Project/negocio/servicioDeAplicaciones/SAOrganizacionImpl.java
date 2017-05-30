@@ -54,9 +54,11 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 	public void addCentro(String name, String passAdmin)
 			throws AlreadyBoundException, AccessException {
 		DAOCentro daocen = factoria.getDAOCentro();
-		if (daocen.existeCentro(name))
+		if (daocen.existeCentro(name)){
 			throw new AlreadyBoundException(
 					"El centro solicitado ya se encuentra registrado en el sistema");
+		}
+			
 
 		daocen.guardarCentro(new EstadoCentro(name));
 
