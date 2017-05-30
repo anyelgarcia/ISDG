@@ -5,6 +5,15 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
 
+import DIedrAl_Project.presentacion.auxiliar.ColorPanel;
+import DIedrAl_Project.presentacion.secciones.Actividades;
+import DIedrAl_Project.presentacion.secciones.Calendario;
+import DIedrAl_Project.presentacion.secciones.Pacientes;
+import DIedrAl_Project.presentacion.secciones.Perfil;
+import DIedrAl_Project.presentacion.secciones.Recursos;
+import DIedrAl_Project.presentacion.secciones.Sesiones;
+import DIedrAl_Project.presentacion.secciones.Usuarios;
+
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame{
 	public MainFrame(){

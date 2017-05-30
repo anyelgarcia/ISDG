@@ -1,4 +1,4 @@
-package DIedrAl_Project.presentacion;
+package DIedrAl_Project.presentacion.secciones;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -11,7 +11,13 @@ import javax.swing.JLabel;
 import DIedrAl_Project.negocio.administracion.Hints;
 import DIedrAl_Project.negocio.administracion.Persona;
 import DIedrAl_Project.negocio.administracion.Usuario;
-import DIedrAl_Project.presentacion.Confirm.confirmListener;
+import DIedrAl_Project.presentacion.Controlador;
+import DIedrAl_Project.presentacion.auxiliar.ColorPanel;
+import DIedrAl_Project.presentacion.auxiliar.Confirm;
+import DIedrAl_Project.presentacion.auxiliar.Error;
+import DIedrAl_Project.presentacion.auxiliar.ImageButton;
+import DIedrAl_Project.presentacion.auxiliar.Modo;
+import DIedrAl_Project.presentacion.auxiliar.Confirm.confirmListener;
 
 
 @SuppressWarnings("serial")

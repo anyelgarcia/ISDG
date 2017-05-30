@@ -24,6 +24,7 @@ import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAOrganizacion;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAPacientes;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SARecursos;
+import DIedrAl_Project.presentacion.auxiliar.Error;
 
 /**
  * 
@@ -34,11 +35,11 @@ public class Controlador {
 	
 	private static Usuario usuario;
 	
-	protected static void setUsuario(Usuario user){
+	public static void setUsuario(Usuario user){
 		usuario = user;
 	}
 	
-	protected static Usuario getUsuario(){
+	public static Usuario getUsuario(){
 		return usuario;
 	}
 	

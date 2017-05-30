@@ -1,4 +1,4 @@
-package DIedrAl_Project.presentacion;
+package DIedrAl_Project.presentacion.auxiliar;
 
 import java.awt.Component;
 import java.awt.Font;

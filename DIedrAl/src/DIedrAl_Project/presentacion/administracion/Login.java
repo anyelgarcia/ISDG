@@ -1,4 +1,4 @@
-package DIedrAl_Project.presentacion;
+package DIedrAl_Project.presentacion.administracion;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -13,7 +13,13 @@ import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAOrganizacion;
-import DIedrAl_Project.presentacion.Confirm.confirmListener;
+import DIedrAl_Project.presentacion.Controlador;
+import DIedrAl_Project.presentacion.MainFrame;
+import DIedrAl_Project.presentacion.auxiliar.Confirm;
+import DIedrAl_Project.presentacion.auxiliar.Error;
+import DIedrAl_Project.presentacion.auxiliar.ImagePanel;
+import DIedrAl_Project.presentacion.auxiliar.Modo;
+import DIedrAl_Project.presentacion.auxiliar.Confirm.confirmListener;
 
 
 @SuppressWarnings("serial")

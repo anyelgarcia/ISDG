@@ -132,7 +132,7 @@ public class SARecursosTest {
 
 	}
 	
-	@Test
+	//@Test
 	public void clearBanco(){
 		ArrayActividades a=sarec.getActividades();
 		for(Actividad act:a){
