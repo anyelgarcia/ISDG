@@ -300,7 +300,7 @@ public class PantallaUsuario extends JFrame{
 			if(tfo.length()>0){
 				usuario.setTfo(tfo);
 			}
-			if(Controlador.usuarioCorrecto(usuario.getCentro()))
+			
 			Controlador.addUsuario(usuario);
 			new Error("El nuevo usuario ha sido creado");
 			new MenuCentroUsuarios();
