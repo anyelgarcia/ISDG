@@ -425,20 +425,23 @@ public class Pacientes extends ColorPanel{
 		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {   
 			
+			System.out.println(Controlador.getUsuario());
 			String aficionestodo = jTextArea2.getText();
 			String aficiones[] = aficionestodo.split(",");
 			
 			Fecha nacimiento = new Fecha(Integer.valueOf(String.valueOf(jComboBox1.getSelectedItem())), String.valueOf(jComboBox2.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox3.getSelectedItem())), 0);
 			Fecha fechaLesion = new Fecha(Integer.valueOf(String.valueOf(jComboBox5.getSelectedItem())), String.valueOf(jComboBox6.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox7.getSelectedItem())), 0);
 			String nombre = jTextField1.getText();
-			if(nombre.equals("")) new Error("Nombre vacio");
+			String DNI = jTextField5.getText();
+			String lesion = jTextField4.getText();
+			if(nombre.equals("") || DNI.equals("") || lesion.equals("") ) new Error("Han de rellenarse los campos de nombre, dni y lesion");
 			else{
 				Paciente info = new Paciente(nombre, jTextField2.getText(), jTextField3.getText(), jTextField5.getText());
 				
 				info.setEstadoCivil(String.valueOf(jComboBox4.getSelectedItem()));
 				info.setBirthday(nacimiento);
 				info.setPerfil(jTextArea2.getText());
-				info.getDatos().setLesion(jTextField4.getText());
+				info.getDatos().setLesion(lesion);
 				info.getDatos().setFechalesion(fechaLesion);
 				
 				for(String str: aficiones)

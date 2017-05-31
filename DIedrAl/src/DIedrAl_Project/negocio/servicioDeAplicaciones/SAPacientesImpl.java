@@ -55,8 +55,8 @@ public class SAPacientesImpl implements SAPacientes {
 		if(!daopac.existePaciente(pac.getId())){
 			pac.setCentro(centro.getNombre());
 			centro.addPaciente(pac);
-			daorelPac.crearRelacion(new Relacion(pac.getId(), centro.getNombre()));
 			daopac.crearPaciente(pac);
+			daorelPac.crearRelacion(new Relacion(pac.getId(), centro.getNombre()));
 		}
 		else throw new AlreadyBoundException("El paciente ya se encuentra registrado");
 	}

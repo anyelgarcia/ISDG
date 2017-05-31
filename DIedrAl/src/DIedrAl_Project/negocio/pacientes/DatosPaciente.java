@@ -1,11 +1,12 @@
 package DIedrAl_Project.negocio.pacientes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import DIedrAl_Project.negocio.calendario.Fecha;
 
 
-public class DatosPaciente {
+public class DatosPaciente implements Serializable {
     private String estadocivil;
 
     private String datosfamiliares;
