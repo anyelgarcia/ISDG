@@ -188,8 +188,8 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 	}
 
 	/**
-	 * FunciÛn que se ejecuta al darle al botÛn buscar. Rellena un Usuario con los datos introducidos y 
-	 * busca en el sistema a todos los que coincidan con Èl.
+	 * FunciÔøΩn que se ejecuta al darle al botÔøΩn buscar. Rellena un Usuario con los datos introducidos y 
+	 * busca en el sistema a todos los que coincidan con ÔøΩl.
 	 * @param evt
 	 */
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -224,7 +224,7 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 			hints.add(Hints.NIF);
 		}
 
-		if(admin.equals("Si")||  admin.equals("SÌ") ||  admin.equals("SI") ||  admin.equals("SÌ")){
+		if(admin.equals("Si")||  admin.equals("S√≠") ||  admin.equals("SI") ||  admin.equals("S√ç")){
 			usuarios = new Hints[1];
 			usuarios[0] = Hints.ADMINISTRADOR;
 		}else{
@@ -239,19 +239,14 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 			i++;
 		}
 
-		i=0;
-		String [] valores = new String[hints.size()];
-		for(String str: campos){
-			valores[i] = str;
-			i++;
-		}
+		String [] valores = campos.toArray(new String[campos.size()]);
 
 		ArrayList<Persona> res = Controlador.buscarUsuarios(claves, valores, usuarios);
 		String[] cadenas = new String[res.size()];
 		resultados = new Usuario[res.size()];
 		i=0;
 		for(Persona p: res){
-			cadenas[i] = res.toString();
+			cadenas[i] = p.toString();
 			resultados[i] = (Usuario)p;
 			i++;
 		}
@@ -266,9 +261,9 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 	}                                        
 
 	/**
-	 * FunciÛn que se ejecuta al seleccionar uno de los resultados de la b˙squeda y pulsar el
-	 * botÛn de validar. Seg˙n el modo se hace una cosa u otra. 
-	 * Si el modo es eliminar, se muestra una pantalla de confirmaciÛn.
+	 * Funci√≥n que se ejecuta al seleccionar uno de los resultados de la b√∫squeda y pulsar el
+	 * bot√≥n de validar. Seg√∫n el modo se hace una cosa u otra. 
+	 * Si el modo es eliminar, se muestra una pantalla de confirmaci√≥n.
 	 * Si el modo es Editar o buscar, se crea una pantalla Usuario y se le pasa el control.
 	 * @param evt
 	 */
@@ -279,7 +274,7 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 			switch(modo){
 				case ELIMINAR:
 					Confirm c = new Confirm();
-					c.setMensaje("El paciente se eliminar· del sistema.");
+					c.setMensaje("El paciente se eliminar√° del sistema.");
 			    	c.setVisible(true);
 			    	c.addListener(this);
 			    	break;
@@ -287,7 +282,7 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 					new PantallaUsuario(u, Modo.VISTA);
 					break;
 				default:
-					new Error("Error raro en el modo en b˙squeda de usuarios");
+					new Error("Error raro en el modo en b√∫squeda de usuarios");
 					break;
 				}
 		}

@@ -12,7 +12,7 @@ import DIedrAl_Project.presentacion.auxiliar.Confirm.confirmListener;
 
 /**
  * Pantalla para trabajar con los centros. Muestra una lista con todos los centros del sistema, permite
- * añadir nuevos centros y eliminar centros existentes. El modo ADD permite eliminar y crear centros. El modo BUSCAR
+ * aï¿½adir nuevos centros y eliminar centros existentes. El modo ADD permite eliminar y crear centros. El modo BUSCAR
  * se utiliza por la clase UsuarioWindow para seleccionar el centro con cuyos usuarios se va a trabajar.
  * @author Diedral_Group
  *
@@ -78,7 +78,7 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
         });
 
         jButton3.setFont(new java.awt.Font("SansSerif", 1, 12)); 
-        jButton3.setText("Validar Selección");
+        jButton3.setText("Validar SelecciÃ³n");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -92,7 +92,7 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 	        jButton2.setVisible(false);
 	        jButton2.setEnabled(false);
         }
-        //El modo Add permite añadir y eliminar centros.
+        //El modo Add permite aï¿½adir y eliminar centros.
         if(modo.equals(Modo.ADD)){
         	jButton3.setVisible(false);
 	        jButton3.setEnabled(false);
@@ -141,7 +141,7 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
     } 
 
     /**
-     * Se delega añadir un centro en otra ventana.
+     * Se delega aÃ±adir un centro en otra ventana.
      * @param evt
      */
 	private void jButton1ActionPerformed(ActionEvent evt) {
@@ -150,14 +150,14 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 	}
 
 	/**
-	 * Se pide confirmación para eliminar (Ver función delete)
+	 * Se pide confirmaciï¿½n para eliminar (Ver funciï¿½n delete)
 	 * @param evt
 	 */
 	private void jButton2ActionPerformed(ActionEvent evt) {
 		
 		if(jList1.getSelectedIndex()!= -1){
 			Confirm c = new Confirm();
-			c.setMensaje("El centro se eliminará definitivamente.");
+			c.setMensaje("El centro se eliminarï¿½ definitivamente.");
 	    	c.setVisible(true);
 	    	c.addListener(this);
 	    	
@@ -165,7 +165,7 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 	}
 	
 	/**
-	 * Para seleccionar un centro. Una vez elegido se abre la pantalla de gestión de
+	 * Para seleccionar un centro. Una vez elegido se abre la pantalla de gestiÃ³n de
 	 * usuarios.
 	 * @param evt
 	 */
@@ -197,8 +197,8 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 	
 	
 	/**
-	 * Clase que contiene la pantalla que se utiliza para añadir un centro nuevo. Se introducen el 
-	 * nombre del centro y la contraseña del administrador.
+	 * Clase que contiene la pantalla que se utiliza para aÃ±adir un centro nuevo. Se introducen el 
+	 * nombre del centro y la contraseï¿½a del administrador.
 	 * @author Diedral_Group
 	 *
 	 */
@@ -229,7 +229,7 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 	       jButton1 = new javax.swing.JButton();
 
 	       setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-	       setTitle("Añadir Centro");
+	       setTitle("AÃ±adir Centro");
 
 	       jLabel1.setFont(new java.awt.Font("Rockwell", 1, 14)); 
 	       jLabel1.setText("Nombre Nuevo Centro:");
