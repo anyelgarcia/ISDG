@@ -36,11 +36,11 @@ public class SAPacientesImpl implements SAPacientes {
 	}
 
 	/**
-	 * AÃ±ade el paciente especificado al centro y actualiza la base de datos
-	 * para incluir la nueva informaciÃ³n
+	 * A�ade el paciente especificado al centro y actualiza la base de datos
+	 * para incluir la nueva informaci�n
 	 * 
 	 * @param pac
-	 *            paciente a aÃ±adir al centro
+	 *            paciente a a�adir al centro
 	 * @throws AlreadyBoundException
 	 *             , si el paciente ya estaba en el centro
 	 */

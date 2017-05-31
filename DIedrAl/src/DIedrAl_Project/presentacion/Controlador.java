@@ -288,8 +288,10 @@ public class Controlador {
 			new Error(e.getMessage());
 			return null;
 		}
-		for(Paciente p : pacientes){
-			salida.add(p.toString());
+		if(pacientes != null){
+			for(Paciente p : pacientes){
+				salida.add(p.toString());
+			}
 		}
 		return salida.toArray(new String[salida.size()]);
 	}
@@ -330,10 +332,36 @@ public class Controlador {
   
 	public static void modificaEtiquetable(Etiquetable antiguo, Etiquetable nuevo){
 		antiguo.igualarCampos(nuevo);
+		if(nuevo instanceof Recurso){
+			try {
+				SAFactory.getInstancia().newSARecursos().updateRecurso((Recurso)nuevo);
+			} catch (AccessException e) {
+				new Error("No se ha podido modificar el recurso");
+			}
+		}
+		else if(nuevo instanceof Actividad){
+			try {
+				SAFactory.getInstancia().newSARecursos().updateActividad((Actividad)nuevo);
+			} catch (AccessException e) {
+				new Error("No se ha podido modificar la actividad");
+			}
+		}
+		else if(nuevo instanceof Sesion){
+			try {
+				SAFactory.getInstancia().newSARecursos().updateSesion((Sesion)nuevo);
+			} catch (AccessException e) {
+				new Error("No se ha podido modificar la sesion");
+			}
+		}
 	}
 
-	public static void modificaPaciente(Paciente antiguo, Paciente nuevo) {
+	public static void modificaPaciente(Paciente antiguo, Paciente nuevo){
 		antiguo.igualarCampos(nuevo);
+		try {
+			SAFactory.getInstancia().newSAPacientes(usuario.getCentro()).updatePaciente(nuevo);
+		} catch (AccessException e) {
+			new Error("No se ha podido modificar el paciente");
+		}
 	}
 
 	public static String[] getCentros(){
@@ -445,6 +473,11 @@ public class Controlador {
 
 	public static void modificaUsuario(Usuario info) {
 		usuario.igualarCampos(info);
+		try {
+			SAFactory.getInstancia().newSAPacientes(usuario.getCentro()).updateUsuario(usuario);
+		} catch (AccessException e) {
+			new Error("No se ha podido actualizar el paciente");
+		}
 	}
 
 }
