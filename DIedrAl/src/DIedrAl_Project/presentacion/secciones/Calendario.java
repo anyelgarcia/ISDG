@@ -170,7 +170,7 @@ public class Calendario extends ColorPanel{
 	        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
 	        jLabel2.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-	        jLabel2.setText("Sesiones del día:");
+	        jLabel2.setText("Sesiones del dï¿½a:");
 	        jLabel2.setForeground(Color.white);
 
 	        jButton1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
@@ -253,7 +253,7 @@ public class Calendario extends ColorPanel{
 	}
 
 	/**
-	 * Pantala que se utiliza para añadir, eliminar y editar las sesiones del calendario.
+	 * Pantala que se utiliza para aï¿½adir, eliminar y editar las sesiones del calendario.
 	 * @author Diedral_Group
 	 *
 	 */
@@ -328,7 +328,7 @@ public class Calendario extends ColorPanel{
 			jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
 			jLabel2.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-			jLabel2.setText("Sesiones del día:");
+			jLabel2.setText("Sesiones del dÃ­a:");
 
 			jButton1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 			jButton1.setText("Filtrar Calendario");
@@ -339,7 +339,7 @@ public class Calendario extends ColorPanel{
 			});
 
 			jButton3.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-			jButton3.setText("Consultar Selección");
+			jButton3.setText("Consultar SelecciÃ³n");
 			jButton3.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent evt) {
 					jButtonConsultarActionPerformed(evt);
@@ -347,7 +347,7 @@ public class Calendario extends ColorPanel{
 			});
 
 			jButton4.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-			jButton4.setText("Eliminar Selección");
+			jButton4.setText("Eliminar Seleccion");
 			jButton4.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent evt) {
 					jButtonEliminarActionPerformed(evt);
@@ -355,7 +355,7 @@ public class Calendario extends ColorPanel{
 			});
 
 			jButton5.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-			jButton5.setText("Editar Selección");
+			jButton5.setText("Editar SelecciÃ³n");
 			jButton5.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent evt) {
 					jButtonEditarActionPerformed(evt);
@@ -363,10 +363,10 @@ public class Calendario extends ColorPanel{
 			});
 
 			jButton6.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-			jButton6.setText("Añadir Sesión");
+			jButton6.setText("AÃ±adir Sesion");
 			jButton6.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent evt) {
-					jButtonAñadirActionPerformed(evt);
+					jButtonAddActionPerformed(evt);
 				}
 			});
 
@@ -455,7 +455,7 @@ public class Calendario extends ColorPanel{
 			
 		}                                        
 
-		private void jButtonAñadirActionPerformed(java.awt.event.ActionEvent evt) {                                         
+		private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {                                         
 			
 		}         
 	}

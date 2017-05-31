@@ -16,7 +16,7 @@ import DIedrAl_Project.presentacion.secciones.Usuarios;
 
 /**
  * Pantalla principal. Se abre cuando se inicia la aplicacion tras haberse iniciado
- * sesión correctamente
+ * sesiÃ³n correctamente
  *
  */
 public class MainFrame extends JFrame{

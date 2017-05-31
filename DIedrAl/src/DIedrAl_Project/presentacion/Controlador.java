@@ -25,7 +25,6 @@ import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAOrganizacion;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAPacientes;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SARecursos;
-import DIedrAl_Project.negocio.tests.SARecursosTest;
 
 /**
  * 
@@ -52,24 +51,10 @@ public class Controlador {
 			saPacientes = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 			saPacientes.addPaciente(p);
 		} catch (AlreadyBoundException e){
-			new Error("El paciente ya est· en el sistema");
+			new Error("El paciente ya est√° en el sistema");
 		} catch (AccessException e) {
 			new Error(e.getMessage());
 		}
-		
-		
-		/* Prueba 1: Satisfactoria :D
-		 System.out.println(p.getNombre());
-		 System.out.println(p.getApellido1());
-		 System.out.println(p.getApellido2());
-		 System.out.println(p.getFechanacimiento().getA√±o() + " " + p.getFechanacimiento().getMes() + " " + p.getFechanacimiento().getDia());
-		 for(String str : p.getAficiones()){
-			 System.out.println(str);
-		 }
-		 System.out.println( p.getDescripcion());
-		 System.out.println( p.getEstadocivil());
-		 System.out.println(p.getLesion());
-		 System.out.println(p.getFechalesion().getA√±o() + " " + p.getFechalesion().getMes() + " " + p.getFechalesion().getDia());*/
 	}
 	
 	public static void addRecurso(Recurso p){
@@ -82,22 +67,9 @@ public class Controlador {
 			new Error(e.getMessage());
 			
 		} catch (IOException e) {
-			new Error("Ha ocurrido un error en el sistema al aÒadir el recurso");
+			new Error("Ha ocurrido un error en el sistema al a√±adir el recurso");
 		}
 		
-		/*Prueba 6 :D
-		for(Recurso rec : Banco.getInstancia().getRecursos().filtrarNombre(p.getNombre())){
-			 System.out.println("itworked!");
-		 }*/
-		
-		
-		/*Prueba 2 Satisfactoria :D
-		 * System.out.println(p.getNombre());
-		 System.out.println(p.getRuta());
-		 for(String str : p.getEtiquetas()){
-			 System.out.println(str);
-		 }
-		 System.out.println( p.getDescripcion());*/
 	}
 	
 	public static void addActividad(Actividad p){
@@ -109,19 +81,6 @@ public class Controlador {
 		} catch (AccessException e) {
 			new Error(e.getMessage());
 		}
-		
-		/*System.out.println(p.getNombre());
-		System.out.println(p.getDificultad());
-		for(String str : p.getDestinatarios()){
-			 System.out.println(str);
-		 }
-		for(String str : p.getEtiquetas()){
-			 System.out.println(str);
-		 }
-		 System.out.println(p.getDuracion());
-		 System.out.println( p.getDescripcion());
-		 System.out.println( p.getVariaciones());
-		 System.out.println( p.getDesarrollo());*/
 	}
 	
 	public static void addSesion(Sesion p){
@@ -132,15 +91,6 @@ public class Controlador {
 		} catch (AccessException e) {
 			new Error(e.getMessage());
 		}
-		
-		/*System.out.println(p.getNombre());
-		for(String str : p.getEtiquetas()){
-			 System.out.println(str);
-		 }
-		 System.out.println(p.getDuracion());
-		 System.out.println( p.getDescripcion());
-		 System.out.println( p.getVariaciones());
-		 System.out.println( p.getDesarrollo());*/
 		
 	}
 	
@@ -157,15 +107,6 @@ public class Controlador {
 		} catch (AccessException | NotBoundException | AlreadyBoundException e) {
 			new Error(e.getMessage());
 		}
-
-		
-		/*System.out.println(p.getNombre());
-		System.out.println(p.getRol());
-		System.out.println(p.getEmail());
-		System.out.println(p.getTelefono());
-		System.out.println(p.getDescripcion());
-		for(String s : p.getPacientes()) System.out.println(s);
-		System.out.println(p.getInfo());*/
 	}
 	
 	public static void deleteActividad(Actividad a){
@@ -442,7 +383,7 @@ public class Controlador {
 		}
 		
 		if(!intento.inputPassword(clave)){
-			new Error("ContraseÒa equivocada");
+			new Error("Contrase√±a equivocada");
 			return false;
 		}
 		

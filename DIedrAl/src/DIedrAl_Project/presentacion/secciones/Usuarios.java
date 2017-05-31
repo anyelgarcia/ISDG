@@ -509,9 +509,8 @@ public class Usuarios extends ColorPanel{
 		}
 
 		/**
-		 * FunciÛn que se ejecuta al darle al botÛn buscar. Rellena un Usuario con los datos introducidos y 
-		 * busca en el sistema a todos los que coincidan con Èl
-		 * @param evt
+		 * Funci√≥n que se ejecuta al darle al bot√≥n buscar. Rellena un Usuario con los datos introducidos y 
+		 * busca en el sistema a todos los que coincidan con √©l
 		 */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 
@@ -545,7 +544,7 @@ public class Usuarios extends ColorPanel{
 				hints.add(Hints.NIF);
 			}
 
-			if(admin.equals("Si")||  admin.equals("S√É¬≠") ||  admin.equals("SI") ||  admin.equals("S√ÉÔøΩ")){
+			if(admin.equals("Si")||  admin.equals("S√≠") ||  admin.equals("SI") ||  admin.equals("S√ç")){
 				usuarios = new Hints[1];
 				usuarios[0] = Hints.ADMINISTRADOR;
 			}else{
@@ -589,11 +588,10 @@ public class Usuarios extends ColorPanel{
 		}                                        
 
 		/**
-		 * FunciÛn que se ejecuta al seleccionar uno de los resultados de la b˙squeda y pulsar el
-		 * botÛn de validar. Seg˙n el modo se hace una cosa u otra. 
-		 * Si el modo es eliminar, se muestra una pantalla de confirmaciÛn.
+		 * Funci√≥n que se ejecuta al seleccionar uno de los resultados de la b√∫squeda y pulsar el
+		 * bot√≥n de confirmar Seg√∫n el modo se hace una cosa u otra. 
+		 * Si el modo es eliminar, se muestra una pantalla de confirmaci√≥n.
 		 * Si el modo es Editar o buscar, se crea una pantalla Usuario y se le pasa el control.
-		 * @param evt
 		 */
 		private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 			int i = jList1.getSelectedIndex();
@@ -602,7 +600,7 @@ public class Usuarios extends ColorPanel{
 			switch(modo){
 				case ELIMINAR:
 					Confirm c = new Confirm();
-					c.setMensaje("El paciente se eliminar· del sistema.");
+					c.setMensaje("El paciente se eliminar√° del sistema.");
 			    	c.setVisible(true);
 			    	c.addListener(this);
 			    	break;
@@ -615,7 +613,7 @@ public class Usuarios extends ColorPanel{
 					j.setVisible(true);
 					break;
 				default:
-					new Error("Error raro en el modo en b˙squeda de usuarios");
+					new Error("Error raro en el modo en b√∫squeda de usuarios");
 					break;
 				}
 		}
