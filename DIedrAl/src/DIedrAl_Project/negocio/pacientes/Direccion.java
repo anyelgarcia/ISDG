@@ -1,6 +1,8 @@
 package DIedrAl_Project.negocio.pacientes;
 
-public class Direccion {
+import java.io.Serializable;
+
+public class Direccion implements Serializable {
 	private String localidad;
 
 	private String provincia;
