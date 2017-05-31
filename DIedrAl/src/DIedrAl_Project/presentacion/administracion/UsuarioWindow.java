@@ -1,5 +1,6 @@
 package DIedrAl_Project.presentacion.administracion;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
@@ -14,8 +15,7 @@ import DIedrAl_Project.presentacion.auxiliar.Error;
 import DIedrAl_Project.presentacion.auxiliar.Modo;
 
 /**
- * Pantalla para trabajar con los usuarios. Muestra una lista con todos los
- * usuarios del sistema, permite añadir nuevos usuarios, eliminar usuarios
+ * Pantalla para trabajar con los usuarios. permite añadir nuevos usuarios, eliminar usuarios
  *  existentes y ligar pacientes con terapeutas.
  * @author Diedral_Group
  *
@@ -26,6 +26,7 @@ public class UsuarioWindow extends javax.swing.JFrame {
 	private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     
     UsuarioWindow() {
         initGUI();
@@ -36,6 +37,7 @@ public class UsuarioWindow extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -62,6 +64,14 @@ public class UsuarioWindow extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
+        
+        jButton4.setFont(new java.awt.Font("Rockwell", 1, 14)); 
+        jButton4.setText("Volver");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,7 +84,8 @@ public class UsuarioWindow extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(53, 53, 53)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2))
+                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -86,23 +97,45 @@ public class UsuarioWindow extends javax.swing.JFrame {
                     .addComponent(jButton2))
                 .addGap(28, 28, 28)
                 .addComponent(jButton3)
+                .addGap(10, 10, 10)
+                .addComponent(jButton4)
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
         setVisible(true);
         pack();
     }
+    /**
+     * Funcion usada para volver
+     * @param evt
+     */
+    protected void jButton4ActionPerformed(ActionEvent evt) {
+		new CentroWindow(Modo.BUSCAR);
+		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+	}
 
+	/**
+     * Funcion que se ejecuta al intentar añadir un usuario
+     * @param evt
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
     	new PantallaUsuario(null, Modo.ADD);
 		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }  
     
+    /**
+     * Funcion que se ejecuta cuando intentas añadir un usuario
+     * @param evt
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
     	new PantallaUsuarioBuscar(Modo.ELIMINAR);
 		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }  
     
+    /**
+     * Funcion que se ejecuta cuando queremos ligar o desligar un usuario
+     * @param evt
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
     	new UsuarioLigarDesligar();
 		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
@@ -121,6 +154,8 @@ public class UsuarioWindow extends javax.swing.JFrame {
 	    private javax.swing.JButton jButton2;
 	    private javax.swing.JButton jButton3;
 	    private javax.swing.JButton jButton4;
+	    private javax.swing.JButton jButton5;
+	    private javax.swing.JButton jButton6;
 	    private javax.swing.JLabel jLabel1;
 	    private javax.swing.JLabel jLabel10;
 	    private javax.swing.JLabel jLabel2;
@@ -178,6 +213,8 @@ public class UsuarioWindow extends javax.swing.JFrame {
 	        jLabel10 = new javax.swing.JLabel();
 	        jButton2 = new javax.swing.JButton();
 	        jButton3 = new javax.swing.JButton();
+	        jButton5 = new javax.swing.JButton();
+	        jButton6 = new javax.swing.JButton();
 
 	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 	        setTitle("Ligar Pacientes y Terapeutas");
@@ -217,6 +254,22 @@ public class UsuarioWindow extends javax.swing.JFrame {
 	        jButton4.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
 	                jButton4ActionPerformed(evt);
+	            }
+	        });
+	        
+	        jButton5.setFont(new java.awt.Font("Rockwell", 1, 12)); 
+	        jButton5.setText("Desligar");
+	        jButton5.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton5ActionPerformed(evt);
+	            }
+	        });
+	        
+	        jButton6.setFont(new java.awt.Font("Rockwell", 1, 12)); 
+	        jButton6.setText("Volver");
+	        jButton6.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton6ActionPerformed(evt);
 	            }
 	        });
 
@@ -278,6 +331,8 @@ public class UsuarioWindow extends javax.swing.JFrame {
 	                .addComponent(jButton1)
 	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 	                .addComponent(jButton4)
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                .addComponent(jButton6)
 	                .addGap(200, 200, 200))
 	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
 	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,14 +436,28 @@ public class UsuarioWindow extends javax.swing.JFrame {
 	                        .addComponent(jButton2))
 	                    .addGroup(layout.createSequentialGroup()
 	                        .addGap(5, 5, 5)
-	                        .addComponent(jButton3)))
+	                        .addComponent(jButton3))
+	                    .addGroup(layout.createSequentialGroup()
+	                       	 .addGap(18, 18, 18)
+	    	                 .addComponent(jButton6)))
+	                    
 	                .addContainerGap(28, Short.MAX_VALUE))
 	        );
 	        pack();
 	        setVisible(true);
 	    }
 
-	    /**
+	    protected void jButton6ActionPerformed(ActionEvent evt) {
+	    	new UsuarioWindow();
+			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+		}
+
+		protected void jButton5ActionPerformed(ActionEvent evt) {
+	    	new UsuarioWindow();
+	    	dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+		}
+
+		/**
 
 	     * Función que se ejecuta al pulsar ligar. Se comprueba que ambos campos tienen contenido
 	     * 
