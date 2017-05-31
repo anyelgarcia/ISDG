@@ -22,17 +22,17 @@ public interface SARecursos {
 
 	public void removeSesion(Sesion ses) throws AccessException;
 
-	public Set<Recurso> filtrarRecursosPorNombre(String nombre);
+	public ArrayRecursos filtrarRecursosPorNombre(String nombre);
 
-	public Set<Actividad> filtrarActividadPorNombre(String nombre);
+	public ArrayActividades filtrarActividadPorNombre(String nombre);
 
-	public Set<Sesion> filtrarSesionPorNombre(String nombre);
+	public ArraySesiones filtrarSesionPorNombre(String nombre);
 
-	public Set<Recurso> filtrarRecursoPorEtiqueta(Set<String> filtros);
+	public ArrayRecursos filtrarRecursoPorEtiqueta(Set<String> filtros);
 
-	public Set<Actividad> filtrarActividadPorEtiqueta(Set<String> filtros);
+	public ArrayActividades filtrarActividadPorEtiqueta(Set<String> filtros);
 
-	public Set<Sesion> filtrarSesionPorEtiqueta(Set<String> filtros);
+	public ArraySesiones filtrarSesionPorEtiqueta(Set<String> filtros);
 
 	public ArrayActividades filtrarActividadesPorRango(Integer min, Integer max);
 

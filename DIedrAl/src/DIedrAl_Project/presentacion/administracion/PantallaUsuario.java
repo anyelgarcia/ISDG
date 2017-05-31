@@ -62,17 +62,23 @@ public class PantallaUsuario extends JFrame{
 		jList1 = new javax.swing.JList<>();
 		jScrollPane2 = new javax.swing.JScrollPane();
 		jTextArea1 = new javax.swing.JTextArea("");
+		jTextArea1.setEditable(editable);
 		jScrollPane3 = new javax.swing.JScrollPane();
 		jTextArea2 = new javax.swing.JTextArea("");
+		jTextArea2.setEditable(editable);
 		jLabel1 = new javax.swing.JLabel();
 		jLabel2 = new javax.swing.JLabel();
 		jLabel3 = new javax.swing.JLabel();
 		jLabel5 = new javax.swing.JLabel();
 		jLabel6 = new javax.swing.JLabel();
 		jTextField1 = new javax.swing.JTextField("");
+		jTextField1.setEditable(editable);
 		jTextField3 = new javax.swing.JTextField("");
+		jTextField3.setEditable(editable);
 		jTextField4 = new javax.swing.JTextField("");
+		jTextField4.setEditable(editable);
 		jPasswordField5 = new javax.swing.JPasswordField("");
+		jPasswordField5.setEditable(editable);
 
 		jButton1 = new javax.swing.JButton();
 		jButton2 = new javax.swing.JButton();
@@ -80,8 +86,11 @@ public class PantallaUsuario extends JFrame{
 		jLabel8 = new javax.swing.JLabel();
 		jLabel9 = new javax.swing.JLabel();
 		jTextField7 = new javax.swing.JTextField("");
+		jTextField7.setEditable(editable);
 		jTextField8 = new javax.swing.JTextField("");
+		jTextField8.setEditable(editable);
 		jTextField9 = new javax.swing.JTextField("");
+		jTextField9.setEditable(editable);
 		jLabel10 = new javax.swing.JLabel();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -182,14 +191,10 @@ public class PantallaUsuario extends JFrame{
 			jTextArea1.setText(u.getPerfil());
 		}
 		
-		if(!editable){
-			jTextField1.setEditable(false);
-			jTextField7.setEditable(false);
-			jTextField8.setEditable(false);
-			jTextField9.setEditable(false);
-			jButton1.setVisible(false);
-	        jButton1.setEnabled(false);
-		}
+		jButton1.setVisible(editable);
+	    jButton1.setEnabled(editable);
+	    jButton2.setVisible(editable);
+	    jButton2.setEnabled(editable);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);

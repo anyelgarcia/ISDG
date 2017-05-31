@@ -40,9 +40,11 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 	private javax.swing.JTextField jTextField4;
 	private javax.swing.JSeparator jSeparator2;
 	private Usuario[] resultados;
-	private Modo modo; 
+	private boolean volver;
+	private Modo modo;
 
-	public PantallaUsuarioBuscar(Modo modo){
+	public PantallaUsuarioBuscar(Modo modo, boolean volvervisible){
+		volver = volvervisible;
 		this.modo = modo;
 		initGUI();
 	}
@@ -113,6 +115,9 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 				jButton3ActionPerformed(evt);
 			}
 		});
+		jButton3.setVisible(volver);
+		jButton3.setEnabled(volver);
+		
 
 		jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 

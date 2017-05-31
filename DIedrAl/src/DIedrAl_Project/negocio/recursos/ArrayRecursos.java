@@ -13,8 +13,8 @@ public class ArrayRecursos extends ArrayEtiquetables<Recurso> {
 		super(rec);
 	}
 	
-    public HashSet<Recurso> filtrarExtension(String ext) {
-    	HashSet<Recurso> aux = new HashSet<Recurso>();
+    public ArrayRecursos filtrarExtension(String ext) {
+    	ArrayRecursos aux = new ArrayRecursos();
     	for(Recurso rec : this.etiquetables){
     		if(rec.getExtension().equals(ext)){
     			aux.add(rec);
@@ -22,5 +22,10 @@ public class ArrayRecursos extends ArrayEtiquetables<Recurso> {
     	}
     	return aux;
     }
+
+	@Override
+	protected ArrayEtiquetables<Recurso> createNew() {
+		return new ArrayRecursos();
+	}
 
 }
