@@ -21,6 +21,7 @@ import DIedrAl_Project.presentacion.auxiliar.Confirm;
 import DIedrAl_Project.presentacion.auxiliar.Confirm.confirmListener;
 import DIedrAl_Project.presentacion.auxiliar.ImageButton;
 import DIedrAl_Project.presentacion.auxiliar.Modo;
+import DIedrAl_Project.presentacion.auxiliar.Error;
 
 /**
  * Esta clase lleva la gestión de las vistas de las actividades. En el constructor se dibuja la secci�n de Actividades del Men� Principal y se pone a la espera para 
@@ -163,7 +164,7 @@ public class Actividades extends ColorPanel{
 	        jTextField1 = new javax.swing.JTextField("");
 	        jTextField1.setEditable(editable);
 	        jComboBox1 = new javax.swing.JComboBox<>();
-	        jComboBox1.setEnabled(editable);
+	        //jComboBox1.setEnabled(editable);
 	        jTextField2 = new javax.swing.JTextField("");
 	        jTextField2.setEditable(editable);
 	        jLabel4 = new javax.swing.JLabel();
@@ -267,6 +268,8 @@ public class Actividades extends ColorPanel{
 	        	jTextArea1.setText(act.getDescripcion());
 	        	
 	        	String etiquetas = act.getEtiquetas().toString();
+	        	
+	        	if(act.getDificultad()!=null) jComboBox1.setSelectedItem(act.getDificultad());
 	        	
 	        	jTextArea5.setText(etiquetas);
 	        	
@@ -428,27 +431,32 @@ public class Actividades extends ColorPanel{
 			String etiquetasSinFormato = jTextArea5.getText();
 			String etiquetas[] = etiquetasSinFormato.split(",");
 			String nombre = jTextField1.getText();
-			if(nombre.equals("")) new Error("Nombre vacio");
-			else{
-			Actividad info = new Actividad(nombre, etiquetas);
-			
-			String duracion = String.valueOf(jTextField2.getText());
-
-			//Esta excepción hay que capturarla
-			if(duracion.length()>0 ){
-				info.setDuracion(Integer.valueOf(duracion));
+			int duracion = 0;
+			try{
+				duracion = Integer.valueOf(String.valueOf((jTextField2.getText())));
+			}catch(NumberFormatException e){
+				new Error("La duración ha de ser un número entero mayor que cero.");
+				return;
 			}
 			
-			info.setDificultad(Dificultad.valueOf(String.valueOf(jComboBox1.getSelectedItem())));
-			info.setDescripcion(String.valueOf(jTextArea1.getText()));
-			info.addDestinatario(String.valueOf(jTextField3.getText()));
-			info.setVariaciones(String.valueOf(jTextArea3.getText()));
-			info.setDesarrollo(String.valueOf(jTextArea4.getText()));
-			
-			if(mode.equals(Modo.ADD)) Controlador.addActividad(info);
-			else if(mode.equals(Modo.VISTA)) Controlador.modificaEtiquetable(act, info);
-			
-			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+			if(nombre.equals("")) new Error("Nombre vacio");
+			else{
+				if(duracion<=0) new Error("La duración ha mayor que cero.");
+				else{
+					Actividad info = new Actividad(nombre, etiquetas);
+					
+					info.setDuracion(duracion);
+					info.setDificultad(Dificultad.valueOf(String.valueOf(jComboBox1.getSelectedItem())));
+					info.setDescripcion(String.valueOf(jTextArea1.getText()));
+					info.addDestinatario(String.valueOf(jTextField3.getText()));
+					info.setVariaciones(String.valueOf(jTextArea3.getText()));
+					info.setDesarrollo(String.valueOf(jTextArea4.getText()));
+					
+					if(mode.equals(Modo.ADD)) Controlador.addActividad(info);
+					else if(mode.equals(Modo.VISTA)) Controlador.modificaEtiquetable(act, info);
+					
+					dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+				}
 			}
 		} 
 	}

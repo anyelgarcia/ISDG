@@ -1,27 +1,12 @@
 package DIedrAl_Project.presentacion.administracion;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
+
 import java.awt.event.WindowEvent;
-import java.rmi.NotBoundException;
-import java.util.ArrayList;
-
 import javax.swing.*;
-
-import DIedrAl_Project.integracion.BasicClasses.AccessException;
-import DIedrAl_Project.negocio.administracion.Hints;
-import DIedrAl_Project.negocio.administracion.Persona;
-import DIedrAl_Project.negocio.administracion.Usuario;
-import DIedrAl_Project.negocio.pacientes.Paciente;
-import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
-import DIedrAl_Project.negocio.servicioDeAplicaciones.SAOrganizacion;
 import DIedrAl_Project.presentacion.Controlador;
 import DIedrAl_Project.presentacion.MainFrame;
-import DIedrAl_Project.presentacion.auxiliar.Confirm;
 import DIedrAl_Project.presentacion.auxiliar.Error;
 import DIedrAl_Project.presentacion.auxiliar.ImagePanel;
-import DIedrAl_Project.presentacion.auxiliar.Modo;
-import DIedrAl_Project.presentacion.auxiliar.Confirm.confirmListener;
 
 
 @SuppressWarnings("serial")
@@ -123,15 +108,14 @@ public class Login extends JFrame{
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {        
     	
     	String nombreuser = jTextField1.getText();
-		String clave = String.copyValueOf(jPasswordField1.getPassword());
+		String clave = String.valueOf(jPasswordField1.getPassword());
 		
-		if(!Controlador.usuarioExiste(nombreuser, clave)){
+		if(!Controlador.usuarioCorrecto(nombreuser, clave)){
 			new Error("Usuario o contraseña incorrecta");
 		}
 		else{
+			new MainFrame().setVisible(true);
 			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-			JFrame p = new MainFrame();
-			p.setVisible(true);
 		}
     }                                        
 

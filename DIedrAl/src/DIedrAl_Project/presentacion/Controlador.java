@@ -21,6 +21,7 @@ import DIedrAl_Project.negocio.recursos.Etiquetable;
 import DIedrAl_Project.negocio.recursos.Programable;
 import DIedrAl_Project.negocio.recursos.Recurso;
 import DIedrAl_Project.negocio.recursos.Sesion;
+import DIedrAl_Project.presentacion.auxiliar.Error;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAFactory;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAOrganizacion;
 import DIedrAl_Project.negocio.servicioDeAplicaciones.SAPacientes;
@@ -104,7 +105,7 @@ public class Controlador {
 		try {
 			saUsuarios = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 			saUsuarios.addUsuario(p);
-		} catch (AccessException | NotBoundException | AlreadyBoundException e) {
+		} catch (AccessException | AlreadyBoundException e) {
 			new Error(e.getMessage());
 		}
 	}
@@ -357,19 +358,12 @@ public class Controlador {
 		return str;
 	}
 
-	public static boolean usuarioExiste(String nombreuser, String clave) {
+	public static boolean usuarioCorrecto(String nombreuser, String clave) {
 		SAOrganizacion saOrg = SAFactory.getInstancia().newSAOrganizacion();
 		Usuario intento = null;
-		
 		try {
 			intento = saOrg.getUsuario(nombreuser);
 		} catch (NotBoundException | AccessException e) {
-			log.severe(e.getMessage());
-			new Error(e.getMessage());
-			return false;
-		}
-		
-		if(intento==null){
 			new Error("No se ha encontrado al usuario en el sistema");
 			return false;
 		}

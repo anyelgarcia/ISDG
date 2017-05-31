@@ -15,7 +15,7 @@ public interface SAPacientes {
 
 	public void erasePaciente(Paciente pac) throws NotBoundException,AccessException;
 
-	public void addUsuario(Usuario usu) throws AlreadyBoundException, NotBoundException, AccessException;
+	public void addUsuario(Usuario usu) throws AlreadyBoundException, AccessException;
 
 	public void eraseUsuario(Usuario usu) throws NotBoundException, AccessException;
 

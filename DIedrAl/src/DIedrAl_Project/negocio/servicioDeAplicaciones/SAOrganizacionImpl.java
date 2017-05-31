@@ -9,6 +9,7 @@ import DIedrAl_Project.integracion.BasicClasses.*;
 import DIedrAl_Project.integracion.DAOinterfaces.*;
 import DIedrAl_Project.integracion.simplefileImp.*;
 import DIedrAl_Project.integracion.BasicClasses.AccessException;
+import DIedrAl_Project.negocio.Relacion;
 import DIedrAl_Project.negocio.administracion.*;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 
@@ -52,15 +53,16 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 
 	@Override
 	public void addCentro(String name, String passAdmin)
-			throws AlreadyBoundException, AccessException {
+			throws AlreadyBoundException, AccessException{
+		
 		DAOCentro daocen = factoria.getDAOCentro();
 		if (daocen.existeCentro(name)){
 			throw new AlreadyBoundException(
 					"El centro solicitado ya se encuentra registrado en el sistema");
 		}
-			
-
-		daocen.guardarCentro(new EstadoCentro(name));
+		
+		EstadoCentro centrotrans = new EstadoCentro(name);
+		daocen.guardarCentro(centrotrans);
 
 		DAOUsuario daousu = factoria.getDAOUsuario();
 		Usuario u = new Usuario(name + "_ADMIN", "", "", name
@@ -68,7 +70,10 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 		u.setCentro(name);
 		u.setPassword(passAdmin);
 		u.setAdmin();
-		daousu.crearUsuario(u);
+		
+		SAPacientes sap = SAFactory.getInstancia().newSAPacientes(name);
+		sap.addUsuario(u);
+		
 		
 	}
 
