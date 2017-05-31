@@ -470,6 +470,7 @@ public class UsuarioWindow extends javax.swing.JFrame {
 		    	Usuario usr = terapeutas[i];
 		    	Paciente pac = pacientes[j];
 		    	Controlador.ligar(usr, pac);
+		    	new Error("Paciente ligado");
 		    	return;
 	    	}
 	    	new Error("Han de elegirse un terapeuta y un paciente");
@@ -517,6 +518,12 @@ public class UsuarioWindow extends javax.swing.JFrame {
 			String [] valores = campos.toArray(new String[campos.size()]);
 
 			terapeutas = Controlador.buscarUsuario(claves, valores);
+			
+			jList1.setModel(new javax.swing.AbstractListModel<String>() {
+				private static final long serialVersionUID = 1L;
+	            public int getSize() { return terapeutas!= null ? terapeutas.length : 0; }
+	            public String getElementAt(int i) { return (terapeutas[i]).toString(); }
+	        });
 	    }                                        
 
 	    /**
@@ -558,6 +565,12 @@ public class UsuarioWindow extends javax.swing.JFrame {
 			String [] valores = campos.toArray(new String[campos.size()]);
 
 			pacientes = Controlador.buscarPaciente(claves, valores);
+			
+			jList2.setModel(new javax.swing.AbstractListModel<String>() {
+				private static final long serialVersionUID = 1L;
+	            public int getSize() { return pacientes!= null ? pacientes.length : 0; }
+	            public String getElementAt(int i) { return (pacientes[i]).toString(); }
+	        });
 	    }  
 	    
 	    /**
@@ -572,6 +585,7 @@ public class UsuarioWindow extends javax.swing.JFrame {
 		    	Usuario usr = terapeutas[i];
 		    	Paciente pac = pacientes[j];
 		    	Controlador.desligar(usr, pac);
+		    	new Error("Paciente desligado");
 		    	return;
 	    	}
 	    	new Error("Han de elegirse un terapeuta y un paciente");

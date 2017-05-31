@@ -63,7 +63,6 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 		EstadoCentro centrotrans = new EstadoCentro(name);
 		daocen.guardarCentro(centrotrans);
 
-		DAOUsuario daousu = factoria.getDAOUsuario();
 		Usuario u = new Usuario(name + "_ADMIN", "", "", name
 				+ "_ADMIN");
 		u.setCentro(name);

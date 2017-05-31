@@ -5,7 +5,7 @@ import java.util.*;
 
 import DIedrAl_Project.negocio.ObjetoAlmacenable;
 
-public class Calendario implements ObjetoAlmacenable {
+public class Calendario implements ObjetoAlmacenable, Serializable {
 
 	private String id;
 	private Map<LocalDate, Set<SesionProgramada>> sesiones;

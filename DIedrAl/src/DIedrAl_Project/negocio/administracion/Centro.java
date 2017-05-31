@@ -105,33 +105,39 @@ public class Centro {
 
 	public void ligarPaciente(Paciente pac, Usuario usu)
 			throws NotBoundException, AlreadyBoundException {
+		
 		if (!personasCentro.containsKey(usu.getNif())) {
 			throw new NotBoundException("Usuario " + usu + " no encontrado");
 		} else if (!personasCentro.containsKey(pac.getNif())) {
 			throw new NotBoundException("Paciente " + pac + " no encontrado");
 		} 
-		else if(!usuarios.containsKey(usu)){
-			throw new NullPointerException("inconsisteeeenciaaaaa que guaaaaay");
-		}
-		else if (usuarios.get(usu).contains(pac)) {
-			throw new AlreadyBoundException("Paciente ya ligado");
-		} else {
-			usuarios.get(usu).add(pac);
-			pacientes.get(pac).add(usu);
+		else { 
+			usu = (Usuario) personasCentro.get(usu.getNif());
+			pac = (Paciente) personasCentro.get(pac.getNif());
+			if (usuarios.get(usu).contains(pac)) {
+				throw new AlreadyBoundException("Paciente ya ligado");
+			} else {
+				usuarios.get(usu).add(pac);
+				pacientes.get(pac).add(usu);
+			}
 		}
 	}
 
 	public void desligarPaciente(Paciente pac, Usuario usu)
 			throws NotBoundException, AlreadyBoundException {
-		if (!usuarios.containsKey(usu)) {
+		if (!personasCentro.containsKey(usu.getNif())) {
 			throw new NotBoundException("Usuario " + usu + " no encontrado");
-		} else if (!pacientes.containsKey(pac)) {
+		} else if (!personasCentro.containsKey(pac.getNif())) {
 			throw new NotBoundException("Paciente " + pac + " no encontrado");
-		} else if (!usuarios.get(usu).contains(pac)) {
-			throw new AlreadyBoundException("Paciente no ligado");
-		} else {
-			usuarios.get(usu).remove(pac);
-			pacientes.get(pac).remove(usu);
+		} else{ 
+			usu = (Usuario) personasCentro.get(usu.getNif());
+			pac = (Paciente) personasCentro.get(pac.getNif());
+			if (!usuarios.get(usu).contains(pac)) {
+				throw new AlreadyBoundException("Paciente no ligado");
+			} else {
+				usuarios.get(usu).remove(pac);
+				pacientes.get(pac).remove(usu);
+			}
 		}
 	}
 
