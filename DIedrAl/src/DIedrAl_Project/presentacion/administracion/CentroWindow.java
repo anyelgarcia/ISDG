@@ -286,7 +286,7 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 	   private void jButton1ActionPerformed(ActionEvent evt) {
 		   
 		   String nameCenter = jTextField1.getText();
-		   String password = jPasswordField1.getPassword().toString();
+		   String password = String.valueOf(jPasswordField1.getPassword());
 		   
 		   if(nameCenter!=null && password!=null){
 			   if(!Controlador.existeCentro(nameCenter)){

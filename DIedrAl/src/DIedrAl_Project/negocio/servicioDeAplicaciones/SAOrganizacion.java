@@ -1,6 +1,5 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
-import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
@@ -11,7 +10,7 @@ import DIedrAl_Project.negocio.administracion.Usuario;
 
 public interface SAOrganizacion {
 	/**
-	 * Devuelve los nombres de los centros asociados a la organización
+	 * Devuelve los nombres de los centros asociados a la organizaciÃ±n
 	 * 
 	 * @return arrayList que contiene los nombres solicitados
 	 * @throws IOException
@@ -21,16 +20,16 @@ public interface SAOrganizacion {
 	public ArrayList<String> getCentros() throws AccessException;
 
 	/**
-	 * Añade a la organización un centro con el nombre name, y genera un usuario
-	 * administrador contraseña dada (el nif y nombre del admin son nombre del
+	 * AÃ±ade a la organizaciÃ³n un centro con el nombre name, y genera un usuario
+	 * administrador contraseÃ±a dada (el nif y nombre del admin son nombre del
 	 * centro + "_ADMIN"; no tiene apellidos)
 	 * 
 	 * @param name
 	 *            nombre del nuevo centro
 	 * @param passAdmin
-	 *            contraseña del administrador
+	 *            contraseÃ±a del administrador
 	 * @throws AlreadyBoundException
-	 *             , si ya había un centro con ese nombre
+	 *             , si ya habÃ­a un centro con ese nombre
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
@@ -60,8 +59,8 @@ public interface SAOrganizacion {
 	public boolean existeCentro(String name) throws AccessException;
 
 	/**
-	 * Comprueba si el string dado coincide con la contraseña de administrador
-	 * de la aplicación
+	 * Comprueba si el string dado coincide con la contraseÃ±a de administrador
+	 * de la aplicaciÃ³n
 	 * 
 	 * @param pass
 	 *            string a comprobar

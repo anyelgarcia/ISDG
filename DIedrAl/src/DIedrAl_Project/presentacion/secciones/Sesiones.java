@@ -20,6 +20,7 @@ import DIedrAl_Project.presentacion.auxiliar.Confirm;
 import DIedrAl_Project.presentacion.auxiliar.Confirm.confirmListener;
 import DIedrAl_Project.presentacion.auxiliar.ImageButton;
 import DIedrAl_Project.presentacion.auxiliar.Modo;
+import DIedrAl_Project.presentacion.auxiliar.Error;
 
 
 /**

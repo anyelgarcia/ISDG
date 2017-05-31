@@ -25,7 +25,7 @@ import DIedrAl_Project.presentacion.auxiliar.Confirm;
 import DIedrAl_Project.presentacion.auxiliar.Confirm.confirmListener;
 import DIedrAl_Project.presentacion.auxiliar.ImageButton;
 import DIedrAl_Project.presentacion.auxiliar.Modo;
-
+import DIedrAl_Project.presentacion.auxiliar.Error;
 
 /**
  * Esta clase lleva la gestión de las vistas de los recursos. En el constructor se dibuja la sección de Recursos del Menú Principal y se pone a la espera para 

@@ -137,8 +137,8 @@ public class SAPacientesImpl implements SAPacientes {
 		if(!daousu.existeUsuario(usu.getId())){
 			usu.setCentro(centro.getNombre());
 			centro.addUsuario(usu);
-			daorelUsu.crearRelacion(new Relacion(usu.getId(), centro.getNombre()));
 			daousu.crearUsuario(usu);
+			daorelUsu.crearRelacion(new Relacion(usu.getId(), centro.getNombre()));
 		}
 		else throw new AlreadyBoundException("El usuario ya se encuentra registrado");
 
