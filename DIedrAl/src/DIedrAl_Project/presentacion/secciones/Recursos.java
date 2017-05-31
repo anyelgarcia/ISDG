@@ -155,11 +155,15 @@ public class Recursos extends ColorPanel{
 		    jButton1.setVisible(editable);
 	        jButton1.setEnabled(editable);
 		    jTextField1 = new javax.swing.JTextField("");
+		    jTextField1.setEditable(editable);
 		    jTextField2 = new javax.swing.JTextField("");
+		    jTextField2.setEditable(editable);
 		    jScrollPane2 = new javax.swing.JScrollPane();
 		    jTextArea2 = new javax.swing.JTextArea("");
+		    jTextArea2.setEditable(editable);
 		    jScrollPane3 = new javax.swing.JScrollPane();
 		    jTextArea3 = new javax.swing.JTextArea("");
+		    jTextArea3.setEditable(editable);
 
 		    setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		    switch(mode){
@@ -199,7 +203,7 @@ public class Recursos extends ColorPanel{
 		        	jTextField1.setText(recurso.getNombre());
 		        	jTextField2.setText(recurso.getFileName());
 		        	jTextArea2.setText(recurso.getDescripcion());
-		        	jTextArea3.setText(Controlador.getEtiquetas(recurso));
+		        	jTextArea3.setText(recurso.getEtiquetas().toString());
 		        }
 		        
 		        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -261,7 +265,7 @@ public class Recursos extends ColorPanel{
 
 		
 		/**
-		 * Funci�n que se ejecuta al darle a guardar en la ventana de de recursos. Se rellena un objeto recurso y es pasado al controlador.
+		 * Función que se ejecuta al darle a guardar en la ventana de de recursos. Se rellena un objeto recurso y es pasado al controlador.
 		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {     
 			
@@ -458,28 +462,31 @@ public class Recursos extends ColorPanel{
 	     */
 	    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 	    	int i; Recurso r; JFrame p;
-	    	switch(modo){
-			case ELIMINAR:
-				Confirm c = new Confirm();
-		    	c.setVisible(true);
-		    	c.addListener(this);
-		    	break;
-			case EDITAR:
-				i = jList1.getSelectedIndex();
-				r = getSelectedRecurso(i, filtrados);
-				p = new PantallaRecurso(r, Modo.EDITAR);
-				p.setVisible(true);
-				break;
-			case BUSCAR:
-				i = jList1.getSelectedIndex();
-				r = getSelectedRecurso(i, filtrados);
-				p = new PantallaRecurso(r, Modo.VISTA);
-				p.setVisible(true);
-				break;
-			default:
-				new Error("Error modo pantalla buscar recursos");
-				break;
-			}
+	    	i = jList1.getSelectedIndex();
+	    	if(i != -1){
+		    	switch(modo){
+				case ELIMINAR:
+					Confirm c = new Confirm();
+			    	c.setVisible(true);
+			    	c.addListener(this);
+			    	break;
+				case EDITAR:
+					i = jList1.getSelectedIndex();
+					r = getSelectedRecurso(i, filtrados);
+					p = new PantallaRecurso(r, Modo.EDITAR);
+					p.setVisible(true);
+					break;
+				case BUSCAR:
+					i = jList1.getSelectedIndex();
+					r = getSelectedRecurso(i, filtrados);
+					p = new PantallaRecurso(r, Modo.VISTA);
+					p.setVisible(true);
+					break;
+				default:
+					new Error("Error modo pantalla buscar recursos");
+					break;
+				}
+	    	}
 	    }
 
 		@Override
@@ -503,7 +510,7 @@ public class Recursos extends ColorPanel{
 	}
 
 	/**
-	 * Crea una pantalla que nos permite a�adir un recurso al sistema
+	 * Crea una pantalla que nos permite añadir un recurso al sistema
 	 */
 	private class CrearRecurso extends JFrame{
 		
@@ -554,7 +561,7 @@ public class Recursos extends ColorPanel{
 
 	        jLabel2.setText("Archivo: ");
 
-	        jLabel3.setText("Descripci�n: ");
+	        jLabel3.setText("Descripción: ");
 
 	        jLabel4.setText("Etiquetas (Separadas por comas): ");
 
@@ -573,7 +580,7 @@ public class Recursos extends ColorPanel{
 	            }
 	        });
 
-	        jTextField2.setText("URL (P�gina web)");
+	        jTextField2.setText("URL (Página web)");
 
 	        jTextArea2.setColumns(20);
 	        jTextArea2.setRows(5);
@@ -664,13 +671,13 @@ public class Recursos extends ColorPanel{
 		     String name = jTextField1.getText();
 		     if(name.equals("")) new Error("Nombre Vacio");
 		     else{
-		    	 if(direction.equals("") && file.canRead()){
+		    	 if(direction.equals("URL (Página web)") && file != null){
 		    		 Recurso rec = new Recurso(name, file, jTextArea3.getText().split(","));
 		    		 rec.setDescripcion(jTextArea2.getText());
 		    		 Controlador.addRecurso(rec);
 		    		 dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		    	 }
-		    	 else if(!direction.equals("") && !file.canRead()){
+		    	 else if(!direction.equals("URL (Página web)") && file == null){
 		    		 try {
 		    			 Recurso rec = new Recurso(name, direction, jTextArea3.getText().split(","));
 		    			 rec.setDescripcion(jTextArea2.getText());

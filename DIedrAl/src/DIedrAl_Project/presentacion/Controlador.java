@@ -245,14 +245,6 @@ public class Controlador {
     	return destinatarios.get(0);
 	}
 	
-	public static String getEtiquetas(Etiquetable a){
-		StringBuilder etiquetas = new StringBuilder();
-    	for(String e : a.getEtiquetas()){
-    		etiquetas.append(e + " ");
-    	}
-    	return a.toString();
-	}
-	
 	public static ArrayList<String> getRecursosAsociados(Programable a){
 		ArrayList<String> salida = new ArrayList<>();
 		Set<Etiquetable> total = a.getAsociados();
