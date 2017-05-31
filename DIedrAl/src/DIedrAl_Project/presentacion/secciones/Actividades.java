@@ -260,17 +260,19 @@ public class Actividades extends ColorPanel{
 	        	jTextField1.setText(act.getNombre());
 	        	
 	        	String pacienteTipo = Controlador.getPacienteTipo(act);
-	        	jTextField2.setText(pacienteTipo);
+	        	jTextField3.setText(pacienteTipo);
 	        	
-	        	jTextField3.setText(String.valueOf(act.getDuracion()));
+	        	jTextField2.setText(String.valueOf(act.getDuracion()));
 	        	
 	        	jTextArea1.setText(act.getDescripcion());
 	        	
-	        	String etiquetas = Controlador.getEtiquetas(act);
-	        	jTextArea3.setText(etiquetas);
+	        	String etiquetas = act.getEtiquetas().toString();
+	        	
+	        	jTextArea5.setText(etiquetas);
 	        	
 	        	jTextArea4.setText(act.getDesarrollo());
-	        	jTextArea5.setText(act.getVariaciones());
+	        	
+	        	jTextArea3.setText(act.getVariaciones());
 	      
 	        	jList1.setModel(new javax.swing.AbstractListModel<String>() {
 					/**
@@ -282,6 +284,7 @@ public class Actividades extends ColorPanel{
 					public int getSize() { return strings!= null ? strings.length : 0; }
 		            public String getElementAt(int i) { return strings[i]; }
 		        });
+	        	
 	        	jList2.setModel(new javax.swing.AbstractListModel<String>() {
 					/**
 					 * 
@@ -749,30 +752,32 @@ public class Actividades extends ColorPanel{
 	     * @param evt
 	     */
 	    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-	    	int i; JFrame p; Actividad a = null;
-	    	switch(modo){
-			case ELIMINAR:
-				Confirm c = new Confirm();
-				c.setMensaje("La actividad se eliminará del sistema.");
-		    	c.setVisible(true);
-		    	c.addListener(this);
-		    	break;
-			case EDITAR:
-				i = jList1.getSelectedIndex();
-				a = getSelectedActividad(i, filtrados);
-				p = new PantallaActividad(a, Modo.EDITAR);
-				p.setVisible(true);
-				break;
-			case BUSCAR:
-				i = jList1.getSelectedIndex();
-				a = getSelectedActividad(i, filtrados);
-				p = new PantallaActividad(a, Modo.VISTA);
-				p.setVisible(true);
-				break;
-			default:
-				new Error("Error modo pantalla de búsqueda de actividades");
-				break;
-			}
+	    	int i = jList1.getSelectedIndex(); JFrame p; Actividad a = null;
+	    	if(i != -1){
+		    	switch(modo){
+				case ELIMINAR:
+					Confirm c = new Confirm();
+					c.setMensaje("La actividad se eliminará del sistema.");
+			    	c.setVisible(true);
+			    	c.addListener(this);
+			    	break;
+				case EDITAR:
+					i = jList1.getSelectedIndex();
+					a = getSelectedActividad(i, filtrados);
+					p = new PantallaActividad(a, Modo.EDITAR);
+					p.setVisible(true);
+					break;
+				case BUSCAR:
+					i = jList1.getSelectedIndex();
+					a = getSelectedActividad(i, filtrados);
+					p = new PantallaActividad(a, Modo.VISTA);
+					p.setVisible(true);
+					break;
+				default:
+					new Error("Error modo pantalla de búsqueda de actividades");
+					break;
+				}
+	    	}
 	    }
 
 		@Override

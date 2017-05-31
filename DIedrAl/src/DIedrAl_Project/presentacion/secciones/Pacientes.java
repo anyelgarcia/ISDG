@@ -627,7 +627,7 @@ public class Pacientes extends ColorPanel{
 	    }
 	    
 		/**
-		 * Función que se ejecuta al darle al botçon buscar. Rellena un Paciente con los datos introducidos y 
+		 * Función que se ejecuta al darle al botón buscar. Rellena un Paciente con los datos introducidos y 
 		 * busca en el sistema a todos los que coincidan con él.
 		 */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -700,18 +700,19 @@ public class Pacientes extends ColorPanel{
 	    
 	    
 		/**
-		 * Funci�n que se ejecuta al seleccionar uno de los resultados de la b�squeda y pulsar el
-		 * bot�n de validar. Seg�n el modo se hace una cosa u otra. 
-		 * Si el modo es eliminar, se muestra una pantalla de confirmaci�n.
+		 * Función que se ejecuta al seleccionar uno de los resultados de la búsqueda y pulsar el
+		 * botón de validar. Según el modo se hace una cosa u otra. 
+		 * Si el modo es eliminar, se muestra una pantalla de confirmación.
 		 * Si el modo es Editar o buscar, se crea una pantalla Paciente y se le pasa el control.
 		 * @param evt
 		 */
 		private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {        
-			int i; JFrame j; Paciente p = null;
-			switch(modo){
+			int i = jList1.getSelectedIndex(); JFrame j; Paciente p = null;
+			if(i != -1){
+				switch(modo){
 				case ELIMINAR:
 					Confirm c = new Confirm();
-					c.setMensaje("El paciente se eliminar� del sistema.");
+					c.setMensaje("El paciente se eliminará del sistema.");
 			    	c.setVisible(true);
 			    	c.addListener(this);
 			    	break;
@@ -731,6 +732,7 @@ public class Pacientes extends ColorPanel{
 					new Error("Error interno en la pantalla buscar pacientes.");
 					break;
 				}
+			}
 			
 		}  
 		

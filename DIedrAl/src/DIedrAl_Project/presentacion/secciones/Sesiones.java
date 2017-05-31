@@ -251,7 +251,7 @@ public class Sesiones extends ColorPanel{
 		        	
 		        	jTextArea1.setText(sesion.getDescripcion());
 		        	
-		        	String etiquetas = Controlador.getEtiquetas(sesion);
+		        	String etiquetas = sesion.getEtiquetas().toString();
 		        	jTextArea3.setText(etiquetas);
 		        	
 		        	jTextArea4.setText(sesion.getDesarrollo());
@@ -620,7 +620,7 @@ public class Sesiones extends ColorPanel{
 	    }
 		
 		/**
-		 * Funci�n que se ejecuta cuando pulsamos el boton buscar en la ventana, muestra las 
+		 * Función que se ejecuta cuando pulsamos el boton buscar en la ventana, muestra las 
 		 * coincidencias en la lista
 		 */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -634,15 +634,18 @@ public class Sesiones extends ColorPanel{
 				end = Integer.parseInt(jTextField3.getText());
 		
 			filtrados = Controlador.filtrarSesiones(nombre, setEtiquetas, ini, end, setDestinatarios);
+			String[] aux = new String[filtrados.size()]; int i = 0;
+			for(Sesion s : filtrados){
+				aux[i] = s.toString();
+				++i;
+			}
 			
-			
-			
-			/*jList1.setModel(new javax.swing.AbstractListModel<String>() {
+			jList1.setModel(new javax.swing.AbstractListModel<String>() {
 				private static final long serialVersionUID = 1L;
-				String[] strings = ;
+				String[] strings = aux;
 	            public int getSize() { return strings.length; }
-	            public String getElementAt(int i) { return salida.; }
-			});*/	
+	            public String getElementAt(int i) { return strings[i]; }
+			});	
 			
 		}                                        
 		
@@ -651,28 +654,30 @@ public class Sesiones extends ColorPanel{
 	     * editando/eliminando/consultando realiza una acci�n.
 	     */
 		private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-			int i; Sesion s; JFrame p;
-			switch(modo){
-			case ELIMINAR:
-				Confirm c = new Confirm();
-		    	c.setVisible(true);
-		    	c.addListener(this);
-		    	break;
-			case EDITAR:
-				i = jList1.getSelectedIndex();
-				s = getSelectedSesion(i, filtrados);
-				p = new PantallaSesion(s, Modo.EDITAR);
-				p.setVisible(true);
-				break;
-			case BUSCAR:
-				i = jList1.getSelectedIndex();
-				s = getSelectedSesion(i, filtrados);
-				p = new PantallaSesion(s, Modo.VISTA);
-				p.setVisible(true);
-				break;
-			default:
-				new Error("Error modo pantalla sesiones buscar");
-				break;
+			int i = jList1.getSelectedIndex(); Sesion s; JFrame p;
+			if(i != -1){
+				switch(modo){
+				case ELIMINAR:
+					Confirm c = new Confirm();
+			    	c.setVisible(true);
+			    	c.addListener(this);
+			    	break;
+				case EDITAR:
+					i = jList1.getSelectedIndex();
+					s = getSelectedSesion(i, filtrados);
+					p = new PantallaSesion(s, Modo.EDITAR);
+					p.setVisible(true);
+					break;
+				case BUSCAR:
+					i = jList1.getSelectedIndex();
+					s = getSelectedSesion(i, filtrados);
+					p = new PantallaSesion(s, Modo.VISTA);
+					p.setVisible(true);
+					break;
+				default:
+					new Error("Error modo pantalla sesiones buscar");
+					break;
+				}
 			}
 		}
 		@Override
