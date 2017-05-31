@@ -158,7 +158,7 @@ public class Controlador {
 		}
 	}
 	
-	public static String[] buscarPaciente(Hints[]hints, String [] values, Hints[] valUsuarios){
+	public static Paciente[] buscarPaciente(Hints[]hints, String [] values){
 		
 		SAPacientes saPacientes = null;
 		
@@ -168,25 +168,42 @@ public class Controlador {
 			new Error(e.getMessage());
 		}
 		
-		Set<Persona> pacientes = saPacientes.filtrarPersonas(hints, values, valUsuarios);
-		return pacientes.toArray(new String[pacientes.size()]);
+		ArrayList<Persona> pacientes = new ArrayList<Persona>();
+		Hints[] valUsuarios = {Hints.PACIENTE};
+		pacientes.addAll(saPacientes.filtrarPersonas(hints, values, valUsuarios));
+		
+		Paciente[] resultado = new Paciente[pacientes.size()];
+		int i = 0;
+		for(Persona p: pacientes){
+			resultado[i] = (Paciente)p;
+			i++;
+		}
+		if(i!=0) return resultado;
+		else return null;
 	}
 	
-	public static ArrayList<Persona> buscarUsuarios(Hints[]hints, String [] values, Hints[] valUsuarios){
+	public static Usuario[] buscarUsuario(Hints[]hints, String [] values){
 		
-		SAPacientes saUsuarios = null;
+		SAPacientes saPacientes = null;
+		
 		try {
-			saUsuarios = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
+			saPacientes = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 		} catch (AccessException e) {
-			log.severe(e.getMessage());
 			new Error(e.getMessage());
 		}
 		
-		Set<Persona> usuarios = saUsuarios.filtrarPersonas(hints, values, valUsuarios);
+		ArrayList<Persona> usuarios = new ArrayList<Persona>();
+		Hints[] valUsuarios = {Hints.PACIENTE};
+		usuarios.addAll(saPacientes.filtrarPersonas(hints, values, valUsuarios));
 		
-		ArrayList<Persona> resultado = new ArrayList<Persona>();
-		resultado.addAll(usuarios);
-		return resultado;
+		Usuario[] resultado = new Usuario[usuarios .size()];
+		int i = 0;
+		for(Persona p: usuarios ){
+			resultado[i] = (Usuario)p;
+			i++;
+		}
+		if(i!=0) return resultado;
+		else return null;
 	}
 	
 	public static ArraySesiones filtrarSesiones(String nombre, Set<String> filtros, Integer min, Integer max, Set<String> destinatarios){

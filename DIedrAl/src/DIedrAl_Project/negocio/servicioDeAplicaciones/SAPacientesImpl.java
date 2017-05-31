@@ -113,7 +113,7 @@ public class SAPacientesImpl implements SAPacientes {
 		if (daopac.existePaciente(pac.getId())) {
 			daopac.eliminarPaciente(pac.getId());
 		} else
-			//No deber�a entrar por aqu� en estos momentos de la pel�cula.
+			//No debería entrar por aquí en estos momentos de la película.
 			throw new NotBoundException(pac + "no se encuentra registrado en la base de datos");
 	}
 

@@ -16,7 +16,7 @@ public class Centro {
 
 	/**
 	 * Diccionario que permite el acceso a un terapeuta o paciente del centro a
-	 * través de su dni.
+	 * travï¿½s de su dni.
 	 */
 	private HashMap<String, Persona> personasCentro;
 
@@ -234,7 +234,7 @@ public class Centro {
 					|| (tipos.contains(Hints.PACIENTE) && x instanceof Paciente)
 					|| (tipos.contains(Hints.ADMINISTRADOR)
 							&& x instanceof Usuario && ((Usuario) x).isAdmin())
-					|| (tipos.contains(Hints.USUARIO) && x instanceof Usuario);
+					|| (tipos.contains(Hints.USUARIO) && x instanceof Usuario && !((Usuario) x).isAdmin());
 
 			valida = filtros.containsKey(Hints.NIF) ? filtros.get(Hints.NIF)
 					.equals(x.getNif()) : valida;

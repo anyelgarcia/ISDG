@@ -181,23 +181,25 @@ public class UsuarioWindow extends javax.swing.JFrame {
 
 	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 	        setTitle("Ligar Pacientes y Terapeutas");
+	        
+	        Hints hints1[] = {Hints.PACIENTE};
+			String valores[] = {"comodín"};
+			Persona pacientes[] = Controlador.buscarPaciente(hints1, valores);
+			Hints hints2[] = {Hints.USUARIO};
+			Persona terapeutas[] = Controlador.buscarUsuario(hints2, valores);
 
 	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
 				private static final long serialVersionUID = 1L;
-				Hints hints[] = {Hints.USUARIO};
-	            String[] strings = Controlador.buscarPaciente(new Hints[0], new String[0], hints);
-	            public int getSize() { return strings!= null ? strings.length : 0; }
-	            public String getElementAt(int i) { return strings[i]; }
+	            public int getSize() { return terapeutas!= null ? terapeutas.length : 0; }
+	            public String getElementAt(int i) { return (terapeutas[i]).toString(); }
 	        });
 	        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 	        jScrollPane1.setViewportView(jList1);
 
 	        jList2.setModel(new javax.swing.AbstractListModel<String>() {
 				private static final long serialVersionUID = 1L;
-				Hints hints[] = {Hints.PACIENTE};
-	            String[] strings = Controlador.buscarPaciente(new Hints[0], new String[0], hints);
-	            public int getSize() { return strings!= null ? strings.length : 0; }
-	            public String getElementAt(int i) { return strings[i]; }
+	            public int getSize() { return pacientes!= null ? pacientes.length : 0; }
+	            public String getElementAt(int i) { return (pacientes[i]).toString(); }
 	        });
 	        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 	        jScrollPane2.setViewportView(jList2);
@@ -405,8 +407,8 @@ public class UsuarioWindow extends javax.swing.JFrame {
 	    }  
 
 	    /**
-	     * Funci�n que se ejecuta al buscar terapeutas, se comprueba el contenido de 
-	     * cada campo, se seleccionan los filtros
+	     * Función que se ejecuta al buscar terapeutas, se comprueba el contenido de 
+	     * cada campo, se seleccionan los filtros y se pasa el control al controlador.
 	     * @param evt
 	     */
 	    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -442,37 +444,10 @@ public class UsuarioWindow extends javax.swing.JFrame {
 			usuarios = new Hints[1];
 			usuarios[0] = Hints.USUARIO;
 			
+			Hints [] claves = hints.toArray(new Hints[hints.size()]);
+			String [] valores = campos.toArray(new String[campos.size()]);
 
-			int i=0;
-			Hints [] claves = new Hints[hints.size()];
-			for(Hints hint: hints){
-				claves[i] = hint;
-				i++;
-			}
-
-			i=0;
-			String [] valores = new String[hints.size()];
-			for(String str: campos){
-				valores[i] = str;
-				i++;
-			}
-
-			ArrayList<Persona> res = Controlador.buscarUsuarios(claves, valores, usuarios);
-			String[] cadenas = new String[res.size()];
-			terapeutas = new Usuario[res.size()];
-			i=0;
-			for(Persona p: res){
-				cadenas[i] = p.toString();
-				terapeutas[i] = (Usuario)p;
-				i++;
-			}
-			
-			jList1.setModel(new javax.swing.AbstractListModel<String>() {
-				private static final long serialVersionUID = 1L;
-				String[] strings = cadenas;
-				public int getSize() { return strings!= null ? strings.length : 0; }
-	            public String getElementAt(int i) { return strings[i]; }
-			});
+			terapeutas = Controlador.buscarUsuario(claves, valores);
 	    }                                        
 
 	    /**
@@ -510,28 +485,11 @@ public class UsuarioWindow extends javax.swing.JFrame {
 				hints.add(Hints.NIF);
 			}
 
-			usuarios = new Hints[1];
-			usuarios[0] = Hints.PACIENTE;
 
 			Hints [] claves = hints.toArray(new Hints[hints.size()]);
 			String [] valores = campos.toArray(new String[campos.size()]);
 
-			ArrayList<Persona> res = Controlador.buscarUsuarios(claves, valores, usuarios);
-			String[] cadenas = new String[res.size()];
-			pacientes = new Paciente[res.size()];
-			int i=0;
-			for(Persona p: res){
-				cadenas[i] = p.toString();
-				pacientes[i] = (Paciente)p;
-				i++;
-			}
-			
-			jList1.setModel(new javax.swing.AbstractListModel<String>() {
-				private static final long serialVersionUID = 1L;
-				String[] strings = cadenas;
-				public int getSize() { return strings!= null ? strings.length : 0; }
-	            public String getElementAt(int i) { return strings[i]; }
-			});
+			pacientes = Controlador.buscarPaciente(claves, valores);
 	    }  
 	    
 	    /**
