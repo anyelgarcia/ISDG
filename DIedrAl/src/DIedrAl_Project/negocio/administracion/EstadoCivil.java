@@ -1,5 +1,7 @@
 package DIedrAl_Project.negocio.administracion;
 
-public enum EstadoCivil {
+import java.io.Serializable;
+
+public enum EstadoCivil implements Serializable{
 	Casado, Soltero, Divorciado, Viudo
 }

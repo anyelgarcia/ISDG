@@ -117,7 +117,7 @@ public class Login extends JFrame{
 		String clave = String.valueOf(jPasswordField1.getPassword());
 		
 		if(!Controlador.usuarioCorrecto(nombreuser, clave)){
-			new Error("Usuario o contraseña incorrecta");
+			return ;
 		}
 		else{
 			new MainFrame().setVisible(true);

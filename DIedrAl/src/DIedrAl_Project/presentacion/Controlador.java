@@ -400,7 +400,7 @@ public class Controlador {
 			SAPacientes saUsu = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 			saUsu.ligarPaciente(pac, usr);
 		} catch (AccessException | NotBoundException | AlreadyBoundException e) {
-			log.severe(e.getMessage());
+
 			new Error(e.getMessage());
 		}
 	}
@@ -410,7 +410,7 @@ public class Controlador {
 			SAPacientes saUsu = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 			saUsu.desligarPaciente(pac, usr);
 		} catch (AccessException | NotBoundException | AlreadyBoundException e) {
-			log.severe(e.getMessage());
+
 			new Error(e.getMessage());
 		}
 	}
@@ -423,5 +423,26 @@ public class Controlador {
 			new Error("No se ha podido actualizar el paciente");
 		}
 	}
+	
+	public static Usuario getUsuarioConNif(String nif){
+		try {
+			return 	SAFactory.getInstancia().newSAPacientes(usuario.getCentro()).getUsuarioConNIF(nif);
+		} catch (AccessException | NotBoundException e) {
+				new Error(e.getMessage());
+		}
+		return null;
+
+	}
+	
+	public static Paciente getPacienteConNif(String nif){
+		try {
+			return 	SAFactory.getInstancia().newSAPacientes(usuario.getCentro()).getPacienteConNIF(nif);	
+		} catch (AccessException | NotBoundException e) {
+				new Error(e.getMessage());
+		}
+		return null;
+
+	}
+
 
 }

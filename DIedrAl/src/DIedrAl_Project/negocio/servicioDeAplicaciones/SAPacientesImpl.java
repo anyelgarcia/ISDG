@@ -220,7 +220,7 @@ public class SAPacientesImpl implements SAPacientes {
 			usuToPac = new Relacion(usu.getId(), centro.getNombre());
 			daorelUsu.crearRelacion(usuToPac);
 		}
-		//A�adimos el nuevo relacionado.
+		//Añadimos el nuevo relacionado.
 		usuToPac.getRelacionados().add(pac.getId());
 		daorelUsu.modificarRelacion(usuToPac);
 		//Hacemos lo mismo con el otro sentido de la relacion.
