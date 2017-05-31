@@ -28,8 +28,8 @@ import DIedrAl_Project.presentacion.auxiliar.Modo;
 
 
 /**
- * Esta clase lleva la gestión de las vistas de los recursos. En el constructor se dibuja la sección de Recursos del Menú Principal y se pone a la espera para 
- * añadir, eliminar, editar o buscar recursos.
+ * Esta clase lleva la gestiÃ³n de las vistas de los recursos. En el constructor se dibuja la secciÃ³n de Recursos del MenÃº Principal y se pone a la espera para 
+ * aÃ±adir, eliminar, editar o buscar recursos.
  * @author Diedral_Group
  *
  */
@@ -172,7 +172,7 @@ public class Recursos extends ColorPanel{
 
 		        jLabel2.setText("Archivo: ");
 
-		        jLabel3.setText("Descripción: ");
+		        jLabel3.setText("DescripciÃ³n: ");
 
 		        jLabel4.setText("Etiquetas: (separadas por comas)");
 
@@ -261,7 +261,7 @@ public class Recursos extends ColorPanel{
 
 		
 		/**
-		 * Función que se ejecuta al darle a guardar en la ventana de de recursos. Se rellena un objeto recurso y es pasado al controlador.
+		 * Funciï¿½n que se ejecuta al darle a guardar en la ventana de de recursos. Se rellena un objeto recurso y es pasado al controlador.
 		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {     
 			
@@ -453,8 +453,8 @@ public class Recursos extends ColorPanel{
 			
 	    }                                        
 	    /**
-	     * Funcion que se ejecuta cuando seleccionamos un archivo, y según se esté
-	     * editando/eliminando/consultando realiza una acción.
+	     * Funcion que se ejecuta cuando seleccionamos un archivo, y segÃºn se estÃ©
+	     * editando/eliminando/consultando realiza una acciÃ³n.
 	     */
 	    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 	    	int i; Recurso r; JFrame p;
@@ -503,7 +503,7 @@ public class Recursos extends ColorPanel{
 	}
 
 	/**
-	 * Crea una pantalla que nos permite añadir un recurso al sistema
+	 * Crea una pantalla que nos permite aï¿½adir un recurso al sistema
 	 */
 	private class CrearRecurso extends JFrame{
 		
@@ -554,7 +554,7 @@ public class Recursos extends ColorPanel{
 
 	        jLabel2.setText("Archivo: ");
 
-	        jLabel3.setText("Descripción: ");
+	        jLabel3.setText("Descripciï¿½n: ");
 
 	        jLabel4.setText("Etiquetas (Separadas por comas): ");
 
@@ -573,7 +573,7 @@ public class Recursos extends ColorPanel{
 	            }
 	        });
 
-	        jTextField2.setText("URL (Página web)");
+	        jTextField2.setText("URL (Pï¿½gina web)");
 
 	        jTextArea2.setColumns(20);
 	        jTextArea2.setRows(5);
@@ -684,7 +684,7 @@ public class Recursos extends ColorPanel{
 		 }                                     
 		 
 		 /**
-		  * Funcion que se ejecuta al pedir añadir un archivo manualmente
+		  * Funcion que se ejecuta al pedir aï¿½adir un archivo manualmente
 		  * @param evt
 		  */
 		 private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) { 

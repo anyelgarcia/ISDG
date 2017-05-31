@@ -81,7 +81,7 @@ public class Pacientes extends ColorPanel{
 
 
 		
-		ImageButton anadir = new ImageButton("A�adir", "images/tanbutton.png", "images/tanbutton2.png", this);
+		ImageButton anadir = new ImageButton("Añadir", "images/tanbutton.png", "images/tanbutton2.png", this);
 		componentes.add(anadir);
 		anadir.addActionListener((ae) -> {
 			JFrame pantalla = new PantallaPaciente(null, Modo.ADD);
@@ -419,8 +419,8 @@ public class Pacientes extends ColorPanel{
 		}
 		
 		/**
-		 * Funci�n que se ejecuta al darle a guardar en la ventana de Paciente. Se rellena un objeto paciente
-		 * y es pasado al controlador para que lo a�ada si estamos en modo a�adir o para que sobreescriba
+		 * Función que se ejecuta al darle a guardar en la ventana de Paciente. Se rellena un objeto paciente
+		 * y es pasado al controlador para que lo añada si estamos en modo añadir o para que sobreescriba
 		 * a un paciente antiguo si estamos en modo editar.
 		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {   
@@ -682,7 +682,7 @@ public class Pacientes extends ColorPanel{
 			resultados = new Paciente[res.size()];
 			i=0;
 			for(Persona p: res){
-				cadenas[i] = res.toString();
+				cadenas[i] = p.toString();
 				resultados[i] = (Paciente)p;
 				i++;
 			}

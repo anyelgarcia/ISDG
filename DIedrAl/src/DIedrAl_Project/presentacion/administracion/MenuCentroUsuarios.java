@@ -30,7 +30,7 @@ public class MenuCentroUsuarios extends javax.swing.JFrame {
     	jButton2 = new javax.swing.JButton();
 
     	setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-    	setTitle("Menú Centros y Usuarios");
+    	setTitle("MenÃº Centros y Usuarios");
 
     	jButton1.setFont(new java.awt.Font("SansSerif", 1, 20)); 
     	jButton1.setText("Menu Centros");

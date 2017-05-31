@@ -25,7 +25,7 @@ public class PasswordFrame extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Contraseña Administrador");
+        setTitle("ContraseÃ±a Administrador");
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 0, 20)); 
         jLabel1.setText("Introduzca el password de administrador");
@@ -79,7 +79,7 @@ public class PasswordFrame extends javax.swing.JFrame {
 		String password = String.valueOf(jPasswordField1.getPassword());
 		SAOrganizacion saOrg = SAFactory.getInstancia().newSAOrganizacion();
 		if(!saOrg.inputPasswordGod(password)){
-			new Error("Contraseña Equivocada");
+			new Error("ContraseÃ±a Equivocada");
 			return;
 		}
 		new MenuCentroUsuarios();
