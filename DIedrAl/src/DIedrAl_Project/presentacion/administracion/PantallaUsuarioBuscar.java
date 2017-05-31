@@ -91,9 +91,8 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 
 		jList1.setModel(new javax.swing.AbstractListModel<String>() {
 			private static final long serialVersionUID = 1L;
-			String[] strings = {  };
-			 public int getSize() { return strings!= null ? strings.length : 0; }
-			 public String getElementAt(int i) { return strings[i]; }
+			 public int getSize() { return resultados!= null ? resultados.length : 0; }
+			 public String getElementAt(int i) { return resultados[i].toString(); }
 		});
 		jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		jScrollPane1.setViewportView(jList1);
@@ -175,7 +174,7 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 
 	/**
 	 * Función que se ejecuta al darle al botón buscar. Rellena un Usuario con los datos introducidos y 
-	 * busca en el sistema a todos los que coincidan con él.
+	 * busca en el sistema a todos los que coincidan con él. Los guarda en resultados
    * @param evt
 	 */
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -187,7 +186,6 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 
 		ArrayList<String> campos = new ArrayList<String>();
 		ArrayList<Hints> hints = new ArrayList<Hints>();
-		Hints [] usuarios = null;
 
 		if(nombre!=null && nombre.length()>0){
 			campos.add(nombre);
@@ -208,36 +206,11 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 			campos.add(DNI);
 			hints.add(Hints.NIF);
 		}
-
-		usuarios = new Hints[1];
-		usuarios[0] = Hints.USUARIO;
-
-		int i=0;
-		Hints [] claves = new Hints[hints.size()];
-		for(Hints hint: hints){
-			claves[i] = hint;
-			i++;
-		}
-
+		
+		Hints [] claves = hints.toArray(new Hints[hints.size()]);
 		String [] valores = campos.toArray(new String[campos.size()]);
 
-		ArrayList<Persona> res = Controlador.buscarUsuarios(claves, valores, usuarios);
-		String[] cadenas = new String[res.size()];
-		resultados = new Usuario[res.size()];
-		i=0;
-		for(Persona p: res){
-			cadenas[i] = p.toString();
-			resultados[i] = (Usuario)p;
-			i++;
-		}
-		
-		jList1.setModel(new javax.swing.AbstractListModel<String>() {
-			
-			private static final long serialVersionUID = 1L;
-			String[] strings = cadenas;
-			public int getSize() { return strings!= null ? strings.length : 0; }
-            public String getElementAt(int i) { return strings[i]; }
-		});
+		resultados = Controlador.buscarUsuario(claves, valores);
 	}                                        
 
 	/**

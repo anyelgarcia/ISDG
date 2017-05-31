@@ -9,7 +9,6 @@ import DIedrAl_Project.integracion.BasicClasses.*;
 import DIedrAl_Project.integracion.DAOinterfaces.*;
 import DIedrAl_Project.integracion.simplefileImp.*;
 import DIedrAl_Project.integracion.BasicClasses.AccessException;
-import DIedrAl_Project.negocio.Relacion;
 import DIedrAl_Project.negocio.administracion.*;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 

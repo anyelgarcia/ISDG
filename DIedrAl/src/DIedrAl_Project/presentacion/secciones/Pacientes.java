@@ -540,13 +540,9 @@ public class Pacientes extends ColorPanel{
 	        });
 
 	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-				/**
-				 * 
-				 */
 				private static final long serialVersionUID = 1L;
-				String[] strings = {  };
-				public int getSize() { return strings!= null ? strings.length : 0; }
-	            public String getElementAt(int i) { return strings[i]; }
+				public int getSize() { return resultados!= null ? resultados.length : 0; }
+	            public String getElementAt(int i) { return resultados[i].toString(); }
 	        });
 	        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 	        jScrollPane1.setViewportView(jList1);
@@ -664,42 +660,10 @@ public class Pacientes extends ColorPanel{
 				hints.add(Hints.NIF);
 			}
 			
-			int i=0;
-			Hints [] claves = new Hints[hints.size()];
-			for(Hints hint: hints){
-				claves[i] = hint;
-				i++;
-			}
+			Hints [] claves = hints.toArray(new Hints[hints.size()]);
+			String [] valores = campos.toArray(new String[campos.size()]);
 			
-			i=0;
-			String [] valores = new String[hints.size()];
-			for(String str: campos){
-				valores[i] = str;
-				i++;
-			}
-			
-			Hints valUsuarios [] = {Hints.PACIENTE};
-			
-			ArrayList<Persona> res = Controlador.buscarUsuarios(claves, valores, valUsuarios);
-			
-			String[] cadenas = new String[res.size()];
-			resultados = new Paciente[res.size()];
-			i=0;
-			for(Persona p: res){
-				cadenas[i] = p.toString();
-				resultados[i] = (Paciente)p;
-				i++;
-			}
-			
-			jList1.setModel(new javax.swing.AbstractListModel<String>() {
-				/**
-				 * 
-				 */
-				private static final long serialVersionUID = 1L;
-				String[] strings = cadenas;
-				public int getSize() { return strings!= null ? strings.length : 0; }
-	            public String getElementAt(int i) { return strings[i]; }
-			});
+			resultados = Controlador.buscarPaciente(claves, valores);
 		}
 	    
 	    
