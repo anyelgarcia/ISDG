@@ -1,5 +1,6 @@
 package DIedrAl_Project.negocio.calendario;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -7,7 +8,7 @@ import DIedrAl_Project.negocio.administracion.*;
 import DIedrAl_Project.negocio.pacientes.*;
 import DIedrAl_Project.negocio.recursos.*;
 
-public class SesionProgramada {
+public class SesionProgramada implements Serializable {
 
 	private Set<Nota> notas;
 

@@ -1,12 +1,13 @@
 package DIedrAl_Project.negocio.pacientes;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import DIedrAl_Project.negocio.ObjetoAlmacenable;
 import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.negocio.calendario.SesionProgramada;
 
-public class Informe implements ObjetoAlmacenable {
+public class Informe implements ObjetoAlmacenable, Serializable {
 	private String texto;
 	/*
 	 * TODO No tiene sentido cambiar la sesion de la que está hablando el
