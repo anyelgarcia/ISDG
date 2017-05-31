@@ -294,6 +294,10 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 				   new Error("El identificador del administrador del nuevo centro es: " + nameCenter + "_ADMIN");
 				   new MenuCentroUsuarios();
 				   dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+			   }else{
+				   new Error("Ya existe un centro con ese nombre");
+				   new MenuCentroUsuarios();
+				   dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 			   }
 		   }else{
 			   new Error("Han de rellenarse todos los campos");

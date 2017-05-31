@@ -289,8 +289,8 @@ public class PantallaUsuario extends JFrame{
 
 		
 		if(!jTextField1.getText().equals("") && !jTextField9.getText().equals("") && !String.valueOf(jPasswordField5.getPassword()).equals("")){
+			
 			Usuario usuario = new Usuario(jTextField1.getText(), jTextField7.getText(), jTextField8.getText(), jTextField9.getText());
-	
 			usuario.setPassword(String.valueOf(jPasswordField5.getPassword()));
 			usuario.setEmail(jTextField3.getText());
 			usuario.setPerfil(jTextArea1.getText());

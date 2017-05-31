@@ -14,9 +14,9 @@ import DIedrAl_Project.presentacion.auxiliar.Error;
 import DIedrAl_Project.presentacion.auxiliar.Modo;
 
 /**
- * Pantalla para trabajar con los centros. Muestra una lista con todos los centros del sistema, permite
- * añadir nuevos centros y eliminar centros existentes. El modo ADD permite eliminar y crear centros. El modo BUSCAR
- * se utiliza por la clase UsuarioWindow para seleccionar el centro con cuyos usuarios se va a trabajar.
+ * Pantalla para trabajar con los usuarios. Muestra una lista con todos los
+ * usuarios del sistema, permite añadir nuevos usuarios, eliminar usuarios
+ *  existentes y ligar pacientes con terapeutas.
  * @author Diedral_Group
  *
  */

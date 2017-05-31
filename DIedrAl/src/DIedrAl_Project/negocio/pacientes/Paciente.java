@@ -1,11 +1,12 @@
 package DIedrAl_Project.negocio.pacientes;
 
+
 import java.util.Set;
 import java.util.TreeSet;
 
 import DIedrAl_Project.negocio.administracion.Persona;
 
-public class Paciente extends Persona {
+public class Paciente extends Persona{
 
 	private static final long serialVersionUID = -5410072833506454068L;
 
