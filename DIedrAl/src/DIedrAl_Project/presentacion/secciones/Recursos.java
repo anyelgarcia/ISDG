@@ -691,7 +691,7 @@ public class Recursos extends ColorPanel{
 		 }                                     
 		 
 		 /**
-		  * Funcion que se ejecuta al pedir a�adir un archivo manualmente
+		  * Funcion que se ejecuta al pedir añadir un archivo manualmente
 		  * @param evt
 		  */
 		 private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) { 

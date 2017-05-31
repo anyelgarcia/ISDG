@@ -37,7 +37,7 @@ public class Usuarios extends ColorPanel{
 
 		ImageButton buscar = new ImageButton("Consultar", "images/orangebutton.png", "images/orangebutton2.png", this);
 		buscar.addActionListener((ae) -> {
-			JFrame pantalla = new PantallaUsuarioBuscar(Modo.BUSCAR);
+			JFrame pantalla = new PantallaUsuarioBuscar(Modo.BUSCAR, false);
 			pantalla.setVisible(true);
 		});
 		c.gridx = 0;

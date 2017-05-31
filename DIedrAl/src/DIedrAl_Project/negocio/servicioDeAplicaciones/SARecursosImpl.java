@@ -135,33 +135,33 @@ public class SARecursosImpl implements SARecursos {
 	}
 
 	@Override
-	public Set<Recurso> filtrarRecursosPorNombre(String nombre) {
-		return bank.getRecursos().filtrarNombre(nombre);
+	public ArrayRecursos filtrarRecursosPorNombre(String nombre) {
+		return (ArrayRecursos) bank.getRecursos().filtrarNombre(nombre);
 	}
 
 	@Override
-	public Set<Actividad> filtrarActividadPorNombre(String nombre) {
-		return bank.getActividades().filtrarNombre(nombre);
+	public ArrayActividades filtrarActividadPorNombre(String nombre) {
+		return (ArrayActividades) bank.getActividades().filtrarNombre(nombre);
 	}
 
 	@Override
-	public Set<Sesion> filtrarSesionPorNombre(String nombre) {
-		return bank.getSesiones().filtrarNombre(nombre);
+	public ArraySesiones filtrarSesionPorNombre(String nombre) {
+		return (ArraySesiones) bank.getSesiones().filtrarNombre(nombre);
 	}
 
 	@Override
-	public Set<Recurso> filtrarRecursoPorEtiqueta(Set<String> filtros) {
-		return bank.getRecursos().filtrarEtiqueta(filtros);
+	public ArrayRecursos filtrarRecursoPorEtiqueta(Set<String> filtros) {
+		return (ArrayRecursos) bank.getRecursos().filtrarEtiqueta(filtros);
 	}
 
 	@Override
-	public Set<Actividad> filtrarActividadPorEtiqueta(Set<String> filtros) {
-		return bank.getActividades().filtrarEtiqueta(filtros);
+	public ArrayActividades filtrarActividadPorEtiqueta(Set<String> filtros) {
+		return (ArrayActividades) bank.getActividades().filtrarEtiqueta(filtros);
 	}
 
 	@Override
-	public Set<Sesion> filtrarSesionPorEtiqueta(Set<String> filtros) {
-		return bank.getSesiones().filtrarEtiqueta(filtros);
+	public ArraySesiones filtrarSesionPorEtiqueta(Set<String> filtros) {
+		return (ArraySesiones) bank.getSesiones().filtrarEtiqueta(filtros);
 	}
 
 	@Override

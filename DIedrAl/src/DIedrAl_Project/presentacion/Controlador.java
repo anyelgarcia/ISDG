@@ -64,11 +64,8 @@ public class Controlador {
 		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos();
 		try {
 			saRecursos.addRecurso(p);
-		} catch (AccessException e) {
+		} catch (AccessException | IOException e) {
 			new Error(e.getMessage());
-			
-		} catch (IOException e) {
-			new Error("Ha ocurrido un error en el sistema al añadir el recurso");
 		}
 		
 	}
@@ -208,11 +205,11 @@ public class Controlador {
 	
 	public static ArraySesiones filtrarSesiones(String nombre, Set<String> filtros, Integer min, Integer max, Set<String> destinatarios){
 		ArraySesiones salida = SAFactory.getInstancia().newSARecursos().getSesiones();
-		if(nombre != null && nombre != "") salida.filtrarNombre(nombre);
-		if(filtros.size() > 0) salida.filtrarEtiqueta(filtros);
-		if(min != null) salida.filtrarDesde(min);
-		if(max != null) salida.filtrarHasta(max);
-		if(destinatarios.size() > 0) salida.filtrarDestinatarios(destinatarios);
+		if(!nombre.equals("") && salida != null) salida = (ArraySesiones) salida.filtrarNombre(nombre);
+		if(filtros.size() > 0 && salida != null) salida = (ArraySesiones) salida.filtrarEtiqueta(filtros);
+		if(min != null && salida != null) salida = (ArraySesiones) salida.filtrarDesde(min);
+		if(max != null && salida != null) salida = (ArraySesiones) salida.filtrarHasta(max);
+		if(destinatarios.size() > 0 && salida != null) salida = (ArraySesiones) salida.filtrarDestinatarios(destinatarios);
 		
 		return salida;
 	}
@@ -220,21 +217,21 @@ public class Controlador {
 	public static ArrayActividades filtrarActividades(String nombre, Set<String> filtros, Integer min, Integer max, Set<String> destinatarios, 
 			Dificultad minimo, Dificultad maximo){
 		ArrayActividades salida = SAFactory.getInstancia().newSARecursos().getActividades();
-		if(nombre != "") salida.filtrarNombre(nombre);
-		if(filtros.size() > 0) salida.filtrarEtiqueta(filtros);
-		if(min != null) salida.filtrarDesde(min);
-		if(max != null) salida.filtrarHasta(max);
-		if(destinatarios.size() > 0) salida.filtrarDestinatarios(destinatarios);
-		if(minimo != null) salida.filtrarDesde(minimo);
-		if(maximo != null) salida.filtrarHasta(maximo);
+		if(!nombre.equals("") && salida != null) salida = (ArrayActividades) salida.filtrarNombre(nombre);
+		if(filtros.size() > 0 && salida != null) salida = (ArrayActividades) salida.filtrarEtiqueta(filtros);
+		if(min != null && salida != null) salida = (ArrayActividades) salida.filtrarDesde(min);
+		if(max != null && salida != null) salida = (ArrayActividades) salida.filtrarHasta(max);
+		if(destinatarios.size() > 0 && salida != null)  salida = (ArrayActividades) salida.filtrarDestinatarios(destinatarios);
+		if(minimo != null && salida != null) salida = salida.filtrarDesde(minimo);
+		if(maximo != null && salida != null) salida = salida.filtrarHasta(maximo);
 		
 		return salida;
 	}
 	
 	public static ArrayRecursos filtrarRecursos(String nombre, Set<String> filtros){
 		ArrayRecursos salida = SAFactory.getInstancia().newSARecursos().getRecursos();
-		if(nombre != null && nombre != "") salida.filtrarNombre(nombre);
-		if(filtros.size() > 0) salida.filtrarEtiqueta(filtros);
+		if(!nombre.equals("") && salida != null) salida = (ArrayRecursos) salida.filtrarNombre(nombre);
+		if(filtros.size() > 0 && salida != null) salida = (ArrayRecursos) salida.filtrarEtiqueta(filtros);
 		return salida;
 	}
 

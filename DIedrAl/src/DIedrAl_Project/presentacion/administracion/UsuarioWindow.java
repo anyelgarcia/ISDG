@@ -128,7 +128,7 @@ public class UsuarioWindow extends javax.swing.JFrame {
      * @param evt
      */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-    	new PantallaUsuarioBuscar(Modo.ELIMINAR);
+    	new PantallaUsuarioBuscar(Modo.ELIMINAR, true);
 		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }  
     

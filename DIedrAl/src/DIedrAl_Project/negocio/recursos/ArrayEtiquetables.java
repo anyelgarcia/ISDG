@@ -23,9 +23,9 @@ public abstract class ArrayEtiquetables<T extends Etiquetable> implements Iterab
 		return etiquetables.isEmpty();
 	}
 
-	public Set<T> filtrarEtiqueta(Set<String> filtros) {
+	public ArrayEtiquetables<T> filtrarEtiqueta(Set<String> filtros) {
 
-		HashSet<T> aux = new HashSet<T>();
+		ArrayEtiquetables<T> aux = createNew();
 		for (T x : etiquetables) {
 			if (x.getEtiquetas().containsAll(filtros)) {
 				aux.add(x);
@@ -34,9 +34,9 @@ public abstract class ArrayEtiquetables<T extends Etiquetable> implements Iterab
 		return aux;
 	}
 
-	public Set<T> filtrarNombre(String nombre) {
+	public ArrayEtiquetables<T> filtrarNombre(String nombre) {
 
-		HashSet<T> aux = new HashSet<T>();
+		ArrayEtiquetables<T> aux = createNew();
 
 		String nameAux;
 
@@ -92,5 +92,5 @@ public abstract class ArrayEtiquetables<T extends Etiquetable> implements Iterab
 		}
 
 	}
-	
+	protected abstract ArrayEtiquetables<T> createNew();
 }
