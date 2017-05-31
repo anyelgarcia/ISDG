@@ -15,7 +15,7 @@ import DIedrAl_Project.presentacion.auxiliar.Modo;
 
 /**
  * Pantalla para trabajar con los centros. Muestra una lista con todos los centros del sistema, permite
- * añadir nuevos centros y eliminar centros existentes. El modo ADD permite eliminar y crear centros. El modo BUSCAR
+ * aÃ±adir nuevos centros y eliminar centros existentes. El modo ADD permite eliminar y crear centros. El modo BUSCAR
  * se utiliza por la clase UsuarioWindow para seleccionar el centro con cuyos usuarios se va a trabajar.
  * @author Diedral_Group
  *
@@ -40,7 +40,7 @@ public class UsuarioWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButton1.setFont(new java.awt.Font("Rockwell", 1, 14)); 
-        jButton1.setText("Añadir Usuario");
+        jButton1.setText("AÃ±adir Usuario");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -387,7 +387,7 @@ public class UsuarioWindow extends javax.swing.JFrame {
 	    }
 
 	    /**
-	     * Función que se ejecuta al pulsar ligar. Se comprueba que ambos campos tienen contenido
+	     * FunciÃ³n que se ejecuta al pulsar ligar. Se comprueba que ambos campos tienen contenido
 	     * y 
 	     * @param evt
 	     */
@@ -404,7 +404,7 @@ public class UsuarioWindow extends javax.swing.JFrame {
 	    }  
 
 	    /**
-	     * Función que se ejecuta al buscar terapeutas, se comprueba el contenido de 
+	     * Funciï¿½n que se ejecuta al buscar terapeutas, se comprueba el contenido de 
 	     * cada campo, se seleccionan los filtros
 	     * @param evt
 	     */
@@ -475,7 +475,7 @@ public class UsuarioWindow extends javax.swing.JFrame {
 	    }                                        
 
 	    /**
-	     * Función que se ejecuta al buscar pacientes. Funciona de forma parecida a la anterior, pero
+	     * Funciï¿½n que se ejecuta al buscar pacientes. Funciona de forma parecida a la anterior, pero
 	     * con diferentes textfields y buscando solo pacientes.
 	     * @param evt
 	     */
@@ -545,7 +545,7 @@ public class UsuarioWindow extends javax.swing.JFrame {
 	    }  
 	    
 	    /**
-	     * Función que se ejecuta al pulsar desligar. Funciona de forma parecida a la
+	     * FunciÃ³n que se ejecuta al pulsar desligar. Funciona de forma parecida a la
 	     * de ligar, pero se llama a Controlador.desligar() en vez de a Controlador.ligar()
 	     * @param evt
 	     */

@@ -126,12 +126,13 @@ public class Login extends JFrame{
 		String clave = String.copyValueOf(jPasswordField1.getPassword());
 		
 		if(!Controlador.usuarioExiste(nombreuser, clave)){
-			new Error("Usuario o contraseña incorrecta");
+			new Error("Usuario o contraseÃ±a incorrecta");
 		}
-		
-		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-		JFrame p = new MainFrame();
-		p.setVisible(true);
+		else{
+			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+			JFrame p = new MainFrame();
+			p.setVisible(true);
+		}
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) { 
