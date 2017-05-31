@@ -109,7 +109,11 @@ public class Centro {
 			throw new NotBoundException("Usuario " + usu + " no encontrado");
 		} else if (!personasCentro.containsKey(pac.getNif())) {
 			throw new NotBoundException("Paciente " + pac + " no encontrado");
-		} else if (usuarios.get(usu).contains(pac)) {
+		} 
+		else if(!usuarios.containsKey(usu)){
+			throw new NullPointerException("inconsisteeeenciaaaaa que guaaaaay");
+		}
+		else if (usuarios.get(usu).contains(pac)) {
 			throw new AlreadyBoundException("Paciente ya ligado");
 		} else {
 			usuarios.get(usu).add(pac);

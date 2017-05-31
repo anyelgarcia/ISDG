@@ -49,29 +49,32 @@ public class CentroMaps {
 		
 		DAORelacionable daore = factory.getDAORelacion(tRelacion.paciente);
 		HashSet<Relacion> relaciones_p = daore.listarRelaciones(nomb);
-		HashSet<Usuario> user = new HashSet<>();
-
-		relaciones_p.forEach((rel)->{
+		
+		
+		for(Relacion rel: relaciones_p){
+			HashSet<Usuario> user = new HashSet<Usuario>();
 			personas.put(rel.getIdAgente(), pacients.get(rel.getIdAgente()));
 			for(String str: rel.getRelacionados()){
 				user.add(users.get(str));
 			}
 			pacientes.put(pacients.get(rel.getIdAgente()), user);
 			user.clear();
-		});
+			
+		}
 		
 		DAORelacionable daorel = factory.getDAORelacion(tRelacion.usuario);
 		HashSet<Relacion> relaciones_t = daorel.listarRelaciones(nomb);
-		HashSet<Paciente> pacs = new HashSet<>();
 		
-		relaciones_t.forEach((rel)->{
+		
+		for(Relacion rel: relaciones_t){
+			HashSet<Paciente> pacs = new HashSet<Paciente>();
 			personas.put(rel.getIdAgente(), users.get(rel.getIdAgente()));
 			for(String str: rel.getRelacionados()){
 				pacs.add(pacients.get(str));
 			}
 			usuarios.put(users.get(rel.getIdAgente()), pacs);
 			pacs.clear();
-		});
+		}
 	}
 	
 	private void cargarCentro(HashMap<String, Persona> personas, HashMap<Paciente, HashSet<Usuario>> pacientes,

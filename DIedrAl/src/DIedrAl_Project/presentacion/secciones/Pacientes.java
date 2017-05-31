@@ -542,7 +542,7 @@ public class Pacientes extends ColorPanel{
 	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
 				private static final long serialVersionUID = 1L;
 				public int getSize() { return resultados!= null ? resultados.length : 0; }
-	            public String getElementAt(int i) { return resultados[i].toString(); }
+	            public String getElementAt(int i) { return (resultados[i]).toString(); }
 	        });
 	        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 	        jScrollPane1.setViewportView(jList1);
@@ -664,6 +664,12 @@ public class Pacientes extends ColorPanel{
 			String [] valores = campos.toArray(new String[campos.size()]);
 			
 			resultados = Controlador.buscarPaciente(claves, valores);
+			
+			jList1.setModel(new javax.swing.AbstractListModel<String>() {
+				private static final long serialVersionUID = 1L;
+				public int getSize() { return resultados!= null ? resultados.length : 0; }
+	            public String getElementAt(int i) { return (resultados[i]).toString(); }
+	        });
 		}
 	    
 	    

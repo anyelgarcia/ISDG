@@ -184,9 +184,9 @@ public class UsuarioWindow extends javax.swing.JFrame {
 	        
 	        Hints hints1[] = {Hints.PACIENTE};
 			String valores[] = {"comodín"};
-			Persona pacientes[] = Controlador.buscarPaciente(hints1, valores);
+			pacientes = Controlador.buscarPaciente(hints1, valores);
 			Hints hints2[] = {Hints.USUARIO};
-			Persona terapeutas[] = Controlador.buscarUsuario(hints2, valores);
+			terapeutas = Controlador.buscarUsuario(hints2, valores);
 
 	        jList1.setModel(new javax.swing.AbstractListModel<String>() {
 				private static final long serialVersionUID = 1L;
@@ -463,7 +463,6 @@ public class UsuarioWindow extends javax.swing.JFrame {
 
 			ArrayList<String> campos = new ArrayList<String>();
 			ArrayList<Hints> hints = new ArrayList<Hints>();
-			Hints [] usuarios = null;
 
 			if(nombre!=null && nombre.length()>0){
 				campos.add(nombre);

@@ -193,7 +193,7 @@ public class Controlador {
 		}
 		
 		ArrayList<Persona> usuarios = new ArrayList<Persona>();
-		Hints[] valUsuarios = {Hints.PACIENTE};
+		Hints[] valUsuarios = {Hints.USUARIO};
 		usuarios.addAll(saPacientes.filtrarPersonas(hints, values, valUsuarios));
 		
 		Usuario[] resultado = new Usuario[usuarios .size()];
