@@ -1,6 +1,7 @@
 package DIedrAl_Project.presentacion.administracion;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
@@ -26,6 +27,7 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 	private static final long serialVersionUID = 4732140844766292200L;
 	private javax.swing.JButton jButton1;
 	private javax.swing.JButton jButton2;
+	private javax.swing.JButton jButton3;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JLabel jLabel2;
 	private javax.swing.JLabel jLabel3;
@@ -61,6 +63,7 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 		jList1 = new javax.swing.JList<>();
 		jButton2 = new javax.swing.JButton();
 		jSeparator2 = new javax.swing.JSeparator();
+		jButton3 = new javax.swing.JButton();
 
 
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -103,6 +106,13 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 				jButton2ActionPerformed(evt);
 			}
 		});
+		
+		jButton3.setText("Volver");
+		jButton3.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jButton3ActionPerformed(evt);
+			}
+		});
 
 		jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -133,7 +143,9 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 																		.addGap(16, 16, 16)
 																		.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 																				.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-																				.addComponent(jButton2))
+																				.addComponent(jButton2)
+																				)
+																		.addComponent(jButton3)
 																				.addContainerGap(29, Short.MAX_VALUE))
 				);
 		layout.setVerticalGroup(
@@ -164,13 +176,20 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 																						.addGap(18, 18, 18)
 																						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 																								.addComponent(jButton2)
-																								.addComponent(jButton1))))
+																								.addComponent(jButton1)
+																								.addComponent(jButton3))))
 																								.addGap(10, 10, 10))
 																								.addComponent(jSeparator2)
 				);
 		setVisible(true);
 		pack();
 	}
+
+	protected void jButton3ActionPerformed(ActionEvent evt) {
+		new UsuarioWindow();
+		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+	}
+
 
 	/**
 	 * Función que se ejecuta al darle al botón buscar. Rellena un Usuario con los datos introducidos y 

@@ -19,6 +19,7 @@ public class MenuCentroUsuarios extends javax.swing.JFrame {
 	private static final long serialVersionUID = -7519617227782866567L;
 	private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
 	
     public MenuCentroUsuarios(){
     	initGUI();
@@ -28,6 +29,7 @@ public class MenuCentroUsuarios extends javax.swing.JFrame {
 
     	jButton1 = new javax.swing.JButton();
     	jButton2 = new javax.swing.JButton();
+    	jButton3 = new javax.swing.JButton();
 
     	setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     	setTitle("Menú Centros y Usuarios");
@@ -47,6 +49,14 @@ public class MenuCentroUsuarios extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        
+        jButton3.setFont(new java.awt.Font("SansSerif", 1, 20)); 
+        jButton3.setText("Volver");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -56,7 +66,8 @@ public class MenuCentroUsuarios extends javax.swing.JFrame {
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -64,15 +75,24 @@ public class MenuCentroUsuarios extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(33, 33, 33)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
         );
         setVisible(true);
         pack();
     }
-    
     /**
+     * Para volver
+     */
+    protected void jButton3ActionPerformed(ActionEvent evt) {
+		new PasswordFrame();
+		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+	}
+
+	/**
      * Crea una pantalla para trabajar con centros.
      * @param evt
      */

@@ -24,6 +24,7 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 	private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
@@ -41,6 +42,7 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -85,6 +87,14 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
             }
         });
         
+        jButton4.setFont(new java.awt.Font("SansSerif", 1, 12)); 
+        jButton4.setText("Volver");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        
         //El modo Buscar solo permite seleccionar un centro.
         if(modo.equals(Modo.BUSCAR)){
         	jButton1.setVisible(false);
@@ -92,7 +102,7 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 	        jButton2.setVisible(false);
 	        jButton2.setEnabled(false);
         }
-        //El modo Add permite a�adir y eliminar centros.
+        //El modo Add permite añadir y eliminar centros.
         if(modo.equals(Modo.ADD)){
         	jButton3.setVisible(false);
 	        jButton3.setEnabled(false);
@@ -113,7 +123,8 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 	.addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -129,7 +140,9 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
                         .addGap(32, 32, 32)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -141,6 +154,15 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
     } 
 
     /**
+     * Funcion que se ejecuta para volver
+     * @param evt
+     */
+    protected void jButton4ActionPerformed(ActionEvent evt) {
+    	new MenuCentroUsuarios();
+		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+	}
+
+	/**
      * Se delega añadir un centro en otra ventana.
      * @param evt
      */
@@ -209,6 +231,7 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 		 */
 		private static final long serialVersionUID = 2197428728727796142L;
 		private javax.swing.JButton jButton1;
+		private javax.swing.JButton jButton2;
 		private javax.swing.JLabel jLabel1;
 		private javax.swing.JLabel jLabel3;
 		private javax.swing.JPasswordField jPasswordField1;
@@ -225,8 +248,9 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
        
 	       jTextField1 = new javax.swing.JTextField("");
 
-	       jPasswordField1 = new javax.swing.JPasswordField();
+	       jPasswordField1 = new javax.swing.JPasswordField("");
 	       jButton1 = new javax.swing.JButton();
+	       jButton2 = new javax.swing.JButton();
 
 	       setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 	       setTitle("Añadir Centro");
@@ -244,6 +268,15 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 	                jButton1ActionPerformed(evt);
 	            }
 	        });
+	       
+	       jButton2.setFont(new java.awt.Font("Rockwell", 0, 14)); 
+	       jButton2.setText("Volver");
+	       jButton2.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                VolverActionPerformed(evt);
+	            }
+	        });
+	       
 
 	       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 	       getContentPane().setLayout(layout);
@@ -252,7 +285,10 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 	           .addGroup(layout.createSequentialGroup()
 	               .addGap(24, 24, 24)
 	               .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                   .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+	            	   .addGroup(layout.createSequentialGroup()
+	            			 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+	            			 .addGap(13, 13, 13)
+	            			 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
 	                   .addGroup(layout.createSequentialGroup()
 	                       .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	                           .addComponent(jLabel1)
@@ -275,7 +311,9 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 	                   .addComponent(jLabel3)
 	                   .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 	               .addGap(27, 27, 27)
-	               .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+	               .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	            		   .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+	            		   .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
 	               .addContainerGap(24, Short.MAX_VALUE))
 	       );
 
@@ -283,12 +321,17 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 	       pack();
 	   }  
 	   
+	   private void VolverActionPerformed(ActionEvent evt) {
+		   new CentroWindow(modo);
+		   dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+		}
+	   
 	   private void jButton1ActionPerformed(ActionEvent evt) {
 		   
 		   String nameCenter = jTextField1.getText();
 		   String password = String.valueOf(jPasswordField1.getPassword());
 		   
-		   if(nameCenter!=null && password!=null){
+		   if(!nameCenter.equals("") && !password.equals("")){
 			   if(!Controlador.existeCentro(nameCenter)){
 				   Controlador.createCentro(nameCenter, password);
 				   new Error("El identificador del administrador del nuevo centro es: " + nameCenter + "_ADMIN");

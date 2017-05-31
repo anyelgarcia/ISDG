@@ -1,6 +1,7 @@
 package DIedrAl_Project.presentacion.administracion;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
@@ -21,6 +22,7 @@ public class PantallaUsuario extends JFrame{
 	 
 	private static final long serialVersionUID = 2137978232214942058L;
 	private javax.swing.JButton jButton1;
+	private javax.swing.JButton jButton2;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JLabel jLabel2;
 	private javax.swing.JLabel jLabel3;
@@ -73,6 +75,7 @@ public class PantallaUsuario extends JFrame{
 		jPasswordField5 = new javax.swing.JPasswordField("");
 
 		jButton1 = new javax.swing.JButton();
+		jButton2 = new javax.swing.JButton();
 		jLabel7 = new javax.swing.JLabel();
 		jLabel8 = new javax.swing.JLabel();
 		jLabel9 = new javax.swing.JLabel();
@@ -161,6 +164,13 @@ public class PantallaUsuario extends JFrame{
 			}
 		});
 		
+		jButton2.setText("Volver");
+		jButton2.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jButton2ActionPerformed(evt);
+			}
+		});
+		
 		if(u!=null){
 			jTextField1.setText(u.getName());
 			jTextField3.setText(u.getEmail());
@@ -227,6 +237,8 @@ public class PantallaUsuario extends JFrame{
 																														.addGroup(layout.createSequentialGroup()
 																																.addGap(273, 273, 273)
 																																.addComponent(jButton1)
+																																.addGap(20, 20, 20)
+																																.addComponent(jButton2)
 																																.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 				);
 		layout.setVerticalGroup(
@@ -272,14 +284,21 @@ public class PantallaUsuario extends JFrame{
 																										.addComponent(jScrollPane1)
 																										.addComponent(jScrollPane2))
 																										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																										.addComponent(jButton1)
-																										.addGap(7, 7, 7))
+																										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+																											.addComponent(jButton1)
+																											.addGap(7, 7, 7)
+																											.addComponent(jButton2))
+																											.addGap(7, 7, 7))
 				);
 
 		setVisible(true);
 		pack();
 	}
 	
+	protected void jButton2ActionPerformed(ActionEvent evt) {
+		new UsuarioWindow();
+		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+	}
 	/**
 	 * Función que se lanza al pulsar el botón de guardar. Se recoge el contenido de los
 	 * campos de texto y se pasan al controlador para que cree el usuario.

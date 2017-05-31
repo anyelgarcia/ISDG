@@ -21,6 +21,10 @@ public class Login extends JFrame{
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     
+    public Login(){
+    	init();
+    }
+    
     public void init() {
     	
     	jPanel1 = new ImagePanel("images/bb.jpg");
@@ -104,7 +108,9 @@ public class Login extends JFrame{
         this.setVisible(true);
         pack();              
     }
-    
+    /**
+     * Funcion que se ejecuta cuando intentan hacer log in
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {        
     	
     	String nombreuser = jTextField1.getText();
@@ -118,7 +124,10 @@ public class Login extends JFrame{
 			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		}
     }                                        
-
+    /**
+     * Funcion que se ejecuta cuando nos piden acceder como super administrador
+     * @param evt
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) { 
     	new PasswordFrame();
 		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
