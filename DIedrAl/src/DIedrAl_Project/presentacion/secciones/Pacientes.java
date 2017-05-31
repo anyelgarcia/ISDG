@@ -22,8 +22,8 @@ import DIedrAl_Project.presentacion.auxiliar.ImageButton;
 import DIedrAl_Project.presentacion.auxiliar.Modo;
 
 /**
- * Esta clase lleva la gestión de las vistas de los pacientes. En el constructor se dibuja la sección de Pacientes del Menú Principal y se pone a la espera para 
- * añadir, eliminar, editar o buscar pacientes.
+ * Esta clase lleva la gestiÃ³n de las vistas de los pacientes. En el constructor se dibuja la secciÃ³n de Pacientes del MenÃº Principal y se pone a la espera para 
+ * aÃ±adir, eliminar, editar o buscar pacientes.
  * 
  * @author Diedral_Group
  *
@@ -81,7 +81,7 @@ public class Pacientes extends ColorPanel{
 
 
 		
-		ImageButton anadir = new ImageButton("Añadir", "images/tanbutton.png", "images/tanbutton2.png", this);
+		ImageButton anadir = new ImageButton("Aï¿½adir", "images/tanbutton.png", "images/tanbutton2.png", this);
 		componentes.add(anadir);
 		anadir.addActionListener((ae) -> {
 			JFrame pantalla = new PantallaPaciente(null, Modo.ADD);
@@ -105,7 +105,7 @@ public class Pacientes extends ColorPanel{
 	}
 	/**
 	 * Clase que gestiona la ventana que muestra los campos de un paciente. Se utiliza esta ventana tanto para
-	 * añadir un paciente nuevo como para editar o consultar los datos de un paciente ya existente.
+	 * aÃ±adir un paciente nuevo como para editar o consultar los datos de un paciente ya existente.
 	 * @author Diedral_Group
 	 * 
 	 */                    
@@ -216,9 +216,9 @@ public class Pacientes extends ColorPanel{
 			
 			jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Casado", "Soltero", "Divorciado", "Viudo" }));
 			
-			jLabel7.setText("Lesión: ");
+			jLabel7.setText("LesiÃ³n: ");
 			
-			jLabel8.setText("Fecha de Lesión:");
+			jLabel8.setText("Fecha de LesiÃ³n:");
 			
 			jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 			
@@ -231,7 +231,7 @@ public class Pacientes extends ColorPanel{
 			jTextArea1.setColumns(20);
 			jTextArea1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 			jTextArea1.setRows(5);
-			jTextArea1.setText("Insertar aquí una descripción del paciente");
+			jTextArea1.setText("Insertar aquÃ­ una descripciÃ³n del paciente");
 			jScrollPane1.setViewportView(jTextArea1);
 			
 			jLabel10.setText("Aficiones: (separadas por comas)");
@@ -419,8 +419,8 @@ public class Pacientes extends ColorPanel{
 		}
 		
 		/**
-		 * Función que se ejecuta al darle a guardar en la ventana de Paciente. Se rellena un objeto paciente
-		 * y es pasado al controlador para que lo añada si estamos en modo añadir o para que sobreescriba
+		 * Funciï¿½n que se ejecuta al darle a guardar en la ventana de Paciente. Se rellena un objeto paciente
+		 * y es pasado al controlador para que lo aï¿½ada si estamos en modo aï¿½adir o para que sobreescriba
 		 * a un paciente antiguo si estamos en modo editar.
 		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {   
@@ -516,7 +516,7 @@ public class Pacientes extends ColorPanel{
 					setTitle("Buscar Paciente");
 					break;
 				default:
-					new Error("Error raro en pantalla de búsqueda de pacientes");
+					new Error("Error raro en pantalla de bÃºsqueda de pacientes");
 					break;
 			}
 
@@ -627,9 +627,8 @@ public class Pacientes extends ColorPanel{
 	    }
 	    
 		/**
-		 * Función que se ejecuta al darle al botón buscar. Rellena un Paciente con los datos introducidos y 
-		 * busca en el sistema a todos los que coincidan con él.
-		 * @param evt
+		 * FunciÃ³n que se ejecuta al darle al botÃ§on buscar. Rellena un Paciente con los datos introducidos y 
+		 * busca en el sistema a todos los que coincidan con Ã©l.
 		 */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 
@@ -701,9 +700,9 @@ public class Pacientes extends ColorPanel{
 	    
 	    
 		/**
-		 * Función que se ejecuta al seleccionar uno de los resultados de la búsqueda y pulsar el
-		 * botón de validar. Según el modo se hace una cosa u otra. 
-		 * Si el modo es eliminar, se muestra una pantalla de confirmación.
+		 * Funciï¿½n que se ejecuta al seleccionar uno de los resultados de la bï¿½squeda y pulsar el
+		 * botï¿½n de validar. Segï¿½n el modo se hace una cosa u otra. 
+		 * Si el modo es eliminar, se muestra una pantalla de confirmaciï¿½n.
 		 * Si el modo es Editar o buscar, se crea una pantalla Paciente y se le pasa el control.
 		 * @param evt
 		 */
@@ -712,7 +711,7 @@ public class Pacientes extends ColorPanel{
 			switch(modo){
 				case ELIMINAR:
 					Confirm c = new Confirm();
-					c.setMensaje("El paciente se eliminará del sistema.");
+					c.setMensaje("El paciente se eliminarï¿½ del sistema.");
 			    	c.setVisible(true);
 			    	c.addListener(this);
 			    	break;
@@ -736,7 +735,7 @@ public class Pacientes extends ColorPanel{
 		}  
 		
 		/**
-	     * Se llama a esta función al pulsar el botón -Sí- en confirmar. Le dice al controlador que elimine al paciente.
+	     * Se llama a esta funciï¿½n al pulsar el botï¿½n -Sï¿½- en confirmar. Le dice al controlador que elimine al paciente.
 	     */
 	    public void delete(){
 	    	int i = jList1.getSelectedIndex();

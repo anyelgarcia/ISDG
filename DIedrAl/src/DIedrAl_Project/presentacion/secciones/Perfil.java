@@ -164,7 +164,7 @@ public class Perfil extends ColorPanel{
 
 	        jLabel5.setText("Email: ");
 
-	        jLabel6.setText("Teléfono: ");
+	        jLabel6.setText("TelÃ©fono: ");
 	        
 	        if(user != null){
 		        jTextField1.setEditable(false);
