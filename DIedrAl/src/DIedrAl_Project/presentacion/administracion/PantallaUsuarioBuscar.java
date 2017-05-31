@@ -190,6 +190,7 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 	/**
 	 * Función que se ejecuta al darle al botón buscar. Rellena un Usuario con los datos introducidos y 
 	 * busca en el sistema a todos los que coincidan con él.
+   * @param evt
 	 */
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 
@@ -223,6 +224,7 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 			hints.add(Hints.NIF);
 		}
 
+
 		if(admin.equalsIgnoreCase("si")||  admin.equals("Sí") || admin.equals("SÍ")){
 			usuarios = new Hints[1];
 			usuarios[0] = Hints.ADMINISTRADOR;
@@ -238,12 +240,7 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 			i++;
 		}
 
-		i=0;
-		String [] valores = new String[hints.size()];
-		for(String str: campos){
-			valores[i] = str;
-			i++;
-		}
+		String [] valores = campos.toArray(new String[campos.size()]);
 
 		ArrayList<Persona> res = Controlador.buscarUsuarios(claves, valores, usuarios);
 		String[] cadenas = new String[res.size()];

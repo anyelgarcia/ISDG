@@ -387,8 +387,9 @@ public class UsuarioWindow extends javax.swing.JFrame {
 	    }
 
 	    /**
+
 	     * Función que se ejecuta al pulsar ligar. Se comprueba que ambos campos tienen contenido
-	     * y 
+	     * 
 	     * @param evt
 	     */
 	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { 
@@ -461,7 +462,7 @@ public class UsuarioWindow extends javax.swing.JFrame {
 			terapeutas = new Usuario[res.size()];
 			i=0;
 			for(Persona p: res){
-				cadenas[i] = res.toString();
+				cadenas[i] = p.toString();
 				terapeutas[i] = (Usuario)p;
 				i++;
 			}
@@ -512,26 +513,15 @@ public class UsuarioWindow extends javax.swing.JFrame {
 			usuarios = new Hints[1];
 			usuarios[0] = Hints.PACIENTE;
 
-			int i=0;
-			Hints [] claves = new Hints[hints.size()];
-			for(Hints hint: hints){
-				claves[i] = hint;
-				i++;
-			}
-
-			i=0;
-			String [] valores = new String[hints.size()];
-			for(String str: campos){
-				valores[i] = str;
-				i++;
-			}
+			Hints [] claves = hints.toArray(new Hints[hints.size()]);
+			String [] valores = campos.toArray(new String[campos.size()]);
 
 			ArrayList<Persona> res = Controlador.buscarUsuarios(claves, valores, usuarios);
 			String[] cadenas = new String[res.size()];
 			pacientes = new Paciente[res.size()];
-			i=0;
+			int i=0;
 			for(Persona p: res){
-				cadenas[i] = res.toString();
+				cadenas[i] = p.toString();
 				pacientes[i] = (Paciente)p;
 				i++;
 			}

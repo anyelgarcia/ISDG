@@ -141,7 +141,7 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
     } 
 
     /**
-     * Se delega a�adir un centro en otra ventana.
+     * Se delega añadir un centro en otra ventana.
      * @param evt
      */
 	private void jButton1ActionPerformed(ActionEvent evt) {
@@ -165,7 +165,7 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 	}
 	
 	/**
-	 * Para seleccionar un centro. Una vez elegido se abre la pantalla de gesti�n de
+	 * Para seleccionar un centro. Una vez elegido se abre la pantalla de gestión de
 	 * usuarios.
 	 * @param evt
 	 */
@@ -197,7 +197,7 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 	
 	
 	/**
-	 * Clase que contiene la pantalla que se utiliza para a�adir un centro nuevo. Se introducen el 
+	 * Clase que contiene la pantalla que se utiliza para añadir un centro nuevo. Se introducen el 
 	 * nombre del centro y la contraseña del administrador.
 	 * @author Diedral_Group
 	 *

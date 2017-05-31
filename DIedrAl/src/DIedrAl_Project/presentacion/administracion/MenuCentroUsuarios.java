@@ -33,7 +33,7 @@ public class MenuCentroUsuarios extends javax.swing.JFrame {
     	setTitle("Menú Centros y Usuarios");
 
     	jButton1.setFont(new java.awt.Font("SansSerif", 1, 20)); 
-    	jButton1.setText("Menu Centros");
+    	jButton1.setText("Menú Centros");
     	jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -41,7 +41,7 @@ public class MenuCentroUsuarios extends javax.swing.JFrame {
         });
     	
     	jButton2.setFont(new java.awt.Font("SansSerif", 1, 20)); 
-        jButton2.setText("Menu Usuarios");
+        jButton2.setText("Menú Usuarios");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
