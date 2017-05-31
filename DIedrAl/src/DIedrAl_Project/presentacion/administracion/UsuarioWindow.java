@@ -387,8 +387,9 @@ public class UsuarioWindow extends javax.swing.JFrame {
 	    }
 
 	    /**
-	     * Funci�n que se ejecuta al pulsar ligar. Se comprueba que ambos campos tienen contenido
-	     * y 
+
+	     * Función que se ejecuta al pulsar ligar. Se comprueba que ambos campos tienen contenido
+	     * 
 	     * @param evt
 	     */
 	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { 
@@ -534,7 +535,7 @@ public class UsuarioWindow extends javax.swing.JFrame {
 	    }  
 	    
 	    /**
-	     * Funci�n que se ejecuta al pulsar desligar. Funciona de forma parecida a la
+	     * Función que se ejecuta al pulsar desligar. Funciona de forma parecida a la
 	     * de ligar, pero se llama a Controlador.desligar() en vez de a Controlador.ligar()
 	     * @param evt
 	     */

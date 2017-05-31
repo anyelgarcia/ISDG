@@ -12,7 +12,7 @@ import DIedrAl_Project.presentacion.auxiliar.Confirm.confirmListener;
 
 /**
  * Pantalla para trabajar con los centros. Muestra una lista con todos los centros del sistema, permite
- * a�adir nuevos centros y eliminar centros existentes. El modo ADD permite eliminar y crear centros. El modo BUSCAR
+ * añadir nuevos centros y eliminar centros existentes. El modo ADD permite eliminar y crear centros. El modo BUSCAR
  * se utiliza por la clase UsuarioWindow para seleccionar el centro con cuyos usuarios se va a trabajar.
  * @author Diedral_Group
  *
@@ -157,7 +157,7 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 		
 		if(jList1.getSelectedIndex()!= -1){
 			Confirm c = new Confirm();
-			c.setMensaje("El centro se eliminar� definitivamente.");
+			c.setMensaje("El centro se eliminará definitivamente.");
 	    	c.setVisible(true);
 	    	c.addListener(this);
 	    	
@@ -198,7 +198,7 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 	
 	/**
 	 * Clase que contiene la pantalla que se utiliza para añadir un centro nuevo. Se introducen el 
-	 * nombre del centro y la contrase�a del administrador.
+	 * nombre del centro y la contraseña del administrador.
 	 * @author Diedral_Group
 	 *
 	 */

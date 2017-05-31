@@ -188,9 +188,9 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 	}
 
 	/**
-	 * Funci�n que se ejecuta al darle al bot�n buscar. Rellena un Usuario con los datos introducidos y 
-	 * busca en el sistema a todos los que coincidan con �l.
-	 * @param evt
+	 * Función que se ejecuta al darle al botón buscar. Rellena un Usuario con los datos introducidos y 
+	 * busca en el sistema a todos los que coincidan con él.
+   * @param evt
 	 */
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 
@@ -224,7 +224,8 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 			hints.add(Hints.NIF);
 		}
 
-		if(admin.equals("Si")||  admin.equals("Sí") ||  admin.equals("SI") ||  admin.equals("SÍ")){
+
+		if(admin.equalsIgnoreCase("si")||  admin.equals("Sí") || admin.equals("SÍ")){
 			usuarios = new Hints[1];
 			usuarios[0] = Hints.ADMINISTRADOR;
 		}else{
@@ -286,7 +287,7 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 					break;
 				}
 		}
-		new Error("Has de seleccionar al menos un usuario.");
+		else new Error("Has de seleccionar al menos un usuario.");
 	}
 
 

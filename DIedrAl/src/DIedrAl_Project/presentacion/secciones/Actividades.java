@@ -103,7 +103,7 @@ public class Actividades extends ColorPanel{
 	 
 	
 	/**
-	 * Clase que gestiona la ventana que aparece al darle al bot�n -A�adir- en la secci�n -Actividades- del Men� Principal
+	 * Clase que gestiona la ventana que aparece al darle al botón -Añadir- en la sección -Actividades- del Menú Principal
 	 * @author Diedral_Group
 	 * 
 	 */
@@ -202,7 +202,7 @@ public class Actividades extends ColorPanel{
 
 	        jLabel2.setText("Dificultad:");
 
-	        jLabel3.setText("Duraci�n:");
+	        jLabel3.setText("Duración:");
 
 	        jButton1.setText("Guardar");
 	        jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -215,7 +215,7 @@ public class Actividades extends ColorPanel{
 
 	        jLabel4.setText("minutos");
 
-	        jLabel5.setText("Descripci�n: ");
+	        jLabel5.setText("Descripción: ");
 
 	        jTextArea1.setColumns(20);
 	        jTextArea1.setRows(5);
@@ -418,7 +418,7 @@ public class Actividades extends ColorPanel{
 		}
 		
 		/**
-		 * Funci�n que se ejecuta al darle a guardar en la ventana de a�adir actividades. Se rellena un objeto actividad y es pasado al controlador.
+		 * Función que se ejecuta al darle a guardar en la ventana de añadir actividades. Se rellena un objeto actividad y es pasado al controlador.
 		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { 
 			
@@ -431,7 +431,7 @@ public class Actividades extends ColorPanel{
 			
 			String duracion = String.valueOf(jTextField2.getText());
 
-			//Esta excepci�n hay que capturarla
+			//Esta excepción hay que capturarla
 			if(duracion.length()>0 ){
 				info.setDuracion(Integer.valueOf(duracion));
 			}
@@ -704,22 +704,43 @@ public class Actividades extends ColorPanel{
 				ini = Integer.parseInt(jTextField2.getText());
 			if(!jTextField3.getText().equals("")) 
 				end = Integer.parseInt(jTextField3.getText());
+			
 			Dificultad min = null, max = null;
-			/*if(jComboBox1.getSelectedIndex() != 0){
-				min = jComboBox1.getSelectedItem();
+			
+			if(jComboBox1.getSelectedIndex() != 0){
+				switch((String) jComboBox1.getSelectedItem()){
+				case "MUY_FACIL": min = Dificultad.MUY_FACIL; break;
+				case "FACIL": min = Dificultad.FACIL; break;
+				case "MEDIO": min = Dificultad.MEDIO; break;
+				case "DIFICIL": min = Dificultad.DIFICIL; break;
+				case "MUY DIFICIL": min = Dificultad.MUY_DIFICIL; break;
+				}
 			}
 			if(jComboBox2.getSelectedIndex() != 0){
-				max = jComboBox2.getSelectedItem();
-			}*/
+				switch((String) jComboBox1.getSelectedItem()){
+				case "MUY_FACIL": max = Dificultad.MUY_FACIL; break;
+				case "FACIL": max = Dificultad.FACIL; break;
+				case "MEDIO": max = Dificultad.MEDIO; break;
+				case "DIFICIL": max = Dificultad.DIFICIL; break;
+				case "MUY DIFICIL": max = Dificultad.MUY_DIFICIL; break;
+				}
+			}
 		
 			filtrados = Controlador.filtrarActividades(nombre, setEtiquetas, ini, end, setDestinatarios, min, max);
 			
-			/*jList1.setModel(new javax.swing.AbstractListModel<String>() {
-			private static final long serialVersionUID = 1L;
-			String[] strings = ;
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return salida.; }
-			});*/
+			String[] aux = new String[filtrados.size()]; int i = 0;
+			for(Actividad a : filtrados){
+				aux[i] = a.toString();
+				++i;
+			}
+			
+			jList1.setModel(new javax.swing.AbstractListModel<String>() {
+			
+				private static final long serialVersionUID = 1L;
+				String[] strings = aux;
+				public int getSize() { return strings.length; }
+				public String getElementAt(int i) { return strings[i]; }
+			});
 			
 			
 	    }                                        
@@ -732,7 +753,7 @@ public class Actividades extends ColorPanel{
 	    	switch(modo){
 			case ELIMINAR:
 				Confirm c = new Confirm();
-				c.setMensaje("La actividad se eliminar� del sistema.");
+				c.setMensaje("La actividad se eliminará del sistema.");
 		    	c.setVisible(true);
 		    	c.addListener(this);
 		    	break;
@@ -749,7 +770,7 @@ public class Actividades extends ColorPanel{
 				p.setVisible(true);
 				break;
 			default:
-				new Error("Error modo pantalla de b�squeda de actividades");
+				new Error("Error modo pantalla de búsqueda de actividades");
 				break;
 			}
 	    }

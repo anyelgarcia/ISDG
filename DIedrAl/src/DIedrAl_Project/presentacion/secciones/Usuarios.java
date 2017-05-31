@@ -571,7 +571,7 @@ public class Usuarios extends ColorPanel{
 			resultados = new Usuario[res.size()];
 			i=0;
 			for(Persona p: res){
-				cadenas[i] = res.toString();
+				cadenas[i] = p.toString();
 				resultados[i] = (Usuario)p;
 				i++;
 			}

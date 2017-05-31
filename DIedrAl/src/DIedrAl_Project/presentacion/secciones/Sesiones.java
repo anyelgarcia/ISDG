@@ -193,7 +193,7 @@ public class Sesiones extends ColorPanel{
 
 		        jLabel1.setText("Nombre: ");
 
-		        jLabel3.setText("Duraci�n:");
+		        jLabel3.setText("Duración:");
 
 		        jButton1.setText("Guardar");
 		        jButton1.addActionListener(new java.awt.event.ActionListener() {

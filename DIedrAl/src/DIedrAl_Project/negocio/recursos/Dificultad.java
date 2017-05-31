@@ -10,7 +10,7 @@ public enum Dificultad {
 		case DIFICIL:
 			return "Dificil";
 		case FACIL:
-			return "Fácil";
+			return "FÃ¡cil";
 		case MEDIO:
 			return "Media";
 		case MUY_DIFICIL:
