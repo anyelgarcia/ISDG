@@ -31,23 +31,23 @@ public class servicioAplicacionTest {
 
 		Sesion sesionAux;
 
-		// Añadir al banco diez sesiones de prueba
+		// AÃ±adir al banco diez sesiones de prueba
 		for (int i = 0; i < 10; i++) {
 			sesionAux = new Sesion("Sesion " + (i + 1));
 			sesionAux.setDuracion(i + 1);
 			servicioAPRecursos.addSesion(sesionAux);
 		}
 
-		// Mover el filtro abarcando cada vez un minuto más.
+		// Mover el filtro abarcando cada vez un minuto mÃ¡s.
 		for (int x = 1; x < 11; x++) {
-			// Filtrar sesiones entre 0 y x de duración
+			// Filtrar sesiones entre 0 y x de duraciÃ³n
 			ArraySesiones resultado = servicioAPRecursos
 					.filtrarSesionesPorRango(0, x);
 
 			// Comprobar que se han tomado las diez
-			assertTrue("Filtra número correcto", resultado.size() == x);
+			assertTrue("Filtra nÃºmero correcto", resultado.size() == x);
 
-			// Creación de un iterador para recorrer el resultado.
+			// CreaciÃ³n de un iterador para recorrer el resultado.
 			Iterator<Sesion> it = resultado.iterator();
 
 			// Texto del resultado
@@ -62,7 +62,7 @@ public class servicioAplicacionTest {
 	}
 
 	/**
-	 * Tests para comprobar el funcionamiento de los métodos: -Construcción de
+	 * Tests para comprobar el funcionamiento de los mÃ©todos: -ConstrucciÃ³n de
 	 * Centro y SAPacientesImpl -filtrarPersonas -addPaciente, addUsuario
 	 * -erasePaciente, eraseUsuario -getUsuarioConNIF -ligarPaciente
 	 */
@@ -70,7 +70,7 @@ public class servicioAplicacionTest {
 	public void testSAPacientesOperaciones() {
 /**
  * 
-		// Crear un nuevo centro de prueba donde añadir pacientes y terapeutas.
+		// Crear un nuevo centro de prueba donde aÃ±adir pacientes y terapeutas.
 		Centro centro = null;
 		try {
 			Organizacion.getInstancia().addCentro("Centro de Prueba");
@@ -82,13 +82,13 @@ public class servicioAplicacionTest {
 
 		assertTrue("Centro iniciado correctamente", centro != null);
 
-		// Tomar instancia de factoría SA y conseguir SA de pacientes
+		// Tomar instancia de factorÃ­a SA y conseguir SA de pacientes
 		SAFactory factoriaSA = SAFactory.getInstancia();
 		SAPacientes servicioApPac = factoriaSA.newSAPacientes(centro);
 
 		assertTrue("SA iniciado correctamente", servicioApPac != null);
 
-		// PRUEBA: LOS PACIENTES SE AÑADEN CORRECTAMENTE. FILTRO FUNCIONA
+		// PRUEBA: LOS PACIENTES SE Aï¿½ADEN CORRECTAMENTE. FILTRO FUNCIONA
 		// ----------------------------------------------------------------------------------
 
 		// Nombres y Apellidos para la prueba
@@ -99,45 +99,45 @@ public class servicioAplicacionTest {
 
 		Random rand = new Random();
 
-		// Añadir pacientes al centro por medio del SA Pacientes.
+		// AÃ±adir pacientes al centro por medio del SA Pacientes.
 		for (int i = 0; i < nombres.length; ++i) {
 			try {
-				// Paciente a añadir.
+				// Paciente a aÃ±adir.
 				Paciente pacAux = new Paciente(nombres[i], apellidos[i],
 						apellidos[i], Integer.toString(rand.nextInt(99999)));
 
-				// Intentar añadirlo.
+				// Intentar aï¿½adirlo.
 				servicioApPac.addPaciente(pacAux);
 
-				// Comprueba que ha sido añadido y que el filtro funciona.
+				// Comprueba que ha sido aÃ±adido y que el filtro funciona.
 				Set<Persona> personas = servicioApPac.filtrarPersonas(
 						new Hints[] { Hints.NOMBRE, Hints.APELLIDO1 },
 						new String[] { nombres[i], apellidos[i] },
 						new Hints[] {});
 
-				assertTrue("Paciente añadido correctamente",
+				assertTrue("Paciente aÃ±adido correctamente",
 						personas.contains(pacAux));
 			} catch (AlreadyBoundException e) {
 				log.info(e.getMessage());
 			}
 		}
 
-		// PRUEBA: LOS USUARIOS SE AÑADEN CORRECTAMENTE. FILTRO FUNCIONA
+		// PRUEBA: LOS USUARIOS SE Aï¿½ADEN CORRECTAMENTE. FILTRO FUNCIONA
 		// ----------------------------------------------------------------------------------
 		try {
-			// Usuario a añadir
+			// Usuario a aÃ±adir
 			Usuario usAux = new Usuario("Antonio", "Lopez", "Morales",
 					"00000001A");
 
-			// Intentar añadir usuario al centro
+			// Intentar aÃ±adir usuario al centro
 			servicioApPac.addUsuario(usAux);
 
-			// Comprueba que ha sido añadido y que el filtro funciona.
+			// Comprueba que ha sido aÃ±adido y que el filtro funciona.
 			Set<Persona> personas = servicioApPac.filtrarPersonas(new Hints[] {
 					Hints.NOMBRE, Hints.APELLIDO1 }, new String[] { "Antonio",
 					"Lopez" }, new Hints[] {});
 
-			assertTrue("Usuario añadido correctamente",
+			assertTrue("Usuario aÃ±adido correctamente",
 					personas.contains(usAux));
 		} catch (AlreadyBoundException e) {
 			log.info(e.getMessage());
@@ -161,9 +161,9 @@ public class servicioAplicacionTest {
 		try {
 			t = servicioApPac.getUsuarioConNIF("00000001A");
 		} catch (NotBoundException e1) {
-			assertTrue("El terapeuta no se pudo añadir", t == null);
+			assertTrue("El terapeuta no se pudo aÃ±adir", t == null);
 		}
-		assertTrue("El terapeuta ha sido añadido al centro", t != null
+		assertTrue("El terapeuta ha sido aÃ±adido al centro", t != null
 				&& t.getNif().equals("00000001A"));
 
 		// Obtener conjunto de personas que se llamen Pablo
@@ -200,7 +200,7 @@ public class servicioAplicacionTest {
 				"Intento de ligar el mismo paciente con el mismo terapeuta por segunda vez",
 				errorDetectado);
 
-		// PRUEBA: comprobar que paciente y terapeuta están ligados.
+		// PRUEBA: comprobar que paciente y terapeuta estï¿½n ligados.
 		// ----------------------------------------------------------------------------------
 		try {
 			assertTrue("El terapeuta tiene como asociado al paciente",
@@ -223,7 +223,7 @@ public class servicioAplicacionTest {
 		// Borrar paciente del sistema y comprobar que no sigue ligado
 		try {
 			servicioApPac.erasePaciente(buscado);
-			assertFalse("El paciente ya no está asociado al usuario",
+			assertFalse("El paciente ya no estÃ¡ asociado al usuario",
 					servicioApPac.getPacientesAsociados(t).contains(buscado));
 		} catch (NotBoundException e) {
 			assertTrue(false);

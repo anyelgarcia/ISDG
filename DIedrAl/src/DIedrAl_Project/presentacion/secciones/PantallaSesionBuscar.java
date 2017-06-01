@@ -250,7 +250,7 @@ public class PantallaSesionBuscar extends JFrame implements confirmListener{
 	}                                        
 
 	/**
-	 * Funcion que se ejecuta cuando seleccionamos una sesion, y seg�n se est�
+	 * Funcion que se ejecuta cuando seleccionamos una sesion, y según se esté
 	 * editando/eliminando/consultando realiza una acción.
 	 */
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         

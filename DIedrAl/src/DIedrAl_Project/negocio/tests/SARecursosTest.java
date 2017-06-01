@@ -28,7 +28,7 @@ public class SARecursosTest {
 		// Limpiamos el banco.
 		Banco.getInstancia().setSesiones(new ArraySesiones());
 
-		// Añadir al banco diez sesiones de prueba
+		// AÃ±adir al banco diez sesiones de prueba
 		for (int i = 0; i < 10; i++) {
 			Sesion sesionAux = new Sesion("Sesion " + (i + 1));
 			sesionAux.setDuracion(i + 1);
@@ -41,13 +41,13 @@ public class SARecursosTest {
 			
 		}
 
-		// Mover el filtro abarcando cada vez un minuto más.
+		// Mover el filtro abarcando cada vez un minuto mÃ¡s.
 		for (int x = 1; x < 11; x++) {
-			// Filtrar sesiones entre 0 y x de duración
+			// Filtrar sesiones entre 0 y x de duraciÃ³n
 			ArraySesiones resultado = sarec.filtrarSesionesPorRango(0, x);
 
 			// Comprobar que se han tomado las diez
-			assertTrue("Filtra número correcto", resultado.size() == x);
+			assertTrue("Filtra nï¿½mero correcto", resultado.size() == x);
 
 			// Texto del resultado
 			StringBuilder sb = new StringBuilder("");
@@ -77,20 +77,20 @@ public class SARecursosTest {
 		// Limpiamos el banco.
 		Banco.getInstancia().setActividades(new ArrayActividades());
 
-		// Añadir al banco diez actividades de prueba
+		// AÃ±adir al banco diez actividades de prueba
 		for (int i = 0; i < 10; i++) {
-			Actividad a = new Actividad("Actividad nº " + (i + 1));
+			Actividad a = new Actividad("Actividad nï¿½ " + (i + 1));
 			try {
 				
 				try {
-					a.addEtiqueta("Sukerorku es el rey nº " + (i + 1));
+					a.addEtiqueta("Sukerorku es el rey nï¿½ " + (i + 1));
 				} catch (AlreadyBoundException e) {
-					log.severe("No añadas etiquetas de más, que es un test");
+					log.severe("No aï¿½adas etiquetas de mï¿½s, que es un test");
 				}
 				a.setDuracion((120 + i) % 30);
 				a.setDescripcion("Shouwa genroku rakugo shinjuu es genial");
-				a.addDestinatario("Pablo Gutiérrez no va a leer esto");
-				a.setVariaciones("Psycho pass " + (Math.abs(new Random().nextInt()) % 2 +1) + " tambien está bien");
+				a.addDestinatario("Pablo Gutiï¿½rrez no va a leer esto");
+				a.setVariaciones("Psycho pass " + (Math.abs(new Random().nextInt()) % 2 +1) + " tambien estï¿½ bien");
 				a.setDesarrollo("Estoy viendo el capitulo " + (Math.abs(new Random().nextInt())) % 25);
 				if ((i % 3) == 2) {
 					a.setDificultad(Dificultad.DIFICIL);

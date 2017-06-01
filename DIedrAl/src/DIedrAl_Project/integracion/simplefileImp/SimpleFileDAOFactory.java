@@ -13,7 +13,7 @@ import DIedrAl_Project.integracion.DAOinterfaces.DAOSesionProgramada;
 import DIedrAl_Project.integracion.DAOinterfaces.DAOUsuario;
 
 /**
- * Factoría de objetos DAO (utiliza el patrÓn 
+ * Factoría de objetos DAO (utiliza el patrón 
  * Singleton para tener una única instancia)
  * @author Diedral_Group
  */

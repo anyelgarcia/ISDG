@@ -5,7 +5,6 @@ import java.awt.event.WindowEvent;
 import javax.swing.*;
 import DIedrAl_Project.presentacion.Controlador;
 import DIedrAl_Project.presentacion.MainFrame;
-import DIedrAl_Project.presentacion.auxiliar.Error;
 import DIedrAl_Project.presentacion.auxiliar.ImagePanel;
 
 

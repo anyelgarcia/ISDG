@@ -1,7 +1,12 @@
 package DIedrAl_Project.negocio.administracion;
 
-@SuppressWarnings("serial")
+
 public class Usuario extends Persona {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 991728753309384395L;
 
 	protected boolean admin;
 

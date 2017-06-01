@@ -7,7 +7,6 @@ import DIedrAl_Project.integracion.BasicClasses.AccessException;
 import DIedrAl_Project.integracion.BasicClasses.DAObasico;
 import DIedrAl_Project.integracion.DAOinterfaces.DAOCalendario;
 import DIedrAl_Project.negocio.calendario.Calendario;
-import DIedrAl_Project.negocio.recursos.Actividad;
 
 public class DAOCalendarioImp implements DAOCalendario {
 	
@@ -40,7 +39,7 @@ private static DAOCalendarioImp instancia = null;
 		try {
 			op.borrar(id, file);
 		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
+			
 			throw new AccessException("No se ha podido eliminar el calendario");
 		}
 	}
@@ -50,7 +49,7 @@ private static DAOCalendarioImp instancia = null;
 		try {
 			op.modificar(r, file);
 		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
+			
 			throw new AccessException("No se ha podido modificar el calendario");
 		}
 	}
@@ -60,7 +59,7 @@ private static DAOCalendarioImp instancia = null;
 		try {
 			return op.obtenerDatosSet(file);
 		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
+			
 			throw new AccessException("No se ha podido listar los calendarios");
 		}
 	}
@@ -70,7 +69,7 @@ private static DAOCalendarioImp instancia = null;
 		try {
 			return op.exists(id, file);
 		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
+			
 			throw new AccessException("No se ha podido "
 					+ "comprobar la existencia del calendario");
 		}

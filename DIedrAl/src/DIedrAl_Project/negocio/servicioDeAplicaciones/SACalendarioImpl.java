@@ -1,6 +1,5 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
-import java.time.LocalDate;
 import java.util.HashSet;
 
 import DIedrAl_Project.integracion.BasicClasses.AccessException;
@@ -46,17 +45,17 @@ public class SACalendarioImpl implements SACalendario {
 		cargarBanco();
 	}
 	@Override
-	public void addSesion(SesionProgramada sesion) {
-		mes.addSesion(sesion);
+	public void addSesionProgramada(SesionProgramada sesion) {
+		// TODO Auto-generated method stub
 	}
 
 	@Override
-	public void removeSesion(SesionProgramada sesion) {
-		mes.removeSesion(sesion);
+	public void removeSesionProgramada(SesionProgramada sesion) {
+		// TODO Auto-generated method stub
 	}
 
 	@Override
-	public void updateSesion(SesionProgramada sesion) throws AccessException {
+	public void updateSesionProgramada(SesionProgramada sesion) throws AccessException {
 		// TODO Auto-generated method stub
 		
 	}

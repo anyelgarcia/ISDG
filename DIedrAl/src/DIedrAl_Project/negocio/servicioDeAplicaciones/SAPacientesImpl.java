@@ -7,7 +7,6 @@ import DIedrAl_Project.integracion.BasicClasses.*;
 import DIedrAl_Project.integracion.BasicClasses.AccessException;
 import DIedrAl_Project.integracion.DAOinterfaces.*;
 import DIedrAl_Project.integracion.simplefileImp.*;
-import DIedrAl_Project.integracion.SQL.*;
 import DIedrAl_Project.negocio.Relacion;
 import DIedrAl_Project.negocio.administracion.*;
 import DIedrAl_Project.negocio.pacientes.*;
@@ -113,7 +112,7 @@ public class SAPacientesImpl implements SAPacientes {
 		if (daopac.existePaciente(pac.getId())) {
 			daopac.eliminarPaciente(pac.getId());
 		} else
-			//No debería entrar por aquí en estos momentos de la película.
+			//No debería de suceder
 			throw new NotBoundException(pac + "no se encuentra registrado en la base de datos");
 	}
 
@@ -182,7 +181,7 @@ public class SAPacientesImpl implements SAPacientes {
 			// Si el usuario esta en alguna relacion con otro usuario, lo eliminamos del los
 			// relacionados.
 			
-			//NOTA: ESTO NO DEBER�A ACTIVARSE NUNCA
+			//NOTA: ESTO NO DEBERÍA ACTIVARSE NUNCA
 			else if (r.getRelacionados().contains(usu.getId())) {
 				r.getRelacionados().remove(usu.getId());
 				daorelUsu.modificarRelacion(r);
@@ -196,7 +195,7 @@ public class SAPacientesImpl implements SAPacientes {
 		if (daousu.existeUsuario(usu.getId())) {
 			daousu.eliminarUsuario(usu.getId());
 		} else
-			//No deber�a entrar por aqu� en estos momentos de la pel�cula.
+			//No debería de suceder
 			throw new NotBoundException(usu + "no se encuentra registrado en la base de datos");
 	}
 
@@ -249,7 +248,7 @@ public class SAPacientesImpl implements SAPacientes {
 		Set<Relacion> setrel = daorelPac.listarRelaciones(centro.getNombre());
 
 		for (Relacion r : setrel) {
-			//Si en alguno es el agente de la relaci�n, eliminamos de relacionado el
+			//Si en alguno es el agente de la relación, eliminamos de relacionado el
 			//usuario
 			if (r.getIdAgente().equals(pac.getId())) {
 				r.getRelacionados().remove(usu.getId());

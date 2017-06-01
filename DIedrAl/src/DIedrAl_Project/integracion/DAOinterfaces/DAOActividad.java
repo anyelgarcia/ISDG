@@ -6,7 +6,7 @@ import DIedrAl_Project.integracion.BasicClasses.AccessException;
 import DIedrAl_Project.negocio.recursos.Actividad;
 
 /**
- * DAO que con los métodos CRUD necesarios para los objetos Actividad
+ * DAO que con los mÃ©todos CRUD necesarios para los objetos Actividad
  * @author Diedral_Group
  */
 public interface DAOActividad {

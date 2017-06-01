@@ -21,19 +21,19 @@ public final class Organizacion {
 
 
 	/**
-	 * Dada una cadena de caracteres, comprueba si coincide con la contraseña de
-	 * la organización
+	 * Dada una cadena de caracteres, comprueba si coincide con la contraseÃ±a de
+	 * la organizaciÃ³n
 	 * 
-	 * @return true si la contraseña suministrada coincide con la de la
-	 *         organización
+	 * @return true si la contraseÃ±a suministrada coincide con la de la
+	 *         organizaciÃ³n
 	 */
 	public boolean inputPassword(String trial) {
 		return password.equals(trial);
 	}
 
 	/**
-	 * Cambia la contraseña actual de la organización por la contraseña proporcionada
-	 * @param password nueva contraseña
+	 * Cambia la contraseÃ±a actual de la organizaciÃ³n por la contraseÃ±a proporcionada
+	 * @param password nueva contraseÃ±a
 	 */
 
 

@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 
 import DIedrAl_Project.negocio.administracion.EstadoCivil;
 import DIedrAl_Project.negocio.administracion.Hints;
-import DIedrAl_Project.negocio.administracion.Persona;
 import DIedrAl_Project.negocio.calendario.Fecha;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.presentacion.Controlador;
@@ -226,7 +225,7 @@ public class Pacientes extends ColorPanel{
 			jLabel9.setText("Perfil: ");
 			
 			jTextArea1.setColumns(20);
-			jTextArea1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+			jTextArea1.setFont(new java.awt.Font("Arial", 0, 12)); 
 			jTextArea1.setRows(5);
 			jTextArea1.setText("Insertar aquí una descripción del paciente");
 			jScrollPane1.setViewportView(jTextArea1);
@@ -234,7 +233,7 @@ public class Pacientes extends ColorPanel{
 			jLabel10.setText("Aficiones: (separadas por comas)");
 			
 			jTextArea2.setColumns(20);
-			jTextArea2.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+			jTextArea2.setFont(new java.awt.Font("Arial", 0, 10)); 
 			jTextArea2.setRows(5);
 			jScrollPane2.setViewportView(jTextArea2);
 			
@@ -677,7 +676,7 @@ public class Pacientes extends ColorPanel{
 		 * @param evt
 		 */
 		private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {        
-			int i = jList1.getSelectedIndex(); JFrame j; Paciente p = null;
+			int i = jList1.getSelectedIndex(); JFrame j;
 			if(i != -1){
 				switch(modo){
 				case ELIMINAR:
@@ -705,7 +704,7 @@ public class Pacientes extends ColorPanel{
 		}  
 		
 		/**
-	     * Se llama a esta funci�n al pulsar el botón -Sí- en confirmar. Le dice al controlador que elimine al paciente.
+	     * Se llama a esta función al pulsar el botón -Sí- en confirmar. Le dice al controlador que elimine al paciente.
 	     */
 	    public void delete(){
 	    	int i = jList1.getSelectedIndex();
