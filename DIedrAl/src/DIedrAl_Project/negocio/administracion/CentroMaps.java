@@ -82,13 +82,13 @@ public class CentroMaps {
 	/**
 	 * Dado un nombre para el centro, genera un centro correctamente mapeado
 	 * @param name nombre del centro 
-	 * @return centro mapeado con la informaci�n de los ficheros usados en la construcci�n del mapeador
+	 * @return centro mapeado con la información de los ficheros usados en la construcción del mapeador
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 * @throws AccessException 
 	 */
 	public Centro generarCentro(EstadoCentro c) throws AccessException{
-		// Mapas donde mapear la informaci�n del centro.
+		// Mapas donde mapear la información del centro.
 		nomb = c.getId();
 		HashMap<String, Persona> personas = new HashMap<String, Persona>();
 		HashMap<Paciente, HashSet<Usuario>> pacientes = new HashMap<Paciente, HashSet<Usuario>>();

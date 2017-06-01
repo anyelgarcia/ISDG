@@ -3,6 +3,11 @@ package DIedrAl_Project.negocio.pacientes;
 import java.io.Serializable;
 
 public class Direccion implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1611004593963612260L;
+
 	private String localidad;
 
 	private String provincia;

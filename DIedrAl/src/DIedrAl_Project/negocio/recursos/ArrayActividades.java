@@ -2,9 +2,7 @@ package DIedrAl_Project.negocio.recursos;
 
 import java.util.*;
 
-/*
- * TODO CAMBIAR EL TIPO DE ESTAS FUNCIONES EN PUTO MODELIO
- */
+
 public class ArrayActividades extends ArrayProgramables<Actividad> {
 	
 

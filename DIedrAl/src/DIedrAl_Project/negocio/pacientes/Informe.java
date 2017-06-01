@@ -8,15 +8,14 @@ import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.negocio.calendario.SesionProgramada;
 
 public class Informe implements ObjetoAlmacenable, Serializable {
-	private String texto;
-	/*
-	 * TODO No tiene sentido cambiar la sesion de la que está hablando el
-	 * informe.
+	/**
+	 * 
 	 */
+	private static final long serialVersionUID = -1305608104357593197L;
+	private String texto;
+	
 	private final SesionProgramada sesion;
-	// TODO Pueden ser más?
 	private Usuario autor;
-
 	private String id;
 
 	public Informe(SesionProgramada ses, Usuario autor) {

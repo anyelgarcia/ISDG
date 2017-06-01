@@ -28,8 +28,8 @@ import DIedrAl_Project.presentacion.auxiliar.Modo;
 import DIedrAl_Project.presentacion.auxiliar.Error;
 
 /**
- * Esta clase lleva la gestión de las vistas de los recursos. En el constructor se dibuja la sección de Recursos del Menú Principal y se pone a la espera para 
- * añadir, eliminar, editar o buscar recursos.
+ * Esta clase lleva la gestión de las vistas de los recursos. En el constructor se dibuja la sección de Recursos 
+ * del Menú Principal y se pone a la espera para añadir, eliminar, editar o buscar recursos.
  * @author Diedral_Group
  *
  */

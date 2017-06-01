@@ -3,28 +3,15 @@ package DIedrAl_Project.presentacion.secciones;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
-import DIedrAl_Project.negocio.recursos.ArraySesiones;
-import DIedrAl_Project.negocio.recursos.Sesion;
-import DIedrAl_Project.presentacion.Controlador;
 import DIedrAl_Project.presentacion.auxiliar.ColorPanel;
-import DIedrAl_Project.presentacion.auxiliar.Confirm;
-import DIedrAl_Project.presentacion.auxiliar.Confirm.confirmListener;
 import DIedrAl_Project.presentacion.auxiliar.ImageButton;
 import DIedrAl_Project.presentacion.auxiliar.Modo;
-import DIedrAl_Project.presentacion.auxiliar.Error;
 
 
 /**
- * Esta clase lleva la gesti�n de las vistas de las sesiones. En el constructor se dibuja la secci�n de Sesiones del Menú Principal y se pone a la espera para 
+ * Esta clase lleva la gestión de las vistas de las sesiones. En el constructor se dibuja la sección de Sesiones del Menú Principal y se pone a la espera para 
  * añadir, eliminar, editar o buscar sesiones.
  * @author Diedral_Group
  *

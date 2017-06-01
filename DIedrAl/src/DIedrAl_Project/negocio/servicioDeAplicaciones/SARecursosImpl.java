@@ -4,7 +4,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
-import java.util.logging.Logger;
 
 import DIedrAl_Project.integracion.BasicClasses.*;
 import DIedrAl_Project.integracion.DAOinterfaces.*;

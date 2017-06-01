@@ -7,7 +7,12 @@ import DIedrAl_Project.negocio.calendario.Fecha;
 
 
 public class DatosPaciente implements Serializable {
-    private String estadocivil;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3361389766149165086L;
+
+	private String estadocivil;
 
     private String datosfamiliares;
 

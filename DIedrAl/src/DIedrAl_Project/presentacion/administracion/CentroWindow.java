@@ -172,7 +172,7 @@ public class CentroWindow extends javax.swing.JFrame implements confirmListener{
 	}
 
 	/**
-	 * Se pide confirmaci�n para eliminar (Ver funci�n delete)
+	 * Se pide confirmación para eliminar (Ver función delete)
 	 * @param evt
 	 */
 	private void jButton2ActionPerformed(ActionEvent evt) {

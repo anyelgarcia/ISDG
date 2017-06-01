@@ -3,7 +3,7 @@ package DIedrAl_Project.integracion.DAOinterfaces;
 import DIedrAl_Project.integracion.BasicClasses.tRelacion;
 
 /**
- * Interfaz para crear una factor�a con todos los métodos DAO necesarios
+ * Interfaz para crear una factoría con todos los métodos DAO necesarios
  * en el programa (patrón AbstractFactoryMethod)
  * @author Diedral_Group
  */

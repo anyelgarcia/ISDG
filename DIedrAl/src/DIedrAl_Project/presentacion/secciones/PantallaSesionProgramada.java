@@ -13,8 +13,6 @@ import DIedrAl_Project.negocio.calendario.SesionProgramada;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.negocio.recursos.Sesion;
 import DIedrAl_Project.presentacion.Controlador;
-import DIedrAl_Project.presentacion.administracion.PantallaUsuario;
-import DIedrAl_Project.presentacion.auxiliar.Confirm;
 import DIedrAl_Project.presentacion.auxiliar.Error;
 import DIedrAl_Project.presentacion.auxiliar.Modo;
 

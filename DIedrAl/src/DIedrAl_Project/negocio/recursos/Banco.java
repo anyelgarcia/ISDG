@@ -57,7 +57,7 @@ public class Banco {
 	}
 
 	/**
-	 * elimina el recurso dado de la lista de recursos del banco, as� como de
+	 * elimina el recurso dado de la lista de recursos del banco, así como de
 	 * los conjuntos de asociados de las listas de sesiones y de actividades del
 	 * banco
 	 * @param rec

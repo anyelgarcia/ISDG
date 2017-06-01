@@ -12,12 +12,12 @@ import DIedrAl_Project.negocio.pacientes.Paciente;
 public class Centro {
 
 	private EstadoCentro estado;
-	// TODO: implementarlo primero
+	
 	private Calendario calendario;
 
 	/**
 	 * Diccionario que permite el acceso a un terapeuta o paciente del centro a
-	 * trav�s de su dni.
+	 * través de su dni.
 	 */
 	private HashMap<String, Persona> personasCentro;
 
@@ -31,7 +31,6 @@ public class Centro {
 	 */
 	private HashMap<Usuario, HashSet<Paciente>> usuarios;
 
-	// TODO: implementarlo primero
 	private Organizacion organizacion;
 
 	/*
@@ -90,7 +89,6 @@ public class Centro {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public void erasePaciente(Paciente pac) throws NotBoundException {
 
 		if (personasCentro.containsKey(pac.getNif())) {

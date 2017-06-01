@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import DIedrAl_Project.negocio.administracion.Hints;
-import DIedrAl_Project.negocio.administracion.Persona;
 import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.presentacion.Controlador;
@@ -527,7 +526,7 @@ public class UsuarioWindow extends javax.swing.JFrame {
 	    }                                        
 
 	    /**
-	     * Funci�n que se ejecuta al buscar pacientes. Funciona de forma parecida a la anterior, pero
+	     * Función que se ejecuta al buscar pacientes. Funciona de forma parecida a la anterior, pero
 	     * con diferentes textfields y buscando solo pacientes.
 	     * @param evt
 	     */

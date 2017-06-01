@@ -77,7 +77,6 @@ public abstract class ArrayEtiquetables<T extends Etiquetable> implements Iterab
 
 		@SuppressWarnings("unchecked")
 		public IteratorEtiquetable() {
-			//TODO xq el cast? NPI
 			it = (Iterator<S>) etiquetables.iterator();
 		}
 

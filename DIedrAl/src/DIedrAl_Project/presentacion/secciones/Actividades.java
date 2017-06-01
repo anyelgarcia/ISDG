@@ -24,8 +24,8 @@ import DIedrAl_Project.presentacion.auxiliar.Modo;
 import DIedrAl_Project.presentacion.auxiliar.Error;
 
 /**
- * Esta clase lleva la gestión de las vistas de las actividades. En el constructor se dibuja la secci�n de Actividades del Men� Principal y se pone a la espera para 
- * añadir, eliminar, editar o buscar actividades.
+ * Esta clase lleva la gestión de las vistas de las actividades. En el constructor se dibuja la sección de 
+ * Actividades del Menú Principal y se pone a la espera para añadir, eliminar, editar o buscar actividades.
  * 
  * @author Diedral_Group
  *
