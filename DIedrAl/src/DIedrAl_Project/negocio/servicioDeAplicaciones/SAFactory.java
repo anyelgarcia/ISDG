@@ -18,5 +18,7 @@ public abstract class SAFactory {
 	public abstract SAPacientes newSAPacientes(String centro) throws AccessException;
 	
 	public abstract SAOrganizacion newSAOrganizacion();
+	
+	public abstract SACalendario newSACalendario();
 
 }

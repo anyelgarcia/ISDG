@@ -18,6 +18,11 @@ public class SAFactoryImpl extends SAFactory{
 	public SAOrganizacion newSAOrganizacion() {
 		return SAOrganizacionImpl.getInstancia();
 	}
+
+	@Override
+	public SACalendario newSACalendario() {
+		return SACalendarioImpl.getInstancia();
+	}
 	
 
 
