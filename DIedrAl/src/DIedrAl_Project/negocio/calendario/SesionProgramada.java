@@ -25,6 +25,14 @@ public class SesionProgramada extends Sesion implements Serializable {
 		nifsPacientes = new TreeSet<String>();
 		notas = new HashSet<Nota>();
 	}
+	
+	public SesionProgramada(String name, Fecha fecha, String ...etiquetas) {
+		super(name, etiquetas);
+		this.fecha = fecha;
+		nifsTerapeutas = new TreeSet<String>();
+		nifsPacientes = new TreeSet<String>();
+		notas = new HashSet<Nota>();
+	}
 
 	public void addNota(Nota nota) {
 		this.notas.add(nota);

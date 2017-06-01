@@ -106,7 +106,7 @@ public class Controlador {
 		
 	}
 	
-	public static void addUsuario(Usuario p){
+	public static boolean addUsuario(Usuario p){
 
 		SAPacientes saUsuarios;
 		try {
@@ -114,7 +114,9 @@ public class Controlador {
 			saUsuarios.addUsuario(p);
 		} catch (AccessException | AlreadyBoundException e) {
 			new Error(e.getMessage());
+			return false;
 		}
+		return true;
 	}
 	
 	public static void deleteActividad(Actividad a){
@@ -301,23 +303,30 @@ public class Controlador {
 		antiguo.igualarCampos(nuevo);
 		if(nuevo instanceof Recurso){
 			try {
-				SAFactory.getInstancia().newSARecursos().updateRecurso((Recurso)nuevo);
+				SAFactory.getInstancia().newSARecursos().updateRecurso((Recurso)antiguo);
 			} catch (AccessException e) {
 				new Error("No se ha podido modificar el recurso");
 			}
 		}
 		else if(nuevo instanceof Actividad){
 			try {
-				SAFactory.getInstancia().newSARecursos().updateActividad((Actividad)nuevo);
+				SAFactory.getInstancia().newSARecursos().updateActividad((Actividad)antiguo);
 			} catch (AccessException e) {
 				new Error("No se ha podido modificar la actividad");
 			}
 		}
 		else if(nuevo instanceof Sesion){
 			try {
-				SAFactory.getInstancia().newSARecursos().updateSesion((Sesion)nuevo);
+				SAFactory.getInstancia().newSARecursos().updateSesion((Sesion)antiguo);
 			} catch (AccessException e) {
 				new Error("No se ha podido modificar la sesion");
+			}
+		}
+		else if(nuevo instanceof SesionProgramada){
+			try {
+				SAFactory.getInstancia().newSARecursos().updateSesionProgramada((SesionProgramada)antiguo);
+			} catch (AccessException e) {
+				new Error("No se ha podido modificar la sesión programada");
 			}
 		}
 	}

@@ -256,13 +256,13 @@ public class Pacientes extends ColorPanel{
 				if(birthday!=null){
 					jComboBox1.setSelectedIndex(birthday.getDia()-1);
 					jComboBox2.setSelectedIndex(birthday.getMesIndex());
-					jComboBox3.setSelectedIndex(birthday.getAño()-1900);
+					jComboBox3.setSelectedIndex(2017-birthday.getAño());
 				}
 				Fecha lesionday = pac.getDatos().getFechalesion();
 				if(lesionday!=null){
 					jComboBox5.setSelectedIndex(lesionday.getDia()-1);
 					jComboBox6.setSelectedIndex(lesionday.getMesIndex());
-					jComboBox7.setSelectedIndex(lesionday.getAño()-1900);
+					jComboBox7.setSelectedIndex(2017-lesionday.getAño());
 				}
 				EstadoCivil estadoCivil = pac.getEstadoCivil();
 				if(estadoCivil!=null){
@@ -707,7 +707,7 @@ public class Pacientes extends ColorPanel{
 		}  
 		
 		/**
-	     * Se llama a esta funci�n al pulsar el bot�n -S�- en confirmar. Le dice al controlador que elimine al paciente.
+	     * Se llama a esta funci�n al pulsar el botón -Sí- en confirmar. Le dice al controlador que elimine al paciente.
 	     */
 	    public void delete(){
 	    	int i = jList1.getSelectedIndex();

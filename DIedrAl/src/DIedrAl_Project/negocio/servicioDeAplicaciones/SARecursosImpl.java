@@ -1,8 +1,8 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
 import java.io.*;
-import java.nio.file.*;
 import java.util.*;
+import java.util.logging.Logger;
 
 import DIedrAl_Project.integracion.BasicClasses.*;
 import DIedrAl_Project.integracion.DAOinterfaces.*;
@@ -48,10 +48,11 @@ public class SARecursosImpl implements SARecursos {
 	public void addRecurso(Recurso rec) throws AccessException, IOException {
 		bank.addRecurso(rec);
 		daorec.crearRecurso(rec);
-
-		File resourcesDir = new File("src/recursos/" + rec.getFileName());
-		Files.copy(rec.getPath(), resourcesDir.toPath(),
-				StandardCopyOption.REPLACE_EXISTING);
+		File dir = new File("C:\\hlocal\\git\\ISDG\\DIedrAl\\src\\recursos");
+		Logger.getLogger(SARecursosImpl.class.getName()).severe(dir.canWrite() +"");
+		dir.mkdirs();
+		File recursoSave= new File(dir, rec.getFileName());
+		recursoSave.createNewFile();
 	}
 
 	@Override
