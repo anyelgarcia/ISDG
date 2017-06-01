@@ -727,20 +727,20 @@ public class Actividades extends ColorPanel{
 			
 			if(jComboBox1.getSelectedIndex() != 0){
 				switch(String.valueOf(jComboBox1.getSelectedItem())){
-					case "Muy fácil": max = Dificultad.MUY_FACIL; break;
-					case "Fácil": max = Dificultad.FACIL; break;
-					case "Media": max = Dificultad.MEDIO; break;
-					case "Difícil": max = Dificultad.DIFICIL; break;
-					case "Muy difícil": max = Dificultad.MUY_DIFICIL; break;
+					case "MUY_FACIL": max = Dificultad.MUY_FACIL; break;
+					case "FACIL": max = Dificultad.FACIL; break;
+					case "MEDIO": max = Dificultad.MEDIO; break;
+					case "DIFICIL": max = Dificultad.DIFICIL; break;
+					case "MUY_DIFICIL": max = Dificultad.MUY_DIFICIL; break;
 				}
 			}
 			if(jComboBox2.getSelectedIndex() != 0){
 				switch(String.valueOf(jComboBox2.getSelectedItem())){
-					case "Muy fácil": max = Dificultad.MUY_FACIL; break;
-					case "Fácil": max = Dificultad.FACIL; break;
-					case "Media": max = Dificultad.MEDIO; break;
-					case "Difícil": max = Dificultad.DIFICIL; break;
-					case "Muy difícil": max = Dificultad.MUY_DIFICIL; break;
+					case "MUY_FACIL": max = Dificultad.MUY_FACIL; break;
+					case "FACIL": max = Dificultad.FACIL; break;
+					case "MEDIO": max = Dificultad.MEDIO; break;
+					case "DIFICIL": max = Dificultad.DIFICIL; break;
+					case "MUY_DIFICIL": max = Dificultad.MUY_DIFICIL; break;
 				}
 			}
 		
