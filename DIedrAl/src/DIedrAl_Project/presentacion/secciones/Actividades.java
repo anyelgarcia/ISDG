@@ -164,7 +164,7 @@ public class Actividades extends ColorPanel{
 	        jTextField1 = new javax.swing.JTextField("");
 	        jTextField1.setEditable(editable);
 	        jComboBox1 = new javax.swing.JComboBox<>();
-	        //jComboBox1.setEnabled(editable);
+	        jComboBox1.setEnabled(editable);
 	        jTextField2 = new javax.swing.JTextField("");
 	        jTextField2.setEditable(editable);
 	        jLabel4 = new javax.swing.JLabel();
@@ -267,9 +267,11 @@ public class Actividades extends ColorPanel{
 	        	
 	        	jTextArea1.setText(act.getDescripcion());
 	        	
-	        	String etiquetas = act.getEtiquetas().toString();
+	        	String etiquetas = "";
+	        	for(String st: act.getEtiquetas())
+	        		etiquetas += st + ", ";
 	        	
-	        	if(act.getDificultad()!=null) jComboBox1.setSelectedItem(act.getDificultad());
+	        	if(act.getDificultad()!=null) jComboBox1.setSelectedItem(String.valueOf(act.getDificultad()));
 	        	
 	        	jTextArea5.setText(etiquetas);
 	        	
@@ -708,8 +710,12 @@ public class Actividades extends ColorPanel{
 		 */
 	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 	    	String nombre = jTextField1.getText();
-			Set<String> setEtiquetas = new HashSet<String>(Arrays.asList(jTextArea1.getText().split(",")));
-			Set<String> setDestinatarios = new HashSet<String>(Arrays.asList(jTextArea2.getText().split(",")));
+			Set<String> setEtiquetas = new HashSet<String>();
+			Set<String> setDestinatarios = new HashSet<String>();
+			if(!jTextArea1.getText().equals(""))
+				setEtiquetas = new HashSet<String>(Arrays.asList(jTextArea1.getText().split(",")));
+			if(!jTextArea2.getText().equals(""))
+				setDestinatarios = new HashSet<String>(Arrays.asList(jTextArea2.getText().split(",")));
 			Integer ini = null, end = null;
 			if(!jTextField2.getText().equals("")) 
 				ini = Integer.parseInt(jTextField2.getText());
@@ -719,7 +725,7 @@ public class Actividades extends ColorPanel{
 			Dificultad min = null, max = null;
 			
 			if(jComboBox1.getSelectedIndex() != 0){
-				switch((String) jComboBox1.getSelectedItem()){
+				switch(String.valueOf(jComboBox1.getSelectedItem())){
 				case "MUY_FACIL": min = Dificultad.MUY_FACIL; break;
 				case "FACIL": min = Dificultad.FACIL; break;
 				case "MEDIO": min = Dificultad.MEDIO; break;
@@ -728,7 +734,7 @@ public class Actividades extends ColorPanel{
 				}
 			}
 			if(jComboBox2.getSelectedIndex() != 0){
-				switch((String) jComboBox1.getSelectedItem()){
+				switch(String.valueOf(jComboBox2.getSelectedItem())){
 				case "MUY_FACIL": max = Dificultad.MUY_FACIL; break;
 				case "FACIL": max = Dificultad.FACIL; break;
 				case "MEDIO": max = Dificultad.MEDIO; break;

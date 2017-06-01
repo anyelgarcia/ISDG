@@ -317,7 +317,7 @@ public class PantallaSesion extends JFrame{
 		}
 		if(nombre.equals("")) new Error("Nombre vacio");
 		else{
-			Sesion info = new Sesion(String.valueOf(jTextField1.getText()), etiquetas);
+			Sesion info = new Sesion(nombre, etiquetas);
 
 			info.setDuracion(duracion);
 			info.setDescripcion(String.valueOf(jTextArea1.getText()));
@@ -333,3 +333,6 @@ public class PantallaSesion extends JFrame{
 		}
 	} 
 }
+
+
+

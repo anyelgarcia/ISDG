@@ -422,7 +422,7 @@ public class Pacientes extends ColorPanel{
 		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {   
 			
-			System.out.println(Controlador.getUsuario());
+			
 			String aficionestodo = jTextArea2.getText();
 			String aficiones[] = aficionestodo.split(",");
 			
