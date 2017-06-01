@@ -78,5 +78,8 @@ public class Recurso extends Etiquetable {
 	public File getFile() {
 		return this.fichero;
 	}
+	public void setFile(File nuevo){
+		this.fichero=nuevo;
+	}
 	
 }
