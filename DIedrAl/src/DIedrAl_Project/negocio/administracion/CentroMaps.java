@@ -56,9 +56,7 @@ public class CentroMaps {
 			for(String str: rel.getRelacionados()){
 				user.add(users.get(str));
 			}
-			pacientes.put(pacients.get(rel.getIdAgente()), user);
-			user.clear();
-			
+			pacientes.put(pacients.get(rel.getIdAgente()), user);			
 		}
 		
 		DAORelacionable daorel = factory.getDAORelacion(tRelacion.usuario);
@@ -72,7 +70,6 @@ public class CentroMaps {
 				pacs.add(pacients.get(str));
 			}
 			usuarios.put(users.get(rel.getIdAgente()), pacs);
-			pacs.clear();
 		}
 	}
 	

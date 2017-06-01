@@ -152,7 +152,7 @@ public class Centro {
 		if (!personasCentro.containsKey(usu.getNif())) {
 			throw new NotBoundException("Usuario " + usu + " no encontrado");
 		} else
-			return usuarios.get(usu);
+			return usuarios.get((Usuario)personasCentro.get(usu.getNif()));
 	}
 
 	public String getNombre() {
