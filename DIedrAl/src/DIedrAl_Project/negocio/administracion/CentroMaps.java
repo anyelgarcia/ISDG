@@ -38,7 +38,6 @@ public class CentroMaps {
 		this.pacients = new HashMap<>();
 		HashSet<Relacion> relaciones_p = daore.listarRelaciones(nomb);
 		for(Relacion r: relaciones_p){
-			System.out.println(r.getIdAgente());
 			pacients.put(r.getIdAgente(), daopac.consultarPaciente(r.getIdAgente()));
 		}
 		

@@ -1,7 +1,6 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
 import java.io.*;
-import java.nio.file.*;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -47,6 +46,7 @@ public class SARecursosImpl implements SARecursos {
 	public void addRecurso(Recurso rec) throws AccessException, IOException {
 		bank.addRecurso(rec);
 		daorec.crearRecurso(rec);
+
 		File dir = new File("/src/recursos");
 		dir.mkdirs();
 		File recursoSave= new File(dir, rec.getFileName());
@@ -57,6 +57,7 @@ public class SARecursosImpl implements SARecursos {
 		//Files.createDirectories(Paths.get(resourcesDir.getPath()));
 		Files.copy(rec.getPath(), resourcesDir.toPath(),
 				StandardCopyOption.REPLACE_EXISTING);
+
 	}
 
 	@Override
