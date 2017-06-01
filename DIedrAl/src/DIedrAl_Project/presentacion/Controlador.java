@@ -230,7 +230,6 @@ public class Controlador {
 		if(min != null && salida != null) salida = (ArraySesiones) salida.filtrarDesde(min);
 		if(max != null && salida != null) salida = (ArraySesiones) salida.filtrarHasta(max);
 		if(destinatarios.size() > 0 && salida != null) salida = (ArraySesiones) salida.filtrarDestinatarios(destinatarios);
-		
 		return salida;
 	}
 	

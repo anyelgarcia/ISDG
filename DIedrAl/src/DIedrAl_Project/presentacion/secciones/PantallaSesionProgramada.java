@@ -1,17 +1,25 @@
 package DIedrAl_Project.presentacion.secciones;
 
 import java.awt.Color;
+import java.util.Set;
 import java.util.TreeSet;
 
+import DIedrAl_Project.negocio.administracion.Hints;
+import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.negocio.calendario.SesionProgramada;
+import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.negocio.recursos.Sesion;
+import DIedrAl_Project.presentacion.Controlador;
 
 public class PantallaSesionProgramada extends javax.swing.JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2360052013258980696L;
 	private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -70,6 +78,10 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;  
     private Sesion sesion;
+    private Paciente pacientes[];
+    private Usuario terapeutas[];
+    private Paciente pacientesSesion[];
+    private Usuario terapeutasSesion[];
     
     public PantallaSesionProgramada(Sesion sesion) {
     	this.sesion = sesion;
@@ -78,7 +90,6 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
     
     private void initGUI() {
 
-        jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -140,13 +151,74 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jTextField10 = new javax.swing.JTextField();
 
-        jButton4.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jButton4.setText("Quitar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
+        
+        
+        if(sesion!=null){
+        	
+        	jTextField1.setText(sesion.getNombre());
+        	jTextField2.setText(String.valueOf(sesion.getDuracion()));
+        	jTextArea1.setText(sesion.getDescripcion());
+        	String str ="";
+        	TreeSet<String> etiqs = sesion.getEtiquetas();
+        	if(!etiqs.isEmpty() && !etiqs.first().equals("")){
+	        	for(String et: sesion.getEtiquetas())
+	        		str+=et +", ";
+        	}
+        	jTextArea2.setText(str);
+        	jTextArea3.setText(sesion.getDesarrollo());
+        	jTextArea4.setText(sesion.getVariaciones());
+        	if(sesion instanceof SesionProgramada){
+        		
+        		jComboBox1.setSelectedItem(((SesionProgramada) sesion).getFecha().getDia());
+        		jComboBox2.setSelectedItem(((SesionProgramada) sesion).getFecha().getMes());
+        		jComboBox3.setSelectedItem(((SesionProgramada) sesion).getFecha().getAño());
+        		Set<String> nifsPac = ((SesionProgramada) sesion).getPacientes();
+        		int i=0;
+        		pacientesSesion = new Paciente[nifsPac.size()];
+        		for(String nif: nifsPac){
+        			pacientesSesion[i] = Controlador.getPacienteConNif(nif);
+        			i++;
+        		}
+        		Set<String> nifsTer = ((SesionProgramada) sesion).getPacientes();
+        		i=0;
+        		terapeutasSesion = new Usuario[nifsTer.size()];
+        		for(String nif: nifsTer){
+        			terapeutasSesion[i] = Controlador.getUsuarioConNif(nif);
+        			i++;
+        		}
+        		
+        		jList4.setModel(new javax.swing.AbstractListModel<String>() {
+        			private static final long serialVersionUID = 1L;
+                    public int getSize() { return terapeutasSesion.length; }
+                    public String getElementAt(int i) { return (terapeutasSesion[i]).toString(); }
+                });
+
+                jList5.setModel(new javax.swing.AbstractListModel<String>() {
+        			private static final long serialVersionUID = 1L;
+                    public int getSize() { return pacientesSesion.length; }
+                    public String getElementAt(int i) { return (pacientesSesion[i]).toString(); }
+                });
+        		
+        	}
+        }
+        if(pacientesSesion==null && terapeutasSesion==null){
+        	jList4.setModel(new javax.swing.AbstractListModel<String>() {
+    			private static final long serialVersionUID = 1L;
+    			String strings[] = {};
+                public int getSize() { return strings.length; }
+                public String getElementAt(int i) { return strings[i]; }
+            });
+
+            jList5.setModel(new javax.swing.AbstractListModel<String>() {
+    			private static final long serialVersionUID = 1L;
+    			String strings[] = {};
+                public int getSize() { return strings.length; }
+                public String getElementAt(int i) { return strings[i]; }
+            });
+        }
+
+        jScrollPane8.setViewportView(jList4);
+        jScrollPane9.setViewportView(jList5);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -206,7 +278,7 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         jLabel8.setToolTipText("");
 
         jLabel9.setFont(new java.awt.Font("SansSerif", 1, 12)); 
-        jLabel9.setText("Actividadess Empleadas");
+        jLabel9.setText("Actividades Empleadas");
         jLabel9.setToolTipText("");
 
         jButton1.setFont(new java.awt.Font("SansSerif", 1, 12)); 
@@ -217,6 +289,7 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
             }
         });
 
+
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(Calendario.DIAS));
 		jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(Calendario.MESES));
 		jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(Calendario.AÑOS));
@@ -224,33 +297,26 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("SansSerif", 1, 12)); 
         jLabel10.setText("Fecha:");
 
+        
+        Hints hints1[] = {Hints.PACIENTE};
+		String valores[] = {"comodín"};
+		pacientes = Controlador.buscarPaciente(hints1, valores);
+		Hints hints2[] = {Hints.USUARIO};
+		terapeutas = Controlador.buscarUsuario(hints2, valores);        
+		
+		jList6.setModel(new javax.swing.AbstractListModel<String>() {
+			private static final long serialVersionUID = 1L;
+            public int getSize() { return terapeutas!= null ? terapeutas.length : 0; }
+            public String getElementAt(int i) { return (terapeutas[i]).toString(); }
+        });
+        jScrollPane10.setViewportView(jList1);
+
         jList3.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+			private static final long serialVersionUID = 1L;
+            public int getSize() { return pacientes!= null ? pacientes.length : 0; }
+            public String getElementAt(int i) { return (pacientes[i]).toString(); }
         });
         jScrollPane7.setViewportView(jList3);
-
-        jList4.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane8.setViewportView(jList4);
-
-        jList5.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane9.setViewportView(jList5);
-
-        jList6.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane10.setViewportView(jList6);
         
         jList3.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jList4.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -336,29 +402,6 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         jLabel22.setFont(new java.awt.Font("SansSerif", 1, 12)); 
         jLabel22.setText("DNI:");
         jLabel22.setToolTipText("");
-        
-        if(sesion!=null){
-        	
-        	jTextField1.setText(sesion.getNombre());
-        	jTextField2.setText(String.valueOf(sesion.getDuracion()));
-        	jTextArea1.setText(sesion.getDescripcion());
-        	String str ="";
-        	TreeSet<String> etiqs = sesion.getEtiquetas();
-        	if(!etiqs.isEmpty() && !etiqs.first().equals("")){
-	        	for(String et: sesion.getEtiquetas())
-	        		str+=et +", ";
-        	}
-        	jTextArea2.setText(str);
-        	jTextArea3.setText(sesion.getDesarrollo());
-        	jTextArea4.setText(sesion.getVariaciones());
-        	if(sesion instanceof SesionProgramada){
-        		jComboBox1.setSelectedItem(((SesionProgramada) sesion).getFecha().getDia());
-        		jComboBox2.setSelectedItem(((SesionProgramada) sesion).getFecha().getMes());
-        		jComboBox3.setSelectedItem(((SesionProgramada) sesion).getFecha().getAño());
-        	}
-        	
-        }
-        
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -389,13 +432,13 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane6, 166, 166, 166)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addComponent(jLabel8)))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane5, 166, 166, 166)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addComponent(jLabel9))))
@@ -477,7 +520,7 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
                                     .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addGap(370, 370, 370)
+                        .addGap(450, 450, 450)
                         .addComponent(jButton3)
                         .addGap(95, 95, 95)
                         .addComponent(jButton6)))
@@ -555,8 +598,8 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
                             .addComponent(jLabel9))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane5, 166, 166, 166)
+                            .addComponent(jScrollPane6, 166, 166, 166))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -604,32 +647,29 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         getContentPane().setBackground(new Color(255, 111, 105));
         setVisible(true);
         pack();
-    }                                                             
+    }                                          
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }                                           
-
+    //GUARDAAR
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     }                                        
 
+    //QUITAR PACIENTES SESION
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     }                                        
 
+    //AÑADIR PACIENTES BUSQUEDA
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }                                        
+    }                                           
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-    }                                        
-
+    //QUITAR TERAPSESION
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     }                                        
 
+    //AÑAD TERAP BUSQUEDA
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     }   
