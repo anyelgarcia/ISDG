@@ -327,7 +327,7 @@ public class PantallaSesion extends JFrame{
 			else if(mode.equals(Modo.EDITAR)) Controlador.modificaEtiquetable(sesion, info);
 			else if(mode.equals(Modo.RETURN)){
 				Controlador.addSesion(info);
-				new PantallaSesionProgramada(info);
+				new PantallaSesionProgramada(info, Modo.ADD);
 			}
 			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		}

@@ -324,10 +324,11 @@ public class PantallaUsuario extends JFrame{
 				usuario.setTfo(tfo);
 			} else usuario.setTfo("");
 
-			Controlador.addUsuario(usuario);
-			new Error("El nuevo usuario ha sido creado");
-			new MenuCentroUsuarios();
-			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+			if(Controlador.addUsuario(usuario)){
+				new Error("El nuevo usuario ha sido creado");
+				new MenuCentroUsuarios();
+				dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+			}
 		}else{
 			new Error("Han de llenarse los campos de nombre, contraseña y DNI");
 		}

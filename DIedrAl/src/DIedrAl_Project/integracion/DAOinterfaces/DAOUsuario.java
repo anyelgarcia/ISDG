@@ -1,13 +1,12 @@
 package DIedrAl_Project.integracion.DAOinterfaces;
 
-import java.io.IOException;
 import java.util.HashSet;
 
 import DIedrAl_Project.integracion.BasicClasses.AccessException;
 import DIedrAl_Project.negocio.administracion.Usuario;
 
 /**
- * DAO que con los métodos CRUD necesarios para los objetos Usuario
+ * DAO que con los metodos CRUD necesarios para los objetos Usuario
  * @author Diedral_Group
  */
 public interface DAOUsuario {

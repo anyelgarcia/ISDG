@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import DIedrAl_Project.negocio.administracion.Hints;
-import DIedrAl_Project.negocio.administracion.Persona;
 import DIedrAl_Project.negocio.administracion.Usuario;
 import DIedrAl_Project.presentacion.Controlador;
 import DIedrAl_Project.presentacion.auxiliar.Confirm;

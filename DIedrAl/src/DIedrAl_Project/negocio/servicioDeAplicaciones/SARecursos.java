@@ -22,6 +22,10 @@ public interface SARecursos {
 	public void addSesion(Sesion ses) throws AccessException;
 
 	public void removeSesion(Sesion ses) throws AccessException;
+	
+	public void addSesionProgramada(SesionProgramada sesion) throws AccessException;
+	
+	public void removeSesionProgramada(SesionProgramada sesion) throws AccessException;
 
 	public ArrayRecursos filtrarRecursosPorNombre(String nombre);
 
@@ -56,6 +60,10 @@ public interface SARecursos {
 	public ArrayActividades filtrarActividadesDesde(Dificultad dif);
 
 	public ArrayActividades filtrarActividadesHasta(Dificultad dif);
+	
+	public ArraySesionesProgramadas filtrarSesionProgramadaPorNifPaciente(String nif);
+	
+	public ArraySesionesProgramadas filtrarSesionProgramadaPorNifTerapeuta(String nif);
 
 	public ArraySesiones getSesiones();
 
@@ -63,10 +71,16 @@ public interface SARecursos {
 
 	public ArrayRecursos getRecursos();
 	
+	public ArraySesionesProgramadas getSesionesProgramadas(Fecha fecha);
+	
 	public void updateSesion(Sesion ses) throws AccessException;
 	
 	public void updateActividad(Actividad act) throws AccessException;
 	
 	public void updateRecurso(Recurso rec) throws AccessException;
 	
+	public void updateSesionProgramada(SesionProgramada sesion) throws AccessException;
+
+	
+
 }

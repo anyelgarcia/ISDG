@@ -24,6 +24,7 @@ public class DAObasico<S extends ObjetoAlmacenable> {
 		obj.close();
 	}
 
+	@SuppressWarnings("unchecked")
 	public S consultar(String id, String file) throws IOException,
 			ClassNotFoundException {
 		FileInputStream fis = new FileInputStream(file);
@@ -42,6 +43,7 @@ public class DAObasico<S extends ObjetoAlmacenable> {
 		return p;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void modificar(S nuevo, String file) throws IOException,
 			ClassNotFoundException {
 		FileInputStream fis = new FileInputStream(file);
@@ -72,6 +74,7 @@ public class DAObasico<S extends ObjetoAlmacenable> {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public ArrayList<S> obtenerDatos(String file) throws IOException,
 			ClassNotFoundException {
 		ArrayList<S> r = new ArrayList<>();
@@ -98,6 +101,7 @@ public class DAObasico<S extends ObjetoAlmacenable> {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void borrar(String id, String file) throws IOException,
 			ClassNotFoundException {
 		FileInputStream fis = new FileInputStream(file);
@@ -124,6 +128,7 @@ public class DAObasico<S extends ObjetoAlmacenable> {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean exists(String id, String file)
 			throws ClassNotFoundException, IOException {
 		FileInputStream fis;
@@ -149,6 +154,7 @@ public class DAObasico<S extends ObjetoAlmacenable> {
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	public HashSet<S> obtenerDatosSet(String file) throws IOException,
 			ClassNotFoundException {
 		HashSet<S> r = new HashSet<>();

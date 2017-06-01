@@ -1,6 +1,5 @@
 package DIedrAl_Project.integracion.DAOinterfaces;
 
-import java.io.IOException;
 import java.util.HashSet;
 
 import DIedrAl_Project.integracion.BasicClasses.AccessException;

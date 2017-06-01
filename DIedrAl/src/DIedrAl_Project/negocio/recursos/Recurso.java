@@ -6,6 +6,9 @@ import java.net.*;
 import java.nio.file.*;
 import java.util.*;
 
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+
 
 public class Recurso extends Etiquetable {
 
@@ -82,4 +85,30 @@ public class Recurso extends Etiquetable {
 		this.fichero=nuevo;
 	}
 	
+	public static void main(String...args){
+
+		// CREA UN NUEVO SELECTOR DE ARCHIVOS
+		final JFileChooser fc = new JFileChooser();
+
+		// Abre la ventanita para elegir archivo y registra lo que ha hecho el usuario en returnVal
+		int returnVal = fc.showOpenDialog(new JFrame("Prueba"));
+
+		// Comprueba si el usuario ha escogido aceptar/abrir (hay más opciones como cancel, etc en JFileChooser)
+	        if (returnVal == JFileChooser.APPROVE_OPTION) {
+
+		// Guarda la selección en un archivo.
+	            File file = fc.getSelectedFile();
+
+		// Y ahora crea un recurso sobre la base de ese archivo e intenta abrirlo
+	            Recurso rec = new Recurso("Recurso de Prueba", file);
+	            try {
+					File path = new File ("/src/recursos/");
+					path.mkdirs();
+					Files.copy(rec.getPath(),path.getAbsoluteFile().toPath(), StandardCopyOption.REPLACE_EXISTING);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	        } 
+	}
 }

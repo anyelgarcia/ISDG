@@ -9,11 +9,12 @@ import DIedrAl_Project.integracion.DAOinterfaces.DAOPaciente;
 import DIedrAl_Project.integracion.DAOinterfaces.DAORecurso;
 import DIedrAl_Project.integracion.DAOinterfaces.DAORelacionable;
 import DIedrAl_Project.integracion.DAOinterfaces.DAOSesion;
+import DIedrAl_Project.integracion.DAOinterfaces.DAOSesionProgramada;
 import DIedrAl_Project.integracion.DAOinterfaces.DAOUsuario;
 
 /**
- * Factoría de objetos DAO (utiliza el patrón 
- * Singleton para tener una única instancia)
+ * FactorÃ­a de objetos DAO (utiliza el patrÃ“n 
+ * Singleton para tener una Ãºnica instancia)
  * @author Diedral_Group
  */
 public class SimpleFileDAOFactory implements DAOFactory {
@@ -53,6 +54,11 @@ public class SimpleFileDAOFactory implements DAOFactory {
 	@Override
 	public DAOSesion getDAOSesion() {
 		return DAOSesionImp.getInstance();
+	}
+	
+	@Override
+	public DAOSesionProgramada getDAOSesionProgramada() {
+		return DAOSesionProgramadaImp.getInstance();
 	}
 
 	@Override

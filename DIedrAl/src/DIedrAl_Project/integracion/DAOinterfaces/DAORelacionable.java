@@ -1,13 +1,12 @@
 package DIedrAl_Project.integracion.DAOinterfaces;
 
-import java.io.IOException;
 import java.util.*;
 
 import DIedrAl_Project.integracion.BasicClasses.AccessException;
 import DIedrAl_Project.negocio.Relacion;
 
 /**
- * DAO que con los métodos CRUD necesarios para los objetos de relaciones
+ * DAO que con los mÃ©todos CRUD necesarios para los objetos de relaciones
  * @author Diedral_Group
  */
 public interface DAORelacionable {

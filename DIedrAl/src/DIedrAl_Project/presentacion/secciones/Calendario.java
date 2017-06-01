@@ -347,9 +347,8 @@ public class Calendario extends ColorPanel{
 			
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
 				private static final long serialVersionUID = 1L;
-				String[] strings = { };
-	            public int getSize() { return strings.length; }
-	            public String getElementAt(int i) { return strings[i]; }
+	            public int getSize() { return aux.length; }
+	            public String getElementAt(int i) { return aux[i]; }
 	        });
 	    }  
 	    
@@ -363,23 +362,33 @@ public class Calendario extends ColorPanel{
 			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	    } 
 	    
-	    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {                                         
-	    	Confirm c = new Confirm();
-			c.setMensaje("La sesión programada se eliminará del sistema.");
-	    	c.setVisible(true);
-	    	c.addListener(this);
+	    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {  
+	    	int i = jList1.getSelectedIndex();
+	    	if(i!=-1){
+		    	Confirm c = new Confirm();
+				c.setMensaje("La sesión programada se eliminará del sistema.");
+		    	c.setVisible(true);
+		    	c.addListener(this);
+	    	}else new Error("Selecciona una sesión");
 	    }                                        
 
-	    private void editarActionPerformed(java.awt.event.ActionEvent evt) {                                         
-	    	new MenuCalendario();
-			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+	    private void editarActionPerformed(java.awt.event.ActionEvent evt) {
+	    	int i = jList1.getSelectedIndex();
+	    	if(i!=-1){
+	    		SesionProgramada a = getSelectedSesionProgramada(i, sesiones);
+				new PantallaSesionProgramada(a, Modo.EDITAR);
+				dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+			}else new Error("Selecciona una sesión");
+	    	
 	    } 
 	    
 	    private void seleccionarActionPerformed(java.awt.event.ActionEvent evt) {                                         
 	    	int i = jList1.getSelectedIndex();
-			SesionProgramada a = getSelectedSesionProgramada(i, sesiones);
-			new PantallaSesionProgramada(a);
-			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+	    	if(i!=-1){
+				SesionProgramada a = getSelectedSesionProgramada(i, sesiones);
+				new PantallaSesionProgramada(a, Modo.VISTA);
+				dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+	    	}else{new Error("Selecciona una sesión");}
 	    }
 
 	    @Override
@@ -805,7 +814,6 @@ public class Calendario extends ColorPanel{
 	    
 
 		/**
-
 	     * Función que se ejecuta al pulsar aplicar filtro bajo la lista de pacientes.
 	     * 
 	     * @param evt

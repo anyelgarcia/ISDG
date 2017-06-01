@@ -1,19 +1,36 @@
 package DIedrAl_Project.presentacion.secciones;
 
 import java.awt.Color;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.Set;
 import java.util.TreeSet;
 
+import DIedrAl_Project.negocio.administracion.Hints;
+import DIedrAl_Project.negocio.administracion.Usuario;
+import DIedrAl_Project.negocio.calendario.Fecha;
 import DIedrAl_Project.negocio.calendario.SesionProgramada;
+import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.negocio.recursos.Sesion;
+import DIedrAl_Project.presentacion.Controlador;
+import DIedrAl_Project.presentacion.administracion.PantallaUsuario;
+import DIedrAl_Project.presentacion.auxiliar.Confirm;
+import DIedrAl_Project.presentacion.auxiliar.Error;
+import DIedrAl_Project.presentacion.auxiliar.Modo;
 
 public class PantallaSesionProgramada extends javax.swing.JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2360052013258980696L;
 	private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
@@ -70,15 +87,24 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;  
     private Sesion sesion;
+    private Modo modo;
+    private Paciente pacientes[];
+    private Usuario terapeutas[];
+    private Paciente pacientesSesion[];
+    private Usuario terapeutasSesion[];
     
-    public PantallaSesionProgramada(Sesion sesion) {
+    public PantallaSesionProgramada(Sesion sesion, Modo modo) {
     	this.sesion = sesion;
+    	this.modo = modo;
+    	pacientes = new Paciente[0];
+        terapeutas = new Usuario[0];
+        pacientesSesion = new Paciente[0];
+        terapeutasSesion = new Usuario[0];
         initGUI();
     }
     
     private void initGUI() {
 
-        jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -123,6 +149,8 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
@@ -140,13 +168,81 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jTextField10 = new javax.swing.JTextField();
 
-        jButton4.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jButton4.setText("Quitar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
+        
+        switch(modo){
+        	case ADD: setTitle("Añadir Sesión Programada"); break;
+        	case EDITAR: setTitle("Editar Sesión Programada"); break;
+        	case VISTA: setTitle("Consultar Sesión Programada"); break;
+        	default: new Error("Error raro modo Sesión Programada");
+        }
+        
+        if(sesion!=null){
+        	
+        	jTextField1.setText(sesion.getNombre());
+        	jTextField2.setText(String.valueOf(sesion.getDuracion()));
+        	jTextArea1.setText(sesion.getDescripcion());
+        	String str ="";
+        	TreeSet<String> etiqs = sesion.getEtiquetas();
+        	if(!etiqs.isEmpty() && !etiqs.first().equals("")){
+	        	for(String et: sesion.getEtiquetas())
+	        		str+=et +", ";
+        	}
+        	jTextArea2.setText(str);
+        	jTextArea3.setText(sesion.getDesarrollo());
+        	jTextArea4.setText(sesion.getVariaciones());
+        	
+        	if(sesion instanceof SesionProgramada){
+        		
+        		jComboBox1.setSelectedItem(((SesionProgramada) sesion).getFecha().getDia());
+        		jComboBox2.setSelectedItem(((SesionProgramada) sesion).getFecha().getMes());
+        		jComboBox3.setSelectedItem(((SesionProgramada) sesion).getFecha().getAño());
+        		Set<String> nifsPac = ((SesionProgramada) sesion).getPacientes();
+        		int i=0;
+        		pacientesSesion = new Paciente[nifsPac.size()];
+        		for(String nif: nifsPac){
+        			pacientesSesion[i] = Controlador.getPacienteConNif(nif);
+        			i++;
+        		}
+        		Set<String> nifsTer = ((SesionProgramada) sesion).getPacientes();
+        		i=0;
+        		terapeutasSesion = new Usuario[nifsTer.size()];
+        		for(String nif: nifsTer){
+        			terapeutasSesion[i] = Controlador.getUsuarioConNif(nif);
+        			i++;
+        		}
+        		
+        		jList4.setModel(new javax.swing.AbstractListModel<String>() {
+        			private static final long serialVersionUID = 1L;
+                    public int getSize() { return terapeutasSesion.length; }
+                    public String getElementAt(int i) { return (terapeutasSesion[i]).toString(); }
+                });
+
+                jList5.setModel(new javax.swing.AbstractListModel<String>() {
+        			private static final long serialVersionUID = 1L;
+                    public int getSize() { return pacientesSesion.length; }
+                    public String getElementAt(int i) { return (pacientesSesion[i]).toString(); }
+                });
+        		
+        	}
+        }
+        if(pacientesSesion==null && terapeutasSesion==null){
+        	jList4.setModel(new javax.swing.AbstractListModel<String>() {
+    			private static final long serialVersionUID = 1L;
+    			String strings[] = {};
+                public int getSize() { return strings.length; }
+                public String getElementAt(int i) { return strings[i]; }
+            });
+
+            jList5.setModel(new javax.swing.AbstractListModel<String>() {
+    			private static final long serialVersionUID = 1L;
+    			String strings[] = {};
+                public int getSize() { return strings.length; }
+                public String getElementAt(int i) { return strings[i]; }
+            });
+        }
+
+        jScrollPane8.setViewportView(jList4);
+        jScrollPane9.setViewportView(jList5);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -206,7 +302,7 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         jLabel8.setToolTipText("");
 
         jLabel9.setFont(new java.awt.Font("SansSerif", 1, 12)); 
-        jLabel9.setText("Actividadess Empleadas");
+        jLabel9.setText("Actividades Empleadas");
         jLabel9.setToolTipText("");
 
         jButton1.setFont(new java.awt.Font("SansSerif", 1, 12)); 
@@ -217,6 +313,7 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
             }
         });
 
+
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(Calendario.DIAS));
 		jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(Calendario.MESES));
 		jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(Calendario.AÑOS));
@@ -224,33 +321,26 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("SansSerif", 1, 12)); 
         jLabel10.setText("Fecha:");
 
-        jList3.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane7.setViewportView(jList3);
-
-        jList4.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane8.setViewportView(jList4);
-
-        jList5.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane9.setViewportView(jList5);
-
-        jList6.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        
+        Hints hints1[] = {Hints.PACIENTE};
+		String valores[] = {"comodín"};
+		pacientes = Controlador.buscarPaciente(hints1, valores);
+		Hints hints2[] = {Hints.USUARIO};
+		terapeutas = Controlador.buscarUsuario(hints2, valores);        
+		
+		jList6.setModel(new javax.swing.AbstractListModel<String>() {
+			private static final long serialVersionUID = 1L;
+            public int getSize() { return terapeutas!= null ? terapeutas.length : 0; }
+            public String getElementAt(int i) { return (terapeutas[i]).toString(); }
         });
         jScrollPane10.setViewportView(jList6);
+
+        jList3.setModel(new javax.swing.AbstractListModel<String>() {
+			private static final long serialVersionUID = 1L;
+            public int getSize() { return pacientes!= null ? pacientes.length : 0; }
+            public String getElementAt(int i) { return (pacientes[i]).toString(); }
+        });
+        jScrollPane7.setViewportView(jList3);
         
         jList3.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jList4.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -285,7 +375,7 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         jButton3.setText("Quitar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton5ActionPerformed(evt);
             }
         });
 
@@ -293,7 +383,7 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         jButton5.setText("Añadir");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -302,6 +392,22 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
+            }
+        });
+        
+        jButton7.setFont(new java.awt.Font("SansSerif", 1, 12)); 
+        jButton7.setText(" Buscar ");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        
+        jButton8.setFont(new java.awt.Font("SansSerif", 1, 12)); 
+        jButton8.setText(" Buscar ");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
             }
         });
 
@@ -337,28 +443,9 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         jLabel22.setText("DNI:");
         jLabel22.setToolTipText("");
         
-        if(sesion!=null){
-        	
-        	jTextField1.setText(sesion.getNombre());
-        	jTextField2.setText(String.valueOf(sesion.getDuracion()));
-        	jTextArea1.setText(sesion.getDescripcion());
-        	String str ="";
-        	TreeSet<String> etiqs = sesion.getEtiquetas();
-        	if(!etiqs.isEmpty() && !etiqs.first().equals("")){
-	        	for(String et: sesion.getEtiquetas())
-	        		str+=et +", ";
-        	}
-        	jTextArea2.setText(str);
-        	jTextArea3.setText(sesion.getDesarrollo());
-        	jTextArea4.setText(sesion.getVariaciones());
-        	if(sesion instanceof SesionProgramada){
-        		jComboBox1.setSelectedItem(((SesionProgramada) sesion).getFecha().getDia());
-        		jComboBox2.setSelectedItem(((SesionProgramada) sesion).getFecha().getMes());
-        		jComboBox3.setSelectedItem(((SesionProgramada) sesion).getFecha().getAño());
-        	}
-        	
+        if(modo.equals(Modo.EDITAR)){
+        	jTextField1.setEditable(false);
         }
-        
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -389,13 +476,13 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane6, 166, 166, 166)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addComponent(jLabel8)))
-                                .addGap(18, 18, 18)
+                                .addGap(48, 48, 48)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane5, 166, 166, 166)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addComponent(jLabel9))))
@@ -467,6 +554,8 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
                                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel17)
                                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)  
                                     .addComponent(jLabel18)
                                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel20)
@@ -477,7 +566,7 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
                                     .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addGap(370, 370, 370)
+                        .addGap(480, 480, 480)
                         .addComponent(jButton3)
                         .addGap(95, 95, 95)
                         .addComponent(jButton6)))
@@ -546,8 +635,11 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel18)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(18, 18, 18)
+                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                ))))
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -555,8 +647,8 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
                             .addComponent(jLabel9))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane5, 166, 166, 166)
+                            .addComponent(jScrollPane6, 166, 166, 166))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -587,7 +679,10 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        ))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -604,35 +699,251 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         getContentPane().setBackground(new Color(255, 111, 105));
         setVisible(true);
         pack();
-    }                                                             
+    }                                          
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }                                           
-
+    /**
+     * Función que permite guardar y editar una sesión programada. Recoge los campos de la pantalla y 
+     * rellena una plantilla de sesión programada. Según el modo, la guarda como sesión nueva
+     * o actualiza una sesión anterior.
+     * @param evt
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+    	String etiquetasSinFormato = jTextArea2.getText();
+		String etiquetas[] = etiquetasSinFormato.split(",");
+		String nombre = jTextField1.getText();
+		Fecha fecha = new Fecha(Integer.valueOf(String.valueOf(jComboBox1.getSelectedItem())), String.valueOf(jComboBox2.getSelectedItem()), Integer.parseInt(String.valueOf(jComboBox3.getSelectedItem())), 0);
+		int duracion = 0;
+		try{
+			duracion = Integer.valueOf(String.valueOf((jTextField2.getText())));
+		}catch(NumberFormatException e){
+			new Error("La duración ha de ser un número entero mayor que cero.");
+			return;
+		}
+		if(nombre.equals("") || (fecha.getAño()==2007 && fecha.getMes().equals("enero")&&fecha.getDia()==1))
+			new Error("Hay que rellenar nombre y fecha");
+		else{
+			SesionProgramada info = new SesionProgramada(String.valueOf(jTextField1.getText()), fecha, etiquetas);
+			info.setDuracion(duracion);
+			info.setDescripcion(String.valueOf(jTextArea1.getText()));
+			info.setDesarrollo(String.valueOf(jTextArea4.getText()));
+			info.setVariaciones(String.valueOf(jTextArea3.getText()));
+			for (Paciente p : pacientesSesion) {
+				info.addPaciente(p.getNif());
+			}
+			for (Usuario t : terapeutasSesion) {
+				info.addTerapeuta(t.getNif());
+			}
+			if(modo.equals(Modo.ADD)) Controlador.addSesionProgramada(info);
+			else if(modo.equals(Modo.EDITAR)) Controlador.modificaEtiquetable(sesion, info);
+			else new Error("Error modo añadir sesión programada");
+			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+		}
     }                                        
 
+    /**
+     * Se quita al paciente seleccionado y se reconstruye el modelo
+     * @param evt
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+    	int i = jList5.getSelectedIndex();
+		if(i!=-1){
+			ArrayList<Paciente> aux = new ArrayList<Paciente>();
+			int n =pacientesSesion.length;
+			for(int j=0; j<n; j++){
+				if(i!=j)aux.add(pacientesSesion[j]);
+			}
+			pacientesSesion = new Paciente[aux.size()];
+			i=0;
+    		for(Paciente p: aux){
+    			pacientesSesion[i] = p;
+    			i++;
+    		}
+
+            jList5.setModel(new javax.swing.AbstractListModel<String>() {
+    			private static final long serialVersionUID = 1L;
+                public int getSize() { return pacientesSesion.length; }
+                public String getElementAt(int i) { return (pacientesSesion[i]).toString(); }
+            });
+		}
+		else new Error("Has de seleccionar al menos un paciente.");
     }                                        
 
+    /**
+     * Se añade al paciente seleccionado (si no está repetido) y se reconstruye el modelo
+     * @param evt
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+    	int i = jList3.getSelectedIndex();
+		if(i!=-1){
+			ArrayList<Paciente> aux = new ArrayList<Paciente>();
+			int n=pacientesSesion.length;
+			for(int j=0; j<n; j++){
+				if(!((pacientesSesion[j].getNif()).equals(pacientes[i].getNif())))
+					aux.add(pacientesSesion[j]);
+			}
+			aux.add(pacientes[i]);
+			pacientesSesion = new Paciente[aux.size()];
+			i=0;
+    		for(Paciente u: aux){
+    			pacientesSesion[i] = u;
+    			i++;
+    		}
+
+    		jList5.setModel(new javax.swing.AbstractListModel<String>() {
+    			private static final long serialVersionUID = 1L;
+                public int getSize() { return pacientesSesion.length; }
+                public String getElementAt(int h) { return (pacientesSesion[h]).toString(); }
+            });
+		}
+		else new Error("Has de seleccionar al menos un Paciente.");
+    	
     }                                        
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-    }                                        
-
+    /**
+     * Se quita al usuario seleccionado y se reconstruye el modelo
+     * @param evt
+     */
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+    	int i = jList4.getSelectedIndex();
+		if(i!=-1){
+			ArrayList<Usuario> aux = new ArrayList<Usuario>();
+			int n =terapeutasSesion.length;
+			for(int j=0; j<n; j++){
+				if(i!=j)aux.add(terapeutasSesion[j]);
+			}
+			terapeutasSesion= new Usuario[aux.size()];
+			i=0;
+    		for(Usuario u: aux){
+    			terapeutasSesion[i] = u;
+    			i++;
+    		}
+
+    		jList4.setModel(new javax.swing.AbstractListModel<String>() {
+    			private static final long serialVersionUID = 1L;
+                public int getSize() { return terapeutasSesion.length; }
+                public String getElementAt(int i) { return (terapeutasSesion[i]).toString(); }
+            });
+		}
+		else new Error("Has de seleccionar al menos un usuario.");
     }                                        
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+    /**
+     * Se añade al usuario seleccionado (si no está repetido) y se reconstruye el modelo
+     * @param evt
+     */
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {   
+    	int i = jList6.getSelectedIndex();
+		if(i!=-1){
+			ArrayList<Usuario> aux = new ArrayList<Usuario>();
+			int n =terapeutasSesion.length;
+			for(int j=0; j<n; j++){
+				if(!((terapeutasSesion[j].getNif()).equals(terapeutas[i].getNif())))
+					aux.add(terapeutasSesion[j]);
+			}
+			aux.add(terapeutas[i]);
+			terapeutasSesion= new Usuario[aux.size()];
+			i=0;
+    		for(Usuario u: aux){
+    			terapeutasSesion[i] = u;
+    			i++;
+    		}
+
+    		jList4.setModel(new javax.swing.AbstractListModel<String>() {
+    			private static final long serialVersionUID = 1L;
+                public int getSize() { return terapeutasSesion.length; }
+                public String getElementAt(int i) { return (terapeutasSesion[i]).toString(); }
+            });
+		}
+		else new Error("Has de seleccionar al menos un usuario.");
+    	
     }   
+    
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    	String nombre = jTextField3.getText();
+		String apellido1 = jTextField4.getText();
+		String apellido2 = jTextField5.getText();
+		String DNI = jTextField6.getText();
+
+		ArrayList<String> campos = new ArrayList<String>();
+		ArrayList<Hints> hints = new ArrayList<Hints>();
+
+		if(nombre!=null && nombre.length()>0){
+			campos.add(nombre);
+			hints.add(Hints.NOMBRE);
+		}
+
+		if(apellido1!=null && apellido1.length()>0){
+			campos.add(apellido1);
+			hints.add(Hints.APELLIDO1);
+		}
+
+		if(apellido2!=null && apellido2.length()>0){
+			campos.add(apellido2);
+			hints.add(Hints.APELLIDO2);
+		}
+
+		if(DNI!=null && DNI.length()>0){
+			campos.add(DNI);
+			hints.add(Hints.NIF);
+		}
+
+
+		Hints [] claves = hints.toArray(new Hints[hints.size()]);
+		String [] valores = campos.toArray(new String[campos.size()]);
+
+		pacientes = Controlador.buscarPaciente(claves, valores);
+		
+		jList3.setModel(new javax.swing.AbstractListModel<String>() {
+			private static final long serialVersionUID = 1L;
+            public int getSize() { return pacientes!= null ? pacientes.length : 0; }
+            public String getElementAt(int i) { return (pacientes[i]).toString(); }
+        });
+    }    
+    
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    	String nombre = jTextField7.getText();
+		String apellido1 = jTextField8.getText();
+		String apellido2 = jTextField9.getText();
+		String DNI = jTextField10.getText();
+
+		ArrayList<String> campos = new ArrayList<String>();
+		ArrayList<Hints> hints = new ArrayList<Hints>();
+		Hints [] usuarios = null;
+
+		if(nombre!=null && nombre.length()>0){
+			campos.add(nombre);
+			hints.add(Hints.NOMBRE);
+		}
+
+		if(apellido1!=null && apellido1.length()>0){
+			campos.add(apellido1);
+			hints.add(Hints.APELLIDO1);
+		}
+
+		if(apellido2!=null && apellido2.length()>0){
+			campos.add(apellido2);
+			hints.add(Hints.APELLIDO2);
+		}
+
+		if(DNI!=null && DNI.length()>0){
+			campos.add(DNI);
+			hints.add(Hints.NIF);
+		}
+
+		usuarios = new Hints[1];
+		usuarios[0] = Hints.USUARIO;
+		
+		Hints [] claves = hints.toArray(new Hints[hints.size()]);
+		String [] valores = campos.toArray(new String[campos.size()]);
+
+		terapeutas = Controlador.buscarUsuario(claves, valores);
+		
+		jList6.setModel(new javax.swing.AbstractListModel<String>() {
+			private static final long serialVersionUID = 1L;
+            public int getSize() { return terapeutas!= null ? terapeutas.length : 0; }
+            public String getElementAt(int i) { return (terapeutas[i]).toString(); }
+        });
+    }    
     
     
      
