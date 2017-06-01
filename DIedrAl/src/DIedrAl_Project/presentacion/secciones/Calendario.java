@@ -370,16 +370,23 @@ public class Calendario extends ColorPanel{
 	    	c.addListener(this);
 	    }                                        
 
-	    private void editarActionPerformed(java.awt.event.ActionEvent evt) {                                         
-	    	new MenuCalendario();
-			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+	    private void editarActionPerformed(java.awt.event.ActionEvent evt) {
+	    	int i = jList1.getSelectedIndex();
+	    	if(i!=-1){
+	    		SesionProgramada a = getSelectedSesionProgramada(i, sesiones);
+				new PantallaSesionProgramada(a, Modo.EDITAR);
+				dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+			}else new Error("Selecciona una sesión");
+	    	
 	    } 
 	    
 	    private void seleccionarActionPerformed(java.awt.event.ActionEvent evt) {                                         
 	    	int i = jList1.getSelectedIndex();
-			SesionProgramada a = getSelectedSesionProgramada(i, sesiones);
-			new PantallaSesionProgramada(a);
-			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+	    	if(i!=-1){
+				SesionProgramada a = getSelectedSesionProgramada(i, sesiones);
+				new PantallaSesionProgramada(a, Modo.VISTA);
+				dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+	    	}else{new Error("Selecciona una sesión");}
 	    }
 
 	    @Override
@@ -805,7 +812,6 @@ public class Calendario extends ColorPanel{
 	    
 
 		/**
-
 	     * Función que se ejecuta al pulsar aplicar filtro bajo la lista de pacientes.
 	     * 
 	     * @param evt

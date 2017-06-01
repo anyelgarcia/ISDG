@@ -275,7 +275,7 @@ public class PantallaSesionBuscar extends JFrame implements confirmListener{
 			case RETURN:
 				i = jList1.getSelectedIndex();
 				s = getSelectedSesion(i, filtrados);
-				new PantallaSesionProgramada(s);
+				new PantallaSesionProgramada(s, Modo.ADD);
 				break;
 			default:
 				new Error("Error modo pantalla sesiones buscar");
