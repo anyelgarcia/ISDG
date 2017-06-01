@@ -35,7 +35,7 @@ public class DAOSesionImp implements DAOSesion {
 		try {
 			op.guardar(a, file);
 		} catch (IOException e) {
-			throw new AccessException("No se pudo guardar la sesión");
+			throw new AccessException("No se pudo guardar la sesiï¿½n");
 		}
 	}
 
@@ -44,7 +44,7 @@ public class DAOSesionImp implements DAOSesion {
 		try {
 			op.borrar(id, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException("No se pudo eliminar la sesión");
+			throw new AccessException("No se pudo eliminar la sesiï¿½n");
 		}
 	}
 
@@ -53,7 +53,7 @@ public class DAOSesionImp implements DAOSesion {
 		try {
 			op.modificar(r, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException("No se pudo modificar la sesión");
+			throw new AccessException("No se pudo modificar la sesiÃ³n");
 		}
 	}
 
@@ -71,7 +71,7 @@ public class DAOSesionImp implements DAOSesion {
 		try {
 			return op.exists(id, file);
 		} catch (ClassNotFoundException | IOException e) {
-			throw new AccessException("No se pudo comprobar la existencia de la sesión");
+			throw new AccessException("No se pudo comprobar la existencia de la sesiï¿½n");
 		}
 	}
 
