@@ -1,6 +1,5 @@
 package DIedrAl_Project.negocio.calendario;
 
-import java.io.Serializable;
 import java.time.*;
 import java.util.*;
 

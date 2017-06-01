@@ -3,8 +3,8 @@ package DIedrAl_Project.integracion.DAOinterfaces;
 import DIedrAl_Project.integracion.BasicClasses.tRelacion;
 
 /**
- * Interfaz para crear una factoría con todos los métodos DAO necesarios
- * en el programa (patrón AbstractFactoryMethod)
+ * Interfaz para crear una factorï¿½a con todos los mÃ©todos DAO necesarios
+ * en el programa (patrÃ³n AbstractFactoryMethod)
  * @author Diedral_Group
  */
 public interface DAOFactory {
@@ -24,4 +24,6 @@ public interface DAOFactory {
 	public DAORelacionable getDAORelacion(tRelacion rel);
 	
 	public DAOCentro getDAOCentro();
+
+	public DAOSesionProgramada getDAOSesionProgramada();
 }

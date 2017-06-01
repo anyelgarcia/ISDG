@@ -221,8 +221,12 @@ public class PantallaSesionBuscar extends JFrame implements confirmListener{
 	 */
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 		String nombre = jTextField1.getText();
-		Set<String> setEtiquetas = new HashSet<String>(Arrays.asList(jTextArea1.getText().split(",")));
-		Set<String> setDestinatarios = new HashSet<String>(Arrays.asList(jTextArea2.getText().split(",")));
+		Set<String> setEtiquetas = new HashSet<String>();
+		Set<String> setDestinatarios = new HashSet<String>();
+		if(!jTextArea1.getText().equals(""))
+			setEtiquetas = new HashSet<String>(Arrays.asList(jTextArea1.getText().split(",")));
+		if(!jTextArea2.getText().equals(""))
+			setDestinatarios = new HashSet<String>(Arrays.asList(jTextArea2.getText().split(",")));
 		Integer ini = null, end = null;
 		if(!jTextField2.getText().equals("")) 
 			ini = Integer.parseInt(jTextField2.getText());
@@ -250,7 +254,7 @@ public class PantallaSesionBuscar extends JFrame implements confirmListener{
 	 * editando/eliminando/consultando realiza una acción.
 	 */
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-		int i = jList1.getSelectedIndex(); Sesion s; JFrame p;
+		int i = jList1.getSelectedIndex(); Sesion s;
 		if(i != -1){
 			switch(modo){
 			case ELIMINAR:
