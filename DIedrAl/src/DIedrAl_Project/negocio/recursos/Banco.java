@@ -1,11 +1,15 @@
 package DIedrAl_Project.negocio.recursos;
 
+import DIedrAl_Project.negocio.calendario.SesionProgramada;
+
 public class Banco {
 	private ArrayActividades actividades;
 
 	private ArraySesiones sesiones;
 
 	private ArrayRecursos recursos;
+	
+	private ArraySesionesProgramadas sesionesProgramadas;
 
 	private static Banco instancia = null;
 
@@ -21,6 +25,7 @@ public class Banco {
 		recursos = new ArrayRecursos();
 		actividades = new ArrayActividades();
 		sesiones = new ArraySesiones();
+		sesionesProgramadas = new ArraySesionesProgramadas();
 	}
 
 	public ArrayActividades getActividades() {
@@ -38,13 +43,21 @@ public class Banco {
 	public void setSesiones(ArraySesiones sesiones) {
 		this.sesiones = sesiones;
 	}
+	
+	public ArraySesionesProgramadas getSesionesProgramadas() {
+		return sesionesProgramadas;
+	}
+
+	public void setSesionesProgramadas(ArraySesionesProgramadas sesionesProgramadas) {
+		this.sesionesProgramadas = sesionesProgramadas;
+	}
 
 	public void addRecurso(Recurso rec) {
 		recursos.add(rec);
 	}
 
 	/**
-	 * elimina el recurso dado de la lista de recursos del banco, así como de
+	 * elimina el recurso dado de la lista de recursos del banco, asï¿½ como de
 	 * los conjuntos de asociados de las listas de sesiones y de actividades del
 	 * banco
 	 * @param rec
@@ -81,6 +94,26 @@ public class Banco {
 		this.sesiones.forEach((sesion) -> {
 			if (sesion.getAsociados().contains(ses)) {
 				sesion.asociados.remove(ses);
+			}
+		});
+	}
+	
+	public void addSesionProgramada(SesionProgramada sp) {
+		sesionesProgramadas.add(sp);
+	}
+
+	public void removeSesionProgramada(SesionProgramada sp) {
+		sesionesProgramadas.erase(sp);
+		
+		this.actividades.forEach((actividad) -> {
+			if (actividad.getAsociados().contains(sp)) {
+				actividad.asociados.remove(sp);
+			}
+		});
+		
+		this.sesionesProgramadas.forEach((sesionProgramada) -> {
+			if (sesionProgramada.getAsociados().contains(sp)) {
+				sesionProgramada.asociados.remove(sp);
 			}
 		});
 	}
