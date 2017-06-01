@@ -20,8 +20,6 @@ public class SARecursosImpl implements SARecursos {
 	private DAOActividad daoact;
 
 	private DAOSesion daoses;
-	
-	private DAOSesionProgramada daosp;
 
 	private static SARecursosImpl instancia = null;
 
@@ -39,7 +37,6 @@ public class SARecursosImpl implements SARecursos {
 		daorec = factoria.getDAORecurso();
 		daoact = factoria.getDAOActividad();
 		daoses = factoria.getDAOSesion();
-		daosp = factoria.getDAOSesionProgramada();
 		bank = Banco.getInstancia();
 		cargarBanco();
 	}
@@ -67,18 +64,15 @@ public class SARecursosImpl implements SARecursos {
 		HashSet<Programable> programables = new HashSet<Programable>();
 		programables.addAll(daoses.listarSesiones());
 		programables.addAll(daoact.listarActividades());
-		programables.addAll(daosp.listarSesionesProgramadas());
 		for (Programable p : programables) {
 			if (p.getAsociados().contains(rec)) {
 				p.getAsociados().remove(rec);
 				try {
-					if (p instanceof SesionProgramada)
-						daosp.modificarSesionProgramada((SesionProgramada) p);
-					else if (p instanceof Sesion) 
+					if (p instanceof Sesion) {
 						daoses.modificarSesion((Sesion) p);
-					else
+					} else {
 						daoact.modificarActividad((Actividad) p);
-
+					}
 				} catch (AccessException e) {
 					throw new AccessException(e.getMessage()
 							+ "\nFallo al utilizar el DAO");
@@ -102,6 +96,9 @@ public class SARecursosImpl implements SARecursos {
 		// Primera capa de borrado: se elimina el recurso de la lista de
 		// recursos del banco
 		bank.removeActividad(act);
+		if (daoact.existeActividad(act.getId())) {
+
+		}
 		daoact.eliminarActividad(act.getId());
 
 		// Segunda capa de borrado: se elimina de todas los programables que la
@@ -109,19 +106,16 @@ public class SARecursosImpl implements SARecursos {
 		HashSet<Programable> programables = new HashSet<Programable>();
 		programables.addAll(daoses.listarSesiones());
 		programables.addAll(daoact.listarActividades());
-		programables.addAll(daosp.listarSesionesProgramadas());
 		for (Programable p : programables) {
 			if (p.getAsociados().contains(act)) {
 				p.getAsociados().remove(act);
 				try {
-					if (p instanceof SesionProgramada)
-						daosp.modificarSesionProgramada((SesionProgramada) p);
-					else if (p instanceof Sesion) 
+					if (p instanceof Sesion) {
 						daoses.modificarSesion((Sesion) p);
-					else
+					} else {
 						daoact.modificarActividad((Actividad) p);
-
-				}catch (AccessException e) {
+					}
+				} catch (AccessException e) {
 					throw new AccessException(e.getMessage()
 							+ "\nFallo al utilizar el DAO");
 				}
@@ -141,20 +135,6 @@ public class SARecursosImpl implements SARecursos {
 		bank.removeSesion(ses);
 		daoses.eliminarSesion(ses.getId());
 	}
-	
-
-	@Override
-	public void addSesionProgramada(SesionProgramada sp) throws AccessException {
-		bank.addSesionProgramada(sp);
-		daosp.crearSesionProgramada(sp);
-	}
-	
-	@Override
-	public void removeSesionProgramada(SesionProgramada sp) throws AccessException {
-		bank.removeSesionProgramada(sp);
-		daosp.eliminarSesionProgramada(sp.getId());
-	}
-	
 
 	@Override
 	public ArrayRecursos filtrarRecursosPorNombre(String nombre) {
@@ -242,14 +222,6 @@ public class SARecursosImpl implements SARecursos {
 	public ArrayActividades filtrarActividadesHasta(Dificultad dif) {
 		return bank.getActividades().filtrarHasta(dif);
 	}
-	
-	public ArraySesionesProgramadas filtrarSesionProgramadaPorNifPaciente(String nif){
-		return bank.getSesionesProgramadas().filtrarNifPaciente(nif);
-	}
-	
-	public ArraySesionesProgramadas filtrarSesionProgramadaPorNifTerapeuta(String nif){
-		return bank.getSesionesProgramadas().filtrarNifTerapeuta(nif);
-	}
 
 	@Override
 	public ArraySesiones getSesiones() {
@@ -264,11 +236,6 @@ public class SARecursosImpl implements SARecursos {
 	@Override
 	public ArrayRecursos getRecursos() {
 		return bank.getRecursos();
-	}
-	
-	@Override
-	public ArraySesionesProgramadas getSesionesProgramadas(Fecha fecha) {
-		return bank.getSesionesProgramadas().filtrarFecha(fecha);
 	}
 
 	private void cargarBanco() {
@@ -297,15 +264,6 @@ public class SARecursosImpl implements SARecursos {
 		} catch (AccessException e) {
 			// e.printStackTrace();
 		}
-		
-		try {
-			HashSet<SesionProgramada> sep = daosp.listarSesionesProgramadas();
-			for (SesionProgramada s : sep) {
-				bank.addSesionProgramada(s);
-			}
-		} catch (AccessException e) {
-			// e.printStackTrace();
-		}
 	}
 
 	@Override
@@ -322,10 +280,4 @@ public class SARecursosImpl implements SARecursos {
 	public void updateRecurso(Recurso rec) throws AccessException {
 		this.daorec.modificarRecurso(rec);
 	}
-	
-	@Override
-	public void updateSesionProgramada(SesionProgramada sp) throws AccessException {
-		this.daosp.modificarSesionProgramada(sp);
-	}
-
 }
