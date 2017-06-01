@@ -72,7 +72,7 @@ public abstract class Programable extends Etiquetable {
 	public void addActividad(Actividad act) throws AlreadyBoundException {
 		if (act == this) {
 			throw new AlreadyBoundException(
-					"No se puede añadir una actividad a sí misma");
+					"No se puede aï¿½adir una actividad a sï¿½ misma");
 		} else if (asociados.contains(act)) {
 			throw new AlreadyBoundException("Actividad " + act
 					+ " ya existente");
@@ -134,6 +134,15 @@ public abstract class Programable extends Etiquetable {
 			sb.append("\n" + e.toString());
 		}
 		return sb.toString();
+	}
+	
+	public void igualarCampos(Programable that){
+		super.igualarCampos(that);
+		this.duracion = that.duracion;
+		this.destinatarios = that.destinatarios;
+		this.asociados = that.asociados;
+		this.desarrollo = that.desarrollo;
+		this.variaciones = that.variaciones;
 	}
 
 }

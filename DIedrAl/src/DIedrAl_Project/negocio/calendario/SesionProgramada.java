@@ -101,6 +101,14 @@ public class SesionProgramada extends Sesion implements Serializable {
 			res+= pac + ", ";
 		return res;
 	}
+	
+	public void igualarCampos(SesionProgramada that){
+		super.igualarCampos(that);
+		this.nifsPacientes = that.nifsPacientes;
+		this.nifsTerapeutas = that.nifsTerapeutas;
+		this.fecha = that.fecha;
+		this.notas = that.notas;
+	}
 
 	
 	

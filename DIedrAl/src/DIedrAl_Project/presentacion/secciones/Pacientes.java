@@ -445,7 +445,7 @@ public class Pacientes extends ColorPanel{
 					info.getDatos().addAficion(str);
 				
 				if(mode.equals(Modo.ADD)) Controlador.addPaciente(info);
-				else if(mode.equals(Modo.VISTA)) Controlador.modificaPaciente(pac, info);
+				else if(mode.equals(Modo.EDITAR)) Controlador.modificaPaciente(pac, info);
 				dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 			}
 		} 
@@ -688,14 +688,12 @@ public class Pacientes extends ColorPanel{
 			    	break;
 				case EDITAR:
 					i = jList1.getSelectedIndex();
-					p = resultados[i];
-					j = new PantallaPaciente(p, Modo.EDITAR);
+					j = new PantallaPaciente(resultados[i], Modo.EDITAR);
 					j.setVisible(true);
 					break;
 				case BUSCAR:
 					i = jList1.getSelectedIndex();
-					p = resultados[i];
-					j = new PantallaPaciente(p, Modo.VISTA);
+					j = new PantallaPaciente(resultados[i], Modo.VISTA);
 					j.setVisible(true);
 					break;
 				default:
