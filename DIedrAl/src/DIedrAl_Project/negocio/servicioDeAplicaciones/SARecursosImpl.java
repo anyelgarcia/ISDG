@@ -47,11 +47,16 @@ public class SARecursosImpl implements SARecursos {
 	public void addRecurso(Recurso rec) throws AccessException, IOException {
 		bank.addRecurso(rec);
 		daorec.crearRecurso(rec);
-		File dir = new File("C:\\hlocal\\git\\ISDG\\DIedrAl\\src\\recursos");
-		Logger.getLogger(SARecursosImpl.class.getName()).severe(dir.canWrite() +"");
+		File dir = new File("/src/recursos");
 		dir.mkdirs();
 		File recursoSave= new File(dir, rec.getFileName());
 		recursoSave.createNewFile();
+		File resourcesDir = new File("\\srcrecursos/" + rec.getFileName());
+		resourcesDir.mkdirs();
+		Logger.getLogger(SARecursosImpl.class.getName()).severe(resourcesDir.mkdirs() + "");
+		//Files.createDirectories(Paths.get(resourcesDir.getPath()));
+		Files.copy(rec.getPath(), resourcesDir.toPath(),
+				StandardCopyOption.REPLACE_EXISTING);
 	}
 
 	@Override
