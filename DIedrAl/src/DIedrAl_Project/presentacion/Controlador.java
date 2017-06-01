@@ -334,7 +334,7 @@ public class Controlador {
 	public static void modificaPaciente(Paciente antiguo, Paciente nuevo){
 		antiguo.igualarCampos(nuevo);
 		try {
-			SAFactory.getInstancia().newSAPacientes(usuario.getCentro()).updatePaciente(nuevo);
+			SAFactory.getInstancia().newSAPacientes(usuario.getCentro()).updatePaciente(antiguo);
 		} catch (AccessException e) {
 			new Error("No se ha podido modificar el paciente");
 		}

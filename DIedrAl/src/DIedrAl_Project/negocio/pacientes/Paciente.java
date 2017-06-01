@@ -38,12 +38,10 @@ public class Paciente extends Persona{
 		return datos;
 	}
 
-	@Override
-	public void igualarCampos(Persona that){
+	public void igualarCampos(Paciente that){
 		super.igualarCampos(that);
-		Paciente aux = (Paciente) that;
-		datos = aux.datos;
-		notas = aux.notas;
+		this.datos = that.datos;
+		this.notas = that.notas;
 	}
 
 }

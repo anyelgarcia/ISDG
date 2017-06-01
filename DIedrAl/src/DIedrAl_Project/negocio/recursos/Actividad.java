@@ -12,13 +12,17 @@ public class Actividad extends Programable {
 		super(name, etiquetas);
 	}
 
-
 	public Dificultad getDificultad() {
 		return this.dificultad;
 	}
 
 	public void setDificultad(Dificultad dificultad) {
 		this.dificultad = dificultad;
+	}
+	
+	public void igualarCampos(Actividad that){
+		super.igualarCampos(that);
+		this.dificultad = that.dificultad;
 	}
 
 }

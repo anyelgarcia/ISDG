@@ -210,7 +210,7 @@ public class SAPacientesImpl implements SAPacientes {
 		Relacion usuToPac = null;
 		for (Relacion r : setrel) {
 			//Si hay una relacion en la que el usuario sea el agente, la guardamos
-			if (r.getIdAgente() == usu.getId()) {
+			if (r.getIdAgente().equals(usu.getId())) {
 				usuToPac = r;
 				break;
 			}
@@ -227,7 +227,7 @@ public class SAPacientesImpl implements SAPacientes {
 		setrel = daorelPac.listarRelaciones(centro.getNombre());
 		Relacion pacToUsu = null;
 		for (Relacion r : setrel) {
-			if (r.getIdAgente() == pac.getId()) {
+			if (r.getIdAgente().equals(pac.getId())) {
 				pacToUsu = r;
 				break;
 			}
@@ -245,7 +245,6 @@ public class SAPacientesImpl implements SAPacientes {
 	public void desligarPaciente(Paciente pac, Usuario usu)
 			throws NotBoundException, AlreadyBoundException, AccessException {
 		centro.desligarPaciente(pac, usu);
-
 		//Cargamos el conjunto de relaciones de pacientes del centro
 		Set<Relacion> setrel = daorelPac.listarRelaciones(centro.getNombre());
 

@@ -335,7 +335,7 @@ public class Actividades extends ColorPanel{
 	                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
 	        	                .addGap(32, 32, 32)
 	        	                .addComponent(jLabel5)
-	        	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+	        	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
 	        	                .addComponent(jLabel11)
 	        	                .addGap(45, 45, 45)))
 	                .addGap(0, 0, Short.MAX_VALUE))
@@ -448,14 +448,14 @@ public class Actividades extends ColorPanel{
 					Actividad info = new Actividad(nombre, etiquetas);
 					
 					info.setDuracion(duracion);
-					info.setDificultad(Dificultad.valueOf(String.valueOf(jComboBox1.getSelectedItem())));
+					info.setDificultad(Dificultad.valueOf(jComboBox1.getSelectedItem().toString()));
 					info.setDescripcion(String.valueOf(jTextArea1.getText()));
 					info.addDestinatario(String.valueOf(jTextField3.getText()));
 					info.setVariaciones(String.valueOf(jTextArea3.getText()));
 					info.setDesarrollo(String.valueOf(jTextArea4.getText()));
 					
 					if(mode.equals(Modo.ADD)) Controlador.addActividad(info);
-					else if(mode.equals(Modo.VISTA)) Controlador.modificaEtiquetable(act, info);
+					else if(mode.equals(Modo.EDITAR)) Controlador.modificaEtiquetable(act, info);
 					
 					dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 				}
@@ -568,11 +568,11 @@ public class Actividades extends ColorPanel{
 
 	        jLabel9.setText("Desde");
 
-	        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MUY_FACIL", "FACIL",  "MEDIO", "DIFICIL", "MUY_DIFICIL"  }));
+	        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MUY_FACIL", "FACIL",  "MEDIO", "DIFICIL", "MUY_DIFICIL" }));
 
 	        jLabel10.setText("Hasta");
 
-	        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"MUY_FACIL", "FACIL",  "MEDIO", "DIFICIL", "MUY_DIFICIL"  }));
+	        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MUY_FACIL", "FACIL",  "MEDIO", "DIFICIL", "MUY_DIFICIL" }));
 
 	        jLabel4.setText("Destinatarios (Separados por comas)");
 
@@ -705,7 +705,8 @@ public class Actividades extends ColorPanel{
 	    }     
 		
 		/**
-		 * Funcion que se ejecuta cuando se pulsa al boton buscar en la pantalla actividad
+		 * Funcion que se ejecuta cuando se pulsa al boton buscar en la pantalla actividad. Se recogen los campos
+		 * y se busca.
 		 * @param evt
 		 */
 	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -726,20 +727,20 @@ public class Actividades extends ColorPanel{
 			
 			if(jComboBox1.getSelectedIndex() != 0){
 				switch(String.valueOf(jComboBox1.getSelectedItem())){
-				case "MUY_FACIL": min = Dificultad.MUY_FACIL; break;
-				case "FACIL": min = Dificultad.FACIL; break;
-				case "MEDIO": min = Dificultad.MEDIO; break;
-				case "DIFICIL": min = Dificultad.DIFICIL; break;
-				case "MUY DIFICIL": min = Dificultad.MUY_DIFICIL; break;
+					case "Muy fácil": max = Dificultad.MUY_FACIL; break;
+					case "Fácil": max = Dificultad.FACIL; break;
+					case "Media": max = Dificultad.MEDIO; break;
+					case "Difícil": max = Dificultad.DIFICIL; break;
+					case "Muy difícil": max = Dificultad.MUY_DIFICIL; break;
 				}
 			}
 			if(jComboBox2.getSelectedIndex() != 0){
 				switch(String.valueOf(jComboBox2.getSelectedItem())){
-				case "MUY_FACIL": max = Dificultad.MUY_FACIL; break;
-				case "FACIL": max = Dificultad.FACIL; break;
-				case "MEDIO": max = Dificultad.MEDIO; break;
-				case "DIFICIL": max = Dificultad.DIFICIL; break;
-				case "MUY DIFICIL": max = Dificultad.MUY_DIFICIL; break;
+					case "Muy fácil": max = Dificultad.MUY_FACIL; break;
+					case "Fácil": max = Dificultad.FACIL; break;
+					case "Media": max = Dificultad.MEDIO; break;
+					case "Difícil": max = Dificultad.DIFICIL; break;
+					case "Muy difícil": max = Dificultad.MUY_DIFICIL; break;
 				}
 			}
 		
