@@ -37,7 +37,7 @@ public class Fecha implements Serializable{
         this.mes = value;
     }
 
-    public int getAnyo() {
+    public int getAño() {
         return this.anyo;
     }
     
@@ -49,7 +49,7 @@ public class Fecha implements Serializable{
     	return -1;
     }
 
-    void setAnyo(int value) {
+    void setAño(int value) {
         this.anyo = value;
     }
 

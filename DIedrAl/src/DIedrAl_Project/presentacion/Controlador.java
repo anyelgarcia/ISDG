@@ -11,11 +11,14 @@ import DIedrAl_Project.integracion.BasicClasses.AccessException;
 import DIedrAl_Project.negocio.administracion.Hints;
 import DIedrAl_Project.negocio.administracion.Persona;
 import DIedrAl_Project.negocio.administracion.Usuario;
+import DIedrAl_Project.negocio.calendario.Fecha;
+import DIedrAl_Project.negocio.calendario.SesionProgramada;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.negocio.recursos.Actividad;
 import DIedrAl_Project.negocio.recursos.ArrayActividades;
 import DIedrAl_Project.negocio.recursos.ArrayRecursos;
 import DIedrAl_Project.negocio.recursos.ArraySesiones;
+import DIedrAl_Project.negocio.recursos.ArraySesionesProgramadas;
 import DIedrAl_Project.negocio.recursos.Dificultad;
 import DIedrAl_Project.negocio.recursos.Etiquetable;
 import DIedrAl_Project.negocio.recursos.Programable;
@@ -92,7 +95,14 @@ public class Controlador {
 		
 	}
 	
-	public static void changeProfile(Usuario p){
+	public static void addSesionProgramada(SesionProgramada sp){
+		
+		SARecursos saSesiones = SAFactory.getInstancia().newSARecursos();
+		try {
+			saSesiones.addSesionProgramada(sp);
+		} catch (AccessException e) {
+			new Error(e.getMessage());
+		}
 		
 	}
 	
@@ -153,6 +163,16 @@ public class Controlador {
 		} catch (AccessException e) {
 			new Error(e.getMessage());
 		}
+	}
+	
+	public static void deleteSesionProgramada(SesionProgramada sp) {
+		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos();
+		try {
+			saRecursos.removeSesionProgramada(sp);
+		} catch (AccessException e) {
+			new Error(e.getMessage());
+		}
+		
 	}
 	
 	public static Paciente[] buscarPaciente(Hints[]hints, String [] values){
@@ -392,24 +412,28 @@ public class Controlador {
 		return true;
 	}
 
-	public static void ligar(Usuario usr, Paciente pac) {
+	public static boolean ligar(Usuario usr, Paciente pac) {
 		try {
 			SAPacientes saUsu = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 			saUsu.ligarPaciente(pac, usr);
 		} catch (AccessException | NotBoundException | AlreadyBoundException e) {
 
 			new Error(e.getMessage());
+			return false;
 		}
+		return true;
 	}
 	
-	public static void desligar(Usuario usr, Paciente pac) {
+	public static boolean desligar(Usuario usr, Paciente pac) {
 		try {
 			SAPacientes saUsu = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 			saUsu.desligarPaciente(pac, usr);
 		} catch (AccessException | NotBoundException | AlreadyBoundException e) {
 
 			new Error(e.getMessage());
+			return false;
 		}
+		return true;
 	}
 
 	public static void modificaUsuario(Usuario info) {
@@ -440,6 +464,12 @@ public class Controlador {
 		return null;
 
 	}
+
+	public static ArraySesionesProgramadas getSesionesProgramadas(Fecha fecha) {
+		return SAFactory.getInstancia().newSARecursos().getSesionesProgramadas(fecha);
+	}
+
+	
 
 
 }

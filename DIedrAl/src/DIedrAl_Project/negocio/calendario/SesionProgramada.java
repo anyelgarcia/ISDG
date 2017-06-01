@@ -1,29 +1,28 @@
 package DIedrAl_Project.negocio.calendario;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.*;
 
-import DIedrAl_Project.negocio.administracion.*;
 import DIedrAl_Project.negocio.pacientes.*;
 import DIedrAl_Project.negocio.recursos.*;
 
-public class SesionProgramada implements Serializable {
+public class SesionProgramada extends Sesion implements Serializable {
+
+	private static final long serialVersionUID = -138011061952205162L;
 
 	private Set<Nota> notas;
 
-	private Set<Paciente> pacientes;
+	private Set<String> nifsPacientes;
 
-	private Set<Usuario> terapeutas;
+	private Set<String> nifsTerapeutas;
 
-	private Sesion modeloSesion;
+	private Fecha fecha;
 
-	private LocalDate fecha;
-
-	public SesionProgramada(LocalDate fecha) {
+	public SesionProgramada(String name, Fecha fecha) {
+		super(name);
 		this.fecha = fecha;
-		terapeutas = new TreeSet<Usuario>();
-		pacientes = new TreeSet<Paciente>();
+		nifsTerapeutas = new TreeSet<String>();
+		nifsPacientes = new TreeSet<String>();
 		notas = new HashSet<Nota>();
 	}
 
@@ -35,59 +34,64 @@ public class SesionProgramada implements Serializable {
 		this.notas.remove(nota);
 	}
 
-	public void addTerapeuta(Usuario terapeuta) {
-		this.terapeutas.add(terapeuta);
+	public void addTerapeuta(String nif) {
+		this.nifsTerapeutas.add(nif);
 	}
 
-	public void removeTerapeuta(Usuario terapeuta) {
-		this.terapeutas.remove(terapeuta);
+	public void removeTerapeuta(String nif) {
+		this.nifsTerapeutas.remove(nif);
 	}
-	public void addPaciente(Paciente paciente) {
-		this.pacientes.add(paciente);
-	}
-
-	public void removePaciente(Paciente paciente) {
-		this.pacientes.remove(paciente);
+	
+	public void addPaciente(String nif) {
+		this.nifsPacientes.add(nif);
 	}
 
-	public Set<Usuario> getTerapeutas() {
-		return terapeutas;
+	public void removePaciente(String nif) {
+		this.nifsPacientes.remove(nif);
 	}
 
-	public Set<Paciente> getPacientes() {
-		return pacientes;
+	public Set<String> getTerapeutas() {
+		return nifsTerapeutas;
+	}
+
+	public Set<String> getPacientes() {
+		return nifsPacientes;
 	}
 
 	public int getDay(){
-		return fecha.getDayOfMonth();
+		return fecha.getDia();
 	}
 	
-	public int getMonth() {
-		return fecha.getMonthValue();
+	public String getMonth() {
+		return fecha.getMes();
+	}
+	
+	public int getMonthIndex() {
+		return fecha.getMesIndex();
 	}
 
 	public int getYear() {
-		return fecha.getYear();
+		return fecha.getAño();
 	}
 
-	public Sesion getModeloSesion() {
-		return modeloSesion;
-	}
-	
-	public void setModeloSesion(Sesion modeloSesion) {
-		this.modeloSesion = modeloSesion;
-	}
-
-	public LocalDate getFecha() {
+	public Fecha getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(LocalDate fecha) {
+	public void setFecha(Fecha fecha) {
 		this.fecha = fecha;
 	}
 
 	public Set<Nota> getNotas() {
 		return notas;
+	}
+
+	public String toString(){
+		String res = getNombre();
+		res+=" - Pacientes: ";
+		for(String pac: nifsPacientes)
+			res+= pac + ", ";
+		return res;
 	}
 
 	

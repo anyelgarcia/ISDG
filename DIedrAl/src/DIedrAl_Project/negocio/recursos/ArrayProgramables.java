@@ -12,6 +12,7 @@ public abstract class ArrayProgramables<T extends Programable> extends
 	public ArrayProgramables(HashSet<T> progra) {
 		super(progra);
 	}
+	
 	public ArrayProgramables<T> filtrarRango(Integer min, Integer max) {
 		return filtrarDur(min, max);
 	}

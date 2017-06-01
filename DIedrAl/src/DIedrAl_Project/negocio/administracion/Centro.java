@@ -246,8 +246,10 @@ public class Centro {
 							&& x instanceof Usuario && ((Usuario) x).isAdmin())
 					|| (tipos.contains(Hints.USUARIO) && x instanceof Usuario && !((Usuario) x).isAdmin());
 
-			valida = filtros.containsKey(Hints.NIF) ? filtros.get(Hints.NIF)
-					.equals(x.getNif()) : valida;
+			if(valida){
+				valida = filtros.containsKey(Hints.NIF) ? filtros.get(Hints.NIF)
+						.equals(x.getNif()) : valida;
+			}
 			if (valida) {
 				valida = filtros.containsKey(Hints.APELLIDO1) ? filtros.get(
 						Hints.APELLIDO1).equals(x.getFirstSurname()) : valida;

@@ -469,8 +469,8 @@ public class UsuarioWindow extends javax.swing.JFrame {
 	    	if(i!=(-1) && j!=(-1)){
 		    	Usuario usr = terapeutas[i];
 		    	Paciente pac = pacientes[j];
-		    	Controlador.ligar(usr, pac);
-		    	new Error("Paciente ligado");
+		    	if(Controlador.ligar(usr, pac));
+		    		new Error("Paciente ligado");
 		    	return;
 	    	}
 	    	new Error("Han de elegirse un terapeuta y un paciente");
@@ -584,8 +584,8 @@ public class UsuarioWindow extends javax.swing.JFrame {
 	    	if(i!=(-1) && j!=(-1)){
 		    	Usuario usr = terapeutas[i];
 		    	Paciente pac = pacientes[j];
-		    	Controlador.desligar(usr, pac);
-		    	new Error("Paciente desligado");
+		    	if(Controlador.desligar(usr, pac))
+		    		new Error("Paciente desligado");
 		    	return;
 	    	}
 	    	new Error("Han de elegirse un terapeuta y un paciente");

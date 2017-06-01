@@ -63,12 +63,9 @@ public class Perfil extends ColorPanel{
 	
 	private class PantallaPerfil extends JFrame{
 		
-		 /**
-		 * 
-		 */
 		private static final long serialVersionUID = 8585905813285568257L;
 		
-		// Variables declaration - do not modify                     
+                    
 	    private javax.swing.JLabel jLabel1;
 	    private javax.swing.JLabel jLabel2;
 	    private javax.swing.JLabel jLabel3;
@@ -87,7 +84,6 @@ public class Perfil extends ColorPanel{
 	    private boolean editable;
 	    private Usuario user;
 	    private Modo mode;
-	    // End of variables declaration  
 	    
 		public PantallaPerfil(Modo m, Usuario s){
 			if(m.equals(Modo.VISTA)) editable = false;
