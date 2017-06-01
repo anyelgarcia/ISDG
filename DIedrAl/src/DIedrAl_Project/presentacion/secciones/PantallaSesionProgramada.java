@@ -10,6 +10,7 @@ import DIedrAl_Project.negocio.calendario.SesionProgramada;
 import DIedrAl_Project.negocio.pacientes.Paciente;
 import DIedrAl_Project.negocio.recursos.Sesion;
 import DIedrAl_Project.presentacion.Controlador;
+import DIedrAl_Project.presentacion.auxiliar.Modo;
 
 public class PantallaSesionProgramada extends javax.swing.JFrame {
 
@@ -78,13 +79,15 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;  
     private Sesion sesion;
+    private Modo modo;
     private Paciente pacientes[];
     private Usuario terapeutas[];
     private Paciente pacientesSesion[];
     private Usuario terapeutasSesion[];
     
-    public PantallaSesionProgramada(Sesion sesion) {
+    public PantallaSesionProgramada(Sesion sesion, Modo modo) {
     	this.sesion = sesion;
+    	this.modo = modo;
         initGUI();
     }
     
@@ -152,6 +155,12 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         jTextField10 = new javax.swing.JTextField();
 
         
+        switch(modo){
+        	case ADD: setTitle("Añadir Sesión Programada");
+        	case EDITAR: setTitle("Editar Sesión Programada");
+        	case VISTA: setTitle("Consultar Sesión Programada");
+        	default: new Error("Error raro modo Sesión Programada");
+        }
         
         if(sesion!=null){
         	
@@ -167,6 +176,7 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         	jTextArea2.setText(str);
         	jTextArea3.setText(sesion.getDesarrollo());
         	jTextArea4.setText(sesion.getVariaciones());
+        	
         	if(sesion instanceof SesionProgramada){
         		
         		jComboBox1.setSelectedItem(((SesionProgramada) sesion).getFecha().getDia());
@@ -402,6 +412,10 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         jLabel22.setFont(new java.awt.Font("SansSerif", 1, 12)); 
         jLabel22.setText("DNI:");
         jLabel22.setToolTipText("");
+        
+        if(modo.equals(Modo.EDITAR)){
+        	jTextField1.setEditable(false);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
