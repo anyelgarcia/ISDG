@@ -1,0 +1,6 @@
+expon_answer.txt
+binomial_answer.txt
+poisson_answer.txt
+uniforme_answer.txt
+normal_answer.txt
+Z_32749_answer.txt

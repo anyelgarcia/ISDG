@@ -174,28 +174,43 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         	default: new Error("Error raro modo Sesión Programada");
         }
         
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(Calendario.DIAS));
+		jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(Calendario.MESES));
+		jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(Calendario.AÑOS));
+		
         if(sesion!=null){
         	
         	jTextField1.setText(sesion.getNombre());
         	jTextField2.setText(String.valueOf(sesion.getDuracion()));
         	jTextArea1.setText(sesion.getDescripcion());
-        	String str ="";
-        	TreeSet<String> etiqs = sesion.getEtiquetas();
-        	if(!etiqs.isEmpty() && !etiqs.first().equals("")){
-	        	for(String et: sesion.getEtiquetas())
-	        		str+=et +", ";
-        	}
-        	jTextArea2.setText(str);
+        	
+        	StringBuilder etiq= new StringBuilder();
+        	int i=1;
+        	for(String str: sesion.getEtiquetas()){
+        		etiq.append(str);
+	        	if(i<sesion.getEtiquetas().size()){
+	        		etiq.append(", ");
+	        	}
+	        	++i;
+        	} 
+        	
+			jTextArea2.setText(etiq.toString());
         	jTextArea3.setText(sesion.getDesarrollo());
         	jTextArea4.setText(sesion.getVariaciones());
         	
         	if(sesion instanceof SesionProgramada){
         		
-        		jComboBox1.setSelectedItem(((SesionProgramada) sesion).getFecha().getDia());
-        		jComboBox2.setSelectedItem(((SesionProgramada) sesion).getFecha().getMes());
-        		jComboBox3.setSelectedItem(((SesionProgramada) sesion).getFecha().getAño());
+        		Fecha fecha = ((SesionProgramada) sesion).getFecha();
+        		
+        		if(fecha!=null){
+					jComboBox1.setSelectedIndex(fecha.getDia()-1);
+					jComboBox2.setSelectedIndex(fecha.getMesIndex());
+					jComboBox3.setSelectedIndex(2017-fecha.getAño());
+				}
+        		
         		Set<String> nifsPac = ((SesionProgramada) sesion).getPacientes();
-        		int i=0;
+        		i=0;
         		pacientesSesion = new Paciente[nifsPac.size()];
         		for(String nif: nifsPac){
         			pacientesSesion[i] = Controlador.getPacienteConNif(nif);
@@ -312,9 +327,6 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         });
 
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(Calendario.DIAS));
-		jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(Calendario.MESES));
-		jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(Calendario.AÑOS));
 				
         jLabel10.setFont(new java.awt.Font("SansSerif", 1, 12)); 
         jLabel10.setText("Fecha:");
@@ -736,7 +748,7 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
 				info.addTerapeuta(t.getNif());
 			}
 			if(modo.equals(Modo.ADD)) Controlador.addSesionProgramada(info);
-			else if(modo.equals(Modo.EDITAR)) Controlador.modificaEtiquetable(sesion, info);
+			else if(modo.equals(Modo.EDITAR)) Controlador.modificaSesionProg(sesion, info);
 			else new Error("Error modo añadir sesión programada");
 			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		}
