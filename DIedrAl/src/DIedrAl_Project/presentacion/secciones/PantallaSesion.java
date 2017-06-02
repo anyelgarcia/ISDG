@@ -40,10 +40,10 @@ public class PantallaSesion extends JFrame{
 	private javax.swing.JScrollPane jScrollPane4;
 	private javax.swing.JScrollPane jScrollPane5; 
 	private javax.swing.JScrollPane jScrollPane6;
-	private javax.swing.JTextArea jTextArea1;
-	private javax.swing.JTextArea jTextArea3;
-	private javax.swing.JTextArea jTextArea4;
-	private javax.swing.JTextArea jTextArea5;
+	private javax.swing.JTextArea jTextDescripcion;
+	private javax.swing.JTextArea jTextEtiquetas;
+	private javax.swing.JTextArea jTextDesarrollo;
+	private javax.swing.JTextArea jTextVariaciones;
 	private javax.swing.JTextField jTextField1;
 	private javax.swing.JTextField jTextField2;
 	private boolean editable;
@@ -70,16 +70,16 @@ public class PantallaSesion extends JFrame{
 		jLabel4 = new javax.swing.JLabel();
 		jLabel5 = new javax.swing.JLabel();
 		jScrollPane1 = new javax.swing.JScrollPane();
-		jTextArea1 = new javax.swing.JTextArea("");
-		jTextArea1.setEditable(editable);
+		jTextDescripcion = new javax.swing.JTextArea("");
+		jTextDescripcion.setEditable(editable);
 		jLabel6 = new javax.swing.JLabel();
 		jLabel7 = new javax.swing.JLabel();
 		jScrollPane3 = new javax.swing.JScrollPane();
-		jTextArea3 = new javax.swing.JTextArea("");
-		jTextArea3.setEditable(editable);
+		jTextEtiquetas = new javax.swing.JTextArea("");
+		jTextEtiquetas.setEditable(editable);
 		jScrollPane4 = new javax.swing.JScrollPane();
-		jTextArea4 = new javax.swing.JTextArea("");
-		jTextArea4.setEditable(editable);
+		jTextDesarrollo = new javax.swing.JTextArea("");
+		jTextDesarrollo.setEditable(editable);
 		jScrollPane2 = new javax.swing.JScrollPane();
 		jList1 = new javax.swing.JList<>();
 		jScrollPane5 = new javax.swing.JScrollPane();
@@ -88,16 +88,16 @@ public class PantallaSesion extends JFrame{
 		jLabel9 = new javax.swing.JLabel();
 		jLabel11 = new javax.swing.JLabel();
 		jScrollPane6 = new javax.swing.JScrollPane();
-		jTextArea5 = new javax.swing.JTextArea("");
-		jTextArea5.setEditable(editable);
+		jTextVariaciones = new javax.swing.JTextArea("");
+		jTextVariaciones.setEditable(editable);
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		switch(mode){
-		case ADD: setTitle("Crear Sesion"); break;
-		case VISTA: setTitle("Sesion"); break;
-		case EDITAR: setTitle("Editar Sesion"); break;
-		case RETURN: setTitle("Crear Plantilla de Sesion"); break;
-		default: new Error("Error en modo en pantalla sesiones"); break;
+			case ADD: setTitle("Crear Sesion"); break;
+			case VISTA: setTitle("Sesion"); break;
+			case EDITAR: setTitle("Editar Sesion"); break;
+			case RETURN: setTitle("Crear Plantilla de Sesion"); break;
+			default: new Error("Error en modo en pantalla sesiones"); break;
 		}
 
 
@@ -116,27 +116,27 @@ public class PantallaSesion extends JFrame{
 
 		jLabel5.setText("Descripción: ");
 
-		jTextArea1.setColumns(20);
-		jTextArea1.setRows(5);
-		jScrollPane1.setViewportView(jTextArea1);
+		jTextDescripcion.setColumns(20);
+		jTextDescripcion.setRows(5);
+		jScrollPane1.setViewportView(jTextDescripcion);
 
 		jLabel6.setText("Desarrollo de la Sesión");
 
 		jLabel7.setText("Posibles Variaciones");
 
-		jTextArea3.setColumns(20);
-		jTextArea3.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-		jTextArea3.setRows(5);
-		jTextArea3.setAutoscrolls(false);
-		jScrollPane3.setViewportView(jTextArea3);
+		jTextEtiquetas.setColumns(20);
+		jTextEtiquetas.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+		jTextEtiquetas.setRows(5);
+		jTextEtiquetas.setAutoscrolls(false);
+		jScrollPane3.setViewportView(jTextEtiquetas);
 
-		jTextArea4.setColumns(20);
-		jTextArea4.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-		jTextArea4.setRows(5);
-		jTextArea4.setAutoscrolls(false);
-		jTextArea4.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-		jScrollPane4.setViewportView(jTextArea4);
-		jTextArea4.getAccessibleContext().setAccessibleParent(jTextArea1);
+		jTextDesarrollo.setColumns(20);
+		jTextDesarrollo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+		jTextDesarrollo.setRows(5);
+		jTextDesarrollo.setAutoscrolls(false);
+		jTextDesarrollo.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+		jScrollPane4.setViewportView(jTextDesarrollo);
+		jTextDesarrollo.getAccessibleContext().setAccessibleParent(jTextDescripcion);
 
 		jScrollPane2.setViewportView(jList1);
 
@@ -148,24 +148,33 @@ public class PantallaSesion extends JFrame{
 
 		jLabel11.setText("Etiquetas: ");
 
-		jTextArea5.setColumns(20);
-		jTextArea5.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-		jTextArea5.setRows(5);
-		jTextArea5.setAutoscrolls(false);
-		jScrollPane6.setViewportView(jTextArea5);
+		jTextVariaciones.setColumns(20);
+		jTextVariaciones.setFont(new java.awt.Font("Arial", 0, 10)); 
+		jTextVariaciones.setRows(5);
+		jTextVariaciones.setAutoscrolls(false);
+		jScrollPane6.setViewportView(jTextVariaciones);
 
 		if(sesion != null){
 			jTextField1.setText(sesion.getNombre());
 
 			jTextField2.setText(String.valueOf(sesion.getDuracion()));
 
-			jTextArea1.setText(sesion.getDescripcion());
+			jTextDescripcion.setText(sesion.getDescripcion());
 
-			String etiquetas = sesion.getEtiquetas().toString();
-			jTextArea3.setText(etiquetas);
+			StringBuilder etiq= new StringBuilder();
+        	int i=1;
+        	for(String str: sesion.getEtiquetas()){
+        		etiq.append(str);
+	        	if(i<sesion.getEtiquetas().size()){
+	        		etiq.append(", ");
+	        	}
+	        	++i;
+        	} 
+        	
+			jTextEtiquetas.setText(etiq.toString());
 
-			jTextArea4.setText(sesion.getDesarrollo());
-			jTextArea5.setText(sesion.getVariaciones());
+			jTextDesarrollo.setText(sesion.getDesarrollo());
+			jTextVariaciones.setText(sesion.getVariaciones());
 
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
 
@@ -207,11 +216,11 @@ public class PantallaSesion extends JFrame{
 										.addGroup(layout.createSequentialGroup()
 												.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
 												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-												.addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+												.addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
 												.addGroup(layout.createSequentialGroup()
 														.addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
 														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-														.addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+														.addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
 														.addContainerGap())
 														.addGroup(layout.createSequentialGroup()
 																.addContainerGap()
@@ -274,13 +283,13 @@ public class PantallaSesion extends JFrame{
 																.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 																		.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-																		.addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+																		.addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
 																		.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 																				.addComponent(jLabel6)
 																				.addComponent(jLabel7))
 																				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																				.addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-																				.addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+																				.addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
 																				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 																						.addComponent(jLabel8)
@@ -305,7 +314,7 @@ public class PantallaSesion extends JFrame{
 	 * */
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { 
 
-		String etiquetasSinFormato = jTextArea5.getText();
+		String etiquetasSinFormato = jTextEtiquetas.getText();
 		String etiquetas[] = etiquetasSinFormato.split(",");
 		String nombre = jTextField1.getText();
 		int duracion = 0;
@@ -320,9 +329,9 @@ public class PantallaSesion extends JFrame{
 			Sesion info = new Sesion(nombre, etiquetas);
 
 			info.setDuracion(duracion);
-			info.setDescripcion(String.valueOf(jTextArea1.getText()));
-			info.setDesarrollo(String.valueOf(jTextArea4.getText()));
-			info.setVariaciones(String.valueOf(jTextArea3.getText()));
+			info.setDescripcion(String.valueOf(jTextDescripcion.getText()));
+			info.setDesarrollo(String.valueOf(jTextDesarrollo.getText()));
+			info.setVariaciones(String.valueOf(jTextVariaciones.getText()));
 			if(mode.equals(Modo.ADD)) Controlador.addSesion(info);
 			else if(mode.equals(Modo.EDITAR)) Controlador.modificaEtiquetable(sesion, info);
 			else if(mode.equals(Modo.RETURN)){
