@@ -436,7 +436,10 @@ public class Recursos extends ColorPanel{
 	     */
 	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 	    	String nombre = jTextField1.getText();
-			Set<String> setEtiquetas = new HashSet<String>(Arrays.asList(jTextArea1.getText().split(",")));
+	    	String etiq = jTextArea1.getText();
+	    	Set<String> setEtiquetas = new HashSet<String>();
+	    	if(!etiq.equals(""))
+	    		setEtiquetas = new HashSet<String>(Arrays.asList(jTextArea1.getText().split(",")));
 		
 			filtrados = Controlador.filtrarRecursos(nombre, setEtiquetas);
 			
@@ -447,9 +450,6 @@ public class Recursos extends ColorPanel{
 			
 			jList1.setModel(new javax.swing.AbstractListModel<String>() {
 				
-				/**
-				 * 
-				 */
 				private static final long serialVersionUID = 1L;
 				public int getSize() { return nombres!= null ? nombres.size() : 0; }
 	            public String getElementAt(int i) { return nombres.get(i); }
