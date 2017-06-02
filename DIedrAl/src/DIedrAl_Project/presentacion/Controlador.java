@@ -431,7 +431,6 @@ public class Controlador {
 			SAPacientes saUsu = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 			saUsu.ligarPaciente(pac, usr);
 		} catch (AccessException | NotBoundException | AlreadyBoundException e) {
-
 			new Error(e.getMessage());
 			return false;
 		}
@@ -443,7 +442,6 @@ public class Controlador {
 			SAPacientes saUsu = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 			saUsu.desligarPaciente(pac, usr);
 		} catch (AccessException | NotBoundException | AlreadyBoundException e) {
-
 			new Error(e.getMessage());
 			return false;
 		}

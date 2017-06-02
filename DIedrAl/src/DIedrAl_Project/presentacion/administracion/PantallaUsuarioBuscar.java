@@ -256,7 +256,7 @@ public class PantallaUsuarioBuscar extends JFrame implements confirmListener{
 			switch(modo){
 				case ELIMINAR:
 					Confirm c = new Confirm();
-					c.setMensaje("El paciente se eliminará del sistema.");
+					c.setMensaje("El usuario se eliminará del sistema.");
 			    	c.setVisible(true);
 			    	c.addListener(this);
 			    	break;

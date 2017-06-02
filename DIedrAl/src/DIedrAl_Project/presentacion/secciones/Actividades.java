@@ -136,9 +136,9 @@ public class Actividades extends ColorPanel{
 	    private javax.swing.JScrollPane jScrollPane5;
 	    private javax.swing.JScrollPane jScrollPane6;
 	    private javax.swing.JTextArea jTextArea1;
-	    private javax.swing.JTextArea jTextArea3;
-	    private javax.swing.JTextArea jTextArea4;
-	    private javax.swing.JTextArea jTextArea5;
+	    private javax.swing.JTextArea jTextVariaciones;
+	    private javax.swing.JTextArea JTextDesarrollo;
+	    private javax.swing.JTextArea jTextEtiquetas;
 	    private javax.swing.JTextField jTextField1;
 	    private javax.swing.JTextField jTextField2;
 	    private javax.swing.JTextField jTextField3;
@@ -174,9 +174,9 @@ public class Actividades extends ColorPanel{
 	        jLabel6 = new javax.swing.JLabel();
 	        jLabel7 = new javax.swing.JLabel();
 	        jScrollPane3 = new javax.swing.JScrollPane();
-	        jTextArea3 = new javax.swing.JTextArea("");
+	        jTextVariaciones = new javax.swing.JTextArea("");
 	        jScrollPane4 = new javax.swing.JScrollPane();
-	        jTextArea4 = new javax.swing.JTextArea("");
+	        JTextDesarrollo = new javax.swing.JTextArea("");
 	        jScrollPane2 = new javax.swing.JScrollPane();
 	        jList1 = new javax.swing.JList<>();
 	        jScrollPane5 = new javax.swing.JScrollPane();
@@ -188,7 +188,7 @@ public class Actividades extends ColorPanel{
 	        jTextField3.setEditable(editable);
 	        jLabel11 = new javax.swing.JLabel();
 	        jScrollPane6 = new javax.swing.JScrollPane();
-	        jTextArea5 = new javax.swing.JTextArea("");
+	        jTextEtiquetas = new javax.swing.JTextArea("");
 
 
 	        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -227,15 +227,15 @@ public class Actividades extends ColorPanel{
 
 	        jLabel7.setText("Posibles Variaciones");
 
-	        jTextArea3.setColumns(20);
-	        jTextArea3.setRows(5);
-	        jTextArea3.setEditable(editable);
-	        jScrollPane3.setViewportView(jTextArea3);
+	        jTextVariaciones.setColumns(20);
+	        jTextVariaciones.setRows(5);
+	        jTextVariaciones.setEditable(editable);
+	        jScrollPane3.setViewportView(jTextVariaciones);
 
-	        jTextArea4.setColumns(20);
-	        jTextArea4.setRows(5);
-	        jTextArea4.setEditable(editable);
-	        jScrollPane4.setViewportView(jTextArea4);
+	        JTextDesarrollo.setColumns(20);
+	        JTextDesarrollo.setRows(5);
+	        JTextDesarrollo.setEditable(editable);
+	        jScrollPane4.setViewportView(JTextDesarrollo);
 
 	        jScrollPane2.setViewportView(jList1);
 	        jList1.getAccessibleContext().setAccessibleParent(null);
@@ -250,10 +250,10 @@ public class Actividades extends ColorPanel{
 	        jLabel10.setText("Paciente Tipo: ");
 	        jLabel11.setText("Etiquetas: ");
 	        
-	        jTextArea5.setColumns(20);
-	        jTextArea5.setRows(5);
-	        jTextArea5.setEditable(editable);
-	        jScrollPane6.setViewportView(jTextArea5);
+	        jTextEtiquetas.setColumns(20);
+	        jTextEtiquetas.setRows(5);
+	        jTextEtiquetas.setEditable(editable);
+	        jScrollPane6.setViewportView(jTextEtiquetas);
 
 	        
 
@@ -267,17 +267,23 @@ public class Actividades extends ColorPanel{
 	        	
 	        	jTextArea1.setText(act.getDescripcion());
 	        	
-	        	String etiquetas = "";
-	        	for(String st: act.getEtiquetas())
-	        		etiquetas += st + ", ";
+	        	StringBuilder etiq= new StringBuilder();
+	        	int i=1;
+	        	for(String str: act.getEtiquetas()){
+	        		etiq.append(str);
+		        	if(i<act.getEtiquetas().size()){
+		        		etiq.append(", ");
+		        	}
+		        	++i;
+	        	} 
 	        	
 	        	if(act.getDificultad()!=null) jComboBox1.setSelectedItem(String.valueOf(act.getDificultad()));
 	        	
-	        	jTextArea5.setText(etiquetas);
+	        	jTextEtiquetas.setText(etiq.toString());
 	        	
-	        	jTextArea4.setText(act.getDesarrollo());
+	        	JTextDesarrollo.setText(act.getDesarrollo());
 	        	
-	        	jTextArea3.setText(act.getVariaciones());
+	        	jTextVariaciones.setText(act.getVariaciones());
 	      
 	        	jList1.setModel(new javax.swing.AbstractListModel<String>() {
 					/**
@@ -430,7 +436,7 @@ public class Actividades extends ColorPanel{
 		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { 
 			
-			String etiquetasSinFormato = jTextArea5.getText();
+			String etiquetasSinFormato = jTextEtiquetas.getText();
 			String etiquetas[] = etiquetasSinFormato.split(",");
 			String nombre = jTextField1.getText();
 			int duracion = 0;
@@ -451,8 +457,8 @@ public class Actividades extends ColorPanel{
 					info.setDificultad(Dificultad.valueOf(jComboBox1.getSelectedItem().toString()));
 					info.setDescripcion(String.valueOf(jTextArea1.getText()));
 					info.addDestinatario(String.valueOf(jTextField3.getText()));
-					info.setVariaciones(String.valueOf(jTextArea3.getText()));
-					info.setDesarrollo(String.valueOf(jTextArea4.getText()));
+					info.setVariaciones(String.valueOf(jTextVariaciones.getText()));
+					info.setDesarrollo(String.valueOf(JTextDesarrollo.getText()));
 					
 					if(mode.equals(Modo.ADD)) Controlador.addActividad(info);
 					else if(mode.equals(Modo.EDITAR)) Controlador.modificaEtiquetable(act, info);
