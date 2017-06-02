@@ -272,15 +272,15 @@ public class Pacientes extends ColorPanel{
 				jTextArea2.setText(pac.getPerfil());
 			}
 			
-			if(!editable){
+			if(mode!=Modo.ADD){
 				jTextField1.setEditable(false);
 				jTextField2.setEditable(false);
 				jTextField3.setEditable(false);
 				jTextField5.setEditable(false);
 				jComboBox1.setEnabled(false);
 				jComboBox2.setEnabled(false);
-				jButton1.setVisible(false);
-		        jButton1.setEnabled(false);
+				jButton1.setVisible(editable);
+		        jButton1.setEnabled(editable);
 				jComboBox3.setEnabled(false);
 			}
 						

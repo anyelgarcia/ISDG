@@ -201,7 +201,7 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         			pacientesSesion[i] = Controlador.getPacienteConNif(nif);
         			i++;
         		}
-        		Set<String> nifsTer = ((SesionProgramada) sesion).getPacientes();
+        		Set<String> nifsTer = ((SesionProgramada) sesion).getTerapeutas();
         		i=0;
         		terapeutasSesion = new Usuario[nifsTer.size()];
         		for(String nif: nifsTer){
@@ -212,13 +212,13 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         		jList4.setModel(new javax.swing.AbstractListModel<String>() {
         			private static final long serialVersionUID = 1L;
                     public int getSize() { return terapeutasSesion.length; }
-                    public String getElementAt(int i) { return (terapeutasSesion[i]).toString(); }
+                    public String getElementAt(int j) { return (terapeutasSesion[j]).toString(); }
                 });
 
                 jList5.setModel(new javax.swing.AbstractListModel<String>() {
         			private static final long serialVersionUID = 1L;
                     public int getSize() { return pacientesSesion.length; }
-                    public String getElementAt(int i) { return (pacientesSesion[i]).toString(); }
+                    public String getElementAt(int j) { return (pacientesSesion[j]).toString(); }
                 });
         		
         	}
@@ -441,8 +441,12 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         jLabel22.setText("DNI:");
         jLabel22.setToolTipText("");
         
-        if(modo.equals(Modo.EDITAR)){
+        if(!modo.equals(Modo.ADD)){
         	jTextField1.setEditable(false);
+        	if(modo.equals(Modo.VISTA)){
+        		jButton1.setVisible(false);
+    			jButton1.setEnabled(false);
+        	}
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -856,6 +860,11 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
     	
     }   
     
+    /**
+     * Función que recoge los campos de búsqueda de pacientes y realiza la búsqueda,
+     * actualizando la lista de pacientes.
+     * @param evt
+     */
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {                                         
     	String nombre = jTextField3.getText();
 		String apellido1 = jTextField4.getText();
@@ -898,6 +907,11 @@ public class PantallaSesionProgramada extends javax.swing.JFrame {
         });
     }    
     
+    /**
+     * Función que recoge los campos de búsqueda de terapeutas y realiza la búsqueda,
+     * actualizando la lista de terapeutas.
+     * @param evt
+     */
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {                                         
     	String nombre = jTextField7.getText();
 		String apellido1 = jTextField8.getText();

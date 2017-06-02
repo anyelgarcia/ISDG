@@ -185,11 +185,14 @@ public class Controlador {
 			saPacientes = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 		} catch (AccessException e) {
 			new Error(e.getMessage());
+			return null;
 		}
 		
 		ArrayList<Persona> pacientes = new ArrayList<Persona>();
 		Hints[] valUsuarios = {Hints.PACIENTE};
-		pacientes.addAll(saPacientes.filtrarPersonas(hints, values, valUsuarios));
+		Set<Persona> resultados = saPacientes.filtrarPersonas(hints, values, valUsuarios);
+		if(resultados!=null && resultados.size()>0)
+			pacientes.addAll(resultados);
 		
 		Paciente[] resultado = new Paciente[pacientes.size()];
 		int i = 0;
@@ -209,13 +212,16 @@ public class Controlador {
 			saPacientes = SAFactory.getInstancia().newSAPacientes(usuario.getCentro());
 		} catch (AccessException e) {
 			new Error(e.getMessage());
+			return null;
 		}
 		
 		ArrayList<Persona> usuarios = new ArrayList<Persona>();
 		Hints[] valUsuarios = {Hints.USUARIO};
-		usuarios.addAll(saPacientes.filtrarPersonas(hints, values, valUsuarios));
+		Set<Persona> resultados = saPacientes.filtrarPersonas(hints, values, valUsuarios);
+		if(resultados!=null && resultados.size()>0)
+			usuarios.addAll(resultados);
 		
-		Usuario[] resultado = new Usuario[usuarios .size()];
+		Usuario[] resultado = new Usuario[usuarios.size()];
 		int i = 0;
 		for(Persona p: usuarios ){
 			resultado[i] = (Usuario)p;
