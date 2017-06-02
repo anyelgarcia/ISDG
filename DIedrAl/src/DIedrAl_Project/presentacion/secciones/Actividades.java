@@ -454,7 +454,7 @@ public class Actividades extends ColorPanel{
 					Actividad info = new Actividad(nombre, etiquetas);
 					
 					info.setDuracion(duracion);
-					info.setDificultad(Dificultad.toDificultad(String.valueOf(jComboBox1.getSelectedItem())));
+					info.setDificultad(Dificultad.valueOf(jComboBox1.getSelectedItem().toString()));
 					info.setDescripcion(String.valueOf(jTextArea1.getText()));
 					info.addDestinatario(String.valueOf(jTextField3.getText()));
 					info.setVariaciones(String.valueOf(jTextVariaciones.getText()));
@@ -731,10 +731,24 @@ public class Actividades extends ColorPanel{
 			
 			Dificultad min = null, max = null;
 			
-			min = Dificultad.toDificultad(String.valueOf(jComboBox1.getSelectedItem()));
-			
-			max = Dificultad.toDificultad(String.valueOf(jComboBox2.getSelectedItem()));
-			
+			if(jComboBox1.getSelectedIndex() != 0){
+				switch(String.valueOf(jComboBox1.getSelectedItem())){
+					case "MUY_FACIL": max = Dificultad.MUY_FACIL; break;
+					case "FACIL": max = Dificultad.FACIL; break;
+					case "MEDIO": max = Dificultad.MEDIO; break;
+					case "DIFICIL": max = Dificultad.DIFICIL; break;
+					case "MUY_DIFICIL": max = Dificultad.MUY_DIFICIL; break;
+				}
+			}
+			if(jComboBox2.getSelectedIndex() != 0){
+				switch(String.valueOf(jComboBox2.getSelectedItem())){
+					case "MUY_FACIL": max = Dificultad.MUY_FACIL; break;
+					case "FACIL": max = Dificultad.FACIL; break;
+					case "MEDIO": max = Dificultad.MEDIO; break;
+					case "DIFICIL": max = Dificultad.DIFICIL; break;
+					case "MUY_DIFICIL": max = Dificultad.MUY_DIFICIL; break;
+				}
+			}
 		
 			filtrados = Controlador.filtrarActividades(nombre, setEtiquetas, ini, end, setDestinatarios, min, max);
 			
