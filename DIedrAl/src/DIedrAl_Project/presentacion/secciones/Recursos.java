@@ -129,8 +129,8 @@ public class Recursos extends ColorPanel{
 	    private javax.swing.JLabel jLabel4;
 	    private javax.swing.JScrollPane jScrollPane2;
 	    private javax.swing.JScrollPane jScrollPane3;
-	    private javax.swing.JTextArea jTextArea2;
-	    private javax.swing.JTextArea jTextArea3;
+	    private javax.swing.JTextArea jTextEtiquetas;
+	    private javax.swing.JTextArea jTextAreaDescripcion;
 	    private javax.swing.JTextField jTextField1;
 	    private javax.swing.JTextField jTextField2;
 	    private boolean editable;
@@ -159,11 +159,11 @@ public class Recursos extends ColorPanel{
 		    jTextField2 = new javax.swing.JTextField("");
 		    jTextField2.setEditable(editable);
 		    jScrollPane2 = new javax.swing.JScrollPane();
-		    jTextArea2 = new javax.swing.JTextArea("");
-		    jTextArea2.setEditable(editable);
+		    jTextEtiquetas = new javax.swing.JTextArea("");
+		    jTextEtiquetas.setEditable(editable);
 		    jScrollPane3 = new javax.swing.JScrollPane();
-		    jTextArea3 = new javax.swing.JTextArea("");
-		    jTextArea3.setEditable(editable);
+		    jTextAreaDescripcion = new javax.swing.JTextArea("");
+		    jTextAreaDescripcion.setEditable(editable);
 
 		    setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		    switch(mode){
@@ -190,20 +190,29 @@ public class Recursos extends ColorPanel{
 
 		        jTextField2.setText("Ruta al archivo");
 
-		        jTextArea2.setColumns(20);
-		        jTextArea2.setRows(5);
-		        jScrollPane2.setViewportView(jTextArea2);
+		        jTextEtiquetas.setColumns(20);
+		        jTextEtiquetas.setRows(5);
+		        jScrollPane2.setViewportView(jTextEtiquetas);
 
-		        jTextArea3.setColumns(20);
-		        jTextArea3.setRows(5);
-		        jScrollPane3.setViewportView(jTextArea3);
+		        jTextAreaDescripcion.setColumns(20);
+		        jTextAreaDescripcion.setRows(5);
+		        jScrollPane3.setViewportView(jTextAreaDescripcion);
 
 		        
 		        if(recurso != null){
 		        	jTextField1.setText(recurso.getNombre());
 		        	jTextField2.setText(recurso.getFileName());
-		        	jTextArea2.setText(recurso.getDescripcion());
-		        	jTextArea3.setText(recurso.getEtiquetas().toString());
+		        	jTextAreaDescripcion.setText(recurso.getDescripcion());
+		        	StringBuilder etiq= new StringBuilder();
+		        	int i=1;
+		        	for(String str: recurso.getEtiquetas()){
+		        		etiq.append(str);
+			        	if(i<recurso.getEtiquetas().size()){
+			        		etiq.append(", ");
+			        	}
+			        	++i;
+		        	}        	
+		        	jTextEtiquetas.setText(etiq.toString());
 		        }
 		        
 		        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -246,11 +255,11 @@ public class Recursos extends ColorPanel{
 		                    .addComponent(jLabel2)
 		                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 		                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-		                .addComponent(jLabel3)
+		                .addComponent(jLabel4)
 		                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 		                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
 		                .addGap(18, 18, 18)
-		                .addComponent(jLabel4)
+		                .addComponent(jLabel3)
 		                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 		                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
 		                .addGap(29, 29, 29)
@@ -269,13 +278,13 @@ public class Recursos extends ColorPanel{
 		 * */
 		private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {     
 			
-			String etiquetas = jTextArea2.getText();
-			String etiqs[] = etiquetas.split(",");
+			String etiquetas = jTextEtiquetas.getText();
+			String etiqs[] = etiquetas.split(", ");
 			String nombre = jTextField1.getText();
 			if(nombre == null) new Error("Nombre vacio");
 			else{
 				Recurso info = new Recurso(nombre, (File)null, etiqs);
-				info.setDescripcion(String.valueOf(jTextArea3.getText()));
+				info.setDescripcion(String.valueOf(jTextAreaDescripcion.getText()));
 				Controlador.modificaEtiquetable(recurso, info);
 				dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 			}
@@ -527,8 +536,8 @@ public class Recursos extends ColorPanel{
 	    private javax.swing.JLabel jLabel4;
 	    private javax.swing.JScrollPane jScrollPane2;
 	    private javax.swing.JScrollPane jScrollPane3;
-	    private javax.swing.JTextArea jTextArea2;
-	    private javax.swing.JTextArea jTextArea3;
+	    private javax.swing.JTextArea jTextEtiquetas;
+	    private javax.swing.JTextArea jTextAreaDescripcion;
 	    private javax.swing.JTextField jTextField1;
 	    private javax.swing.JTextField jTextField2;
 	    private JFileChooser fc;
@@ -548,9 +557,9 @@ public class Recursos extends ColorPanel{
 	        jTextField1 = new javax.swing.JTextField("");
 	        jTextField2 = new javax.swing.JTextField("");
 	        jScrollPane2 = new javax.swing.JScrollPane();
-	        jTextArea2 = new javax.swing.JTextArea("");
+	        jTextEtiquetas = new javax.swing.JTextArea("");
 	        jScrollPane3 = new javax.swing.JScrollPane();
-	        jTextArea3 = new javax.swing.JTextArea("");
+	        jTextAreaDescripcion = new javax.swing.JTextArea("");
 	        jButton3 = new javax.swing.JButton();
 	        fc = new JFileChooser();
 
@@ -582,13 +591,13 @@ public class Recursos extends ColorPanel{
 
 	        jTextField2.setText("URL (Página web)");
 
-	        jTextArea2.setColumns(20);
-	        jTextArea2.setRows(5);
-	        jScrollPane2.setViewportView(jTextArea2);
+	        jTextEtiquetas.setColumns(20);
+	        jTextEtiquetas.setRows(5);
+	        jScrollPane3.setViewportView(jTextEtiquetas);
 
-	        jTextArea3.setColumns(20);
-	        jTextArea3.setRows(5);
-	        jScrollPane3.setViewportView(jTextArea3);
+	        jTextAreaDescripcion.setColumns(20);
+	        jTextAreaDescripcion.setRows(5);
+	        jScrollPane2.setViewportView(jTextAreaDescripcion);
 
 	        jButton3.setText("Seleccionar Archivo");
 	        jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -672,15 +681,15 @@ public class Recursos extends ColorPanel{
 		     if(name.equals("")) new Error("Nombre Vacio");
 		     else{
 		    	 if(direction.equals("URL (Página web)") && file != null){
-		    		 Recurso rec = new Recurso(name, file, jTextArea3.getText().split(","));
-		    		 rec.setDescripcion(jTextArea2.getText());
+		    		 Recurso rec = new Recurso(name, file, jTextEtiquetas.getText().split(","));
+		    		 rec.setDescripcion(this.jTextAreaDescripcion.getText());
 		    		 Controlador.addRecurso(rec);
 		    		 dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		    	 }
 		    	 else if(!direction.equals("URL (Página web)") && file == null){
 		    		 try {
-		    			 Recurso rec = new Recurso(name, direction, jTextArea3.getText().split(","));
-		    			 rec.setDescripcion(jTextArea2.getText());
+		    			 Recurso rec = new Recurso(name, direction, this.jTextEtiquetas.getText().split(","));
+		    			 rec.setDescripcion(jTextAreaDescripcion.getText());
 		    			 Controlador.addRecurso(rec);
 		    		 } catch (URISyntaxException e) {
 		    			 new Error("Direccion incorrecta");
