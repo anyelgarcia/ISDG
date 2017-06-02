@@ -691,6 +691,7 @@ public class Recursos extends ColorPanel{
 		    			 Recurso rec = new Recurso(name, direction, this.jTextEtiquetas.getText().split(","));
 		    			 rec.setDescripcion(jTextAreaDescripcion.getText());
 		    			 Controlador.addRecurso(rec);
+		    			 dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		    		 } catch (URISyntaxException e) {
 		    			 new Error("Direccion incorrecta");
 		    		 }

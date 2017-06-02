@@ -47,12 +47,14 @@ public class SARecursosImpl implements SARecursos {
 
 	@Override
 	public void addRecurso(Recurso rec) throws AccessException, IOException {
-		File dir = new File("src/recursos");
-		dir.mkdirs();
-		File resourcesDir = new File(dir, rec.getFileName());
-		//Cambiamos el archivo que nos interesa abrir
-		rec.setFile(Files.copy(rec.getPath(), resourcesDir.getAbsoluteFile().toPath(),
-				StandardCopyOption.REPLACE_EXISTING).toFile());
+		if(rec.getFile()!=null){
+			File dir = new File("src/recursos");
+			dir.mkdirs();
+			File resourcesDir = new File(dir, rec.getFileName());
+			//Cambiamos el archivo que nos interesa abrir
+			rec.setFile(Files.copy(rec.getPath(), resourcesDir.getAbsoluteFile().toPath(),
+					StandardCopyOption.REPLACE_EXISTING).toFile());
+		}
 		bank.addRecurso(rec);
 		daorec.crearRecurso(rec);
 	}
@@ -88,7 +90,9 @@ public class SARecursosImpl implements SARecursos {
 				}
 			}
 		}
-		rec.getFile().delete();
+		if(rec.getFile()!=null){
+			rec.getFile().delete();
+		}
 	}
 
 	@Override
