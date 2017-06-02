@@ -81,7 +81,7 @@ public class SAPacientesImpl implements SAPacientes {
 		Relacion aEliminar = null;
 		for (Relacion r : setrel) {
 			//Si el paciente es el agente de la relacion, la marcamos para eliminarla luego
-			if (r.getIdAgente() == pac.getId()) {
+			if (r.getIdAgente().equals(pac.getId())) {
 				aEliminar = r;
 			} 
 			// Si el paciente esta en alguna relacion con otro paciente, lo eliminamos del los
@@ -175,7 +175,7 @@ public class SAPacientesImpl implements SAPacientes {
 		setrel = daorelUsu.listarRelaciones(centro.getNombre());
 		for (Relacion r : setrel) {
 			//Si el usuario es el agente de la relacion, la marcamos para eliminarla luego
-			if (r.getIdAgente() == usu.getId()) {
+			if (r.getIdAgente().equals(usu.getId())) {
 				aEliminar = r;
 			} 
 			// Si el usuario esta en alguna relacion con otro usuario, lo eliminamos del los

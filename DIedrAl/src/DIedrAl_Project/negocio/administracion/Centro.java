@@ -50,6 +50,9 @@ public class Centro {
 	}
 
 	public void addUsuario(Usuario usu) throws AlreadyBoundException {
+		if(usu==null){
+			throw new IllegalArgumentException("Paciente mal formado");
+		}
 		if (!usuarios.containsKey(usu)) {
 			usuarios.put(usu, new HashSet<Paciente>());
 			personasCentro.put(usu.getId(), usu);
@@ -59,6 +62,9 @@ public class Centro {
 	}
 
 	public void addPaciente(Paciente pac) throws AlreadyBoundException {
+		if(pac==null){
+			throw new IllegalArgumentException("Paciente mal formado");
+		}
 		if (!pacientes.containsKey(pac)) {
 			pacientes.put(pac, new HashSet<Usuario>());
 			personasCentro.put(pac.getId(), pac);
@@ -71,9 +77,9 @@ public class Centro {
 
 		if (personasCentro.containsKey(usu.getNif())) {
 
-			for (Entry<Usuario, HashSet<Paciente>> entrada : usuarios.entrySet()) {
+			for (HashMap.Entry<Usuario, HashSet<Paciente>> entrada : usuarios.entrySet()) {
 				if (entrada.getKey().getNif().equals(usu.getNif())) {
-					usuarios.remove(entrada);
+					usuarios.remove(entrada.getKey());
 					break;
 				}
 			}
@@ -92,9 +98,9 @@ public class Centro {
 	public void erasePaciente(Paciente pac) throws NotBoundException {
 
 		if (personasCentro.containsKey(pac.getNif())) {
-			for (Entry<Paciente, HashSet<Usuario>> entrada : pacientes.entrySet()) {
+			for (HashMap.Entry<Paciente, HashSet<Usuario>> entrada : pacientes.entrySet()) {
 				if (entrada.getKey().getNif().equals(pac.getNif())) {
-					pacientes.remove(entrada);
+					pacientes.remove(entrada.getKey());
 					break;
 				}
 			}
