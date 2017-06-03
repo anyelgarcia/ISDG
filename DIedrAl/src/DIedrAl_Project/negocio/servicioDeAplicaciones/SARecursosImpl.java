@@ -3,6 +3,7 @@ package DIedrAl_Project.negocio.servicioDeAplicaciones;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.rmi.AlreadyBoundException;
 import java.util.*;
 
 import DIedrAl_Project.integracion.BasicClasses.*;
@@ -46,7 +47,7 @@ public class SARecursosImpl implements SARecursos {
 	}
 
 	@Override
-	public void addRecurso(Recurso rec) throws AccessException, IOException {
+	public void addRecurso(Recurso rec) throws AccessException, IOException, AlreadyBoundException {
 		if(rec.getFile()!=null){
 			File dir = new File("src/recursos");
 			dir.mkdirs();

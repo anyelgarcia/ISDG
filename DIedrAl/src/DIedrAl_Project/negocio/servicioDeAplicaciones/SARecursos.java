@@ -1,6 +1,7 @@
 package DIedrAl_Project.negocio.servicioDeAplicaciones;
 
 import java.io.IOException;
+import java.rmi.AlreadyBoundException;
 import java.util.Set;
 
 import DIedrAl_Project.integracion.BasicClasses.AccessException;
@@ -11,7 +12,7 @@ import DIedrAl_Project.negocio.recursos.*;
 public interface SARecursos {
 	
 	
-	public void addRecurso(Recurso rec) throws AccessException, IOException;
+	public void addRecurso(Recurso rec) throws AccessException, IOException, AlreadyBoundException;
 
 	public void removeRecurso(Recurso rec) throws AccessException;
 

@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -123,6 +124,7 @@ public class Recursos extends ColorPanel{
 		 */
 		private static final long serialVersionUID = 4771327958790552537L;
 		private javax.swing.JButton jButton1;
+		private javax.swing.JButton jButton2;
 	    private javax.swing.JLabel jLabel1;
 	    private javax.swing.JLabel jLabel2;
 	    private javax.swing.JLabel jLabel3;
@@ -154,6 +156,9 @@ public class Recursos extends ColorPanel{
 		    jButton1 = new javax.swing.JButton();
 		    jButton1.setVisible(editable);
 	        jButton1.setEnabled(editable);
+	        jButton2 = new javax.swing.JButton();
+		    jButton2.setVisible(!editable);
+	        jButton2.setEnabled(!editable);
 		    jTextField1 = new javax.swing.JTextField("");
 		    jTextField1.setEditable(editable);
 		    jTextField2 = new javax.swing.JTextField("");
@@ -184,6 +189,13 @@ public class Recursos extends ColorPanel{
 		        jButton1.addActionListener(new java.awt.event.ActionListener() {
 		            public void actionPerformed(java.awt.event.ActionEvent evt) {
 		                jButton1ActionPerformed(evt);
+		            }
+		        });
+		        
+		        jButton2.setText("Abrir Recurso");
+		        jButton2.addActionListener(new java.awt.event.ActionListener() {
+		            public void actionPerformed(java.awt.event.ActionEvent evt) {
+		                jButton2ActionPerformed(evt);
 		            }
 		        });
 
@@ -241,6 +253,8 @@ public class Recursos extends ColorPanel{
 		            .addGroup(layout.createSequentialGroup()
 		            		.addGap(126, 126, 126)
 			                .addComponent(jButton1)
+			                .addGap(16, 16, 16)
+			                .addComponent(jButton2)
 			                .addGap(0, 0, Short.MAX_VALUE))
 		        );
 		        layout.setVerticalGroup(
@@ -264,7 +278,8 @@ public class Recursos extends ColorPanel{
 		                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
 		                .addGap(29, 29, 29)
 		                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-		                    .addComponent(jButton1))
+		                    .addComponent(jButton1)
+		                    .addComponent(jButton2))
 		                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		        );
 		        
@@ -273,6 +288,14 @@ public class Recursos extends ColorPanel{
 		}
 
 		
+		protected void jButton2ActionPerformed(ActionEvent evt) {
+			try {
+				recurso.open();
+			} catch (UnsupportedOperationException | IOException e) {
+				new Error("No se puede abrir el archivo");
+			}
+		}
+
 		/**
 		 * Función que se ejecuta al darle a guardar en la ventana de de recursos. Se rellena un objeto recurso y es pasado al controlador.
 		 * */
