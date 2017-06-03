@@ -67,7 +67,7 @@ public class Controlador {
 		SARecursos saRecursos = SAFactory.getInstancia().newSARecursos();
 		try {
 			saRecursos.addRecurso(p);
-		} catch (AccessException | IOException e) {
+		} catch (AccessException | IOException | AlreadyBoundException e) {
 			new Error(e.getMessage());
 		}
 		

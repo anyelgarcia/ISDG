@@ -4,10 +4,9 @@ import java.awt.*;
 import java.io.*;
 import java.net.*;
 import java.nio.file.*;
+import java.rmi.AlreadyBoundException;
 import java.util.*;
 
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 
 
 public class Recurso extends Etiquetable {
@@ -77,11 +76,16 @@ public class Recurso extends Etiquetable {
 	public TreeSet<String> getEtiquetas() {
 		return this.etiquetas;
 	}
+	
+	public URI getUrl(){
+		return direccion;
+	}
 
 	public File getFile() {
 		return this.fichero;
 	}
-	public void setFile(File nuevo){
-		this.fichero=nuevo;
+	public void setFile(File nuevo) throws AlreadyBoundException{
+		if(direccion != null) throw new AlreadyBoundException("Ya tiene asociada una url");
+		else this.fichero=nuevo;
 	}
 }
