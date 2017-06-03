@@ -24,7 +24,7 @@ public class PantallaSesionBuscar extends JFrame implements confirmListener{
 	private javax.swing.JButton jButton1;
 	private javax.swing.JButton jButton2;
 	private javax.swing.JLabel jLabel1;
-	private javax.swing.JLabel jLabel2;
+	private javax.swing.JLabel jLabelEtiquetas;
 	private javax.swing.JLabel jLabel3;
 	private javax.swing.JLabel jLabel4;
 	private javax.swing.JLabel jLabel6;
@@ -34,7 +34,7 @@ public class PantallaSesionBuscar extends JFrame implements confirmListener{
 	private javax.swing.JScrollPane jScrollPane2;
 	private javax.swing.JScrollPane jScrollPane3;
 	private javax.swing.JSeparator jSeparator1;
-	private javax.swing.JTextArea jTextArea1;
+	private javax.swing.JTextArea jTextAreaEtiquetas;
 	private javax.swing.JTextArea jTextArea2;
 	private javax.swing.JTextField jTextField1;
 	private javax.swing.JTextField jTextField2;
@@ -50,9 +50,9 @@ public class PantallaSesionBuscar extends JFrame implements confirmListener{
 
 		jLabel1 = new javax.swing.JLabel();
 		jTextField1 = new javax.swing.JTextField("");
-		jLabel2 = new javax.swing.JLabel();
+		jLabelEtiquetas = new javax.swing.JLabel();
 		jScrollPane1 = new javax.swing.JScrollPane();
-		jTextArea1 = new javax.swing.JTextArea("");
+		jTextAreaEtiquetas = new javax.swing.JTextArea("");
 		jLabel3 = new javax.swing.JLabel();
 		jLabel6 = new javax.swing.JLabel();
 		jTextField2 = new javax.swing.JTextField("");
@@ -87,11 +87,11 @@ public class PantallaSesionBuscar extends JFrame implements confirmListener{
 
 		jLabel1.setText("Nombre");
 
-		jLabel2.setText("Etiquetas (Separadas por comas) ");
+		jLabelEtiquetas.setText("Etiquetas (Separadas por comas) ");
 
-		jTextArea1.setColumns(20);
-		jTextArea1.setRows(5);
-		jScrollPane1.setViewportView(jTextArea1);
+		jTextAreaEtiquetas.setColumns(20);
+		jTextAreaEtiquetas.setRows(5);
+		jScrollPane1.setViewportView(jTextAreaEtiquetas);
 
 		jLabel3.setText("Duración:");
 
@@ -151,7 +151,7 @@ public class PantallaSesionBuscar extends JFrame implements confirmListener{
 										.addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
 										.addComponent(jLabel3)
 										.addComponent(jLabel4)
-										.addComponent(jLabel2)
+										.addComponent(jLabelEtiquetas)
 										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
 												.addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
 														.addComponent(jLabel1)
@@ -185,7 +185,7 @@ public class PantallaSesionBuscar extends JFrame implements confirmListener{
 												.addComponent(jLabel1)
 												.addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(jLabel2)
+												.addComponent(jLabelEtiquetas)
 												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 												.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
 												.addGap(14, 14, 14)
@@ -223,10 +223,10 @@ public class PantallaSesionBuscar extends JFrame implements confirmListener{
 		String nombre = jTextField1.getText();
 		Set<String> setEtiquetas = new HashSet<String>();
 		Set<String> setDestinatarios = new HashSet<String>();
-		if(!jTextArea1.getText().equals(""))
-			setEtiquetas = new HashSet<String>(Arrays.asList(jTextArea1.getText().split(",")));
+		if(!jTextAreaEtiquetas.getText().equals(""))
+			setEtiquetas = new HashSet<String>(Arrays.asList(jTextAreaEtiquetas.getText().split(", ")));
 		if(!jTextArea2.getText().equals(""))
-			setDestinatarios = new HashSet<String>(Arrays.asList(jTextArea2.getText().split(",")));
+			setDestinatarios = new HashSet<String>(Arrays.asList(jTextArea2.getText().split(", ")));
 		Integer ini = null, end = null;
 		if(!jTextField2.getText().equals("")) 
 			ini = Integer.parseInt(jTextField2.getText());

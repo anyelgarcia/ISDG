@@ -315,7 +315,7 @@ public class PantallaSesion extends JFrame{
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { 
 
 		String etiquetasSinFormato = jTextEtiquetas.getText();
-		String etiquetas[] = etiquetasSinFormato.split(",");
+		String etiquetas[] = etiquetasSinFormato.split(", ");
 		String nombre = jTextField1.getText();
 		int duracion = 0;
 		try{
@@ -327,7 +327,7 @@ public class PantallaSesion extends JFrame{
 		if(nombre.equals("")) new Error("Nombre vacio");
 		else{
 			Sesion info = new Sesion(nombre, etiquetas);
-
+			
 			info.setDuracion(duracion);
 			info.setDescripcion(String.valueOf(jTextDescripcion.getText()));
 			info.setDesarrollo(String.valueOf(jTextDesarrollo.getText()));
