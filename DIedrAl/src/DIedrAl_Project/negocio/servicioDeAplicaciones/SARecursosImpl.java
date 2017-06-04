@@ -7,7 +7,6 @@ import java.util.*;
 
 import DIedrAl_Project.integracion.BasicClasses.*;
 import DIedrAl_Project.integracion.DAOinterfaces.*;
-import DIedrAl_Project.integracion.SQL.SQLDAOFactory;
 import DIedrAl_Project.integracion.simplefileImp.*;
 import DIedrAl_Project.negocio.calendario.Fecha;
 import DIedrAl_Project.negocio.calendario.SesionProgramada;
@@ -38,6 +37,7 @@ public class SARecursosImpl implements SARecursos {
 
 	private SARecursosImpl() {
 		SimpleFileDAOFactory factoria = SimpleFileDAOFactory.getInstance();
+		
 		daorec = factoria.getDAORecurso();
 		daoact = factoria.getDAOActividad();
 		daoses = factoria.getDAOSesion();

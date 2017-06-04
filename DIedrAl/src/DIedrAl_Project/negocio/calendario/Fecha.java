@@ -64,5 +64,9 @@ public class Fecha implements Serializable{
     void setHora(int value) {
         this.hora = value;
     }
+    
+   public String toString(){
+	   return dia + "-" + mes + "-" + anyo + "-" + hora;
+   }
 
 }
