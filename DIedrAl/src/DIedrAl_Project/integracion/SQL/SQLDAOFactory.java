@@ -75,13 +75,12 @@ public class SQLDAOFactory implements DAOFactory {
 
 	@Override
 	public DAOUsuario getDAOUsuario() {
-		System.out.println(conexion);
 		return DAOUsuarioImpSQL.getInstance(conexion);
 	}
 
 	@Override
 	public DAORelacionable getDAORelacion(tRelacion rel) {
-		return new DAORelacionableImpSQL(rel);
+		return DAORelacionableImpSQL.getInstance(rel, conexion);
 	}
 
 	@Override

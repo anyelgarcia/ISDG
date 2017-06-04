@@ -29,12 +29,7 @@ public class DAOUsuarioImpSQL implements DAOUsuario{
 	}
 
 	public DAOUsuarioImpSQL(Connection conexion) {
-		System.out.println(conexion);
-		System.out.println(this.conexion);
-		DAOUsuarioImpSQL.conexion = conexion;
-		System.out.println(conexion);
-		System.out.println(this.conexion);
-		
+		DAOUsuarioImpSQL.conexion = conexion;	
 	}
 	
 	@Override
@@ -42,17 +37,30 @@ public class DAOUsuarioImpSQL implements DAOUsuario{
 		Statement s;
 		try {
 			s = conexion.createStatement();
-			s.executeUpdate ("INSERT INTO `Usuarios` VALUES '" + u.getId() + "','" + u.getNif() + "','" +
-				u.getName() + "','" + u.getFirstSurname() + "','" + u.getSecondSurname() + "'," +
-				u.getBirthday() + "," + u.getAddress().getLocalidad() + "','" 
-				+ "','" + u.getAddress().getProvincia() + "','" + u.getAddress().getCalle()
-				+ "','" + u.getAddress().getPiso() + "','" + u.getAddress().getPortal() 
-				+ "','" + u.getAddress().getPuerta() + "','" + u.getAddress().getCodigopostal() 
-				+ "','" + u.getEmail() + "','" + u.getTfo() + "','" + u.getCentro()
-				+ "','" + u.getPerfil() + "'," + u.isAdmin()  + ",'" + u.getInfor()
-				+ "','" + u.getPassword() +"')");
+			System.out.println("INSERT INTO `Usuarios` VALUES ('" + u.getId() + "','" + u.getNif() + "','" +
+					u.getName() + "','" + u.getFirstSurname() + "','" + u.getSecondSurname() + "','" +
+					(u.getBirthday() != null ? u.getBirthday() : "") + "'," + (u.getEstadoCivil() != null ? u.getEstadoCivil().getOrdinal() : "NULL") 
+					+ ",'"+ (u.getAddress() != null ? u.getAddress().getLocalidad() + "','" 
+					+ "','" + u.getAddress().getProvincia() + "','" + u.getAddress().getCalle()
+					+ "'," + u.getAddress().getPiso() + "," + u.getAddress().getPortal() 
+					+ "," + u.getAddress().getPuerta() + "," + u.getAddress().getCodigopostal() :
+					"','','',NULL,NULL,NULL,NULL")	
+					+ ",'" + u.getEmail() + "','" + u.getTfo() + "','" + u.getCentro()
+					+ "','" + u.getPerfil() + "'," + u.isAdmin()  + ",'" + u.getInfor()
+					+ "','" + u.getPassword() +"')");
+			s.executeUpdate ("INSERT INTO `Usuarios` VALUES ('" + u.getId() + "','" + u.getNif() + "','" +
+					u.getName() + "','" + u.getFirstSurname() + "','" + u.getSecondSurname() + "','" +
+					(u.getBirthday() != null ? u.getBirthday() : "") + "'," + (u.getEstadoCivil() != null ? u.getEstadoCivil().getOrdinal() : "NULL") 
+					+ ",'"+ (u.getAddress() != null ? u.getAddress().getLocalidad() + "','" 
+					+ "','" + u.getAddress().getProvincia() + "','" + u.getAddress().getCalle()
+					+ "'," + u.getAddress().getPiso() + "," + u.getAddress().getPortal() 
+					+ "," + u.getAddress().getPuerta() + "," + u.getAddress().getCodigopostal() :
+					"','','',NULL,NULL,NULL,NULL")	
+					+ ",'" + u.getEmail() + "','" + u.getTfo() + "','" + u.getCentro()
+					+ "','" + u.getPerfil() + "'," + u.isAdmin()  + ",'" + u.getInfor()
+					+ "','" + u.getPassword() +"')");
 		} catch (SQLException e) {
-			throw new AccessException();
+			throw new AccessException("Error al crear Usuario");
 		}
 	}
 
@@ -62,7 +70,7 @@ public class DAOUsuarioImpSQL implements DAOUsuario{
 			Statement s = conexion.createStatement();
 			s.executeQuery("DELETE FROM Usuarios WHERE ID = " + id);
 		} catch (SQLException e) {
-			throw new AccessException();
+			throw new AccessException("Error al eliminar Usuario");
 		}
 	}
 
@@ -82,7 +90,7 @@ public class DAOUsuarioImpSQL implements DAOUsuario{
 					+ "', PERFIL = '" + u.getPerfil() + "', ADMINISTRADOR = " + u.isAdmin()  + ", INFOR = '" + u.getInfor() 
 					+ "', PASSWORD = " + u.getPassword() + "')");
 			} catch (SQLException e) {
-				throw new AccessException();
+				throw new AccessException("Error al modificar Usuario");
 			}
 	}
 
@@ -118,7 +126,7 @@ public class DAOUsuarioImpSQL implements DAOUsuario{
 				hs.add(u);
 			}
 		} catch (SQLException e) {
-			throw new AccessException();
+			throw new AccessException("Error al listar Usuarios");
 		}
 		return hs;
 	}
@@ -128,9 +136,9 @@ public class DAOUsuarioImpSQL implements DAOUsuario{
 		ResultSet rs;
 		try {
 			Statement s = conexion.createStatement();
-			rs = s.executeQuery("SELECT * FROM Usuarios WHERE ID = " + id);
+			rs = s.executeQuery("SELECT * FROM Usuarios WHERE ID = '" + id + "'");
 		} catch (SQLException e) {
-			throw new AccessException();
+			throw new AccessException("Error al comprobar si existe un Usuario");
 		}
 		return (rs == null);
 	}
@@ -140,33 +148,34 @@ public class DAOUsuarioImpSQL implements DAOUsuario{
 		ResultSet rs;
 		Usuario u = null;
 		try {
-			System.out.println("Primero");
-			System.out.println(conexion);
-			System.out.println("Sefundo");
 			Statement s = conexion.createStatement();
-			rs = s.executeQuery("SELECT * FROM Usuarios WHERE ID = " + id);
-			u = new Usuario(rs.getString("NOMBRE"), rs.getString("APELLIDO1"),
-					rs.getString("APELLIDO2"), rs.getString("NIF"));
-			String[] fecha = rs.getString("FECHADENACIMIENTO").split("-");
-			u.setBirthday(new Fecha((int) Integer.parseInt(fecha[0]), fecha[1], 
-					(int) Integer.parseInt(fecha[2]), (int) Integer.parseInt(fecha[3])));
-			
-			Direccion dir = new Direccion();
-			dir.setLocalidad(rs.getString("LOCALIDAD")); dir.setProvincia(rs.getString("PROVINCIA"));
-			dir.setCalle(rs.getString("CALLE")); dir.setPiso(rs.getInt("PISO"));
-			dir.setPortal(rs.getInt("PORTAL")); dir.setPuerta(rs.getInt("PUERTA"));
-			dir.setCodigopostal(rs.getInt("CODIGOPOSTAL"));
-			
-			u.setAddress(dir);
-			u.setEmail(rs.getString("EMAIL"));
-			u.setTfo(rs.getString("TFO"));
-			u.setPerfil(rs.getString("PERFIL"));
-			u.setCentro(rs.getString("CENTRO"));
-			if(rs.getInt("ADMINISTRADOR") == 1) u.setAdmin();
-			u.setInfor(rs.getString("INFOR"));
-			u.setPassword(rs.getString("PASSWORD"));
+			rs = s.executeQuery("SELECT * FROM Usuarios WHERE ID = '" + id + "'");
+			if(rs.next()){
+				u = new Usuario(rs.getString("NOMBRE"), rs.getString("APELLIDO1"),
+						rs.getString("APELLIDO2"), rs.getString("NIF"));
+				String fecha = rs.getString("FECHANACIMIENTO");
+				if(fecha != ""){
+					String[] farray = fecha.split("-");
+					u.setBirthday(new Fecha((int) Integer.parseInt(farray[0]), farray[1], 
+						(int) Integer.parseInt(farray[2]), (int) Integer.parseInt(farray[3])));
+				}
+				Direccion dir = new Direccion();
+				dir.setLocalidad(rs.getString("LOCALIDAD")); dir.setProvincia(rs.getString("PROVINCIA"));
+				dir.setCalle(rs.getString("CALLE")); dir.setPiso(rs.getInt("PISO"));
+				dir.setPortal(rs.getInt("PORTAL")); dir.setPuerta(rs.getInt("PUERTA"));
+				dir.setCodigopostal(rs.getInt("CODIGOPOSTAL"));
+				
+				u.setAddress(dir);
+				u.setEmail(rs.getString("EMAIL"));
+				u.setTfo(rs.getString("TFO"));
+				u.setPerfil(rs.getString("PERFIL"));
+				u.setCentro(rs.getString("CENTRO"));
+				if(rs.getInt("ADMINISTRADOR") == 1) u.setAdmin();
+				u.setInfor(rs.getString("INFOR"));
+				u.setPassword(rs.getString("PASSWORD"));
+			}
 		} catch (SQLException e) {
-			throw new AccessException();
+			throw new AccessException("Error al consultar un Usuario");
 		}
 		return u ;
 	}

@@ -7,7 +7,6 @@ import java.util.HashSet;
 
 import DIedrAl_Project.integracion.BasicClasses.*;
 import DIedrAl_Project.integracion.DAOinterfaces.*;
-import DIedrAl_Project.integracion.SQL.SQLDAOFactory;
 import DIedrAl_Project.integracion.simplefileImp.*;
 import DIedrAl_Project.integracion.BasicClasses.AccessException;
 import DIedrAl_Project.negocio.administracion.*;
@@ -19,7 +18,7 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 	
 	private DAOUsuario daousu;
 
-	private SQLDAOFactory factoria;
+	private SimpleFileDAOFactory factoria;
 
 	private static SAOrganizacionImpl instancia = null;
 
@@ -34,12 +33,9 @@ public class SAOrganizacionImpl implements SAOrganizacion {
 
 	private SAOrganizacionImpl() {
 		this.organizacion = Organizacion.getInstancia();
-		try {
-			factoria = SQLDAOFactory.getInstance();
-		} catch (AccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		factoria = SimpleFileDAOFactory.getInstance();
+		
+		
 		daousu=factoria.getDAOUsuario();
 	}
 

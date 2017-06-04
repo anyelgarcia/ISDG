@@ -43,7 +43,7 @@ public class DAOCentroImpSQL implements DAOCentro{
 	public void eliminarCentro(String id) throws AccessException {
 		try {
 			Statement s = conexion.createStatement();
-			s.executeQuery("DELETE FROM Centros WHERE ID = " + id);
+			s.executeUpdate("DELETE FROM Centros WHERE ID = '" + id + "'");
 		} catch (SQLException e) {
 			throw new AccessException();
 		}
@@ -53,7 +53,7 @@ public class DAOCentroImpSQL implements DAOCentro{
 	public void modificarCentro(EstadoCentro c) throws AccessException  {
 		try{
 			Statement s = conexion.createStatement();
-			s.executeQuery ("UPDATE FROM Centros SET NOMBRE = '" + c.getNombre());
+			s.executeQuery ("UPDATE FROM Centros SET NOMBRE = '" + c.getNombre() + "'");
 		} catch(SQLException e) {
 			throw new AccessException();
 		}
@@ -81,8 +81,9 @@ public class DAOCentroImpSQL implements DAOCentro{
 		EstadoCentro es = null;
 		try{
 			Statement s = conexion.createStatement();
-			ResultSet rs = s.executeQuery ("SELECT * FROM Centros WHERE ID = " + id );
-			es = new EstadoCentro(rs.getString("NOMBRE"));
+			ResultSet rs = s.executeQuery ("SELECT * FROM Centros WHERE ID = '" + id + "'");
+			if(rs.next())
+				es = new EstadoCentro(rs.getString("NOMBRE"));
 		} catch(SQLException e) {
 			throw new AccessException();
 		}
@@ -96,10 +97,11 @@ public class DAOCentroImpSQL implements DAOCentro{
 		try {
 			Statement s = conexion.createStatement();
 			rs = s.executeQuery("SELECT * FROM Centros WHERE ID = '" + id + "'");
+			return rs.next();
 		} catch (SQLException e) {
 			throw new AccessException();
 		}
-		return rs == null;
+		
 	}
 
 	
