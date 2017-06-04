@@ -22,7 +22,7 @@ public class SAPacientesImpl implements SAPacientes {
 	private DAORelacionable daorelUsu;
 
 	public SAPacientesImpl(String nombreCentro) throws AccessException{
-		DAOFactory factoria = SQLDAOFactory.getInstance();
+		DAOFactory factoria = SimpleFileDAOFactory.getInstance();
 		daocen = factoria.getDAOCentro();
 		daopac = factoria.getDAOPaciente();
 		daousu = factoria.getDAOUsuario();

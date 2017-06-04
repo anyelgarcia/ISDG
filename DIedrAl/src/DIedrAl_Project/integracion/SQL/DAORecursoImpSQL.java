@@ -50,7 +50,7 @@ public class DAORecursoImpSQL implements DAORecurso{
 	public void eliminarRecurso(String id) throws AccessException {
 		try {
 			Statement s = conexion.createStatement();
-			s.executeQuery("DELETE FROM Sesiones WHERE ID = " + id);
+			s.executeQuery("DELETE FROM Sesiones WHERE ID = '" + id + "'");
 		} catch (SQLException e) {
 			throw new AccessException();
 		}
@@ -64,7 +64,7 @@ public class DAORecursoImpSQL implements DAORecurso{
 			r.getNombre() + "', DESCRIPCION = '" + r.getDescripcion() +  "', FOD = " + 
 			(r.isFich() ? 1 + ", FILEURI = " + r.getPath() : 0 + ", FILEURI = " + r.getURI()) 
 			+ " WHERE ID = " + r.getId() + ")");
-			} catch (SQLException e) {
+		} catch (SQLException e) {
 			throw new AccessException();
 		}
 		

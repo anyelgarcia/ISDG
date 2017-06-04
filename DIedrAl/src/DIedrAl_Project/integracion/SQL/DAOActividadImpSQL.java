@@ -49,7 +49,7 @@ public class DAOActividadImpSQL implements DAOActividad{
 	public void eliminarActividad(String id) throws AccessException {
 		try{
 			Statement s = conexion.createStatement();
-			s.executeQuery ("DELETE FROM `Actividades` WHERE `ID` = " + id);		
+			s.executeQuery ("DELETE FROM `Actividades` WHERE ID = '" + id + "'");		
 		} catch(SQLException e) {
 			throw new AccessException();
 		}
@@ -63,8 +63,8 @@ public class DAOActividadImpSQL implements DAOActividad{
 					+ a.getNombre() + ",`DESCRIPCION`= " + a.getDescripcion() + "`DURACION`= " + a.getDuracion()
 					+ ", `DIFICULTAD` = " + a.getDificultad().getOrdinal()
 					+ ",`DESTINATARIOS`=" + a.getDestinatarios() + ",`ASOCIADOS`= " + a.getAsociados().toString()
-					+ ",`DESARROLLO`=" + a.getDesarrollo() + ",`VARIACIONES`=" + a.getVariaciones() + " WHERE `ID` = "
-					+ a.getId());
+					+ ",`DESARROLLO`=" + a.getDesarrollo() + ",`VARIACIONES`=" + a.getVariaciones() + " WHERE `ID` = '"
+					+ a.getId() + "'");
 		} catch (SQLException e) {
 			throw new AccessException();
 		}
@@ -99,7 +99,7 @@ public class DAOActividadImpSQL implements DAOActividad{
 	public boolean existeActividad(String id) throws AccessException {
 		try {
 			Statement s = conexion.createStatement();
-			ResultSet rs = s.executeQuery("SELECT * FROM `Actividades` WHERE `ID` = " + id);
+			ResultSet rs = s.executeQuery("SELECT * FROM `Actividades` WHERE `ID` = '" + id + "'");
 			return (rs == null);
 		} catch (SQLException e) {
 			throw new AccessException();

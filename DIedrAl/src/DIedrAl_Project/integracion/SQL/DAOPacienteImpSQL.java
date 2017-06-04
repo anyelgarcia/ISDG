@@ -8,7 +8,6 @@ import java.util.HashSet;
 
 import DIedrAl_Project.integracion.BasicClasses.AccessException;
 import DIedrAl_Project.integracion.DAOinterfaces.DAOPaciente;
-import DIedrAl_Project.negocio.administracion.EstadoCivil;
 import DIedrAl_Project.negocio.calendario.Fecha;
 import DIedrAl_Project.negocio.pacientes.Direccion;
 import DIedrAl_Project.negocio.pacientes.Paciente;
@@ -46,7 +45,7 @@ public class DAOPacienteImpSQL implements DAOPaciente{
 				p.getDatos().getDatosfamiliares() + "','" + p.getDatos().getLesion() + "','" + 
 				p.getDatos().getLesion() + "','" + p.getDatos().getAficiones() +"')");
 		} catch (SQLException e) {
-			throw new AccessException();
+			throw new AccessException("Error al crear un Paciente");
 		}
 	}
 
@@ -54,9 +53,9 @@ public class DAOPacienteImpSQL implements DAOPaciente{
 	public void eliminarPaciente(String id) throws AccessException  {
 		try{
 			Statement s = conexion.createStatement();
-			s.executeQuery ("DELETE FROM `Pacientes` WHERE `ID` = " + id);
+			s.executeQuery ("DELETE FROM `Pacientes` WHERE `ID` = '" + id + "'");
 		} catch(SQLException e) {
-			throw new AccessException();
+			throw new AccessException("Error al eliminar un Paciente");
 		}
 	}
 
@@ -73,9 +72,9 @@ public class DAOPacienteImpSQL implements DAOPaciente{
 					",`LESION`=" + p.getDatos().getLesion() + 
 					",`FECHALESION`=" + p.getDatos().getFechalesion() +
 					",`AFICIONES`=" + p.getDatos().getAficiones().toString() +
-					" WHERE `ID` = " + p.getId());
+					" WHERE `ID` = '" + p.getId() + "'");
 		} catch (SQLException e) {
-			throw new AccessException();
+			throw new AccessException("Error al modificar un Paciente");
 		}
 	}
 
@@ -109,7 +108,7 @@ public class DAOPacienteImpSQL implements DAOPaciente{
 				hs.add(p);
 			}
 		} catch (SQLException e) {
-			throw new AccessException();
+			throw new AccessException("Error al listar Pacientes");
 		}
 		return hs;
 	}
@@ -119,9 +118,9 @@ public class DAOPacienteImpSQL implements DAOPaciente{
 		ResultSet rs;
 		try{
 			Statement s = conexion.createStatement();
-			rs = s.executeQuery ("SELECT * FROM Pacients WHERE ID = " + id);
+			rs = s.executeQuery ("SELECT * FROM Pacients WHERE ID = '" + id + "'");
 		} catch(SQLException e) {
-			throw new AccessException();
+			throw new AccessException("Error al comprobar si un paciente existe");
 		}
 		return (rs == null);
 	}
@@ -131,7 +130,7 @@ public class DAOPacienteImpSQL implements DAOPaciente{
 		Paciente p = null;
 		try{
 			Statement s = conexion.createStatement();
-			ResultSet rs = s.executeQuery("SELECT * FROM Pacientes WHERE ID = " + id);
+			ResultSet rs = s.executeQuery("SELECT * FROM Pacientes WHERE ID = '" + id + "'");
 			p = new Paciente(rs.getString("NOMBRE"), rs.getString("APELLIDO1"), rs.getString("APELLIDO2"),
 					rs.getString("NIF"));
 			String[] fecha = rs.getString("FECHADENACIMIENTO").split("-");
@@ -153,7 +152,7 @@ public class DAOPacienteImpSQL implements DAOPaciente{
 			p.setCentro(rs.getString("CENTRO"));
 
 		} catch(SQLException e) {
-			throw new AccessException();
+			throw new AccessException("Error al consultar un Paciente");
 		}
 		return p;
 	}

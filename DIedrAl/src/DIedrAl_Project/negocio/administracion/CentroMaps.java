@@ -22,7 +22,7 @@ public class CentroMaps {
 	private String nomb;
 
 	public CentroMaps() throws AccessException {
-		factory = SQLDAOFactory.getInstance();
+		factory = SimpleFileDAOFactory.getInstance();
 	}
 
 	private void cargarInfo() throws AccessException {

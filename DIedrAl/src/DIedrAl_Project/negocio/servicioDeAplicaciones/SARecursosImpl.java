@@ -37,13 +37,7 @@ public class SARecursosImpl implements SARecursos {
 	}
 
 	private SARecursosImpl() {
-		SQLDAOFactory factoria = null;
-		try {
-			factoria = SQLDAOFactory.getInstance();
-		} catch (AccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		SimpleFileDAOFactory factoria = SimpleFileDAOFactory.getInstance();
 		daorec = factoria.getDAORecurso();
 		daoact = factoria.getDAOActividad();
 		daoses = factoria.getDAOSesion();
