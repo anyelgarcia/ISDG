@@ -10,11 +10,11 @@ public class SesionProgramada extends Sesion implements Serializable {
 
 	private static final long serialVersionUID = -138011061952205162L;
 
-	private Set<Nota> notas;
+	private HashSet<Nota> notas;
 
-	private Set<String> nifsPacientes;
+	private TreeSet<String> nifsPacientes;
 
-	private Set<String> nifsTerapeutas;
+	private TreeSet<String> nifsTerapeutas;
 
 	private Fecha fecha;
 
