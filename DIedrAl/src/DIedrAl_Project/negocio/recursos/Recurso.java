@@ -43,6 +43,10 @@ public class Recurso extends Etiquetable {
 	public Path getPath() {
 		return fichero != null ? fichero.toPath() : null;
 	}
+	
+	public URI getURI() {
+		return direccion;
+	}
 
 	public String getExtension() {
 		if (fichero != null) {
@@ -57,6 +61,10 @@ public class Recurso extends Etiquetable {
 
 	public String getFileName() {
 		return this.fichero != null ? fichero.getName() : null;
+	}
+	
+	public boolean isFich(){
+		return fichero != null;
 	}
 
 	public void open() throws IOException, UnsupportedOperationException {

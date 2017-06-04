@@ -1,9 +1,7 @@
 package DIedrAl_Project.integracion.SQL;
 
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Connection;
 
 import DIedrAl_Project.integracion.BasicClasses.AccessException;
@@ -16,20 +14,21 @@ import DIedrAl_Project.integracion.DAOinterfaces.DAOPaciente;
 import DIedrAl_Project.integracion.DAOinterfaces.DAORecurso;
 import DIedrAl_Project.integracion.DAOinterfaces.DAORelacionable;
 import DIedrAl_Project.integracion.DAOinterfaces.DAOSesion;
+import DIedrAl_Project.integracion.DAOinterfaces.DAOSesionProgramada;
 import DIedrAl_Project.integracion.DAOinterfaces.DAOUsuario;
 
 
 
 /**
- * Factoría de objetos DAO (utiliza el patrón 
- * Singleton para tener una única instancia)
+ * Factorï¿½a de objetos DAO (utiliza el patrï¿½n 
+ * Singleton para tener una ï¿½nica instancia)
  * @author Diedral_Group
  */
 public class SQLDAOFactory implements DAOFactory {
 	
 	private static SQLDAOFactory instancia = null;
 	
-	private static Connection conexion = null;
+	private static Connection conexion;
 	
 	
 	public static SQLDAOFactory getInstance() throws AccessException{
@@ -76,6 +75,7 @@ public class SQLDAOFactory implements DAOFactory {
 
 	@Override
 	public DAOUsuario getDAOUsuario() {
+		System.out.println(conexion);
 		return DAOUsuarioImpSQL.getInstance(conexion);
 	}
 
@@ -87,6 +87,12 @@ public class SQLDAOFactory implements DAOFactory {
 	@Override
 	public DAOCentro getDAOCentro() {
 		return DAOCentroImpSQL.getInstance(conexion);
+	}
+
+	@Override
+	public DAOSesionProgramada getDAOSesionProgramada() {
+		return null;
+		//return DAOSesionImpSQL.getInstance(conexion);
 	}
 	
 	

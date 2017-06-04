@@ -41,6 +41,10 @@ public class Usuario extends Persona {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public String getPassword(){
+		return password;
+	}
 
 	/**
 	 * Comprueba si el string introducido coincide con la contraseña del

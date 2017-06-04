@@ -7,6 +7,7 @@ import DIedrAl_Project.integracion.DAOinterfaces.DAOActividad;
 import DIedrAl_Project.integracion.DAOinterfaces.DAORecurso;
 import DIedrAl_Project.integracion.DAOinterfaces.DAOSesion;
 import DIedrAl_Project.integracion.DAOinterfaces.DAOSesionProgramada;
+import DIedrAl_Project.integracion.SQL.SQLDAOFactory;
 import DIedrAl_Project.integracion.simplefileImp.SimpleFileDAOFactory;
 import DIedrAl_Project.negocio.calendario.*;
 import DIedrAl_Project.negocio.recursos.Actividad;
@@ -36,7 +37,13 @@ public class SACalendarioImpl implements SACalendario {
 	}
 
 	private SACalendarioImpl() {
-		SimpleFileDAOFactory factoria = SimpleFileDAOFactory.getInstance();
+		SQLDAOFactory factoria = null;;
+		try {
+			factoria = SQLDAOFactory.getInstance();
+		} catch (AccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		daorec = factoria.getDAORecurso();
 		daoact = factoria.getDAOActividad();
 		daoses = factoria.getDAOSesion();
