@@ -16,6 +16,8 @@ public enum Dificultad implements Serializable{
 		case "DIFICIL": return Dificultad.DIFICIL;
 		case "MUY_DIFICIL": return Dificultad.MUY_DIFICIL;
 		default: return null;
+		}
+	}
 	
 	public int getOrdinal(){
 		switch(this){
