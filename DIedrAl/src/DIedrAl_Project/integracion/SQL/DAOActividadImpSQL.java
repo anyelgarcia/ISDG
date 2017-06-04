@@ -1,6 +1,6 @@
 package DIedrAl_Project.integracion.SQL;
 
-import java.io.IOException;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +10,7 @@ import java.util.HashSet;
 import DIedrAl_Project.integracion.BasicClasses.AccessException;
 import DIedrAl_Project.integracion.DAOinterfaces.DAOActividad;
 import DIedrAl_Project.negocio.recursos.Actividad;
+import DIedrAl_Project.negocio.recursos.Dificultad;
 
 
 
@@ -35,9 +36,9 @@ public class DAOActividadImpSQL implements DAOActividad{
 		Statement s;
 		try {
 			s = conexion.createStatement();
-			s.executeQuery ("INSERT INTO `Actividades` VALUES '" + a.getEtiquetas().toString() + "','"
+			s.executeUpdate ("INSERT INTO `Actividades` VALUES '" + a.getEtiquetas().toString() + "','"
 				+ a.getNombre() + "','" + a.getDescripcion() + "','" + a.getId() + "'," +
-				a.getDuracion() + "," + a.getDestinatarios().toString() + "','" + a.getAsociados().toString() +
+				a.getDuracion() + "," + a.getDificultad().getOrdinal() + "," +  a.getDestinatarios().toString() + "','" + a.getAsociados().toString() + "','" +
 				a.getDesarrollo() + "','" + a.getVariaciones() + "')");
 		} catch (SQLException e) {
 			throw new AccessException();
@@ -60,6 +61,7 @@ public class DAOActividadImpSQL implements DAOActividad{
 			Statement s = conexion.createStatement();
 			s.executeQuery("UPDATE FROM `Actividades` SET `ETIQUETAS`= " + a.getEtiquetas().toString() + ",`NOMBRE`="
 					+ a.getNombre() + ",`DESCRIPCION`= " + a.getDescripcion() + "`DURACION`= " + a.getDuracion()
+					+ ", `DIFICULTAD` = " + a.getDificultad().getOrdinal()
 					+ ",`DESTINATARIOS`=" + a.getDestinatarios() + ",`ASOCIADOS`= " + a.getAsociados().toString()
 					+ ",`DESARROLLO`=" + a.getDesarrollo() + ",`VARIACIONES`=" + a.getVariaciones() + " WHERE `ID` = "
 					+ a.getId());
@@ -69,9 +71,29 @@ public class DAOActividadImpSQL implements DAOActividad{
 	}
 
 	@Override
-	public HashSet<Actividad> listarActividades()  {
-		
+	public HashSet<Actividad> listarActividades() throws AccessException  {
+		ResultSet rs;
+		HashSet<Actividad> hs = new HashSet<Actividad>();;
+		try {
+				Statement s = conexion.createStatement();
+				rs = s.executeQuery("SELECT * FROM `Actividades`");
+			
+			while(rs.next()){
+				Actividad a = new Actividad(rs.getString("NOMBRE"), rs.getString("ETIQUETAS"));
+				a.setDesarrollo(rs.getString("DESARROLLO"));
+				a.setDescripcion(rs.getString("DESCRPCION"));
+				a.setDificultad(Dificultad.values()[rs.getInt("DIFICULTAD")]);
+				a.setDuracion(rs.getInt("DURACION"));
+				a.setVariaciones(rs.getString("VARIACIONES"));
+				a.addDestinatario(rs.getString("DESTINATARIO"));
+				hs.add(a);
+			}
+		} catch (SQLException e) {
+			throw new AccessException();
+		}
+		return hs;
 	}
+
 
 	@Override
 	public boolean existeActividad(String id) throws AccessException {

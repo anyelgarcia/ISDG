@@ -1,6 +1,6 @@
 package DIedrAl_Project.integracion.SQL;
 
-import java.io.IOException;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,7 +33,7 @@ public class DAOCentroImpSQL implements DAOCentro{
 	public void guardarCentro(EstadoCentro c) throws AccessException {
 		try{
 			Statement s = conexion.createStatement();
-			s.executeQuery ("INSERT INSERT INTO");
+			s.executeUpdate("INSERT INTO Centros VALUES ('" + c.getId() + "','" + c.getNombre() + "')");
 		} catch(SQLException e) {
 			throw new AccessException();
 		}
@@ -43,7 +43,7 @@ public class DAOCentroImpSQL implements DAOCentro{
 	public void eliminarCentro(String id) throws AccessException {
 		try {
 			Statement s = conexion.createStatement();
-			s.executeQuery("DELETE FROM ");
+			s.executeQuery("DELETE FROM Centros WHERE ID = " + id);
 		} catch (SQLException e) {
 			throw new AccessException();
 		}
@@ -53,7 +53,7 @@ public class DAOCentroImpSQL implements DAOCentro{
 	public void modificarCentro(EstadoCentro c) throws AccessException  {
 		try{
 			Statement s = conexion.createStatement();
-			s.executeQuery ("UPDATE FROM ");
+			s.executeQuery ("UPDATE FROM Centros SET NOMBRE = '" + c.getNombre());
 		} catch(SQLException e) {
 			throw new AccessException();
 		}
@@ -61,19 +61,32 @@ public class DAOCentroImpSQL implements DAOCentro{
 	}
 
 	@Override
-	public HashSet<EstadoCentro> listarCentros()  {
-		
+	public HashSet<EstadoCentro> listarCentros() throws AccessException  {
+		HashSet<EstadoCentro> hs = new HashSet<EstadoCentro>();
+		try{
+			Statement s = conexion.createStatement();
+			ResultSet rs = s.executeQuery ("SELECT * FROM Centros");
+			while(rs.next()){
+				EstadoCentro c = new EstadoCentro(rs.getString("NOMBRE"));
+				hs.add(c);
+			}
+		} catch(SQLException e) {
+			throw new AccessException();
+		}
+		return hs;	
 	}
 
 	@Override
 	public EstadoCentro consultarCentro(String id) throws AccessException {
+		EstadoCentro es = null;
 		try{
 			Statement s = conexion.createStatement();
-			ResultSet rs = s.executeQuery ("SELECT * ");
+			ResultSet rs = s.executeQuery ("SELECT * FROM Centros WHERE ID = " + id );
+			es = new EstadoCentro(rs.getString("NOMBRE"));
 		} catch(SQLException e) {
 			throw new AccessException();
 		}
-		return null;
+		return es;
 		
 	}
 
@@ -82,7 +95,7 @@ public class DAOCentroImpSQL implements DAOCentro{
 		ResultSet rs;
 		try {
 			Statement s = conexion.createStatement();
-			rs = s.executeQuery("SELECT * ");
+			rs = s.executeQuery("SELECT * FROM Centros WHERE ID = '" + id + "'");
 		} catch (SQLException e) {
 			throw new AccessException();
 		}

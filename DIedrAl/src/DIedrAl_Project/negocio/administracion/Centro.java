@@ -2,7 +2,6 @@ package DIedrAl_Project.negocio.administracion;
 
 import java.rmi.*;
 import java.util.*;
-import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
