@@ -126,12 +126,12 @@ public abstract class Programable extends Etiquetable {
 		for(String s: destinatarios){
 			sbdes.append(s+" ");
 		}
-		sb.append(super.toString() + "\nDuracion: " + duracion
-				+ "\nDestinatarios: " + sbdes.toString() + "\nSu desarrollo es: "
-				+ desarrollo + "\nSus variaciones son: " + variaciones);
-		sb.append("\nContiene a:");
+		sb.append(super.toString() + ".Duracion: " + duracion
+				+ ". Destinatarios: " + sbdes.toString() + ". Su desarrollo es: "
+				+ desarrollo + ". Sus variaciones son: " + variaciones);
+		sb.append(". Contiene a:");
 		for (Etiquetable e : asociados) {
-			sb.append("\n" + e.toString());
+			sb.append(" " + e.toString());
 		}
 		return sb.toString();
 	}

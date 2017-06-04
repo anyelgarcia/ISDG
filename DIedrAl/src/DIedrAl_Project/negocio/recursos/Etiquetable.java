@@ -105,12 +105,13 @@ public abstract class Etiquetable implements ObjetoAlmacenable, Serializable {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(this.nombre+"\n");
-		sb.append(this.descripcion+"\n");
-		sb.append("Lista de etiquetas:\n");
+		sb.append(this.nombre+": ");
+		sb.append(this.descripcion+". ");
+		sb.append("Lista de etiquetas: ");
 		for(String e:etiquetas){
 			sb.append(e+" ");
 		}
+		sb.append(".");
 		return sb.toString();
 	}
 	

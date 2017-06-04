@@ -306,8 +306,8 @@ public class Controlador {
 	}
   
 	public static void modificaEtiquetable(Etiquetable antiguo, Etiquetable nuevo){
-		antiguo.igualarCampos(nuevo);
 		if(nuevo instanceof Recurso){
+			((Recurso)antiguo).igualarCampos((Recurso)nuevo);
 			try {
 				SAFactory.getInstancia().newSARecursos().updateRecurso((Recurso)antiguo);
 			} catch (AccessException e) {
@@ -315,24 +315,27 @@ public class Controlador {
 			}
 		}
 		else if(nuevo instanceof Actividad){
+			((Actividad)antiguo).igualarCampos((Actividad)nuevo);
 			try {
 				SAFactory.getInstancia().newSARecursos().updateActividad((Actividad)antiguo);
 			} catch (AccessException e) {
 				new Error("No se ha podido modificar la actividad");
 			}
 		}
-		else if(nuevo instanceof Sesion){
-			try {
-				SAFactory.getInstancia().newSARecursos().updateSesion((Sesion)antiguo);
-			} catch (AccessException e) {
-				new Error("No se ha podido modificar la sesion");
-			}
-		}
 		else if(nuevo instanceof SesionProgramada){
+			((SesionProgramada)antiguo).igualarCampos((SesionProgramada)nuevo);
 			try {
 				SAFactory.getInstancia().newSARecursos().updateSesionProgramada((SesionProgramada)antiguo);
 			} catch (AccessException e) {
 				new Error("No se ha podido modificar la sesión programada");
+			}
+		}
+		else if(nuevo instanceof Sesion){
+			((Sesion)antiguo).igualarCampos((Sesion)nuevo);
+			try {
+				SAFactory.getInstancia().newSARecursos().updateSesion((Sesion)antiguo);
+			} catch (AccessException e) {
+				new Error("No se ha podido modificar la sesion");
 			}
 		}
 	}
