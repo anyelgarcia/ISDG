@@ -1,5 +1,6 @@
 package DIedrAl_Project.negocio.calendario;
 
+import java.io.Serializable;
 import java.time.*;
 import java.util.*;
 
@@ -7,6 +8,10 @@ import DIedrAl_Project.negocio.ObjetoAlmacenable;
 
 public class Calendario implements ObjetoAlmacenable, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3051545144712451097L;
 	private String id;
 	private Map<LocalDate, Set<SesionProgramada>> sesiones;
 

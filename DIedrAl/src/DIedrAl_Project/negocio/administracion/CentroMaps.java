@@ -5,6 +5,7 @@ import java.util.*;
 
 import DIedrAl_Project.integracion.BasicClasses.*;
 import DIedrAl_Project.integracion.DAOinterfaces.*;
+import DIedrAl_Project.integracion.SQL.SQLDAOFactory;
 import DIedrAl_Project.integracion.simplefileImp.*;
 import DIedrAl_Project.integracion.BasicClasses.AccessException;
 import DIedrAl_Project.negocio.Relacion;
@@ -20,8 +21,8 @@ public class CentroMaps {
 	
 	private String nomb;
 
-	public CentroMaps() {
-		factory = SimpleFileDAOFactory.getInstance();
+	public CentroMaps() throws AccessException {
+		factory = SQLDAOFactory.getInstance();
 	}
 
 	private void cargarInfo() throws AccessException {

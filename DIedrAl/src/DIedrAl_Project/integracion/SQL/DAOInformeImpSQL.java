@@ -1,6 +1,5 @@
 package DIedrAl_Project.integracion.SQL;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,7 +34,7 @@ public class DAOInformeImpSQL implements DAOInforme{
 	public void crearInforme(Informe i) throws AccessException {
 		try{
 			Statement s = conexion.createStatement();
-			s.executeQuery ("INSERT INSERT INTO");
+			s.executeUpdate ("INSERT INTO Informes VALUES '" + i.getId() + "','" + i.getTexto() + "','" + i.getAutor()  + "')");
 		} catch(SQLException e) {
 			throw new AccessException();
 		}
@@ -65,7 +64,7 @@ public class DAOInformeImpSQL implements DAOInforme{
 
 	@Override
 	public HashSet<Informe> listarInformes()  {
-		
+		return null;
 	}
 
 	@Override
